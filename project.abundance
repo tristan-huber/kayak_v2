@@ -4462,7 +4462,8 @@
         },
         {
           "name": "dipRadius",
-          "ioValue": 150
+          "ioValue": 55,
+          "currentEquation": "55"
         },
         {
           "name": "aftOffset",
@@ -4470,11 +4471,13 @@
         },
         {
           "name": "downOffset",
-          "ioValue": 3
+          "ioValue": 0,
+          "currentEquation": "0"
         },
         {
           "name": "cockpitTilt",
-          "ioValue": 10
+          "ioValue": 3,
+          "currentEquation": "3"
         }
       ],
       "topLevel": false,
@@ -4547,7 +4550,7 @@
           "ioValues": [
             {
               "name": "diameter",
-              "ioValue": 150
+              "ioValue": 55
             }
           ]
         },
@@ -4567,7 +4570,7 @@
             },
             {
               "name": "y-axis degrees",
-              "ioValue": 100,
+              "ioValue": 93,
               "currentEquation": "90 + cockpitTilt"
             },
             {
@@ -4602,8 +4605,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.3567708333333333,
-          "y": 0.7885714285714285,
+          "x": 0.35872395833333337,
+          "y": 0.8057142857142858,
           "uniqueID": "id-27614",
           "ioValues": [
             {
@@ -4618,22 +4621,11 @@
             {
               "name": "yDist",
               "ioValue": 0
-            }
-          ]
-        },
-        {
-          "atomType": "Difference",
-          "x": 0.42708333333333337,
-          "y": 0.6114285714285714,
-          "uniqueID": "id-27620",
-          "ioValues": [
-            {
-              "name": "retain",
-              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "remove",
-              "ioValue": "__GEOMETRY_INPUT__"
+              "name": "zDist",
+              "ioValue": -27.5,
+              "currentEquation": "-dipRadius / 2 - downOffset"
             }
           ]
         },
@@ -4701,7 +4693,31 @@
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": {
+                "geometry": "a29dd4d8-0",
+                "color": "#3c5a6e",
+                "tags": [],
+                "bom": [],
+                "plane": {
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "xDir": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "normal": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "metadata": {},
+                "dimension": "Wire"
+              }
             },
             {
               "name": "Shape 3",
@@ -5018,8 +5034,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.4661458333333333,
-          "y": 0.8200000000000001,
+          "x": 0.509765625,
+          "y": 0.8685714285714285,
           "uniqueID": "id-27843",
           "name": "util.SelectFace",
           "ioValues": [
@@ -5750,13 +5766,29 @@
               "currentEquation": "-length / 2"
             }
           ]
+        },
+        {
+          "atomType": "Intersection",
+          "x": 0.43489583333333337,
+          "y": 0.6085714285714285,
+          "uniqueID": "id-37320",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
         }
       ],
       "allConnectors": [
         {
-          "ap2Name": "retain",
+          "ap2Name": "geometry1",
           "ap1ID": "id-27565",
-          "ap2ID": "id-27620"
+          "ap2ID": "id-37320"
         },
         {
           "ap2Name": "geometry",
@@ -5789,14 +5821,9 @@
           "ap2ID": "id-37314"
         },
         {
-          "ap2Name": "remove",
+          "ap2Name": "geometry2",
           "ap1ID": "id-27614",
-          "ap2ID": "id-27620"
-        },
-        {
-          "ap2Name": "shape",
-          "ap1ID": "id-27620",
-          "ap2ID": "id-27843"
+          "ap2ID": "id-37320"
         },
         {
           "ap2Name": "wires",
@@ -5862,6 +5889,11 @@
           "ap2Name": "geometry",
           "ap1ID": "id-37314",
           "ap2ID": "id-27600"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-37320",
+          "ap2ID": "id-27843"
         }
       ],
       "fileTypeVersion": 1
