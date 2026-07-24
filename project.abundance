@@ -2333,7 +2333,8 @@
             },
             {
               "name": "yDist",
-              "ioValue": 0
+              "ioValue": 1,
+              "currentEquation": "1"
             },
             {
               "name": "zDist",
@@ -2427,11 +2428,13 @@
             },
             {
               "name": "yDist",
-              "ioValue": 0
+              "ioValue": 1,
+              "currentEquation": "1"
             },
             {
               "name": "zDist",
-              "ioValue": -17
+              "ioValue": -17,
+              "currentEquation": "-17"
             }
           ]
         },
@@ -2560,7 +2563,8 @@
             },
             {
               "name": "x-axis degrees",
-              "ioValue": 200
+              "ioValue": 190,
+              "currentEquation": "190"
             },
             {
               "name": "y-axis degrees",
