@@ -1287,9 +1287,9 @@
         {
           "name": "positions",
           "ioValue": [
-            "20",
-            "45",
-            "96"
+            "15",
+            "40",
+            "90"
           ]
         }
       ],
@@ -1396,9 +1396,9 @@
             {
               "name": "offsets",
               "ioValue": [
-                "20",
-                "45",
-                "96"
+                "15",
+                "40",
+                "90"
               ]
             },
             {
@@ -1462,9 +1462,9 @@
                 {
                   "name": "offsets",
                   "ioValue": [
-                    "20",
-                    "45",
-                    "96"
+                    "15",
+                    "40",
+                    "90"
                   ]
                 },
                 {
@@ -5291,6 +5291,497 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.4537760416666667,
+      "y": 0.6457142857142857,
+      "uniqueID": "id-37221",
+      "name": "G24_marine_battery",
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-37205",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Rectangle",
+          "x": 0.30078125,
+          "y": 0.24188311688311687,
+          "uniqueID": "id-37206",
+          "ioValues": [
+            {
+              "name": "x length",
+              "ioValue": 10.3
+            },
+            {
+              "name": "y length",
+              "ioValue": 6.8
+            }
+          ]
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.44140625,
+          "y": 0.3555194805194805,
+          "uniqueID": "id-37207",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 8.9
+            }
+          ]
+        },
+        {
+          "atomType": "Circle",
+          "x": 0.21171875,
+          "y": 0.6331168831168832,
+          "uniqueID": "id-37208",
+          "ioValues": [
+            {
+              "name": "diameter",
+              "ioValue": 0.5
+            }
+          ]
+        },
+        {
+          "atomType": "Constant",
+          "x": 0.15234375,
+          "y": 0.3782467532467532,
+          "uniqueID": "id-37209",
+          "name": "Height",
+          "value": 8.9
+        },
+        {
+          "atomType": "Constant",
+          "x": 0.16640625,
+          "y": 0.17370129870129872,
+          "uniqueID": "id-37210",
+          "name": "width",
+          "value": 10.3
+        },
+        {
+          "atomType": "Constant",
+          "x": 0.10234375,
+          "y": 0.48376623376623373,
+          "uniqueID": "id-37211",
+          "name": "PinInset",
+          "value": 1
+        },
+        {
+          "atomType": "Color",
+          "x": 0.48515625000000007,
+          "y": 0.5974025974025974,
+          "uniqueID": "id-37212",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "selectedColor": "Black"
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.26640625,
+          "y": 0.7646103896103896,
+          "uniqueID": "id-37213",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 0.5
+            }
+          ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.69140625,
+          "y": 0.6412337662337662,
+          "uniqueID": "id-37214",
+          "ioValues": [
+            {
+              "name": "Shape 1",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 2",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 3",
+              "ioValue": null
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.38203125,
+          "y": 0.7824675324675325,
+          "uniqueID": "id-37215",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 1,
+              "currentEquation": "PinInset"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 1,
+              "currentEquation": "PinInset"
+            },
+            {
+              "name": "zDist",
+              "ioValue": 8.9,
+              "currentEquation": "Height"
+            }
+          ]
+        },
+        {
+          "atomType": "Color",
+          "x": 0.47734374999999996,
+          "y": 0.7077922077922079,
+          "uniqueID": "id-37216",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "selectedColor": "Red"
+        },
+        {
+          "atomType": "Constant",
+          "x": 0.15078125,
+          "y": 0.28084415584415584,
+          "uniqueID": "id-37217",
+          "name": "Depth",
+          "value": 6.8
+        },
+        {
+          "atomType": "Move",
+          "x": 0.378125,
+          "y": 0.5616883116883117,
+          "uniqueID": "id-37218",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 9.3,
+              "currentEquation": "width - PinInset"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 1,
+              "currentEquation": "PinInset"
+            },
+            {
+              "name": "zDist",
+              "ioValue": 8.9,
+              "currentEquation": "Height"
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.60390625,
+          "y": 0.336038961038961,
+          "uniqueID": "id-37219",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 5.15,
+              "currentEquation": "width / 2"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 3.4,
+              "currentEquation": "Depth / 2"
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0
+            }
+          ]
+        },
+        {
+          "atomType": "Add-BOM-Tag",
+          "x": 0.821875,
+          "y": 0.40584415584415584,
+          "uniqueID": "id-37220",
+          "name": "Add BOM Tag",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Item Name",
+              "ioValue": "12.8V 100Ah battery",
+              "currentEquation": "12.8V 100Ah battery"
+            },
+            {
+              "name": "Number Needed",
+              "ioValue": 1
+            },
+            {
+              "name": "Cost (USD)",
+              "ioValue": 185
+            },
+            {
+              "name": "Source Link",
+              "ioValue": "https://www.amazon.com/dp/B0DZXDWJXR",
+              "currentEquation": "https://www.amazon.com/dp/B0DZXDWJXR"
+            }
+          ],
+          "BOMitem": {
+            "BOMitemName": "12.8V 100Ah battery",
+            "numberNeeded": 1,
+            "costUSD": 185,
+            "source": "https://www.amazon.com/dp/B0DZXDWJXR"
+          }
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37206",
+          "ap2ID": "id-37207"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37207",
+          "ap2ID": "id-37219"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37208",
+          "ap2ID": "id-37213"
+        },
+        {
+          "ap2Name": "height",
+          "ap1ID": "id-37209",
+          "ap2ID": "id-37207"
+        },
+        {
+          "ap2Name": "x length",
+          "ap1ID": "id-37210",
+          "ap2ID": "id-37206"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-37212",
+          "ap2ID": "id-37214"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37213",
+          "ap2ID": "id-37215"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37213",
+          "ap2ID": "id-37218"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37214",
+          "ap2ID": "id-37220"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37215",
+          "ap2ID": "id-37216"
+        },
+        {
+          "ap2Name": "Shape 2",
+          "ap1ID": "id-37216",
+          "ap2ID": "id-37214"
+        },
+        {
+          "ap2Name": "y length",
+          "ap1ID": "id-37217",
+          "ap2ID": "id-37206"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37218",
+          "ap2ID": "id-37212"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-37219",
+          "ap2ID": "id-37214"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-37220",
+          "ap2ID": "id-37205"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-24T18:23:39.035Z",
+        "privateRepo": false,
+        "repoName": "G24_marine_battery",
+        "dateCreated": "2026-07-08T23:43:50Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-21801",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/G24_marine_battery",
+        "topics": [
+          "hardware",
+          "electronics"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739807",
+        "ranking": 0.3,
+        "searchField": "g24_marine_battery tristan-huber model for a group24 sized marine battery. bom links to a lithium ion version available on amazon. hardware electronics",
+        "owner": "tristan-huber",
+        "description": "Model for a Group24 sized marine battery. BOM links to a Lithium Ion version available on amazon.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Inches",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1784933285793
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.5299479166666666,
+      "y": 0.7742857142857142,
+      "uniqueID": "id-37275",
+      "name": "Width",
+      "ioValues": [
+        {
+          "name": "Shape",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-37272",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-37273",
+          "name": "Shape",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Code",
+          "x": 0.380178716490658,
+          "y": 0.47632311977715874,
+          "uniqueID": "id-37274",
+          "ioValues": [
+            {
+              "name": "A",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 0,
+          "code": "/**\n Inputs for this Code Atom:\n - Takes a single geometry input \"A\" and returns its width (X size) as measured by the bounding box.\n*/\nInputs = [\n  { inputName: \"A\", type: \"geometry\", defaultValue: null }\n]\n\nif (!A) {\n  // No input provided — return null to indicate absence.\n  return null\n}\n\n// Get bounding box of A. boundsA.min and boundsA.max are arrays [x, y, z]\nlet boundsA = await GetBounds(A);\nlet min = boundsA.min;\nlet max = boundsA.max;\n\n// Compute width along X (maxX - minX)\nlet width = max[0] - min[0];\n\n// Ensure a non-negative numeric result\nwidth = typeof width === 'number' && isFinite(width) ? Math.max(0, width) : null;\n\nreturn width;"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "A",
+          "ap1ID": "id-37273",
+          "ap2ID": "id-37274"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-37274",
+          "ap2ID": "id-37272"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-24T18:23:39.035Z",
+        "privateRepo": false,
+        "repoName": "Width",
+        "dateCreated": "2025-12-04T20:14:11Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/BarbourSmith/Width/master/README.md?sanitize=true",
+        "yyyy": 2025,
+        "topMoleculeID": "id-386",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/BarbourSmith/Width",
+        "topics": [],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739589",
+        "ranking": 5.4,
+        "searchField": "width barboursmith takes a shape and returns the width as measured by the shapes bounding box in the x direction ",
+        "owner": "BarbourSmith",
+        "description": "Takes a shape and returns the width as measured by the shapes bounding box in the X direction",
+        "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "MM",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1784933314058
+    },
+    {
+      "atomType": "Equation",
+      "x": 0.6236979166666666,
+      "y": 0.8200000000000001,
+      "uniqueID": "id-37284",
+      "name": "x + y",
+      "ioValues": [
+        {
+          "name": "x",
+          "ioValue": 10.3000002
+        },
+        {
+          "name": "y",
+          "ioValue": 1
+        }
+      ],
+      "currentEquation": "x + y"
     }
   ],
   "allConnectors": [
@@ -5383,6 +5874,16 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-27561",
       "ap2ID": "id-27926"
+    },
+    {
+      "ap2Name": "Shape",
+      "ap1ID": "id-37221",
+      "ap2ID": "id-37275"
+    },
+    {
+      "ap2Name": "x",
+      "ap1ID": "id-37275",
+      "ap2ID": "id-37284"
     }
   ],
   "unitsKey": "MM",
