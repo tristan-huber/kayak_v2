@@ -3910,7 +3910,8 @@
         },
         {
           "name": "downOffset",
-          "ioValue": 4
+          "ioValue": 3,
+          "currentEquation": "3"
         }
       ],
       "topLevel": false,
@@ -4055,7 +4056,7 @@
             },
             {
               "name": "zDist",
-              "ioValue": 71,
+              "ioValue": 72,
               "currentEquation": "cockpitVertDiam / 2 - downOffset"
             }
           ]
@@ -4141,7 +4142,7 @@
             {
               "name": "Shape 2",
               "ioValue": {
-                "geometry": "5e633ac0-0",
+                "geometry": "39ac7b98-0",
                 "color": "#3c5a6e",
                 "tags": [],
                 "bom": [],
@@ -5294,8 +5295,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.4537760416666667,
-      "y": 0.6457142857142857,
+      "x": 0.46419270833333337,
+      "y": 0.5857142857142857,
       "uniqueID": "id-37221",
       "name": "G24_marine_battery",
       "topLevel": false,
@@ -5767,14 +5768,14 @@
     },
     {
       "atomType": "Equation",
-      "x": 0.6236979166666666,
-      "y": 0.8200000000000001,
+      "x": 0.583984375,
+      "y": 0.9085714285714286,
       "uniqueID": "id-37284",
       "name": "x + y",
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 10.3000002
+          "ioValue": 15.832658931458438
         },
         {
           "name": "y",
@@ -5782,6 +5783,85 @@
         }
       ],
       "currentEquation": "x + y"
+    },
+    {
+      "atomType": "Rotate",
+      "x": 0.46744791666666663,
+      "y": 0.8657142857142858,
+      "uniqueID": "id-37288",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "x-axis degrees",
+          "ioValue": 0,
+          "currentEquation": "0"
+        },
+        {
+          "name": "y-axis degrees",
+          "ioValue": 90,
+          "currentEquation": "90"
+        },
+        {
+          "name": "z-axis degrees",
+          "ioValue": 0
+        }
+      ]
+    },
+    {
+      "atomType": "Rotate",
+      "x": 0.55859375,
+      "y": 0.5742857142857143,
+      "uniqueID": "id-37294",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "x-axis degrees",
+          "ioValue": -90,
+          "currentEquation": "-90"
+        },
+        {
+          "name": "y-axis degrees",
+          "ioValue": 0,
+          "currentEquation": "0"
+        },
+        {
+          "name": "z-axis degrees",
+          "ioValue": 0
+        }
+      ]
+    },
+    {
+      "atomType": "Move",
+      "x": 0.642578125,
+      "y": 0.6942857142857143,
+      "uniqueID": "id-37300",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "xDist",
+          "ioValue": 91,
+          "currentEquation": "91"
+        },
+        {
+          "name": "yDist",
+          "ioValue": -4.5,
+          "currentEquation": "-4.5"
+        },
+        {
+          "name": "zDist",
+          "ioValue": -3,
+          "currentEquation": "-3"
+        }
+      ]
     }
   ],
   "allConnectors": [
@@ -5836,6 +5916,11 @@
       "ap2ID": "id-130"
     },
     {
+      "ap2Name": "geometry",
+      "ap1ID": "id-27917",
+      "ap2ID": "id-37288"
+    },
+    {
       "ap2Name": "assembly",
       "ap1ID": "id-27936",
       "ap2ID": "id-27904"
@@ -5876,14 +5961,24 @@
       "ap2ID": "id-27926"
     },
     {
-      "ap2Name": "Shape",
+      "ap2Name": "geometry",
       "ap1ID": "id-37221",
-      "ap2ID": "id-37275"
+      "ap2ID": "id-37294"
     },
     {
       "ap2Name": "x",
       "ap1ID": "id-37275",
       "ap2ID": "id-37284"
+    },
+    {
+      "ap2Name": "Shape",
+      "ap1ID": "id-37288",
+      "ap2ID": "id-37275"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-37294",
+      "ap2ID": "id-37300"
     }
   ],
   "unitsKey": "MM",
