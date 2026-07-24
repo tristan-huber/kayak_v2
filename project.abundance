@@ -179,7 +179,7 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 15.832658931458438
+          "ioValue": 16.87016576354634
         },
         {
           "name": "y",
@@ -4462,8 +4462,8 @@
         },
         {
           "name": "dipRadius",
-          "ioValue": 55,
-          "currentEquation": "55"
+          "ioValue": 50,
+          "currentEquation": "50"
         },
         {
           "name": "aftOffset",
@@ -4471,13 +4471,11 @@
         },
         {
           "name": "downOffset",
-          "ioValue": 0,
-          "currentEquation": "0"
+          "ioValue": 1
         },
         {
           "name": "cockpitTilt",
-          "ioValue": 3,
-          "currentEquation": "3"
+          "ioValue": 1
         }
       ],
       "topLevel": false,
@@ -4550,7 +4548,7 @@
           "ioValues": [
             {
               "name": "diameter",
-              "ioValue": 55
+              "ioValue": 50
             }
           ]
         },
@@ -4570,7 +4568,7 @@
             },
             {
               "name": "y-axis degrees",
-              "ioValue": 93,
+              "ioValue": 91,
               "currentEquation": "90 + cockpitTilt"
             },
             {
@@ -4624,7 +4622,7 @@
             },
             {
               "name": "zDist",
-              "ioValue": -27.5,
+              "ioValue": -26,
               "currentEquation": "-dipRadius / 2 - downOffset"
             }
           ]
@@ -4694,7 +4692,7 @@
             {
               "name": "Shape 2",
               "ioValue": {
-                "geometry": "a29dd4d8-0",
+                "geometry": "cf481100-0",
                 "color": "#3c5a6e",
                 "tags": [],
                 "bom": [],
@@ -4762,6 +4760,54 @@
             {
               "name": "Shape 2",
               "ioValue": null
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.6153846153846154,
+          "uniqueID": "id-37310",
+          "name": "cockpitTilt"
+        },
+        {
+          "atomType": "Move",
+          "x": 0.21744791666666669,
+          "y": 0.7828571428571428,
+          "uniqueID": "id-37314",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": -72,
+              "currentEquation": "-length / 2"
+            }
+          ]
+        },
+        {
+          "atomType": "Intersection",
+          "x": 0.43489583333333337,
+          "y": 0.6085714285714285,
+          "uniqueID": "id-37320",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -5734,54 +5780,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1784845022435
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.7085714285714285,
-          "uniqueID": "id-37310",
-          "name": "cockpitTilt"
-        },
-        {
-          "atomType": "Move",
-          "x": 0.21744791666666669,
-          "y": 0.7828571428571428,
-          "uniqueID": "id-37314",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 0
-            },
-            {
-              "name": "yDist",
-              "ioValue": 0
-            },
-            {
-              "name": "zDist",
-              "ioValue": -72,
-              "currentEquation": "-length / 2"
-            }
-          ]
-        },
-        {
-          "atomType": "Intersection",
-          "x": 0.43489583333333337,
-          "y": 0.6085714285714285,
-          "uniqueID": "id-37320",
-          "ioValues": [
-            {
-              "name": "geometry1",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "geometry2",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
         }
       ],
       "allConnectors": [
@@ -5841,6 +5839,16 @@
           "ap2ID": "id-27563"
         },
         {
+          "ap2Name": "geometry",
+          "ap1ID": "id-37314",
+          "ap2ID": "id-27600"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-37320",
+          "ap2ID": "id-27843"
+        },
+        {
           "ap2Name": "Shape 1",
           "ap1ID": "id-27770",
           "ap2ID": "id-27798"
@@ -5884,16 +5892,6 @@
           "ap2Name": "assembly",
           "ap1ID": "id-27681",
           "ap2ID": "id-27788"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37314",
-          "ap2ID": "id-27600"
-        },
-        {
-          "ap2Name": "shape",
-          "ap1ID": "id-37320",
-          "ap2ID": "id-27843"
         }
       ],
       "fileTypeVersion": 1
