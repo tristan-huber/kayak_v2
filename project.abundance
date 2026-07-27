@@ -6162,8 +6162,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.6549479166666667,
-      "y": 0.45142857142857146,
+      "x": 0.677734375,
+      "y": 0.36,
       "uniqueID": "id-41185",
       "ioValues": [
         {
@@ -6979,6 +6979,11 @@
       "ap2Name": "Geometry",
       "ap1ID": "id-41185",
       "ap2ID": "id-37346"
+    },
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-41185",
+      "ap2ID": "id-130"
     }
   ],
   "unitsKey": "MM",
