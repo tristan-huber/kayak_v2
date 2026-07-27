@@ -67,8 +67,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.3033854166666667,
-      "y": 0.7514285714285714,
+      "x": 0.2825520833333333,
+      "y": 0.7142857142857143,
       "uniqueID": "id-27926",
       "ioValues": [
         {
@@ -173,8 +173,8 @@
     },
     {
       "atomType": "Rotate",
-      "x": 0.55859375,
-      "y": 0.5742857142857143,
+      "x": 0.5455729166666666,
+      "y": 0.7657142857142857,
       "uniqueID": "id-37294",
       "ioValues": [
         {
@@ -253,8 +253,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.38671874999999994,
-      "y": 0.8857142857142857,
+      "x": 0.38020833333333337,
+      "y": 0.8285714285714286,
       "uniqueID": "id-37384",
       "ioValues": [
         {
@@ -948,8 +948,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.46484375,
-      "y": 0.7885714285714285,
+      "x": 0.4537760416666667,
+      "y": 0.7114285714285714,
       "uniqueID": "id-37221",
       "name": "G24_marine_battery",
       "topLevel": false,
@@ -1587,8 +1587,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.35546875,
-      "y": 0.5314285714285714,
+      "x": 0.32421875,
+      "y": 0.5028571428571429,
       "uniqueID": "id-38226",
       "name": "facesToSolid",
       "ioValues": [
@@ -1820,8 +1820,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4140625,
-      "y": 0.20857142857142857,
+      "x": 0.4876302083333333,
+      "y": 0.4228571428571429,
       "uniqueID": "id-37127",
       "name": "bulkheads",
       "ioValues": [
@@ -1834,7 +1834,8 @@
           "ioValue": [
             "15",
             "40",
-            "90"
+            "90",
+            "130"
           ]
         }
       ],
@@ -1956,7 +1957,8 @@
               "ioValue": [
                 "15",
                 "40",
-                "90"
+                "90",
+                "130"
               ]
             },
             {
@@ -2022,7 +2024,8 @@
                   "ioValue": [
                     "15",
                     "40",
-                    "90"
+                    "90",
+                    "130"
                   ]
                 },
                 {
@@ -4591,8 +4594,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.22786458333333331,
-      "y": 0.54,
+      "x": 0.18098958333333331,
+      "y": 0.5485714285714286,
       "uniqueID": "id-27561",
       "name": "top deck",
       "ioValues": [
@@ -5613,8 +5616,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.6217447916666666,
-          "y": 0.6657142857142857,
+          "x": 0.583984375,
+          "y": 0.6799999999999999,
           "uniqueID": "id-38188",
           "name": "flipFaceOrientation",
           "ioValues": [
@@ -5699,97 +5702,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1784935769060
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.7721354166666667,
-          "y": 0.4971428571428571,
-          "uniqueID": "id-38210",
-          "name": "util.asFaces",
-          "ioValues": [
-            {
-              "name": "shape",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-38211",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.44596354166666663,
-              "y": 0.6428571428571428,
-              "uniqueID": "id-38212",
-              "ioValues": [
-                {
-                  "name": "shape",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "\nfunction run(\n  shape: Assembly\n) {\n  let result = undefined;\n  return shape.onLeafs((leaf) => {\n    if (leaf.is3D()) {\n      const f = leaf.geometry.faces\n      if (f.length > 1) {\n        const subassembly = []\n        for (const face of f) {\n          subassembly.push(new Assembly({\n            geometry: face\n          }))\n        }\n        leaf.geometry = subassembly\n      } else {\n        leaf.geometry = f[0]\n      }\n    } else if (leaf.geometry instanceof replicad.Drawing) {\n      const solidifiedFaces = leaf.geometry.sketchOnPlane(leaf.plane).extrude(0.1).faces\n      leaf.geometry = solidifiedFaces[solidifiedFaces.length - 2] // Usually where the initial face is indexed after extrusion.      \n    } else if (leaf.geometry instanceof replicad.Face) {\n      leaf.geometry = leaf.geometry.clone();\n    } else {\n      return undefined\n    }\n    return leaf;\n  })\n  return result;\n}\n",
-              "compiledCode": "\"use strict\";\nfunction run(shape) {\n    let result = undefined;\n    return shape.onLeafs((leaf) => {\n        if (leaf.is3D()) {\n            const f = leaf.geometry.faces;\n            if (f.length > 1) {\n                const subassembly = [];\n                for (const face of f) {\n                    subassembly.push(new Assembly({\n                        geometry: face\n                    }));\n                }\n                leaf.geometry = subassembly;\n            }\n            else {\n                leaf.geometry = f[0];\n            }\n        }\n        else if (leaf.geometry instanceof replicad.Drawing) {\n            const solidifiedFaces = leaf.geometry.sketchOnPlane(leaf.plane).extrude(0.1).faces;\n            leaf.geometry = solidifiedFaces[solidifiedFaces.length - 2]; // Usually where the initial face is indexed after extrusion.      \n        }\n        else if (leaf.geometry instanceof replicad.Face) {\n            leaf.geometry = leaf.geometry.clone();\n        }\n        else {\n            return undefined;\n        }\n        return leaf;\n    });\n    return result;\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.15384615384615385,
-              "uniqueID": "id-38213",
-              "name": "shape",
-              "type": "geometry"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-38212",
-              "ap2ID": "id-38211"
-            },
-            {
-              "ap2Name": "shape",
-              "ap1ID": "id-38213",
-              "ap2ID": "id-38212"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-07-23T18:23:39.131Z",
-            "privateRepo": false,
-            "repoName": "util.asFaces",
-            "dateCreated": "2026-07-20T21:58:22Z",
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/util.asFaces/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-1",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/util.asFaces",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739817",
-            "ranking": 0,
-            "searchField": "util.asfaces tristan-huber from the input geometry get all faces then return them as an assembly of bare faces. extract faces as assembly. abundance-tool",
-            "owner": "tristan-huber",
-            "description": "from the input geometry get all faces then return them as an assembly of bare faces. Extract faces as assembly.",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.asFaces/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.asFaces/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1784845354352
         },
         {
           "atomType": "GitHubMolecule",
@@ -6171,11 +6083,6 @@
           "ap2ID": "id-38188"
         },
         {
-          "ap2Name": "Shape 1",
-          "ap1ID": "id-27816",
-          "ap2ID": "id-27834"
-        },
-        {
           "ap2Name": "shape",
           "ap1ID": "id-27843",
           "ap2ID": "id-27866"
@@ -6191,9 +6098,9 @@
           "ap2ID": "id-27798"
         },
         {
-          "ap2Name": "shape",
+          "ap2Name": "Shape 1",
           "ap1ID": "id-38188",
-          "ap2ID": "id-38210"
+          "ap2ID": "id-27834"
         },
         {
           "ap2Name": "Shape 2",
