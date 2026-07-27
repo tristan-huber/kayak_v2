@@ -168,46 +168,6 @@
       ]
     },
     {
-      "atomType": "Move",
-      "x": 0.642578125,
-      "y": 0.6942857142857143,
-      "uniqueID": "id-37300",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "xDist",
-          "ioValue": 91
-        },
-        {
-          "name": "yDist",
-          "ioValue": -4.5
-        },
-        {
-          "name": "zDist",
-          "ioValue": -3
-        }
-      ]
-    },
-    {
-      "atomType": "Difference",
-      "x": 0.7675781249999999,
-      "y": 0.8285714285714286,
-      "uniqueID": "id-37330",
-      "ioValues": [
-        {
-          "name": "retain",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "remove",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ]
-    },
-    {
       "atomType": "Extrude",
       "x": 0.34505208333333337,
       "y": 0.937142857142857,
@@ -1357,98 +1317,6 @@
       "unitsKey": "MM",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1784934759884
-    },
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.3125,
-      "y": 0.4085714285714286,
-      "uniqueID": "id-38226",
-      "name": "facesToSolid",
-      "ioValues": [
-        {
-          "name": "FaceAssembly",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-38223",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.5261718750000001,
-          "y": 0.3896103896103896,
-          "uniqueID": "id-38224",
-          "ioValues": [
-            {
-              "name": "faces",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "function run(faces: Assembly) {\n  const faceList: any[] = []\n  faces.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      faceList.push(leaf.geometry)\n      return leaf;\n    } else if (leaf.is3D()) {\n      if (leaf.geometry instanceof replicad.Shell) {\n        faceList.push(leaf.geometry)\n      } else {\n        console.warn(\"got a non-face non-shell entry. attempting to extract it's faces\")\n        console.log(leaf.geometry instanceof replicad.Compound)\n        for (const face of leaf.geometry.faces) {\n          faceList.push(face);\n        }\n      }\n      return leaf;\n    } else {\n      throw Error(\"input must be faces or other 3dshape.\")\n    }\n  });\n  const validatedFaces = faceList.filter((f) => replicad.measureArea(f) > 0.00001)\n  let comp = replicad.weldShellsAndFaces(validatedFaces, true)\n  const shells = Array.from(replicad.iterTopo(comp.wrapped, \"shell\"))\n  comp = replicad.makeSolid(shells.map(replicad.cast))\n  return comp\n}",
-          "compiledCode": "\"use strict\";\nfunction run(faces) {\n    const faceList = [];\n    faces.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            faceList.push(leaf.geometry);\n            return leaf;\n        }\n        else if (leaf.is3D()) {\n            if (leaf.geometry instanceof replicad.Shell) {\n                faceList.push(leaf.geometry);\n            }\n            else {\n                console.warn(\"got a non-face non-shell entry. attempting to extract it's faces\");\n                console.log(leaf.geometry instanceof replicad.Compound);\n                for (const face of leaf.geometry.faces) {\n                    faceList.push(face);\n                }\n            }\n            return leaf;\n        }\n        else {\n            throw Error(\"input must be faces or other 3dshape.\");\n        }\n    });\n    const validatedFaces = faceList.filter((f) => replicad.measureArea(f) > 0.00001);\n    let comp = replicad.weldShellsAndFaces(validatedFaces, true);\n    const shells = Array.from(replicad.iterTopo(comp.wrapped, \"shell\"));\n    comp = replicad.makeSolid(shells.map(replicad.cast));\n    return comp;\n}\n"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
-          "uniqueID": "id-38225",
-          "name": "FaceAssembly",
-          "type": "geometry"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-38224",
-          "ap2ID": "id-38223"
-        },
-        {
-          "ap2Name": "faces",
-          "ap1ID": "id-38225",
-          "ap2ID": "id-38224"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-07-23T18:23:39.131Z",
-        "privateRepo": false,
-        "repoName": "facesToSolid",
-        "dateCreated": "2026-07-04T21:08:34Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/tristan-huber/facesToSolid/master/README.md?sanitize=true",
-        "yyyy": 2026,
-        "topMoleculeID": "id-22553",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/tristan-huber/facesToSolid",
-        "topics": [
-          "abundance-tool"
-        ],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739814",
-        "ranking": 0.9,
-        "searchField": "facestosolid tristan-huber make a solid based on an assembly of faces that fully enclose a volume.  abundance-tool",
-        "owner": "tristan-huber",
-        "description": "make a solid based on an assembly of faces that fully enclose a volume. ",
-        "contentURL": "https://raw.githubusercontent.com/tristan-huber/facesToSolid/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/tristan-huber/facesToSolid/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Unitless",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1784935932266
     },
     {
       "atomType": "GitHubMolecule",
@@ -7324,14 +7192,125 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "Move",
+      "x": 0.642578125,
+      "y": 0.6942857142857143,
+      "uniqueID": "id-37300",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "xDist",
+          "ioValue": 91
+        },
+        {
+          "name": "yDist",
+          "ioValue": -4.5
+        },
+        {
+          "name": "zDist",
+          "ioValue": -3
+        }
+      ]
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.3125,
+      "y": 0.4085714285714286,
+      "uniqueID": "id-38226",
+      "name": "facesToSolid",
+      "ioValues": [
+        {
+          "name": "FaceAssembly",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-38223",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.5261718750000001,
+          "y": 0.3896103896103896,
+          "uniqueID": "id-38224",
+          "ioValues": [
+            {
+              "name": "faces",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(faces: Assembly) {\n  const faceList: any[] = []\n  faces.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      faceList.push(leaf.geometry)\n      return leaf;\n    } else if (leaf.is3D()) {\n      if (leaf.geometry instanceof replicad.Shell) {\n        faceList.push(leaf.geometry)\n      } else {\n        console.warn(\"got a non-face non-shell entry. attempting to extract it's faces\")\n        console.log(leaf.geometry instanceof replicad.Compound)\n        for (const face of leaf.geometry.faces) {\n          faceList.push(face);\n        }\n      }\n      return leaf;\n    } else {\n      throw Error(\"input must be faces or other 3dshape.\")\n    }\n  });\n  const validatedFaces = faceList.filter((f) => replicad.measureArea(f) > 0.00001)\n  let comp = replicad.weldShellsAndFaces(validatedFaces, true)\n  const shells = Array.from(replicad.iterTopo(comp.wrapped, \"shell\"))\n  comp = replicad.makeSolid(shells.map(replicad.cast))\n  return comp\n}",
+          "compiledCode": "\"use strict\";\nfunction run(faces) {\n    const faceList = [];\n    faces.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            faceList.push(leaf.geometry);\n            return leaf;\n        }\n        else if (leaf.is3D()) {\n            if (leaf.geometry instanceof replicad.Shell) {\n                faceList.push(leaf.geometry);\n            }\n            else {\n                console.warn(\"got a non-face non-shell entry. attempting to extract it's faces\");\n                console.log(leaf.geometry instanceof replicad.Compound);\n                for (const face of leaf.geometry.faces) {\n                    faceList.push(face);\n                }\n            }\n            return leaf;\n        }\n        else {\n            throw Error(\"input must be faces or other 3dshape.\");\n        }\n    });\n    const validatedFaces = faceList.filter((f) => replicad.measureArea(f) > 0.00001);\n    let comp = replicad.weldShellsAndFaces(validatedFaces, true);\n    const shells = Array.from(replicad.iterTopo(comp.wrapped, \"shell\"));\n    comp = replicad.makeSolid(shells.map(replicad.cast));\n    return comp;\n}\n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-38225",
+          "name": "FaceAssembly",
+          "type": "geometry"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-38224",
+          "ap2ID": "id-38223"
+        },
+        {
+          "ap2Name": "faces",
+          "ap1ID": "id-38225",
+          "ap2ID": "id-38224"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-23T18:23:39.131Z",
+        "privateRepo": false,
+        "repoName": "facesToSolid",
+        "dateCreated": "2026-07-04T21:08:34Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/facesToSolid/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-22553",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/facesToSolid",
+        "topics": [
+          "abundance-tool"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739814",
+        "ranking": 0.9,
+        "searchField": "facestosolid tristan-huber make a solid based on an assembly of faces that fully enclose a volume.  abundance-tool",
+        "owner": "tristan-huber",
+        "description": "make a solid based on an assembly of faces that fully enclose a volume. ",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/facesToSolid/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/facesToSolid/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1784935932266
     }
   ],
   "allConnectors": [
-    {
-      "ap2Name": "FaceAssembly",
-      "ap1ID": "id-27926",
-      "ap2ID": "id-38226"
-    },
     {
       "ap2Name": "geometry",
       "ap1ID": "id-27926",
@@ -7341,6 +7320,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-27926",
       "ap2ID": "id-37384"
+    },
+    {
+      "ap2Name": "FaceAssembly",
+      "ap1ID": "id-27926",
+      "ap2ID": "id-38226"
     },
     {
       "ap2Name": "geometry",
@@ -7361,11 +7345,6 @@
       "ap2Name": "geometry",
       "ap1ID": "id-37294",
       "ap2ID": "id-37300"
-    },
-    {
-      "ap2Name": "retain",
-      "ap1ID": "id-37300",
-      "ap2ID": "id-37330"
     },
     {
       "ap2Name": "faces",
@@ -7396,16 +7375,6 @@
       "ap2Name": "Shape",
       "ap1ID": "id-37221",
       "ap2ID": "id-40670"
-    },
-    {
-      "ap2Name": "kayakbody",
-      "ap1ID": "id-38226",
-      "ap2ID": "id-37127"
-    },
-    {
-      "ap2Name": "remove",
-      "ap1ID": "id-38226",
-      "ap2ID": "id-37330"
     },
     {
       "ap2Name": "faceAssembly",
@@ -7441,6 +7410,11 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-27561",
       "ap2ID": "id-27926"
+    },
+    {
+      "ap2Name": "kayakbody",
+      "ap1ID": "id-38226",
+      "ap2ID": "id-37127"
     }
   ],
   "unitsKey": "MM",
