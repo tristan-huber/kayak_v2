@@ -3688,7 +3688,8 @@
             },
             {
               "name": "zDist",
-              "ioValue": -0.25
+              "ioValue": -0.25,
+              "currentEquation": "-0.25"
             }
           ]
         },
@@ -3734,8 +3735,8 @@
         },
         {
           "atomType": "Intersection",
-          "x": 0.52734375,
-          "y": 0.5228571428571429,
+          "x": 0.53515625,
+          "y": 0.48571428571428577,
           "uniqueID": "id-41045",
           "ioValues": [
             {
