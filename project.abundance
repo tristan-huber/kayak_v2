@@ -5851,8 +5851,8 @@
         },
         {
           "atomType": "Loft",
-          "x": 0.619140625,
-          "y": 0.41714285714285715,
+          "x": 0.6009114583333334,
+          "y": 0.24285714285714288,
           "uniqueID": "id-27798",
           "ioValues": [
             {
@@ -5939,8 +5939,8 @@
         },
         {
           "atomType": "Assembly",
-          "x": 0.7057291666666667,
-          "y": 0.8257142857142857,
+          "x": 0.7154947916666666,
+          "y": 0.8657142857142858,
           "uniqueID": "id-27834",
           "ioValues": [
             {
@@ -6003,8 +6003,8 @@
         },
         {
           "atomType": "Tag",
-          "x": 0.6549479166666667,
-          "y": 0.6228571428571429,
+          "x": 0.6510416666666666,
+          "y": 0.6628571428571429,
           "uniqueID": "id-40785",
           "name": "deck",
           "ioValues": [
@@ -6211,8 +6211,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.6979166666666667,
-          "y": 0.37999999999999995,
+          "x": 0.6764322916666667,
+          "y": 0.23142857142857146,
           "uniqueID": "id-27816",
           "name": "util.asFaces",
           "ioValues": [
@@ -7091,6 +7091,38 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1784845022435
+        },
+        {
+          "atomType": "ExtractTag",
+          "x": 0.8235677083333333,
+          "y": 0.5371428571428571,
+          "uniqueID": "id-41156",
+          "name": "Extract Tag",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tagIndex": 0,
+          "selectedTags": [],
+          "includeUntagged": false,
+          "notKeepOut": false
+        },
+        {
+          "atomType": "Code",
+          "x": 0.7669270833333333,
+          "y": 0.37999999999999995,
+          "uniqueID": "id-41159",
+          "ioValues": [
+            {
+              "name": "a",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(a: Assembly) {\n  let i = 0;\n  const t = []\n  a.onLeafs((leaf) => {\n    i+= 1\n    t.push(...leaf.tags)\n    return leaf;\n  })\n  console.log(\"found tags; \", t)\n  console.log(`total of ${i} leafs, top-level has ${a.geometry.length} children`)\n  console.log(a)\n  return a\n}",
+          "compiledCode": "\"use strict\";\nfunction run(a) {\n    let i = 0;\n    const t = [];\n    a.onLeafs((leaf) => {\n        i += 1;\n        t.push(...leaf.tags);\n        return leaf;\n    });\n    console.log(\"found tags; \", t);\n    console.log(`total of ${i} leafs, top-level has ${a.geometry.length} children`);\n    console.log(a);\n    return a;\n}\n"
         }
       ],
       "allConnectors": [
@@ -7151,6 +7183,11 @@
         },
         {
           "ap2Name": "geometry",
+          "ap1ID": "id-27834",
+          "ap2ID": "id-41156"
+        },
+        {
+          "ap2Name": "geometry",
           "ap1ID": "id-37314",
           "ap2ID": "id-27600"
         },
@@ -7163,6 +7200,11 @@
           "ap2Name": "Shape 1",
           "ap1ID": "id-40785",
           "ap2ID": "id-27834"
+        },
+        {
+          "ap2Name": "a",
+          "ap1ID": "id-40785",
+          "ap2ID": "id-41159"
         },
         {
           "ap2Name": "Shape 2",
