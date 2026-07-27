@@ -112,30 +112,6 @@
       "compiledCode": "\"use strict\";\n/**\n * Unrolls (flattens) a ruled surface into a 2D Drawing of its boundary,\n * using the same primary/secondary ruling extractor as the rulings atom\n * (see atomimpl.ts and Wang et al., JCISE 2021).\n *\n * Because the 2-neighbour shortest path advances exactly one of (i, j) per\n * step, every pair of consecutive rulings shares an endpoint. The strip\n * between them is therefore a TRIANGLE, which is intrinsically planar and\n * unrolls exactly — no quad-skew distortion. The first ruling is laid along\n * +X; each subsequent triangle hinges across the shared ruling and is\n * placed on the opposite side from the prior triangle's apex.\n *\n * The two long edges (primary chain and secondary chain) are emitted as\n * smooth splines through the placed vertices; the two short edges (first\n * and last rulings) are straight line segments. Splines play better with\n * downstream CAM than dense polylines.\n *\n *   primaryEdgeIndex → cyclic index into face.outerWire().edges. The two\n *                      neighbouring edges are excluded; remaining edges form\n *                      the secondary, identical to atomimpl.ts.\n */\nfunction run(surface, numRulings = 24, primaryEdgeIndex = 0, holeSamples = 64) {\n    console.log(numRulings);\n    if (!Number.isFinite(numRulings) || numRulings < 2) {\n        throw new Error(\"Unroll surface: numRulings must be an integer ≥ 2 (two rulings \" +\n            \"needed to define a strip).\");\n    }\n    console.log(primaryEdgeIndex);\n    if (!Number.isFinite(primaryEdgeIndex)) {\n        throw new Error(\"Unroll surface: primaryEdgeIndex must be a number. was: \" +\n            primaryEdgeIndex);\n    }\n    if (!Number.isFinite(holeSamples) || holeSamples < 8) {\n        throw new Error(\"Unroll surface: holeSamples must be an integer ≥ 8.\");\n    }\n    const results = [];\n    let index = 0;\n    surface.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            console.warn(\"drawings cannot be unrolled\");\n            return leaf;\n        }\n        const faces = leaf.geometry instanceof replicad.Face ? [leaf.geometry] : leaf.geometry.faces;\n        for (const face of faces) {\n            const { drawing, pIdx } = unrollFaceToDrawing(face, numRulings, primaryEdgeIndex, holeSamples);\n            results.push(new Assembly({\n                ...leaf,\n                geometry: drawing,\n                tags: [...(leaf.tags ?? []), \"developed\", \"ruling-primary:\" + pIdx],\n                plane: replicad.makePlane(\"XY\", [0, 0, index])\n            }));\n            index++;\n        }\n        return leaf;\n    });\n    console.log(results);\n    return results;\n}\n/**\n * Unrolls a single replicad.Face into a 2D Drawing. Returns the drawing and\n * the resolved primary edge index (pIdx) so callers can attach a tag.\n */\n/**\n * Probe every outer edge of `face` at a low ruling count and return the\n * index of the edge that yields the lowest total ruling cost. Used when\n * primaryEdgeIndex < 0 (auto-select mode).\n */\nconst AUTO_PROBE_N = 8;\nfunction selectBestPrimaryEdge(face) {\n    console.log(\"blahblah\");\n    const outerWire = face.clone().outerWire();\n    const allEdges = outerWire.edges ?? []; // eslint-disable-line @typescript-eslint/no-explicit-any\n    const m = allEdges.length;\n    let bestIdx = 0;\n    let bestCost = Infinity;\n    for (let k = 0; k < m; k++) {\n        try {\n            const { primary, secondaryEdges } = partitionOuterWire(face, k);\n            const P3 = samplePrimary(primary, AUTO_PROBE_N);\n            const S3 = sampleSecondary(secondaryEdges, AUTO_PROBE_N);\n            const cost = buildCostGrid(face, P3, S3);\n            const { totalCost } = findOptimalRulingPath(cost, P3, S3);\n            if (totalCost < bestCost) {\n                bestCost = totalCost;\n                bestIdx = k;\n            }\n        }\n        catch {\n            // edge produced a degenerate partition; skip\n        }\n    }\n    console.log(`Unroll auto-select: chose primaryEdgeIndex=${bestIdx} (cost=${bestCost.toExponential(2)}) from ${m} candidates`);\n    return bestIdx;\n}\nfunction unrollFaceToDrawing(face, // eslint-disable-line @typescript-eslint/no-explicit-any\nnumRulings, primaryEdgeIndex, holeSamples) {\n    // eslint-disable-line @typescript-eslint/no-explicit-any\n    const n = Math.max(2, Math.floor(numRulings));\n    const holeN = Math.max(8, Math.floor(holeSamples));\n    const resolvedEdgeIndex = primaryEdgeIndex < 0 ? selectBestPrimaryEdge(face) : primaryEdgeIndex;\n    const { primary, secondaryEdges, pIdx } = partitionOuterWire(face, resolvedEdgeIndex);\n    const primaryDir = primary.orientation;\n    console.log(primary.orientation);\n    console.log(secondaryEdges.map((e) => e.orientation));\n    const orientedSecondaries = secondaryEdges.map((e) => {\n        if (e.orientation == primaryDir) {\n            return e.flipOrientation();\n        }\n        return e;\n    });\n    console.log(orientedSecondaries.map((e) => e.orientation));\n    const P3 = samplePrimary(primary, n);\n    const S3 = sampleSecondary(orientedSecondaries, n);\n    const cost = buildCostGrid(face, P3, S3);\n    const { path, totalCost } = findOptimalRulingPath(cost, P3, S3);\n    console.log(`Unroll: ${path.length} rulings, total cost=${totalCost.toExponential(2)}`);\n    // UV coordinates of every primary/secondary sample on the underlying\n    // surface. We map hole samples through UV (single-valued chart), not 3D,\n    // so triangle containment is an unambiguous 2D point-in-triangle test.\n    const PUV = P3.map((p) => uvAtSafe(face, p));\n    const SUV = S3.map((p) => uvAtSafe(face, p));\n    // ── Unfold triangles ────────────────────────────────────────────────────\n    // P2[i] / S2[j] hold the 2D position of primary sample i / secondary\n    // sample j once it's been placed. Each path step extends exactly one of\n    // these arrays by one new entry.\n    const P2 = new Array(n);\n    const S2 = new Array(n);\n    const [i0, j0] = path[0];\n    const L0 = dist3(P3[i0], S3[j0]);\n    if (!(L0 > 0)) {\n        throw new Error(\"Unroll: first ruling has zero length; cannot orient.\");\n    }\n    // First ruling along +X: primary endpoint at origin, secondary endpoint at +X.\n    P2[i0] = [0, 0];\n    S2[j0] = [L0, 0];\n    // Per-strip triangle records, populated alongside the unfold. Vertex order\n    // is (hinge-primary, hinge-secondary, apex); 2D and UV triples stay in\n    // sync so a UV barycentric coord transfers directly to the 2D pattern.\n    const tris2D = [];\n    const trisUV = [];\n    const tris3D = [];\n    for (let k = 0; k < path.length - 1; k++) {\n        const [i, j] = path[k];\n        const [iN, jN] = path[k + 1];\n        const advancedP = iN > i;\n        const newP3 = advancedP ? P3[iN] : S3[jN];\n        const r0 = dist3(P3[i], newP3);\n        const r1 = dist3(S3[j], newP3);\n        const p0 = P2[i];\n        const p1 = S2[j];\n        // Side choice: place the new apex on the opposite side of the current\n        // hinge (P2[i] → S2[j]) from the previous triangle's apex. For the\n        // first triangle there's no prior apex, so pick +1 (left of p0→p1)\n        // arbitrarily — the whole pattern just unfolds toward +Y.\n        let side;\n        if (k === 0) {\n            side = 1;\n        }\n        else {\n            const [iPrev, jPrev] = path[k - 1];\n            // The previous triangle's apex is whichever of (P2[iPrev], S2[jPrev])\n            // is NOT shared with the current hinge. Exactly one of iPrev, jPrev\n            // differs from (i, j) — that one is the apex.\n            const otherPt = iPrev !== i ? P2[iPrev] : S2[jPrev];\n            const ox = otherPt[0] - p0[0];\n            const oy = otherPt[1] - p0[1];\n            const hx = p1[0] - p0[0];\n            const hy = p1[1] - p0[1];\n            const sideOfOther = Math.sign(hx * oy - hy * ox);\n            side = -sideOfOther || 1;\n        }\n        const newP2 = circleIntersect(p0, r0, p1, r1, side, k);\n        if (advancedP)\n            P2[iN] = newP2;\n        else\n            S2[jN] = newP2;\n        tris2D.push([p0, p1, newP2]);\n        tris3D.push([P3[i], S3[j], newP3]);\n        const uvA = PUV[i];\n        const uvB = SUV[j];\n        const uvC = advancedP ? PUV[iN] : SUV[jN];\n        trisUV.push(uvA && uvB && uvC ? [uvA, uvB, uvC] : null);\n    }\n    // ── Build the two long chains in path order ────────────────────────────\n    // primaryChain = the 2D positions of the primary samples actually visited,\n    // in the order they appear along the path. Same for secondaryChain.\n    const primaryChain = [];\n    const secondaryChain = [];\n    let lastI = -1;\n    let lastJ = -1;\n    for (const [i, j] of path) {\n        if (i !== lastI) {\n            primaryChain.push(P2[i]);\n            lastI = i;\n        }\n        if (j !== lastJ) {\n            secondaryChain.push(S2[j]);\n            lastJ = j;\n        }\n    }\n    if (primaryChain.length < 2 || secondaryChain.length < 2) {\n        throw new Error(`Unroll: degenerate chains (primary=${primaryChain.length}, ` +\n            `secondary=${secondaryChain.length}); need ≥2 on each side.`);\n    }\n    // ── Build the boundary drawing ─────────────────────────────────────────\n    // Primary chain (spline) → last ruling (straight) → reversed secondary\n    // chain (spline) → close back along first ruling (straight).\n    const pen = replicad.draw(primaryChain[0]);\n    for (let i = 1; i < primaryChain.length; i++) {\n        pen.lineTo(primaryChain[i]);\n    }\n    pen.lineTo(secondaryChain[secondaryChain.length - 1]);\n    for (let i = secondaryChain.length - 2; i >= 0; i--) {\n        pen.lineTo(secondaryChain[i]);\n    }\n    let drawing = pen.close();\n    // ── Punch holes from inner wires (if any) ───────────────────────\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    const innerWires = face.clone().innerWires() ?? [];\n    for (let h = 0; h < innerWires.length; h++) {\n        const wire = innerWires[h];\n        // Pass 1: dense 3D samples around the wire.\n        const samples3D = [];\n        for (let i = 0; i < holeN; i++) {\n            const t = i / holeN;\n            samples3D.push(toT3(wire.pointAt(t)));\n        }\n        if (samples3D.length < 3)\n            continue;\n        // Pass 2: map 3D→2D using nearest physical triangle.\n        const samples2D = samples3D\n            .map((p) => {\n            const k = findBestTriangle3D(p, tris3D);\n            return k >= 0 ? mapWithTriangle3D(p, k, tris3D, tris2D) : null;\n        })\n            .filter((p) => p !== null);\n        if (samples2D.length < 3)\n            continue;\n        // Pass 3: Draw the hole.\n        const holePen = replicad.draw(samples2D[0]);\n        for (let i = 1; i < samples2D.length; i++) {\n            holePen.lineTo(samples2D[i]);\n        }\n        const holeDrawing = holePen.close();\n        drawing = drawing.cut(holeDrawing);\n    }\n    return { drawing, pIdx };\n}\nfunction toT3(v) {\n    return [v.x, v.y, v.z];\n}\nfunction dist3(a, b) {\n    return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);\n}\nfunction partitionOuterWire(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primaryEdgeIndex) {\n    const outerWire = face.clone().outerWire();\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    const allEdges = outerWire.edges ?? [];\n    const m = allEdges.length;\n    const pIdx = ((Math.floor(primaryEdgeIndex) % m) + m) % m;\n    const primary = allEdges[pIdx];\n    const excludedIdx = new Set([pIdx]);\n    if (primary.isClosed) {\n        if (pIdx == 0) {\n            excludedIdx.add(1);\n        }\n        else if (pIdx == allEdges.length - 1) {\n            excludedIdx.add(allEdges.length - 2);\n        }\n        else {\n            console.warn(\"found a closed face with two neighbors..\");\n        }\n    }\n    else {\n        excludedIdx.add((pIdx - 1 + m) % m);\n        excludedIdx.add((pIdx + 1) % m);\n    }\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    const secondaryEdges = [];\n    for (let k = 0; k < m; k++) {\n        const idx = (pIdx + 2 + k) % m;\n        if (!excludedIdx.has(idx))\n            secondaryEdges.push(allEdges[idx]);\n    }\n    if (secondaryEdges.length === 0) {\n        console.warn(\"less than 4 edges total. this may cause bugs later\");\n        secondaryEdges.push(allEdges[(pIdx + 1) % m]);\n    }\n    return { primary, secondaryEdges, pIdx };\n}\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nfunction samplePrimary(primary, n) {\n    const out = new Array(n);\n    for (let i = 0; i < n; i++) {\n        const t = n === 1 ? 0 : i / (n - 1);\n        out[i] = toT3(primary.pointAt(t));\n    }\n    return out;\n}\nfunction sampleSecondary(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nsecondaryEdges, n) {\n    const secLengths = secondaryEdges.map((e) => e.length);\n    const secTotal = secLengths.reduce((a, b) => a + b, 0);\n    if (!(secTotal > 0)) {\n        throw new Error(\"Unroll surface: secondary edges have zero total length.\");\n    }\n    const perEdge = secondaryEdges.map((_, k) => Math.max(1, Math.round((n * secLengths[k]) / secTotal)));\n    let perSum = perEdge.reduce((a, b) => a + b, 0);\n    while (perSum !== n) {\n        let bestK = 0;\n        let bestLen = -1;\n        for (let k = 0; k < secondaryEdges.length; k++) {\n            if (secLengths[k] > bestLen) {\n                bestLen = secLengths[k];\n                bestK = k;\n            }\n        }\n        if (perSum < n) {\n            perEdge[bestK] += 1;\n            perSum += 1;\n        }\n        else if (perEdge[bestK] > 1) {\n            perEdge[bestK] -= 1;\n            perSum -= 1;\n        }\n        else {\n            break;\n        }\n    }\n    const samples = [];\n    for (let k = 0; k < secondaryEdges.length; k++) {\n        const e = secondaryEdges[k];\n        const cnt = perEdge[k];\n        for (let i = 0; i < cnt; i++) {\n            const t = (i + 0.5) / cnt;\n            samples.push(toT3(e.pointAt(t)));\n        }\n    }\n    let cursor = 0;\n    for (let k = 0; k < secondaryEdges.length - 1; k++) {\n        cursor += perEdge[k];\n        const sharedVertex = toT3(secondaryEdges[k].endPoint);\n        const a = cursor - 1;\n        const b = cursor;\n        if (a < 0 || b >= samples.length)\n            continue;\n        const dA = dist3(samples[a], sharedVertex);\n        const dB = dist3(samples[b], sharedVertex);\n        if (dA <= dB)\n            samples[a] = sharedVertex;\n        else\n            samples[b] = sharedVertex;\n    }\n    return samples;\n}\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nfunction normalAtSafe(face, p) {\n    try {\n        const nv = face.normalAt(p);\n        const x = nv.x, y = nv.y, z = nv.z;\n        const len = Math.hypot(x, y, z);\n        if (!(len > 0))\n            return null;\n        return [x / len, y / len, z / len];\n    }\n    catch {\n        return null;\n    }\n}\nfunction buildCostGrid(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primarySamples, secondarySamples) {\n    const n = primarySamples.length;\n    const ns = secondarySamples.length;\n    const primaryNormals = primarySamples.map((p) => normalAtSafe(face, p));\n    const secondaryNormals = secondarySamples.map((p) => normalAtSafe(face, p));\n    const cost = new Array(n);\n    for (let i = 0; i < n; i++) {\n        const row = new Array(ns);\n        const nA = primaryNormals[i];\n        for (let j = 0; j < ns; j++) {\n            const nB = secondaryNormals[j];\n            if (!nA || !nB) {\n                row[j] = Infinity;\n                continue;\n            }\n            const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n            row[j] = 1 - Math.abs(dot);\n        }\n        cost[i] = row;\n    }\n    return cost;\n}\nfunction quadTwist(P, S, i, j, iN, jN) {\n    const A = P[i];\n    const Ap = P[iN];\n    const B = S[j];\n    const Bp = S[jN];\n    const e1x = Ap[0] - A[0], e1y = Ap[1] - A[1], e1z = Ap[2] - A[2];\n    const e2x = Bp[0] - A[0], e2y = Bp[1] - A[1], e2z = Bp[2] - A[2];\n    const e3x = B[0] - A[0], e3y = B[1] - A[1], e3z = B[2] - A[2];\n    const nx = e1y * e2z - e1z * e2y;\n    const ny = e1z * e2x - e1x * e2z;\n    const nz = e1x * e2y - e1y * e2x;\n    const nMag = Math.hypot(nx, ny, nz);\n    const height = nMag > 0 ? Math.abs(nx * e3x + ny * e3y + nz * e3z) / nMag : 0;\n    const avgEdge = 0.25 * (dist3(A, Ap) + dist3(Ap, Bp) + dist3(Bp, B) + dist3(B, A));\n    return avgEdge > 0 ? height / avgEdge : 0;\n}\n/**\n * 2-neighbour anti-diagonal DP: from (i, j) you may only advance to\n * (i+1, j) or (i, j+1). Every path has 2(n-1) steps and emits 2n-1 rulings.\n * Identical to the implementation in atomimpl.ts.\n */\nfunction findOptimalRulingPath(cost, P, S) {\n    const n = cost.length;\n    const INF = Number.POSITIVE_INFINITY;\n    const dist = new Array(n);\n    const prevDir = new Array(n);\n    for (let i = 0; i < n; i++) {\n        dist[i] = new Array(n).fill(INF);\n        prevDir[i] = new Array(n).fill(-1);\n    }\n    dist[0][0] = cost[0][0];\n    for (let s = 1; s <= 2 * (n - 1); s++) {\n        const iLo = Math.max(0, s - (n - 1));\n        const iHi = Math.min(n - 1, s);\n        for (let iN = iLo; iN <= iHi; iN++) {\n            const jN = s - iN;\n            const rulingCost = cost[iN][jN];\n            if (!isFinite(rulingCost))\n                continue;\n            let best = INF;\n            let bestDir = -1;\n            if (iN > 0 && isFinite(dist[iN - 1][jN])) {\n                const cand = dist[iN - 1][jN] + rulingCost + quadTwist(P, S, iN - 1, jN, iN, jN);\n                if (cand < best) {\n                    best = cand;\n                    bestDir = 0;\n                }\n            }\n            if (jN > 0 && isFinite(dist[iN][jN - 1])) {\n                const cand = dist[iN][jN - 1] + rulingCost + quadTwist(P, S, iN, jN - 1, iN, jN);\n                if (cand < best) {\n                    best = cand;\n                    bestDir = 1;\n                }\n            }\n            if (best < INF) {\n                dist[iN][jN] = best;\n                prevDir[iN][jN] = bestDir;\n            }\n        }\n    }\n    const path = [];\n    if (isFinite(dist[n - 1][n - 1])) {\n        let ci = n - 1;\n        let cj = n - 1;\n        while (ci >= 0 && cj >= 0) {\n            path.push([ci, cj]);\n            if (ci === 0 && cj === 0)\n                break;\n            const dir = prevDir[ci][cj];\n            if (dir === 0)\n                ci -= 1;\n            else if (dir === 1)\n                cj -= 1;\n            else\n                break;\n        }\n        path.reverse();\n        return { path, totalCost: dist[n - 1][n - 1] };\n    }\n    console.warn(\"Unroll: DAG search found no path; falling back to diagonal.\");\n    for (let k = 0; k < n; k++)\n        path.push([k, k]);\n    return { path, totalCost: INF };\n}\n/**\n * Locate the unfold triangle whose plane is closest to `p`, returning the\n * 2D image of `p` under that triangle's affine 3D→2D map. We prefer\n * triangles where the projected point's barycentric coordinates are all\n * within [−ε, 1+ε] (i.e. inside the triangle); among those, pick the one\n * with the smallest perpendicular distance. If none qualify, fall back to\n * the globally closest triangle and clamp.\n */\n/**\n * Safely fetch the UV coordinates of a 3D point on `face`. Returns null if\n * the point is off-surface or OCCT raises (e.g. periodic-seam glitch).\n * `face.uvCoordinates(p)` may return either a `[u, v]` tuple or an\n * object with .u/.v depending on the replicad build; normalise both.\n */\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nfunction uvAtSafe(face, p) {\n    try {\n        const r = face.uvCoordinates([p[0], p[1], p[2]]);\n        if (Array.isArray(r)) {\n            if (!isFinite(r[0]) || !isFinite(r[1]))\n                return null;\n            return [r[0], r[1]];\n        }\n        if (r && typeof r.u === \"number\" && typeof r.v === \"number\") {\n            return [r.u, r.v];\n        }\n        return null;\n    }\n    catch {\n        return null;\n    }\n}\n/**\n * Return the index of the unfold triangle whose UV image contains `uv`,\n * or -1 if none does. UV is a single-valued chart on the trimmed face, so\n * at most one triangle truly contains `uv`; a small ε accepts on-edge\n * points and either side resolves to the same 2D position (the affine\n * maps agree on the shared edge).\n */\nfunction findContainingTriangle(uv, trisUV) {\n    const EPS = 1e-9;\n    for (let k = 0; k < trisUV.length; k++) {\n        const tri = trisUV[k];\n        if (!tri)\n            continue;\n        const bary = baryUV(uv, tri[0], tri[1], tri[2]);\n        if (!bary)\n            continue;\n        const [u, v, w] = bary;\n        if (u >= -EPS && v >= -EPS && w >= -EPS)\n            return k;\n    }\n    return -1;\n}\n/**\n * Identify the best 3D triangle for a point P. We prefer the one where P\n * projects inside (positive barycentric), using physical distance to the\n * triangle plane as a tie-breaker.\n */\nfunction findBestTriangle3D(p, tris3D) {\n    let bestK = -1;\n    let minScore = Infinity;\n    for (let k = 0; k < tris3D.length; k++) {\n        const tri = tris3D[k];\n        const bary = bary3D(p, tri[0], tri[1], tri[2]);\n        if (!bary)\n            continue;\n        const [u, v, w] = bary;\n        // Penalty for being physically outside the triangle footprint\n        const outsideDist = Math.max(0, -u, -v, -w);\n        // Distance to triangle plane\n        const planeDist = distToPlane(p, tri[0], tri[1], tri[2]);\n        // Combined score: proximity to plane + penalty for being outside.\n        // Being outside is penalized much more heavily than being slightly\n        // off-plane.\n        const score = planeDist + outsideDist * 1000;\n        if (score < minScore) {\n            minScore = score;\n            bestK = k;\n        }\n    }\n    return bestK;\n}\n/**\n * Project 3D point p into triangle k and return its 2D coordinates.\n */\nfunction mapWithTriangle3D(p, k, tris3D, tris2D) {\n    const tri3 = tris3D[k];\n    const tri2 = tris2D[k];\n    const bary = bary3D(p, tri3[0], tri3[1], tri3[2]);\n    if (!bary)\n        return [0, 0];\n    const [u, v, w] = bary;\n    const [a2, b2, c2] = tri2;\n    return [u * a2[0] + v * b2[0] + w * c2[0], u * a2[1] + v * b2[1] + w * c2[1]];\n}\nfunction distToPlane(p, a, b, c) {\n    const v1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n    const v2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n    const nx = v1[1] * v2[2] - v1[2] * v2[1];\n    const ny = v1[2] * v2[0] - v1[0] * v2[2];\n    const nz = v1[0] * v2[1] - v1[1] * v2[0];\n    const nLen = Math.hypot(nx, ny, nz);\n    if (nLen === 0)\n        return dist3(p, a);\n    const dx = p[0] - a[0];\n    const dy = p[1] - a[1];\n    const dz = p[2] - a[2];\n    return Math.abs(dx * nx + dy * ny + dz * nz) / nLen;\n}\n/**\n * 3D Barycentric coordinates of P in triangle (A, B, C).\n * P is projected onto the plane of ABC.\n */\nfunction bary3D(p, a, b, c) {\n    const v0 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n    const v1 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n    const v2 = [p[0] - a[0], p[1] - a[1], p[2] - a[2]];\n    const d00 = v0[0] * v0[0] + v0[1] * v0[1] + v0[2] * v0[2];\n    const d01 = v0[0] * v1[0] + v0[1] * v1[1] + v0[2] * v1[2];\n    const d11 = v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2];\n    const d20 = v2[0] * v0[0] + v2[1] * v0[1] + v2[2] * v0[2];\n    const d21 = v2[0] * v1[0] + v2[1] * v1[1] + v2[2] * v1[2];\n    const denom = d00 * d11 - d01 * d01;\n    if (Math.abs(denom) < 1e-12)\n        return null;\n    const invDenom = 1.0 / denom;\n    const v = (d11 * d20 - d01 * d21) * invDenom;\n    const w = (d00 * d21 - d01 * d20) * invDenom;\n    const u = 1.0 - v - w;\n    return [u, v, w];\n}\n/**\n * Affine UV→2D map via the barycentric of `uv` in triangle `k`. Caller is\n * responsible for picking a triangle that (nearly) contains `uv`.\n */\nfunction mapWithTriangle(uv, k, trisUV, tris2D) {\n    const tri = trisUV[k];\n    if (!tri)\n        return [0, 0];\n    const bary = baryUV(uv, tri[0], tri[1], tri[2]);\n    const [u, v, w] = bary ?? [1, 0, 0];\n    const [a2, b2, c2] = tris2D[k];\n    return [u * a2[0] + v * b2[0] + w * c2[0], u * a2[1] + v * b2[1] + w * c2[1]];\n}\n/** Signed-area barycentric of `p` in triangle (A, B, C) in 2D. Returns\n *  [u, v, w] with u+v+w=1; null on a zero-area triangle. */\nfunction baryUV(p, A, B, C) {\n    const ax = B[0] - A[0], ay = B[1] - A[1];\n    const bx = C[0] - A[0], by = C[1] - A[1];\n    const denom = ax * by - ay * bx;\n    if (!(Math.abs(denom) > 0))\n        return null;\n    const px = p[0] - A[0], py = p[1] - A[1];\n    const v = (px * by - py * bx) / denom;\n    const w = (ax * py - ay * px) / denom;\n    const u = 1 - v - w;\n    return [u, v, w];\n}\n/** Place a new 2D point at distance r0 from p0 and r1 from p1, on the\n * sideSign side of the directed line p0→p1 (+1 = left, −1 = right). */\nfunction circleIntersect(p0, r0, p1, r1, sideSign, stripIdx) {\n    const dx = p1[0] - p0[0];\n    const dy = p1[1] - p0[1];\n    const d = Math.hypot(dx, dy);\n    const sum = r0 + r1;\n    const diff = Math.abs(r0 - r1);\n    const EPS = 1e-6;\n    if (d === 0 || d > sum * (1 + EPS) || d < diff * (1 - EPS)) {\n        throw new Error(`Unroll: degenerate triangle at strip ${stripIdx} ` +\n            `(r0=${r0.toFixed(4)}, r1=${r1.toFixed(4)}, hinge=${d.toFixed(4)}).`);\n    }\n    const dC = Math.max(diff, Math.min(sum, d));\n    const a = (r0 * r0 - r1 * r1 + dC * dC) / (2 * dC);\n    const h = Math.sqrt(Math.max(0, r0 * r0 - a * a));\n    const ux = dx / d;\n    const uy = dy / d;\n    const mx = p0[0] + a * ux;\n    const my = p0[1] + a * uy;\n    return [mx + h * -uy * sideSign, my + h * ux * sideSign];\n}\n"
     },
     {
-      "atomType": "Rotate",
-      "x": 0.5455729166666666,
-      "y": 0.7657142857142857,
-      "uniqueID": "id-37294",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "x-axis degrees",
-          "ioValue": -90
-        },
-        {
-          "name": "y-axis degrees",
-          "ioValue": 0
-        },
-        {
-          "name": "z-axis degrees",
-          "ioValue": 0
-        }
-      ]
-    },
-    {
       "atomType": "Extrude",
       "x": 0.3626302083333333,
       "y": 0.9085714285714286,
@@ -197,30 +173,6 @@
       "interpreterVersion": 1,
       "code": "function run(faces: Assembly, direction: number[], height: number) {\n  return faces.onLeafs((leaf) => {\n    leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction).normalize().multiply(height))\n    return leaf;\n  })\n}",
       "compiledCode": "\"use strict\";\nfunction run(faces, direction, height) {\n    return faces.onLeafs((leaf) => {\n        leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction).normalize().multiply(height));\n        return leaf;\n    });\n}\n"
-    },
-    {
-      "atomType": "Move",
-      "x": 0.642578125,
-      "y": 0.6942857142857143,
-      "uniqueID": "id-37300",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "xDist",
-          "ioValue": 91
-        },
-        {
-          "name": "yDist",
-          "ioValue": -4.5
-        },
-        {
-          "name": "zDist",
-          "ioValue": -3
-        }
-      ]
     },
     {
       "atomType": "GitHubMolecule",
@@ -306,390 +258,6 @@
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1784845612735
-    },
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.4388020833333333,
-      "y": 0.7171428571428571,
-      "uniqueID": "id-37221",
-      "name": "G24_marine_battery",
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-37205",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Rectangle",
-          "x": 0.30078125,
-          "y": 0.24188311688311687,
-          "uniqueID": "id-37206",
-          "ioValues": [
-            {
-              "name": "x length",
-              "ioValue": 10.3
-            },
-            {
-              "name": "y length",
-              "ioValue": 6.8
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.44140625,
-          "y": 0.3555194805194805,
-          "uniqueID": "id-37207",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 8.9
-            }
-          ]
-        },
-        {
-          "atomType": "Circle",
-          "x": 0.21171875,
-          "y": 0.6331168831168832,
-          "uniqueID": "id-37208",
-          "ioValues": [
-            {
-              "name": "diameter",
-              "ioValue": 0.5
-            }
-          ]
-        },
-        {
-          "atomType": "Constant",
-          "x": 0.15234375,
-          "y": 0.3782467532467532,
-          "uniqueID": "id-37209",
-          "name": "Height",
-          "value": 8.9
-        },
-        {
-          "atomType": "Constant",
-          "x": 0.16640625,
-          "y": 0.17370129870129872,
-          "uniqueID": "id-37210",
-          "name": "width",
-          "value": 10.3
-        },
-        {
-          "atomType": "Constant",
-          "x": 0.10234375,
-          "y": 0.48376623376623373,
-          "uniqueID": "id-37211",
-          "name": "PinInset",
-          "value": 1
-        },
-        {
-          "atomType": "Color",
-          "x": 0.48515625000000007,
-          "y": 0.5974025974025974,
-          "uniqueID": "id-37212",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "selectedColor": "Black"
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.26640625,
-          "y": 0.7646103896103896,
-          "uniqueID": "id-37213",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 0.5
-            }
-          ]
-        },
-        {
-          "atomType": "Assembly",
-          "x": 0.69140625,
-          "y": 0.6412337662337662,
-          "uniqueID": "id-37214",
-          "ioValues": [
-            {
-              "name": "Shape 1",
-              "ioValue": null
-            },
-            {
-              "name": "Shape 2",
-              "ioValue": null
-            },
-            {
-              "name": "Shape 3",
-              "ioValue": null
-            }
-          ]
-        },
-        {
-          "atomType": "Move",
-          "x": 0.38203125,
-          "y": 0.7824675324675325,
-          "uniqueID": "id-37215",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 1,
-              "currentEquation": "PinInset"
-            },
-            {
-              "name": "yDist",
-              "ioValue": 1,
-              "currentEquation": "PinInset"
-            },
-            {
-              "name": "zDist",
-              "ioValue": 8.9,
-              "currentEquation": "Height"
-            }
-          ]
-        },
-        {
-          "atomType": "Color",
-          "x": 0.47734374999999996,
-          "y": 0.7077922077922079,
-          "uniqueID": "id-37216",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "selectedColor": "Red"
-        },
-        {
-          "atomType": "Constant",
-          "x": 0.15078125,
-          "y": 0.28084415584415584,
-          "uniqueID": "id-37217",
-          "name": "Depth",
-          "value": 6.8
-        },
-        {
-          "atomType": "Move",
-          "x": 0.378125,
-          "y": 0.5616883116883117,
-          "uniqueID": "id-37218",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 9.3,
-              "currentEquation": "width - PinInset"
-            },
-            {
-              "name": "yDist",
-              "ioValue": 1,
-              "currentEquation": "PinInset"
-            },
-            {
-              "name": "zDist",
-              "ioValue": 8.9,
-              "currentEquation": "Height"
-            }
-          ]
-        },
-        {
-          "atomType": "Move",
-          "x": 0.60390625,
-          "y": 0.336038961038961,
-          "uniqueID": "id-37219",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 5.15,
-              "currentEquation": "width / 2"
-            },
-            {
-              "name": "yDist",
-              "ioValue": 3.4,
-              "currentEquation": "Depth / 2"
-            },
-            {
-              "name": "zDist",
-              "ioValue": 0
-            }
-          ]
-        },
-        {
-          "atomType": "Add-BOM-Tag",
-          "x": 0.821875,
-          "y": 0.40584415584415584,
-          "uniqueID": "id-37220",
-          "name": "Add BOM Tag",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "Item Name",
-              "ioValue": "12.8V 100Ah battery",
-              "currentEquation": "12.8V 100Ah battery"
-            },
-            {
-              "name": "Number Needed",
-              "ioValue": 1
-            },
-            {
-              "name": "Cost (USD)",
-              "ioValue": 185
-            },
-            {
-              "name": "Source Link",
-              "ioValue": "https://www.amazon.com/dp/B0DZXDWJXR",
-              "currentEquation": "https://www.amazon.com/dp/B0DZXDWJXR"
-            }
-          ],
-          "BOMitem": {
-            "BOMitemName": "12.8V 100Ah battery",
-            "numberNeeded": 1,
-            "costUSD": 185,
-            "source": "https://www.amazon.com/dp/B0DZXDWJXR"
-          }
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37206",
-          "ap2ID": "id-37207"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37207",
-          "ap2ID": "id-37219"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37208",
-          "ap2ID": "id-37213"
-        },
-        {
-          "ap2Name": "height",
-          "ap1ID": "id-37209",
-          "ap2ID": "id-37207"
-        },
-        {
-          "ap2Name": "x length",
-          "ap1ID": "id-37210",
-          "ap2ID": "id-37206"
-        },
-        {
-          "ap2Name": "Shape 1",
-          "ap1ID": "id-37212",
-          "ap2ID": "id-37214"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37213",
-          "ap2ID": "id-37215"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37213",
-          "ap2ID": "id-37218"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37214",
-          "ap2ID": "id-37220"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37215",
-          "ap2ID": "id-37216"
-        },
-        {
-          "ap2Name": "Shape 2",
-          "ap1ID": "id-37216",
-          "ap2ID": "id-37214"
-        },
-        {
-          "ap2Name": "y length",
-          "ap1ID": "id-37217",
-          "ap2ID": "id-37206"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37218",
-          "ap2ID": "id-37212"
-        },
-        {
-          "ap2Name": "Shape 3",
-          "ap1ID": "id-37219",
-          "ap2ID": "id-37214"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-37220",
-          "ap2ID": "id-37205"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-07-24T18:23:39.035Z",
-        "privateRepo": false,
-        "repoName": "G24_marine_battery",
-        "dateCreated": "2026-07-08T23:43:50Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/README.md?sanitize=true",
-        "yyyy": 2026,
-        "topMoleculeID": "id-21801",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/tristan-huber/G24_marine_battery",
-        "topics": [
-          "hardware",
-          "electronics"
-        ],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739807",
-        "ranking": 0.3,
-        "searchField": "g24_marine_battery tristan-huber model for a group24 sized marine battery. bom links to a lithium ion version available on amazon. hardware electronics",
-        "owner": "tristan-huber",
-        "description": "Model for a Group24 sized marine battery. BOM links to a Lithium Ion version available on amazon.",
-        "contentURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Inches",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1784933285793
     },
     {
       "atomType": "GitHubMolecule",
@@ -1136,232 +704,6 @@
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1785174335502
-    },
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.5618489583333334,
-      "y": 0.5771428571428572,
-      "uniqueID": "id-40670",
-      "name": "Label_Bounding_Box",
-      "ioValues": [
-        {
-          "name": "Shape",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Font_Size",
-          "ioValue": 34
-        },
-        {
-          "name": "Decimals",
-          "ioValue": 1
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-40661",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.45833333333333337,
-          "y": 0.33704735376044564,
-          "uniqueID": "id-40662",
-          "ioValues": [
-            {
-              "name": "input",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "labelColor",
-              "ioValue": "#3A2F28",
-              "currentEquation": "#3A2F28"
-            },
-            {
-              "name": "fontSize",
-              "ioValue": 34
-            },
-            {
-              "name": "decimals",
-              "ioValue": 1
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "type Vec3 = [number, number, number];\n\ntype LabelPayload = {\n  type: \"Label\";\n  fontSize: number;\n  line: {\n    start: Vec3;\n    end: Vec3;\n    color: string;\n    linewidth: number;\n  };\n  endSegments: {\n    start: { p1: Vec3; p2: Vec3 };\n    end: { p1: Vec3; p2: Vec3 };\n    color: string;\n    linewidth: number;\n  };\n  text: {\n    value: string;\n    color: string;\n    position: Vec3;\n    scale: Vec3;\n    font: string;\n    linewidth: number;\n  };\n  movement: { x: number; y: number; z: number };\n  rotation: { x: number; y: number; z: number };\n};\n\nfunction run(\n  input: Assembly,\n  labelColor: string = \"#2C241F\",\n  fontSize: number = 1,\n  decimals: number = 2\n) {\n  if (!input) {\n    throw new Error(\"Connect a geometry Assembly to the input.\");\n  }\n\n  const leaves = collectLeaves(input);\n  if (leaves.length === 0) {\n    throw new Error(\"Input assembly has no leaf geometry.\");\n  }\n\n  let minX = Number.POSITIVE_INFINITY;\n  let minY = Number.POSITIVE_INFINITY;\n  let minZ = Number.POSITIVE_INFINITY;\n  let maxX = Number.NEGATIVE_INFINITY;\n  let maxY = Number.NEGATIVE_INFINITY;\n  let maxZ = Number.NEGATIVE_INFINITY;\n\n  let all2D = true;\n  let foundBounds = false;\n\n  for (const leaf of leaves) {\n    const geom: any = (leaf as any).geometry;\n    const bbox = geom && geom.boundingBox;\n    const bounds = bbox && bbox.bounds;\n\n    if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n      continue;\n    }\n\n    const b0: any[] = bounds[0];\n    const b1: any[] = bounds[1];\n    if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n      continue;\n    }\n\n    const lx = Number(b0[0]);\n    const ly = Number(b0[1]);\n    const lz = Number(b0.length > 2 ? b0[2] : 0);\n\n    const ux = Number(b1[0]);\n    const uy = Number(b1[1]);\n    const uz = Number(b1.length > 2 ? b1[2] : 0);\n\n    minX = Math.min(minX, lx);\n    minY = Math.min(minY, ly);\n    minZ = Math.min(minZ, lz);\n\n    maxX = Math.max(maxX, ux);\n    maxY = Math.max(maxY, uy);\n    maxZ = Math.max(maxZ, uz);\n\n    const leafIs2D =\n      typeof (leaf as any).is2D === \"function\" ? (leaf as any).is2D() : b0.length < 3;\n    if (!leafIs2D) all2D = false;\n\n    foundBounds = true;\n  }\n\n  if (!foundBounds) {\n    throw new Error(\"Could not read bounding boxes from the input geometry.\");\n  }\n\n  const dx = Math.max(0, maxX - minX);\n  const dy = Math.max(0, maxY - minY);\n  const dz = Math.max(0, maxZ - minZ);\n\n  const span = Math.max(dx, dy, dz, 1e-6);\n  const margin = span * 0.08;\n\n  // Uniform text scale for all axis labels so font appears consistent.\n  const textScaleX = span * 0.12 * fontSize;\n  const textScaleY = span * 0.06 * fontSize;\n\n  const labels: LabelPayload[] = [];\n\n  // X dimension (offset below)\n  labels.push(\n    makeLabel(\n      \"X: \" + fmt(dx, decimals),\n      [minX, minY - margin, minZ],\n      [maxX, minY - margin, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Y dimension (offset left)\n  labels.push(\n    makeLabel(\n      \"Y: \" + fmt(dy, decimals),\n      [minX - margin, minY, minZ],\n      [minX - margin, maxY, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Z dimension only for non-2D input\n  if (!all2D) {\n    labels.push(\n      makeLabel(\n        \"Z: \" + fmt(dz, decimals),\n        [maxX + margin, maxY + margin, minZ],\n        [maxX + margin, maxY + margin, maxZ],\n        labelColor,\n        fontSize,\n        textScaleX,\n        textScaleY\n      )\n    );\n  }\n\n  // Preserve source geometry and metadata, then append generated labels.\n  const out: any = new Assembly(input as any);\n  const prev = Array.isArray(out.nonReplicadSerialized)\n    ? out.nonReplicadSerialized\n    : out.nonReplicadSerialized\n      ? [out.nonReplicadSerialized]\n      : [];\n  out.nonReplicadSerialized = prev.concat(labels);\n\n  return out;\n}\n\nfunction collectLeaves(node: Assembly): Assembly[] {\n  if ((node as any).isLeaf && (node as any).isLeaf()) {\n    return [node];\n  }\n  const children: any[] = Array.isArray((node as any).geometry)\n    ? ((node as any).geometry as any[])\n    : [];\n  const out: Assembly[] = [];\n  for (const child of children) {\n    out.push(...collectLeaves(child as Assembly));\n  }\n  return out;\n}\n\nfunction fmt(v: number, decimals: number): string {\n  const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n  const p = Math.pow(10, d);\n  const rounded = Math.round(v * p) / p;\n  return String(rounded);\n}\n\nfunction makeLabel(\n  text: string,\n  start: Vec3,\n  end: Vec3,\n  color: string,\n  fontSize: number,\n  textScaleX: number,\n  textScaleY: number\n): LabelPayload {\n  const lineDir = normalize(sub(end, start));\n\n  const ref: Vec3 = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n  const segDir = normalize(cross(lineDir, ref));\n\n  let perp: Vec3 = normalize([-lineDir[1], lineDir[0], 0]);\n  if (length(perp) < 1e-9) perp = [0, 1, 0];\n\n  const lineLength = Math.max(length(sub(end, start)), 1e-6);\n  const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n\n  const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n  const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n  const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n  const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n\n  const mid = mul(add(start, end), 0.5);\n  const offset = mul(perp, 2.5);\n  const textPos = add(mid, offset);\n\n  return {\n    type: \"Label\",\n    fontSize,\n    line: {\n      start,\n      end,\n      color,\n      linewidth: 5\n    },\n    endSegments: {\n      start: { p1: startP1, p2: startP2 },\n      end: { p1: endP1, p2: endP2 },\n      color,\n      linewidth: 5\n    },\n    text: {\n      value: text,\n      color,\n      position: textPos,\n      scale: [textScaleX, textScaleY, 1],\n      font: \"Bold \" + String(fontSize) + \"px Arial\",\n      linewidth: fontSize * 0.4\n    },\n    movement: { x: 0, y: 0, z: 0 },\n    rotation: { x: 0, y: 0, z: 0 }\n  };\n}\n\nfunction add(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a: Vec3, s: number): Vec3 {\n  return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a: Vec3, b: Vec3): Vec3 {\n  return [\n    a[1] * b[2] - a[2] * b[1],\n    a[2] * b[0] - a[0] * b[2],\n    a[0] * b[1] - a[1] * b[0]\n  ];\n}\nfunction length(a: Vec3): number {\n  return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a: Vec3): Vec3 {\n  const len = length(a);\n  if (len < 1e-12) return [0, 0, 0];\n  return [a[0] / len, a[1] / len, a[2] / len];\n}",
-          "compiledCode": "\"use strict\";\nfunction run(input, labelColor = \"#2C241F\", fontSize = 1, decimals = 2) {\n    if (!input) {\n        throw new Error(\"Connect a geometry Assembly to the input.\");\n    }\n    const leaves = collectLeaves(input);\n    if (leaves.length === 0) {\n        throw new Error(\"Input assembly has no leaf geometry.\");\n    }\n    let minX = Number.POSITIVE_INFINITY;\n    let minY = Number.POSITIVE_INFINITY;\n    let minZ = Number.POSITIVE_INFINITY;\n    let maxX = Number.NEGATIVE_INFINITY;\n    let maxY = Number.NEGATIVE_INFINITY;\n    let maxZ = Number.NEGATIVE_INFINITY;\n    let all2D = true;\n    let foundBounds = false;\n    for (const leaf of leaves) {\n        const geom = leaf.geometry;\n        const bbox = geom && geom.boundingBox;\n        const bounds = bbox && bbox.bounds;\n        if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n            continue;\n        }\n        const b0 = bounds[0];\n        const b1 = bounds[1];\n        if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n            continue;\n        }\n        const lx = Number(b0[0]);\n        const ly = Number(b0[1]);\n        const lz = Number(b0.length > 2 ? b0[2] : 0);\n        const ux = Number(b1[0]);\n        const uy = Number(b1[1]);\n        const uz = Number(b1.length > 2 ? b1[2] : 0);\n        minX = Math.min(minX, lx);\n        minY = Math.min(minY, ly);\n        minZ = Math.min(minZ, lz);\n        maxX = Math.max(maxX, ux);\n        maxY = Math.max(maxY, uy);\n        maxZ = Math.max(maxZ, uz);\n        const leafIs2D = typeof leaf.is2D === \"function\" ? leaf.is2D() : b0.length < 3;\n        if (!leafIs2D)\n            all2D = false;\n        foundBounds = true;\n    }\n    if (!foundBounds) {\n        throw new Error(\"Could not read bounding boxes from the input geometry.\");\n    }\n    const dx = Math.max(0, maxX - minX);\n    const dy = Math.max(0, maxY - minY);\n    const dz = Math.max(0, maxZ - minZ);\n    const span = Math.max(dx, dy, dz, 1e-6);\n    const margin = span * 0.08;\n    // Uniform text scale for all axis labels so font appears consistent.\n    const textScaleX = span * 0.12 * fontSize;\n    const textScaleY = span * 0.06 * fontSize;\n    const labels = [];\n    // X dimension (offset below)\n    labels.push(makeLabel(\"X: \" + fmt(dx, decimals), [minX, minY - margin, minZ], [maxX, minY - margin, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Y dimension (offset left)\n    labels.push(makeLabel(\"Y: \" + fmt(dy, decimals), [minX - margin, minY, minZ], [minX - margin, maxY, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Z dimension only for non-2D input\n    if (!all2D) {\n        labels.push(makeLabel(\"Z: \" + fmt(dz, decimals), [maxX + margin, maxY + margin, minZ], [maxX + margin, maxY + margin, maxZ], labelColor, fontSize, textScaleX, textScaleY));\n    }\n    // Preserve source geometry and metadata, then append generated labels.\n    const out = new Assembly(input);\n    const prev = Array.isArray(out.nonReplicadSerialized)\n        ? out.nonReplicadSerialized\n        : out.nonReplicadSerialized\n            ? [out.nonReplicadSerialized]\n            : [];\n    out.nonReplicadSerialized = prev.concat(labels);\n    return out;\n}\nfunction collectLeaves(node) {\n    if (node.isLeaf && node.isLeaf()) {\n        return [node];\n    }\n    const children = Array.isArray(node.geometry)\n        ? node.geometry\n        : [];\n    const out = [];\n    for (const child of children) {\n        out.push(...collectLeaves(child));\n    }\n    return out;\n}\nfunction fmt(v, decimals) {\n    const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n    const p = Math.pow(10, d);\n    const rounded = Math.round(v * p) / p;\n    return String(rounded);\n}\nfunction makeLabel(text, start, end, color, fontSize, textScaleX, textScaleY) {\n    const lineDir = normalize(sub(end, start));\n    const ref = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n    const segDir = normalize(cross(lineDir, ref));\n    let perp = normalize([-lineDir[1], lineDir[0], 0]);\n    if (length(perp) < 1e-9)\n        perp = [0, 1, 0];\n    const lineLength = Math.max(length(sub(end, start)), 1e-6);\n    const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n    const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n    const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n    const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n    const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n    const mid = mul(add(start, end), 0.5);\n    const offset = mul(perp, 2.5);\n    const textPos = add(mid, offset);\n    return {\n        type: \"Label\",\n        fontSize,\n        line: {\n            start,\n            end,\n            color,\n            linewidth: 5\n        },\n        endSegments: {\n            start: { p1: startP1, p2: startP2 },\n            end: { p1: endP1, p2: endP2 },\n            color,\n            linewidth: 5\n        },\n        text: {\n            value: text,\n            color,\n            position: textPos,\n            scale: [textScaleX, textScaleY, 1],\n            font: \"Bold \" + String(fontSize) + \"px Arial\",\n            linewidth: fontSize * 0.4\n        },\n        movement: { x: 0, y: 0, z: 0 },\n        rotation: { x: 0, y: 0, z: 0 }\n    };\n}\nfunction add(a, b) {\n    return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a, b) {\n    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a, s) {\n    return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a, b) {\n    return [\n        a[1] * b[2] - a[2] * b[1],\n        a[2] * b[0] - a[0] * b[2],\n        a[0] * b[1] - a[1] * b[0]\n    ];\n}\nfunction length(a) {\n    return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a) {\n    const len = length(a);\n    if (len < 1e-12)\n        return [0, 0, 0];\n    return [a[0] / len, a[1] / len, a[2] / len];\n}\n"
-        },
-        {
-          "atomType": "Circle",
-          "x": 0.14219576719576718,
-          "y": 0.8523676880222841,
-          "uniqueID": "id-40663",
-          "ioValues": [
-            {
-              "name": "diameter",
-              "ioValue": 10
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.2804232804232804,
-          "y": 0.8440111420612814,
-          "uniqueID": "id-40664",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 50
-            }
-          ]
-        },
-        {
-          "atomType": "Move",
-          "x": 0.3697089947089947,
-          "y": 0.713091922005571,
-          "uniqueID": "id-40665",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 0
-            },
-            {
-              "name": "yDist",
-              "ioValue": 0
-            },
-            {
-              "name": "zDist",
-              "ioValue": 10
-            }
-          ]
-        },
-        {
-          "atomType": "Rotate",
-          "x": 0.576058201058201,
-          "y": 0.6991643454038997,
-          "uniqueID": "id-40666",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "x-axis degrees",
-              "ioValue": 10
-            },
-            {
-              "name": "y-axis degrees",
-              "ioValue": 30
-            },
-            {
-              "name": "z-axis degrees",
-              "ioValue": 0
-            }
-          ]
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
-          "uniqueID": "id-40667",
-          "name": "Shape",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
-          "uniqueID": "id-40668",
-          "name": "Font_Size"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.3384615384615385,
-          "uniqueID": "id-40669",
-          "name": "Decimals"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-40662",
-          "ap2ID": "id-40661"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-40663",
-          "ap2ID": "id-40664"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-40664",
-          "ap2ID": "id-40665"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-40665",
-          "ap2ID": "id-40666"
-        },
-        {
-          "ap2Name": "input",
-          "ap1ID": "id-40667",
-          "ap2ID": "id-40662"
-        },
-        {
-          "ap2Name": "fontSize",
-          "ap1ID": "id-40668",
-          "ap2ID": "id-40662"
-        },
-        {
-          "ap2Name": "decimals",
-          "ap1ID": "id-40669",
-          "ap2ID": "id-40662"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-07-27T10:23:38.997Z",
-        "privateRepo": false,
-        "repoName": "Label_Bounding_Box",
-        "dateCreated": "2026-07-15T16:37:50Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/README.md?sanitize=true",
-        "yyyy": 2026,
-        "topMoleculeID": "id-872",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/BarbourSmith/Label_Bounding_Box",
-        "topics": [],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739812",
-        "ranking": 2.7,
-        "searchField": "label_bounding_box barboursmith adds labels to show an input geometrie's bounding box ",
-        "owner": "BarbourSmith",
-        "description": "Adds labels to show an input geometrie's bounding Box",
-        "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Unitless",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1785174901813
     },
     {
       "atomType": "Molecule",
@@ -6820,8 +6162,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.7239583333333333,
-      "y": 0.6914285714285714,
+      "x": 0.7545572916666667,
+      "y": 0.5314285714285714,
       "uniqueID": "id-41185",
       "ioValues": [
         {
@@ -6833,14 +6175,717 @@
           "ioValue": null
         },
         {
-          "name": "Shape 3",
+          "name": "Shape 4",
           "ioValue": null
         },
         {
-          "name": "Shape 4",
+          "name": "Shape 5",
           "ioValue": null
         }
       ]
+    },
+    {
+      "atomType": "Molecule",
+      "x": 0.583984375,
+      "y": 0.8257142857142857,
+      "uniqueID": "id-41192",
+      "name": "New Molecule",
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-41194",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Rotate",
+          "x": 0.5553385416666666,
+          "y": 0.7742857142857142,
+          "uniqueID": "id-41196",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "x-axis degrees",
+              "ioValue": -90
+            },
+            {
+              "name": "y-axis degrees",
+              "ioValue": 0
+            },
+            {
+              "name": "z-axis degrees",
+              "ioValue": 0
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.692578125,
+          "y": 0.6442857142857142,
+          "uniqueID": "id-41197",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 91
+            },
+            {
+              "name": "yDist",
+              "ioValue": -4.5
+            },
+            {
+              "name": "zDist",
+              "ioValue": -3
+            }
+          ]
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.4153645833333333,
+          "y": 0.5885714285714286,
+          "uniqueID": "id-41198",
+          "name": "G24_marine_battery",
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-41199",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Rectangle",
+              "x": 0.30078125,
+              "y": 0.24188311688311687,
+              "uniqueID": "id-41200",
+              "ioValues": [
+                {
+                  "name": "x length",
+                  "ioValue": 10.3
+                },
+                {
+                  "name": "y length",
+                  "ioValue": 6.8
+                }
+              ]
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.44140625,
+              "y": 0.3555194805194805,
+              "uniqueID": "id-41201",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": 8.9
+                }
+              ]
+            },
+            {
+              "atomType": "Circle",
+              "x": 0.21171875,
+              "y": 0.6331168831168832,
+              "uniqueID": "id-41202",
+              "ioValues": [
+                {
+                  "name": "diameter",
+                  "ioValue": 0.5
+                }
+              ]
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.15234375,
+              "y": 0.3782467532467532,
+              "uniqueID": "id-41203",
+              "name": "Height",
+              "value": 8.9
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.16640625,
+              "y": 0.17370129870129872,
+              "uniqueID": "id-41204",
+              "name": "width",
+              "value": 10.3
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.10234375,
+              "y": 0.48376623376623373,
+              "uniqueID": "id-41205",
+              "name": "PinInset",
+              "value": 1
+            },
+            {
+              "atomType": "Color",
+              "x": 0.48515625000000007,
+              "y": 0.5974025974025974,
+              "uniqueID": "id-41206",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "selectedColor": "Black"
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.26640625,
+              "y": 0.7646103896103896,
+              "uniqueID": "id-41207",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": 0.5
+                }
+              ]
+            },
+            {
+              "atomType": "Assembly",
+              "x": 0.69140625,
+              "y": 0.6412337662337662,
+              "uniqueID": "id-41208",
+              "ioValues": [
+                {
+                  "name": "Shape 1",
+                  "ioValue": null
+                },
+                {
+                  "name": "Shape 2",
+                  "ioValue": null
+                },
+                {
+                  "name": "Shape 3",
+                  "ioValue": null
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.38203125,
+              "y": 0.7824675324675325,
+              "uniqueID": "id-41209",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 1,
+                  "currentEquation": "PinInset"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 1,
+                  "currentEquation": "PinInset"
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 8.9,
+                  "currentEquation": "Height"
+                }
+              ]
+            },
+            {
+              "atomType": "Color",
+              "x": 0.47734374999999996,
+              "y": 0.7077922077922079,
+              "uniqueID": "id-41210",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "selectedColor": "Red"
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.15078125,
+              "y": 0.28084415584415584,
+              "uniqueID": "id-41211",
+              "name": "Depth",
+              "value": 6.8
+            },
+            {
+              "atomType": "Move",
+              "x": 0.378125,
+              "y": 0.5616883116883117,
+              "uniqueID": "id-41212",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 9.3,
+                  "currentEquation": "width - PinInset"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 1,
+                  "currentEquation": "PinInset"
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 8.9,
+                  "currentEquation": "Height"
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.60390625,
+              "y": 0.336038961038961,
+              "uniqueID": "id-41213",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 5.15,
+                  "currentEquation": "width / 2"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 3.4,
+                  "currentEquation": "Depth / 2"
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0
+                }
+              ]
+            },
+            {
+              "atomType": "Add-BOM-Tag",
+              "x": 0.821875,
+              "y": 0.40584415584415584,
+              "uniqueID": "id-41214",
+              "name": "Add BOM Tag",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Item Name",
+                  "ioValue": "12.8V 100Ah battery",
+                  "currentEquation": "12.8V 100Ah battery"
+                },
+                {
+                  "name": "Number Needed",
+                  "ioValue": 1
+                },
+                {
+                  "name": "Cost (USD)",
+                  "ioValue": 185
+                },
+                {
+                  "name": "Source Link",
+                  "ioValue": "https://www.amazon.com/dp/B0DZXDWJXR",
+                  "currentEquation": "https://www.amazon.com/dp/B0DZXDWJXR"
+                }
+              ],
+              "BOMitem": {
+                "BOMitemName": "12.8V 100Ah battery",
+                "numberNeeded": 1,
+                "costUSD": 185,
+                "source": "https://www.amazon.com/dp/B0DZXDWJXR"
+              }
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41200",
+              "ap2ID": "id-41201"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41201",
+              "ap2ID": "id-41213"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41202",
+              "ap2ID": "id-41207"
+            },
+            {
+              "ap2Name": "height",
+              "ap1ID": "id-41203",
+              "ap2ID": "id-41201"
+            },
+            {
+              "ap2Name": "x length",
+              "ap1ID": "id-41204",
+              "ap2ID": "id-41200"
+            },
+            {
+              "ap2Name": "Shape 1",
+              "ap1ID": "id-41206",
+              "ap2ID": "id-41208"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41207",
+              "ap2ID": "id-41209"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41207",
+              "ap2ID": "id-41212"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41208",
+              "ap2ID": "id-41214"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41209",
+              "ap2ID": "id-41210"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-41210",
+              "ap2ID": "id-41208"
+            },
+            {
+              "ap2Name": "y length",
+              "ap1ID": "id-41211",
+              "ap2ID": "id-41200"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41212",
+              "ap2ID": "id-41206"
+            },
+            {
+              "ap2Name": "Shape 3",
+              "ap1ID": "id-41213",
+              "ap2ID": "id-41208"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-41214",
+              "ap2ID": "id-41199"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-07-24T18:23:39.035Z",
+            "privateRepo": false,
+            "repoName": "G24_marine_battery",
+            "dateCreated": "2026-07-08T23:43:50Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-21801",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/G24_marine_battery",
+            "topics": [
+              "hardware",
+              "electronics"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739807",
+            "ranking": 0.3,
+            "searchField": "g24_marine_battery tristan-huber model for a group24 sized marine battery. bom links to a lithium ion version available on amazon. hardware electronics",
+            "owner": "tristan-huber",
+            "description": "Model for a Group24 sized marine battery. BOM links to a Lithium Ion version available on amazon.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Inches",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1784933285793
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.57421875,
+          "y": 0.36,
+          "uniqueID": "id-41215",
+          "name": "Label_Bounding_Box",
+          "ioValues": [
+            {
+              "name": "Shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Font_Size",
+              "ioValue": 34
+            },
+            {
+              "name": "Decimals",
+              "ioValue": 1
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-41216",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.45833333333333337,
+              "y": 0.33704735376044564,
+              "uniqueID": "id-41217",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "labelColor",
+                  "ioValue": "#3A2F28",
+                  "currentEquation": "#3A2F28"
+                },
+                {
+                  "name": "fontSize",
+                  "ioValue": 34
+                },
+                {
+                  "name": "decimals",
+                  "ioValue": 1
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "type Vec3 = [number, number, number];\n\ntype LabelPayload = {\n  type: \"Label\";\n  fontSize: number;\n  line: {\n    start: Vec3;\n    end: Vec3;\n    color: string;\n    linewidth: number;\n  };\n  endSegments: {\n    start: { p1: Vec3; p2: Vec3 };\n    end: { p1: Vec3; p2: Vec3 };\n    color: string;\n    linewidth: number;\n  };\n  text: {\n    value: string;\n    color: string;\n    position: Vec3;\n    scale: Vec3;\n    font: string;\n    linewidth: number;\n  };\n  movement: { x: number; y: number; z: number };\n  rotation: { x: number; y: number; z: number };\n};\n\nfunction run(\n  input: Assembly,\n  labelColor: string = \"#2C241F\",\n  fontSize: number = 1,\n  decimals: number = 2\n) {\n  if (!input) {\n    throw new Error(\"Connect a geometry Assembly to the input.\");\n  }\n\n  const leaves = collectLeaves(input);\n  if (leaves.length === 0) {\n    throw new Error(\"Input assembly has no leaf geometry.\");\n  }\n\n  let minX = Number.POSITIVE_INFINITY;\n  let minY = Number.POSITIVE_INFINITY;\n  let minZ = Number.POSITIVE_INFINITY;\n  let maxX = Number.NEGATIVE_INFINITY;\n  let maxY = Number.NEGATIVE_INFINITY;\n  let maxZ = Number.NEGATIVE_INFINITY;\n\n  let all2D = true;\n  let foundBounds = false;\n\n  for (const leaf of leaves) {\n    const geom: any = (leaf as any).geometry;\n    const bbox = geom && geom.boundingBox;\n    const bounds = bbox && bbox.bounds;\n\n    if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n      continue;\n    }\n\n    const b0: any[] = bounds[0];\n    const b1: any[] = bounds[1];\n    if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n      continue;\n    }\n\n    const lx = Number(b0[0]);\n    const ly = Number(b0[1]);\n    const lz = Number(b0.length > 2 ? b0[2] : 0);\n\n    const ux = Number(b1[0]);\n    const uy = Number(b1[1]);\n    const uz = Number(b1.length > 2 ? b1[2] : 0);\n\n    minX = Math.min(minX, lx);\n    minY = Math.min(minY, ly);\n    minZ = Math.min(minZ, lz);\n\n    maxX = Math.max(maxX, ux);\n    maxY = Math.max(maxY, uy);\n    maxZ = Math.max(maxZ, uz);\n\n    const leafIs2D =\n      typeof (leaf as any).is2D === \"function\" ? (leaf as any).is2D() : b0.length < 3;\n    if (!leafIs2D) all2D = false;\n\n    foundBounds = true;\n  }\n\n  if (!foundBounds) {\n    throw new Error(\"Could not read bounding boxes from the input geometry.\");\n  }\n\n  const dx = Math.max(0, maxX - minX);\n  const dy = Math.max(0, maxY - minY);\n  const dz = Math.max(0, maxZ - minZ);\n\n  const span = Math.max(dx, dy, dz, 1e-6);\n  const margin = span * 0.08;\n\n  // Uniform text scale for all axis labels so font appears consistent.\n  const textScaleX = span * 0.12 * fontSize;\n  const textScaleY = span * 0.06 * fontSize;\n\n  const labels: LabelPayload[] = [];\n\n  // X dimension (offset below)\n  labels.push(\n    makeLabel(\n      \"X: \" + fmt(dx, decimals),\n      [minX, minY - margin, minZ],\n      [maxX, minY - margin, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Y dimension (offset left)\n  labels.push(\n    makeLabel(\n      \"Y: \" + fmt(dy, decimals),\n      [minX - margin, minY, minZ],\n      [minX - margin, maxY, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Z dimension only for non-2D input\n  if (!all2D) {\n    labels.push(\n      makeLabel(\n        \"Z: \" + fmt(dz, decimals),\n        [maxX + margin, maxY + margin, minZ],\n        [maxX + margin, maxY + margin, maxZ],\n        labelColor,\n        fontSize,\n        textScaleX,\n        textScaleY\n      )\n    );\n  }\n\n  // Preserve source geometry and metadata, then append generated labels.\n  const out: any = new Assembly(input as any);\n  const prev = Array.isArray(out.nonReplicadSerialized)\n    ? out.nonReplicadSerialized\n    : out.nonReplicadSerialized\n      ? [out.nonReplicadSerialized]\n      : [];\n  out.nonReplicadSerialized = prev.concat(labels);\n\n  return out;\n}\n\nfunction collectLeaves(node: Assembly): Assembly[] {\n  if ((node as any).isLeaf && (node as any).isLeaf()) {\n    return [node];\n  }\n  const children: any[] = Array.isArray((node as any).geometry)\n    ? ((node as any).geometry as any[])\n    : [];\n  const out: Assembly[] = [];\n  for (const child of children) {\n    out.push(...collectLeaves(child as Assembly));\n  }\n  return out;\n}\n\nfunction fmt(v: number, decimals: number): string {\n  const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n  const p = Math.pow(10, d);\n  const rounded = Math.round(v * p) / p;\n  return String(rounded);\n}\n\nfunction makeLabel(\n  text: string,\n  start: Vec3,\n  end: Vec3,\n  color: string,\n  fontSize: number,\n  textScaleX: number,\n  textScaleY: number\n): LabelPayload {\n  const lineDir = normalize(sub(end, start));\n\n  const ref: Vec3 = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n  const segDir = normalize(cross(lineDir, ref));\n\n  let perp: Vec3 = normalize([-lineDir[1], lineDir[0], 0]);\n  if (length(perp) < 1e-9) perp = [0, 1, 0];\n\n  const lineLength = Math.max(length(sub(end, start)), 1e-6);\n  const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n\n  const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n  const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n  const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n  const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n\n  const mid = mul(add(start, end), 0.5);\n  const offset = mul(perp, 2.5);\n  const textPos = add(mid, offset);\n\n  return {\n    type: \"Label\",\n    fontSize,\n    line: {\n      start,\n      end,\n      color,\n      linewidth: 5\n    },\n    endSegments: {\n      start: { p1: startP1, p2: startP2 },\n      end: { p1: endP1, p2: endP2 },\n      color,\n      linewidth: 5\n    },\n    text: {\n      value: text,\n      color,\n      position: textPos,\n      scale: [textScaleX, textScaleY, 1],\n      font: \"Bold \" + String(fontSize) + \"px Arial\",\n      linewidth: fontSize * 0.4\n    },\n    movement: { x: 0, y: 0, z: 0 },\n    rotation: { x: 0, y: 0, z: 0 }\n  };\n}\n\nfunction add(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a: Vec3, s: number): Vec3 {\n  return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a: Vec3, b: Vec3): Vec3 {\n  return [\n    a[1] * b[2] - a[2] * b[1],\n    a[2] * b[0] - a[0] * b[2],\n    a[0] * b[1] - a[1] * b[0]\n  ];\n}\nfunction length(a: Vec3): number {\n  return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a: Vec3): Vec3 {\n  const len = length(a);\n  if (len < 1e-12) return [0, 0, 0];\n  return [a[0] / len, a[1] / len, a[2] / len];\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input, labelColor = \"#2C241F\", fontSize = 1, decimals = 2) {\n    if (!input) {\n        throw new Error(\"Connect a geometry Assembly to the input.\");\n    }\n    const leaves = collectLeaves(input);\n    if (leaves.length === 0) {\n        throw new Error(\"Input assembly has no leaf geometry.\");\n    }\n    let minX = Number.POSITIVE_INFINITY;\n    let minY = Number.POSITIVE_INFINITY;\n    let minZ = Number.POSITIVE_INFINITY;\n    let maxX = Number.NEGATIVE_INFINITY;\n    let maxY = Number.NEGATIVE_INFINITY;\n    let maxZ = Number.NEGATIVE_INFINITY;\n    let all2D = true;\n    let foundBounds = false;\n    for (const leaf of leaves) {\n        const geom = leaf.geometry;\n        const bbox = geom && geom.boundingBox;\n        const bounds = bbox && bbox.bounds;\n        if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n            continue;\n        }\n        const b0 = bounds[0];\n        const b1 = bounds[1];\n        if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n            continue;\n        }\n        const lx = Number(b0[0]);\n        const ly = Number(b0[1]);\n        const lz = Number(b0.length > 2 ? b0[2] : 0);\n        const ux = Number(b1[0]);\n        const uy = Number(b1[1]);\n        const uz = Number(b1.length > 2 ? b1[2] : 0);\n        minX = Math.min(minX, lx);\n        minY = Math.min(minY, ly);\n        minZ = Math.min(minZ, lz);\n        maxX = Math.max(maxX, ux);\n        maxY = Math.max(maxY, uy);\n        maxZ = Math.max(maxZ, uz);\n        const leafIs2D = typeof leaf.is2D === \"function\" ? leaf.is2D() : b0.length < 3;\n        if (!leafIs2D)\n            all2D = false;\n        foundBounds = true;\n    }\n    if (!foundBounds) {\n        throw new Error(\"Could not read bounding boxes from the input geometry.\");\n    }\n    const dx = Math.max(0, maxX - minX);\n    const dy = Math.max(0, maxY - minY);\n    const dz = Math.max(0, maxZ - minZ);\n    const span = Math.max(dx, dy, dz, 1e-6);\n    const margin = span * 0.08;\n    // Uniform text scale for all axis labels so font appears consistent.\n    const textScaleX = span * 0.12 * fontSize;\n    const textScaleY = span * 0.06 * fontSize;\n    const labels = [];\n    // X dimension (offset below)\n    labels.push(makeLabel(\"X: \" + fmt(dx, decimals), [minX, minY - margin, minZ], [maxX, minY - margin, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Y dimension (offset left)\n    labels.push(makeLabel(\"Y: \" + fmt(dy, decimals), [minX - margin, minY, minZ], [minX - margin, maxY, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Z dimension only for non-2D input\n    if (!all2D) {\n        labels.push(makeLabel(\"Z: \" + fmt(dz, decimals), [maxX + margin, maxY + margin, minZ], [maxX + margin, maxY + margin, maxZ], labelColor, fontSize, textScaleX, textScaleY));\n    }\n    // Preserve source geometry and metadata, then append generated labels.\n    const out = new Assembly(input);\n    const prev = Array.isArray(out.nonReplicadSerialized)\n        ? out.nonReplicadSerialized\n        : out.nonReplicadSerialized\n            ? [out.nonReplicadSerialized]\n            : [];\n    out.nonReplicadSerialized = prev.concat(labels);\n    return out;\n}\nfunction collectLeaves(node) {\n    if (node.isLeaf && node.isLeaf()) {\n        return [node];\n    }\n    const children = Array.isArray(node.geometry)\n        ? node.geometry\n        : [];\n    const out = [];\n    for (const child of children) {\n        out.push(...collectLeaves(child));\n    }\n    return out;\n}\nfunction fmt(v, decimals) {\n    const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n    const p = Math.pow(10, d);\n    const rounded = Math.round(v * p) / p;\n    return String(rounded);\n}\nfunction makeLabel(text, start, end, color, fontSize, textScaleX, textScaleY) {\n    const lineDir = normalize(sub(end, start));\n    const ref = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n    const segDir = normalize(cross(lineDir, ref));\n    let perp = normalize([-lineDir[1], lineDir[0], 0]);\n    if (length(perp) < 1e-9)\n        perp = [0, 1, 0];\n    const lineLength = Math.max(length(sub(end, start)), 1e-6);\n    const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n    const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n    const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n    const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n    const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n    const mid = mul(add(start, end), 0.5);\n    const offset = mul(perp, 2.5);\n    const textPos = add(mid, offset);\n    return {\n        type: \"Label\",\n        fontSize,\n        line: {\n            start,\n            end,\n            color,\n            linewidth: 5\n        },\n        endSegments: {\n            start: { p1: startP1, p2: startP2 },\n            end: { p1: endP1, p2: endP2 },\n            color,\n            linewidth: 5\n        },\n        text: {\n            value: text,\n            color,\n            position: textPos,\n            scale: [textScaleX, textScaleY, 1],\n            font: \"Bold \" + String(fontSize) + \"px Arial\",\n            linewidth: fontSize * 0.4\n        },\n        movement: { x: 0, y: 0, z: 0 },\n        rotation: { x: 0, y: 0, z: 0 }\n    };\n}\nfunction add(a, b) {\n    return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a, b) {\n    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a, s) {\n    return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a, b) {\n    return [\n        a[1] * b[2] - a[2] * b[1],\n        a[2] * b[0] - a[0] * b[2],\n        a[0] * b[1] - a[1] * b[0]\n    ];\n}\nfunction length(a) {\n    return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a) {\n    const len = length(a);\n    if (len < 1e-12)\n        return [0, 0, 0];\n    return [a[0] / len, a[1] / len, a[2] / len];\n}\n"
+            },
+            {
+              "atomType": "Circle",
+              "x": 0.14219576719576718,
+              "y": 0.8523676880222841,
+              "uniqueID": "id-41218",
+              "ioValues": [
+                {
+                  "name": "diameter",
+                  "ioValue": 10
+                }
+              ]
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.2804232804232804,
+              "y": 0.8440111420612814,
+              "uniqueID": "id-41219",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": 50
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.3697089947089947,
+              "y": 0.713091922005571,
+              "uniqueID": "id-41220",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 10
+                }
+              ]
+            },
+            {
+              "atomType": "Rotate",
+              "x": 0.576058201058201,
+              "y": 0.6991643454038997,
+              "uniqueID": "id-41221",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "x-axis degrees",
+                  "ioValue": 10
+                },
+                {
+                  "name": "y-axis degrees",
+                  "ioValue": 30
+                },
+                {
+                  "name": "z-axis degrees",
+                  "ioValue": 0
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.15384615384615385,
+              "uniqueID": "id-41222",
+              "name": "Shape",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.24615384615384617,
+              "uniqueID": "id-41223",
+              "name": "Font_Size"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.3384615384615385,
+              "uniqueID": "id-41224",
+              "name": "Decimals"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-41217",
+              "ap2ID": "id-41216"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41218",
+              "ap2ID": "id-41219"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41219",
+              "ap2ID": "id-41220"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-41220",
+              "ap2ID": "id-41221"
+            },
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-41222",
+              "ap2ID": "id-41217"
+            },
+            {
+              "ap2Name": "fontSize",
+              "ap1ID": "id-41223",
+              "ap2ID": "id-41217"
+            },
+            {
+              "ap2Name": "decimals",
+              "ap1ID": "id-41224",
+              "ap2ID": "id-41217"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-07-27T10:23:38.997Z",
+            "privateRepo": false,
+            "repoName": "Label_Bounding_Box",
+            "dateCreated": "2026-07-15T16:37:50Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-872",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/BarbourSmith/Label_Bounding_Box",
+            "topics": [],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739812",
+            "ranking": 2.7,
+            "searchField": "label_bounding_box barboursmith adds labels to show an input geometrie's bounding box ",
+            "owner": "BarbourSmith",
+            "description": "Adds labels to show an input geometrie's bounding Box",
+            "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1785174901813
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-41196",
+          "ap2ID": "id-41197"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-41197",
+          "ap2ID": "id-41194"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-41198",
+          "ap2ID": "id-41196"
+        },
+        {
+          "ap2Name": "Shape",
+          "ap1ID": "id-41198",
+          "ap2ID": "id-41215"
+        }
+      ],
+      "fileTypeVersion": 1
     }
   ],
   "allConnectors": [
@@ -6860,11 +6905,6 @@
       "ap2ID": "id-41153"
     },
     {
-      "ap2Name": "geometry",
-      "ap1ID": "id-37294",
-      "ap2ID": "id-37300"
-    },
-    {
       "ap2Name": "Shape 1",
       "ap1ID": "id-37384",
       "ap2ID": "id-41185"
@@ -6880,24 +6920,9 @@
       "ap2ID": "id-40735"
     },
     {
-      "ap2Name": "Shape 3",
-      "ap1ID": "id-37300",
-      "ap2ID": "id-41185"
-    },
-    {
       "ap2Name": "Shape 5",
       "ap1ID": "id-27904",
       "ap2ID": "id-27926"
-    },
-    {
-      "ap2Name": "geometry",
-      "ap1ID": "id-37221",
-      "ap2ID": "id-37294"
-    },
-    {
-      "ap2Name": "Shape",
-      "ap1ID": "id-37221",
-      "ap2ID": "id-40670"
     },
     {
       "ap2Name": "faceAssembly",
@@ -6958,6 +6983,11 @@
       "ap2Name": "Geometry",
       "ap1ID": "id-41185",
       "ap2ID": "id-37346"
+    },
+    {
+      "ap2Name": "Shape 5",
+      "ap1ID": "id-41192",
+      "ap2ID": "id-41185"
     }
   ],
   "unitsKey": "MM",
