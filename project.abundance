@@ -6570,8 +6570,8 @@
         },
         {
           "atomType": "Intersection",
-          "x": 0.3190104166666667,
-          "y": 0.44571428571428573,
+          "x": 0.3307291666666667,
+          "y": 0.33999999999999997,
           "uniqueID": "id-40791",
           "ioValues": [
             {
@@ -6711,22 +6711,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785176396468
-        },
-        {
-          "atomType": "Intersection",
-          "x": 0.48632812500000006,
-          "y": 0.24,
-          "uniqueID": "id-40989",
-          "ioValues": [
-            {
-              "name": "geometry1",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "geometry2",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
         },
         {
           "atomType": "GitHubMolecule",
@@ -6907,8 +6891,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.7037760416666667,
-          "y": 0.5571428571428572,
+          "x": 0.69921875,
+          "y": 0.6314285714285715,
           "uniqueID": "id-41025",
           "ioValues": [
             {
@@ -6951,7 +6935,8 @@
             },
             {
               "name": "zDist",
-              "ioValue": 0
+              "ioValue": -0.5,
+              "currentEquation": "-0.5"
             }
           ]
         },
@@ -6989,8 +6974,8 @@
         },
         {
           "atomType": "Color",
-          "x": 0.58984375,
-          "y": 0.4085714285714286,
+          "x": 0.5846354166666666,
+          "y": 0.5571428571428572,
           "uniqueID": "id-41049",
           "ioValues": [
             {
@@ -7002,8 +6987,8 @@
         },
         {
           "atomType": "Add-BOM-Tag",
-          "x": 0.6640625,
-          "y": 0.3257142857142857,
+          "x": 0.64453125,
+          "y": 0.4142857142857143,
           "uniqueID": "id-41073",
           "name": "Add BOM Tag",
           "ioValues": [
@@ -7013,28 +6998,121 @@
             },
             {
               "name": "Item Name",
-              "ioValue": "New Item",
-              "currentEquation": "New Item"
+              "ioValue": "HatchTape",
+              "currentEquation": "HatchTape"
             },
             {
               "name": "Number Needed",
-              "ioValue": 1
+              "ioValue": 0.5
             },
             {
               "name": "Cost (USD)",
-              "ioValue": 0
+              "ioValue": 5
             },
             {
               "name": "Source Link",
-              "ioValue": ""
+              "ioValue": "https://clcboats.com/products/foam-hatch-tape",
+              "currentEquation": "https://clcboats.com/products/foam-hatch-tape"
             }
           ],
           "BOMitem": {
-            "BOMitemName": "New Item",
-            "numberNeeded": 1,
-            "costUSD": 0,
-            "source": ""
+            "BOMitemName": "HatchTape",
+            "numberNeeded": 0.5,
+            "costUSD": 5,
+            "source": "https://clcboats.com/products/foam-hatch-tape"
           }
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.7408854166666666,
+          "y": 0.8200000000000001,
+          "uniqueID": "id-41097",
+          "ioValues": [
+            {
+              "name": "Shape 1",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 2",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 3",
+              "ioValue": null
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.716796875,
+          "y": 0.4628571428571429,
+          "uniqueID": "id-41103",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": -0.25
+            }
+          ]
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.80859375,
+          "y": 0.86,
+          "uniqueID": "id-41109",
+          "name": "hatch support",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "hatch support"
+          ]
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.41796875000000006,
+          "y": 0.29714285714285715,
+          "uniqueID": "id-41112",
+          "name": "hatch panel",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "hatch panel"
+          ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.8743489583333334,
+          "y": 0.21142857142857144,
+          "uniqueID": "id-41115",
+          "ioValues": [
+            {
+              "name": "Shape 1",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 2",
+              "ioValue": null
+            }
+          ]
         }
       ],
       "allConnectors": [
@@ -7109,6 +7187,21 @@
           "ap2ID": "id-41041"
         },
         {
+          "ap2Name": "geometry",
+          "ap1ID": "id-40791",
+          "ap2ID": "id-41112"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-40815",
+          "ap2ID": "id-40737"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-40815",
+          "ap2ID": "id-41115"
+        },
+        {
           "ap2Name": "retain",
           "ap1ID": "id-40966",
           "ap2ID": "id-41009"
@@ -7149,6 +7242,16 @@
           "ap2ID": "id-41031"
         },
         {
+          "ap2Name": "Shape 2",
+          "ap1ID": "id-41025",
+          "ap2ID": "id-41097"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-41031",
+          "ap2ID": "id-41097"
+        },
+        {
           "ap2Name": "geometry1",
           "ap1ID": "id-41041",
           "ap2ID": "id-41045"
@@ -7162,6 +7265,26 @@
           "ap2Name": "geometry",
           "ap1ID": "id-41049",
           "ap2ID": "id-41073"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-41073",
+          "ap2ID": "id-41103"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-41097",
+          "ap2ID": "id-41109"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-41103",
+          "ap2ID": "id-41097"
+        },
+        {
+          "ap2Name": "Shape 2",
+          "ap1ID": "id-41109",
+          "ap2ID": "id-41115"
         }
       ],
       "fileTypeVersion": 1
