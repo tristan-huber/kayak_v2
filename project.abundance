@@ -239,6 +239,30 @@
       "compiledCode": "\"use strict\";\nfunction run(faces, direction, height) {\n    return faces.onLeafs((leaf) => {\n        leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction).normalize().multiply(height));\n        return leaf;\n    });\n}\n"
     },
     {
+      "atomType": "Move",
+      "x": 0.642578125,
+      "y": 0.6942857142857143,
+      "uniqueID": "id-37300",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "xDist",
+          "ioValue": 91
+        },
+        {
+          "name": "yDist",
+          "ioValue": -4.5
+        },
+        {
+          "name": "zDist",
+          "ioValue": -3
+        }
+      ]
+    },
+    {
       "atomType": "GitHubMolecule",
       "x": 0.17578125,
       "y": 0.8742857142857143,
@@ -1419,8 +1443,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.24609375,
-      "y": 0.24857142857142855,
+      "x": 0.22395833333333334,
+      "y": 0.20571428571428574,
       "uniqueID": "id-40651",
       "name": "flipFaceOrientation",
       "ioValues": [
@@ -5630,8 +5654,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.18098958333333331,
-      "y": 0.5485714285714286,
+      "x": 0.16536458333333334,
+      "y": 0.5599999999999999,
       "uniqueID": "id-27561",
       "name": "top deck",
       "ioValues": [
@@ -7194,34 +7218,10 @@
       "fileTypeVersion": 1
     },
     {
-      "atomType": "Move",
-      "x": 0.642578125,
-      "y": 0.6942857142857143,
-      "uniqueID": "id-37300",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "xDist",
-          "ioValue": 91
-        },
-        {
-          "name": "yDist",
-          "ioValue": -4.5
-        },
-        {
-          "name": "zDist",
-          "ioValue": -3
-        }
-      ]
-    },
-    {
       "atomType": "GitHubMolecule",
       "x": 0.3125,
       "y": 0.4085714285714286,
-      "uniqueID": "id-38226",
+      "uniqueID": "id-41144",
       "name": "facesToSolid",
       "ioValues": [
         {
@@ -7235,7 +7235,7 @@
           "atomType": "Output",
           "x": 0.98,
           "y": 0.5,
-          "uniqueID": "id-38223",
+          "uniqueID": "id-41141",
           "ioValues": [
             {
               "name": "number or geometry",
@@ -7247,7 +7247,7 @@
           "atomType": "Code",
           "x": 0.5261718750000001,
           "y": 0.3896103896103896,
-          "uniqueID": "id-38224",
+          "uniqueID": "id-41142",
           "ioValues": [
             {
               "name": "faces",
@@ -7262,7 +7262,7 @@
           "atomType": "Input",
           "x": 0.025384615384615384,
           "y": 0.15384615384615385,
-          "uniqueID": "id-38225",
+          "uniqueID": "id-41143",
           "name": "FaceAssembly",
           "type": "geometry"
         }
@@ -7270,13 +7270,13 @@
       "allConnectors": [
         {
           "ap2Name": "number or geometry",
-          "ap1ID": "id-38224",
-          "ap2ID": "id-38223"
+          "ap1ID": "id-41142",
+          "ap2ID": "id-41141"
         },
         {
           "ap2Name": "faces",
-          "ap1ID": "id-38225",
-          "ap2ID": "id-38224"
+          "ap1ID": "id-41143",
+          "ap2ID": "id-41142"
         }
       ],
       "parentRepo": {
@@ -7307,7 +7307,25 @@
       },
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1784935932266
+      "lastReloadedFromGithubAt": 1785178620879
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.3567708333333333,
+      "y": 0.7485714285714287,
+      "uniqueID": "id-41153",
+      "name": "Extract Untagged",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tag": "deck",
+      "tagIndex": 0,
+      "selectedTags": [],
+      "includeUntagged": true,
+      "notKeepOut": false
     }
   ],
   "allConnectors": [
@@ -7324,7 +7342,12 @@
     {
       "ap2Name": "FaceAssembly",
       "ap1ID": "id-27926",
-      "ap2ID": "id-38226"
+      "ap2ID": "id-41144"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-27926",
+      "ap2ID": "id-41153"
     },
     {
       "ap2Name": "geometry",
@@ -7413,7 +7436,7 @@
     },
     {
       "ap2Name": "kayakbody",
-      "ap1ID": "id-38226",
+      "ap1ID": "id-41144",
       "ap2ID": "id-37127"
     }
   ],
