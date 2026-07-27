@@ -15,7 +15,7 @@
     },
     {
       "name": "Breadth",
-      "ioValue": 25
+      "ioValue": 24
     },
     {
       "name": "length",
@@ -2404,7 +2404,8 @@
             },
             {
               "name": "yDist",
-              "ioValue": 1
+              "ioValue": 0,
+              "currentEquation": "0"
             },
             {
               "name": "zDist",
@@ -2450,7 +2451,8 @@
             },
             {
               "name": "x-axis degrees",
-              "ioValue": -10
+              "ioValue": -5,
+              "currentEquation": "-5"
             },
             {
               "name": "y-axis degrees",
@@ -2555,7 +2557,7 @@
             },
             {
               "name": "height",
-              "ioValue": 50,
+              "ioValue": 48,
               "currentEquation": "Breadth * 2"
             }
           ]
@@ -2577,7 +2579,7 @@
             },
             {
               "name": "yDist",
-              "ioValue": 25,
+              "ioValue": 24,
               "currentEquation": "Breadth"
             },
             {
@@ -2631,7 +2633,8 @@
             },
             {
               "name": "x-axis degrees",
-              "ioValue": 190
+              "ioValue": 190,
+              "currentEquation": "190"
             },
             {
               "name": "y-axis degrees",
@@ -2916,7 +2919,7 @@
             },
             {
               "name": "Y",
-              "ioValue": 12.5,
+              "ioValue": 12,
               "currentEquation": "Breadth / 2"
             },
             {
@@ -2957,7 +2960,7 @@
                 },
                 {
                   "name": "y",
-                  "ioValue": 12.5
+                  "ioValue": 12
                 },
                 {
                   "name": "z",
@@ -3662,7 +3665,7 @@
             },
             {
               "name": "Y",
-              "ioValue": 7.5,
+              "ioValue": 7.199999999999999,
               "currentEquation": "Breadth * 0.3"
             },
             {
@@ -3703,7 +3706,7 @@
                 },
                 {
                   "name": "y",
-                  "ioValue": 7.5
+                  "ioValue": 7.199999999999999
                 },
                 {
                   "name": "z",
@@ -4892,11 +4895,59 @@
             },
             {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": {
+                "geometry": "1edc4c98-0",
+                "color": "#3c5a6e",
+                "tags": [],
+                "bom": [],
+                "plane": {
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "xDir": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "normal": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "metadata": {},
+                "dimension": "Wire"
+              }
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": {
+                "geometry": "cf481100-0",
+                "color": "#3c5a6e",
+                "tags": [],
+                "bom": [],
+                "plane": {
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "xDir": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "normal": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "metadata": {},
+                "dimension": "Wire"
+              }
             },
             {
               "name": "Shape 3",
