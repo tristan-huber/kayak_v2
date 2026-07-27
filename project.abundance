@@ -2644,6 +2644,22 @@
           ]
         },
         {
+          "atomType": "Rectangle",
+          "x": 0.08333333333333333,
+          "y": 0.6857142857142857,
+          "uniqueID": "id-38974",
+          "ioValues": [
+            {
+              "name": "x length",
+              "ioValue": 10
+            },
+            {
+              "name": "y length",
+              "ioValue": 10
+            }
+          ]
+        },
+        {
           "atomType": "GitHubMolecule",
           "x": 0.7897135416666666,
           "y": 0.41714285714285715,
@@ -3764,22 +3780,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1784841546092
-        },
-        {
-          "atomType": "Rectangle",
-          "x": 0.08333333333333333,
-          "y": 0.6857142857142857,
-          "uniqueID": "id-38974",
-          "ioValues": [
-            {
-              "name": "x length",
-              "ioValue": 10
-            },
-            {
-              "name": "y length",
-              "ioValue": 10
-            }
-          ]
         }
       ],
       "allConnectors": [
