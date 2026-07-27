@@ -948,8 +948,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.41796875000000006,
-      "y": 0.6171428571428571,
+      "x": 0.4388020833333333,
+      "y": 0.7171428571428571,
       "uniqueID": "id-37221",
       "name": "G24_marine_battery",
       "topLevel": false,
@@ -1820,8 +1820,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4876302083333333,
-      "y": 0.4228571428571429,
+      "x": 0.4661458333333333,
+      "y": 0.3514285714285714,
       "uniqueID": "id-37127",
       "name": "bulkheads",
       "ioValues": [
@@ -6531,6 +6531,211 @@
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1785174901813
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.47786458333333337,
+      "y": 0.5,
+      "uniqueID": "id-40717",
+      "name": "Rounded-rectangle-rep",
+      "ioValues": [
+        {
+          "name": "width",
+          "ioValue": 14
+        },
+        {
+          "name": "length",
+          "ioValue": 12,
+          "currentEquation": "12"
+        },
+        {
+          "name": "radius",
+          "ioValue": 1.5,
+          "currentEquation": "1.5"
+        },
+        {
+          "name": "height",
+          "ioValue": 1
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-40711",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.5328151986183074,
+          "y": 0.48757763975155277,
+          "uniqueID": "id-40712",
+          "ioValues": [
+            {
+              "name": "width",
+              "ioValue": 14
+            },
+            {
+              "name": "length",
+              "ioValue": 12
+            },
+            {
+              "name": "rad",
+              "ioValue": 1.5
+            },
+            {
+              "name": "height",
+              "ioValue": 1
+            }
+          ],
+          "interpreterVersion": 0,
+          "code": "\n      const Inputs = [\n      {inputName: \"width\", type: \"number\", defaultValue: 5},\n        {inputName: \"length\", type: \"number\", defaultValue: 10},\n        {inputName: \"rad\", type: \"number\", defaultValue: 2},\n         {inputName: \"height\", type: \"number\", defaultValue: 1}\n        \n      ]\n\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      //Create a new shape from scratch using replicad\nconsole.log(replicad)\n      let createdRoundedRectangle = replicad.sketchRoundedRectangle(width, length, rad, newPlane).extrude(height)\n    console.log(createdRoundedRectangle)\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdRoundedRectangle],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\n\n     \n\n      return shape2\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-40713",
+          "name": "width",
+          "type": "number"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.24615384615384617,
+          "uniqueID": "id-40714",
+          "name": "length",
+          "type": "number"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.3384615384615385,
+          "uniqueID": "id-40715",
+          "name": "radius",
+          "type": "number"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.4307692307692308,
+          "uniqueID": "id-40716",
+          "name": "height",
+          "type": "number"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-40712",
+          "ap2ID": "id-40711"
+        },
+        {
+          "ap2Name": "width",
+          "ap1ID": "id-40713",
+          "ap2ID": "id-40712"
+        },
+        {
+          "ap2Name": "length",
+          "ap1ID": "id-40714",
+          "ap2ID": "id-40712"
+        },
+        {
+          "ap2Name": "rad",
+          "ap1ID": "id-40715",
+          "ap2ID": "id-40712"
+        },
+        {
+          "ap2Name": "height",
+          "ap1ID": "id-40716",
+          "ap2ID": "id-40712"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-27T10:23:38.997Z",
+        "privateRepo": false,
+        "repoName": "Rounded-rectangle-rep",
+        "dateCreated": "2025-10-07T14:21:34Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/alzatin/Rounded-rectangle-rep/master/README.md?sanitize=true",
+        "yyyy": 2025,
+        "topMoleculeID": "cda49ba0-13f8-4029-b2b8-230ed42791e4",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/alzatin/Rounded-rectangle-rep",
+        "topics": [
+          "abundance-tool",
+          "3d"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739531",
+        "ranking": 7.5,
+        "searchField": "rounded-rectangle-rep alzatin 3d extruded- rounded rectangle using replicad's sketchroundedrectangle method. less likely to fail when using larger radius.  abundance-tool 3d",
+        "owner": "alzatin",
+        "description": "3D Extruded- Rounded rectangle using replicad's sketchRoundedRectangle method. Less likely to fail when using larger radius. ",
+        "contentURL": "https://raw.githubusercontent.com/alzatin/Rounded-rectangle-rep/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/alzatin/Rounded-rectangle-rep/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "MM",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1785175088276
+    },
+    {
+      "atomType": "Molecule",
+      "x": 0.3391927083333333,
+      "y": 0.22285714285714286,
+      "uniqueID": "id-40735",
+      "name": "hatch",
+      "ioValues": [
+        {
+          "name": "topdeck",
+          "ioValue": 10
+        },
+        {
+          "name": "distFromBow",
+          "ioValue": 10
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-40737",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.3142857142857143,
+          "uniqueID": "id-40739",
+          "name": "topdeck"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.5257142857142857,
+          "uniqueID": "id-40742",
+          "name": "distFromBow"
+        }
+      ],
+      "allConnectors": [],
+      "fileTypeVersion": 1
     }
   ],
   "allConnectors": [
