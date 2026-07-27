@@ -253,8 +253,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.38020833333333337,
-      "y": 0.8285714285714286,
+      "x": 0.35807291666666663,
+      "y": 0.84,
       "uniqueID": "id-37384",
       "ioValues": [
         {
@@ -269,8 +269,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.20442708333333334,
-      "y": 0.9342857142857142,
+      "x": 0.17578125,
+      "y": 0.8742857142857143,
       "uniqueID": "id-27904",
       "name": "util.Mirror",
       "topLevel": false,
@@ -5999,6 +5999,38 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1784845022435
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.6549479166666667,
+          "y": 0.6228571428571429,
+          "uniqueID": "id-40785",
+          "name": "deck",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "deck"
+          ]
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.6009114583333334,
+          "y": 0.8857142857142857,
+          "uniqueID": "id-40788",
+          "name": "cockpitVoid",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "cockpitVoid"
+          ]
         }
       ],
       "allConnectors": [
@@ -6088,9 +6120,9 @@
           "ap2ID": "id-27866"
         },
         {
-          "ap2Name": "Shape 2",
+          "ap2Name": "geometry",
           "ap1ID": "id-27843",
-          "ap2ID": "id-27834"
+          "ap2ID": "id-40788"
         },
         {
           "ap2Name": "Shape 2",
@@ -6098,9 +6130,9 @@
           "ap2ID": "id-27798"
         },
         {
-          "ap2Name": "Shape 1",
+          "ap2Name": "geometry",
           "ap1ID": "id-38188",
-          "ap2ID": "id-27834"
+          "ap2ID": "id-40785"
         },
         {
           "ap2Name": "Shape 2",
@@ -6111,6 +6143,16 @@
           "ap2Name": "assembly",
           "ap1ID": "id-27681",
           "ap2ID": "id-27788"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-40785",
+          "ap2ID": "id-27834"
+        },
+        {
+          "ap2Name": "Shape 2",
+          "ap1ID": "id-40788",
+          "ap2ID": "id-27834"
         }
       ],
       "fileTypeVersion": 1
@@ -6697,12 +6739,9 @@
       "name": "hatch",
       "ioValues": [
         {
-          "name": "topdeckPanels",
-          "ioValue": 10
-        },
-        {
           "name": "distFromBow",
-          "ioValue": 10
+          "ioValue": 96,
+          "currentEquation": "96"
         },
         {
           "name": "width",
@@ -6759,8 +6798,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.18489583333333334,
-          "y": 0.7742857142857142,
+          "x": 0.13411458333333334,
+          "y": 0.7942857142857144,
           "uniqueID": "id-40758",
           "name": "Rounded-rectangle-rep",
           "ioValues": [
@@ -6915,8 +6954,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.31705729166666663,
-          "y": 0.8057142857142858,
+          "x": 0.232421875,
+          "y": 0.7342857142857142,
           "uniqueID": "id-40776",
           "ioValues": [
             {
@@ -6925,8 +6964,8 @@
             },
             {
               "name": "xDist",
-              "ioValue": 10,
-              "currentEquation": "distFromBow"
+              "ioValue": 102,
+              "currentEquation": "distFromBow + length / 2"
             },
             {
               "name": "yDist",
@@ -6937,9 +6976,30 @@
               "ioValue": 0
             }
           ]
+        },
+        {
+          "atomType": "Intersection",
+          "x": 0.41861979166666663,
+          "y": 0.6114285714285714,
+          "uniqueID": "id-40791",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
         }
       ],
       "allConnectors": [
+        {
+          "ap2Name": "geometry2",
+          "ap1ID": "id-40739",
+          "ap2ID": "id-40791"
+        },
         {
           "ap2Name": "width",
           "ap1ID": "id-40745",
@@ -6954,9 +7014,29 @@
           "ap2Name": "geometry",
           "ap1ID": "id-40758",
           "ap2ID": "id-40776"
+        },
+        {
+          "ap2Name": "geometry1",
+          "ap1ID": "id-40776",
+          "ap2ID": "id-40791"
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.4205729166666667,
+      "y": 0.8885714285714285,
+      "uniqueID": "id-40782",
+      "name": "Extract deck",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tag": "deck",
+      "tagIndex": 0
     }
   ],
   "allConnectors": [
@@ -7014,6 +7094,11 @@
       "ap2Name": "Shape 2",
       "ap1ID": "id-37384",
       "ap2ID": "id-37380"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-37384",
+      "ap2ID": "id-40782"
     },
     {
       "ap2Name": "Shape 5",
@@ -7089,6 +7174,11 @@
       "ap2Name": "Shape 3",
       "ap1ID": "id-40651",
       "ap2ID": "id-27926"
+    },
+    {
+      "ap2Name": "topdeckPanels",
+      "ap1ID": "id-40782",
+      "ap2ID": "id-40735"
     }
   ],
   "unitsKey": "MM",
