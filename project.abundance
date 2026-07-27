@@ -800,8 +800,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "function run(profile: Assembly, edges: Assembly) {\n  let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n  if (extWires.length == 0) {\n    edges.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        extWires.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n  if (extWires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  console.log(extWires)\n  return profile.onLeafs((leaf) => {\n    const result = replicad.genericSweep(leaf.geometry, extWires[0], {}, false)\n    console.log(result)\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(profile, edges) {\n    let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n    if (extWires.length == 0) {\n        edges.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                extWires.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (extWires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    console.log(extWires);\n    return profile.onLeafs((leaf) => {\n        const result = replicad.genericSweep(leaf.geometry, extWires[0], {}, false);\n        console.log(result);\n        return leaf;\n    });\n}\n"
+          "code": "function run(profile: Assembly, edges: Assembly) {\n  let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n  if (extWires.length == 0) {\n    edges.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        extWires.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n  if (extWires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  console.log(extWires)\n  return profile.onLeafs((leaf) => {\n    console.log(leaf.geometry instanceof replicad.Wire)\n    console.log(extWires)\n    const result = replicad.genericSweep(leaf.geometry, extWires[0],\n      {\n        frenet: false,\n        law: null,\n        transitionMode: \"right\",\n        forceProfileSpineOthogonality: true}, false)\n    console.log(result)\n    leaf.geometry = result\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(profile, edges) {\n    let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n    if (extWires.length == 0) {\n        edges.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                extWires.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (extWires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    console.log(extWires);\n    return profile.onLeafs((leaf) => {\n        console.log(leaf.geometry instanceof replicad.Wire);\n        console.log(extWires);\n        const result = replicad.genericSweep(leaf.geometry, extWires[0], {\n            frenet: false,\n            law: null,\n            transitionMode: \"right\",\n            forceProfileSpineOthogonality: true\n        }, false);\n        console.log(result);\n        leaf.geometry = result;\n        return leaf;\n    });\n}\n"
         },
         {
           "atomType": "Rectangle",
@@ -919,7 +919,10 @@
               "type": "edgeselect",
               "selectedEdgeData": {
                 "0": [
-                  22
+                  22,
+                  19,
+                  16,
+                  13
                 ]
               }
             }
@@ -1240,11 +1243,6 @@
           "ap2ID": "id-41541"
         },
         {
-          "ap2Name": "profile",
-          "ap1ID": "id-41537",
-          "ap2ID": "id-41528"
-        },
-        {
           "ap2Name": "shape",
           "ap1ID": "id-41537",
           "ap2ID": "id-41582"
@@ -1262,6 +1260,11 @@
         {
           "ap2Name": "edges",
           "ap1ID": "id-41564",
+          "ap2ID": "id-41528"
+        },
+        {
+          "ap2Name": "profile",
+          "ap1ID": "id-41582",
           "ap2ID": "id-41528"
         }
       ],
