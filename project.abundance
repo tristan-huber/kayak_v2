@@ -253,8 +253,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.35807291666666663,
-      "y": 0.84,
+      "x": 0.32356770833333337,
+      "y": 0.9085714285714286,
       "uniqueID": "id-37384",
       "ioValues": [
         {
@@ -263,7 +263,8 @@
         },
         {
           "name": "height",
-          "ioValue": 0.25
+          "ioValue": 0.25,
+          "currentEquation": "0.25"
         }
       ]
     },
@@ -7025,8 +7026,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.4205729166666667,
-      "y": 0.8885714285714285,
+      "x": 0.36197916666666663,
+      "y": 0.7142857142857143,
       "uniqueID": "id-40782",
       "name": "Extract deck",
       "ioValues": [
@@ -7037,6 +7038,14 @@
       ],
       "tag": "deck",
       "tagIndex": 0
+    },
+    {
+      "atomType": "Fusion",
+      "x": 0.48046874999999994,
+      "y": 0.8657142857142858,
+      "uniqueID": "id-40795",
+      "ioValues": [],
+      "unionType": "Fusion"
     }
   ],
   "allConnectors": [
