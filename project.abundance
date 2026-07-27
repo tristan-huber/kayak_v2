@@ -2501,12 +2501,12 @@
             },
             {
               "name": "yDist",
-              "ioValue": 0,
-              "currentEquation": "0"
+              "ioValue": -6,
+              "currentEquation": "-6"
             },
             {
               "name": "zDist",
-              "ioValue": -17
+              "ioValue": -20
             }
           ]
         },
@@ -2635,8 +2635,8 @@
             },
             {
               "name": "x-axis degrees",
-              "ioValue": 190,
-              "currentEquation": "190"
+              "ioValue": 210,
+              "currentEquation": "210"
             },
             {
               "name": "y-axis degrees",
@@ -3421,8 +3421,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.9088541666666666,
-          "y": 0.37714285714285717,
+          "x": 0.857421875,
+          "y": 0.44857142857142857,
           "uniqueID": "id-40569",
           "name": "Cross-Section",
           "ioValues": [
