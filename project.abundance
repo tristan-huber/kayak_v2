@@ -67,8 +67,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.2825520833333333,
-      "y": 0.7142857142857143,
+      "x": 0.27408854166666663,
+      "y": 0.7514285714285714,
       "uniqueID": "id-27926",
       "ioValues": [
         {
@@ -7111,6 +7111,10 @@
             {
               "name": "Shape 2",
               "ioValue": null
+            },
+            {
+              "name": "Shape 3",
+              "ioValue": null
             }
           ]
         }
@@ -7190,11 +7194,6 @@
           "ap2Name": "geometry",
           "ap1ID": "id-40791",
           "ap2ID": "id-41112"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-40815",
-          "ap2ID": "id-40737"
         },
         {
           "ap2Name": "Shape 1",
@@ -7285,14 +7284,24 @@
           "ap2Name": "Shape 2",
           "ap1ID": "id-41109",
           "ap2ID": "id-41115"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-41112",
+          "ap2ID": "id-41115"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-41115",
+          "ap2ID": "id-40737"
         }
       ],
       "fileTypeVersion": 1
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.36197916666666663,
-      "y": 0.7142857142857143,
+      "x": 0.3684895833333333,
+      "y": 0.6057142857142858,
       "uniqueID": "id-40782",
       "name": "Extract deck",
       "ioValues": [
