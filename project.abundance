@@ -253,8 +253,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.32356770833333337,
-      "y": 0.9085714285714286,
+      "x": 0.3268229166666667,
+      "y": 0.8628571428571429,
       "uniqueID": "id-37384",
       "ioValues": [
         {
@@ -1588,8 +1588,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.32421875,
-      "y": 0.5028571428571429,
+      "x": 0.322265625,
+      "y": 0.5457142857142857,
       "uniqueID": "id-38226",
       "name": "facesToSolid",
       "ioValues": [
@@ -6997,11 +6997,6 @@
       ],
       "allConnectors": [
         {
-          "ap2Name": "geometry2",
-          "ap1ID": "id-40739",
-          "ap2ID": "id-40791"
-        },
-        {
           "ap2Name": "width",
           "ap1ID": "id-40745",
           "ap2ID": "id-40758"
@@ -7138,11 +7133,6 @@
       "ap2Name": "kayakbody",
       "ap1ID": "id-38226",
       "ap2ID": "id-37127"
-    },
-    {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-38226",
-      "ap2ID": "id-130"
     },
     {
       "ap2Name": "remove",
