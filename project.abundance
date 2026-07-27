@@ -6697,12 +6697,22 @@
       "name": "hatch",
       "ioValues": [
         {
-          "name": "topdeck",
+          "name": "topdeckPanels",
           "ioValue": 10
         },
         {
           "name": "distFromBow",
           "ioValue": 10
+        },
+        {
+          "name": "width",
+          "ioValue": 14,
+          "currentEquation": "14"
+        },
+        {
+          "name": "length",
+          "ioValue": 12,
+          "currentEquation": "12"
         }
       ],
       "topLevel": false,
@@ -6724,17 +6734,228 @@
           "x": 0.025384615384615384,
           "y": 0.3142857142857143,
           "uniqueID": "id-40739",
-          "name": "topdeck"
+          "name": "topdeckPanels"
         },
         {
           "atomType": "Input",
           "x": 0.025384615384615384,
-          "y": 0.5257142857142857,
+          "y": 0.45142857142857146,
           "uniqueID": "id-40742",
           "name": "distFromBow"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.6228571428571429,
+          "uniqueID": "id-40745",
+          "name": "width"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.7571428571428572,
+          "uniqueID": "id-40748",
+          "name": "length"
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.18489583333333334,
+          "y": 0.7742857142857142,
+          "uniqueID": "id-40758",
+          "name": "Rounded-rectangle-rep",
+          "ioValues": [
+            {
+              "name": "width",
+              "ioValue": 14
+            },
+            {
+              "name": "length",
+              "ioValue": 12
+            },
+            {
+              "name": "radius",
+              "ioValue": 3
+            },
+            {
+              "name": "height",
+              "ioValue": -50,
+              "currentEquation": "-50"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-40752",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.5328151986183074,
+              "y": 0.48757763975155277,
+              "uniqueID": "id-40753",
+              "ioValues": [
+                {
+                  "name": "width",
+                  "ioValue": 14
+                },
+                {
+                  "name": "length",
+                  "ioValue": 12
+                },
+                {
+                  "name": "rad",
+                  "ioValue": 3
+                },
+                {
+                  "name": "height",
+                  "ioValue": -50
+                }
+              ],
+              "interpreterVersion": 0,
+              "code": "\n      const Inputs = [\n      {inputName: \"width\", type: \"number\", defaultValue: 5},\n        {inputName: \"length\", type: \"number\", defaultValue: 10},\n        {inputName: \"rad\", type: \"number\", defaultValue: 2},\n         {inputName: \"height\", type: \"number\", defaultValue: 1}\n        \n      ]\n\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      //Create a new shape from scratch using replicad\nconsole.log(replicad)\n      let createdRoundedRectangle = replicad.sketchRoundedRectangle(width, length, rad, newPlane).extrude(height)\n    console.log(createdRoundedRectangle)\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdRoundedRectangle],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\n\n     \n\n      return shape2\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.15384615384615385,
+              "uniqueID": "id-40754",
+              "name": "width",
+              "type": "number"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.24615384615384617,
+              "uniqueID": "id-40755",
+              "name": "length",
+              "type": "number"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.3384615384615385,
+              "uniqueID": "id-40756",
+              "name": "radius",
+              "type": "number"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.4307692307692308,
+              "uniqueID": "id-40757",
+              "name": "height",
+              "type": "number"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-40753",
+              "ap2ID": "id-40752"
+            },
+            {
+              "ap2Name": "width",
+              "ap1ID": "id-40754",
+              "ap2ID": "id-40753"
+            },
+            {
+              "ap2Name": "length",
+              "ap1ID": "id-40755",
+              "ap2ID": "id-40753"
+            },
+            {
+              "ap2Name": "rad",
+              "ap1ID": "id-40756",
+              "ap2ID": "id-40753"
+            },
+            {
+              "ap2Name": "height",
+              "ap1ID": "id-40757",
+              "ap2ID": "id-40753"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-07-27T10:23:38.997Z",
+            "privateRepo": false,
+            "repoName": "Rounded-rectangle-rep",
+            "dateCreated": "2025-10-07T14:21:34Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/alzatin/Rounded-rectangle-rep/master/README.md?sanitize=true",
+            "yyyy": 2025,
+            "topMoleculeID": "cda49ba0-13f8-4029-b2b8-230ed42791e4",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/alzatin/Rounded-rectangle-rep",
+            "topics": [
+              "abundance-tool",
+              "3d"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739531",
+            "ranking": 7.5,
+            "searchField": "rounded-rectangle-rep alzatin 3d extruded- rounded rectangle using replicad's sketchroundedrectangle method. less likely to fail when using larger radius.  abundance-tool 3d",
+            "owner": "alzatin",
+            "description": "3D Extruded- Rounded rectangle using replicad's sketchRoundedRectangle method. Less likely to fail when using larger radius. ",
+            "contentURL": "https://raw.githubusercontent.com/alzatin/Rounded-rectangle-rep/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/alzatin/Rounded-rectangle-rep/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "MM",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1785175306292
+        },
+        {
+          "atomType": "Move",
+          "x": 0.31705729166666663,
+          "y": 0.8057142857142858,
+          "uniqueID": "id-40776",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 10,
+              "currentEquation": "distFromBow"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0
+            }
+          ]
         }
       ],
-      "allConnectors": [],
+      "allConnectors": [
+        {
+          "ap2Name": "width",
+          "ap1ID": "id-40745",
+          "ap2ID": "id-40758"
+        },
+        {
+          "ap2Name": "length",
+          "ap1ID": "id-40748",
+          "ap2ID": "id-40758"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-40758",
+          "ap2ID": "id-40776"
+        }
+      ],
       "fileTypeVersion": 1
     }
   ],
