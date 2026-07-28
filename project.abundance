@@ -802,8 +802,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.5247395833333334,
-          "y": 0.5595238095238095,
+          "x": 0.47460937499999994,
+          "y": 0.6458333333333334,
           "uniqueID": "id-41528",
           "ioValues": [
             {
@@ -813,11 +813,15 @@
             {
               "name": "edges",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "alignedPoint",
+              "ioValue": 0
             }
           ],
           "interpreterVersion": 1,
-          "code": "function run(profile: Assembly, edges: Assembly) {\n  console.log(edges.getSelectedEdges())\n  let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n  if (extWires.length == 0) {\n    edges.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        extWires.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n  if (extWires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  console.log(extWires)\n  return profile.onLeafs((leaf) => {\n    const primaryWire = extWires[0]\n    const result = replicad.genericSweep(leaf.geometry, primaryWire,\n      {\n        frenet: false,\n        auxiliarySpine: extWires.length == 2 ? extWires[1] : undefined,\n        law: null,\n        transitionMode: \"right\",\n        forceProfileSpineOthogonality: true\n      },\n      false)\n\n    return new Assembly({ ...leaf, geometry: result })\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(profile, edges) {\n    console.log(edges.getSelectedEdges());\n    let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n    if (extWires.length == 0) {\n        edges.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                extWires.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (extWires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    console.log(extWires);\n    return profile.onLeafs((leaf) => {\n        const primaryWire = extWires[0];\n        const result = replicad.genericSweep(leaf.geometry, primaryWire, {\n            frenet: false,\n            auxiliarySpine: extWires.length == 2 ? extWires[1] : undefined,\n            law: null,\n            transitionMode: \"right\",\n            forceProfileSpineOthogonality: true\n        }, false);\n        return new Assembly({ ...leaf, geometry: result });\n    });\n}\n"
+          "code": "function run(profile: Assembly, edges: Assembly, alignedPoint: number = 0) {\n  console.log(edges.getSelectedEdges())\n  let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n  if (extWires.length == 0) {\n    edges.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        extWires.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n  if (extWires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  console.log(extWires)\n  const primaryWire = extWires[0]\n  const sweepStart = primaryWire.startPoint;\n  return profile.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Wire)) {\n      throw new Error(\"only wires can be swept as profile.\")\n    }\n    const f = leaf.geometry.pointAt(alignedPoint)\n    const p = leaf.geometry.translate(f.multiply(-1).add(sweepStart))\n    const result = replicad.genericSweep(p, primaryWire,\n      {\n        frenet: false,\n        //auxiliarySpine: extWires.length >= 2 ? extWires[1] : undefined,\n        law: null,\n        transitionMode: \"right\",\n        forceProfileSpineOthogonality: true\n      },\n      false)\n\n    return new Assembly({ ...leaf, geometry: result })\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(profile, edges, alignedPoint = 0) {\n    console.log(edges.getSelectedEdges());\n    let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n    if (extWires.length == 0) {\n        edges.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                extWires.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (extWires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    console.log(extWires);\n    const primaryWire = extWires[0];\n    const sweepStart = primaryWire.startPoint;\n    return profile.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Wire)) {\n            throw new Error(\"only wires can be swept as profile.\");\n        }\n        const f = leaf.geometry.pointAt(alignedPoint);\n        const p = leaf.geometry.translate(f.multiply(-1).add(sweepStart));\n        const result = replicad.genericSweep(p, primaryWire, {\n            frenet: false,\n            //auxiliarySpine: extWires.length >= 2 ? extWires[1] : undefined,\n            law: null,\n            transitionMode: \"right\",\n            forceProfileSpineOthogonality: true\n        }, false);\n        return new Assembly({ ...leaf, geometry: result });\n    });\n}\n"
         },
         {
           "atomType": "Rectangle",
@@ -921,7 +925,7 @@
             {
               "name": "Shape 1",
               "ioValue": {
-                "geometry": "17a4e890-0",
+                "geometry": "24a01fb8-0",
                 "color": "#aad7f2",
                 "tags": [],
                 "bom": [],
