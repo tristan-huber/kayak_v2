@@ -9796,7 +9796,11 @@
           "y": 0.15384615384615385,
           "uniqueID": "id-43439",
           "type": "edgeselect",
-          "selectedEdgeData": {}
+          "selectedEdgeData": {
+            "3": [
+              21
+            ]
+          }
         },
         {
           "atomType": "Code",
