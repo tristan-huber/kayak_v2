@@ -820,8 +820,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "function run(profile: Assembly, along: Assembly, alignedPoint: number = 0) {\n  console.log(along.getSelectedEdges())\n  const wires: replicad.Wire[] = []\n  const supports = []\n  along.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"drawings can't be used as guide wire for sweep\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      wires.push(replicad.assembleWire(leaf.selection.edges.map((i) => leaf.geometry.edges[i])))\n      supports.push(leaf.geometry)\n    }\n    return leaf;\n  })\n  if (wires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  console.log(wires)\n  return profile.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Wire)) {\n      throw new Error(\"only wires can be swept as profile.\")\n    }\n    const results = wires.map((wire, index) => {\n      const geom = replicad.genericSweep(leaf.geometry, wire,\n      {\n        withContact: true,\n        support: supports[index].wrapped,\n        forceProfileSpineOthogonality: true\n      })\n      return new Assembly({...leaf, geometry: geom})\n    })\n    return results.length == 1 ? results[0] : new Assembly({geometry: results})\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(profile, along, alignedPoint = 0) {\n    console.log(along.getSelectedEdges());\n    const wires = [];\n    const supports = [];\n    along.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"drawings can't be used as guide wire for sweep\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            wires.push(replicad.assembleWire(leaf.selection.edges.map((i) => leaf.geometry.edges[i])));\n            supports.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (wires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    console.log(wires);\n    return profile.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Wire)) {\n            throw new Error(\"only wires can be swept as profile.\");\n        }\n        const results = wires.map((wire, index) => {\n            const geom = replicad.genericSweep(leaf.geometry, wire, {\n                withContact: true,\n                support: supports[index].wrapped,\n                forceProfileSpineOthogonality: true\n            });\n            return new Assembly({ ...leaf, geometry: geom });\n        });\n        return results.length == 1 ? results[0] : new Assembly({ geometry: results });\n    });\n}\n"
+          "code": "function run(profile: Assembly, along: Assembly, alignedPoint: number = 0) {\n  console.log(along.getSelectedEdges())\n  const wires: replicad.Wire[] = []\n  const supports = []\n  along.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"drawings can't be used as guide wire for sweep\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      wires.push(replicad.assembleWire(leaf.selection.edges.map((i) => leaf.geometry.edges[i])))\n      supports.push(leaf.geometry)\n    }\n    return leaf;\n  })\n  if (wires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  console.log(wires)\n  return profile.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Wire)) {\n      throw new Error(\"only wires can be swept as profile.\")\n    }\n    const results = wires.map((wire, index) => {\n      const geom = replicad.genericSweep(leaf.geometry, wire,\n      {\n       // withContact: true,\n        support: supports[index].wrapped,\n        forceProfileSpineOthogonality: true\n      })\n      return new Assembly({...leaf, geometry: geom})\n    })\n    return results.length == 1 ? results[0] : new Assembly({geometry: results})\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(profile, along, alignedPoint = 0) {\n    console.log(along.getSelectedEdges());\n    const wires = [];\n    const supports = [];\n    along.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"drawings can't be used as guide wire for sweep\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            wires.push(replicad.assembleWire(leaf.selection.edges.map((i) => leaf.geometry.edges[i])));\n            supports.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (wires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    console.log(wires);\n    return profile.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Wire)) {\n            throw new Error(\"only wires can be swept as profile.\");\n        }\n        const results = wires.map((wire, index) => {\n            const geom = replicad.genericSweep(leaf.geometry, wire, {\n                // withContact: true,\n                support: supports[index].wrapped,\n                forceProfileSpineOthogonality: true\n            });\n            return new Assembly({ ...leaf, geometry: geom });\n        });\n        return results.length == 1 ? results[0] : new Assembly({ geometry: results });\n    });\n}\n"
         },
         {
           "atomType": "Rectangle",
@@ -924,7 +924,31 @@
           "ioValues": [
             {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": {
+                "geometry": "ed39c3a8-0",
+                "color": "#aad7f2",
+                "tags": [],
+                "bom": [],
+                "plane": {
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "xDir": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "normal": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "metadata": {},
+                "dimension": "3D"
+              }
             }
           ],
           "unionType": "Fusion"
