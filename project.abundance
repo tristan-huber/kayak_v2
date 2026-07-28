@@ -215,6 +215,22 @@
       ]
     },
     {
+      "atomType": "Difference",
+      "x": 0.5768229166666666,
+      "y": 0.5657142857142857,
+      "uniqueID": "id-41849",
+      "ioValues": [
+        {
+          "name": "retain",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "remove",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
+    },
+    {
       "atomType": "GitHubMolecule",
       "x": 0.17578125,
       "y": 0.8742857142857143,
@@ -779,7 +795,7 @@
         {
           "atomType": "Input",
           "x": 0.025384615384615384,
-          "y": 0.4085714285714286,
+          "y": 0.24615384615384617,
           "uniqueID": "id-41525",
           "name": "hullVolume",
           "type": "geometry"
@@ -859,8 +875,7 @@
             },
             {
               "name": "yDist",
-              "ioValue": 0,
-              "currentEquation": "0"
+              "ioValue": 0
             },
             {
               "name": "zDist",
@@ -880,8 +895,97 @@
             },
             {
               "name": "height",
-              "ioValue": 1,
-              "currentEquation": "1"
+              "ioValue": 1
+            }
+          ]
+        },
+        {
+          "atomType": "Color",
+          "x": 0.5768229166666666,
+          "y": 0.6799999999999999,
+          "uniqueID": "id-41680",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "selectedColor": "Default"
+        },
+        {
+          "atomType": "Fusion",
+          "x": 0.6985677083333333,
+          "y": 0.7257142857142858,
+          "uniqueID": "id-41683",
+          "ioValues": [
+            {
+              "name": "Shape 1",
+              "ioValue": null
+            }
+          ],
+          "unionType": "Fusion"
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.27734375,
+          "y": 0.17714285714285713,
+          "uniqueID": "id-41717",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": -0.75
+            }
+          ]
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.4856770833333333,
+          "y": 0.2914285714285714,
+          "uniqueID": "id-41733",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": -1.5
+            }
+          ]
+        },
+        {
+          "atomType": "Intersection",
+          "x": 0.62890625,
+          "y": 0.15142857142857144,
+          "uniqueID": "id-41737",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.8717447916666667,
+          "y": 0.7828571428571428,
+          "uniqueID": "id-41800",
+          "ioValues": [
+            {
+              "name": "Shape 1",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 2",
+              "ioValue": null
             }
           ]
         },
@@ -1211,14 +1315,7 @@
               "y": 0.15384615384615385,
               "uniqueID": "id-41656",
               "type": "edgeselect",
-              "selectedEdgeData": {
-                "0": [
-                  22,
-                  19,
-                  16,
-                  13
-                ]
-              }
+              "selectedEdgeData": {}
             },
             {
               "atomType": "Code",
@@ -1279,8 +1376,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.35546875,
-          "y": 0.41714285714285715,
+          "x": 0.3509114583333333,
+          "y": 0.48214285714285715,
           "uniqueID": "id-41671",
           "name": "util.FuseWire",
           "ioValues": [
@@ -1370,56 +1467,6 @@
           "lastReloadedFromGithubAt": 1785185925698
         },
         {
-          "atomType": "Color",
-          "x": 0.5768229166666666,
-          "y": 0.6799999999999999,
-          "uniqueID": "id-41680",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "selectedColor": "Default"
-        },
-        {
-          "atomType": "Fusion",
-          "x": 0.6985677083333333,
-          "y": 0.7257142857142858,
-          "uniqueID": "id-41683",
-          "ioValues": [
-            {
-              "name": "Shape 1",
-              "ioValue": {
-                "geometry": "86d36028-0",
-                "color": "#aad7f2",
-                "tags": [],
-                "bom": [],
-                "plane": {
-                  "origin": [
-                    0,
-                    0,
-                    0
-                  ],
-                  "xDir": [
-                    1,
-                    0,
-                    0
-                  ],
-                  "normal": [
-                    0,
-                    0,
-                    1
-                  ]
-                },
-                "metadata": {},
-                "dimension": "3D"
-              }
-            }
-          ],
-          "unionType": "Fusion"
-        },
-        {
           "atomType": "GitHubMolecule",
           "x": 0.185546875,
           "y": 0.26857142857142857,
@@ -1452,11 +1499,7 @@
               "uniqueID": "id-41706",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {
-                "0": [
-                  11
-                ]
-              }
+              "selectedFaceData": {}
             },
             {
               "atomType": "Code",
@@ -1514,23 +1557,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785186064154
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.27734375,
-          "y": 0.17714285714285713,
-          "uniqueID": "id-41717",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": -0.75,
-              "currentEquation": "-0.75"
-            }
-          ]
         },
         {
           "atomType": "GitHubMolecule",
@@ -1632,39 +1658,6 @@
           "lastReloadedFromGithubAt": 1785186064154
         },
         {
-          "atomType": "Extrude",
-          "x": 0.4856770833333333,
-          "y": 0.2914285714285714,
-          "uniqueID": "id-41733",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": -1.5,
-              "currentEquation": "-1.5"
-            }
-          ]
-        },
-        {
-          "atomType": "Intersection",
-          "x": 0.62890625,
-          "y": 0.15142857142857144,
-          "uniqueID": "id-41737",
-          "ioValues": [
-            {
-              "name": "geometry1",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "geometry2",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
           "atomType": "GitHubMolecule",
           "x": 0.7057291666666667,
           "y": 0.33714285714285713,
@@ -1677,8 +1670,7 @@
             },
             {
               "name": "Angle X",
-              "ioValue": 270,
-              "currentEquation": "270"
+              "ioValue": 270
             },
             {
               "name": "Angle Z",
@@ -2004,35 +1996,9 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785186365429
-        },
-        {
-          "atomType": "Assembly",
-          "x": 0.8717447916666667,
-          "y": 0.7828571428571428,
-          "uniqueID": "id-41800",
-          "ioValues": [
-            {
-              "name": "Shape 1",
-              "ioValue": null
-            },
-            {
-              "name": "Shape 2",
-              "ioValue": null
-            }
-          ]
         }
       ],
       "allConnectors": [
-        {
-          "ap2Name": "Input",
-          "ap1ID": "id-41525",
-          "ap2ID": "id-41658"
-        },
-        {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-41525",
-          "ap2ID": "id-41708"
-        },
         {
           "ap2Name": "geometry1",
           "ap1ID": "id-41525",
@@ -2064,6 +2030,31 @@
           "ap2ID": "id-41560"
         },
         {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-41680",
+          "ap2ID": "id-41683"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-41717",
+          "ap2ID": "id-41721"
+        },
+        {
+          "ap2Name": "geometry2",
+          "ap1ID": "id-41733",
+          "ap2ID": "id-41737"
+        },
+        {
+          "ap2Name": "Geometry",
+          "ap1ID": "id-41733",
+          "ap2ID": "id-41753"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-41800",
+          "ap2ID": "id-41520"
+        },
+        {
           "ap2Name": "profile",
           "ap1ID": "id-41582",
           "ap2ID": "id-41528"
@@ -2079,34 +2070,14 @@
           "ap2ID": "id-41528"
         },
         {
-          "ap2Name": "Shape 1",
-          "ap1ID": "id-41680",
-          "ap2ID": "id-41683"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-41708",
           "ap2ID": "id-41717"
         },
         {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-41717",
-          "ap2ID": "id-41721"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-41721",
           "ap2ID": "id-41733"
-        },
-        {
-          "ap2Name": "geometry2",
-          "ap1ID": "id-41733",
-          "ap2ID": "id-41737"
-        },
-        {
-          "ap2Name": "Geometry",
-          "ap1ID": "id-41733",
-          "ap2ID": "id-41753"
         },
         {
           "ap2Name": "assembly",
@@ -2122,11 +2093,6 @@
           "ap2Name": "Shape 1",
           "ap1ID": "id-41791",
           "ap2ID": "id-41800"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-41800",
-          "ap2ID": "id-41520"
         }
       ],
       "fileTypeVersion": 1
@@ -8723,22 +8689,6 @@
         }
       ],
       "fileTypeVersion": 1
-    },
-    {
-      "atomType": "Difference",
-      "x": 0.5768229166666666,
-      "y": 0.5657142857142857,
-      "uniqueID": "id-41849",
-      "ioValues": [
-        {
-          "name": "retain",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "remove",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ]
     }
   ],
   "allConnectors": [
