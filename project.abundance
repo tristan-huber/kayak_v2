@@ -7,8 +7,7 @@
   "ioValues": [
     {
       "name": "diam",
-      "ioValue": 0,
-      "currentEquation": "0"
+      "ioValue": 0
     },
     {
       "name": "TargetLen",
@@ -803,8 +802,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.5227864583333333,
-          "y": 0.44857142857142857,
+          "x": 0.5247395833333334,
+          "y": 0.5595238095238095,
           "uniqueID": "id-41528",
           "ioValues": [
             {
@@ -817,13 +816,13 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "function run(profile: Assembly, edges: Assembly) {\n  let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n  if (extWires.length == 0) {\n    edges.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        extWires.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n  if (extWires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  console.log(extWires)\n  return profile.onLeafs((leaf) => {\n    const newLeafs = extWires.map((wire) => {\n      const result = replicad.genericSweep(leaf.geometry, wire,\n        {\n          frenet: false,\n          law: null,\n          transitionMode: \"right\",\n          forceProfileSpineOthogonality: true\n        }, false)\n      return new Assembly({...leaf, geometry: result})\n    })\n    return newLeafs.length == 1 ? newLeafs[0] : new Assembly({geometry: newLeafs})\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(profile, edges) {\n    let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n    if (extWires.length == 0) {\n        edges.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                extWires.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (extWires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    console.log(extWires);\n    return profile.onLeafs((leaf) => {\n        const newLeafs = extWires.map((wire) => {\n            const result = replicad.genericSweep(leaf.geometry, wire, {\n                frenet: false,\n                law: null,\n                transitionMode: \"right\",\n                forceProfileSpineOthogonality: true\n            }, false);\n            return new Assembly({ ...leaf, geometry: result });\n        });\n        return newLeafs.length == 1 ? newLeafs[0] : new Assembly({ geometry: newLeafs });\n    });\n}\n"
+          "code": "function run(profile: Assembly, edges: Assembly) {\n  console.log(edges.getSelectedEdges())\n  let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n  if (extWires.length == 0) {\n    edges.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        extWires.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n  if (extWires.length == 0) {\n    throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\")\n  }\n  if (extWires.length > 2) {\n    throw new Error(\"loft between requires exactly 1 or two wires, got: \", extWires.length)\n  }\n  console.log(extWires)\n  return profile.onLeafs((leaf) => {\n    const primaryWire = extWires[0]\n    const result = replicad.genericSweep(leaf.geometry, primaryWire,\n      {\n        frenet: false,\n        auxiliarySpine: extWires.length == 2 ? extWires[1] : undefined,\n        law: null,\n        transitionMode: \"right\",\n        forceProfileSpineOthogonality: true\n      },\n      false)\n\n    return new Assembly({ ...leaf, geometry: result })\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(profile, edges) {\n    console.log(edges.getSelectedEdges());\n    let extWires = edges.getSelectedEdges().map((edge) => replicad.assembleWire([edge]));\n    if (extWires.length == 0) {\n        edges.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                extWires.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (extWires.length == 0) {\n        throw new Error(\"edges must be either an assembly with selected edges or an assembly of wires. was neither. No edges to loft along.\");\n    }\n    if (extWires.length > 2) {\n        throw new Error(\"loft between requires exactly 1 or two wires, got: \", extWires.length);\n    }\n    console.log(extWires);\n    return profile.onLeafs((leaf) => {\n        const primaryWire = extWires[0];\n        const result = replicad.genericSweep(leaf.geometry, primaryWire, {\n            frenet: false,\n            auxiliarySpine: extWires.length == 2 ? extWires[1] : undefined,\n            law: null,\n            transitionMode: \"right\",\n            forceProfileSpineOthogonality: true\n        }, false);\n        return new Assembly({ ...leaf, geometry: result });\n    });\n}\n"
         },
         {
           "atomType": "Rectangle",
-          "x": 0.16276041666666666,
-          "y": 0.8257142857142857,
+          "x": 0.09244791666666667,
+          "y": 0.7767857142857143,
           "uniqueID": "id-41537",
           "ioValues": [
             {
@@ -838,8 +837,8 @@
         },
         {
           "atomType": "Rotate",
-          "x": 0.3111979166666667,
-          "y": 0.7571428571428572,
+          "x": 0.16015625,
+          "y": 0.8571428571428571,
           "uniqueID": "id-41541",
           "ioValues": [
             {
@@ -1283,189 +1282,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785185074121
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.2578125,
-          "y": 0.40571428571428575,
-          "uniqueID": "id-41658",
-          "name": "ExtractEdges",
-          "ioValues": [
-            {
-              "name": "Input",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-41655",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.15384615384615385,
-              "uniqueID": "id-41656",
-              "type": "edgeselect",
-              "selectedEdgeData": {}
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4309895833333333,
-              "y": 0.4342857142857143,
-              "uniqueID": "id-41657",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      const edges = leaf.geometry.edges;\n      const edgeIndexes = leaf.selection.edges\n      if (edgeIndexes.length == 1) {\n        leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]])\n        return leaf;\n      } else {\n        const res = edgeIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]])})\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            const edges = leaf.geometry.edges;\n            const edgeIndexes = leaf.selection.edges;\n            if (edgeIndexes.length == 1) {\n                leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]]);\n                return leaf;\n            }\n            else {\n                const res = edgeIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]]) });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-41656",
-              "ap2ID": "id-41657"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-41657",
-              "ap2ID": "id-41655"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-07-27T18:23:38.914Z",
-            "privateRepo": false,
-            "repoName": "ExtractEdges",
-            "dateCreated": "2026-07-24T20:38:56Z",
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34874",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractEdges",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 0,
-            "searchField": "extractedges tristan-huber select edges from an assembly by clicking on them. returns a new assembly of just those edges as wires. selection is saved as index of each edge in it's leaf. abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Select edges from an assembly by clicking on them. Returns a new assembly of just those edges as wires. Selection is saved as index of each edge in it's leaf.",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1785185876073
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.3509114583333333,
-          "y": 0.48214285714285715,
-          "uniqueID": "id-41671",
-          "name": "util.FuseWire",
-          "ioValues": [
-            {
-              "name": "wires",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-41668",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4290364583333333,
-              "y": 0.5228571428571429,
-              "uniqueID": "id-41669",
-              "ioValues": [
-                {
-                  "name": "shape",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "// as edges\nfunction run(\n  shape: Assembly\n) {\n  const edges = []\n  shape.onLeafs((leaf) => {\n    if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n      edges.push(...leaf.geometry.edges)\n    } else {\n      return undefined\n    }\n    return leaf;\n  })\n  return replicad.assembleWire(edges);\n}\n",
-              "compiledCode": "\"use strict\";\n// as edges\nfunction run(shape) {\n    const edges = [];\n    shape.onLeafs((leaf) => {\n        if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n            edges.push(...leaf.geometry.edges);\n        }\n        else {\n            return undefined;\n        }\n        return leaf;\n    });\n    return replicad.assembleWire(edges);\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.15384615384615385,
-              "uniqueID": "id-41670",
-              "name": "wires",
-              "type": "geometry"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-41669",
-              "ap2ID": "id-41668"
-            },
-            {
-              "ap2Name": "shape",
-              "ap1ID": "id-41670",
-              "ap2ID": "id-41669"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-07-27T18:23:38.914Z",
-            "privateRepo": false,
-            "repoName": "util.FuseWire",
-            "dateCreated": "2026-07-20T22:27:14Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-42",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/util.FuseWire",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739817",
-            "ranking": 0.6,
-            "searchField": "util.fusewire tristan-huber fuse a collection of wires into one wire object. also called join wire, assemble wire, or concatenate wire. this is a thin wrapper of assemblewire and can return a branching wire. abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Fuse a collection of wires into one wire object. Also called join wire, assemble wire, or concatenate wire. This is a thin wrapper of assembleWire and can return a branching wire.",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1785185925698
         },
         {
           "atomType": "GitHubMolecule",
@@ -1997,9 +1813,113 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785186365429
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.28059895833333337,
+          "y": 0.49404761904761907,
+          "uniqueID": "id-42192",
+          "name": "ExtractEdges",
+          "ioValues": [
+            {
+              "name": "Input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-42189",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.15384615384615385,
+              "uniqueID": "id-42190",
+              "type": "edgeselect",
+              "selectedEdgeData": {
+                "2": [
+                  3,
+                  1
+                ],
+                "3": [
+                  1
+                ]
+              }
+            },
+            {
+              "atomType": "Code",
+              "x": 0.4309895833333333,
+              "y": 0.4342857142857143,
+              "uniqueID": "id-42191",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      const edges = leaf.geometry.edges;\n      const edgeIndexes = leaf.selection.edges\n      if (edgeIndexes.length == 1) {\n        leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]])\n        return leaf;\n      } else {\n        const res = edgeIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]])})\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  return res;\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            const edges = leaf.geometry.edges;\n            const edgeIndexes = leaf.selection.edges;\n            if (edgeIndexes.length == 1) {\n                leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]]);\n                return leaf;\n            }\n            else {\n                const res = edgeIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]]) });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    return res;\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-42190",
+              "ap2ID": "id-42191"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-42191",
+              "ap2ID": "id-42189"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-07-28T10:27:38.399Z",
+            "privateRepo": false,
+            "repoName": "ExtractEdges",
+            "dateCreated": "2026-07-24T20:38:56Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-34874",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ExtractEdges",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739824",
+            "ranking": 0,
+            "searchField": "extractedges tristan-huber select edges from an assembly by clicking on them. returns a new assembly of just those edges as wires. selection is saved as index of each edge in it's leaf. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Select edges from an assembly by clicking on them. Returns a new assembly of just those edges as wires. Selection is saved as index of each edge in it's leaf.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1785255786619
         }
       ],
       "allConnectors": [
+        {
+          "ap2Name": "Input",
+          "ap1ID": "id-41522",
+          "ap2ID": "id-42192"
+        },
         {
           "ap2Name": "geometry1",
           "ap1ID": "id-41525",
@@ -2016,14 +1936,14 @@
           "ap2ID": "id-41541"
         },
         {
-          "ap2Name": "shape",
-          "ap1ID": "id-41537",
-          "ap2ID": "id-41582"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-41541",
           "ap2ID": "id-41547"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-41541",
+          "ap2ID": "id-41582"
         },
         {
           "ap2Name": "geometry",
@@ -2058,16 +1978,6 @@
         {
           "ap2Name": "profile",
           "ap1ID": "id-41582",
-          "ap2ID": "id-41528"
-        },
-        {
-          "ap2Name": "wires",
-          "ap1ID": "id-41658",
-          "ap2ID": "id-41671"
-        },
-        {
-          "ap2Name": "edges",
-          "ap1ID": "id-41671",
           "ap2ID": "id-41528"
         },
         {
@@ -5828,11 +5738,6 @@
           "ap2ID": "id-41115"
         },
         {
-          "ap2Name": "geometry1",
-          "ap1ID": "id-41013",
-          "ap2ID": "id-41021"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-41017",
           "ap2ID": "id-41025"
@@ -5851,11 +5756,6 @@
           "ap2Name": "Shape 1",
           "ap1ID": "id-41031",
           "ap2ID": "id-41097"
-        },
-        {
-          "ap2Name": "geometry1",
-          "ap1ID": "id-41041",
-          "ap2ID": "id-41045"
         },
         {
           "ap2Name": "geometry",
@@ -10041,6 +9941,11 @@
       "ap2Name": "hullPanels",
       "ap1ID": "id-41153",
       "ap2ID": "id-41385"
+    },
+    {
+      "ap2Name": "sheerLine",
+      "ap1ID": "id-41153",
+      "ap2ID": "id-41518"
     },
     {
       "ap2Name": "Geometry",
