@@ -5802,16 +5802,6 @@
           "ap2ID": "id-40758"
         },
         {
-          "ap2Name": "geometry1",
-          "ap1ID": "id-40776",
-          "ap2ID": "id-40791"
-        },
-        {
-          "ap2Name": "remove",
-          "ap1ID": "id-40776",
-          "ap2ID": "id-40815"
-        },
-        {
           "ap2Name": "Shape",
           "ap1ID": "id-40776",
           "ap2ID": "id-40966"
@@ -5840,11 +5830,6 @@
           "ap2Name": "Shape 1",
           "ap1ID": "id-40815",
           "ap2ID": "id-41115"
-        },
-        {
-          "ap2Name": "geometry1",
-          "ap1ID": "id-41009",
-          "ap2ID": "id-41017"
         },
         {
           "ap2Name": "geometry1",
