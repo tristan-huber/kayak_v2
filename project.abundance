@@ -4465,14 +4465,15 @@
             },
             {
               "name": "zDist",
-              "ioValue": 0
+              "ioValue": 0,
+              "currentEquation": "0"
             }
           ]
         },
         {
           "atomType": "Intersection",
-          "x": 0.2994791666666667,
-          "y": 0.45238095238095233,
+          "x": 0.32747395833333337,
+          "y": 0.4613095238095238,
           "uniqueID": "id-40791",
           "ioValues": [
             {
