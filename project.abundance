@@ -6682,270 +6682,6 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.2877604166666667,
-          "y": 0.6857142857142857,
-          "uniqueID": "id-41452",
-          "name": "ClosestEdge",
-          "ioValues": [
-            {
-              "name": "EdgeFrom",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "NearestTo",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "tieTolerance",
-              "ioValue": 0.001
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-41447",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4309895833333333,
-              "y": 0.5059523809523809,
-              "uniqueID": "id-41448",
-              "ioValues": [
-                {
-                  "name": "edgeFrom",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "nearestTo",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "tolerance",
-                  "ioValue": 0.001
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "\nfunction run(\n  edgeFrom: Assembly,\n  nearestTo: Assembly,\n  tolerance: number = 0.001\n) {\n  let best: replicad.Edge[] = [];\n  let bestDist = Infinity;\n  const target: replicad.Vector = nearestTo.isLeaf() && nearestTo.isPoint()\n    ? new replicad.Vector(nearestTo.geometry.asTuple()).multiply(-1)\n    : new replicad.Vector(getBBoxCenter(nearestTo)).multiply(-1)\n  edgeFrom.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Drawing)) {\n      for (const edge of leaf.geometry.edges) {\n        const dist = edge.pointAt(.5).add(target).Length;\n        if (dist - bestDist < -1 * tolerance || best.length == 0) {\n          console.log(\"new best dist: \", dist)\n          best = [edge]\n          bestDist = dist;\n        } else if (Math.abs(dist - bestDist) < tolerance) {\n          // include ties\n          best.push(edge)\n        }\n      }\n      return leaf;\n    }\n  })\n  console.log(best)\n  return best.map((e) => { return replicad.assembleWire([e]) });\n}\n\nfunction getBBoxCenter(foo: Assembly) {\n  let bbox: replicad.BoundingBox = undefined;\n  foo.onLeafs((leaf) => {\n    if (bbox == undefined) {\n      bbox = leaf.geometry.boundingBox;\n    } else {\n      bbox.add(leaf.geometry.boundingBox)\n    }\n  })\n  return bbox.center;\n}\n\n\n/*\n  const surfaces = [];\n  const leadFaceEdges = [];\n  const endFaceEdges = [];\n  for (let i = 0; i < wireList.length; i++) {\n    const w1 = wireList[i]\n    const w2 = wireList[(i + 1) % wireList.length]\n    const surf = replicad.loft([w1, w2], {}, true)\n    surfaces.push(surf)\n    leadFaceEdges.push(replicad.makeLine(w1.startPoint, w2.startPoint))\n    endFaceEdges.push(replicad.makeLine(w1.endPoint, w2.endPoint))\n  }\n  const frontCap = replicad.makeNonPlanarFace(replicad.assembleWire(leadFaceEdges))\n  const endCap = replicad.makeNonPlanarFace(replicad.assembleWire(endFaceEdges))\n\n  return replicad.makeSolid([frontCap, ...surfaces, endCap])*/",
-              "compiledCode": "\"use strict\";\nfunction run(edgeFrom, nearestTo, tolerance = 0.001) {\n    let best = [];\n    let bestDist = Infinity;\n    const target = nearestTo.isLeaf() && nearestTo.isPoint()\n        ? new replicad.Vector(nearestTo.geometry.asTuple()).multiply(-1)\n        : new replicad.Vector(getBBoxCenter(nearestTo)).multiply(-1);\n    edgeFrom.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Drawing)) {\n            for (const edge of leaf.geometry.edges) {\n                const dist = edge.pointAt(.5).add(target).Length;\n                if (dist - bestDist < -1 * tolerance || best.length == 0) {\n                    console.log(\"new best dist: \", dist);\n                    best = [edge];\n                    bestDist = dist;\n                }\n                else if (Math.abs(dist - bestDist) < tolerance) {\n                    // include ties\n                    best.push(edge);\n                }\n            }\n            return leaf;\n        }\n    });\n    console.log(best);\n    return best.map((e) => { return replicad.assembleWire([e]); });\n}\nfunction getBBoxCenter(foo) {\n    let bbox = undefined;\n    foo.onLeafs((leaf) => {\n        if (bbox == undefined) {\n            bbox = leaf.geometry.boundingBox;\n        }\n        else {\n            bbox.add(leaf.geometry.boundingBox);\n        }\n    });\n    return bbox.center;\n}\n/*\n  const surfaces = [];\n  const leadFaceEdges = [];\n  const endFaceEdges = [];\n  for (let i = 0; i < wireList.length; i++) {\n    const w1 = wireList[i]\n    const w2 = wireList[(i + 1) % wireList.length]\n    const surf = replicad.loft([w1, w2], {}, true)\n    surfaces.push(surf)\n    leadFaceEdges.push(replicad.makeLine(w1.startPoint, w2.startPoint))\n    endFaceEdges.push(replicad.makeLine(w1.endPoint, w2.endPoint))\n  }\n  const frontCap = replicad.makeNonPlanarFace(replicad.assembleWire(leadFaceEdges))\n  const endCap = replicad.makeNonPlanarFace(replicad.assembleWire(endFaceEdges))\n\n  return replicad.makeSolid([frontCap, ...surfaces, endCap])*/ \n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.15384615384615385,
-              "uniqueID": "id-41449",
-              "name": "EdgeFrom",
-              "type": "geometry"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.24615384615384617,
-              "uniqueID": "id-41450",
-              "name": "NearestTo",
-              "type": "geometry"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.3384615384615385,
-              "uniqueID": "id-41451",
-              "name": "tieTolerance"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-41448",
-              "ap2ID": "id-41447"
-            },
-            {
-              "ap2Name": "edgeFrom",
-              "ap1ID": "id-41449",
-              "ap2ID": "id-41448"
-            },
-            {
-              "ap2Name": "nearestTo",
-              "ap1ID": "id-41450",
-              "ap2ID": "id-41448"
-            },
-            {
-              "ap2Name": "tolerance",
-              "ap1ID": "id-41451",
-              "ap2ID": "id-41448"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-07-27T18:23:38.914Z",
-            "privateRepo": false,
-            "repoName": "ClosestEdge",
-            "dateCreated": "2026-07-05T16:50:19Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-22851",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ClosestEdge",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739814",
-            "ranking": 0.6,
-            "searchField": "closestedge tristan-huber return a single edge from an assembly which is closest to another selector shape / assembly. pick an edge based on distance / nearness abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Return a single edge from an assembly which is closest to another selector shape / assembly. Pick an edge based on distance / nearness",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1785183455871
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.119140625,
-          "y": 0.8857142857142857,
-          "uniqueID": "id-41473",
-          "name": "crv.Point",
-          "ioValues": [
-            {
-              "name": "X",
-              "ioValue": 72.0000001
-            },
-            {
-              "name": "Y",
-              "ioValue": 50
-            },
-            {
-              "name": "Z",
-              "ioValue": 0
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-41468",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.15384615384615385,
-              "uniqueID": "id-41469",
-              "name": "X"
-            },
-            {
-              "atomType": "Code",
-              "x": 0.2688802083333333,
-              "y": 0.42857142857142855,
-              "uniqueID": "id-41470",
-              "ioValues": [
-                {
-                  "name": "x",
-                  "ioValue": 72.0000001
-                },
-                {
-                  "name": "y",
-                  "ioValue": 50
-                },
-                {
-                  "name": "z",
-                  "ioValue": 0
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "\nfunction run(x: number = 0, y: number = 0, z: number = 0) {\n  return replicad.makeVertex([x,y,z])\n}",
-              "compiledCode": "\"use strict\";\nfunction run(x = 0, y = 0, z = 0) {\n    return replicad.makeVertex([x, y, z]);\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.24615384615384617,
-              "uniqueID": "id-41471",
-              "name": "Y"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.3384615384615385,
-              "uniqueID": "id-41472",
-              "name": "Z"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "x",
-              "ap1ID": "id-41469",
-              "ap2ID": "id-41470"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-41470",
-              "ap2ID": "id-41468"
-            },
-            {
-              "ap2Name": "y",
-              "ap1ID": "id-41471",
-              "ap2ID": "id-41470"
-            },
-            {
-              "ap2Name": "z",
-              "ap1ID": "id-41472",
-              "ap2ID": "id-41470"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-07-27T18:23:38.914Z",
-            "privateRepo": false,
-            "repoName": "crv.Point",
-            "dateCreated": "2026-05-08T22:20:14Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-1",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/crv.Point",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739800",
-            "ranking": 4.8,
-            "searchField": "crv.point tristan-huber simple 3d point defined by it's xyz position abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Simple 3d Point defined by it's xyz position",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1785183464270
-        },
-        {
-          "atomType": "GitHubMolecule",
           "x": 0.05859375,
           "y": 0.6799999999999999,
           "uniqueID": "id-41492",
@@ -7032,6 +6768,270 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785183488158
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.31380208333333337,
+          "y": 0.6488095238095237,
+          "uniqueID": "id-41866",
+          "name": "ClosestEdge",
+          "ioValues": [
+            {
+              "name": "EdgeFrom",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "NearestTo",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "tieTolerance",
+              "ioValue": 0.001
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-41861",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.4309895833333333,
+              "y": 0.5059523809523809,
+              "uniqueID": "id-41862",
+              "ioValues": [
+                {
+                  "name": "edgeFrom",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "nearestTo",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "tolerance",
+                  "ioValue": 0.001
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "\nfunction run(\n  edgeFrom: Assembly,\n  nearestTo: Assembly,\n  tolerance: number = 0.001\n) {\n  let best: replicad.Edge[] = [];\n  let bestDist = Infinity;\n  const target: replicad.Vector = nearestTo.isLeaf() && nearestTo.isPoint()\n    ? new replicad.Vector(nearestTo.geometry.asTuple()).multiply(-1)\n    : new replicad.Vector(getBBoxCenter(nearestTo)).multiply(-1)\n  edgeFrom.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Drawing)) {\n      for (const edge of leaf.geometry.edges) {\n        const dist = edge.pointAt(.5).add(target).Length;\n        if (dist - bestDist < -1 * tolerance || best.length == 0) {\n          console.log(\"new best dist: \", dist)\n          best = [edge]\n          bestDist = dist;\n        } else if (Math.abs(dist - bestDist) < tolerance) {\n          // include ties\n          best.push(edge)\n        }\n      }\n      return leaf;\n    }\n  })\n  console.log(best)\n  return best.map((e) => { return replicad.assembleWire([e]) });\n}\n\nfunction getBBoxCenter(foo: Assembly) {\n  let bbox: replicad.BoundingBox = undefined;\n  foo.onLeafs((leaf) => {\n    if (bbox == undefined) {\n      bbox = leaf.geometry.boundingBox;\n    } else {\n      bbox.add(leaf.geometry.boundingBox)\n    }\n  })\n  return bbox.center;\n}\n\n\n/*\n  const surfaces = [];\n  const leadFaceEdges = [];\n  const endFaceEdges = [];\n  for (let i = 0; i < wireList.length; i++) {\n    const w1 = wireList[i]\n    const w2 = wireList[(i + 1) % wireList.length]\n    const surf = replicad.loft([w1, w2], {}, true)\n    surfaces.push(surf)\n    leadFaceEdges.push(replicad.makeLine(w1.startPoint, w2.startPoint))\n    endFaceEdges.push(replicad.makeLine(w1.endPoint, w2.endPoint))\n  }\n  const frontCap = replicad.makeNonPlanarFace(replicad.assembleWire(leadFaceEdges))\n  const endCap = replicad.makeNonPlanarFace(replicad.assembleWire(endFaceEdges))\n\n  return replicad.makeSolid([frontCap, ...surfaces, endCap])*/",
+              "compiledCode": "\"use strict\";\nfunction run(edgeFrom, nearestTo, tolerance = 0.001) {\n    let best = [];\n    let bestDist = Infinity;\n    const target = nearestTo.isLeaf() && nearestTo.isPoint()\n        ? new replicad.Vector(nearestTo.geometry.asTuple()).multiply(-1)\n        : new replicad.Vector(getBBoxCenter(nearestTo)).multiply(-1);\n    edgeFrom.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Drawing)) {\n            for (const edge of leaf.geometry.edges) {\n                const dist = edge.pointAt(.5).add(target).Length;\n                if (dist - bestDist < -1 * tolerance || best.length == 0) {\n                    console.log(\"new best dist: \", dist);\n                    best = [edge];\n                    bestDist = dist;\n                }\n                else if (Math.abs(dist - bestDist) < tolerance) {\n                    // include ties\n                    best.push(edge);\n                }\n            }\n            return leaf;\n        }\n    });\n    console.log(best);\n    return best.map((e) => { return replicad.assembleWire([e]); });\n}\nfunction getBBoxCenter(foo) {\n    let bbox = undefined;\n    foo.onLeafs((leaf) => {\n        if (bbox == undefined) {\n            bbox = leaf.geometry.boundingBox;\n        }\n        else {\n            bbox.add(leaf.geometry.boundingBox);\n        }\n    });\n    return bbox.center;\n}\n/*\n  const surfaces = [];\n  const leadFaceEdges = [];\n  const endFaceEdges = [];\n  for (let i = 0; i < wireList.length; i++) {\n    const w1 = wireList[i]\n    const w2 = wireList[(i + 1) % wireList.length]\n    const surf = replicad.loft([w1, w2], {}, true)\n    surfaces.push(surf)\n    leadFaceEdges.push(replicad.makeLine(w1.startPoint, w2.startPoint))\n    endFaceEdges.push(replicad.makeLine(w1.endPoint, w2.endPoint))\n  }\n  const frontCap = replicad.makeNonPlanarFace(replicad.assembleWire(leadFaceEdges))\n  const endCap = replicad.makeNonPlanarFace(replicad.assembleWire(endFaceEdges))\n\n  return replicad.makeSolid([frontCap, ...surfaces, endCap])*/ \n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.15384615384615385,
+              "uniqueID": "id-41863",
+              "name": "EdgeFrom",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.24615384615384617,
+              "uniqueID": "id-41864",
+              "name": "NearestTo",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.3384615384615385,
+              "uniqueID": "id-41865",
+              "name": "tieTolerance"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-41862",
+              "ap2ID": "id-41861"
+            },
+            {
+              "ap2Name": "edgeFrom",
+              "ap1ID": "id-41863",
+              "ap2ID": "id-41862"
+            },
+            {
+              "ap2Name": "nearestTo",
+              "ap1ID": "id-41864",
+              "ap2ID": "id-41862"
+            },
+            {
+              "ap2Name": "tolerance",
+              "ap1ID": "id-41865",
+              "ap2ID": "id-41862"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-07-27T18:23:38.914Z",
+            "privateRepo": false,
+            "repoName": "ClosestEdge",
+            "dateCreated": "2026-07-05T16:50:19Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-22851",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ClosestEdge",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739814",
+            "ranking": 0.6,
+            "searchField": "closestedge tristan-huber return a single edge from an assembly which is closest to another selector shape / assembly. pick an edge based on distance / nearness abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Return a single edge from an assembly which is closest to another selector shape / assembly. Pick an edge based on distance / nearness",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1785253617345
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.119140625,
+          "y": 0.8857142857142857,
+          "uniqueID": "id-41887",
+          "name": "crv.Point",
+          "ioValues": [
+            {
+              "name": "X",
+              "ioValue": 72.0000001
+            },
+            {
+              "name": "Y",
+              "ioValue": 50
+            },
+            {
+              "name": "Z",
+              "ioValue": 0
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-41882",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.15384615384615385,
+              "uniqueID": "id-41883",
+              "name": "X"
+            },
+            {
+              "atomType": "Code",
+              "x": 0.2688802083333333,
+              "y": 0.42857142857142855,
+              "uniqueID": "id-41884",
+              "ioValues": [
+                {
+                  "name": "x",
+                  "ioValue": 72.0000001
+                },
+                {
+                  "name": "y",
+                  "ioValue": 50
+                },
+                {
+                  "name": "z",
+                  "ioValue": 0
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "\nfunction run(x: number = 0, y: number = 0, z: number = 0) {\n  return replicad.makeVertex([x,y,z])\n}",
+              "compiledCode": "\"use strict\";\nfunction run(x = 0, y = 0, z = 0) {\n    return replicad.makeVertex([x, y, z]);\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.24615384615384617,
+              "uniqueID": "id-41885",
+              "name": "Y"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.3384615384615385,
+              "uniqueID": "id-41886",
+              "name": "Z"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "x",
+              "ap1ID": "id-41883",
+              "ap2ID": "id-41884"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-41884",
+              "ap2ID": "id-41882"
+            },
+            {
+              "ap2Name": "y",
+              "ap1ID": "id-41885",
+              "ap2ID": "id-41884"
+            },
+            {
+              "ap2Name": "z",
+              "ap1ID": "id-41886",
+              "ap2ID": "id-41884"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-07-27T18:23:38.914Z",
+            "privateRepo": false,
+            "repoName": "crv.Point",
+            "dateCreated": "2026-05-08T22:20:14Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-1",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/crv.Point",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739800",
+            "ranking": 4.8,
+            "searchField": "crv.point tristan-huber simple 3d point defined by it's xyz position abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Simple 3d Point defined by it's xyz position",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1785253632701
         }
       ],
       "allConnectors": [
@@ -7043,27 +7043,22 @@
         {
           "ap2Name": "EdgeFrom",
           "ap1ID": "id-41398",
-          "ap2ID": "id-41452"
+          "ap2ID": "id-41866"
         },
         {
           "ap2Name": "X",
           "ap1ID": "id-41501",
-          "ap2ID": "id-41473"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-41452",
-          "ap2ID": "id-41387"
-        },
-        {
-          "ap2Name": "NearestTo",
-          "ap1ID": "id-41473",
-          "ap2ID": "id-41452"
+          "ap2ID": "id-41887"
         },
         {
           "ap2Name": "x",
           "ap1ID": "id-41492",
           "ap2ID": "id-41501"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-41866",
+          "ap2ID": "id-41387"
         }
       ],
       "fileTypeVersion": 1
@@ -7286,7 +7281,7 @@
             {
               "name": "Shape 1",
               "ioValue": {
-                "geometry": "53372ed8-0",
+                "geometry": "7aa502f7-0",
                 "color": "#3c5a6e",
                 "tags": [],
                 "bom": [],
