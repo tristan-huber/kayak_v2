@@ -4700,6 +4700,38 @@
           ]
         },
         {
+          "atomType": "Intersection",
+          "x": 0.49267578125,
+          "y": 0.38125000000000003,
+          "uniqueID": "id-43780",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Difference",
+          "x": 0.5029296875,
+          "y": 0.7458333333333333,
+          "uniqueID": "id-43786",
+          "ioValues": [
+            {
+              "name": "retain",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "remove",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
           "atomType": "GitHubMolecule",
           "x": 0.12434895833333334,
           "y": 0.8057142857142858,
@@ -5077,38 +5109,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785176396468
-        },
-        {
-          "atomType": "Intersection",
-          "x": 0.49267578125,
-          "y": 0.38125000000000003,
-          "uniqueID": "id-43780",
-          "ioValues": [
-            {
-              "name": "geometry1",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "geometry2",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Difference",
-          "x": 0.5029296875,
-          "y": 0.7458333333333333,
-          "uniqueID": "id-43786",
-          "ioValues": [
-            {
-              "name": "retain",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "remove",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
         }
       ],
       "allConnectors": [
@@ -5244,6 +5244,16 @@
         },
         {
           "ap2Name": "geometry",
+          "ap1ID": "id-43780",
+          "ap2ID": "id-41112"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-43786",
+          "ap2ID": "id-41049"
+        },
+        {
+          "ap2Name": "geometry",
           "ap1ID": "id-40758",
           "ap2ID": "id-40776"
         },
@@ -5256,16 +5266,6 @@
           "ap2Name": "remove",
           "ap1ID": "id-40993",
           "ap2ID": "id-41041"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-43780",
-          "ap2ID": "id-41112"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-43786",
-          "ap2ID": "id-41049"
         }
       ],
       "fileTypeVersion": 1
@@ -9510,10 +9510,16 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.7861328125,
-      "y": 0.19166666666666665,
+      "x": 0.783203125,
+      "y": 0.18541666666666667,
       "uniqueID": "id-43724",
       "name": "forCNC",
+      "ioValues": [
+        {
+          "name": "topdeck",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
       "topLevel": false,
       "allAtoms": [
         {
@@ -10463,6 +10469,14 @@
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-43798",
+          "name": "topdeck",
+          "type": "geometry"
         }
       ],
       "allConnectors": [
@@ -10610,6 +10624,11 @@
       "ap2Name": "Shape 2",
       "ap1ID": "id-40735",
       "ap2ID": "id-41185"
+    },
+    {
+      "ap2Name": "topdeck",
+      "ap1ID": "id-40735",
+      "ap2ID": "id-43724"
     },
     {
       "ap2Name": "sheerWire",
