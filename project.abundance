@@ -8619,8 +8619,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.8271484375,
-          "y": 0.4791666666666667,
+          "x": 0.82958984375,
+          "y": 0.41458333333333336,
           "uniqueID": "id-44247",
           "name": "Molecule",
           "ioValues": [
@@ -8630,6 +8630,10 @@
             },
             {
               "name": "Input_1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "holes",
               "ioValue": "__GEOMETRY_INPUT__"
             }
           ],
@@ -8653,7 +8657,13 @@
               "y": 0.15384615384615385,
               "uniqueID": "id-44251",
               "type": "edgeselect",
-              "selectedEdgeData": {}
+              "selectedEdgeData": {
+                "0": [
+                  9,
+                  3,
+                  6
+                ]
+              }
             },
             {
               "atomType": "Input",
@@ -8662,7 +8672,13 @@
               "uniqueID": "id-44254",
               "name": "Input_1",
               "type": "edgeselect",
-              "selectedEdgeData": {}
+              "selectedEdgeData": {
+                "0": [
+                  20,
+                  21,
+                  19
+                ]
+              }
             },
             {
               "atomType": "GitHubMolecule",
@@ -8910,6 +8926,14 @@
                   "ioValue": 10
                 }
               ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.4479166666666667,
+              "uniqueID": "id-44304",
+              "name": "holes",
+              "type": "geometry"
             }
           ],
           "allConnectors": [
@@ -8945,11 +8969,305 @@
             },
             {
               "ap2Name": "holes",
-              "ap1ID": "id-44300",
+              "ap1ID": "id-44304",
               "ap2ID": "id-44282"
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.6357421875,
+          "y": 0.24791666666666667,
+          "uniqueID": "id-44318",
+          "name": "util.SelectEdgeLoop",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "index",
+              "ioValue": 4
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-44308",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.515625,
+              "y": 0.5308441558441559,
+              "uniqueID": "id-44309",
+              "ioValues": [
+                {
+                  "name": "shape",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "index",
+                  "ioValue": 4
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(\n  shape: Assembly,\n  index: number = 0) {\n  let result: replicad.Wire;\n  let total = 0;\n  shape.onLeafs((leaf) => {\n    let faces: replicad.Face[] = []\n    if (leaf.geometry instanceof replicad.Drawing) {\n      const sketches = leaf.geometry.sketchOnPlane(leaf.plane)\n      if (sketches instanceof replicad.Sketches) {\n        const t = sketches.faces()\n        faces = t instanceof replicad.Face ? [t] : t.faces\n      } else {\n        faces = [sketches.face()]\n      }\n    } else {\n      faces = leaf.geometry.faces\n    }\n    const wires = faces.map((face) => {\n      return [face.clone().outerWire(), ...face.innerWires()]\n    }).flat()\n    total += wires.length\n    if (index >= 0 && index < wires.length) {\n      result = wires[index]\n    }\n    index -= wires.length\n    return leaf;\n  })\n  console.log(result)\n  if (result === undefined) {\n    throw new Error(\"Index out of bounds. Only \" + total + \" eligible wires\")\n  }\n  return result;\n}\n",
+              "compiledCode": "\"use strict\";\nfunction run(shape, index = 0) {\n    let result;\n    let total = 0;\n    shape.onLeafs((leaf) => {\n        let faces = [];\n        if (leaf.geometry instanceof replicad.Drawing) {\n            const sketches = leaf.geometry.sketchOnPlane(leaf.plane);\n            if (sketches instanceof replicad.Sketches) {\n                const t = sketches.faces();\n                faces = t instanceof replicad.Face ? [t] : t.faces;\n            }\n            else {\n                faces = [sketches.face()];\n            }\n        }\n        else {\n            faces = leaf.geometry.faces;\n        }\n        const wires = faces.map((face) => {\n            return [face.clone().outerWire(), ...face.innerWires()];\n        }).flat();\n        total += wires.length;\n        if (index >= 0 && index < wires.length) {\n            result = wires[index];\n        }\n        index -= wires.length;\n        return leaf;\n    });\n    console.log(result);\n    if (result === undefined) {\n        throw new Error(\"Index out of bounds. Only \" + total + \" eligible wires\");\n    }\n    return result;\n}\n"
+            },
+            {
+              "atomType": "Rectangle",
+              "x": 0.203125,
+              "y": 0.48701298701298706,
+              "uniqueID": "id-44310",
+              "ioValues": [
+                {
+                  "name": "x length",
+                  "ioValue": 10
+                },
+                {
+                  "name": "y length",
+                  "ioValue": 10
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.279296875,
+              "y": 0.672077922077922,
+              "uniqueID": "id-44311",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 5
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": -3
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0
+                }
+              ]
+            },
+            {
+              "atomType": "Assembly",
+              "x": 0.369921875,
+              "y": 0.8165584415584415,
+              "uniqueID": "id-44312",
+              "ioValues": [
+                {
+                  "name": "Shape 1",
+                  "ioValue": null
+                },
+                {
+                  "name": "Shape 2",
+                  "ioValue": null
+                }
+              ]
+            },
+            {
+              "atomType": "Fusion",
+              "x": 0.373828125,
+              "y": 0.5503246753246753,
+              "uniqueID": "id-44313",
+              "ioValues": [
+                {
+                  "name": "Shape 1",
+                  "ioValue": {
+                    "geometry": "move-rectangle-10-10-5--3-0",
+                    "dimension": "2D",
+                    "plane": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "xDir": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "normal": [
+                        0,
+                        0,
+                        1
+                      ]
+                    },
+                    "color": "#aad7f2",
+                    "tags": [],
+                    "bom": []
+                  }
+                },
+                {
+                  "name": "Shape 2",
+                  "ioValue": {
+                    "geometry": "rectangle-10-10",
+                    "dimension": "2D",
+                    "plane": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "xDir": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "normal": [
+                        0,
+                        0,
+                        1
+                      ]
+                    },
+                    "color": "#aad7f2",
+                    "tags": [],
+                    "bom": []
+                  }
+                }
+              ],
+              "unionType": "Fusion"
+            },
+            {
+              "atomType": "Difference",
+              "x": 0.422265625,
+              "y": 0.36363636363636365,
+              "uniqueID": "id-44314",
+              "ioValues": [
+                {
+                  "name": "retain",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "remove",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Circle",
+              "x": 0.141015625,
+              "y": 0.6363636363636364,
+              "uniqueID": "id-44315",
+              "ioValues": [
+                {
+                  "name": "diameter",
+                  "ioValue": 1
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.15384615384615385,
+              "uniqueID": "id-44316",
+              "name": "shape",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.025384615384615384,
+              "y": 0.24615384615384617,
+              "uniqueID": "id-44317",
+              "name": "index"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-44309",
+              "ap2ID": "id-44308"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-44310",
+              "ap2ID": "id-44311"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-44310",
+              "ap2ID": "id-44312"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-44310",
+              "ap2ID": "id-44313"
+            },
+            {
+              "ap2Name": "Shape 1",
+              "ap1ID": "id-44311",
+              "ap2ID": "id-44312"
+            },
+            {
+              "ap2Name": "Shape 1",
+              "ap1ID": "id-44311",
+              "ap2ID": "id-44313"
+            },
+            {
+              "ap2Name": "retain",
+              "ap1ID": "id-44313",
+              "ap2ID": "id-44314"
+            },
+            {
+              "ap2Name": "remove",
+              "ap1ID": "id-44315",
+              "ap2ID": "id-44314"
+            },
+            {
+              "ap2Name": "shape",
+              "ap1ID": "id-44316",
+              "ap2ID": "id-44309"
+            },
+            {
+              "ap2Name": "index",
+              "ap1ID": "id-44317",
+              "ap2ID": "id-44309"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-07-29T20:40:13.596Z",
+            "privateRepo": false,
+            "repoName": "util.SelectEdgeLoop",
+            "dateCreated": "2026-07-11T03:17:29Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/util.SelectEdgeLoop/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-94",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/util.SelectEdgeLoop",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739808",
+            "ranking": 0.9,
+            "searchField": "util.selectedgeloop tristan-huber select a loop of edges which enclose a face or a hole by index. equivalently, picks an outer or inner wire. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Select a loop of edges which enclose a face or a hole by index. Equivalently, picks an outer or inner wire.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.SelectEdgeLoop/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.SelectEdgeLoop/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1785364813703
         }
       ],
       "allConnectors": [
@@ -9004,6 +9322,21 @@
           "ap2ID": "id-44212"
         },
         {
+          "ap2Name": "Input",
+          "ap1ID": "id-44064",
+          "ap2ID": "id-44247"
+        },
+        {
+          "ap2Name": "Input_1",
+          "ap1ID": "id-44064",
+          "ap2ID": "id-44247"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-44064",
+          "ap2ID": "id-44318"
+        },
+        {
           "ap2Name": "remove",
           "ap1ID": "id-44068",
           "ap2ID": "id-44064"
@@ -9037,6 +9370,11 @@
           "ap2Name": "holes",
           "ap1ID": "id-44148",
           "ap2ID": "id-44212"
+        },
+        {
+          "ap2Name": "holes",
+          "ap1ID": "id-44318",
+          "ap2ID": "id-44247"
         }
       ],
       "fileTypeVersion": 1
