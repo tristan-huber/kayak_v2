@@ -12501,8 +12501,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.63671875,
-      "y": 0.6729166666666666,
+      "x": 0.62158203125,
+      "y": 0.5791666666666667,
       "uniqueID": "id-44606",
       "ioValues": [
         {
@@ -12511,10 +12511,6 @@
         },
         {
           "name": "Shape 2",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 3",
           "ioValue": null
         }
       ]
@@ -12540,11 +12536,6 @@
       "ap2Name": "geometry",
       "ap1ID": "id-27926",
       "ap2ID": "id-43956"
-    },
-    {
-      "ap2Name": "Shape 3",
-      "ap1ID": "id-37384",
-      "ap2ID": "id-44606"
     },
     {
       "ap2Name": "faces",
