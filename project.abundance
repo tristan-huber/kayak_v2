@@ -96,7 +96,8 @@
         },
         {
           "name": "height",
-          "ioValue": 0.25
+          "ioValue": -0.25,
+          "currentEquation": "-0.25"
         }
       ]
     },
@@ -166,22 +167,6 @@
       ],
       "includeUntagged": false,
       "notKeepOut": false
-    },
-    {
-      "atomType": "Difference",
-      "x": 0.5673828125,
-      "y": 0.4479166666666667,
-      "uniqueID": "id-41849",
-      "ioValues": [
-        {
-          "name": "retain",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "remove",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ]
     },
     {
       "atomType": "ExtractTag",
@@ -6415,8 +6400,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.59814453125,
-      "y": 0.29583333333333334,
+      "x": 0.6083984375,
+      "y": 0.2791666666666667,
       "uniqueID": "id-43806",
       "name": "hatch",
       "ioValues": [
@@ -12513,6 +12498,26 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.63671875,
+      "y": 0.6729166666666666,
+      "uniqueID": "id-44606",
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 3",
+          "ioValue": null
+        }
+      ]
     }
   ],
   "allConnectors": [
@@ -12535,6 +12540,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-27926",
       "ap2ID": "id-43956"
+    },
+    {
+      "ap2Name": "Shape 3",
+      "ap1ID": "id-37384",
+      "ap2ID": "id-44606"
     },
     {
       "ap2Name": "faces",
@@ -12597,14 +12607,14 @@
       "ap2ID": "id-37127"
     },
     {
-      "ap2Name": "remove",
+      "ap2Name": "Shape 2",
       "ap1ID": "id-41518",
-      "ap2ID": "id-41849"
+      "ap2ID": "id-44606"
     },
     {
-      "ap2Name": "retain",
+      "ap2Name": "Shape 1",
       "ap1ID": "id-37127",
-      "ap2ID": "id-41849"
+      "ap2ID": "id-44606"
     },
     {
       "ap2Name": "faceAssembly",
