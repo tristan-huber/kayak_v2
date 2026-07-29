@@ -2,4 +2,5 @@
 # Bill Of Materials 
  |Part|Number Needed|Price|Source| 
  |----|----------|-----|-----|
-|Total: |0|$0.00| |
+|HatchTape|0.5|$5.00|https://clcboats.com/products/foam-hatch-tape|
+|Total: |0.5|$5.00| |
