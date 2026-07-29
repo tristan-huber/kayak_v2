@@ -169,8 +169,8 @@
     },
     {
       "atomType": "Difference",
-      "x": 0.61572265625,
-      "y": 0.48958333333333337,
+      "x": 0.5673828125,
+      "y": 0.4479166666666667,
       "uniqueID": "id-41849",
       "ioValues": [
         {
@@ -6415,8 +6415,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.5869140625,
-      "y": 0.2916666666666667,
+      "x": 0.59814453125,
+      "y": 0.29583333333333334,
       "uniqueID": "id-43806",
       "name": "hatch",
       "ioValues": [
@@ -7342,7 +7342,8 @@
         },
         {
           "name": "aftOffset",
-          "ioValue": 10
+          "ioValue": 3.25,
+          "currentEquation": "3.25"
         }
       ],
       "topLevel": false,
@@ -9524,42 +9525,17 @@
           ]
         },
         {
-          "atomType": "Move",
-          "x": 0.6083984375,
-          "y": 0.8520833333333333,
-          "uniqueID": "id-44539",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 0
-            },
-            {
-              "name": "yDist",
-              "ioValue": 0
-            },
-            {
-              "name": "zDist",
-              "ioValue": 0.75,
-              "currentEquation": "0.75"
-            }
-          ]
-        },
-        {
           "atomType": "Assembly",
           "x": 0.72802734375,
           "y": 0.7791666666666667,
           "uniqueID": "id-44545",
           "ioValues": [
             {
-              "name": "Shape 1",
+              "name": "Shape 2",
               "ioValue": null
             },
             {
-              "name": "Shape 2",
+              "name": "Shape 3",
               "ioValue": null
             }
           ]
@@ -9583,7 +9559,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 82,
+              "ioValue": 75.25,
               "currentEquation": "length / 2 + aftOffset"
             },
             {
@@ -9593,7 +9569,33 @@
             },
             {
               "name": "zDist",
+              "ioValue": 0.25,
+              "currentEquation": "0.25"
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.56884765625,
+          "y": 0.8270833333333333,
+          "uniqueID": "id-44599",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
               "ioValue": 0
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0.75,
+              "currentEquation": "0.75"
             }
           ]
         }
@@ -9727,12 +9729,7 @@
         {
           "ap2Name": "geometry",
           "ap1ID": "id-44535",
-          "ap2ID": "id-44539"
-        },
-        {
-          "ap2Name": "Shape 1",
-          "ap1ID": "id-44539",
-          "ap2ID": "id-44545"
+          "ap2ID": "id-44599"
         },
         {
           "ap2Name": "geometry",
@@ -9743,6 +9740,11 @@
           "ap2Name": "number or geometry",
           "ap1ID": "id-44553",
           "ap2ID": "id-43961"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-44599",
+          "ap2ID": "id-44545"
         }
       ],
       "fileTypeVersion": 1
@@ -12623,6 +12625,11 @@
       "ap2Name": "topdeckPanels",
       "ap1ID": "id-40735",
       "ap2ID": "id-43806"
+    },
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-43806",
+      "ap2ID": "id-130"
     },
     {
       "ap2Name": "Shape 1",
