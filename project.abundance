@@ -102,8 +102,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.3040364583333333,
-      "y": 0.3657142857142857,
+      "x": 0.2763671875,
+      "y": 0.28541666666666665,
       "uniqueID": "id-40782",
       "name": "Extract deck",
       "ioValues": [
@@ -122,8 +122,8 @@
     },
     {
       "atomType": "Code",
-      "x": 0.38932291666666663,
-      "y": 0.18285714285714286,
+      "x": 0.4013671875,
+      "y": 0.12083333333333332,
       "uniqueID": "id-40798",
       "ioValues": [
         {
@@ -189,8 +189,8 @@
     },
     {
       "atomType": "Difference",
-      "x": 0.59033203125,
-      "y": 0.61875,
+      "x": 0.61572265625,
+      "y": 0.48958333333333337,
       "uniqueID": "id-41849",
       "ioValues": [
         {
@@ -637,8 +637,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.35286458333333337,
-      "y": 0.5314285714285714,
+      "x": 0.40527343749999994,
+      "y": 0.3458333333333333,
       "uniqueID": "id-41144",
       "name": "facesToSolid",
       "ioValues": [
@@ -729,8 +729,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.47216796874999994,
-      "y": 0.6791666666666667,
+      "x": 0.50048828125,
+      "y": 0.5229166666666667,
       "uniqueID": "id-41518",
       "name": "sheerRails",
       "ioValues": [
@@ -1477,8 +1477,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4661458333333333,
-      "y": 0.3514285714285714,
+      "x": 0.4814453125,
+      "y": 0.29791666666666666,
       "uniqueID": "id-37127",
       "name": "bulkheads",
       "ioValues": [
@@ -5975,8 +5975,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.34326171875,
-      "y": 0.7104166666666666,
+      "x": 0.4375,
+      "y": 0.8083333333333333,
       "uniqueID": "id-41385",
       "name": "sheerLine",
       "ioValues": [
@@ -10092,6 +10092,26 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.3154296875,
+      "y": 0.5145833333333334,
+      "uniqueID": "id-43956",
+      "name": "Extract cockpitVoid",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tag": "deck",
+      "tagIndex": 0,
+      "selectedTags": [
+        "cockpitVoid"
+      ],
+      "includeUntagged": false,
+      "notKeepOut": false
     }
   ],
   "allConnectors": [
@@ -10109,6 +10129,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-27926",
       "ap2ID": "id-41153"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-27926",
+      "ap2ID": "id-43956"
     },
     {
       "ap2Name": "Shape 1",
