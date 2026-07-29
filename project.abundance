@@ -86,8 +86,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.548828125,
-      "y": 0.8857142857142857,
+      "x": 0.5166015625,
+      "y": 0.9208333333333334,
       "uniqueID": "id-37384",
       "ioValues": [
         {
@@ -96,8 +96,8 @@
         },
         {
           "name": "height",
-          "ioValue": -0.25,
-          "currentEquation": "-0.25"
+          "ioValue": 0.25,
+          "currentEquation": "0.25"
         }
       ]
     },
@@ -170,8 +170,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.35205078125,
-      "y": 0.6333333333333333,
+      "x": 0.31689453125,
+      "y": 0.45416666666666666,
       "uniqueID": "id-43956",
       "name": "Extract cockpitVoid",
       "ioValues": [
@@ -626,8 +626,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.40527343749999994,
-      "y": 0.3458333333333333,
+      "x": 0.43261718750000006,
+      "y": 0.6458333333333334,
       "uniqueID": "id-41144",
       "name": "facesToSolid",
       "ioValues": [
@@ -718,8 +718,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.50048828125,
-      "y": 0.5229166666666667,
+      "x": 0.41650390625000006,
+      "y": 0.44583333333333336,
       "uniqueID": "id-41518",
       "name": "sheerRails",
       "ioValues": [
@@ -1466,8 +1466,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4814453125,
-      "y": 0.29791666666666666,
+      "x": 0.5009765625,
+      "y": 0.6375,
       "uniqueID": "id-37127",
       "name": "bulkheads",
       "ioValues": [
@@ -4345,8 +4345,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.5078125,
-      "y": 0.12083333333333332,
+      "x": 0.51025390625,
+      "y": 0.12916666666666665,
       "uniqueID": "id-40735",
       "name": "hatch",
       "ioValues": [
@@ -6400,8 +6400,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.6083984375,
-      "y": 0.2791666666666667,
+      "x": 0.60986328125,
+      "y": 0.20416666666666666,
       "uniqueID": "id-43806",
       "name": "hatch",
       "ioValues": [
@@ -7316,8 +7316,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4306640625,
-      "y": 0.6583333333333333,
+      "x": 0.4599609375,
+      "y": 0.29791666666666666,
       "uniqueID": "id-43959",
       "name": "CockpitBorder",
       "ioValues": [
@@ -12501,9 +12501,25 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.62158203125,
-      "y": 0.5791666666666667,
+      "x": 0.61328125,
+      "y": 0.6270833333333333,
       "uniqueID": "id-44606",
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        }
+      ]
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.67822265625,
+      "y": 0.4291666666666667,
+      "uniqueID": "id-44617",
       "ioValues": [
         {
           "name": "Shape 1",
@@ -12631,6 +12647,16 @@
       "ap2Name": "number or geometry",
       "ap1ID": "id-43806",
       "ap2ID": "id-130"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-43806",
+      "ap2ID": "id-44617"
+    },
+    {
+      "ap2Name": "Shape 2",
+      "ap1ID": "id-43959",
+      "ap2ID": "id-44617"
     },
     {
       "ap2Name": "Shape 1",
