@@ -6430,7 +6430,8 @@
         },
         {
           "name": "aftOffset",
-          "ioValue": 10
+          "ioValue": 10,
+          "currentEquation": "10"
         },
         {
           "name": "downOffset",
@@ -10262,8 +10263,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.5,
-          "y": 0.6958333333333333,
+          "x": 0.3291015625,
+          "y": 0.7416666666666667,
           "uniqueID": "id-43988",
           "name": "Scale",
           "ioValues": [
@@ -10492,8 +10493,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.2841796875,
-          "y": 0.16041666666666665,
+          "x": 0.2451171875,
+          "y": 0.48750000000000004,
           "uniqueID": "id-44030",
           "name": "Center_XY",
           "ioValues": [
@@ -10653,11 +10654,6 @@
           "ap2ID": "id-43971"
         },
         {
-          "ap2Name": "Geometry",
-          "ap1ID": "id-43963",
-          "ap2ID": "id-43988"
-        },
-        {
           "ap2Name": "Shape",
           "ap1ID": "id-43963",
           "ap2ID": "id-44004"
@@ -10680,6 +10676,11 @@
         {
           "ap2Name": "Scale Factor",
           "ap1ID": "id-44015",
+          "ap2ID": "id-43988"
+        },
+        {
+          "ap2Name": "Geometry",
+          "ap1ID": "id-44030",
           "ap2ID": "id-43988"
         }
       ],
