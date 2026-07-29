@@ -12517,8 +12517,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.67822265625,
-      "y": 0.4291666666666667,
+      "x": 0.6806640625,
+      "y": 0.3458333333333333,
       "uniqueID": "id-44617",
       "ioValues": [
         {
@@ -12530,6 +12530,30 @@
           "ioValue": null
         }
       ]
+    },
+    {
+      "atomType": "Molecule",
+      "x": 0.77587890625,
+      "y": 0.69375,
+      "uniqueID": "id-44622",
+      "name": "Molecule",
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-44624",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        }
+      ],
+      "allConnectors": [],
+      "fileTypeVersion": 1
     }
   ],
   "allConnectors": [
