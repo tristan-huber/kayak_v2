@@ -168,26 +168,6 @@
       "notKeepOut": false
     },
     {
-      "atomType": "Assembly",
-      "x": 0.8427734375,
-      "y": 0.45416666666666666,
-      "uniqueID": "id-41185",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 4",
-          "ioValue": null
-        }
-      ]
-    },
-    {
       "atomType": "Difference",
       "x": 0.61572265625,
       "y": 0.48958333333333337,
@@ -315,6 +295,10 @@
       "uniqueID": "id-37346",
       "name": "Cross-Section",
       "ioValues": [
+        {
+          "name": "Geometry",
+          "ioValue": 10
+        },
         {
           "name": "Offset",
           "ioValue": 0
@@ -12551,11 +12535,6 @@
       "ap2ID": "id-43956"
     },
     {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-37384",
-      "ap2ID": "id-41185"
-    },
-    {
       "ap2Name": "faces",
       "ap1ID": "id-40782",
       "ap2ID": "id-40798"
@@ -12584,16 +12563,6 @@
       "ap2Name": "sheerLine",
       "ap1ID": "id-41153",
       "ap2ID": "id-41518"
-    },
-    {
-      "ap2Name": "Geometry",
-      "ap1ID": "id-41185",
-      "ap2ID": "id-37346"
-    },
-    {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-41185",
-      "ap2ID": "id-130"
     },
     {
       "ap2Name": "cockpitShape",
@@ -12631,11 +12600,6 @@
       "ap2ID": "id-41849"
     },
     {
-      "ap2Name": "Shape 4",
-      "ap1ID": "id-37127",
-      "ap2ID": "id-41185"
-    },
-    {
       "ap2Name": "retain",
       "ap1ID": "id-37127",
       "ap2ID": "id-41849"
@@ -12649,11 +12613,6 @@
       "ap2Name": "cockpit_plug",
       "ap1ID": "id-27153",
       "ap2ID": "id-27561"
-    },
-    {
-      "ap2Name": "Shape 2",
-      "ap1ID": "id-40735",
-      "ap2ID": "id-41185"
     },
     {
       "ap2Name": "topdeck",
