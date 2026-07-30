@@ -7739,6 +7739,10 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
+              "name": "x",
+              "ioValue": 144.01932093235354
+            },
+            {
               "name": "y",
               "ioValue": 120
             }
@@ -7754,6 +7758,10 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 12.009660466176769
             },
             {
               "name": "yDist",
