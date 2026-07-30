@@ -12852,8 +12852,8 @@
         },
         {
           "atomType": "Add-BOM-Tag",
-          "x": 0.49544270833333337,
-          "y": 0.8035714285714286,
+          "x": 0.4036458333333333,
+          "y": 0.9226190476190476,
           "uniqueID": "id-44708",
           "name": "Add BOM Tag",
           "ioValues": [
@@ -12904,9 +12904,63 @@
         },
         {
           "atomType": "Move",
-          "x": 0.6751302083333333,
-          "y": 0.3214285714285714,
+          "x": 0.6002604166666667,
+          "y": 0.41369047619047616,
           "uniqueID": "id-44717",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "yDist",
+              "ioValue": -1.75,
+              "currentEquation": "(-3.5) / 2"
+            },
+            {
+              "name": "zDist",
+              "ioValue": -1.5,
+              "currentEquation": "-1.5"
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.4915364583333333,
+          "y": 0.8392857142857143,
+          "uniqueID": "id-44723",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 12.000004999999987,
+              "currentEquation": "0"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0.75,
+              "currentEquation": "0.75"
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.6022135416666667,
+          "y": 0.6755952380952381,
+          "uniqueID": "id-44729",
           "ioValues": [
             {
               "name": "geometry",
@@ -12918,11 +12972,89 @@
             },
             {
               "name": "yDist",
-              "ioValue": 0
+              "ioValue": 3.75,
+              "currentEquation": "3.5 + 0.25"
             },
             {
               "name": "zDist",
               "ioValue": 0
+            }
+          ]
+        },
+        {
+          "atomType": "Difference",
+          "x": 0.7799479166666666,
+          "y": 0.22023809523809526,
+          "uniqueID": "id-44735",
+          "ioValues": [
+            {
+              "name": "retain",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "remove",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.6861979166666666,
+          "y": 0.7142857142857143,
+          "uniqueID": "id-44739",
+          "ioValues": [
+            {
+              "name": "Shape 1",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 2",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 3",
+              "ioValue": null
+            }
+          ]
+        },
+        {
+          "atomType": "Equation",
+          "x": 0.31380208333333337,
+          "y": 0.6071428571428572,
+          "uniqueID": "id-44745",
+          "name": "(x - 120) / 2",
+          "ioValues": [
+            {
+              "name": "x",
+              "ioValue": 144.00000999999997,
+              "currentEquation": "144.00000999999997"
+            }
+          ],
+          "currentEquation": "(x - 120) / 2"
+        },
+        {
+          "atomType": "Move",
+          "x": 0.791015625,
+          "y": 0.6130952380952381,
+          "uniqueID": "id-44754",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 2,
+              "currentEquation": "2"
             }
           ]
         }
@@ -12937,6 +13069,11 @@
           "ap2Name": "Shape",
           "ap1ID": "id-44626",
           "ap2ID": "id-44663"
+        },
+        {
+          "ap2Name": "retain",
+          "ap1ID": "id-44626",
+          "ap2ID": "id-44735"
         },
         {
           "ap2Name": "geometry",
@@ -12957,6 +13094,11 @@
           "ap2Name": "x",
           "ap1ID": "id-44663",
           "ap2ID": "id-44681"
+        },
+        {
+          "ap2Name": "x",
+          "ap1ID": "id-44663",
+          "ap2ID": "id-44745"
         },
         {
           "ap2Name": "geometry",
@@ -12997,6 +13139,46 @@
           "ap2Name": "geometry",
           "ap1ID": "id-44705",
           "ap2ID": "id-44708"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-44708",
+          "ap2ID": "id-44723"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-44717",
+          "ap2ID": "id-44729"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-44717",
+          "ap2ID": "id-44739"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-44723",
+          "ap2ID": "id-44739"
+        },
+        {
+          "ap2Name": "Shape 2",
+          "ap1ID": "id-44729",
+          "ap2ID": "id-44739"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-44739",
+          "ap2ID": "id-44754"
+        },
+        {
+          "ap2Name": "xDist",
+          "ap1ID": "id-44745",
+          "ap2ID": "id-44723"
+        },
+        {
+          "ap2Name": "remove",
+          "ap1ID": "id-44754",
+          "ap2ID": "id-44735"
         }
       ],
       "fileTypeVersion": 1
