@@ -12538,8 +12538,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.77587890625,
-      "y": 0.69375,
+      "x": 0.7291666666666666,
+      "y": 0.7767857142857143,
       "uniqueID": "id-44622",
       "name": "falsework",
       "ioValues": [
@@ -12651,8 +12651,8 @@
             },
             {
               "name": "yDist",
-              "ioValue": -1,
-              "currentEquation": "-1 * aftHeightOffset"
+              "ioValue": -0.5,
+              "currentEquation": "-1 * aftHeightOffset / 2"
             },
             {
               "name": "zDist",
@@ -13091,8 +13091,8 @@
         },
         {
           "atomType": "Assembly",
-          "x": 0.8567708333333334,
-          "y": 0.6964285714285714,
+          "x": 0.7981770833333334,
+          "y": 0.7380952380952381,
           "uniqueID": "id-44788",
           "ioValues": [
             {
@@ -13162,6 +13162,25 @@
               "currentEquation": "6 + aftHeightOffset"
             }
           ]
+        },
+        {
+          "atomType": "ExtractTag",
+          "x": 0.916015625,
+          "y": 0.824404761904762,
+          "uniqueID": "id-44807",
+          "name": "Extract strongback",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tagIndex": 0,
+          "selectedTags": [
+            "strongback"
+          ],
+          "includeUntagged": false,
+          "notKeepOut": false
         }
       ],
       "allConnectors": [
@@ -13289,6 +13308,16 @@
           "ap2Name": "x",
           "ap1ID": "id-44778",
           "ap2ID": "id-44745"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-44788",
+          "ap2ID": "id-44624"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-44788",
+          "ap2ID": "id-44807"
         },
         {
           "ap2Name": "Shape 1",
