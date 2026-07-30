@@ -12537,22 +12537,6 @@
       ]
     },
     {
-      "atomType": "Assembly",
-      "x": 0.6806640625,
-      "y": 0.3458333333333333,
-      "uniqueID": "id-44617",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        }
-      ]
-    },
-    {
       "atomType": "Molecule",
       "x": 0.77587890625,
       "y": 0.69375,
@@ -12606,8 +12590,8 @@
         },
         {
           "atomType": "ExtractTag",
-          "x": 0.19921875,
-          "y": 0.35,
+          "x": 0.21614583333333334,
+          "y": 0.22023809523809526,
           "uniqueID": "id-44633",
           "name": "Extract bulkhead",
           "ioValues": [
@@ -12651,8 +12635,8 @@
         },
         {
           "atomType": "Rectangle",
-          "x": 0.43359375,
-          "y": 0.8166666666666667,
+          "x": 0.369140625,
+          "y": 0.4464285714285714,
           "uniqueID": "id-44655",
           "ioValues": [
             {
@@ -12668,8 +12652,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.3916015625,
-          "y": 0.48958333333333337,
+          "x": 0.24609375,
+          "y": 0.375,
           "uniqueID": "id-44663",
           "name": "Width",
           "ioValues": [
@@ -12757,8 +12741,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.56982421875,
-          "y": 0.6687500000000001,
+          "x": 0.5104166666666666,
+          "y": 0.4375,
           "uniqueID": "id-44672",
           "ioValues": [
             {
@@ -12767,7 +12751,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 0
+              "ioValue": 72.00000499999999
             },
             {
               "name": "yDist",
@@ -12778,6 +12762,20 @@
               "ioValue": 0
             }
           ]
+        },
+        {
+          "atomType": "Equation",
+          "x": 0.3776041666666667,
+          "y": 0.20535714285714285,
+          "uniqueID": "id-44681",
+          "name": "x / 2",
+          "ioValues": [
+            {
+              "name": "x",
+              "ioValue": 144.00000999999997
+            }
+          ],
+          "currentEquation": "x / 2"
         }
       ],
       "allConnectors": [
@@ -12787,14 +12785,14 @@
           "ap2ID": "id-44633"
         },
         {
+          "ap2Name": "Shape",
+          "ap1ID": "id-44626",
+          "ap2ID": "id-44663"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-44629",
           "ap2ID": "id-44649"
-        },
-        {
-          "ap2Name": "Shape",
-          "ap1ID": "id-44633",
-          "ap2ID": "id-44663"
         },
         {
           "ap2Name": "geometry",
@@ -12805,6 +12803,16 @@
           "ap2Name": "x length",
           "ap1ID": "id-44663",
           "ap2ID": "id-44655"
+        },
+        {
+          "ap2Name": "x",
+          "ap1ID": "id-44663",
+          "ap2ID": "id-44681"
+        },
+        {
+          "ap2Name": "xDist",
+          "ap1ID": "id-44681",
+          "ap2ID": "id-44672"
         }
       ],
       "fileTypeVersion": 1
@@ -12925,16 +12933,6 @@
       "ap2Name": "number or geometry",
       "ap1ID": "id-43806",
       "ap2ID": "id-130"
-    },
-    {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-43806",
-      "ap2ID": "id-44617"
-    },
-    {
-      "ap2Name": "Shape 2",
-      "ap1ID": "id-43959",
-      "ap2ID": "id-44617"
     },
     {
       "ap2Name": "Shape 1",
