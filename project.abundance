@@ -7739,10 +7739,6 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
-              "name": "x",
-              "ioValue": 144.01932093235354
-            },
-            {
               "name": "y",
               "ioValue": 120
             }
@@ -7758,10 +7754,6 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 12.009660466176769
             },
             {
               "name": "yDist",
@@ -10773,7 +10765,7 @@
             {
               "name": "Shape 1",
               "ioValue": {
-                "geometry": "7aa502f7-0",
+                "geometry": "53372ed8-0",
                 "color": "#3c5a6e",
                 "tags": [],
                 "bom": [],
