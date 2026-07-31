@@ -188,22 +188,6 @@
       "notKeepOut": false
     },
     {
-      "atomType": "Assembly",
-      "x": 0.61865234375,
-      "y": 0.5708333333333333,
-      "uniqueID": "id-44606",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        }
-      ]
-    },
-    {
       "atomType": "GitHubMolecule",
       "x": 0.17578125,
       "y": 0.8742857142857143,
@@ -8134,6 +8118,10 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
+              "name": "x",
+              "ioValue": 144.00000999999997
+            },
+            {
               "name": "y",
               "ioValue": 120
             }
@@ -8149,6 +8137,10 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 12.000004999999987
             },
             {
               "name": "yDist",
@@ -13706,6 +13698,22 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.6106770833333334,
+      "y": 0.5314285714285714,
+      "uniqueID": "id-44899",
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 3",
+          "ioValue": null
+        }
+      ]
     }
   ],
   "allConnectors": [
@@ -13765,11 +13773,6 @@
       "ap2ID": "id-43959"
     },
     {
-      "ap2Name": "bulkheads",
-      "ap1ID": "id-44606",
-      "ap2ID": "id-44622"
-    },
-    {
       "ap2Name": "Shape 5",
       "ap1ID": "id-27904",
       "ap2ID": "id-27926"
@@ -13795,14 +13798,14 @@
       "ap2ID": "id-37127"
     },
     {
-      "ap2Name": "Shape 2",
+      "ap2Name": "Shape 3",
       "ap1ID": "id-41518",
-      "ap2ID": "id-44606"
+      "ap2ID": "id-44899"
     },
     {
       "ap2Name": "Shape 1",
       "ap1ID": "id-37127",
-      "ap2ID": "id-44606"
+      "ap2ID": "id-44899"
     },
     {
       "ap2Name": "faceAssembly",
@@ -13833,6 +13836,11 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-27561",
       "ap2ID": "id-27926"
+    },
+    {
+      "ap2Name": "bulkheads",
+      "ap1ID": "id-44899",
+      "ap2ID": "id-44622"
     }
   ],
   "unitsKey": "MM",
