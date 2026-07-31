@@ -834,8 +834,8 @@
         },
         {
           "atomType": "Intersection",
-          "x": 0.45963541666666663,
-          "y": 0.45238095238095233,
+          "x": 0.45247395833333337,
+          "y": 0.18857142857142858,
           "uniqueID": "id-42226",
           "ioValues": [
             {
@@ -1547,7 +1547,7 @@
               "ioValue": [
                 0,
                 0.75,
-                0.2
+                0.4
               ]
             }
           ],
@@ -1580,7 +1580,7 @@
                   "ioValue": [
                     0,
                     0.75,
-                    0.2
+                    0.4
                   ]
                 }
               ],
@@ -1654,8 +1654,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.19921875,
-          "y": 0.4114285714285715,
+          "x": 0.18489583333333334,
+          "y": 0.2942857142857143,
           "uniqueID": "id-44878",
           "name": "extrudeFaceDirected",
           "ioValues": [
@@ -1801,6 +1801,11 @@
           "ap2ID": "id-42242"
         },
         {
+          "ap2Name": "Geometry",
+          "ap1ID": "id-42226",
+          "ap2ID": "id-41753"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-42242",
           "ap2ID": "id-42245"
@@ -1809,11 +1814,6 @@
           "ap2Name": "number or geometry",
           "ap1ID": "id-42245",
           "ap2ID": "id-41520"
-        },
-        {
-          "ap2Name": "Geometry",
-          "ap1ID": "id-44857",
-          "ap2ID": "id-41753"
         },
         {
           "ap2Name": "remove",
@@ -1854,6 +1854,16 @@
           "ap2Name": "retain",
           "ap1ID": "id-44841",
           "ap2ID": "id-44857"
+        },
+        {
+          "ap2Name": "geometry1",
+          "ap1ID": "id-44841",
+          "ap2ID": "id-42226"
+        },
+        {
+          "ap2Name": "geometry2",
+          "ap1ID": "id-44878",
+          "ap2ID": "id-42226"
         }
       ],
       "fileTypeVersion": 1
@@ -13701,8 +13711,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.6106770833333334,
-      "y": 0.5314285714285714,
+      "x": 0.5455729166666666,
+      "y": 0.4542857142857143,
       "uniqueID": "id-44899",
       "ioValues": [
         {
@@ -13714,6 +13724,13 @@
           "ioValue": null
         }
       ]
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.791015625,
+      "y": 0.5514285714285714,
+      "uniqueID": "id-44906",
+      "ioValues": []
     }
   ],
   "allConnectors": [
