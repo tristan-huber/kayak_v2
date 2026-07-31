@@ -7741,8 +7741,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.7291666666666666,
-      "y": 0.7767857142857143,
+      "x": 0.587890625,
+      "y": 0.6799999999999999,
       "uniqueID": "id-44622",
       "name": "falsework",
       "ioValues": [
@@ -13730,7 +13730,36 @@
       "x": 0.791015625,
       "y": 0.5514285714285714,
       "uniqueID": "id-44906",
-      "ioValues": []
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        }
+      ]
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.65234375,
+      "y": 0.5771428571428572,
+      "uniqueID": "id-44909",
+      "name": "Extract bulkhead, rails",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tagIndex": 0,
+      "selectedTags": [
+        "bulkhead",
+        "rails"
+      ],
+      "includeUntagged": false,
+      "notKeepOut": false
     }
   ],
   "allConnectors": [
@@ -13753,6 +13782,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-27926",
       "ap2ID": "id-43956"
+    },
+    {
+      "ap2Name": "Shape 2",
+      "ap1ID": "id-37384",
+      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "faces",
@@ -13850,6 +13884,11 @@
       "ap2ID": "id-130"
     },
     {
+      "ap2Name": "geometry",
+      "ap1ID": "id-44622",
+      "ap2ID": "id-44909"
+    },
+    {
       "ap2Name": "Shape 1",
       "ap1ID": "id-27561",
       "ap2ID": "id-27926"
@@ -13858,6 +13897,11 @@
       "ap2Name": "bulkheads",
       "ap1ID": "id-44899",
       "ap2ID": "id-44622"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-44909",
+      "ap2ID": "id-44906"
     }
   ],
   "unitsKey": "MM",
