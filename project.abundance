@@ -169,8 +169,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.31689453125,
-      "y": 0.45416666666666666,
+      "x": 0.36197916666666663,
+      "y": 0.2857142857142857,
       "uniqueID": "id-43956",
       "name": "Extract cockpitVoid",
       "ioValues": [
@@ -8531,8 +8531,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4599609375,
-      "y": 0.29791666666666666,
+      "x": 0.4921875,
+      "y": 0.2914285714285714,
       "uniqueID": "id-43959",
       "name": "CockpitBorder",
       "ioValues": [
@@ -12716,8 +12716,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.783203125,
-      "y": 0.18541666666666667,
+      "x": 0.8346354166666666,
+      "y": 0.14285714285714285,
       "uniqueID": "id-43724",
       "name": "forCNC",
       "ioValues": [
@@ -13738,6 +13738,10 @@
         {
           "name": "Shape 2",
           "ioValue": null
+        },
+        {
+          "name": "Shape 3",
+          "ioValue": null
         }
       ]
     },
@@ -13882,6 +13886,11 @@
       "ap2Name": "number or geometry",
       "ap1ID": "id-43806",
       "ap2ID": "id-130"
+    },
+    {
+      "ap2Name": "Shape 3",
+      "ap1ID": "id-43806",
+      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "geometry",
