@@ -1563,7 +1563,7 @@
               "ioValue": [
                 0,
                 0.75,
-                0.5
+                0.2
               ]
             }
           ],
@@ -1596,7 +1596,7 @@
                   "ioValue": [
                     0,
                     0.75,
-                    0.5
+                    0.2
                   ]
                 }
               ],
@@ -1820,6 +1820,11 @@
           "ap2Name": "geometry",
           "ap1ID": "id-42242",
           "ap2ID": "id-42245"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-42245",
+          "ap2ID": "id-41520"
         },
         {
           "ap2Name": "Geometry",
