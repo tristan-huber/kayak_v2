@@ -3987,6 +3987,11 @@
           "ap2ID": "id-26965"
         },
         {
+          "ap2Name": "remove",
+          "ap1ID": "id-26965",
+          "ap2ID": "id-26967"
+        },
+        {
           "ap2Name": "Assembly",
           "ap1ID": "id-26967",
           "ap2ID": "id-41405"
@@ -5779,6 +5784,12 @@
           "y": 0.8314285714285715,
           "uniqueID": "id-41501",
           "name": "x/2",
+          "ioValues": [
+            {
+              "name": "x",
+              "ioValue": 144.0000002
+            }
+          ],
           "currentEquation": "x/2"
         },
         {
@@ -6011,6 +6022,10 @@
           "name": "crv.Point",
           "ioValues": [
             {
+              "name": "X",
+              "ioValue": 72.0000001
+            },
+            {
               "name": "Y",
               "ioValue": 50
             },
@@ -6046,6 +6061,10 @@
               "y": 0.42857142857142855,
               "uniqueID": "id-41884",
               "ioValues": [
+                {
+                  "name": "x",
+                  "ioValue": 72.0000001
+                },
                 {
                   "name": "y",
                   "ioValue": 50
@@ -9728,6 +9747,10 @@
           "name": "(width + 2 * t) / width",
           "ioValues": [
             {
+              "name": "width",
+              "ioValue": 27.587902419204262
+            },
+            {
               "name": "t",
               "ioValue": 0.5
             }
@@ -9781,6 +9804,10 @@
           "uniqueID": "id-44368",
           "name": "(width + 2 * t + 1.5) / width",
           "ioValues": [
+            {
+              "name": "width",
+              "ioValue": 27.587902419204262
+            },
             {
               "name": "t",
               "ioValue": 0.5
@@ -9882,6 +9909,12 @@
           "y": 0.5208333333333334,
           "uniqueID": "id-43988",
           "name": "Scale",
+          "ioValues": [
+            {
+              "name": "Scale Factor",
+              "ioValue": 1.0362477721141963
+            }
+          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -11340,6 +11373,12 @@
           "y": 0.8541666666666667,
           "uniqueID": "id-44503",
           "name": "Scale",
+          "ioValues": [
+            {
+              "name": "Scale Factor",
+              "ioValue": 1.0906194302854906
+            }
+          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -12286,11 +12325,59 @@
             },
             {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": {
+                "geometry": "53372ed8-0",
+                "color": "#3c5a6e",
+                "tags": [],
+                "bom": [],
+                "plane": {
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "xDir": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "normal": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "metadata": {},
+                "dimension": "Wire"
+              }
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": {
+                "geometry": "a4b2bbd0-0",
+                "color": "#3c5a6e",
+                "tags": [],
+                "bom": [],
+                "plane": {
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "xDir": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "normal": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "metadata": {},
+                "dimension": "Wire"
+              }
             },
             {
               "name": "Shape 3",
