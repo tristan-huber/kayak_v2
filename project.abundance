@@ -165,16 +165,7 @@
       "x": 0.5455729166666666,
       "y": 0.4542857142857143,
       "uniqueID": "id-44899",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 3",
-          "ioValue": null
-        }
-      ]
+      "ioValues": []
     },
     {
       "atomType": "Assembly",
@@ -4913,6 +4904,10 @@
       "uniqueID": "id-40735",
       "name": "hatch",
       "ioValues": [
+        {
+          "name": "topdeckPanels",
+          "ioValue": 10
+        },
         {
           "name": "distFromBow",
           "ioValue": 96
@@ -9825,10 +9820,6 @@
           "name": "(width + 2 * t) / width",
           "ioValues": [
             {
-              "name": "width",
-              "ioValue": 27.587902419204262
-            },
-            {
               "name": "t",
               "ioValue": 0.5
             }
@@ -9882,10 +9873,6 @@
           "uniqueID": "id-44368",
           "name": "(width + 2 * t + 1.5) / width",
           "ioValues": [
-            {
-              "name": "width",
-              "ioValue": 27.587902419204262
-            },
             {
               "name": "t",
               "ioValue": 0.5
@@ -9987,12 +9974,6 @@
           "y": 0.5208333333333334,
           "uniqueID": "id-43988",
           "name": "Scale",
-          "ioValues": [
-            {
-              "name": "Scale Factor",
-              "ioValue": 1.0362477721141963
-            }
-          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -11451,12 +11432,6 @@
           "y": 0.8541666666666667,
           "uniqueID": "id-44503",
           "name": "Scale",
-          "ioValues": [
-            {
-              "name": "Scale Factor",
-              "ioValue": 1.0906194302854906
-            }
-          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -14999,11 +14974,6 @@
       "ap2ID": "id-41518"
     },
     {
-      "ap2Name": "cockpitShape",
-      "ap1ID": "id-43956",
-      "ap2ID": "id-43959"
-    },
-    {
       "ap2Name": "bulkheads",
       "ap1ID": "id-44899",
       "ap2ID": "id-44622"
@@ -15047,21 +15017,6 @@
       "ap2Name": "interiorVolume",
       "ap1ID": "id-41144",
       "ap2ID": "id-41192"
-    },
-    {
-      "ap2Name": "topdeckPanels",
-      "ap1ID": "id-46843",
-      "ap2ID": "id-40735"
-    },
-    {
-      "ap2Name": "Shape 3",
-      "ap1ID": "id-41518",
-      "ap2ID": "id-44899"
-    },
-    {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-37127",
-      "ap2ID": "id-44899"
     },
     {
       "ap2Name": "faceAssembly",
