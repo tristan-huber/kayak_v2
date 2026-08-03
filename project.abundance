@@ -846,8 +846,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.5009765625,
-      "y": 0.6375,
+      "x": 0.5690104166666667,
+      "y": 0.7371428571428572,
       "uniqueID": "id-37127",
       "name": "bulkheads",
       "ioValues": [
@@ -15020,11 +15020,6 @@
       "ap2Name": "kayakbody",
       "ap1ID": "id-41144",
       "ap2ID": "id-37127"
-    },
-    {
-      "ap2Name": "interiorVolume",
-      "ap1ID": "id-41144",
-      "ap2ID": "id-41192"
     },
     {
       "ap2Name": "faceAssembly",
