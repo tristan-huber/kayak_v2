@@ -121,33 +121,6 @@
       "notKeepOut": false
     },
     {
-      "atomType": "Code",
-      "x": 0.4013671875,
-      "y": 0.12083333333333332,
-      "uniqueID": "id-40798",
-      "ioValues": [
-        {
-          "name": "faces",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "direction",
-          "ioValue": [
-            0,
-            0,
-            1
-          ]
-        },
-        {
-          "name": "height",
-          "ioValue": 0.25
-        }
-      ],
-      "interpreterVersion": 1,
-      "code": "function run(faces: Assembly, direction: number[], height: number) {\n  return faces.onLeafs((leaf) => {\n    leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction).normalize().multiply(height))\n    return leaf;\n  })\n}",
-      "compiledCode": "\"use strict\";\nfunction run(faces, direction, height) {\n    return faces.onLeafs((leaf) => {\n        leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction).normalize().multiply(height));\n        return leaf;\n    });\n}\n"
-    },
-    {
       "atomType": "ExtractTag",
       "x": 0.30859375,
       "y": 0.92,
@@ -4813,8 +4786,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.51025390625,
-      "y": 0.12916666666666665,
+      "x": 0.5065104166666666,
+      "y": 0.15714285714285714,
       "uniqueID": "id-40735",
       "name": "hatch",
       "ioValues": [
@@ -12317,7 +12290,7 @@
             {
               "name": "Shape 1",
               "ioValue": {
-                "geometry": "7aa502f7-0",
+                "geometry": "53372ed8-0",
                 "color": "#3c5a6e",
                 "tags": [],
                 "bom": [],
@@ -14863,6 +14836,128 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.38802083333333337,
+      "y": 0.12571428571428572,
+      "uniqueID": "id-46843",
+      "name": "extrudeFaceDirected",
+      "ioValues": [
+        {
+          "name": "face",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "extrusionVec",
+          "ioValue": [
+            0,
+            0,
+            0.25
+          ]
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-46839",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.45166015625,
+          "y": 0.4833333333333333,
+          "uniqueID": "id-46840",
+          "ioValues": [
+            {
+              "name": "faces",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "direction",
+              "ioValue": [
+                0,
+                0,
+                0.25
+              ]
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(faces: Assembly, direction: number[]) {\n  return faces.onLeafs((leaf) => {\n    leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction))\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(faces, direction) {\n    return faces.onLeafs((leaf) => {\n        leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction));\n        return leaf;\n    });\n}\n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-46841",
+          "name": "face",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.24615384615384617,
+          "uniqueID": "id-46842",
+          "name": "extrusionVec",
+          "type": "point3d",
+          "pointValue": null
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-46840",
+          "ap2ID": "id-46839"
+        },
+        {
+          "ap2Name": "faces",
+          "ap1ID": "id-46841",
+          "ap2ID": "id-46840"
+        },
+        {
+          "ap2Name": "direction",
+          "ap1ID": "id-46842",
+          "ap2ID": "id-46840"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-08-03T18:27:36.540Z",
+        "privateRepo": false,
+        "repoName": "extrudeFaceDirected",
+        "dateCreated": "2026-07-29T22:22:15Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-121",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/extrudeFaceDirected",
+        "topics": [
+          "abundance-tool"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739826",
+        "ranking": 1.8,
+        "searchField": "extrudefacedirected tristan-huber extrude an assembly of faces in a given direction. same as feeding an assembly of faces to extrude except that the direction of extrusion is specified explicitly. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Extrude an assembly of faces in a given direction. Same as feeding an assembly of faces to Extrude except that the direction of extrusion is specified explicitly.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1785795264053
     }
   ],
   "allConnectors": [
@@ -14887,19 +14982,14 @@
       "ap2ID": "id-43956"
     },
     {
-      "ap2Name": "faces",
-      "ap1ID": "id-40782",
-      "ap2ID": "id-40798"
-    },
-    {
       "ap2Name": "hullVolume",
       "ap1ID": "id-40782",
       "ap2ID": "id-41518"
     },
     {
-      "ap2Name": "topdeckPanels",
-      "ap1ID": "id-40798",
-      "ap2ID": "id-40735"
+      "ap2Name": "face",
+      "ap1ID": "id-40782",
+      "ap2ID": "id-46843"
     },
     {
       "ap2Name": "geometry",
@@ -15005,6 +15095,11 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-27561",
       "ap2ID": "id-27926"
+    },
+    {
+      "ap2Name": "topdeckPanels",
+      "ap1ID": "id-46843",
+      "ap2ID": "id-40735"
     }
   ],
   "unitsKey": "MM",
