@@ -208,24 +208,7 @@
       "x": 0.7623697916666666,
       "y": 0.4228571428571429,
       "uniqueID": "id-44906",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 3",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 4",
-          "ioValue": null
-        }
-      ]
+      "ioValues": []
     },
     {
       "atomType": "ExtractTag",
@@ -7485,6 +7468,10 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
+              "name": "x",
+              "ioValue": 144.00000999999997
+            },
+            {
               "name": "y",
               "ioValue": 120
             }
@@ -7500,6 +7487,10 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 12.000004999999987
             },
             {
               "name": "yDist",
@@ -14896,11 +14887,6 @@
       "ap2ID": "id-43956"
     },
     {
-      "ap2Name": "Shape 2",
-      "ap1ID": "id-37384",
-      "ap2ID": "id-44906"
-    },
-    {
       "ap2Name": "faces",
       "ap1ID": "id-40782",
       "ap2ID": "id-40798"
@@ -14949,11 +14935,6 @@
       "ap2Name": "number or geometry",
       "ap1ID": "id-44906",
       "ap2ID": "id-130"
-    },
-    {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-44909",
-      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "Shape 5",
@@ -15016,19 +14997,9 @@
       "ap2ID": "id-43806"
     },
     {
-      "ap2Name": "Shape 3",
-      "ap1ID": "id-43806",
-      "ap2ID": "id-44906"
-    },
-    {
       "ap2Name": "geometry",
       "ap1ID": "id-44622",
       "ap2ID": "id-44909"
-    },
-    {
-      "ap2Name": "Shape 4",
-      "ap1ID": "id-43959",
-      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "Shape 1",
