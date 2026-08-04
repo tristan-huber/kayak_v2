@@ -6128,24 +6128,8 @@
               "ioValue": null
             },
             {
-              "name": "Shape 2",
+              "name": "Shape 3",
               "ioValue": null
-            }
-          ]
-        },
-        {
-          "atomType": "Intersection",
-          "x": 0.5364583333333334,
-          "y": 0.20857142857142857,
-          "uniqueID": "id-42226",
-          "ioValues": [
-            {
-              "name": "geometry1",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "geometry2",
-              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -6378,6 +6362,10 @@
           "uniqueID": "id-41753",
           "name": "Cross-Section",
           "ioValues": [
+            {
+              "name": "Geometry",
+              "ioValue": 10
+            },
             {
               "name": "Offset",
               "ioValue": 0
@@ -7583,6 +7571,22 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785186298977
+        },
+        {
+          "atomType": "Intersection",
+          "x": 0.5091145833333334,
+          "y": 0.38285714285714284,
+          "uniqueID": "id-50393",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
         }
       ],
       "allConnectors": [
@@ -7612,11 +7616,6 @@
           "ap2ID": "id-42242"
         },
         {
-          "ap2Name": "Geometry",
-          "ap1ID": "id-42226",
-          "ap2ID": "id-41753"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-42242",
           "ap2ID": "id-42245"
@@ -7642,16 +7641,6 @@
           "ap2ID": "id-44841"
         },
         {
-          "ap2Name": "assembly",
-          "ap1ID": "id-41753",
-          "ap2ID": "id-41791"
-        },
-        {
-          "ap2Name": "Shape 2",
-          "ap1ID": "id-41753",
-          "ap2ID": "id-41800"
-        },
-        {
           "ap2Name": "Shape 1",
           "ap1ID": "id-41791",
           "ap2ID": "id-41800"
@@ -7674,12 +7663,22 @@
         {
           "ap2Name": "geometry1",
           "ap1ID": "id-48573",
-          "ap2ID": "id-42226"
+          "ap2ID": "id-50393"
         },
         {
           "ap2Name": "geometry2",
           "ap1ID": "id-50348",
-          "ap2ID": "id-42226"
+          "ap2ID": "id-50393"
+        },
+        {
+          "ap2Name": "assembly",
+          "ap1ID": "id-50393",
+          "ap2ID": "id-41791"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-50393",
+          "ap2ID": "id-41800"
         }
       ],
       "fileTypeVersion": 1
