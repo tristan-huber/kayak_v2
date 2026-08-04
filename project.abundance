@@ -178,17 +178,30 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.7623697916666666,
-      "y": 0.4228571428571429,
+      "x": 0.6966145833333334,
+      "y": 0.7485714285714287,
       "uniqueID": "id-44906",
-      "ioValues": []
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 3",
+          "ioValue": null
+        }
+      ]
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.65234375,
-      "y": 0.5771428571428572,
+      "x": 0.701171875,
+      "y": 0.3,
       "uniqueID": "id-44909",
-      "name": "Extract bulkhead, rails",
+      "name": "Extract bulkhead",
       "ioValues": [
         {
           "name": "geometry",
@@ -197,8 +210,7 @@
       ],
       "tagIndex": 0,
       "selectedTags": [
-        "bulkhead",
-        "rails"
+        "bulkhead"
       ],
       "includeUntagged": false,
       "notKeepOut": false
@@ -5107,8 +5119,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.60986328125,
-      "y": 0.20416666666666666,
+      "x": 0.5716145833333334,
+      "y": 0.2571428571428572,
       "uniqueID": "id-43806",
       "name": "hatch",
       "ioValues": [
@@ -7690,8 +7702,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.62109375,
-      "y": 0.4628571428571429,
+      "x": 0.6145833333333333,
+      "y": 0.4085714285714286,
       "uniqueID": "id-44622",
       "name": "falsework",
       "ioValues": [
@@ -10295,8 +10307,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.48046874999999994,
-      "y": 0.28285714285714286,
+      "x": 0.4563802083333333,
+      "y": 0.2914285714285714,
       "uniqueID": "id-43959",
       "name": "CockpitBorder",
       "ioValues": [
@@ -14480,8 +14492,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.8346354166666666,
-      "y": 0.14285714285714285,
+      "x": 0.7981770833333334,
+      "y": 0.09714285714285714,
       "uniqueID": "id-43724",
       "name": "forCNC",
       "ioValues": [
@@ -15496,6 +15508,11 @@
       "ap2ID": "id-43956"
     },
     {
+      "ap2Name": "Shape 2",
+      "ap1ID": "id-37384",
+      "ap2ID": "id-44906"
+    },
+    {
       "ap2Name": "face",
       "ap1ID": "id-40782",
       "ap2ID": "id-46843"
@@ -15529,6 +15546,11 @@
       "ap2Name": "bulkheads",
       "ap1ID": "id-44899",
       "ap2ID": "id-44622"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-44899",
+      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "boat",
@@ -15586,14 +15608,14 @@
       "ap2ID": "id-27561"
     },
     {
-      "ap2Name": "topdeck",
-      "ap1ID": "id-40735",
-      "ap2ID": "id-43724"
-    },
-    {
       "ap2Name": "topdeckPanels",
       "ap1ID": "id-40735",
       "ap2ID": "id-43806"
+    },
+    {
+      "ap2Name": "Shape 3",
+      "ap1ID": "id-43806",
+      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "Shape 2",
