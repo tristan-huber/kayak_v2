@@ -165,7 +165,16 @@
       "x": 0.5455729166666666,
       "y": 0.4542857142857143,
       "uniqueID": "id-44899",
-      "ioValues": []
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        }
+      ]
     },
     {
       "atomType": "Assembly",
@@ -846,8 +855,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.5690104166666667,
-      "y": 0.7371428571428572,
+      "x": 0.5013020833333334,
+      "y": 0.6828571428571429,
       "uniqueID": "id-37127",
       "name": "bulkheads",
       "ioValues": [
@@ -3751,10 +3760,6 @@
       "uniqueID": "id-40735",
       "name": "hatch",
       "ioValues": [
-        {
-          "name": "topdeckPanels",
-          "ioValue": 10
-        },
         {
           "name": "distFromBow",
           "ioValue": 96
@@ -10282,8 +10287,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4921875,
-      "y": 0.2914285714285714,
+      "x": 0.48046874999999994,
+      "y": 0.28285714285714286,
       "uniqueID": "id-43959",
       "name": "CockpitBorder",
       "ioValues": [
@@ -10333,6 +10338,10 @@
           "uniqueID": "id-44015",
           "name": "(width + 2 * t) / width",
           "ioValues": [
+            {
+              "name": "width",
+              "ioValue": 27.587902419204262
+            },
             {
               "name": "t",
               "ioValue": 0.5
@@ -10387,6 +10396,10 @@
           "uniqueID": "id-44368",
           "name": "(width + 2 * t + 1.5) / width",
           "ioValues": [
+            {
+              "name": "width",
+              "ioValue": 27.587902419204262
+            },
             {
               "name": "t",
               "ioValue": 0.5
@@ -10488,6 +10501,12 @@
           "y": 0.5208333333333334,
           "uniqueID": "id-43988",
           "name": "Scale",
+          "ioValues": [
+            {
+              "name": "Scale Factor",
+              "ioValue": 1.0362477721141963
+            }
+          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -11946,6 +11965,12 @@
           "y": 0.8541666666666667,
           "uniqueID": "id-44503",
           "name": "Scale",
+          "ioValues": [
+            {
+              "name": "Scale Factor",
+              "ioValue": 1.0906194302854906
+            }
+          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -15488,6 +15513,11 @@
       "ap2ID": "id-41518"
     },
     {
+      "ap2Name": "cockpitShape",
+      "ap1ID": "id-43956",
+      "ap2ID": "id-43959"
+    },
+    {
       "ap2Name": "bulkheads",
       "ap1ID": "id-44899",
       "ap2ID": "id-44622"
@@ -15528,6 +15558,16 @@
       "ap2ID": "id-37127"
     },
     {
+      "ap2Name": "topdeckPanels",
+      "ap1ID": "id-46843",
+      "ap2ID": "id-40735"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-37127",
+      "ap2ID": "id-44899"
+    },
+    {
       "ap2Name": "faceAssembly",
       "ap1ID": "id-26906",
       "ap2ID": "id-40651"
@@ -15546,6 +15586,11 @@
       "ap2Name": "topdeckPanels",
       "ap1ID": "id-40735",
       "ap2ID": "id-43806"
+    },
+    {
+      "ap2Name": "Shape 2",
+      "ap1ID": "id-41518",
+      "ap2ID": "id-44899"
     },
     {
       "ap2Name": "geometry",
