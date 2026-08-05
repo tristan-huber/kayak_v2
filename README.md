@@ -16,11 +16,7 @@
 
  ### falsework
 
-make sure this 2x4 has no twist. It's forming the "strongback" of the assembly form. Twist or bow here will be imparted to the boat itself. 
-
-![readme](/readmeid-44715.svg?v=n52bbq2)
-
-
+make sure this 2x4 has no twist. It's forming the "strongback" of the assembly form. Twist or bow here will be imparted to the boat itself.
 
 
 

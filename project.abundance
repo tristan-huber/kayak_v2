@@ -6277,6 +6277,22 @@
           ]
         },
         {
+          "atomType": "Intersection",
+          "x": 0.5091145833333334,
+          "y": 0.38285714285714284,
+          "uniqueID": "id-50393",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
           "atomType": "GitHubMolecule",
           "x": 0.19661458333333331,
           "y": 0.11904761904761904,
@@ -7588,22 +7604,6 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785186298977
-        },
-        {
-          "atomType": "Intersection",
-          "x": 0.5091145833333334,
-          "y": 0.38285714285714284,
-          "uniqueID": "id-50393",
-          "ioValues": [
-            {
-              "name": "geometry1",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "geometry2",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
         }
       ],
       "allConnectors": [
@@ -7648,6 +7648,16 @@
           "ap2ID": "id-44857"
         },
         {
+          "ap2Name": "assembly",
+          "ap1ID": "id-50393",
+          "ap2ID": "id-41791"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-50393",
+          "ap2ID": "id-41800"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-41708",
           "ap2ID": "id-41717"
@@ -7686,16 +7696,6 @@
           "ap2Name": "geometry2",
           "ap1ID": "id-50348",
           "ap2ID": "id-50393"
-        },
-        {
-          "ap2Name": "assembly",
-          "ap1ID": "id-50393",
-          "ap2ID": "id-41791"
-        },
-        {
-          "ap2Name": "Shape 3",
-          "ap1ID": "id-50393",
-          "ap2ID": "id-41800"
         }
       ],
       "fileTypeVersion": 1
