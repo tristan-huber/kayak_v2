@@ -202,8 +202,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.701171875,
-      "y": 0.3,
+      "x": 0.7109375,
+      "y": 0.08857142857142856,
       "uniqueID": "id-44909",
       "name": "Extract bulkhead",
       "ioValues": [
@@ -7138,8 +7138,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.6145833333333333,
-      "y": 0.4085714285714286,
+      "x": 0.689453125,
+      "y": 0.2742857142857143,
       "uniqueID": "id-44622",
       "name": "falsework",
       "ioValues": [
