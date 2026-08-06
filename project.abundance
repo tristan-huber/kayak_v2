@@ -5436,8 +5436,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.27001953125,
-          "y": 0.5208333333333334,
+          "x": 0.19270833333333331,
+          "y": 0.3214285714285714,
           "uniqueID": "id-43835",
           "name": "util.Offset",
           "ioValues": [
@@ -5657,6 +5657,46 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785176396468
+        },
+        {
+          "atomType": "Code",
+          "x": 0.27473958333333337,
+          "y": 0.5029761904761905,
+          "uniqueID": "id-57668",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "offset",
+              "ioValue": 0.75,
+              "currentEquation": "0.75"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings not supported for this type of offset\")\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings not supported for this type of offset\");\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
+        },
+        {
+          "atomType": "Code",
+          "x": 0.31640625,
+          "y": 0.7738095238095237,
+          "uniqueID": "id-57679",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "offset",
+              "ioValue": -0.75,
+              "currentEquation": "-0.75"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings not supported for this type of offset\")\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings not supported for this type of offset\");\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -5704,6 +5744,16 @@
           "ap2Name": "geometry2",
           "ap1ID": "id-43812",
           "ap2ID": "id-43826"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-43812",
+          "ap2ID": "id-57668"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-43812",
+          "ap2ID": "id-57679"
         },
         {
           "ap2Name": "retain",
@@ -5807,12 +5857,12 @@
         },
         {
           "ap2Name": "geometry1",
-          "ap1ID": "id-43835",
+          "ap1ID": "id-57668",
           "ap2ID": "id-43813"
         },
         {
           "ap2Name": "remove",
-          "ap1ID": "id-43840",
+          "ap1ID": "id-57679",
           "ap2ID": "id-43818"
         }
       ],
