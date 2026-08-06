@@ -4156,8 +4156,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.27001953125,
-          "y": 0.5208333333333334,
+          "x": 0.22265625,
+          "y": 0.318452380952381,
           "uniqueID": "id-44582",
           "name": "util.Offset",
           "ioValues": [
@@ -4265,6 +4265,46 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785365662569
+        },
+        {
+          "atomType": "Code",
+          "x": 0.275390625,
+          "y": 0.43452380952380953,
+          "uniqueID": "id-57652",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "offset",
+              "ioValue": 0.75,
+              "currentEquation": "0.75"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings not supported for this type of offset\")\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings not supported for this type of offset\");\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
+        },
+        {
+          "atomType": "Code",
+          "x": 0.3098958333333333,
+          "y": 0.8035714285714286,
+          "uniqueID": "id-57663",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "offset",
+              "ioValue": -0.75,
+              "currentEquation": "-0.75"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings not supported for this type of offset\")\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings not supported for this type of offset\");\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -4299,19 +4339,19 @@
           "ap2ID": "id-43780"
         },
         {
-          "ap2Name": "Shape",
-          "ap1ID": "id-40776",
-          "ap2ID": "id-44565"
-        },
-        {
-          "ap2Name": "Shape",
-          "ap1ID": "id-40776",
-          "ap2ID": "id-44582"
-        },
-        {
           "ap2Name": "remove",
           "ap1ID": "id-40776",
           "ap2ID": "id-40815"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-40776",
+          "ap2ID": "id-57652"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-40776",
+          "ap2ID": "id-57663"
         },
         {
           "ap2Name": "retain",
@@ -4414,14 +4454,14 @@
           "ap2ID": "id-40776"
         },
         {
-          "ap2Name": "remove",
-          "ap1ID": "id-44565",
-          "ap2ID": "id-41041"
+          "ap2Name": "geometry1",
+          "ap1ID": "id-57652",
+          "ap2ID": "id-40791"
         },
         {
-          "ap2Name": "geometry1",
-          "ap1ID": "id-44582",
-          "ap2ID": "id-40791"
+          "ap2Name": "remove",
+          "ap1ID": "id-57663",
+          "ap2ID": "id-41041"
         }
       ],
       "fileTypeVersion": 1
@@ -9788,7 +9828,7 @@
           "ioValues": [
             {
               "name": "width",
-              "ioValue": 5.681282297771929
+              "ioValue": 27.58790241937058
             },
             {
               "name": "t",
@@ -9846,7 +9886,7 @@
           "ioValues": [
             {
               "name": "width",
-              "ioValue": 5.681282297771929
+              "ioValue": 27.58790241937058
             },
             {
               "name": "t",
@@ -9952,7 +9992,7 @@
           "ioValues": [
             {
               "name": "Scale Factor",
-              "ioValue": 1.1760166011099602
+              "ioValue": 1.0362477721139778
             }
           ],
           "topLevel": false,
@@ -11416,7 +11456,7 @@
           "ioValues": [
             {
               "name": "Scale Factor",
-              "ioValue": 1.4400415027749005
+              "ioValue": 1.0906194302849443
             }
           ],
           "topLevel": false,
