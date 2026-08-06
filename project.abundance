@@ -7525,10 +7525,6 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
-              "name": "x",
-              "ioValue": 144.00000999999997
-            },
-            {
               "name": "y",
               "ioValue": 120
             }
@@ -7544,10 +7540,6 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 12.000004999999987
             },
             {
               "name": "yDist",
@@ -9796,7 +9788,7 @@
           "ioValues": [
             {
               "name": "width",
-              "ioValue": 27.587902419204262
+              "ioValue": 5.681282297771929
             },
             {
               "name": "t",
@@ -9854,7 +9846,7 @@
           "ioValues": [
             {
               "name": "width",
-              "ioValue": 27.587902419204262
+              "ioValue": 5.681282297771929
             },
             {
               "name": "t",
@@ -9960,7 +9952,7 @@
           "ioValues": [
             {
               "name": "Scale Factor",
-              "ioValue": 1.0362477721141963
+              "ioValue": 1.1760166011099602
             }
           ],
           "topLevel": false,
@@ -11424,7 +11416,7 @@
           "ioValues": [
             {
               "name": "Scale Factor",
-              "ioValue": 1.0906194302854906
+              "ioValue": 1.4400415027749005
             }
           ],
           "topLevel": false,
@@ -12402,7 +12394,7 @@
             {
               "name": "Shape 2",
               "ioValue": {
-                "geometry": "d8eaa148-0",
+                "geometry": "596e4cb8-0",
                 "color": "#3c5a6e",
                 "tags": [],
                 "bom": [],
@@ -12789,7 +12781,7 @@
             },
             {
               "name": "index",
-              "ioValue": 3
+              "ioValue": 5
             }
           ],
           "topLevel": false,
@@ -12833,7 +12825,7 @@
                 },
                 {
                   "name": "faceIndex",
-                  "ioValue": 3
+                  "ioValue": 5
                 }
               ],
               "interpreterVersion": 1,
