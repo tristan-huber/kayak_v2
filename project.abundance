@@ -3551,10 +3551,6 @@
       "name": "hatch",
       "ioValues": [
         {
-          "name": "topdeckPanels",
-          "ioValue": 10
-        },
-        {
           "name": "distFromBow",
           "ioValue": 96
         },
@@ -9918,6 +9914,10 @@
           "name": "(width + 2 * t) / width",
           "ioValues": [
             {
+              "name": "width",
+              "ioValue": 27.58790241937058
+            },
+            {
               "name": "t",
               "ioValue": 0.5
             }
@@ -9971,6 +9971,10 @@
           "uniqueID": "id-44368",
           "name": "(width + 2 * t + 1.5) / width",
           "ioValues": [
+            {
+              "name": "width",
+              "ioValue": 27.58790241937058
+            },
             {
               "name": "t",
               "ioValue": 0.5
@@ -10072,6 +10076,12 @@
           "y": 0.5208333333333334,
           "uniqueID": "id-43988",
           "name": "Scale",
+          "ioValues": [
+            {
+              "name": "Scale Factor",
+              "ioValue": 1.0362477721139778
+            }
+          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -11530,6 +11540,12 @@
           "y": 0.8541666666666667,
           "uniqueID": "id-44503",
           "name": "Scale",
+          "ioValues": [
+            {
+              "name": "Scale Factor",
+              "ioValue": 1.0906194302849443
+            }
+          ],
           "topLevel": false,
           "allAtoms": [
             {
@@ -14933,6 +14949,11 @@
       "ap2ID": "id-41518"
     },
     {
+      "ap2Name": "cockpitShape",
+      "ap1ID": "id-43956",
+      "ap2ID": "id-43959"
+    },
+    {
       "ap2Name": "bulkheads",
       "ap1ID": "id-44899",
       "ap2ID": "id-44622"
@@ -14976,6 +14997,11 @@
       "ap2Name": "kayakbody",
       "ap1ID": "id-41144",
       "ap2ID": "id-37127"
+    },
+    {
+      "ap2Name": "topdeckPanels",
+      "ap1ID": "id-46843",
+      "ap2ID": "id-40735"
     },
     {
       "ap2Name": "faceAssembly",
