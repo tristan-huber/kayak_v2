@@ -6101,8 +6101,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.19661458333333331,
-          "y": 0.11904761904761904,
+          "x": 0.19140625000000003,
+          "y": 0.12571428571428572,
           "uniqueID": "id-41708",
           "name": "ExtractFaces",
           "ioValues": [
@@ -6132,11 +6132,7 @@
               "uniqueID": "id-41706",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {
-                "2": [
-                  0
-                ]
-              }
+              "selectedFaceData": {}
             },
             {
               "atomType": "Code",
@@ -7152,13 +7148,28 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785186298977
+        },
+        {
+          "atomType": "Code",
+          "x": 0.12434895833333334,
+          "y": 0.17714285714285713,
+          "uniqueID": "id-61134",
+          "ioValues": [
+            {
+              "name": "assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    return new Assembly({\n      ...leaf,\n      selection: {}\n    })\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        return new Assembly({\n            ...leaf,\n            selection: {}\n        });\n    });\n}\n"
         }
       ],
       "allConnectors": [
         {
-          "ap2Name": "Assembly",
+          "ap2Name": "assembly",
           "ap1ID": "id-41522",
-          "ap2ID": "id-41708"
+          "ap2ID": "id-61134"
         },
         {
           "ap2Name": "faces",
@@ -7244,6 +7255,11 @@
           "ap2Name": "geometry2",
           "ap1ID": "id-50348",
           "ap2ID": "id-50393"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-61134",
+          "ap2ID": "id-41708"
         }
       ],
       "fileTypeVersion": 1
@@ -7637,10 +7653,6 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
-              "name": "x",
-              "ioValue": 140.61178563323216
-            },
-            {
               "name": "y",
               "ioValue": 120
             }
@@ -7656,10 +7668,6 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 10.30589281661608
             },
             {
               "name": "yDist",
@@ -9908,7 +9916,7 @@
           "ioValues": [
             {
               "name": "width",
-              "ioValue": 0.699829011882926
+              "ioValue": 27.587902419204262
             },
             {
               "name": "t",
@@ -9966,7 +9974,7 @@
           "ioValues": [
             {
               "name": "width",
-              "ioValue": 0.699829011882926
+              "ioValue": 27.587902419204262
             },
             {
               "name": "t",
@@ -10072,7 +10080,7 @@
           "ioValues": [
             {
               "name": "Scale Factor",
-              "ioValue": 2.428920469172103
+              "ioValue": 1.0362477721141963
             }
           ],
           "topLevel": false,
@@ -11536,7 +11544,7 @@
           "ioValues": [
             {
               "name": "Scale Factor",
-              "ioValue": 4.572301172930258
+              "ioValue": 1.0906194302854906
             }
           ],
           "topLevel": false,
@@ -12514,7 +12522,7 @@
             {
               "name": "Shape 2",
               "ioValue": {
-                "geometry": "596e4cb8-0",
+                "geometry": "d8eaa148-0",
                 "color": "#3c5a6e",
                 "tags": [],
                 "bom": [],
@@ -12901,7 +12909,7 @@
             },
             {
               "name": "index",
-              "ioValue": 5
+              "ioValue": 3
             }
           ],
           "topLevel": false,
@@ -12945,7 +12953,7 @@
                 },
                 {
                   "name": "faceIndex",
-                  "ioValue": 5
+                  "ioValue": 3
                 }
               ],
               "interpreterVersion": 1,
