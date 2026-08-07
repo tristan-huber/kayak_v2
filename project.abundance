@@ -177,16 +177,7 @@
       "x": 0.6966145833333334,
       "y": 0.7485714285714287,
       "uniqueID": "id-44906",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        }
-      ]
+      "ioValues": []
     },
     {
       "atomType": "ExtractTag",
@@ -14910,116 +14901,43 @@
       "fileTypeVersion": 1
     },
     {
-      "atomType": "GitHubMolecule",
-      "x": 0.734375,
-      "y": 0.5171428571428571,
-      "uniqueID": "id-62882",
-      "name": "IthFromAssembly",
+      "atomType": "Code",
+      "x": 0.6875,
+      "y": 0.4828571428571429,
+      "uniqueID": "id-64622",
       "ioValues": [
         {
-          "name": "geometry",
+          "name": "width",
+          "ioValue": 40
+        },
+        {
+          "name": "depth",
+          "ioValue": 30
+        },
+        {
+          "name": "thickness",
+          "ioValue": 5
+        },
+        {
+          "name": "holeRadius",
+          "ioValue": 6
+        },
+        {
+          "name": "color",
+          "ioValue": "#5B9BD5",
+          "currentEquation": "#5B9BD5"
+        },
+        {
+          "name": "addFillet",
+          "ioValue": true
+        },
+        {
+          "name": "extra",
           "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "i",
-          "ioValue": 12
         }
       ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-62878",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.5026041666666666,
-          "y": 0.6845238095238095,
-          "uniqueID": "id-62879",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "i",
-              "ioValue": 12
-            }
-          ],
-          "interpreterVersion": 0,
-          "code": "\n      const Inputs = [\n       {inputName: \"geometry\", type: \"geometry\", defaultValue: null},\n      {inputName: \"i\", type: \"number\", defaultValue: 0},\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[geometry]\n      let j = 0;\n      console.log(\"foo\")\n      console.log(importedShape)\n      const leafList = await AssemblyAsIterable(importedShape)\n      console.log(leafList)\n      if (i >= leafList.length) {\n        throw new Error(`Assembly only has ${leafList.length} entries. Tried to find index: ${i}.`)\n      }\n      return leafList[i]\n\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
-          "uniqueID": "id-62880",
-          "name": "geometry",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
-          "uniqueID": "id-62881",
-          "name": "i",
-          "type": "number"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-62879",
-          "ap2ID": "id-62878"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-62880",
-          "ap2ID": "id-62879"
-        },
-        {
-          "ap2Name": "i",
-          "ap1ID": "id-62881",
-          "ap2ID": "id-62879"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-08-07T18:23:38.949Z",
-        "privateRepo": false,
-        "repoName": "IthFromAssembly",
-        "dateCreated": "2025-11-03T02:49:44Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/README.md?sanitize=true",
-        "yyyy": 2025,
-        "topMoleculeID": "id-2718",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/tristan-huber/IthFromAssembly",
-        "topics": [
-          "abundance-tool"
-        ],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 1,
-        "dateModified": "739558",
-        "ranking": 10.1,
-        "searchField": "ithfromassembly tristan-huber get the ith leaf from an assembly abundance-tool",
-        "owner": "tristan-huber",
-        "description": "Get the ith leaf from an assembly",
-        "contentURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Unitless",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1786136716918
+      "interpreterVersion": 1,
+      "code": "\n/**\n * =========================================================================\n *  ABUNDANCE CODE ATOM — Quick Reference\n * =========================================================================\n *\n *  HOW INPUTS WORK\n *  ---------------\n *  Every parameter of run() becomes an input port on this atom.\n *  Four types are supported:\n *\n *    number   -> numeric input / slider\n *    string   -> text input  (great for hex color codes, labels, etc.)\n *    boolean  -> true/false toggle\n *    Assembly -> geometry -- wire this to the output of another atom\n *\n *  Give a parameter a default value ( = x ) to make it optional.\n *  Mark it with ? (name?: Assembly) to make it optional with no default.\n *  Parameters without a default must be connected before the atom runs.\n *\n *  RETURN VALUE\n *  ------------\n *  Return an Assembly, an Assembly[], or a primitive (number/string/boolean).\n *  Returning an Assembly[] lets downstream atoms (BOM, cut layout...)\n *  see each piece independently.\n *\n *  GEOMETRY API  (replicad is available as a global)\n *  -------------------------------------------------\n *  Create 2-D sketches\n *    replicad.drawCircle(radius)\n *    replicad.drawRectangle(width, height)\n *    replicad.drawRoundedRectangle(width, height, cornerRadius)\n *\n *  Turn a 2-D sketch into a 3-D solid\n *    sketch.sketchOnPlane().extrude(distance)\n *    sketch.sketchOnPlane().revolve()          // rotate 360 deg around Z\n *\n *  Create 3-D primitives directly\n *    replicad.makeBaseBox(width, depth, height)\n *    replicad.makeSphere(radius)\n *    replicad.makeCylinder(radius, height)\n *\n *  Boolean operations\n *    solidA.fuse(solidB)                       // union\n *    solidA.cut(solidB)                        // difference (cut a hole)\n *    solidA.intersect(solidB)                  // intersection\n *\n *  Post-processing\n *    solid.fillet(radius)                      // round ALL edges\n *    solid.fillet(r, e => e.inPlane(\"XY\", z))  // round only top-face edges\n *    solid.chamfer(distance)                   // bevel ALL edges\n *    solid.translate(x, y, z)                  // move the solid\n *    solid.rotate(angle, [0, 0, 1])            // rotate around Z axis\n *\n *  ASSEMBLY CLASS\n *  --------------\n *  Wrap any replicad solid in an Assembly to attach display metadata:\n *    new Assembly({ geometry, color, tags, bom })\n *      geometry -> replicad solid / drawing returned by the API above\n *      color    -> hex string shown in the 3-D viewport  (\"#A3CE5B\")\n *      tags     -> string[] used for filtering in cut layout / BOM\n *      bom      -> string[] lines added to the Bill of Materials panel\n *\n *  AI PROMPT TIP\n *  -------------\n *  Copy the code in this editor into ChatGPT / Claude and say something like:\n *    \"Modify this Abundance Code Atom to create a gear with 12 teeth\"\n *    \"Change this to make a hexagonal nut instead of a round plate\"\n *  The comments above give the AI all the context it needs to produce\n *  valid, working Abundance TypeScript code.\n * =========================================================================\n */\n\n/**\n * A rectangular mounting plate with a circular hole in the centre.\n * All parameters have defaults so the atom produces geometry immediately\n * after creation — no connections required to get started.\n */\nfunction run(\n  width: number = 40,        \n  depth: number = 30,       \n  thickness: number = 5,    \n  holeRadius: number = 6,   \n  color: string = \"#5B9BD5\", \n  addFillet: boolean = true, \n  extra?: Assembly           \n) {\n  // ── Step 1: Create the base solid ────────────────────────────────────────\n  // makeBaseBox(width, depth, height) places a box with one corner at the\n  // origin.  Translate it so the hole will be centred at (0, 0).\n  let plate = replicad\n    .makeBaseBox(width, depth, thickness)\n    .translate(-width / 2, -depth / 2, 0);\n\n  // ── Step 2: Cut a through-hole in the centre ──────────────────────────────\n  // Extrude a circle slightly taller than the plate so the cut goes all the\n  // way through.  Start 1 mm below the bottom face to avoid coplanar issues.\n  const holeCutter = replicad\n    .drawCircle(holeRadius)\n    .sketchOnPlane()\n    .extrude(thickness + 2)\n    .translate(0, 0, -1);\n\n  plate = plate.cut(holeCutter);\n\n  // ── Step 3: Optional fillet on the top-face edges ────────────────────────\n  // inPlane(\"XY\", thickness) selects only the edges that lie in the\n  // horizontal plane at z = thickness (i.e. the top face of the plate).\n  if (addFillet) {\n    plate = plate.fillet(1.5, (e) => e.inPlane(\"XY\", thickness));\n  }\n\n  // ── Step 4: Wrap in an Assembly to set display properties ─────────────────\n  const plateAssembly = new Assembly({\n    geometry: plate,\n    color: color,\n    tags: [\"plate\", \"mounting-plate\"],\n    bom: [`Mounting plate ${width}×${depth}×${thickness} mm`],\n  });\n\n  // ── Step 5: Combine with any upstream geometry ────────────────────────────\n  // Returning an array lets each piece stay independent for the BOM and\n  // cut-layout atoms.  If nothing is connected, `extra` is undefined.\n  const results: Assembly[] = [plateAssembly];\n  if (extra) results.push(extra);\n  return results;\n}\n"
     }
   ],
   "allConnectors": [
@@ -15124,16 +15042,6 @@
       "ap2ID": "id-27561"
     },
     {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-40735",
-      "ap2ID": "id-44906"
-    },
-    {
-      "ap2Name": "geometry",
-      "ap1ID": "id-40735",
-      "ap2ID": "id-62882"
-    },
-    {
       "ap2Name": "Shape 2",
       "ap1ID": "id-41518",
       "ap2ID": "id-44899"
@@ -15142,11 +15050,6 @@
       "ap2Name": "geometry",
       "ap1ID": "id-44622",
       "ap2ID": "id-44909"
-    },
-    {
-      "ap2Name": "Shape 2",
-      "ap1ID": "id-43959",
-      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "Shape 1",
