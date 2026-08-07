@@ -181,6 +181,10 @@
         {
           "name": "Shape 1",
           "ioValue": null
+        },
+        {
+          "name": "Shape 3",
+          "ioValue": null
         }
       ]
     },
@@ -15035,6 +15039,11 @@
       "ap2Name": "topdeckPanels",
       "ap1ID": "id-46843",
       "ap2ID": "id-40735"
+    },
+    {
+      "ap2Name": "Shape 3",
+      "ap1ID": "id-37127",
+      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "faceAssembly",
