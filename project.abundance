@@ -216,11 +216,15 @@
         {
           "name": "assembly",
           "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "a2",
+          "ioValue": "__GEOMETRY_INPUT__"
         }
       ],
       "interpreterVersion": 1,
-      "code": "function run(assembly: Assembly) {\n  let i = 0;\n  return assembly.onLeafs((leaf) => {\n    console.log(`${i}th entry has bounds ${leaf.geometry.boundingBox.bounds}`)\n    i++\n    return leaf;\n  })\n}",
-      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    let i = 0;\n    return assembly.onLeafs((leaf) => {\n        console.log(`${i}th entry has bounds ${leaf.geometry.boundingBox.bounds}`);\n        i++;\n        return leaf;\n    });\n}\n"
+      "code": "function run(assembly: Assembly, a2: Assembly) {\n  const t = []\n  a2.onLeafs((l) => {\n    t.push(...l.geometry.faces)\n    return l\n  })\n  const other = t[0]\n  console.log(other)\n\n  let i = 0;\n  const foo = false;\n  const result = assembly.onLeafs((leaf) => {\n    console.log(`${i}th entry has bounds ${leaf.geometry.boundingBox.bounds}`)\n    i++\n    leaf.geometry.faces.forEach((face, index) => {\n      console.log(`${index}th face of ${i}th part`)\n      console.log(face.isEqual(other))\n      console.log(face.isSame(other))\n    })\n    return leaf;\n  })\n}",
+      "compiledCode": "\"use strict\";\nfunction run(assembly, a2) {\n    const t = [];\n    a2.onLeafs((l) => {\n        t.push(...l.geometry.faces);\n        return l;\n    });\n    const other = t[0];\n    console.log(other);\n    let i = 0;\n    const foo = false;\n    const result = assembly.onLeafs((leaf) => {\n        console.log(`${i}th entry has bounds ${leaf.geometry.boundingBox.bounds}`);\n        i++;\n        leaf.geometry.faces.forEach((face, index) => {\n            console.log(`${index}th face of ${i}th part`);\n            console.log(face.isEqual(other));\n            console.log(face.isSame(other));\n        });\n        return leaf;\n    });\n}\n"
     },
     {
       "atomType": "GitHubMolecule",
@@ -14923,6 +14927,103 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.5885416666666666,
+      "y": 0.9028571428571429,
+      "uniqueID": "id-66359",
+      "name": "ExtractFaces",
+      "ioValues": [
+        {
+          "name": "Assembly",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-66356",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-66357",
+          "name": "Assembly",
+          "type": "faceselect",
+          "selectedFaceData": {
+            "0": [
+              11
+            ]
+          }
+        },
+        {
+          "atomType": "Code",
+          "x": 0.2565104166666667,
+          "y": 0.7599999999999999,
+          "uniqueID": "id-66358",
+          "ioValues": [
+            {
+              "name": "input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
+          "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "input",
+          "ap1ID": "id-66357",
+          "ap2ID": "id-66358"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-66358",
+          "ap2ID": "id-66356"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-08-07T18:23:38.949Z",
+        "privateRepo": false,
+        "repoName": "ExtractFaces",
+        "dateCreated": "2026-07-24T19:57:30Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-34810",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/ExtractFaces",
+        "topics": [
+          "abundance-tool"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739821",
+        "ranking": 0.9,
+        "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1786140036082
     }
   ],
   "allConnectors": [
@@ -15012,6 +15113,11 @@
       "ap2ID": "id-37127"
     },
     {
+      "ap2Name": "Assembly",
+      "ap1ID": "id-41144",
+      "ap2ID": "id-66359"
+    },
+    {
       "ap2Name": "topdeckPanels",
       "ap1ID": "id-46843",
       "ap2ID": "id-40735"
@@ -15055,6 +15161,11 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-27561",
       "ap2ID": "id-27926"
+    },
+    {
+      "ap2Name": "a2",
+      "ap1ID": "id-66359",
+      "ap2ID": "id-64622"
     }
   ],
   "unitsKey": "MM",
