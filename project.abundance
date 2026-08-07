@@ -6100,6 +6100,21 @@
           ]
         },
         {
+          "atomType": "Code",
+          "x": 0.12434895833333334,
+          "y": 0.17714285714285713,
+          "uniqueID": "id-61134",
+          "ioValues": [
+            {
+              "name": "assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    return new Assembly({\n      ...leaf,\n      selection: {}\n    })\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        return new Assembly({\n            ...leaf,\n            selection: {}\n        });\n    });\n}\n"
+        },
+        {
           "atomType": "GitHubMolecule",
           "x": 0.19140625000000003,
           "y": 0.12571428571428572,
@@ -7148,21 +7163,6 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1785186298977
-        },
-        {
-          "atomType": "Code",
-          "x": 0.12434895833333334,
-          "y": 0.17714285714285713,
-          "uniqueID": "id-61134",
-          "ioValues": [
-            {
-              "name": "assembly",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    return new Assembly({\n      ...leaf,\n      selection: {}\n    })\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        return new Assembly({\n            ...leaf,\n            selection: {}\n        });\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -7217,6 +7217,11 @@
           "ap2ID": "id-41800"
         },
         {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-61134",
+          "ap2ID": "id-41708"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-41708",
           "ap2ID": "id-41717"
@@ -7255,11 +7260,6 @@
           "ap2Name": "geometry2",
           "ap1ID": "id-50348",
           "ap2ID": "id-50393"
-        },
-        {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-61134",
-          "ap2ID": "id-41708"
         }
       ],
       "fileTypeVersion": 1
