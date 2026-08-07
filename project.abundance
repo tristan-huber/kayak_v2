@@ -208,25 +208,6 @@
       "notKeepOut": false
     },
     {
-      "atomType": "Code",
-      "x": 0.6940104166666666,
-      "y": 0.5028571428571429,
-      "uniqueID": "id-64622",
-      "ioValues": [
-        {
-          "name": "assembly",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "a2",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "interpreterVersion": 1,
-      "code": "function run(assembly: Assembly, a2: Assembly) {\n  const t = []\n  a2.onLeafs((l) => {\n    t.push(...l.geometry.faces)\n    return l\n  })\n  const other = t[0]\n  console.log(other)\n\n  let i = 0;\n  const foo = false;\n  const result = assembly.onLeafs((leaf) => {\n    console.log(`${i}th entry has bounds ${leaf.geometry.boundingBox.bounds}`)\n    i++\n    leaf.geometry.faces.forEach((face, index) => {\n      console.log(`${index}th face of ${i}th part`)\n      console.log(face.isEqual(other))\n      console.log(face.isSame(other))\n    })\n    return leaf;\n  })\n}",
-      "compiledCode": "\"use strict\";\nfunction run(assembly, a2) {\n    const t = [];\n    a2.onLeafs((l) => {\n        t.push(...l.geometry.faces);\n        return l;\n    });\n    const other = t[0];\n    console.log(other);\n    let i = 0;\n    const foo = false;\n    const result = assembly.onLeafs((leaf) => {\n        console.log(`${i}th entry has bounds ${leaf.geometry.boundingBox.bounds}`);\n        i++;\n        leaf.geometry.faces.forEach((face, index) => {\n            console.log(`${index}th face of ${i}th part`);\n            console.log(face.isEqual(other));\n            console.log(face.isSame(other));\n        });\n        return leaf;\n    });\n}\n"
-    },
-    {
       "atomType": "GitHubMolecule",
       "x": 0.17578125,
       "y": 0.8742857142857143,
@@ -6148,8 +6129,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.19140625000000003,
-          "y": 0.12571428571428572,
+          "x": 0.22200520833333331,
+          "y": 0.22285714285714286,
           "uniqueID": "id-41708",
           "name": "ExtractFaces",
           "ioValues": [
@@ -6179,7 +6160,11 @@
               "uniqueID": "id-41706",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "2": [
+                  0
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -15128,11 +15113,6 @@
       "ap2ID": "id-44906"
     },
     {
-      "ap2Name": "assembly",
-      "ap1ID": "id-37127",
-      "ap2ID": "id-64622"
-    },
-    {
       "ap2Name": "faceAssembly",
       "ap1ID": "id-26906",
       "ap2ID": "id-40651"
@@ -15161,11 +15141,6 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-27561",
       "ap2ID": "id-27926"
-    },
-    {
-      "ap2Name": "a2",
-      "ap1ID": "id-66359",
-      "ap2ID": "id-64622"
     }
   ],
   "unitsKey": "MM",
