@@ -7,8 +7,7 @@
   "ioValues": [
     {
       "name": "diam",
-      "ioValue": 0,
-      "currentEquation": "0"
+      "ioValue": 0
     },
     {
       "name": "TargetLen",
@@ -178,12 +177,7 @@
       "x": 0.6966145833333334,
       "y": 0.7485714285714287,
       "uniqueID": "id-44906",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        }
-      ]
+      "ioValues": []
     },
     {
       "atomType": "ExtractTag",
@@ -8788,6 +8782,10 @@
           "name": "Cross-Section",
           "ioValues": [
             {
+              "name": "Geometry",
+              "ioValue": 10
+            },
+            {
               "name": "Offset",
               "ioValue": 0
             },
@@ -9847,11 +9845,6 @@
           "ap2Name": "number or geometry",
           "ap1ID": "id-41197",
           "ap2ID": "id-41194"
-        },
-        {
-          "ap2Name": "Geometry",
-          "ap1ID": "id-44915",
-          "ap2ID": "id-45071"
         },
         {
           "ap2Name": "geometry",
@@ -14965,11 +14958,6 @@
       "ap2ID": "id-44622"
     },
     {
-      "ap2Name": "boat",
-      "ap1ID": "id-44906",
-      "ap2ID": "id-41192"
-    },
-    {
       "ap2Name": "number or geometry",
       "ap1ID": "id-44906",
       "ap2ID": "id-130"
@@ -15013,11 +15001,6 @@
       "ap2Name": "cockpit_plug",
       "ap1ID": "id-27153",
       "ap2ID": "id-27561"
-    },
-    {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-40735",
-      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "Shape 2",
