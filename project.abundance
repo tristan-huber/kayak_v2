@@ -7,7 +7,8 @@
   "ioValues": [
     {
       "name": "diam",
-      "ioValue": 0
+      "ioValue": 0,
+      "currentEquation": "0"
     },
     {
       "name": "TargetLen",
@@ -177,7 +178,12 @@
       "x": 0.6966145833333334,
       "y": 0.7485714285714287,
       "uniqueID": "id-44906",
-      "ioValues": []
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        }
+      ]
     },
     {
       "atomType": "ExtractTag",
@@ -4933,6 +4939,10 @@
       "uniqueID": "id-43806",
       "name": "hatch",
       "ioValues": [
+        {
+          "name": "topdeckPanels",
+          "ioValue": 10
+        },
         {
           "name": "distFromBow",
           "ioValue": 26
@@ -15005,9 +15015,9 @@
       "ap2ID": "id-27561"
     },
     {
-      "ap2Name": "topdeckPanels",
+      "ap2Name": "Shape 1",
       "ap1ID": "id-40735",
-      "ap2ID": "id-43806"
+      "ap2ID": "id-44906"
     },
     {
       "ap2Name": "Shape 2",
