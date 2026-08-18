@@ -11845,120 +11845,6 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.31884765625,
-              "y": 0.5208333333333334,
-              "uniqueID": "id-76345",
-              "name": "Scale",
-              "ioValues": [
-                {
-                  "name": "Scale Factor",
-                  "ioValue": 1.0362524229194814
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 0.98,
-                  "y": 0.5,
-                  "uniqueID": "id-76346",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.025384615384615384,
-                  "y": 0.15384615384615385,
-                  "uniqueID": "id-76347",
-                  "name": "Geometry",
-                  "type": "number"
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.025384615384615384,
-                  "y": 0.24615384615384617,
-                  "uniqueID": "id-76348",
-                  "name": "Scale Factor",
-                  "type": "number"
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.4226190476190476,
-                  "y": 0.25139664804469275,
-                  "uniqueID": "id-76349",
-                  "ioValues": [
-                    {
-                      "name": "inputShape",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "scaleFactor",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "interpreterVersion": 0,
-                  "code": " \n      //Inputs:[inputShape, scaleFactor]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n      \n      //Takes the address and gets the shape from the library\n      let importedShape = library[inputShape]\n\n      let scaledShape = await Scale(inputShape, scaleFactor);\n      \n      \n      //Shapes stored in the library have tags, a color, a plane, and a bill of materials like this. We don't modify them here\n      let shape1 = {\n        geometry: [scaledShape],\n        tags: importedShape.tags,\n        color: importedShape.color,\n        plane: importedShape.plane,\n        bom: importedShape.bom\n      }\n      \n      return shape1\n      \n      \n      \n          /**\n          To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n          If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n          Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n          https://replicad.xyz/docs/introapp/UserGuide.html \n          Return a replicad object that includes geometry, color, tags and plane. \n      \n      \n          Example Code Atom:\n      \n            Inputs:[shape, x];\n      \n            let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n      \n            return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      \n            - See more examples at _______ \n      \n      \n          */\n      "
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "inputShape",
-                  "ap1ID": "id-76347",
-                  "ap2ID": "id-76349"
-                },
-                {
-                  "ap2Name": "scaleFactor",
-                  "ap1ID": "id-76348",
-                  "ap2ID": "id-76349"
-                },
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-76349",
-                  "ap2ID": "id-76346"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-07-29T20:40:13.596Z",
-                "privateRepo": false,
-                "repoName": "Scale",
-                "dateCreated": "2025-06-26T17:06:11Z",
-                "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/README.md?sanitize=true",
-                "yyyy": 2025,
-                "topMoleculeID": "4b6bc40a-44a9-438a-9ed9-ba4910815d8d",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/BarbourSmith/Scale",
-                "topics": [],
-                "pullRequests": [
-                  {
-                    "owner": "alzatin",
-                    "branch": "main",
-                    "pullRequestNumber": 1,
-                    "url": "https://github.com/BarbourSmith/Scale/pull/1",
-                    "repo": "Scale"
-                  }
-                ],
-                "parentRepo": null,
-                "forks": 1,
-                "dateModified": "739428",
-                "ranking": 6.5,
-                "searchField": "scale barboursmith scales the input 2d or 3d geometry by the scale factor ",
-                "owner": "BarbourSmith",
-                "description": "Scales the input 2D or 3D geometry by the scale factor",
-                "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Unitless",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1785363818181
-            },
-            {
-              "atomType": "GitHubMolecule",
               "x": 0.0810546875,
               "y": 0.7541666666666667,
               "uniqueID": "id-76350",
@@ -12045,161 +11931,6 @@
               "unitsKey": "MM",
               "fileTypeVersion": 1,
               "lastReloadedFromGithubAt": 1785363849312
-            },
-            {
-              "atomType": "GitHubMolecule",
-              "x": 0.17578125,
-              "y": 0.24285714285714288,
-              "uniqueID": "id-76354",
-              "name": "Center_XY",
-              "ioValues": [
-                {
-                  "name": "Geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 0.98,
-                  "y": 0.5,
-                  "uniqueID": "id-76355",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.42791005291005285,
-                  "y": 0.2785515320334262,
-                  "uniqueID": "id-76356",
-                  "ioValues": [
-                    {
-                      "name": "A",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "interpreterVersion": 0,
-                  "code": "/**\n Inputs for this Code Atom:\n - Takes a single geometry input \"A\" and recenters it in the XY plane based on its bounding box.\n*/\nInputs = [\n  { inputName: \"A\", type: \"geometry\", defaultValue: null }\n]\n\nif (!A) {\n  // Nothing to do if no input provided\n  return null\n}\n\n// Get bounding box of A\nlet boundsA = await GetBounds(A);\n// boundsA.min and boundsA.max are arrays [x,y,z]\nlet min = boundsA.min\nlet max = boundsA.max\n\n// Compute the center of the bounding box in X and Y\nlet centerX = (min[0] + max[0]) / 2.0\nlet centerY = (min[1] + max[1]) / 2.0\n\n// Translation to move the bounding box center to the origin (0,0) in XY,\n// leaving Z unchanged.\nlet translationX = -centerX\nlet translationY = -centerY\nlet translationZ = 0\n\n// Move the shape. Move takes the input ID and translations (x,y,z)\nlet movedOutput = await Move(A, translationX, translationY, translationZ)\n\n// Return the moved shape. Move typically returns a replicad object suitable for return.\nreturn movedOutput"
-                },
-                {
-                  "atomType": "Rectangle",
-                  "x": 0.1798941798941799,
-                  "y": 0.6044568245125348,
-                  "uniqueID": "id-76357",
-                  "ioValues": [
-                    {
-                      "name": "x length",
-                      "ioValue": 10
-                    },
-                    {
-                      "name": "y length",
-                      "ioValue": 10
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Extrude",
-                  "x": 0.2798941798941799,
-                  "y": 0.6044568245125348,
-                  "uniqueID": "id-76358",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "height",
-                      "ioValue": 10
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Move",
-                  "x": 0.46891534391534395,
-                  "y": 0.6211699164345404,
-                  "uniqueID": "id-76359",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "xDist",
-                      "ioValue": 50
-                    },
-                    {
-                      "name": "yDist",
-                      "ioValue": 30
-                    },
-                    {
-                      "name": "zDist",
-                      "ioValue": 0
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.025384615384615384,
-                  "y": 0.15384615384615385,
-                  "uniqueID": "id-76360",
-                  "name": "Geometry",
-                  "type": "geometry"
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-76356",
-                  "ap2ID": "id-76355"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-76357",
-                  "ap2ID": "id-76358"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-76358",
-                  "ap2ID": "id-76359"
-                },
-                {
-                  "ap2Name": "A",
-                  "ap1ID": "id-76360",
-                  "ap2ID": "id-76356"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-07-29T20:40:13.596Z",
-                "privateRepo": false,
-                "repoName": "Center_XY",
-                "dateCreated": "2025-12-04T19:44:27Z",
-                "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/BarbourSmith/Center_XY/master/README.md?sanitize=true",
-                "yyyy": 2025,
-                "topMoleculeID": "id-64",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/BarbourSmith/Center_XY",
-                "topics": [],
-                "pullRequests": [],
-                "parentRepo": null,
-                "forks": 0,
-                "dateModified": "739589",
-                "ranking": 10.8,
-                "searchField": "center_xy barboursmith this takes an input shape and moves it to be centered on the xy plane ",
-                "owner": "BarbourSmith",
-                "description": "This takes an input shape and moves it to be centered on the XY plane",
-                "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Center_XY/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Center_XY/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "MM",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1785363946079
             },
             {
               "atomType": "GitHubMolecule",
@@ -13062,122 +12793,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.3291015625,
-              "y": 0.8541666666666667,
-              "uniqueID": "id-76397",
-              "name": "Scale",
-              "ioValues": [
-                {
-                  "name": "Scale Factor",
-                  "ioValue": 1.0906310572987037
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 0.98,
-                  "y": 0.5,
-                  "uniqueID": "id-76398",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.025384615384615384,
-                  "y": 0.15384615384615385,
-                  "uniqueID": "id-76399",
-                  "name": "Geometry",
-                  "type": "number"
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.025384615384615384,
-                  "y": 0.24615384615384617,
-                  "uniqueID": "id-76400",
-                  "name": "Scale Factor",
-                  "type": "number"
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.4226190476190476,
-                  "y": 0.25139664804469275,
-                  "uniqueID": "id-76401",
-                  "ioValues": [
-                    {
-                      "name": "inputShape",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "scaleFactor",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "interpreterVersion": 0,
-                  "code": " \n      //Inputs:[inputShape, scaleFactor]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n      \n      //Takes the address and gets the shape from the library\n      let importedShape = library[inputShape]\n\n      let scaledShape = await Scale(inputShape, scaleFactor);\n      \n      \n      //Shapes stored in the library have tags, a color, a plane, and a bill of materials like this. We don't modify them here\n      let shape1 = {\n        geometry: [scaledShape],\n        tags: importedShape.tags,\n        color: importedShape.color,\n        plane: importedShape.plane,\n        bom: importedShape.bom\n      }\n      \n      return shape1\n      \n      \n      \n          /**\n          To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n          If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n          Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n          https://replicad.xyz/docs/introapp/UserGuide.html \n          Return a replicad object that includes geometry, color, tags and plane. \n      \n      \n          Example Code Atom:\n      \n            Inputs:[shape, x];\n      \n            let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n      \n            return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      \n            - See more examples at _______ \n      \n      \n          */\n      "
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "inputShape",
-                  "ap1ID": "id-76399",
-                  "ap2ID": "id-76401"
-                },
-                {
-                  "ap2Name": "scaleFactor",
-                  "ap1ID": "id-76400",
-                  "ap2ID": "id-76401"
-                },
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-76401",
-                  "ap2ID": "id-76398"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-07-29T20:40:13.596Z",
-                "privateRepo": false,
-                "repoName": "Scale",
-                "dateCreated": "2025-06-26T17:06:11Z",
-                "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/README.md?sanitize=true",
-                "yyyy": 2025,
-                "topMoleculeID": "4b6bc40a-44a9-438a-9ed9-ba4910815d8d",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/BarbourSmith/Scale",
-                "topics": [],
-                "pullRequests": [
-                  {
-                    "owner": "alzatin",
-                    "branch": "main",
-                    "pullRequestNumber": 1,
-                    "url": "https://github.com/BarbourSmith/Scale/pull/1",
-                    "repo": "Scale"
-                  }
-                ],
-                "parentRepo": null,
-                "forks": 1,
-                "dateModified": "739428",
-                "ranking": 6.5,
-                "searchField": "scale barboursmith scales the input 2d or 3d geometry by the scale factor ",
-                "owner": "BarbourSmith",
-                "description": "Scales the input 2D or 3D geometry by the scale factor",
-                "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Unitless",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1785363818181
-            },
-            {
-              "atomType": "GitHubMolecule",
-              "x": 0.4091796875,
-              "y": 0.8375,
+              "x": 0.3912760416666667,
+              "y": 0.822857142857143,
               "uniqueID": "id-76402",
               "name": "extrudeFaceDirected",
               "ioValues": [
@@ -13640,10 +13257,11 @@
               "fileTypeVersion": 1
             },
             {
-              "atomType": "Code",
-              "x": 0.39192708333333337,
-              "y": 0.34285714285714286,
-              "uniqueID": "id-76863",
+              "atomType": "GitHubMolecule",
+              "x": 0.330078125,
+              "y": 0.45714285714285713,
+              "uniqueID": "id-76881",
+              "name": "ScaleCentered",
               "ioValues": [
                 {
                   "name": "shape",
@@ -13651,17 +13269,254 @@
                 },
                 {
                   "name": "factor",
-                  "ioValue": 1.5,
-                  "currentEquation": "1.5"
+                  "ioValue": 1.0362524229194814
                 },
                 {
                   "name": "center",
-                  "ioValue": []
+                  "ioValue": 10
                 }
               ],
-              "interpreterVersion": 1,
-              "code": "function run(shape: Assembly, factor: number, center: number[]) {\n  return shape.onLeafs((leaf) => {\n    let centerAsPoint: replicad.Point | undefined = undefined\n    if (leaf.is2D() && center.length == 2 || (leaf.is3D() && center.length == 3)) {\n      centerAsPoint = center as replicad.Point;\n    } else {\n      centerAsPoint = leaf.geometry.boundingBox.center;\n    }\n    console.log(leaf.geometry)\n    leaf.geometry = replicad.scale(leaf.geometry, centerAsPoint, factor)\n    return leaf;\n  })\n}",
-              "compiledCode": "\"use strict\";\nfunction run(shape, factor, center) {\n    return shape.onLeafs((leaf) => {\n        let centerAsPoint = undefined;\n        if (leaf.is2D() && center.length == 2 || (leaf.is3D() && center.length == 3)) {\n            centerAsPoint = center;\n        }\n        else {\n            centerAsPoint = leaf.geometry.boundingBox.center;\n        }\n        console.log(leaf.geometry);\n        leaf.geometry = replicad.scale(leaf.geometry, centerAsPoint, factor);\n        return leaf;\n    });\n}\n"
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 0.98,
+                  "y": 0.5,
+                  "uniqueID": "id-76876",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.5716145833333334,
+                  "y": 0.6028571428571429,
+                  "uniqueID": "id-76877",
+                  "ioValues": [
+                    {
+                      "name": "shape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "factor",
+                      "ioValue": 1.0362524229194814
+                    },
+                    {
+                      "name": "center",
+                      "ioValue": 10
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "function run(shape: Assembly, factor: number, center: number[]) {\n  return shape.onLeafs((leaf) => {\n    let centerAsPoint: replicad.Point | undefined = undefined\n    if (leaf.is2D() && center.length == 2 || (!leaf.is2D() && center.length == 3)) {\n      centerAsPoint = center as replicad.Point;\n    } else {\n      centerAsPoint = leaf.geometry.boundingBox.center;\n    }\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.scale(factor, centerAsPoint as [number, number])\n    } else {\n      leaf.geometry = replicad.cast(replicad.scale(leaf.geometry.wrapped, centerAsPoint, factor))\n    }\n    return leaf;\n  })\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(shape, factor, center) {\n    return shape.onLeafs((leaf) => {\n        let centerAsPoint = undefined;\n        if (leaf.is2D() && center.length == 2 || (!leaf.is2D() && center.length == 3)) {\n            centerAsPoint = center;\n        }\n        else {\n            centerAsPoint = leaf.geometry.boundingBox.center;\n        }\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.scale(factor, centerAsPoint);\n        }\n        else {\n            leaf.geometry = replicad.cast(replicad.scale(leaf.geometry.wrapped, centerAsPoint, factor));\n        }\n        return leaf;\n    });\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.15384615384615385,
+                  "uniqueID": "id-76878",
+                  "name": "shape",
+                  "type": "geometry"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.24615384615384617,
+                  "uniqueID": "id-76879",
+                  "name": "factor"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.3384615384615385,
+                  "uniqueID": "id-76880",
+                  "name": "center",
+                  "type": "point3d",
+                  "pointValue": null
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-76877",
+                  "ap2ID": "id-76876"
+                },
+                {
+                  "ap2Name": "shape",
+                  "ap1ID": "id-76878",
+                  "ap2ID": "id-76877"
+                },
+                {
+                  "ap2Name": "factor",
+                  "ap1ID": "id-76879",
+                  "ap2ID": "id-76877"
+                },
+                {
+                  "ap2Name": "center",
+                  "ap1ID": "id-76880",
+                  "ap2ID": "id-76877"
+                }
+              ],
+              "parentRepo": {
+                "privateRepo": false,
+                "repoName": "ScaleCentered",
+                "dateCreated": "2026-08-18T16:38:59Z",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-1",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/ScaleCentered",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739846",
+                "ranking": 0,
+                "searchField": "scalecentered tristan-huber scale a shape by the given factor. defaults to scale from center of the input shape. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Scale a shape by the given factor. Defaults to scale from center of the input shape.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1787071981585
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.31705729166666663,
+              "y": 0.7857142857142857,
+              "uniqueID": "id-76896",
+              "name": "ScaleCentered",
+              "ioValues": [
+                {
+                  "name": "shape",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "factor",
+                  "ioValue": 1.0906310572987037
+                },
+                {
+                  "name": "center",
+                  "ioValue": 10
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 0.98,
+                  "y": 0.5,
+                  "uniqueID": "id-76897",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.5716145833333334,
+                  "y": 0.6028571428571429,
+                  "uniqueID": "id-76898",
+                  "ioValues": [
+                    {
+                      "name": "shape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "factor",
+                      "ioValue": 1.0906310572987037
+                    },
+                    {
+                      "name": "center",
+                      "ioValue": 10
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "function run(shape: Assembly, factor: number, center: number[]) {\n  return shape.onLeafs((leaf) => {\n    let centerAsPoint: replicad.Point | undefined = undefined\n    if (leaf.is2D() && center.length == 2 || (!leaf.is2D() && center.length == 3)) {\n      centerAsPoint = center as replicad.Point;\n    } else {\n      centerAsPoint = leaf.geometry.boundingBox.center;\n    }\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.scale(factor, centerAsPoint as [number, number])\n    } else {\n      leaf.geometry = replicad.cast(replicad.scale(leaf.geometry.wrapped, centerAsPoint, factor))\n    }\n    return leaf;\n  })\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(shape, factor, center) {\n    return shape.onLeafs((leaf) => {\n        let centerAsPoint = undefined;\n        if (leaf.is2D() && center.length == 2 || (!leaf.is2D() && center.length == 3)) {\n            centerAsPoint = center;\n        }\n        else {\n            centerAsPoint = leaf.geometry.boundingBox.center;\n        }\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.scale(factor, centerAsPoint);\n        }\n        else {\n            leaf.geometry = replicad.cast(replicad.scale(leaf.geometry.wrapped, centerAsPoint, factor));\n        }\n        return leaf;\n    });\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.15384615384615385,
+                  "uniqueID": "id-76899",
+                  "name": "shape",
+                  "type": "geometry"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.24615384615384617,
+                  "uniqueID": "id-76900",
+                  "name": "factor"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.3384615384615385,
+                  "uniqueID": "id-76901",
+                  "name": "center",
+                  "type": "point3d",
+                  "pointValue": null
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-76898",
+                  "ap2ID": "id-76897"
+                },
+                {
+                  "ap2Name": "shape",
+                  "ap1ID": "id-76899",
+                  "ap2ID": "id-76898"
+                },
+                {
+                  "ap2Name": "factor",
+                  "ap1ID": "id-76900",
+                  "ap2ID": "id-76898"
+                },
+                {
+                  "ap2Name": "center",
+                  "ap1ID": "id-76901",
+                  "ap2ID": "id-76898"
+                }
+              ],
+              "parentRepo": {
+                "privateRepo": false,
+                "repoName": "ScaleCentered",
+                "dateCreated": "2026-08-18T16:38:59Z",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-1",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/ScaleCentered",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739846",
+                "ranking": 0,
+                "searchField": "scalecentered tristan-huber scale a shape by the given factor. defaults to scale from center of the input shape. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Scale a shape by the given factor. Defaults to scale from center of the input shape.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1787071981585
             }
           ],
           "allConnectors": [
@@ -13671,14 +13526,19 @@
               "ap2ID": "id-76350"
             },
             {
-              "ap2Name": "Geometry",
+              "ap2Name": "shape",
               "ap1ID": "id-76334",
-              "ap2ID": "id-76354"
+              "ap2ID": "id-76881"
             },
             {
               "ap2Name": "shape",
               "ap1ID": "id-76334",
-              "ap2ID": "id-76863"
+              "ap2ID": "id-76896"
+            },
+            {
+              "ap2Name": "face",
+              "ap1ID": "id-76334",
+              "ap2ID": "id-76372"
             },
             {
               "ap2Name": "t",
@@ -13691,9 +13551,9 @@
               "ap2ID": "id-76339"
             },
             {
-              "ap2Name": "Scale Factor",
+              "ap2Name": "factor",
               "ap1ID": "id-76336",
-              "ap2ID": "id-76345"
+              "ap2ID": "id-76881"
             },
             {
               "ap2Name": "Input",
@@ -13726,9 +13586,9 @@
               "ap2ID": "id-76340"
             },
             {
-              "ap2Name": "Scale Factor",
+              "ap2Name": "factor",
               "ap1ID": "id-76339",
-              "ap2ID": "id-76397"
+              "ap2ID": "id-76896"
             },
             {
               "ap2Name": "geometry",
@@ -13751,11 +13611,6 @@
               "ap2ID": "id-76341"
             },
             {
-              "ap2Name": "face",
-              "ap1ID": "id-76345",
-              "ap2ID": "id-76377"
-            },
-            {
               "ap2Name": "width",
               "ap1ID": "id-76350",
               "ap2ID": "id-76336"
@@ -13764,21 +13619,6 @@
               "ap2Name": "width",
               "ap1ID": "id-76350",
               "ap2ID": "id-76339"
-            },
-            {
-              "ap2Name": "Geometry",
-              "ap1ID": "id-76354",
-              "ap2ID": "id-76345"
-            },
-            {
-              "ap2Name": "face",
-              "ap1ID": "id-76354",
-              "ap2ID": "id-76372"
-            },
-            {
-              "ap2Name": "Geometry",
-              "ap1ID": "id-76354",
-              "ap2ID": "id-76397"
             },
             {
               "ap2Name": "holes",
@@ -13801,14 +13641,19 @@
               "ap2ID": "id-76341"
             },
             {
-              "ap2Name": "face",
-              "ap1ID": "id-76397",
-              "ap2ID": "id-76402"
-            },
-            {
               "ap2Name": "retain",
               "ap1ID": "id-76402",
               "ap2ID": "id-76340"
+            },
+            {
+              "ap2Name": "face",
+              "ap1ID": "id-76881",
+              "ap2ID": "id-76377"
+            },
+            {
+              "ap2Name": "face",
+              "ap1ID": "id-76896",
+              "ap2ID": "id-76402"
             }
           ],
           "fileTypeVersion": 1
