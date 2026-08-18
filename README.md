@@ -7,7 +7,7 @@
 ## Inputs
 
 - **hullThickness** (number)
-- **bulkheadThickness** (undefined)
+- **bulkheadThickness** (number)
 - **bulkheadPlacements** (array)
 
 
