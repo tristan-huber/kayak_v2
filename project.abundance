@@ -13660,8 +13660,8 @@
                 }
               ],
               "interpreterVersion": 1,
-              "code": "function run(shape: Assembly, factor: number, center: number[]) {\n  return shape.onLeafs((leaf) => {\n    leaf.geometry = replicad.scale(leaf.geometry, new replicad.Vector(center), factor)\n    return leaf;\n  })\n}",
-              "compiledCode": "\"use strict\";\nfunction run(shape, factor, center) {\n    return shape.onLeafs((leaf) => {\n        leaf.geometry = replicad.scale(leaf.geometry, new replicad.Vector(center), factor);\n        return leaf;\n    });\n}\n"
+              "code": "function run(shape: Assembly, factor: number, center: number[]) {\n  return shape.onLeafs((leaf) => {\n    let centerAsPoint: replicad.Point | undefined = undefined\n    if (leaf.is2D() && center.length == 2 || (leaf.is3D() && center.length == 3)) {\n      centerAsPoint = center as replicad.Point;\n    } else {\n      centerAsPoint = leaf.geometry.boundingBox.center;\n    }\n    console.log(leaf.geometry)\n    leaf.geometry = replicad.scale(leaf.geometry, centerAsPoint, factor)\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\nfunction run(shape, factor, center) {\n    return shape.onLeafs((leaf) => {\n        let centerAsPoint = undefined;\n        if (leaf.is2D() && center.length == 2 || (leaf.is3D() && center.length == 3)) {\n            centerAsPoint = center;\n        }\n        else {\n            centerAsPoint = leaf.geometry.boundingBox.center;\n        }\n        console.log(leaf.geometry);\n        leaf.geometry = replicad.scale(leaf.geometry, centerAsPoint, factor);\n        return leaf;\n    });\n}\n"
             }
           ],
           "allConnectors": [
