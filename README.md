@@ -6,10 +6,9 @@
 
 ## Inputs
 
-- **diam** (number)
-- **TargetLen** (number)
-- **Breadth** (number)
-- **length** (number)
+- **hullThickness** (number)
+- **bulkheadThickness** (undefined)
+- **bulkheadPlacements** (array)
 
 
 
