@@ -9691,8 +9691,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.3268229166666667,
-          "y": 0.2742857142857143,
+          "x": 0.2799479166666667,
+          "y": 0.21428571428571427,
           "uniqueID": "id-80982",
           "ioValues": [
             {
@@ -9701,18 +9701,18 @@
             },
             {
               "name": "maxArea",
-              "ioValue": 50,
-              "currentEquation": "50"
+              "ioValue": 3,
+              "currentEquation": "3"
             }
           ],
           "interpreterVersion": 1,
-          "code": "function run(input: Assembly, maxArea: number) {\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n\n    const filter = (face) => {return replicad.measureArea(face.element) < maxArea}\n\n    const finder = new replicad.FaceFinder().when(filter)\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    console.log(`found edges: ${foundFaces} indexes: ${indexes}`)\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [] }\n    }\n    const before = leaf.selection.edges as number[];\n    leaf.selection.edges = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.edges}`)\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(input, maxArea) {\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const filter = (face) => { return replicad.measureArea(face.element) < maxArea; };\n        const finder = new replicad.FaceFinder().when(filter);\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        console.log(`found edges: ${foundFaces} indexes: ${indexes}`);\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [] };\n        }\n        const before = leaf.selection.edges;\n        leaf.selection.edges = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.edges}`);\n        return leaf;\n    });\n}\n"
+          "code": "function run(input: Assembly, maxArea: number) {\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n\n    const filter = (face) => {return replicad.measureArea(face.element) < maxArea}\n\n    const finder = new replicad.FaceFinder().when(filter)\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    console.log(`found edges: ${foundFaces} indexes: ${indexes}`)\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(input, maxArea) {\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const filter = (face) => { return replicad.measureArea(face.element) < maxArea; };\n        const finder = new replicad.FaceFinder().when(filter);\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        console.log(`found edges: ${foundFaces} indexes: ${indexes}`);\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.44986979166666663,
-          "y": 0.6628571428571429,
+          "x": 0.4388020833333333,
+          "y": 0.1857142857142857,
           "uniqueID": "id-80997",
           "name": "ExtractFaces",
           "ioValues": [
@@ -9742,7 +9742,32 @@
               "uniqueID": "id-80995",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ],
+                "1": [
+                  1,
+                  4
+                ],
+                "2": [
+                  1,
+                  4
+                ],
+                "3": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -9801,6 +9826,25 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787078543674
+        },
+        {
+          "atomType": "Code",
+          "x": 0.20963541666666666,
+          "y": 0.6142857142857143,
+          "uniqueID": "id-81032",
+          "ioValues": [
+            {
+              "name": "input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "maxArea",
+              "ioValue": 5
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(input: Assembly, maxArea: number) {\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n\n    const filter = (face) => {return replicad.measureArea(face.element) < maxArea}\n\n    const finder = new replicad.FaceFinder().when(filter)\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    console.log(`found edges: ${foundFaces} indexes: ${indexes}`)\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(input, maxArea) {\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const filter = (face) => { return replicad.measureArea(face.element) < maxArea; };\n        const finder = new replicad.FaceFinder().when(filter);\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        console.log(`found edges: ${foundFaces} indexes: ${indexes}`);\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -9808,6 +9852,11 @@
           "ap2Name": "input",
           "ap1ID": "id-80971",
           "ap2ID": "id-80982"
+        },
+        {
+          "ap2Name": "input",
+          "ap1ID": "id-80971",
+          "ap2ID": "id-81032"
         },
         {
           "ap2Name": "Assembly",
