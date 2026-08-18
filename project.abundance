@@ -2522,10 +2522,6 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
-              "name": "x",
-              "ioValue": 144.00000999999997
-            },
-            {
               "name": "y",
               "ioValue": 120
             }
@@ -2541,10 +2537,6 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 12.000004999999987
             },
             {
               "name": "yDist",
@@ -7396,17 +7388,7 @@
               "atomType": "Rectangle",
               "x": 0.21940104166666666,
               "y": 0.7457142857142858,
-              "uniqueID": "id-76116",
-              "ioValues": [
-                {
-                  "name": "x length",
-                  "ioValue": 20.77848179346001
-                },
-                {
-                  "name": "y length",
-                  "ioValue": 56.553146005825
-                }
-              ]
+              "uniqueID": "id-76116"
             },
             {
               "atomType": "Extrude",
@@ -9804,10 +9786,6 @@
               "name": "(width + 2 * t) / width",
               "ioValues": [
                 {
-                  "name": "width",
-                  "ioValue": 27.584363180939746
-                },
-                {
                   "name": "t",
                   "ioValue": 0.5
                 }
@@ -9861,10 +9839,6 @@
               "uniqueID": "id-76339",
               "name": "(width + 2 * t + 1.5) / width",
               "ioValues": [
-                {
-                  "name": "width",
-                  "ioValue": 27.584363180939746
-                },
                 {
                   "name": "t",
                   "ioValue": 0.5
@@ -10161,57 +10135,11 @@
                   "ioValues": [
                     {
                       "name": "Shape 1",
-                      "ioValue": {
-                        "geometry": "move-rectangle-10-10-5--3-0",
-                        "dimension": "2D",
-                        "plane": {
-                          "origin": [
-                            0,
-                            0,
-                            0
-                          ],
-                          "xDir": [
-                            1,
-                            0,
-                            0
-                          ],
-                          "normal": [
-                            0,
-                            0,
-                            1
-                          ]
-                        },
-                        "color": "#aad7f2",
-                        "tags": [],
-                        "bom": []
-                      }
+                      "ioValue": null
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": {
-                        "geometry": "rectangle-10-10",
-                        "dimension": "2D",
-                        "plane": {
-                          "origin": [
-                            0,
-                            0,
-                            0
-                          ],
-                          "xDir": [
-                            1,
-                            0,
-                            0
-                          ],
-                          "normal": [
-                            0,
-                            0,
-                            1
-                          ]
-                        },
-                        "color": "#aad7f2",
-                        "tags": [],
-                        "bom": []
-                      }
+                      "ioValue": null
                     }
                   ],
                   "unionType": "Fusion"
@@ -11038,10 +10966,6 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
-                  "name": "factor",
-                  "ioValue": 1.0362524229194814
-                },
-                {
                   "name": "center",
                   "ioValue": 10
                 }
@@ -11069,10 +10993,6 @@
                     {
                       "name": "shape",
                       "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "factor",
-                      "ioValue": 1.0362524229194814
                     },
                     {
                       "name": "center",
@@ -11169,10 +11089,6 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
-                  "name": "factor",
-                  "ioValue": 1.0906310572987037
-                },
-                {
                   "name": "center",
                   "ioValue": 10
                 }
@@ -11200,10 +11116,6 @@
                     {
                       "name": "shape",
                       "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "factor",
-                      "ioValue": 1.0906310572987037
                     },
                     {
                       "name": "center",
