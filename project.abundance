@@ -5040,34 +5040,6 @@
           ]
         },
         {
-          "atomType": "CutOrient",
-          "x": 0.17838541666666666,
-          "y": 0.5457142857142857,
-          "uniqueID": "id-74088",
-          "name": "Cut Orient",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "orientations": [
-            {
-              "downwardFaceIndex": 0
-            },
-            {
-              "downwardFaceIndex": 0
-            },
-            {
-              "downwardFaceIndex": 0
-            },
-            {
-              "downwardFaceIndex": 0
-            }
-          ],
-          "orientationsForHashed": "e4ee48ec"
-        },
-        {
           "atomType": "Input",
           "x": 0.025384615384615384,
           "y": 0.24615384615384617,
@@ -6988,18 +6960,8 @@
         },
         {
           "ap2Name": "geometry",
-          "ap1ID": "id-74072",
-          "ap2ID": "id-74088"
-        },
-        {
-          "ap2Name": "geometry",
           "ap1ID": "id-74075",
           "ap2ID": "id-74095"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-74088",
-          "ap2ID": "id-74075"
         },
         {
           "ap2Name": "geometry",
