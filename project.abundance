@@ -10713,22 +10713,6 @@
               ]
             },
             {
-              "atomType": "Intersection",
-              "x": 0.35986328125000006,
-              "y": 0.33125,
-              "uniqueID": "id-76682",
-              "ioValues": [
-                {
-                  "name": "geometry1",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "geometry2",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
               "atomType": "Difference",
               "x": 0.33203125,
               "y": 0.14285714285714285,
@@ -11003,44 +10987,6 @@
               ]
             },
             {
-              "atomType": "Code",
-              "x": 0.3098958333333333,
-              "y": 0.5657142857142857,
-              "uniqueID": "id-76697",
-              "ioValues": [
-                {
-                  "name": "shape",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "offset",
-                  "ioValue": 0.75
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings not supported for this type of offset\")\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
-              "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings not supported for this type of offset\");\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
-            },
-            {
-              "atomType": "Code",
-              "x": 0.3098958333333333,
-              "y": 0.8035714285714286,
-              "uniqueID": "id-76698",
-              "ioValues": [
-                {
-                  "name": "shape",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "offset",
-                  "ioValue": -0.75
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings not supported for this type of offset\")\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
-              "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings not supported for this type of offset\");\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
-            },
-            {
               "atomType": "GitHubMolecule",
               "x": 0.12434895833333334,
               "y": 0.8057142857142858,
@@ -11309,8 +11255,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.22265625,
-              "y": 0.318452380952381,
+              "x": 0.2727864583333333,
+              "y": 0.5428571428571428,
               "uniqueID": "id-76711",
               "name": "util.Offset",
               "ioValues": [
@@ -11421,8 +11367,8 @@
             },
             {
               "atomType": "Extrude",
-              "x": 0.20703125,
-              "y": 0.1742857142857143,
+              "x": 0.171875,
+              "y": 0.20571428571428574,
               "uniqueID": "id-76831",
               "ioValues": [
                 {
@@ -11435,18 +11381,156 @@
                   "currentEquation": "-1 * hullThickness"
                 }
               ]
+            },
+            {
+              "atomType": "Intersection",
+              "x": 0.33658854166666663,
+              "y": 0.2942857142857143,
+              "uniqueID": "id-76919",
+              "ioValues": [
+                {
+                  "name": "geometry1",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "geometry2",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.17578125,
+              "y": 0.5257142857142857,
+              "uniqueID": "id-76928",
+              "name": "extrudeFaceDirected",
+              "ioValues": [
+                {
+                  "name": "face",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "extrusionVec",
+                  "ioValue": [
+                    0,
+                    0,
+                    ""
+                  ]
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 0.98,
+                  "y": 0.5,
+                  "uniqueID": "id-76924",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.45166015625,
+                  "y": 0.4833333333333333,
+                  "uniqueID": "id-76925",
+                  "ioValues": [
+                    {
+                      "name": "faces",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "direction",
+                      "ioValue": [
+                        0,
+                        0,
+                        ""
+                      ]
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "function run(faces: Assembly, direction: number[]) {\n  return faces.onLeafs((leaf) => {\n    leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction))\n    return leaf;\n  })\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(faces, direction) {\n    return faces.onLeafs((leaf) => {\n        leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction));\n        return leaf;\n    });\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.15384615384615385,
+                  "uniqueID": "id-76926",
+                  "name": "face",
+                  "type": "geometry"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.025384615384615384,
+                  "y": 0.24615384615384617,
+                  "uniqueID": "id-76927",
+                  "name": "extrusionVec",
+                  "type": "point3d",
+                  "pointValue": null
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-76925",
+                  "ap2ID": "id-76924"
+                },
+                {
+                  "ap2Name": "faces",
+                  "ap1ID": "id-76926",
+                  "ap2ID": "id-76925"
+                },
+                {
+                  "ap2Name": "direction",
+                  "ap1ID": "id-76927",
+                  "ap2ID": "id-76925"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-08-18T10:23:39.059Z",
+                "privateRepo": false,
+                "repoName": "extrudeFaceDirected",
+                "dateCreated": "2026-07-29T22:22:15Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-121",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/extrudeFaceDirected",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739826",
+                "ranking": 2.7,
+                "searchField": "extrudefacedirected tristan-huber extrude an assembly of faces in a given direction. same as feeding an assembly of faces to extrude except that the direction of extrusion is specified explicitly. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Extrude an assembly of faces in a given direction. Same as feeding an assembly of faces to Extrude except that the direction of extrusion is specified explicitly.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1787072606466
             }
           ],
           "allConnectors": [
             {
-              "ap2Name": "geometry2",
-              "ap1ID": "id-76677",
-              "ap2ID": "id-76682"
-            },
-            {
               "ap2Name": "geometry",
               "ap1ID": "id-76677",
               "ap2ID": "id-76831"
+            },
+            {
+              "ap2Name": "face",
+              "ap1ID": "id-76677",
+              "ap2ID": "id-76928"
             },
             {
               "ap2Name": "width",
@@ -11474,16 +11558,6 @@
               "ap2ID": "id-76683"
             },
             {
-              "ap2Name": "shape",
-              "ap1ID": "id-76681",
-              "ap2ID": "id-76697"
-            },
-            {
-              "ap2Name": "shape",
-              "ap1ID": "id-76681",
-              "ap2ID": "id-76698"
-            },
-            {
               "ap2Name": "Shape",
               "ap1ID": "id-76681",
               "ap2ID": "id-76711"
@@ -11492,21 +11566,6 @@
               "ap2Name": "Shape",
               "ap1ID": "id-76681",
               "ap2ID": "id-76706"
-            },
-            {
-              "ap2Name": "retain",
-              "ap1ID": "id-76682",
-              "ap2ID": "id-76684"
-            },
-            {
-              "ap2Name": "geometry1",
-              "ap1ID": "id-76682",
-              "ap2ID": "id-76695"
-            },
-            {
-              "ap2Name": "retain",
-              "ap1ID": "id-76682",
-              "ap2ID": "id-76687"
             },
             {
               "ap2Name": "Shape 1",
@@ -11599,14 +11658,19 @@
               "ap2ID": "id-76687"
             },
             {
-              "ap2Name": "geometry1",
+              "ap2Name": "geometry2",
               "ap1ID": "id-76711",
-              "ap2ID": "id-76682"
+              "ap2ID": "id-76919"
             },
             {
               "ap2Name": "retain",
               "ap1ID": "id-76831",
               "ap2ID": "id-76683"
+            },
+            {
+              "ap2Name": "geometry1",
+              "ap1ID": "id-76831",
+              "ap2ID": "id-76919"
             }
           ],
           "fileTypeVersion": 1
