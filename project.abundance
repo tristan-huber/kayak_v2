@@ -12,11 +12,17 @@
     },
     {
       "name": "bulkheadThickness",
-      "ioValue": 10
+      "ioValue": 0.5,
+      "currentEquation": "0.5"
     },
     {
       "name": "bulkheadPlacements",
-      "ioValue": 10
+      "ioValue": [
+        "15",
+        "40",
+        "90",
+        "130"
+      ]
     }
   ],
   "topLevel": true,
@@ -12538,8 +12544,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.32747395833333337,
-      "y": 0.6371428571428571,
+      "x": 0.19986979166666669,
+      "y": 0.6742857142857143,
       "uniqueID": "id-76160",
       "name": "kayak_v2",
       "ioValues": [
@@ -12554,16 +12560,9 @@
         {
           "name": "slicePositions",
           "ioValue": [
-            "12",
             "15",
-            "20",
-            "25",
-            "32",
             "40",
             "90",
-            "100",
-            "110",
-            "120",
             "130"
           ]
         }
@@ -12637,34 +12636,13 @@
               "downwardFaceIndex": 0
             },
             {
-              "downwardFaceIndex": 0
-            },
-            {
-              "downwardFaceIndex": 0
-            },
-            {
-              "downwardFaceIndex": 0
-            },
-            {
-              "downwardFaceIndex": 0
-            },
-            {
               "downwardFaceIndex": 9
-            },
-            {
-              "downwardFaceIndex": 9
-            },
-            {
-              "downwardFaceIndex": 7
-            },
-            {
-              "downwardFaceIndex": 7
             },
             {
               "downwardFaceIndex": 7
             }
           ],
-          "orientationsForHashed": "e028d5d4"
+          "orientationsForHashed": "e83ff318"
         },
         {
           "atomType": "CutLayout",
@@ -12801,16 +12779,9 @@
             {
               "name": "positions",
               "ioValue": [
-                "12",
                 "15",
-                "20",
-                "25",
-                "32",
                 "40",
                 "90",
-                "100",
-                "110",
-                "120",
                 "130"
               ]
             },
@@ -13037,16 +13008,9 @@
                 {
                   "name": "offsets",
                   "ioValue": [
-                    "12",
                     "15",
-                    "20",
-                    "25",
-                    "32",
                     "40",
                     "90",
-                    "100",
-                    "110",
-                    "120",
                     "130"
                   ]
                 },
@@ -13111,16 +13075,9 @@
                     {
                       "name": "offsets",
                       "ioValue": [
-                        "12",
                         "15",
-                        "20",
-                        "25",
-                        "32",
                         "40",
                         "90",
-                        "100",
-                        "110",
-                        "120",
                         "130"
                       ]
                     },
@@ -14076,6 +14033,11 @@
       "ap2ID": "id-76095"
     },
     {
+      "ap2Name": "profileShape",
+      "ap1ID": "id-76095",
+      "ap2ID": "id-76160"
+    },
+    {
       "ap2Name": "x",
       "ap1ID": "id-76297",
       "ap2ID": "id-76300"
@@ -14084,6 +14046,16 @@
       "ap2Name": "Offset",
       "ap1ID": "id-76300",
       "ap2ID": "id-76095"
+    },
+    {
+      "ap2Name": "sliceThickness",
+      "ap1ID": "id-76304",
+      "ap2ID": "id-76160"
+    },
+    {
+      "ap2Name": "slicePositions",
+      "ap1ID": "id-76307",
+      "ap2ID": "id-76160"
     }
   ],
   "unitsKey": "MM",
