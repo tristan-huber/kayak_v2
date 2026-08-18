@@ -77,8 +77,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.30859375,
-      "y": 0.92,
+      "x": 0.34505208333333337,
+      "y": 0.9028571428571429,
       "uniqueID": "id-41153",
       "name": "Extract halfhull",
       "ioValues": [
@@ -94,38 +94,6 @@
       ],
       "includeUntagged": false,
       "notKeepOut": false
-    },
-    {
-      "atomType": "Assembly",
-      "x": 0.5455729166666666,
-      "y": 0.4542857142857143,
-      "uniqueID": "id-44899",
-      "ioValues": [
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        }
-      ]
-    },
-    {
-      "atomType": "Assembly",
-      "x": 0.6966145833333334,
-      "y": 0.7485714285714287,
-      "uniqueID": "id-44906",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 3",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 4",
-          "ioValue": null
-        }
-      ]
     },
     {
       "atomType": "ExtractTag",
@@ -456,841 +424,6 @@
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1786140036082
-    },
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.7604166666666667,
-      "y": 0.5314285714285714,
-      "uniqueID": "id-68110",
-      "name": "Label_Bounding_Box",
-      "ioValues": [
-        {
-          "name": "Shape",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Font_Size",
-          "ioValue": 34
-        },
-        {
-          "name": "Decimals",
-          "ioValue": 1
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-68101",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.45833333333333337,
-          "y": 0.33704735376044564,
-          "uniqueID": "id-68102",
-          "ioValues": [
-            {
-              "name": "input",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "labelColor",
-              "ioValue": "#3A2F28",
-              "currentEquation": "#3A2F28"
-            },
-            {
-              "name": "fontSize",
-              "ioValue": 34
-            },
-            {
-              "name": "decimals",
-              "ioValue": 1
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "type Vec3 = [number, number, number];\n\ntype LabelPayload = {\n  type: \"Label\";\n  fontSize: number;\n  line: {\n    start: Vec3;\n    end: Vec3;\n    color: string;\n    linewidth: number;\n  };\n  endSegments: {\n    start: { p1: Vec3; p2: Vec3 };\n    end: { p1: Vec3; p2: Vec3 };\n    color: string;\n    linewidth: number;\n  };\n  text: {\n    value: string;\n    color: string;\n    position: Vec3;\n    scale: Vec3;\n    font: string;\n    linewidth: number;\n  };\n  movement: { x: number; y: number; z: number };\n  rotation: { x: number; y: number; z: number };\n};\n\nfunction run(\n  input: Assembly,\n  labelColor: string = \"#2C241F\",\n  fontSize: number = 1,\n  decimals: number = 2\n) {\n  if (!input) {\n    throw new Error(\"Connect a geometry Assembly to the input.\");\n  }\n\n  const leaves = collectLeaves(input);\n  if (leaves.length === 0) {\n    throw new Error(\"Input assembly has no leaf geometry.\");\n  }\n\n  let minX = Number.POSITIVE_INFINITY;\n  let minY = Number.POSITIVE_INFINITY;\n  let minZ = Number.POSITIVE_INFINITY;\n  let maxX = Number.NEGATIVE_INFINITY;\n  let maxY = Number.NEGATIVE_INFINITY;\n  let maxZ = Number.NEGATIVE_INFINITY;\n\n  let all2D = true;\n  let foundBounds = false;\n\n  for (const leaf of leaves) {\n    const geom: any = (leaf as any).geometry;\n    const bbox = geom && geom.boundingBox;\n    const bounds = bbox && bbox.bounds;\n\n    if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n      continue;\n    }\n\n    const b0: any[] = bounds[0];\n    const b1: any[] = bounds[1];\n    if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n      continue;\n    }\n\n    const lx = Number(b0[0]);\n    const ly = Number(b0[1]);\n    const lz = Number(b0.length > 2 ? b0[2] : 0);\n\n    const ux = Number(b1[0]);\n    const uy = Number(b1[1]);\n    const uz = Number(b1.length > 2 ? b1[2] : 0);\n\n    minX = Math.min(minX, lx);\n    minY = Math.min(minY, ly);\n    minZ = Math.min(minZ, lz);\n\n    maxX = Math.max(maxX, ux);\n    maxY = Math.max(maxY, uy);\n    maxZ = Math.max(maxZ, uz);\n\n    const leafIs2D =\n      typeof (leaf as any).is2D === \"function\" ? (leaf as any).is2D() : b0.length < 3;\n    if (!leafIs2D) all2D = false;\n\n    foundBounds = true;\n  }\n\n  if (!foundBounds) {\n    throw new Error(\"Could not read bounding boxes from the input geometry.\");\n  }\n\n  const dx = Math.max(0, maxX - minX);\n  const dy = Math.max(0, maxY - minY);\n  const dz = Math.max(0, maxZ - minZ);\n\n  const span = Math.max(dx, dy, dz, 1e-6);\n  const margin = span * 0.08;\n\n  // Uniform text scale for all axis labels so font appears consistent.\n  const textScaleX = span * 0.12 * fontSize;\n  const textScaleY = span * 0.06 * fontSize;\n\n  const labels: LabelPayload[] = [];\n\n  // X dimension (offset below)\n  labels.push(\n    makeLabel(\n      \"X: \" + fmt(dx, decimals),\n      [minX, minY - margin, minZ],\n      [maxX, minY - margin, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Y dimension (offset left)\n  labels.push(\n    makeLabel(\n      \"Y: \" + fmt(dy, decimals),\n      [minX - margin, minY, minZ],\n      [minX - margin, maxY, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Z dimension only for non-2D input\n  if (!all2D) {\n    labels.push(\n      makeLabel(\n        \"Z: \" + fmt(dz, decimals),\n        [maxX + margin, maxY + margin, minZ],\n        [maxX + margin, maxY + margin, maxZ],\n        labelColor,\n        fontSize,\n        textScaleX,\n        textScaleY\n      )\n    );\n  }\n\n  // Preserve source geometry and metadata, then append generated labels.\n  const out: any = new Assembly(input as any);\n  const prev = Array.isArray(out.nonReplicadSerialized)\n    ? out.nonReplicadSerialized\n    : out.nonReplicadSerialized\n      ? [out.nonReplicadSerialized]\n      : [];\n  out.nonReplicadSerialized = prev.concat(labels);\n\n  return out;\n}\n\nfunction collectLeaves(node: Assembly): Assembly[] {\n  if ((node as any).isLeaf && (node as any).isLeaf()) {\n    return [node];\n  }\n  const children: any[] = Array.isArray((node as any).geometry)\n    ? ((node as any).geometry as any[])\n    : [];\n  const out: Assembly[] = [];\n  for (const child of children) {\n    out.push(...collectLeaves(child as Assembly));\n  }\n  return out;\n}\n\nfunction fmt(v: number, decimals: number): string {\n  const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n  const p = Math.pow(10, d);\n  const rounded = Math.round(v * p) / p;\n  return String(rounded);\n}\n\nfunction makeLabel(\n  text: string,\n  start: Vec3,\n  end: Vec3,\n  color: string,\n  fontSize: number,\n  textScaleX: number,\n  textScaleY: number\n): LabelPayload {\n  const lineDir = normalize(sub(end, start));\n\n  const ref: Vec3 = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n  const segDir = normalize(cross(lineDir, ref));\n\n  let perp: Vec3 = normalize([-lineDir[1], lineDir[0], 0]);\n  if (length(perp) < 1e-9) perp = [0, 1, 0];\n\n  const lineLength = Math.max(length(sub(end, start)), 1e-6);\n  const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n\n  const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n  const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n  const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n  const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n\n  const mid = mul(add(start, end), 0.5);\n  const offset = mul(perp, 2.5);\n  const textPos = add(mid, offset);\n\n  return {\n    type: \"Label\",\n    fontSize,\n    line: {\n      start,\n      end,\n      color,\n      linewidth: 5\n    },\n    endSegments: {\n      start: { p1: startP1, p2: startP2 },\n      end: { p1: endP1, p2: endP2 },\n      color,\n      linewidth: 5\n    },\n    text: {\n      value: text,\n      color,\n      position: textPos,\n      scale: [textScaleX, textScaleY, 1],\n      font: \"Bold \" + String(fontSize) + \"px Arial\",\n      linewidth: fontSize * 0.4\n    },\n    movement: { x: 0, y: 0, z: 0 },\n    rotation: { x: 0, y: 0, z: 0 }\n  };\n}\n\nfunction add(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a: Vec3, s: number): Vec3 {\n  return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a: Vec3, b: Vec3): Vec3 {\n  return [\n    a[1] * b[2] - a[2] * b[1],\n    a[2] * b[0] - a[0] * b[2],\n    a[0] * b[1] - a[1] * b[0]\n  ];\n}\nfunction length(a: Vec3): number {\n  return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a: Vec3): Vec3 {\n  const len = length(a);\n  if (len < 1e-12) return [0, 0, 0];\n  return [a[0] / len, a[1] / len, a[2] / len];\n}",
-          "compiledCode": "\"use strict\";\nfunction run(input, labelColor = \"#2C241F\", fontSize = 1, decimals = 2) {\n    if (!input) {\n        throw new Error(\"Connect a geometry Assembly to the input.\");\n    }\n    const leaves = collectLeaves(input);\n    if (leaves.length === 0) {\n        throw new Error(\"Input assembly has no leaf geometry.\");\n    }\n    let minX = Number.POSITIVE_INFINITY;\n    let minY = Number.POSITIVE_INFINITY;\n    let minZ = Number.POSITIVE_INFINITY;\n    let maxX = Number.NEGATIVE_INFINITY;\n    let maxY = Number.NEGATIVE_INFINITY;\n    let maxZ = Number.NEGATIVE_INFINITY;\n    let all2D = true;\n    let foundBounds = false;\n    for (const leaf of leaves) {\n        const geom = leaf.geometry;\n        const bbox = geom && geom.boundingBox;\n        const bounds = bbox && bbox.bounds;\n        if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n            continue;\n        }\n        const b0 = bounds[0];\n        const b1 = bounds[1];\n        if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n            continue;\n        }\n        const lx = Number(b0[0]);\n        const ly = Number(b0[1]);\n        const lz = Number(b0.length > 2 ? b0[2] : 0);\n        const ux = Number(b1[0]);\n        const uy = Number(b1[1]);\n        const uz = Number(b1.length > 2 ? b1[2] : 0);\n        minX = Math.min(minX, lx);\n        minY = Math.min(minY, ly);\n        minZ = Math.min(minZ, lz);\n        maxX = Math.max(maxX, ux);\n        maxY = Math.max(maxY, uy);\n        maxZ = Math.max(maxZ, uz);\n        const leafIs2D = typeof leaf.is2D === \"function\" ? leaf.is2D() : b0.length < 3;\n        if (!leafIs2D)\n            all2D = false;\n        foundBounds = true;\n    }\n    if (!foundBounds) {\n        throw new Error(\"Could not read bounding boxes from the input geometry.\");\n    }\n    const dx = Math.max(0, maxX - minX);\n    const dy = Math.max(0, maxY - minY);\n    const dz = Math.max(0, maxZ - minZ);\n    const span = Math.max(dx, dy, dz, 1e-6);\n    const margin = span * 0.08;\n    // Uniform text scale for all axis labels so font appears consistent.\n    const textScaleX = span * 0.12 * fontSize;\n    const textScaleY = span * 0.06 * fontSize;\n    const labels = [];\n    // X dimension (offset below)\n    labels.push(makeLabel(\"X: \" + fmt(dx, decimals), [minX, minY - margin, minZ], [maxX, minY - margin, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Y dimension (offset left)\n    labels.push(makeLabel(\"Y: \" + fmt(dy, decimals), [minX - margin, minY, minZ], [minX - margin, maxY, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Z dimension only for non-2D input\n    if (!all2D) {\n        labels.push(makeLabel(\"Z: \" + fmt(dz, decimals), [maxX + margin, maxY + margin, minZ], [maxX + margin, maxY + margin, maxZ], labelColor, fontSize, textScaleX, textScaleY));\n    }\n    // Preserve source geometry and metadata, then append generated labels.\n    const out = new Assembly(input);\n    const prev = Array.isArray(out.nonReplicadSerialized)\n        ? out.nonReplicadSerialized\n        : out.nonReplicadSerialized\n            ? [out.nonReplicadSerialized]\n            : [];\n    out.nonReplicadSerialized = prev.concat(labels);\n    return out;\n}\nfunction collectLeaves(node) {\n    if (node.isLeaf && node.isLeaf()) {\n        return [node];\n    }\n    const children = Array.isArray(node.geometry)\n        ? node.geometry\n        : [];\n    const out = [];\n    for (const child of children) {\n        out.push(...collectLeaves(child));\n    }\n    return out;\n}\nfunction fmt(v, decimals) {\n    const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n    const p = Math.pow(10, d);\n    const rounded = Math.round(v * p) / p;\n    return String(rounded);\n}\nfunction makeLabel(text, start, end, color, fontSize, textScaleX, textScaleY) {\n    const lineDir = normalize(sub(end, start));\n    const ref = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n    const segDir = normalize(cross(lineDir, ref));\n    let perp = normalize([-lineDir[1], lineDir[0], 0]);\n    if (length(perp) < 1e-9)\n        perp = [0, 1, 0];\n    const lineLength = Math.max(length(sub(end, start)), 1e-6);\n    const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n    const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n    const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n    const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n    const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n    const mid = mul(add(start, end), 0.5);\n    const offset = mul(perp, 2.5);\n    const textPos = add(mid, offset);\n    return {\n        type: \"Label\",\n        fontSize,\n        line: {\n            start,\n            end,\n            color,\n            linewidth: 5\n        },\n        endSegments: {\n            start: { p1: startP1, p2: startP2 },\n            end: { p1: endP1, p2: endP2 },\n            color,\n            linewidth: 5\n        },\n        text: {\n            value: text,\n            color,\n            position: textPos,\n            scale: [textScaleX, textScaleY, 1],\n            font: \"Bold \" + String(fontSize) + \"px Arial\",\n            linewidth: fontSize * 0.4\n        },\n        movement: { x: 0, y: 0, z: 0 },\n        rotation: { x: 0, y: 0, z: 0 }\n    };\n}\nfunction add(a, b) {\n    return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a, b) {\n    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a, s) {\n    return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a, b) {\n    return [\n        a[1] * b[2] - a[2] * b[1],\n        a[2] * b[0] - a[0] * b[2],\n        a[0] * b[1] - a[1] * b[0]\n    ];\n}\nfunction length(a) {\n    return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a) {\n    const len = length(a);\n    if (len < 1e-12)\n        return [0, 0, 0];\n    return [a[0] / len, a[1] / len, a[2] / len];\n}\n"
-        },
-        {
-          "atomType": "Circle",
-          "x": 0.14219576719576718,
-          "y": 0.8523676880222841,
-          "uniqueID": "id-68103",
-          "ioValues": [
-            {
-              "name": "diameter",
-              "ioValue": 10
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.2804232804232804,
-          "y": 0.8440111420612814,
-          "uniqueID": "id-68104",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 50
-            }
-          ]
-        },
-        {
-          "atomType": "Move",
-          "x": 0.3697089947089947,
-          "y": 0.713091922005571,
-          "uniqueID": "id-68105",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 0
-            },
-            {
-              "name": "yDist",
-              "ioValue": 0
-            },
-            {
-              "name": "zDist",
-              "ioValue": 10
-            }
-          ]
-        },
-        {
-          "atomType": "Rotate",
-          "x": 0.576058201058201,
-          "y": 0.6991643454038997,
-          "uniqueID": "id-68106",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "x-axis degrees",
-              "ioValue": 10
-            },
-            {
-              "name": "y-axis degrees",
-              "ioValue": 30
-            },
-            {
-              "name": "z-axis degrees",
-              "ioValue": 0
-            }
-          ]
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
-          "uniqueID": "id-68107",
-          "name": "Shape",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
-          "uniqueID": "id-68108",
-          "name": "Font_Size"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.3384615384615385,
-          "uniqueID": "id-68109",
-          "name": "Decimals"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-68102",
-          "ap2ID": "id-68101"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-68103",
-          "ap2ID": "id-68104"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-68104",
-          "ap2ID": "id-68105"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-68105",
-          "ap2ID": "id-68106"
-        },
-        {
-          "ap2Name": "input",
-          "ap1ID": "id-68107",
-          "ap2ID": "id-68102"
-        },
-        {
-          "ap2Name": "fontSize",
-          "ap1ID": "id-68108",
-          "ap2ID": "id-68102"
-        },
-        {
-          "ap2Name": "decimals",
-          "ap1ID": "id-68109",
-          "ap2ID": "id-68102"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-08-07T18:23:38.949Z",
-        "privateRepo": false,
-        "repoName": "Label_Bounding_Box",
-        "dateCreated": "2026-07-15T16:37:50Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/README.md?sanitize=true",
-        "yyyy": 2026,
-        "topMoleculeID": "id-872",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/BarbourSmith/Label_Bounding_Box",
-        "topics": [],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739812",
-        "ranking": 3,
-        "searchField": "label_bounding_box barboursmith adds labels to show an input geometrie's bounding box ",
-        "owner": "BarbourSmith",
-        "description": "Adds labels to show an input geometrie's bounding Box",
-        "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Unitless",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1786140984502
-    },
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.6510416666666666,
-      "y": 0.5114285714285715,
-      "uniqueID": "id-68146",
-      "name": "IthFromAssembly",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "i",
-          "ioValue": 1
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-68142",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.5026041666666666,
-          "y": 0.6845238095238095,
-          "uniqueID": "id-68143",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "i",
-              "ioValue": 1
-            }
-          ],
-          "interpreterVersion": 0,
-          "code": "\n      const Inputs = [\n       {inputName: \"geometry\", type: \"geometry\", defaultValue: null},\n      {inputName: \"i\", type: \"number\", defaultValue: 0},\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[geometry]\n      let j = 0;\n      console.log(\"foo\")\n      console.log(importedShape)\n      const leafList = await AssemblyAsIterable(importedShape)\n      console.log(leafList)\n      if (i >= leafList.length) {\n        throw new Error(`Assembly only has ${leafList.length} entries. Tried to find index: ${i}.`)\n      }\n      return leafList[i]\n\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
-          "uniqueID": "id-68144",
-          "name": "geometry",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
-          "uniqueID": "id-68145",
-          "name": "i",
-          "type": "number"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-68143",
-          "ap2ID": "id-68142"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-68144",
-          "ap2ID": "id-68143"
-        },
-        {
-          "ap2Name": "i",
-          "ap1ID": "id-68145",
-          "ap2ID": "id-68143"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-08-07T18:23:38.949Z",
-        "privateRepo": false,
-        "repoName": "IthFromAssembly",
-        "dateCreated": "2025-11-03T02:49:44Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/README.md?sanitize=true",
-        "yyyy": 2025,
-        "topMoleculeID": "id-2718",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/tristan-huber/IthFromAssembly",
-        "topics": [
-          "abundance-tool"
-        ],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 1,
-        "dateModified": "739558",
-        "ranking": 10.1,
-        "searchField": "ithfromassembly tristan-huber get the ith leaf from an assembly abundance-tool",
-        "owner": "tristan-huber",
-        "description": "Get the ith leaf from an assembly",
-        "contentURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Unitless",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1786141006578
-    },
-    {
-      "atomType": "Molecule",
-      "x": 0.53515625,
-      "y": 0.64,
-      "uniqueID": "id-37127",
-      "name": "bulkheads",
-      "ioValues": [
-        {
-          "name": "kayakbody",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "positions",
-          "ioValue": [
-            "15",
-            "40",
-            "90",
-            "130"
-          ]
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-37129",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
-          "uniqueID": "id-37131",
-          "name": "kayakbody",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
-          "uniqueID": "id-37134",
-          "name": "positions",
-          "type": "array"
-        },
-        {
-          "atomType": "Rectangle",
-          "x": 0.2109375,
-          "y": 0.6485714285714286,
-          "uniqueID": "id-37142",
-          "ioValues": [
-            {
-              "name": "x length",
-              "ioValue": 100
-            },
-            {
-              "name": "y length",
-              "ioValue": 100
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.3151041666666667,
-          "y": 0.7342857142857142,
-          "uniqueID": "id-37146",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 0.25
-            }
-          ]
-        },
-        {
-          "atomType": "Rotate",
-          "x": 0.41210937499999994,
-          "y": 0.8742857142857143,
-          "uniqueID": "id-37150",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "x-axis degrees",
-              "ioValue": 0
-            },
-            {
-              "name": "y-axis degrees",
-              "ioValue": 90
-            },
-            {
-              "name": "z-axis degrees",
-              "ioValue": 0
-            }
-          ]
-        },
-        {
-          "atomType": "Intersection",
-          "x": 0.685546875,
-          "y": 0.47428571428571425,
-          "uniqueID": "id-37200",
-          "ioValues": [
-            {
-              "name": "geometry1",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "geometry2",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Tag",
-          "x": 0.80419921875,
-          "y": 0.40625,
-          "uniqueID": "id-44636",
-          "name": "bulkhead",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "tags": [
-            "bulkhead"
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.5546875,
-          "y": 0.7946428571428572,
-          "uniqueID": "id-59409",
-          "ioValues": [
-            {
-              "name": "toMove",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "offsets",
-              "ioValue": [
-                "15",
-                "40",
-                "90",
-                "130"
-              ]
-            },
-            {
-              "name": "direction",
-              "ioValue": [
-                1,
-                0,
-                0
-              ]
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n * \n * Notice that defaults are set for both count and offset.\n */\nfunction move(shape: Assembly, v: [number, number, number]): Assembly | null {\n  return shape.onLeafs((l: Assembly<LeafGeom>) => {\n    const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v)\n    return new Assembly({ ...l, geometry: mvd })\n  })\n}\n\nfunction run(toMove: Assembly, offsets: number[], direction: number[]) {\n  if (!offsets.length || offsets.length == 0) {\n    throw new Error(\"Missing offsets list\")\n  }\n  if (direction.length != 3) {\n    throw new Error(\"Direction needs to be an [x,y,z] vector. Was: \" + direction)\n  }\n  const vec = new replicad.Vector(direction as [number, number, number]).normalize()\n  let leafCount = 0;\n  toMove.onLeafs((l) => {\n    leafCount++;\n    return l;\n  })\n\n  if (leafCount == 1) {\n    console.log(\"moving single object n times\")\n    const result: (Assembly | null)[] = []\n    offsets.forEach((magnitude) => {\n      console.log(`attempting mult ${vec.toTuple()} ${Number(magnitude)}`)\n      result.push(move(toMove, vec.multiply(Number(magnitude)).toTuple()))\n    });\n    console.log(result.length)\n    console.log(result)\n    return result;\n  } else if (leafCount === offsets.length) {\n    console.log(\"moving batch of objects by independent amounts\")\n    let index = 0;\n    let result: Assembly<AnyGeom>[] = []\n    toMove.onLeafs((l: Assembly<LeafGeom>) => {\n      const v = vec.multiply(offsets[index]).toTuple()\n      console.log(v)\n      index += 1\n      const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v)\n      const res = new Assembly({ ...l, geometry: mvd })\n      result.push(res)\n      return res;\n    })\n    return result;\n  } else {\n    throw new Error(\"Assembly needs to be singleton or match offsets length. Was: \" + leafCount + \" offsets len: \" + offsets.length)\n  }\n}\n",
-          "compiledCode": "\"use strict\";\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n *\n * Notice that defaults are set for both count and offset.\n */\nfunction move(shape, v) {\n    return shape.onLeafs((l) => {\n        const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v);\n        return new Assembly({ ...l, geometry: mvd });\n    });\n}\nfunction run(toMove, offsets, direction) {\n    if (!offsets.length || offsets.length == 0) {\n        throw new Error(\"Missing offsets list\");\n    }\n    if (direction.length != 3) {\n        throw new Error(\"Direction needs to be an [x,y,z] vector. Was: \" + direction);\n    }\n    const vec = new replicad.Vector(direction).normalize();\n    let leafCount = 0;\n    toMove.onLeafs((l) => {\n        leafCount++;\n        return l;\n    });\n    if (leafCount == 1) {\n        console.log(\"moving single object n times\");\n        const result = [];\n        offsets.forEach((magnitude) => {\n            console.log(`attempting mult ${vec.toTuple()} ${Number(magnitude)}`);\n            result.push(move(toMove, vec.multiply(Number(magnitude)).toTuple()));\n        });\n        console.log(result.length);\n        console.log(result);\n        return result;\n    }\n    else if (leafCount === offsets.length) {\n        console.log(\"moving batch of objects by independent amounts\");\n        let index = 0;\n        let result = [];\n        toMove.onLeafs((l) => {\n            const v = vec.multiply(offsets[index]).toTuple();\n            console.log(v);\n            index += 1;\n            const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v);\n            const res = new Assembly({ ...l, geometry: mvd });\n            result.push(res);\n            return res;\n        });\n        return result;\n    }\n    else {\n        throw new Error(\"Assembly needs to be singleton or match offsets length. Was: \" + leafCount + \" offsets len: \" + offsets.length);\n    }\n}\n"
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.5013020833333334,
-          "y": 0.4851190476190476,
-          "uniqueID": "id-41816",
-          "name": "crv.PolyMove",
-          "ioValues": [
-            {
-              "name": "toMove",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "offsets",
-              "ioValue": [
-                "15",
-                "40",
-                "90",
-                "130"
-              ]
-            },
-            {
-              "name": "direction",
-              "ioValue": [
-                1,
-                0,
-                0
-              ]
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-41806",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.15384615384615385,
-              "uniqueID": "id-41807",
-              "name": "toMove",
-              "type": "geometry"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.24615384615384617,
-              "uniqueID": "id-41808",
-              "name": "offsets",
-              "type": "array"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.3384615384615385,
-              "uniqueID": "id-41809",
-              "name": "direction",
-              "type": "point3d",
-              "pointValue": null
-            },
-            {
-              "atomType": "Code",
-              "x": 0.39583333333333337,
-              "y": 0.43714285714285717,
-              "uniqueID": "id-41810",
-              "ioValues": [
-                {
-                  "name": "toMove",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "offsets",
-                  "ioValue": [
-                    "15",
-                    "40",
-                    "90",
-                    "130"
-                  ]
-                },
-                {
-                  "name": "direction",
-                  "ioValue": [
-                    1,
-                    0,
-                    0
-                  ]
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n * \n * Notice that defaults are set for both count and offset.\n */\nfunction move(shape: Assembly, v: [number, number, number]): Assembly | null {\n  return shape.onLeafs((l: Assembly<LeafGeom>) => {\n    const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v)\n    return new Assembly({ ...l, geometry: mvd })\n  })\n}\n\nfunction run(toMove: Assembly, offsets: number[], direction: number[]) {\n  if (!offsets.length || offsets.length == 0) {\n    throw new Error(\"Missing offsets list\")\n  }\n  if (direction.length != 3) {\n    throw new Error(\"Direction needs to be an [x,y,z] vector. Was: \" + direction)\n  }\n  const vec = new replicad.Vector(direction as [number, number, number]).normalize()\n  let leafCount = 0;\n  toMove.onLeafs((l) => {\n    leafCount++;\n    return l;\n  })\n\n  if (leafCount == 1) {\n    console.log(\"moving single object n times\")\n    const result: (Assembly | null)[] = []\n    offsets.forEach((magnitude) => {\n      result.push(move(toMove, vec.multiply(magnitude).toTuple()))\n    });\n    console.log(result.length)\n    console.log(result)\n    return result;\n  } else if (leafCount === offsets.length) {\n    console.log(\"moving batch of objects by independent amounts\")\n    let index = 0;\n    let result: Assembly<AnyGeom>[] = []\n    toMove.onLeafs((l: Assembly<LeafGeom>) => {\n      const v = vec.multiply(offsets[index]).toTuple()\n      console.log(v)\n      index += 1\n      const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v)\n      const res = new Assembly({ ...l, geometry: mvd })\n      result.push(res)\n      return res;\n    })\n    return result;\n  } else {\n    throw new Error(\"Assembly needs to be singleton or match offsets length. Was: \" + leafCount + \" offsets len: \" + offsets.length)\n  }\n}\n",
-              "compiledCode": "\"use strict\";\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n *\n * Notice that defaults are set for both count and offset.\n */\nfunction move(shape, v) {\n    return shape.onLeafs((l) => {\n        const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v);\n        return new Assembly({ ...l, geometry: mvd });\n    });\n}\nfunction run(toMove, offsets, direction) {\n    if (!offsets.length || offsets.length == 0) {\n        throw new Error(\"Missing offsets list\");\n    }\n    if (direction.length != 3) {\n        throw new Error(\"Direction needs to be an [x,y,z] vector. Was: \" + direction);\n    }\n    const vec = new replicad.Vector(direction).normalize();\n    let leafCount = 0;\n    toMove.onLeafs((l) => {\n        leafCount++;\n        return l;\n    });\n    if (leafCount == 1) {\n        console.log(\"moving single object n times\");\n        const result = [];\n        offsets.forEach((magnitude) => {\n            result.push(move(toMove, vec.multiply(magnitude).toTuple()));\n        });\n        console.log(result.length);\n        console.log(result);\n        return result;\n    }\n    else if (leafCount === offsets.length) {\n        console.log(\"moving batch of objects by independent amounts\");\n        let index = 0;\n        let result = [];\n        toMove.onLeafs((l) => {\n            const v = vec.multiply(offsets[index]).toTuple();\n            console.log(v);\n            index += 1;\n            const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v);\n            const res = new Assembly({ ...l, geometry: mvd });\n            result.push(res);\n            return res;\n        });\n        return result;\n    }\n    else {\n        throw new Error(\"Assembly needs to be singleton or match offsets length. Was: \" + leafCount + \" offsets len: \" + offsets.length);\n    }\n}\n"
-            },
-            {
-              "atomType": "Circle",
-              "x": 0.177734375,
-              "y": 0.6799999999999999,
-              "uniqueID": "id-41811",
-              "ioValues": [
-                {
-                  "name": "diameter",
-                  "ioValue": 10
-                }
-              ]
-            },
-            {
-              "atomType": "Move",
-              "x": 0.2532552083333333,
-              "y": 0.8514285714285714,
-              "uniqueID": "id-41812",
-              "ioValues": [
-                {
-                  "name": "geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "xDist",
-                  "ioValue": 0
-                },
-                {
-                  "name": "yDist",
-                  "ioValue": 20
-                },
-                {
-                  "name": "zDist",
-                  "ioValue": 0
-                }
-              ]
-            },
-            {
-              "atomType": "Assembly",
-              "x": 0.2903645833333333,
-              "y": 0.7171428571428571,
-              "uniqueID": "id-41813",
-              "ioValues": [
-                {
-                  "name": "Shape 1",
-                  "ioValue": null
-                },
-                {
-                  "name": "Shape 2",
-                  "ioValue": null
-                }
-              ]
-            },
-            {
-              "atomType": "Extrude",
-              "x": 0.36588541666666663,
-              "y": 0.8057142857142858,
-              "uniqueID": "id-41814",
-              "ioValues": [
-                {
-                  "name": "geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "height",
-                  "ioValue": 10
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.49544270833333337,
-              "y": 0.6799999999999999,
-              "uniqueID": "id-41815",
-              "ioValues": [
-                {
-                  "name": "toMove",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "offsets",
-                  "ioValue": [
-                    2,
-                    3
-                  ]
-                },
-                {
-                  "name": "direction",
-                  "ioValue": [
-                    1,
-                    0,
-                    0
-                  ]
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n * \n * Notice that defaults are set for both count and offset.\n */\nfunction move(shape: Assembly, v: [number, number, number]): Assembly | null {\n  return shape.onLeafs((l: Assembly<LeafGeom>) => {\n    const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v)\n    return new Assembly({ ...l, geometry: mvd })\n  })\n}\n\nfunction run(toMove: Assembly, offsets: number[], direction: number[]) {\n  if (!offsets.length || offsets.length == 0) {\n    throw new Error(\"Missing offsets list\")\n  }\n  if (direction.length != 3) {\n    throw new Error(\"Direction needs to be an [x,y,z] vector. Was: \" + direction)\n  }\n  const vec = new replicad.Vector(direction as [number, number, number]).normalize()\n  let leafCount = 0;\n  toMove.onLeafs((l) => {\n    leafCount++;\n    return l;\n  })\n\n  if (leafCount == 1) {\n    console.log(\"moving single object n times\")\n    const result: (Assembly | null)[] = []\n    offsets.forEach((magnitude) => {\n      result.push(move(toMove, vec.multiply(magnitude).toTuple()))\n    });\n    console.log(result.length)\n    console.log(result)\n    return result;\n  } else if (leafCount === offsets.length) {\n    console.log(\"moving batch of objects by independent amounts\")\n    let index = 0;\n    let result: Assembly<AnyGeom>[] = []\n    toMove.onLeafs((l: Assembly<LeafGeom>) => {\n      const v = vec.multiply(offsets[index]).toTuple()\n      console.log(v)\n      index += 1\n      const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v)\n      const res = new Assembly({ ...l, geometry: mvd })\n      result.push(res)\n      return res;\n    })\n    return result;\n  } else {\n    throw new Error(\"Assembly needs to be singleton or match offsets length. Was: \" + leafCount + \" offsets len: \" + offsets.length)\n  }\n}\n",
-              "compiledCode": "\"use strict\";\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n *\n * Notice that defaults are set for both count and offset.\n */\nfunction move(shape, v) {\n    return shape.onLeafs((l) => {\n        const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v);\n        return new Assembly({ ...l, geometry: mvd });\n    });\n}\nfunction run(toMove, offsets, direction) {\n    if (!offsets.length || offsets.length == 0) {\n        throw new Error(\"Missing offsets list\");\n    }\n    if (direction.length != 3) {\n        throw new Error(\"Direction needs to be an [x,y,z] vector. Was: \" + direction);\n    }\n    const vec = new replicad.Vector(direction).normalize();\n    let leafCount = 0;\n    toMove.onLeafs((l) => {\n        leafCount++;\n        return l;\n    });\n    if (leafCount == 1) {\n        console.log(\"moving single object n times\");\n        const result = [];\n        offsets.forEach((magnitude) => {\n            result.push(move(toMove, vec.multiply(magnitude).toTuple()));\n        });\n        console.log(result.length);\n        console.log(result);\n        return result;\n    }\n    else if (leafCount === offsets.length) {\n        console.log(\"moving batch of objects by independent amounts\");\n        let index = 0;\n        let result = [];\n        toMove.onLeafs((l) => {\n            const v = vec.multiply(offsets[index]).toTuple();\n            console.log(v);\n            index += 1;\n            const mvd = l.is2D() ? l.geometry.translate([v[0], v[1]]) : l.geometry.clone().translate(v);\n            const res = new Assembly({ ...l, geometry: mvd });\n            result.push(res);\n            return res;\n        });\n        return result;\n    }\n    else {\n        throw new Error(\"Assembly needs to be singleton or match offsets length. Was: \" + leafCount + \" offsets len: \" + offsets.length);\n    }\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "toMove",
-              "ap1ID": "id-41807",
-              "ap2ID": "id-41810"
-            },
-            {
-              "ap2Name": "offsets",
-              "ap1ID": "id-41808",
-              "ap2ID": "id-41810"
-            },
-            {
-              "ap2Name": "direction",
-              "ap1ID": "id-41809",
-              "ap2ID": "id-41810"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-41810",
-              "ap2ID": "id-41806"
-            },
-            {
-              "ap2Name": "geometry",
-              "ap1ID": "id-41811",
-              "ap2ID": "id-41812"
-            },
-            {
-              "ap2Name": "Shape 1",
-              "ap1ID": "id-41811",
-              "ap2ID": "id-41813"
-            },
-            {
-              "ap2Name": "Shape 2",
-              "ap1ID": "id-41812",
-              "ap2ID": "id-41813"
-            },
-            {
-              "ap2Name": "geometry",
-              "ap1ID": "id-41813",
-              "ap2ID": "id-41814"
-            },
-            {
-              "ap2Name": "toMove",
-              "ap1ID": "id-41814",
-              "ap2ID": "id-41815"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-07-24T18:23:39.035Z",
-            "privateRepo": false,
-            "repoName": "crv.PolyMove",
-            "dateCreated": "2026-05-08T22:28:49Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.PolyMove/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-23",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/crv.PolyMove",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739765",
-            "ranking": 12.6,
-            "searchField": "crv.polymove tristan-huber move one thing n times and return an assembly of the results. or move n things by n different distances. default direction is x+ abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Move one thing n times and return an assembly of the results. Or move n things by n different distances. Default direction is X+",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.PolyMove/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.PolyMove/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1785186399029
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "geometry2",
-          "ap1ID": "id-37131",
-          "ap2ID": "id-37200"
-        },
-        {
-          "ap2Name": "offsets",
-          "ap1ID": "id-37134",
-          "ap2ID": "id-41816"
-        },
-        {
-          "ap2Name": "offsets",
-          "ap1ID": "id-37134",
-          "ap2ID": "id-59409"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37142",
-          "ap2ID": "id-37146"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37146",
-          "ap2ID": "id-37150"
-        },
-        {
-          "ap2Name": "toMove",
-          "ap1ID": "id-37150",
-          "ap2ID": "id-59409"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-37200",
-          "ap2ID": "id-44636"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-44636",
-          "ap2ID": "id-37129"
-        },
-        {
-          "ap2Name": "geometry1",
-          "ap1ID": "id-59409",
-          "ap2ID": "id-37200"
-        }
-      ],
-      "fileTypeVersion": 1
     },
     {
       "atomType": "Molecule",
@@ -5026,8 +4159,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.689453125,
-      "y": 0.2742857142857143,
+      "x": 0.3313802083333333,
+      "y": 0.6914285714285714,
       "uniqueID": "id-44622",
       "name": "falsework",
       "ioValues": [
@@ -5084,28 +4217,9 @@
           ]
         },
         {
-          "atomType": "ExtractTag",
-          "x": 0.21614583333333334,
-          "y": 0.22023809523809526,
-          "uniqueID": "id-44633",
-          "name": "Extract bulkhead",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "tagIndex": 0,
-          "selectedTags": [
-            "bulkhead"
-          ],
-          "includeUntagged": false,
-          "notKeepOut": false
-        },
-        {
           "atomType": "Rectangle",
-          "x": 0.3111979166666667,
-          "y": 0.19345238095238093,
+          "x": 0.29296875,
+          "y": 0.2742857142857143,
           "uniqueID": "id-44655",
           "ioValues": [
             {
@@ -5413,6 +4527,10 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
+              "name": "x",
+              "ioValue": 144.00000999999997
+            },
+            {
               "name": "y",
               "ioValue": 120
             }
@@ -5428,6 +4546,10 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 12.000004999999987
             },
             {
               "name": "yDist",
@@ -5653,11 +4775,6 @@
         }
       ],
       "allConnectors": [
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-44626",
-          "ap2ID": "id-44633"
-        },
         {
           "ap2Name": "retain",
           "ap1ID": "id-44626",
@@ -11517,8 +10634,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.24479166666666669,
-      "y": 0.21999999999999997,
+      "x": 0.22395833333333334,
+      "y": 0.16285714285714284,
       "uniqueID": "id-76328",
       "name": "topdeckAddOns",
       "ioValues": [
@@ -11640,8 +10757,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.37109375,
-          "y": 0.33999999999999997,
+          "x": 0.38802083333333337,
+          "y": 0.2742857142857143,
           "uniqueID": "id-76332",
           "name": "CockpitBorder",
           "ioValues": [
@@ -14777,11 +13894,6 @@
   ],
   "allConnectors": [
     {
-      "ap2Name": "Shape 4",
-      "ap1ID": "id-37384",
-      "ap2ID": "id-44906"
-    },
-    {
       "ap2Name": "face",
       "ap1ID": "id-40782",
       "ap2ID": "id-46843"
@@ -14802,21 +13914,6 @@
       "ap2ID": "id-41385"
     },
     {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-44906",
-      "ap2ID": "id-130"
-    },
-    {
-      "ap2Name": "kayak",
-      "ap1ID": "id-44906",
-      "ap2ID": "id-43724"
-    },
-    {
-      "ap2Name": "kayakbody",
-      "ap1ID": "id-41144",
-      "ap2ID": "id-37127"
-    },
-    {
       "ap2Name": "Assembly",
       "ap1ID": "id-41144",
       "ap2ID": "id-66359"
@@ -14825,36 +13922,6 @@
       "ap2Name": "topdeckPanels",
       "ap1ID": "id-46843",
       "ap2ID": "id-40735"
-    },
-    {
-      "ap2Name": "Shape",
-      "ap1ID": "id-68146",
-      "ap2ID": "id-68110"
-    },
-    {
-      "ap2Name": "Shape 3",
-      "ap1ID": "id-37127",
-      "ap2ID": "id-44906"
-    },
-    {
-      "ap2Name": "geometry",
-      "ap1ID": "id-37127",
-      "ap2ID": "id-68146"
-    },
-    {
-      "ap2Name": "bulkheads",
-      "ap1ID": "id-37127",
-      "ap2ID": "id-44622"
-    },
-    {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-40735",
-      "ap2ID": "id-44906"
-    },
-    {
-      "ap2Name": "Shape 2",
-      "ap1ID": "id-41518",
-      "ap2ID": "id-44899"
     },
     {
       "ap2Name": "geometry",
@@ -14880,6 +13947,11 @@
       "ap2Name": "profileShape",
       "ap1ID": "id-76095",
       "ap2ID": "id-76160"
+    },
+    {
+      "ap2Name": "bulkheads",
+      "ap1ID": "id-76160",
+      "ap2ID": "id-44622"
     },
     {
       "ap2Name": "x",
