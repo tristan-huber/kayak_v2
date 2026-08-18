@@ -8762,8 +8762,8 @@
             },
             {
               "atomType": "Difference",
-              "x": 0.39973958333333337,
-              "y": 0.6685714285714286,
+              "x": 0.36328124999999994,
+              "y": 0.7342857142857142,
               "uniqueID": "id-76684",
               "ioValues": [
                 {
@@ -8778,8 +8778,8 @@
             },
             {
               "atomType": "Move",
-              "x": 0.65576171875,
-              "y": 0.6812499999999999,
+              "x": 0.556640625,
+              "y": 0.6971428571428572,
               "uniqueID": "id-76685",
               "ioValues": [
                 {
@@ -8802,8 +8802,8 @@
             },
             {
               "atomType": "Move",
-              "x": 0.60791015625,
-              "y": 0.8604166666666667,
+              "x": 0.5651041666666666,
+              "y": 0.8542857142857142,
               "uniqueID": "id-76686",
               "ioValues": [
                 {
@@ -8841,58 +8841,8 @@
               ]
             },
             {
-              "atomType": "Color",
-              "x": 0.5888671875,
-              "y": 0.5083333333333333,
-              "uniqueID": "id-76688",
-              "ioValues": [
-                {
-                  "name": "geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "selectedColor": "Black"
-            },
-            {
-              "atomType": "Add-BOM-Tag",
-              "x": 0.64453125,
-              "y": 0.4142857142857143,
-              "uniqueID": "id-76689",
-              "name": "Add BOM Tag",
-              "ioValues": [
-                {
-                  "name": "geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "Item Name",
-                  "ioValue": "HatchTape",
-                  "currentEquation": "HatchTape"
-                },
-                {
-                  "name": "Number Needed",
-                  "ioValue": 0.5
-                },
-                {
-                  "name": "Cost (USD)",
-                  "ioValue": 5
-                },
-                {
-                  "name": "Source Link",
-                  "ioValue": "https://clcboats.com/products/foam-hatch-tape",
-                  "currentEquation": "https://clcboats.com/products/foam-hatch-tape"
-                }
-              ],
-              "BOMitem": {
-                "BOMitemName": "HatchTape",
-                "numberNeeded": 0.5,
-                "costUSD": 5,
-                "source": "https://clcboats.com/products/foam-hatch-tape"
-              }
-            },
-            {
               "atomType": "Assembly",
-              "x": 0.7408854166666666,
+              "x": 0.6360677083333334,
               "y": 0.8200000000000001,
               "uniqueID": "id-76690",
               "ioValues": [
@@ -8903,34 +8853,6 @@
                 {
                   "name": "Shape 2",
                   "ioValue": null
-                },
-                {
-                  "name": "Shape 3",
-                  "ioValue": null
-                }
-              ]
-            },
-            {
-              "atomType": "Move",
-              "x": 0.7041015625,
-              "y": 0.5145833333333334,
-              "uniqueID": "id-76691",
-              "ioValues": [
-                {
-                  "name": "geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "xDist",
-                  "ioValue": 0
-                },
-                {
-                  "name": "yDist",
-                  "ioValue": 0
-                },
-                {
-                  "name": "zDist",
-                  "ioValue": -0.25
                 }
               ]
             },
@@ -9021,8 +8943,8 @@
             },
             {
               "atomType": "Intersection",
-              "x": 0.5052083333333333,
-              "y": 0.54,
+              "x": 0.4563802083333333,
+              "y": 0.5314285714285714,
               "uniqueID": "id-78280",
               "ioValues": [
                 {
@@ -9415,126 +9337,57 @@
               "lastReloadedFromGithubAt": 1785365662569
             },
             {
-              "atomType": "GitHubMolecule",
-              "x": 0.173828125,
-              "y": 0.42,
-              "uniqueID": "id-76928",
-              "name": "extrudeFaceDirected",
+              "atomType": "Intersection",
+              "x": 0.4700520833333333,
+              "y": 0.8485714285714286,
+              "uniqueID": "id-79624",
               "ioValues": [
                 {
-                  "name": "face",
+                  "name": "geometry1",
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
-                  "name": "extrusionVec",
-                  "ioValue": [
-                    0,
-                    0,
-                    ""
-                  ]
+                  "name": "geometry2",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Add-BOM-Tag",
+              "x": 0.728515625,
+              "y": 0.7228571428571429,
+              "uniqueID": "id-79628",
+              "name": "Add BOM Tag",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Item Name",
+                  "ioValue": "HatchTape",
+                  "currentEquation": "HatchTape"
+                },
+                {
+                  "name": "Number Needed",
+                  "ioValue": 0.5
+                },
+                {
+                  "name": "Cost (USD)",
+                  "ioValue": 5
+                },
+                {
+                  "name": "Source Link",
+                  "ioValue": "https://clcboats.com/products/foam-hatch-tape",
+                  "currentEquation": "https://clcboats.com/products/foam-hatch-tape"
                 }
               ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 0.98,
-                  "y": 0.5,
-                  "uniqueID": "id-76924",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.45166015625,
-                  "y": 0.4833333333333333,
-                  "uniqueID": "id-76925",
-                  "ioValues": [
-                    {
-                      "name": "faces",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "direction",
-                      "ioValue": [
-                        0,
-                        0,
-                        ""
-                      ]
-                    }
-                  ],
-                  "interpreterVersion": 1,
-                  "code": "function run(faces: Assembly, direction: number[]) {\n  return faces.onLeafs((leaf) => {\n    leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction))\n    return leaf;\n  })\n}",
-                  "compiledCode": "\"use strict\";\nfunction run(faces, direction) {\n    return faces.onLeafs((leaf) => {\n        leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction));\n        return leaf;\n    });\n}\n"
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.0231,
-                  "y": 0.14,
-                  "uniqueID": "id-76926",
-                  "name": "face",
-                  "type": "geometry"
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.0231,
-                  "y": 0.22400000000000003,
-                  "uniqueID": "id-76927",
-                  "name": "extrusionVec",
-                  "type": "point3d",
-                  "pointValue": null
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-76925",
-                  "ap2ID": "id-76924"
-                },
-                {
-                  "ap2Name": "faces",
-                  "ap1ID": "id-76926",
-                  "ap2ID": "id-76925"
-                },
-                {
-                  "ap2Name": "direction",
-                  "ap1ID": "id-76927",
-                  "ap2ID": "id-76925"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-08-18T10:23:39.059Z",
-                "privateRepo": false,
-                "repoName": "extrudeFaceDirected",
-                "dateCreated": "2026-07-29T22:22:15Z",
-                "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/README.md?sanitize=true",
-                "yyyy": 2026,
-                "topMoleculeID": "id-121",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/tristan-huber/extrudeFaceDirected",
-                "topics": [
-                  "abundance-tool"
-                ],
-                "pullRequests": [],
-                "parentRepo": null,
-                "forks": 0,
-                "dateModified": "739826",
-                "ranking": 2.7,
-                "searchField": "extrudefacedirected tristan-huber extrude an assembly of faces in a given direction. same as feeding an assembly of faces to extrude except that the direction of extrusion is specified explicitly. abundance-tool",
-                "owner": "tristan-huber",
-                "description": "Extrude an assembly of faces in a given direction. Same as feeding an assembly of faces to Extrude except that the direction of extrusion is specified explicitly.",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Unitless",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1787072606466
+              "BOMitem": {
+                "BOMitemName": "HatchTape",
+                "numberNeeded": 0.5,
+                "costUSD": 5,
+                "source": "https://clcboats.com/products/foam-hatch-tape"
+              }
             }
           ],
           "allConnectors": [
@@ -9542,11 +9395,6 @@
               "ap2Name": "geometry",
               "ap1ID": "id-76677",
               "ap2ID": "id-76831"
-            },
-            {
-              "ap2Name": "face",
-              "ap1ID": "id-76677",
-              "ap2ID": "id-76928"
             },
             {
               "ap2Name": "width",
@@ -9584,11 +9432,6 @@
               "ap2ID": "id-76694"
             },
             {
-              "ap2Name": "geometry",
-              "ap1ID": "id-76684",
-              "ap2ID": "id-76685"
-            },
-            {
               "ap2Name": "geometry2",
               "ap1ID": "id-76684",
               "ap2ID": "id-78280"
@@ -9604,29 +9447,14 @@
               "ap2ID": "id-76690"
             },
             {
-              "ap2Name": "geometry",
+              "ap2Name": "geometry2",
               "ap1ID": "id-76687",
-              "ap2ID": "id-76686"
-            },
-            {
-              "ap2Name": "geometry",
-              "ap1ID": "id-76688",
-              "ap2ID": "id-76689"
-            },
-            {
-              "ap2Name": "geometry",
-              "ap1ID": "id-76689",
-              "ap2ID": "id-76691"
+              "ap2ID": "id-79624"
             },
             {
               "ap2Name": "geometry",
               "ap1ID": "id-76690",
-              "ap2ID": "id-76692"
-            },
-            {
-              "ap2Name": "Shape 3",
-              "ap1ID": "id-76691",
-              "ap2ID": "id-76690"
+              "ap2ID": "id-79628"
             },
             {
               "ap2Name": "Shape 2",
@@ -9659,6 +9487,21 @@
               "ap2ID": "id-78280"
             },
             {
+              "ap2Name": "geometry1",
+              "ap1ID": "id-76831",
+              "ap2ID": "id-79624"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-76919",
+              "ap2ID": "id-76693"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-78280",
+              "ap2ID": "id-76685"
+            },
+            {
               "ap2Name": "geometry",
               "ap1ID": "id-76699",
               "ap2ID": "id-76681"
@@ -9682,6 +9525,16 @@
               "ap2Name": "retain",
               "ap1ID": "id-76711",
               "ap2ID": "id-76687"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-79624",
+              "ap2ID": "id-76686"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-79628",
+              "ap2ID": "id-76692"
             }
           ],
           "fileTypeVersion": 1
