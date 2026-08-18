@@ -13638,6 +13638,30 @@
                 }
               ],
               "fileTypeVersion": 1
+            },
+            {
+              "atomType": "Code",
+              "x": 0.39192708333333337,
+              "y": 0.34285714285714286,
+              "uniqueID": "id-76863",
+              "ioValues": [
+                {
+                  "name": "shape",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "factor",
+                  "ioValue": 1.5,
+                  "currentEquation": "1.5"
+                },
+                {
+                  "name": "center",
+                  "ioValue": []
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(shape: Assembly, factor: number, center: number[]) {\n  return shape.onLeafs((leaf) => {\n    leaf.geometry = replicad.scale(leaf.geometry, new replicad.Vector(center), factor)\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\nfunction run(shape, factor, center) {\n    return shape.onLeafs((leaf) => {\n        leaf.geometry = replicad.scale(leaf.geometry, new replicad.Vector(center), factor);\n        return leaf;\n    });\n}\n"
             }
           ],
           "allConnectors": [
@@ -13650,6 +13674,11 @@
               "ap2Name": "Geometry",
               "ap1ID": "id-76334",
               "ap2ID": "id-76354"
+            },
+            {
+              "ap2Name": "shape",
+              "ap1ID": "id-76334",
+              "ap2ID": "id-76863"
             },
             {
               "ap2Name": "t",
