@@ -1991,8 +1991,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// face.normalTo\n\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center))\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= toleranceDeg;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// face.normalTo\nfunction run(facesOf, normal, toleranceDeg = 0) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center));\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= toleranceDeg;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
+          "code": "// face.normalTo\n\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n  const tol = toleranceDeg * replicad.DEG2RAD\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center))\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= tol;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// face.normalTo\nfunction run(facesOf, normal, toleranceDeg = 0) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    const tol = toleranceDeg * replicad.DEG2RAD;\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center));\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= tol;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
         },
         {
           "atomType": "GitHubMolecule",
@@ -2027,7 +2027,20 @@
               "uniqueID": "id-83506",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  7
+                ],
+                "1": [
+                  7
+                ],
+                "2": [
+                  9
+                ],
+                "3": [
+                  7
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -2271,8 +2284,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.4153645833333333,
-          "y": 0.7514285714285714,
+          "x": 0.47786458333333337,
+          "y": 0.7685714285714286,
           "uniqueID": "id-83556",
           "ioValues": [
             {
@@ -2282,19 +2295,20 @@
             {
               "name": "normal",
               "ioValue": [
-                1,
-                0,
-                0
+                -0.131291103375244,
+                -0.312829450030199,
+                -0.9406914379159163
               ]
             },
             {
               "name": "toleranceDeg",
-              "ioValue": 0
+              "ioValue": 25,
+              "currentEquation": "25"
             }
           ],
           "interpreterVersion": 1,
-          "code": "// face.normalTo\n\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center))\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= toleranceDeg;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// face.normalTo\nfunction run(facesOf, normal, toleranceDeg = 0) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center));\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= toleranceDeg;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
+          "code": "// face.normalTo\n\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n  const tol = toleranceDeg * replicad.DEG2RAD\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center))\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= tol;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// face.normalTo\nfunction run(facesOf, normal, toleranceDeg = 0) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    const tol = toleranceDeg * replicad.DEG2RAD;\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center));\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= tol;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
         },
         {
           "atomType": "GitHubMolecule",
@@ -2331,16 +2345,16 @@
               "type": "faceselect",
               "selectedFaceData": {
                 "0": [
-                  7
+                  3
                 ],
                 "1": [
-                  7
+                  3
                 ],
                 "2": [
-                  9
+                  3
                 ],
                 "3": [
-                  7
+                  3
                 ]
               }
             },
@@ -2404,8 +2418,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.587890625,
-          "y": 0.4942857142857142,
+          "x": 0.42252604166666663,
+          "y": 0.5828571428571429,
           "uniqueID": "id-83573",
           "ioValues": [
             {
@@ -2422,8 +2436,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// face.normal\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  let faces = face.getSelectedFaces();\n  if (faces.length == 0) {\n    face.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        faces.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n\n  if (faces.length != 1) {\n    throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length)\n  }\n  console.log(faces)\n  return faces[0].normalAt([u,v])\n}",
-          "compiledCode": "\"use strict\";\n// face.normal\nfunction run(face, u = 0.5, v = 0.5) {\n    let faces = face.getSelectedFaces();\n    if (faces.length == 0) {\n        face.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                faces.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (faces.length != 1) {\n        throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length);\n    }\n    console.log(faces);\n    return faces[0].normalAt([u, v]);\n}\n"
+          "code": "// face.normal\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  let faces = face.getSelectedFaces().filter((a) => a != undefined && a != null);\n  if (faces.length == 0) {\n    face.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        faces.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n\n  if (faces.length != 1) {\n    throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length)\n  }\n  console.log(faces)\n  return faces[0].normalAt([u,v]).normalize().toTuple()\n}",
+          "compiledCode": "\"use strict\";\n// face.normal\nfunction run(face, u = 0.5, v = 0.5) {\n    let faces = face.getSelectedFaces().filter((a) => a != undefined && a != null);\n    if (faces.length == 0) {\n        face.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                faces.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (faces.length != 1) {\n        throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length);\n    }\n    console.log(faces);\n    return faces[0].normalAt([u, v]).normalize().toTuple();\n}\n"
         }
       ],
       "allConnectors": [
@@ -2528,11 +2542,6 @@
           "ap2ID": "id-83516"
         },
         {
-          "ap2Name": "normal",
-          "ap1ID": "id-83491",
-          "ap2ID": "id-83556"
-        },
-        {
           "ap2Name": "Assembly",
           "ap1ID": "id-83497",
           "ap2ID": "id-83504"
@@ -2546,6 +2555,11 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-83556",
           "ap2ID": "id-83557"
+        },
+        {
+          "ap2Name": "normal",
+          "ap1ID": "id-83573",
+          "ap2ID": "id-83556"
         }
       ],
       "fileTypeVersion": 1
