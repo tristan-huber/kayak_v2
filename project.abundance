@@ -10527,106 +10527,6 @@
           "lastReloadedFromGithubAt": 1787079495116
         },
         {
-          "atomType": "GitHubMolecule",
-          "x": 0.13671875,
-          "y": 0.37714285714285717,
-          "uniqueID": "id-83445",
-          "name": "ExtractFaces",
-          "ioValues": [
-            {
-              "name": "Assembly",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-83446",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-83447",
-              "name": "Assembly",
-              "type": "faceselect",
-              "selectedFaceData": {
-                "0": [
-                  12,
-                  4,
-                  5,
-                  6
-                ]
-              }
-            },
-            {
-              "atomType": "Code",
-              "x": 0.2565104166666667,
-              "y": 0.7599999999999999,
-              "uniqueID": "id-83448",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-83447",
-              "ap2ID": "id-83448"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-83448",
-              "ap2ID": "id-83446"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-18T18:23:39.146Z",
-            "privateRepo": false,
-            "repoName": "ExtractFaces",
-            "dateCreated": "2026-07-24T19:57:30Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34810",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractFaces",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 4.2,
-            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787078543674
-        },
-        {
           "atomType": "Molecule",
           "x": 0.5384114583333334,
           "y": 0.10857142857142857,
@@ -11001,8 +10901,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.09375,
-          "y": 0.5742857142857143,
+          "x": 0.0390625,
+          "y": 0.7,
           "uniqueID": "id-83633",
           "name": "select.FacesByNormal",
           "ioValues": [
@@ -11416,8 +11316,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.14453125,
-          "y": 0.8171428571428572,
+          "x": 0.18359375,
+          "y": 0.8714285714285714,
           "uniqueID": "id-85642",
           "name": "ExtractFaces",
           "ioValues": [
@@ -11447,20 +11347,7 @@
               "uniqueID": "id-85644",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {
-                "0": [
-                  0
-                ],
-                "1": [
-                  0
-                ],
-                "2": [
-                  0
-                ],
-                "3": [
-                  0
-                ]
-              }
+              "selectedFaceData": {}
             },
             {
               "atomType": "Code",
@@ -15261,6 +15148,812 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787171044415
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.09895833333333334,
+          "y": 0.7914285714285715,
+          "uniqueID": "id-87515",
+          "name": "select.adjascentFaces",
+          "ioValues": [
+            {
+              "name": "assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87512",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.404296875,
+              "y": 0.6285714285714286,
+              "uniqueID": "id-87513",
+              "ioValues": [
+                {
+                  "name": "assembly",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "// select.adjascentFaces\nfunction run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.is3D()) {\n      const selectedFaceIndexes = leaf.selection?.faces ?? []\n      const faces = leaf.geometry.faces;\n      const selectedFaces = selectedFaceIndexes.map((index) => faces[index])\n      const targetEdges = selectedFaces.map((f) => f.edges).flat()\n      const newSelection: number[] = []\n      console.log(targetEdges)\n\n\n      faces.forEach((face, index) => {\n        if (selectedFaceIndexes.includes(index)) {\n          // explicitly reject already selected faces\n          return undefined;\n        }\n        const isAdj = face.edges.some((e) => targetEdges.some((e2) => e2.isSame((e))))\n        console.log(`${index}th face is adjascent: ${isAdj}`)\n        if (isAdj) {\n          newSelection.push(index)\n        }\n      })\n      if (leaf.selection == undefined) {\n        leaf.selection = { faces: [] }\n      }\n      if (leaf.selection.faces == undefined) {\n        leaf.selection.faces = []\n      }\n      leaf.selection.faces = newSelection\n    }\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.is3D()) {\n            const selectedFaceIndexes = leaf.selection?.faces ?? [];\n            const faces = leaf.geometry.faces;\n            const selectedFaces = selectedFaceIndexes.map((index) => faces[index]);\n            const targetEdges = selectedFaces.map((f) => f.edges).flat();\n            const newSelection = [];\n            console.log(targetEdges);\n            faces.forEach((face, index) => {\n                if (selectedFaceIndexes.includes(index)) {\n                    // explicitly reject already selected faces\n                    return undefined;\n                }\n                const isAdj = face.edges.some((e) => targetEdges.some((e2) => e2.isSame((e))));\n                console.log(`${index}th face is adjascent: ${isAdj}`);\n                if (isAdj) {\n                    newSelection.push(index);\n                }\n            });\n            if (leaf.selection == undefined) {\n                leaf.selection = { faces: [] };\n            }\n            if (leaf.selection.faces == undefined) {\n                leaf.selection.faces = [];\n            }\n            leaf.selection.faces = newSelection;\n        }\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87514",
+              "name": "assembly",
+              "type": "geometry"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87513",
+              "ap2ID": "id-87512"
+            },
+            {
+              "ap2Name": "assembly",
+              "ap1ID": "id-87514",
+              "ap2ID": "id-87513"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "select.adjascentFaces",
+            "dateCreated": "2026-08-19T21:10:20Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/select.adjascentFaces/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-1",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/select.adjascentFaces",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "select.adjascentfaces tristan-huber selects faces adjacent to the existing selection. already selected faces are specifically excluded even if they share an edge with another selected face. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Selects faces adjacent to the existing selection. Already selected faces are specifically excluded even if they share an edge with another selected face.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.adjascentFaces/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.adjascentFaces/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787177185236
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.11458333333333334,
+          "y": 0.4542857142857143,
+          "uniqueID": "id-87524",
+          "name": "select.FacesByNormal",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "normal",
+              "ioValue": [
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "name": "toleranceDeg",
+              "ioValue": 45,
+              "currentEquation": "45"
+            },
+            {
+              "name": "u",
+              "ioValue": 0.5
+            },
+            {
+              "name": "v",
+              "ioValue": 0.5
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87525",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.46223958333333337,
+              "y": 0.3485714285714286,
+              "uniqueID": "id-87526",
+              "ioValues": [
+                {
+                  "name": "facesOf",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "normal",
+                  "ioValue": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "toleranceDeg",
+                  "ioValue": 45
+                },
+                {
+                  "name": "u",
+                  "ioValue": 0.5
+                },
+                {
+                  "name": "v",
+                  "ioValue": 0.5
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0, u: number = 0.5, v: number = 0.5) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n  const tol = toleranceDeg * replicad.DEG2RAD\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u,v])\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= tol;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\nfunction run(facesOf, normal, toleranceDeg = 0, u = 0.5, v = 0.5) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    const tol = toleranceDeg * replicad.DEG2RAD;\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u, v]);\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= tol;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87527",
+              "name": "shape",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.22400000000000003,
+              "uniqueID": "id-87528",
+              "name": "normal",
+              "type": "point3d",
+              "pointValue": null
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.30800000000000005,
+              "uniqueID": "id-87529",
+              "name": "toleranceDeg"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.39200000000000007,
+              "uniqueID": "id-87530",
+              "name": "u"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.4760000000000001,
+              "uniqueID": "id-87531",
+              "name": "v"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87526",
+              "ap2ID": "id-87525"
+            },
+            {
+              "ap2Name": "facesOf",
+              "ap1ID": "id-87527",
+              "ap2ID": "id-87526"
+            },
+            {
+              "ap2Name": "normal",
+              "ap1ID": "id-87528",
+              "ap2ID": "id-87526"
+            },
+            {
+              "ap2Name": "toleranceDeg",
+              "ap1ID": "id-87529",
+              "ap2ID": "id-87526"
+            },
+            {
+              "ap2Name": "u",
+              "ap1ID": "id-87530",
+              "ap2ID": "id-87526"
+            },
+            {
+              "ap2Name": "v",
+              "ap1ID": "id-87531",
+              "ap2ID": "id-87526"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "select.FacesByNormal",
+            "dateCreated": "2026-08-19T19:30:15Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-54",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/select.FacesByNormal",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "select.facesbynormal tristan-huber select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5) abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. Note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5)",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787167991694
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.3548177083333333,
+          "y": 0.7971428571428572,
+          "uniqueID": "id-87552",
+          "name": "ExtractFaces",
+          "ioValues": [
+            {
+              "name": "Assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87553",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87554",
+              "name": "Assembly",
+              "type": "faceselect",
+              "selectedFaceData": {
+                "0": [
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "1": [
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "2": [
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "3": [
+                  1,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "atomType": "Code",
+              "x": 0.2565104166666667,
+              "y": 0.7599999999999999,
+              "uniqueID": "id-87555",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-87554",
+              "ap2ID": "id-87555"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87555",
+              "ap2ID": "id-87553"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-08-18T18:23:39.146Z",
+            "privateRepo": false,
+            "repoName": "ExtractFaces",
+            "dateCreated": "2026-07-24T19:57:30Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-34810",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ExtractFaces",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739821",
+            "ranking": 4.2,
+            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787078543674
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.203125,
+          "y": 0.45142857142857146,
+          "uniqueID": "id-87568",
+          "name": "select.Invert",
+          "ioValues": [
+            {
+              "name": "selection",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87565",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.39453125,
+              "y": 0.4828571428571429,
+              "uniqueID": "id-87566",
+              "ioValues": [
+                {
+                  "name": "a1",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "// select.Not\nfunction run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (leaf.selection) {\n      leaf.selection.part = !leaf.selection?.part\n    }\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [], faces: [], part: true }\n    }\n    const initialEdges = leaf.selection.edges ?? []\n    const initialFaces = leaf.selection.faces ?? []\n\n    leaf.selection.edges = [...new Array(leaf.geometry.edges.length).keys()].filter((i) => !initialEdges.includes(i))\n    leaf.selection.faces = [...new Array(leaf.geometry.faces.length).keys()].filter((i) => !initialFaces.includes(i))\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\n// select.Not\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (leaf.selection) {\n            leaf.selection.part = !leaf.selection?.part;\n        }\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [], faces: [], part: true };\n        }\n        const initialEdges = leaf.selection.edges ?? [];\n        const initialFaces = leaf.selection.faces ?? [];\n        leaf.selection.edges = [...new Array(leaf.geometry.edges.length).keys()].filter((i) => !initialEdges.includes(i));\n        leaf.selection.faces = [...new Array(leaf.geometry.faces.length).keys()].filter((i) => !initialFaces.includes(i));\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87567",
+              "name": "selection",
+              "type": "geometry"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87566",
+              "ap2ID": "id-87565"
+            },
+            {
+              "ap2Name": "a1",
+              "ap1ID": "id-87567",
+              "ap2ID": "id-87566"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "select.Invert",
+            "dateCreated": "2026-08-19T21:57:12Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/select.Invert/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-90",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/select.Invert",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "select.invert tristan-huber invert the selection on the input assembly. unselected parts become selected, selected parts become unselected. same for edges and faces. a logical not. also works like select all if given an assembly with no selections abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Invert the selection on the input assembly. Unselected parts become selected, selected parts become unselected. Same for edges and faces. A logical Not. Also works like select all if given an assembly with no selections",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.Invert/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.Invert/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787177267157
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.2669270833333333,
+          "y": 0.7714285714285715,
+          "uniqueID": "id-87594",
+          "name": "select.Both",
+          "ioValues": [
+            {
+              "name": "selectionOne",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "selectionTwo",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87590",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.3463541666666667,
+              "y": 0.47714285714285715,
+              "uniqueID": "id-87591",
+              "ioValues": [
+                {
+                  "name": "a1",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "a2",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "// select.adjascentFaces\nfunction run(a1: Assembly, a2: Assembly) {\n  const a2leafs: Assembly<LeafGeom>[] = []\n  a2.onLeafs((leaf) => {\n    a2leafs.push(leaf)\n    return leaf;\n  })\n  let index = 0;\n  return a1.onLeafs((leaf) => {\n    if (index > a2leafs.length - 1) {\n      throw new Error(\"Input asesmblies had different number of leafs\")\n    }\n    const otherSel = a2leafs[index].selection;\n    index++;\n\n    const thisSel = leaf.selection;\n    if (thisSel == undefined || otherSel == undefined) {\n      leaf.selection = { edges: [], faces: [], part: false }\n      return leaf;\n    }\n    const newSel = {\n      edges: (thisSel.edges ?? []).filter((i) => (otherSel.edges ?? []).includes(i)),\n      faces: (thisSel.faces ?? []).filter((i) => (otherSel.faces ?? []).includes(i)),\n      part: thisSel.part && otherSel.part\n    }\n    console.log(otherSel)\n    console.log(thisSel)\n    console.log(newSel)\n    leaf.selection = newSel;\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(a1, a2) {\n    const a2leafs = [];\n    a2.onLeafs((leaf) => {\n        a2leafs.push(leaf);\n        return leaf;\n    });\n    let index = 0;\n    return a1.onLeafs((leaf) => {\n        if (index > a2leafs.length - 1) {\n            throw new Error(\"Input asesmblies had different number of leafs\");\n        }\n        const otherSel = a2leafs[index].selection;\n        index++;\n        const thisSel = leaf.selection;\n        if (thisSel == undefined || otherSel == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const newSel = {\n            edges: (thisSel.edges ?? []).filter((i) => (otherSel.edges ?? []).includes(i)),\n            faces: (thisSel.faces ?? []).filter((i) => (otherSel.faces ?? []).includes(i)),\n            part: thisSel.part && otherSel.part\n        };\n        console.log(otherSel);\n        console.log(thisSel);\n        console.log(newSel);\n        leaf.selection = newSel;\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87592",
+              "name": "selectionOne",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.22400000000000003,
+              "uniqueID": "id-87593",
+              "name": "selectionTwo",
+              "type": "geometry"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87591",
+              "ap2ID": "id-87590"
+            },
+            {
+              "ap2Name": "a1",
+              "ap1ID": "id-87592",
+              "ap2ID": "id-87591"
+            },
+            {
+              "ap2Name": "a2",
+              "ap1ID": "id-87593",
+              "ap2ID": "id-87591"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "select.Both",
+            "dateCreated": "2026-08-19T21:13:32Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/select.Both/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-18",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/select.Both",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "select.both tristan-huber combines selections of the two inputs. resulting assembly has selections only where both inputs had a selection. it's expected that the inputs to this atom are two selection on the same underyling assembly. a logical and selector or intersection of selection abundance-tool",
+            "owner": "tristan-huber",
+            "description": "combines selections of the two inputs. Resulting assembly has selections only where both inputs had a selection. It's expected that the inputs to this atom are two selection on the same underyling assembly. A logical And selector or intersection of selection",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.Both/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.Both/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787177287021
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.421875,
+          "y": 0.41714285714285715,
+          "uniqueID": "id-87613",
+          "name": "face.asPlane",
+          "ioValues": [
+            {
+              "name": "u",
+              "ioValue": 0.5
+            },
+            {
+              "name": "v",
+              "ioValue": 0.1,
+              "currentEquation": "0.1"
+            },
+            {
+              "name": "xDir",
+              "ioValue": [
+                1,
+                0,
+                0
+              ]
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87607",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.5026041666666666,
+              "y": 0.5028571428571429,
+              "uniqueID": "id-87608",
+              "ioValues": [
+                {
+                  "name": "face",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "u",
+                  "ioValue": 0.5
+                },
+                {
+                  "name": "v",
+                  "ioValue": 0.1
+                },
+                {
+                  "name": "xPos",
+                  "ioValue": [
+                    1,
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "// face.asPlane\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5, xPos: number[]) {\n  let xposOverride = undefined;\n  if (xPos.length == 3 && new replicad.Vector(xPos as [number, number, number]).Length > 0) {\n    xposOverride = new replicad.Vector(xPos as [number, number, number])\n  }\n\n  const normUV = (uV: number, min: number, max: number) => {\n    return min + (max - min) * uV\n  }\n  return face.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v])\n      if (xposOverride) {\n        const projXDir = xposOverride.projectToPlane(leaf.plane)\n        if (projXDir.Length == 0) {\n          throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`)\n        }\n        const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD\n        const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)))\n        leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1)\n        console.log(`degrees different: ${deg} sign: ${sign}.`)\n      }\n      leaf.geometry = replicad.drawRectangle(1, 0.5)\n    }\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\n// face.asPlane\nfunction run(face, u = 0.5, v = 0.5, xPos) {\n    let xposOverride = undefined;\n    if (xPos.length == 3 && new replicad.Vector(xPos).Length > 0) {\n        xposOverride = new replicad.Vector(xPos);\n    }\n    const normUV = (uV, min, max) => {\n        return min + (max - min) * uV;\n    };\n    return face.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v]);\n            if (xposOverride) {\n                const projXDir = xposOverride.projectToPlane(leaf.plane);\n                if (projXDir.Length == 0) {\n                    throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`);\n                }\n                const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD;\n                const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)));\n                leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1);\n                console.log(`degrees different: ${deg} sign: ${sign}.`);\n            }\n            leaf.geometry = replicad.drawRectangle(1, 0.5);\n        }\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87609",
+              "name": "faces"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.22400000000000003,
+              "uniqueID": "id-87610",
+              "name": "u"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.30800000000000005,
+              "uniqueID": "id-87611",
+              "name": "v"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.39200000000000007,
+              "uniqueID": "id-87612",
+              "name": "xDir",
+              "type": "array"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87608",
+              "ap2ID": "id-87607"
+            },
+            {
+              "ap2Name": "face",
+              "ap1ID": "id-87609",
+              "ap2ID": "id-87608"
+            },
+            {
+              "ap2Name": "u",
+              "ap1ID": "id-87610",
+              "ap2ID": "id-87608"
+            },
+            {
+              "ap2Name": "v",
+              "ap1ID": "id-87611",
+              "ap2ID": "id-87608"
+            },
+            {
+              "ap2Name": "xPos",
+              "ap1ID": "id-87612",
+              "ap2ID": "id-87608"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "face.asPlane",
+            "dateCreated": "2026-08-19T20:08:51Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/face.asPlane/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-110",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/face.asPlane",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "face.asplane tristan-huber turns a face (or faces) into planes. each face in the input gets a plane created with it's origin and normal vector determined by the input u, v position. by default x axis is u positive direction but this can be overriden abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Turns a face (or faces) into planes. Each face in the input gets a plane created with it's origin and normal vector determined by the input u, v position. By default x axis is U positive direction but this can be overriden",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/face.asPlane/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/face.asPlane/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787177335423
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.3216145833333333,
+          "y": 0.5742857142857143,
+          "uniqueID": "id-87634",
+          "name": "vec.X",
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87632",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.40950520833333337,
+              "y": 0.47428571428571425,
+              "uniqueID": "id-87633",
+              "interpreterVersion": 1,
+              "code": "// edges.inShape\n\nfunction run() {\n  return [1, 0, 0]\n}",
+              "compiledCode": "\"use strict\";\n// edges.inShape\nfunction run() {\n    return [1, 0, 0];\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87633",
+              "ap2ID": "id-87632"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "vec.X",
+            "dateCreated": "2026-08-19T19:23:39Z",
+            "pngURL": "https://raw.githubusercontent.com/tristan-huber/vec.X/main/project.png",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/vec.X/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-34",
+            "userSetAsThumbnail": false,
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/vec.X",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "vec.x tristan-huber returns the x positive vector as an array of three numbers, ie [0,0,1]. compatible with a point or vertex type input. vector magnitude 1 abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Returns the X positive vector as an array of three numbers, ie [0,0,1]. Compatible with a Point or Vertex type input. Vector magnitude 1",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/vec.X/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/vec.X/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787177362288
         }
       ],
       "allConnectors": [
@@ -15290,14 +15983,19 @@
           "ap2ID": "id-83633"
         },
         {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-83431",
-          "ap2ID": "id-80997"
+          "ap2Name": "shape",
+          "ap1ID": "id-80971",
+          "ap2ID": "id-87524"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-80971",
+          "ap2ID": "id-80969"
         },
         {
           "ap2Name": "Assembly",
-          "ap1ID": "id-83442",
-          "ap2ID": "id-83445"
+          "ap1ID": "id-83431",
+          "ap2ID": "id-80997"
         },
         {
           "ap2Name": "Assembly",
@@ -15313,11 +16011,6 @@
           "ap2Name": "planes",
           "ap1ID": "id-83585",
           "ap2ID": "id-83608"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-83608",
-          "ap2ID": "id-80969"
         },
         {
           "ap2Name": "geometry",
@@ -15365,14 +16058,49 @@
           "ap2ID": "id-83585"
         },
         {
-          "ap2Name": "Assembly",
+          "ap2Name": "assembly",
           "ap1ID": "id-83633",
-          "ap2ID": "id-85642"
+          "ap2ID": "id-87515"
+        },
+        {
+          "ap2Name": "selectionTwo",
+          "ap1ID": "id-85642",
+          "ap2ID": "id-87594"
         },
         {
           "ap2Name": "Geometry",
           "ap1ID": "id-85140",
           "ap2ID": "id-85565"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-87515",
+          "ap2ID": "id-85642"
+        },
+        {
+          "ap2Name": "selection",
+          "ap1ID": "id-87524",
+          "ap2ID": "id-87568"
+        },
+        {
+          "ap2Name": "faces",
+          "ap1ID": "id-87552",
+          "ap2ID": "id-87613"
+        },
+        {
+          "ap2Name": "selectionOne",
+          "ap1ID": "id-87568",
+          "ap2ID": "id-87594"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-87594",
+          "ap2ID": "id-87552"
+        },
+        {
+          "ap2Name": "xDir",
+          "ap1ID": "id-87634",
+          "ap2ID": "id-87613"
         }
       ],
       "fileTypeVersion": 1
