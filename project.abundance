@@ -1853,8 +1853,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.37369791666666663,
-          "y": 0.8628571428571429,
+          "x": 0.4322916666666667,
+          "y": 0.8171428571428572,
           "uniqueID": "id-83504",
           "name": "ExtractFaces",
           "ioValues": [
@@ -6566,8 +6566,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.3040364583333333,
-          "y": 0.5885714285714286,
+          "x": 0.33203125,
+          "y": 0.4971428571428571,
           "uniqueID": "id-85654",
           "ioValues": [
             {
@@ -6585,8 +6585,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.3540364583333333,
-          "y": 0.5385714285714286,
+          "x": 0.33984375,
+          "y": 0.6914285714285714,
           "uniqueID": "id-85665",
           "ioValues": [
             {
@@ -6599,8 +6599,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// select.adjascentFaces\nfunction run(a1: Assembly, a2: Assembly) {\n  const a2leafs: Assembly<LeafGeom>[] = []\n  a2.onLeafs((leaf) => {\n    a2leafs.push(leaf)\n    return leaf;\n  })\n  let index = 0;\n  return a1.onLeafs((leaf) => {\n    if (index > a2leafs.length - 1) {\n      throw new Error(\"Input asesmblies had different number of leafs\")\n    }\n    const otherSel = a2leafs[index].selection;\n    index++;\n\n    const thisSel = leaf.selection;\n    if (thisSel == undefined || otherSel == undefined) {\n      leaf.selection = {edges: [], faces: [], part: false}\n      return leaf;\n    }\n    const newSel = {\n      edges: (thisSel.edges ?? []).filter((i) => (otherSel.edges ?? []).includes(i)),\n      faces: (thisSel.faces ?? []).filter((i) => (otherSel.faces ?? []).includes(i)),\n      part: thisSel.part && otherSel.part\n    }\n    console.log(otherSel)\n    console.log(thisSel)\n    console.log(newSel)\n    leaf.selection = newSel;\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(a1, a2) {\n    const a2leafs = [];\n    a2.onLeafs((leaf) => {\n        a2leafs.push(leaf);\n        return leaf;\n    });\n    let index = 0;\n    return a1.onLeafs((leaf) => {\n        if (index > a2leafs.length - 1) {\n            throw new Error(\"Input asesmblies had different number of leafs\");\n        }\n        const otherSel = a2leafs[index].selection;\n        index++;\n        const thisSel = leaf.selection;\n        if (thisSel == undefined || otherSel == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const newSel = {\n            edges: (thisSel.edges ?? []).filter((i) => (otherSel.edges ?? []).includes(i)),\n            faces: (thisSel.faces ?? []).filter((i) => (otherSel.faces ?? []).includes(i)),\n            part: thisSel.part && otherSel.part\n        };\n        console.log(otherSel);\n        console.log(thisSel);\n        console.log(newSel);\n        leaf.selection = newSel;\n        return leaf;\n    });\n}\n"
+          "code": "// select.adjascentFaces\nfunction run(a1: Assembly, a2: Assembly) {\n  const a2leafs: Assembly<LeafGeom>[] = []\n  a2.onLeafs((leaf) => {\n    a2leafs.push(leaf)\n    return leaf;\n  })\n  let index = 0;\n  return a1.onLeafs((leaf) => {\n    if (index > a2leafs.length - 1) {\n      throw new Error(\"Input asesmblies had different number of leafs\")\n    }\n    const otherSel = a2leafs[index].selection;\n    index++;\n\n    const thisSel = leaf.selection;\n    if (thisSel == undefined || otherSel == undefined) {\n      leaf.selection = {edges: [], faces: [], part: false}\n      return leaf;\n    }\n    const newSel = {\n      edges: [...new Set([...(thisSel.edges ?? []), ...(otherSel.edges ?? [])])],\n      faces: [...new Set([...(thisSel.faces ?? []), ...(otherSel.faces ?? [])])],\n      part: thisSel.part || otherSel.part\n    }\n    console.log(otherSel)\n    console.log(thisSel)\n    console.log(newSel)\n    leaf.selection = newSel;\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(a1, a2) {\n    const a2leafs = [];\n    a2.onLeafs((leaf) => {\n        a2leafs.push(leaf);\n        return leaf;\n    });\n    let index = 0;\n    return a1.onLeafs((leaf) => {\n        if (index > a2leafs.length - 1) {\n            throw new Error(\"Input asesmblies had different number of leafs\");\n        }\n        const otherSel = a2leafs[index].selection;\n        index++;\n        const thisSel = leaf.selection;\n        if (thisSel == undefined || otherSel == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const newSel = {\n            edges: [...new Set([...(thisSel.edges ?? []), ...(otherSel.edges ?? [])])],\n            faces: [...new Set([...(thisSel.faces ?? []), ...(otherSel.faces ?? [])])],\n            part: thisSel.part || otherSel.part\n        };\n        console.log(otherSel);\n        console.log(thisSel);\n        console.log(newSel);\n        leaf.selection = newSel;\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -6761,7 +6761,7 @@
         },
         {
           "ap2Name": "Assembly",
-          "ap1ID": "id-85654",
+          "ap1ID": "id-85665",
           "ap2ID": "id-83504"
         }
       ],
