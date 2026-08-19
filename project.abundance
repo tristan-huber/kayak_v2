@@ -6711,8 +6711,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.36588541666666663,
-          "y": 0.8971428571428571,
+          "x": 0.34505208333333337,
+          "y": 0.9257142857142858,
           "uniqueID": "id-85686",
           "ioValues": [
             {
@@ -6721,8 +6721,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// select.adjascentFaces\nfunction run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined) {\n      leaf.selection = {edges: [], faces: [], part: false}\n      return leaf;\n    }\n    const edges = leaf.geometry.edges;\n    const selectedEdgeIndexes = new Set<number>();\n    leaf.getSelectedFaces().forEach((face) => {\n      const indexes: number[] = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)))\n      indexes.forEach((i) =>{\n        selectedEdgeIndexes.add(i)\n      })\n    })\n    leaf.selection.edges = [...selectedEdgeIndexes]\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const edges = leaf.geometry.edges;\n        const selectedEdgeIndexes = new Set();\n        leaf.getSelectedFaces().forEach((face) => {\n            const indexes = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)));\n            indexes.forEach((i) => {\n                selectedEdgeIndexes.add(i);\n            });\n        });\n        leaf.selection.edges = [...selectedEdgeIndexes];\n        return leaf;\n    });\n}\n"
+          "code": "// select.adjascentFaces\nfunction run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined || leaf.selection.edges == undefined) {\n      leaf.selection = {edges: [], faces: [], part: false}\n      return leaf;\n    }\n    const edgeSelectionIndexes = leaf.selection.edges;\n    const shapeEdges = leaf.geometry.edges;\n    const edgeIndex = (edge) => {\n      return shapeEdges.findIndex((e) => e.isSame(edge))\n    }\n    const selectedFaceIndexes = new Set<number>()\n    leaf.geometry.faces.forEach((face, index) => {\n      const faceEdges = face.edges;\n      if (faceEdges.some((e) => edgeSelectionIndexes.includes(edgeIndex(e)))) {\n        selectedFaceIndexes.add(index)\n      }\n    })\n    leaf.selection.faces = [...selectedFaceIndexes]\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined || leaf.selection.edges == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const edgeSelectionIndexes = leaf.selection.edges;\n        const shapeEdges = leaf.geometry.edges;\n        const edgeIndex = (edge) => {\n            return shapeEdges.findIndex((e) => e.isSame(edge));\n        };\n        const selectedFaceIndexes = new Set();\n        leaf.geometry.faces.forEach((face, index) => {\n            const faceEdges = face.edges;\n            if (faceEdges.some((e) => edgeSelectionIndexes.includes(edgeIndex(e)))) {\n                selectedFaceIndexes.add(index);\n            }\n        });\n        leaf.selection.faces = [...selectedFaceIndexes];\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -6887,11 +6887,6 @@
           "ap2ID": "id-85637"
         },
         {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-85665",
-          "ap2ID": "id-83504"
-        },
-        {
           "ap2Name": "Input",
           "ap1ID": "id-85669",
           "ap2ID": "id-85677"
@@ -6900,6 +6895,11 @@
           "ap2Name": "a1",
           "ap1ID": "id-85669",
           "ap2ID": "id-85686"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-85686",
+          "ap2ID": "id-83504"
         }
       ],
       "fileTypeVersion": 1
