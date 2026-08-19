@@ -1996,8 +1996,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.3391927083333333,
-          "y": 0.8742857142857143,
+          "x": 0.396484375,
+          "y": 0.8971428571428571,
           "uniqueID": "id-83504",
           "name": "ExtractFaces",
           "ioValues": [
@@ -2029,16 +2029,16 @@
               "type": "faceselect",
               "selectedFaceData": {
                 "0": [
-                  7
+                  0
                 ],
                 "1": [
-                  7
+                  0
                 ],
                 "2": [
-                  9
+                  0
                 ],
                 "3": [
-                  7
+                  0
                 ]
               }
             },
@@ -2673,7 +2673,7 @@
             {
               "name": "normal",
               "ioValue": [
-                1,
+                -1,
                 0,
                 0
               ]
@@ -2718,7 +2718,7 @@
                 {
                   "name": "normal",
                   "ioValue": [
-                    1,
+                    -1,
                     0,
                     0
                   ]
@@ -2951,11 +2951,6 @@
           "ap2ID": "id-83585"
         },
         {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-83497",
-          "ap2ID": "id-83504"
-        },
-        {
           "ap2Name": "Drawing",
           "ap1ID": "id-83521",
           "ap2ID": "id-82189"
@@ -2999,6 +2994,11 @@
           "ap2Name": "shape",
           "ap1ID": "id-83624",
           "ap2ID": "id-83608"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-83633",
+          "ap2ID": "id-83504"
         }
       ],
       "fileTypeVersion": 1
