@@ -10075,8 +10075,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.5436197916666666,
-          "y": 0.6342857142857142,
+          "x": 0.533203125,
+          "y": 0.41714285714285715,
           "uniqueID": "id-83556",
           "ioValues": [
             {
@@ -10317,8 +10317,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.318359375,
-          "y": 0.2714285714285714,
+          "x": 0.3079427083333333,
+          "y": 0.33999999999999997,
           "uniqueID": "id-82172",
           "name": "ExtractFaces",
           "ioValues": [
@@ -10348,12 +10348,7 @@
               "uniqueID": "id-82174",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {
-                "0": [],
-                "1": [
-                  3
-                ]
-              }
+              "selectedFaceData": {}
             },
             {
               "atomType": "Code",
@@ -16216,8 +16211,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.46484375,
-          "y": 0.8057142857142858,
+          "x": 0.4876302083333333,
+          "y": 0.7599999999999999,
           "uniqueID": "id-87699",
           "ioValues": [
             {
@@ -16226,12 +16221,194 @@
             },
             {
               "name": "inset",
-              "ioValue": 0
+              "ioValue": 1,
+              "currentEquation": "1"
             }
           ],
           "interpreterVersion": 1,
           "code": "// edge.endpoints\nfunction run(assembly: Assembly, inset: number = 0) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.isWire()) {\n      let points: replicad.Vector[] = []\n      if (inset == 0) {\n        points.push(leaf.geometry.startPoint)\n        points.push(leaf.geometry.endPoint)\n      } else if (inset > 0) {\n        const normalizedInset = inset / leaf.geometry.length;\n        if (normalizedInset < 1) {\n          points.push(leaf.geometry.pointAt(normalizedInset))\n          points.push(leaf.geometry.pointAt(1 - normalizedInset))\n        }\n      } else if (inset < 0) {\n        // ie do an outset.\n        const start = leaf.geometry.startPoint;\n        points.push(start.add(leaf.geometry.tangentAt(0).normalize().multiply(-1 * inset)))\n        const end = leaf.geometry.endPoint;\n        points.push(end.add(leaf.geometry.tangentAt(1).normalize().multiply(inset)))\n      }\n\n      const geoms = points.map((point) => {\n        return new Assembly({\n          ...leaf,\n          geometry: replicad.makeVertex(point)\n        })\n      })\n      return new Assembly({geometry: geoms})\n    }\n    return leaf;\n  })\n}",
           "compiledCode": "\"use strict\";\n// edge.endpoints\nfunction run(assembly, inset = 0) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.isWire()) {\n            let points = [];\n            if (inset == 0) {\n                points.push(leaf.geometry.startPoint);\n                points.push(leaf.geometry.endPoint);\n            }\n            else if (inset > 0) {\n                const normalizedInset = inset / leaf.geometry.length;\n                if (normalizedInset < 1) {\n                    points.push(leaf.geometry.pointAt(normalizedInset));\n                    points.push(leaf.geometry.pointAt(1 - normalizedInset));\n                }\n            }\n            else if (inset < 0) {\n                // ie do an outset.\n                const start = leaf.geometry.startPoint;\n                points.push(start.add(leaf.geometry.tangentAt(0).normalize().multiply(-1 * inset)));\n                const end = leaf.geometry.endPoint;\n                points.push(end.add(leaf.geometry.tangentAt(1).normalize().multiply(inset)));\n            }\n            const geoms = points.map((point) => {\n                return new Assembly({\n                    ...leaf,\n                    geometry: replicad.makeVertex(point)\n                });\n            });\n            return new Assembly({ geometry: geoms });\n        }\n        return leaf;\n    });\n}\n"
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.30078125,
+          "y": 0.9314285714285714,
+          "uniqueID": "id-87714",
+          "name": "select.EdgesOnFace",
+          "ioValues": [
+            {
+              "name": "faceSelection",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87711",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.31575520833333337,
+              "y": 0.5028571428571429,
+              "uniqueID": "id-87712",
+              "ioValues": [
+                {
+                  "name": "a1",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [], faces: [], part: false }\n      return leaf;\n    }\n    const edges = leaf.geometry.edges;\n    const selectedEdgeIndexes = new Set<number>();\n    leaf.getSelectedFaces().forEach((face) => {\n      const indexes: number[] = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)))\n      indexes.forEach((i) => {\n        selectedEdgeIndexes.add(i)\n      })\n    })\n    leaf.selection.edges = [...selectedEdgeIndexes]\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const edges = leaf.geometry.edges;\n        const selectedEdgeIndexes = new Set();\n        leaf.getSelectedFaces().forEach((face) => {\n            const indexes = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)));\n            indexes.forEach((i) => {\n                selectedEdgeIndexes.add(i);\n            });\n        });\n        leaf.selection.edges = [...selectedEdgeIndexes];\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87713",
+              "name": "faceSelection",
+              "type": "geometry"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87712",
+              "ap2ID": "id-87711"
+            },
+            {
+              "ap2Name": "a1",
+              "ap1ID": "id-87713",
+              "ap2ID": "id-87712"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "select.EdgesOnFace",
+            "dateCreated": "2026-08-19T21:34:40Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/select.EdgesOnFace/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-58",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/select.EdgesOnFace",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "select.edgesonface tristan-huber translates a selection of faces into a selection of edges. the edges which are on a selected face become selected themselves. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Translates a selection of faces into a selection of edges. The edges which are on a selected face become selected themselves.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.EdgesOnFace/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.EdgesOnFace/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787179700894
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.40494791666666663,
+          "y": 0.9085714285714286,
+          "uniqueID": "id-87727",
+          "name": "ExtractEdges",
+          "ioValues": [
+            {
+              "name": "Input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87724",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87725",
+              "type": "edgeselect",
+              "selectedEdgeData": {}
+            },
+            {
+              "atomType": "Code",
+              "x": 0.4309895833333333,
+              "y": 0.4342857142857143,
+              "uniqueID": "id-87726",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      const edges = leaf.geometry.edges;\n      const edgeIndexes = leaf.selection.edges\n      if (edgeIndexes.length == 1) {\n        leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]])\n        return leaf;\n      } else {\n        const res = edgeIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]])})\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  return res;\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            const edges = leaf.geometry.edges;\n            const edgeIndexes = leaf.selection.edges;\n            if (edgeIndexes.length == 1) {\n                leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]]);\n                return leaf;\n            }\n            else {\n                const res = edgeIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]]) });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    return res;\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-87725",
+              "ap2ID": "id-87726"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87726",
+              "ap2ID": "id-87724"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-08-19T18:23:39.128Z",
+            "privateRepo": false,
+            "repoName": "ExtractEdges",
+            "dateCreated": "2026-07-24T20:38:56Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-34874",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ExtractEdges",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739824",
+            "ranking": 0.6,
+            "searchField": "extractedges tristan-huber select edges from an assembly by clicking on them. returns a new assembly of just those edges as wires. selection is saved as index of each edge in it's leaf. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Select edges from an assembly by clicking on them. Returns a new assembly of just those edges as wires. Selection is saved as index of each edge in it's leaf.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787179737553
         }
       ],
       "allConnectors": [
@@ -16239,11 +16416,6 @@
           "ap2Name": "input",
           "ap1ID": "id-80971",
           "ap2ID": "id-80982"
-        },
-        {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-80971",
-          "ap2ID": "id-82172"
         },
         {
           "ap2Name": "input",
@@ -16341,6 +16513,11 @@
           "ap2ID": "id-87515"
         },
         {
+          "ap2Name": "faceSelection",
+          "ap1ID": "id-83633",
+          "ap2ID": "id-87714"
+        },
+        {
           "ap2Name": "selectionTwo",
           "ap1ID": "id-85642",
           "ap2ID": "id-87594"
@@ -16377,6 +16554,11 @@
         },
         {
           "ap2Name": "Assembly",
+          "ap1ID": "id-87568",
+          "ap2ID": "id-82172"
+        },
+        {
+          "ap2Name": "Assembly",
           "ap1ID": "id-87594",
           "ap2ID": "id-87552"
         },
@@ -16394,6 +16576,16 @@
           "ap2Name": "geometry",
           "ap1ID": "id-87640",
           "ap2ID": "id-83595"
+        },
+        {
+          "ap2Name": "Input",
+          "ap1ID": "id-87714",
+          "ap2ID": "id-87727"
+        },
+        {
+          "ap2Name": "assembly",
+          "ap1ID": "id-87727",
+          "ap2ID": "id-87699"
         }
       ],
       "fileTypeVersion": 1
