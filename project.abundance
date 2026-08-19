@@ -15837,8 +15837,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.4837239583333333,
-          "y": 0.8057142857142858,
+          "x": 0.546875,
+          "y": 0.7142857142857143,
           "uniqueID": "id-87699",
           "ioValues": [
             {
@@ -15946,8 +15946,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.40494791666666663,
-          "y": 0.9085714285714286,
+          "x": 0.47265625,
+          "y": 0.72,
           "uniqueID": "id-87727",
           "name": "ExtractEdges",
           "ioValues": [
@@ -16038,8 +16038,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.5592447916666666,
-          "y": 0.6771428571428572,
+          "x": 0.7311197916666666,
+          "y": 0.5314285714285714,
           "uniqueID": "id-87736",
           "ioValues": [
             {
@@ -16076,8 +16076,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.259765625,
-          "y": 0.5457142857142857,
+          "x": 0.4088541666666667,
+          "y": 0.8314285714285715,
           "uniqueID": "id-87750",
           "name": "select.Exclude",
           "ioValues": [
@@ -16343,6 +16343,95 @@
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.42122395833333337,
+          "y": 0.23142857142857146,
+          "uniqueID": "id-87788",
+          "name": "select.EdgesOnFace",
+          "ioValues": [
+            {
+              "name": "faceSelection",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87789",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.31575520833333337,
+              "y": 0.5028571428571429,
+              "uniqueID": "id-87790",
+              "ioValues": [
+                {
+                  "name": "a1",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [], faces: [], part: false }\n      return leaf;\n    }\n    const edges = leaf.geometry.edges;\n    const selectedEdgeIndexes = new Set<number>();\n    leaf.getSelectedFaces().forEach((face) => {\n      const indexes: number[] = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)))\n      indexes.forEach((i) => {\n        selectedEdgeIndexes.add(i)\n      })\n    })\n    leaf.selection.edges = [...selectedEdgeIndexes]\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const edges = leaf.geometry.edges;\n        const selectedEdgeIndexes = new Set();\n        leaf.getSelectedFaces().forEach((face) => {\n            const indexes = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)));\n            indexes.forEach((i) => {\n                selectedEdgeIndexes.add(i);\n            });\n        });\n        leaf.selection.edges = [...selectedEdgeIndexes];\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87791",
+              "name": "faceSelection",
+              "type": "geometry"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87790",
+              "ap2ID": "id-87789"
+            },
+            {
+              "ap2Name": "a1",
+              "ap1ID": "id-87791",
+              "ap2ID": "id-87790"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "select.EdgesOnFace",
+            "dateCreated": "2026-08-19T21:34:40Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/select.EdgesOnFace/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-58",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/select.EdgesOnFace",
+            "topics": [
+              "abundance-tool"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 0,
+            "searchField": "select.edgesonface tristan-huber translates a selection of faces into a selection of edges. the edges which are on a selected face become selected themselves. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Translates a selection of faces into a selection of edges. The edges which are on a selected face become selected themselves.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.EdgesOnFace/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.EdgesOnFace/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787179700894
         }
       ],
       "allConnectors": [
@@ -16437,6 +16526,11 @@
           "ap2ID": "id-87568"
         },
         {
+          "ap2Name": "faceSelection",
+          "ap1ID": "id-87524",
+          "ap2ID": "id-87788"
+        },
+        {
           "ap2Name": "faces",
           "ap1ID": "id-87552",
           "ap2ID": "id-87613"
@@ -16477,14 +16571,24 @@
           "ap2ID": "id-83595"
         },
         {
-          "ap2Name": "Input",
+          "ap2Name": "selection",
           "ap1ID": "id-87714",
-          "ap2ID": "id-87727"
+          "ap2ID": "id-87750"
         },
         {
           "ap2Name": "assembly",
           "ap1ID": "id-87727",
           "ap2ID": "id-87699"
+        },
+        {
+          "ap2Name": "Input",
+          "ap1ID": "id-87750",
+          "ap2ID": "id-87727"
+        },
+        {
+          "ap2Name": "exclude",
+          "ap1ID": "id-87788",
+          "ap2ID": "id-87750"
         }
       ],
       "fileTypeVersion": 1
