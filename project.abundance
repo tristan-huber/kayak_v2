@@ -6736,8 +6736,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// select.adjascentFaces\nfunction run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined || leaf.selection.edges == undefined) {\n      leaf.selection = {edges: [], faces: [], part: false}\n      return leaf;\n    }\n    const edgeSelectionIndexes = leaf.selection.edges;\n    const shapeEdges = leaf.geometry.edges;\n    const edgeIndex = (edge) => {\n      return shapeEdges.findIndex((e) => e.isSame(edge))\n    }\n    const selectedFaceIndexes = new Set<number>()\n    leaf.geometry.faces.forEach((face, index) => {\n      const faceEdges = face.edges;\n      if (faceEdges.some((e) => edgeSelectionIndexes.includes(edgeIndex(e)))) {\n        selectedFaceIndexes.add(index)\n      }\n    })\n    leaf.selection.faces = [...selectedFaceIndexes]\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined || leaf.selection.edges == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const edgeSelectionIndexes = leaf.selection.edges;\n        const shapeEdges = leaf.geometry.edges;\n        const edgeIndex = (edge) => {\n            return shapeEdges.findIndex((e) => e.isSame(edge));\n        };\n        const selectedFaceIndexes = new Set();\n        leaf.geometry.faces.forEach((face, index) => {\n            const faceEdges = face.edges;\n            if (faceEdges.some((e) => edgeSelectionIndexes.includes(edgeIndex(e)))) {\n                selectedFaceIndexes.add(index);\n            }\n        });\n        leaf.selection.faces = [...selectedFaceIndexes];\n        return leaf;\n    });\n}\n"
+          "code": "// select.Not\nfunction run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (leaf.selection) {\n      leaf.selection.part = !leaf.selection?.part\n    } \n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined) {\n      leaf.selection = {edges: [], faces: [], part: true}\n    }\n    const initialEdges = leaf.selection.edges ?? []  \n    const initialFaces = leaf.selection.faces ?? []\n\n    leaf.selection.edges = [...new Array(leaf.geometry.edges.length).keys()].filter((i) => !initialEdges.includes(i))\n    leaf.selection.faces = [...new Array(leaf.geometry.faces.length).keys()].filter((i) => !initialFaces.includes(i))\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// select.Not\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (leaf.selection) {\n            leaf.selection.part = !leaf.selection?.part;\n        }\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [], faces: [], part: true };\n        }\n        const initialEdges = leaf.selection.edges ?? [];\n        const initialFaces = leaf.selection.faces ?? [];\n        leaf.selection.edges = [...new Array(leaf.geometry.edges.length).keys()].filter((i) => !initialEdges.includes(i));\n        leaf.selection.faces = [...new Array(leaf.geometry.faces.length).keys()].filter((i) => !initialFaces.includes(i));\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -6902,11 +6902,6 @@
           "ap2ID": "id-85637"
         },
         {
-          "ap2Name": "Input",
-          "ap1ID": "id-85669",
-          "ap2ID": "id-85677"
-        },
-        {
           "ap2Name": "a1",
           "ap1ID": "id-85669",
           "ap2ID": "id-85686"
@@ -6920,6 +6915,11 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-85686",
           "ap2ID": "id-83504"
+        },
+        {
+          "ap2Name": "Input",
+          "ap1ID": "id-85689",
+          "ap2ID": "id-85677"
         }
       ],
       "fileTypeVersion": 1
