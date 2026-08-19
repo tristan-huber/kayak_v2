@@ -1884,7 +1884,20 @@
               "uniqueID": "id-83506",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  0
+                ],
+                "1": [
+                  0
+                ],
+                "2": [
+                  0
+                ],
+                "3": [
+                  0
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -6419,8 +6432,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// select.adjascentFaces\nfunction run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.is3D()) {\n      const selectedFaceIndexes = leaf.selection?.faces ?? []\n      const faces = leaf.geometry.faces;\n      const selectedFaces = selectedFaceIndexes.map((index) => faces[index])\n      const targetEdges = selectedFaces.map((f) => f.edges).flat()\n      const newSelection: number[] = []\n      faces.forEach((face, index) => {\n        if (selectedFaceIndexes.includes(index)) {\n          // explicitly reject already selected faces\n          return undefined;\n        }\n        const edges = face.edges;\n        const isAdj = targetEdges.some((targetEdge) => edges.some((e) => e.isSame(targetEdge)))\n        if (isAdj) {\n          newSelection.push(index)\n        }\n      })\n      if (leaf.selection == undefined) {\n        leaf.selection = {faces: []}\n      }\n      if (leaf.selection.faces == undefined) {\n        leaf.selection.faces = []\n      }\n      leaf.selection.faces.push(...newSelection)\n    }\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.is3D()) {\n            const selectedFaceIndexes = leaf.selection?.faces ?? [];\n            const faces = leaf.geometry.faces;\n            const selectedFaces = selectedFaceIndexes.map((index) => faces[index]);\n            const targetEdges = selectedFaces.map((f) => f.edges).flat();\n            const newSelection = [];\n            faces.forEach((face, index) => {\n                if (selectedFaceIndexes.includes(index)) {\n                    // explicitly reject already selected faces\n                    return undefined;\n                }\n                const edges = face.edges;\n                const isAdj = targetEdges.some((targetEdge) => edges.some((e) => e.isSame(targetEdge)));\n                if (isAdj) {\n                    newSelection.push(index);\n                }\n            });\n            if (leaf.selection == undefined) {\n                leaf.selection = { faces: [] };\n            }\n            if (leaf.selection.faces == undefined) {\n                leaf.selection.faces = [];\n            }\n            leaf.selection.faces.push(...newSelection);\n        }\n        return leaf;\n    });\n}\n"
+          "code": "// select.adjascentFaces\nfunction run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.is3D()) {\n      const selectedFaceIndexes = leaf.selection?.faces ?? []\n      const faces = leaf.geometry.faces;\n      const selectedFaces = selectedFaceIndexes.map((index) => faces[index])\n      const targetEdges = selectedFaces.map((f) => f.edges).flat()\n      const newSelection: number[] = []\n\n      const inTargetEdges = (edge) => {\n        return targetEdges.some((target) => {target.isSame(edge)})\n      }\n\n      faces.forEach((face, index) => {\n        if (selectedFaceIndexes.includes(index)) {\n          // explicitly reject already selected faces\n          return undefined;\n        }\n        const isAdj = face.edges.some((e) => inTargetEdges(e))\n        if (isAdj) {\n          newSelection.push(index)\n        }\n      })\n      if (leaf.selection == undefined) {\n        leaf.selection = {faces: []}\n      }\n      if (leaf.selection.faces == undefined) {\n        leaf.selection.faces = []\n      }\n      leaf.selection.faces.push(...newSelection)\n    }\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.is3D()) {\n            const selectedFaceIndexes = leaf.selection?.faces ?? [];\n            const faces = leaf.geometry.faces;\n            const selectedFaces = selectedFaceIndexes.map((index) => faces[index]);\n            const targetEdges = selectedFaces.map((f) => f.edges).flat();\n            const newSelection = [];\n            const inTargetEdges = (edge) => {\n                return targetEdges.some((target) => { target.isSame(edge); });\n            };\n            faces.forEach((face, index) => {\n                if (selectedFaceIndexes.includes(index)) {\n                    // explicitly reject already selected faces\n                    return undefined;\n                }\n                const isAdj = face.edges.some((e) => inTargetEdges(e));\n                if (isAdj) {\n                    newSelection.push(index);\n                }\n            });\n            if (leaf.selection == undefined) {\n                leaf.selection = { faces: [] };\n            }\n            if (leaf.selection.faces == undefined) {\n                leaf.selection.faces = [];\n            }\n            leaf.selection.faces.push(...newSelection);\n        }\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
