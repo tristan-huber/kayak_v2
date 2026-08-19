@@ -2284,8 +2284,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.47786458333333337,
-          "y": 0.7685714285714286,
+          "x": 0.5436197916666666,
+          "y": 0.6342857142857142,
           "uniqueID": "id-83556",
           "ioValues": [
             {
@@ -2438,6 +2438,29 @@
           "interpreterVersion": 1,
           "code": "// face.normal\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  let faces = face.getSelectedFaces().filter((a) => a != undefined && a != null);\n  if (faces.length == 0) {\n    face.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        faces.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n\n  if (faces.length != 1) {\n    throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length)\n  }\n  console.log(faces)\n  return faces[0].normalAt([u,v]).normalize().toTuple()\n}",
           "compiledCode": "\"use strict\";\n// face.normal\nfunction run(face, u = 0.5, v = 0.5) {\n    let faces = face.getSelectedFaces().filter((a) => a != undefined && a != null);\n    if (faces.length == 0) {\n        face.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                faces.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (faces.length != 1) {\n        throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length);\n    }\n    console.log(faces);\n    return faces[0].normalAt([u, v]).normalize().toTuple();\n}\n"
+        },
+        {
+          "atomType": "Code",
+          "x": 0.45572916666666663,
+          "y": 0.8028571428571428,
+          "uniqueID": "id-83585",
+          "ioValues": [
+            {
+              "name": "face",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "u",
+              "ioValue": 0.5
+            },
+            {
+              "name": "v",
+              "ioValue": 0.5
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "// face.normal\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  let faces = face.getSelectedFaces().filter((a) => a != undefined && a != null);\n  if (faces.length == 0) {\n    face.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        faces.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n\n  if (faces.length != 1) {\n    throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length)\n  }\n  console.log(faces)\n  return faces[0].normalAt([u,v]).normalize().toTuple()\n}",
+          "compiledCode": "\"use strict\";\n// face.normal\nfunction run(face, u = 0.5, v = 0.5) {\n    let faces = face.getSelectedFaces().filter((a) => a != undefined && a != null);\n    if (faces.length == 0) {\n        face.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                faces.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (faces.length != 1) {\n        throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length);\n    }\n    console.log(faces);\n    return faces[0].normalAt([u, v]).normalize().toTuple();\n}\n"
         }
       ],
       "allConnectors": [
@@ -2525,6 +2548,11 @@
           "ap2Name": "face",
           "ap1ID": "id-83445",
           "ap2ID": "id-83573"
+        },
+        {
+          "ap2Name": "face",
+          "ap1ID": "id-83445",
+          "ap2ID": "id-83585"
         },
         {
           "ap2Name": "extrusionVec",
