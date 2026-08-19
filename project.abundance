@@ -2455,7 +2455,8 @@
             },
             {
               "name": "v",
-              "ioValue": 0.6
+              "ioValue": 0.6,
+              "currentEquation": "0.6"
             },
             {
               "name": "xPos",
