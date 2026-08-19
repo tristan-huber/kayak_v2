@@ -2441,8 +2441,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.45572916666666663,
-          "y": 0.8028571428571428,
+          "x": 0.7037760416666667,
+          "y": 0.5599999999999999,
           "uniqueID": "id-83585",
           "ioValues": [
             {
@@ -2459,8 +2459,121 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// face.asPlane\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  return face.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      const origin = replicad.makeVertex(leaf.geometry.pointOnSurface(u, v).toTuple())\n      leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u,v])\n      leaf.geometry = origin\n    }\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// face.asPlane\nfunction run(face, u = 0.5, v = 0.5) {\n    return face.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            const origin = replicad.makeVertex(leaf.geometry.pointOnSurface(u, v).toTuple());\n            leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v]);\n            leaf.geometry = origin;\n        }\n        return leaf;\n    });\n}\n"
+          "code": "// face.asPlane\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  return face.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      //const origin = replicad.makeVertex(leaf.geometry.pointOnSurface(u, v).toTuple())\n      leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u,v])\n      leaf.geometry = replicad.drawRectangle(1,0.5)\n    }\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// face.asPlane\nfunction run(face, u = 0.5, v = 0.5) {\n    return face.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            //const origin = replicad.makeVertex(leaf.geometry.pointOnSurface(u, v).toTuple())\n            leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v]);\n            leaf.geometry = replicad.drawRectangle(1, 0.5);\n        }\n        return leaf;\n    });\n}\n"
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.7721354166666667,
+          "y": 0.7485714285714287,
+          "uniqueID": "id-83595",
+          "name": "IthFromAssembly",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "i",
+              "ioValue": 0,
+              "currentEquation": "0"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-83591",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.5026041666666666,
+              "y": 0.6845238095238095,
+              "uniqueID": "id-83592",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "i",
+                  "ioValue": 0
+                }
+              ],
+              "interpreterVersion": 0,
+              "code": "\n      const Inputs = [\n       {inputName: \"geometry\", type: \"geometry\", defaultValue: null},\n      {inputName: \"i\", type: \"number\", defaultValue: 0},\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[geometry]\n      let j = 0;\n      console.log(\"foo\")\n      console.log(importedShape)\n      const leafList = await AssemblyAsIterable(importedShape)\n      console.log(leafList)\n      if (i >= leafList.length) {\n        throw new Error(`Assembly only has ${leafList.length} entries. Tried to find index: ${i}.`)\n      }\n      return leafList[i]\n\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-83593",
+              "name": "geometry",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.22400000000000003,
+              "uniqueID": "id-83594",
+              "name": "i",
+              "type": "number"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-83592",
+              "ap2ID": "id-83591"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-83593",
+              "ap2ID": "id-83592"
+            },
+            {
+              "ap2Name": "i",
+              "ap1ID": "id-83594",
+              "ap2ID": "id-83592"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-08-19T10:23:39.049Z",
+            "privateRepo": false,
+            "repoName": "IthFromAssembly",
+            "dateCreated": "2025-11-03T02:49:44Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/README.md?sanitize=true",
+            "yyyy": 2025,
+            "topMoleculeID": "id-2718",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/IthFromAssembly",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 1,
+            "dateModified": "739558",
+            "ranking": 10.4,
+            "searchField": "ithfromassembly tristan-huber get the ith leaf from an assembly abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Get the ith leaf from an assembly",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787163293321
         }
       ],
       "allConnectors": [
@@ -2550,11 +2663,6 @@
           "ap2ID": "id-83573"
         },
         {
-          "ap2Name": "face",
-          "ap1ID": "id-83445",
-          "ap2ID": "id-83585"
-        },
-        {
           "ap2Name": "extrusionVec",
           "ap1ID": "id-83491",
           "ap2ID": "id-83479"
@@ -2585,9 +2693,19 @@
           "ap2ID": "id-83557"
         },
         {
+          "ap2Name": "face",
+          "ap1ID": "id-83557",
+          "ap2ID": "id-83585"
+        },
+        {
           "ap2Name": "normal",
           "ap1ID": "id-83573",
           "ap2ID": "id-83556"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-83585",
+          "ap2ID": "id-83595"
         }
       ],
       "fileTypeVersion": 1
