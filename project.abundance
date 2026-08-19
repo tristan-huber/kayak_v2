@@ -1656,7 +1656,6 @@
               "type": "faceselect",
               "selectedFaceData": {
                 "0": [
-                  4,
                   12
                 ]
               }
@@ -2405,8 +2404,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.48502604166666663,
-          "y": 0.8742857142857143,
+          "x": 0.587890625,
+          "y": 0.4942857142857142,
           "uniqueID": "id-83573",
           "ioValues": [
             {
@@ -2423,8 +2422,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// face.normal\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  const bounds: replicad.AnyShape[] = []\n  boundingShape.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Drawing)) {\n      bounds.push(leaf.geometry)\n    }\n    return leaf;\n  })\n\n  if (bounds.length == 0) {\n    return input;\n  }\n\n  console.log(`Using ${bounds.length} bounding shapes`)\n\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    for (const bound of bounds) {\n      const finder = new replicad.EdgeFinder().inShape(bound)\n      const foundEdges = finder.find(leaf.geometry)\n      const allEdges = leaf.geometry.edges;\n      const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n      console.log(`found edges: ${foundEdges} indexes: ${indexes}`)\n      selectedIndexes.push(...indexes)\n    }\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [] }\n    }\n    const before = leaf.selection.edges as number[];\n    leaf.selection.edges = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.edges}`)\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// face.normal\nfunction run(face, u = 0.5, v = 0.5) {\n    const bounds = [];\n    boundingShape.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Drawing)) {\n            bounds.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (bounds.length == 0) {\n        return input;\n    }\n    console.log(`Using ${bounds.length} bounding shapes`);\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        for (const bound of bounds) {\n            const finder = new replicad.EdgeFinder().inShape(bound);\n            const foundEdges = finder.find(leaf.geometry);\n            const allEdges = leaf.geometry.edges;\n            const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n            console.log(`found edges: ${foundEdges} indexes: ${indexes}`);\n            selectedIndexes.push(...indexes);\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [] };\n        }\n        const before = leaf.selection.edges;\n        leaf.selection.edges = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.edges}`);\n        return leaf;\n    });\n}\n"
+          "code": "// face.normal\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5) {\n  let faces = face.getSelectedFaces();\n  if (faces.length == 0) {\n    face.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        faces.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n\n  if (faces.length != 1) {\n    throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length)\n  }\n\n  return faces[0].normalAt([u,v])\n}",
+          "compiledCode": "\"use strict\";\n// face.normal\nfunction run(face, u = 0.5, v = 0.5) {\n    let faces = face.getSelectedFaces();\n    if (faces.length == 0) {\n        face.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                faces.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    if (faces.length != 1) {\n        throw new Error(\"needs exactly one face or one selected face as input. Got \" + faces.length);\n    }\n    return faces[0].normalAt([u, v]);\n}\n"
         }
       ],
       "allConnectors": [
@@ -2507,6 +2506,11 @@
           "ap2Name": "face",
           "ap1ID": "id-83445",
           "ap2ID": "id-83479"
+        },
+        {
+          "ap2Name": "face",
+          "ap1ID": "id-83445",
+          "ap2ID": "id-83573"
         },
         {
           "ap2Name": "extrusionVec",
