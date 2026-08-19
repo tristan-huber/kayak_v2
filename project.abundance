@@ -1252,8 +1252,8 @@
         },
         {
           "atomType": "Circle",
-          "x": 0.19466145833333331,
-          "y": 0.8200000000000001,
+          "x": 0.3092447916666667,
+          "y": 0.7714285714285715,
           "uniqueID": "id-82201",
           "ioValues": [
             {
@@ -1264,8 +1264,8 @@
         },
         {
           "atomType": "Assembly",
-          "x": 0.36067708333333337,
-          "y": 0.7057142857142857,
+          "x": 0.3990885416666667,
+          "y": 0.5457142857142857,
           "uniqueID": "id-82204",
           "ioValues": [
             {
@@ -1280,8 +1280,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.30859375,
-          "y": 0.8714285714285714,
+          "x": 0.35546875,
+          "y": 0.9571428571428572,
           "uniqueID": "id-82208",
           "ioValues": [
             {
@@ -1697,8 +1697,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.19401041666666669,
-          "y": 0.6285714285714286,
+          "x": 0.19205729166666669,
+          "y": 0.5142857142857143,
           "uniqueID": "id-83431",
           "ioValues": [
             {
@@ -1711,8 +1711,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "function run(input: Assembly, boundingShape: Assembly) {\n  const bounds: replicad.Shape3D[] = []\n  boundingShape.onLeafs((leaf) => {\n    if (leaf.is3D()) {\n      bounds.push(leaf.geometry)\n    }\n    return leaf;\n  })\n\n  if (bounds.length == 0) {\n    return input;\n  }\n\n  console.log(`Using ${bounds.length} bounding shapes`)\n\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    for (const bound of bounds) {\n      const finder = new replicad.EdgeFinder().inShape(bound)\n      const foundEdges = finder.find(leaf.geometry)\n      const allEdges = leaf.geometry.edges;\n      const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n      console.log(`found edges: ${foundEdges} indexes: ${indexes}`)\n      selectedIndexes.push(...indexes)\n    }\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [] }\n    }\n    const before = leaf.selection.edges as number[];\n    leaf.selection.edges = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.edges}`)\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(input, boundingShape) {\n    const bounds = [];\n    boundingShape.onLeafs((leaf) => {\n        if (leaf.is3D()) {\n            bounds.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (bounds.length == 0) {\n        return input;\n    }\n    console.log(`Using ${bounds.length} bounding shapes`);\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        for (const bound of bounds) {\n            const finder = new replicad.EdgeFinder().inShape(bound);\n            const foundEdges = finder.find(leaf.geometry);\n            const allEdges = leaf.geometry.edges;\n            const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n            console.log(`found edges: ${foundEdges} indexes: ${indexes}`);\n            selectedIndexes.push(...indexes);\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [] };\n        }\n        const before = leaf.selection.edges;\n        leaf.selection.edges = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.edges}`);\n        return leaf;\n    });\n}\n"
+          "code": "// edges.inShape\n\nfunction run(input: Assembly, boundingShape: Assembly) {\n  const bounds: replicad.AnyShape[] = []\n  boundingShape.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Drawing)) {\n      bounds.push(leaf.geometry)\n    }\n    return leaf;\n  })\n\n  if (bounds.length == 0) {\n    return input;\n  }\n\n  console.log(`Using ${bounds.length} bounding shapes`)\n\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    for (const bound of bounds) {\n      const finder = new replicad.EdgeFinder().inShape(bound)\n      const foundEdges = finder.find(leaf.geometry)\n      const allEdges = leaf.geometry.edges;\n      const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n      console.log(`found edges: ${foundEdges} indexes: ${indexes}`)\n      selectedIndexes.push(...indexes)\n    }\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [] }\n    }\n    const before = leaf.selection.edges as number[];\n    leaf.selection.edges = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.edges}`)\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// edges.inShape\nfunction run(input, boundingShape) {\n    const bounds = [];\n    boundingShape.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Drawing)) {\n            bounds.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (bounds.length == 0) {\n        return input;\n    }\n    console.log(`Using ${bounds.length} bounding shapes`);\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        for (const bound of bounds) {\n            const finder = new replicad.EdgeFinder().inShape(bound);\n            const foundEdges = finder.find(leaf.geometry);\n            const allEdges = leaf.geometry.edges;\n            const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n            console.log(`found edges: ${foundEdges} indexes: ${indexes}`);\n            selectedIndexes.push(...indexes);\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [] };\n        }\n        const before = leaf.selection.edges;\n        leaf.selection.edges = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.edges}`);\n        return leaf;\n    });\n}\n"
         },
         {
           "atomType": "Input",
@@ -1910,6 +1910,186 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787159896489
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.255859375,
+          "y": 0.7057142857142857,
+          "uniqueID": "id-83479",
+          "name": "extrudeFaceDirected",
+          "ioValues": [
+            {
+              "name": "face",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "extrusionVec",
+              "ioValue": [
+                1,
+                0,
+                0
+              ]
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-83475",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.45166015625,
+              "y": 0.4833333333333333,
+              "uniqueID": "id-83476",
+              "ioValues": [
+                {
+                  "name": "faces",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "direction",
+                  "ioValue": [
+                    1,
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(faces: Assembly, direction: number[]) {\n  return faces.onLeafs((leaf) => {\n    leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction))\n    return leaf;\n  })\n}",
+              "compiledCode": "\"use strict\";\nfunction run(faces, direction) {\n    return faces.onLeafs((leaf) => {\n        leaf.geometry = replicad.basicFaceExtrusion(leaf.geometry, new replicad.Vector(direction));\n        return leaf;\n    });\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-83477",
+              "name": "face",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.22400000000000003,
+              "uniqueID": "id-83478",
+              "name": "extrusionVec",
+              "type": "point3d",
+              "pointValue": null
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-83476",
+              "ap2ID": "id-83475"
+            },
+            {
+              "ap2Name": "faces",
+              "ap1ID": "id-83477",
+              "ap2ID": "id-83476"
+            },
+            {
+              "ap2Name": "direction",
+              "ap1ID": "id-83478",
+              "ap2ID": "id-83476"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-08-19T10:23:39.049Z",
+            "privateRepo": false,
+            "repoName": "extrudeFaceDirected",
+            "dateCreated": "2026-07-29T22:22:15Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-121",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/extrudeFaceDirected",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739826",
+            "ranking": 2.7,
+            "searchField": "extrudefacedirected tristan-huber extrude an assembly of faces in a given direction. same as feeding an assembly of faces to extrude except that the direction of extrusion is specified explicitly. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Extrude an assembly of faces in a given direction. Same as feeding an assembly of faces to Extrude except that the direction of extrusion is specified explicitly.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/extrudeFaceDirected/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787160274655
+        },
+        {
+          "atomType": "Molecule",
+          "x": 0.10546875,
+          "y": 0.8542857142857142,
+          "uniqueID": "id-83491",
+          "name": "vec.X",
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-83493",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.18932291666666667,
+              "y": 0.8557142857142856,
+              "uniqueID": "id-83495",
+              "interpreterVersion": 1,
+              "code": "// edges.inShape\n\nfunction run() {\n  return [1,0,0]\n}",
+              "compiledCode": "\"use strict\";\n// edges.inShape\nfunction run() {\n    return [1, 0, 0];\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-83495",
+              "ap2ID": "id-83493"
+            }
+          ],
+          "fileTypeVersion": 1
+        },
+        {
+          "atomType": "Code",
+          "x": 0.24348958333333331,
+          "y": 0.822857142857143,
+          "uniqueID": "id-83497",
+          "ioValues": [
+            {
+              "name": "input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "boundingShape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "// edges.inShape\n\nfunction run(input: Assembly, boundingShape: Assembly) {\n  const bounds: replicad.AnyShape[] = []\n  boundingShape.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Drawing)) {\n      bounds.push(leaf.geometry)\n    }\n    return leaf;\n  })\n\n  if (bounds.length == 0) {\n    return input;\n  }\n\n  console.log(`Using ${bounds.length} bounding shapes`)\n\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    for (const bound of bounds) {\n      const finder = new replicad.EdgeFinder().inShape(bound)\n      const foundEdges = finder.find(leaf.geometry)\n      const allEdges = leaf.geometry.edges;\n      const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n      console.log(`found edges: ${foundEdges} indexes: ${indexes}`)\n      selectedIndexes.push(...indexes)\n    }\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [] }\n    }\n    const before = leaf.selection.edges as number[];\n    leaf.selection.edges = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.edges}`)\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// edges.inShape\nfunction run(input, boundingShape) {\n    const bounds = [];\n    boundingShape.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Drawing)) {\n            bounds.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (bounds.length == 0) {\n        return input;\n    }\n    console.log(`Using ${bounds.length} bounding shapes`);\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        for (const bound of bounds) {\n            const finder = new replicad.EdgeFinder().inShape(bound);\n            const foundEdges = finder.find(leaf.geometry);\n            const allEdges = leaf.geometry.edges;\n            const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n            console.log(`found edges: ${foundEdges} indexes: ${indexes}`);\n            selectedIndexes.push(...indexes);\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [] };\n        }\n        const before = leaf.selection.edges;\n        leaf.selection.edges = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.edges}`);\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -1937,6 +2117,11 @@
           "ap2Name": "input",
           "ap1ID": "id-80971",
           "ap2ID": "id-83431"
+        },
+        {
+          "ap2Name": "input",
+          "ap1ID": "id-80971",
+          "ap2ID": "id-83497"
         },
         {
           "ap2Name": "Assembly",
@@ -2007,6 +2192,21 @@
           "ap2Name": "boundingShape",
           "ap1ID": "id-83445",
           "ap2ID": "id-83431"
+        },
+        {
+          "ap2Name": "face",
+          "ap1ID": "id-83445",
+          "ap2ID": "id-83479"
+        },
+        {
+          "ap2Name": "boundingShape",
+          "ap1ID": "id-83445",
+          "ap2ID": "id-83497"
+        },
+        {
+          "ap2Name": "extrusionVec",
+          "ap1ID": "id-83491",
+          "ap2ID": "id-83479"
         }
       ],
       "fileTypeVersion": 1
