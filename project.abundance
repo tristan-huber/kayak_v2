@@ -2312,8 +2312,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.611328125,
-          "y": 0.7428571428571428,
+          "x": 0.6321614583333334,
+          "y": 0.6971428571428572,
           "uniqueID": "id-83557",
           "name": "ExtractFaces",
           "ioValues": [
@@ -2459,7 +2459,11 @@
             },
             {
               "name": "xPos",
-              "ioValue": []
+              "ioValue": [
+                1,
+                0,
+                0
+              ]
             }
           ],
           "interpreterVersion": 1,
@@ -2680,6 +2684,11 @@
           "ap2Name": "normal",
           "ap1ID": "id-83491",
           "ap2ID": "id-83516"
+        },
+        {
+          "ap2Name": "xPos",
+          "ap1ID": "id-83491",
+          "ap2ID": "id-83585"
         },
         {
           "ap2Name": "Assembly",
