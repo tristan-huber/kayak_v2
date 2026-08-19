@@ -15042,8 +15042,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.3548177083333333,
-          "y": 0.7971428571428572,
+          "x": 0.2962239583333333,
+          "y": 0.4828571428571429,
           "uniqueID": "id-87552",
           "name": "ExtractFaces",
           "ioValues": [
@@ -15073,32 +15073,7 @@
               "uniqueID": "id-87554",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {
-                "0": [
-                  1,
-                  2,
-                  3,
-                  4
-                ],
-                "1": [
-                  1,
-                  2,
-                  3,
-                  4
-                ],
-                "2": [
-                  1,
-                  2,
-                  3,
-                  4
-                ],
-                "3": [
-                  1,
-                  2,
-                  3,
-                  4
-                ]
-              }
+              "selectedFaceData": {}
             },
             {
               "atomType": "Code",
@@ -15249,8 +15224,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.2669270833333333,
-          "y": 0.7714285714285715,
+          "x": 0.26302083333333337,
+          "y": 0.7285714285714285,
           "uniqueID": "id-87594",
           "name": "select.Both",
           "ioValues": [
@@ -15847,8 +15822,7 @@
             },
             {
               "name": "inset",
-              "ioValue": 1,
-              "currentEquation": "1"
+              "ioValue": -1
             }
           ],
           "interpreterVersion": 1,
@@ -15857,8 +15831,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.30078125,
-          "y": 0.9314285714285714,
+          "x": 0.302734375,
+          "y": 0.8799999999999999,
           "uniqueID": "id-87714",
           "name": "select.EdgesOnFace",
           "ioValues": [
@@ -15947,7 +15921,7 @@
         {
           "atomType": "GitHubMolecule",
           "x": 0.47265625,
-          "y": 0.72,
+          "y": 0.6285714285714286,
           "uniqueID": "id-87727",
           "name": "ExtractEdges",
           "ioValues": [
@@ -16501,6 +16475,99 @@
               "currentEquation": "-1.25"
             }
           ]
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.46484375,
+          "y": 0.9057142857142857,
+          "uniqueID": "id-87822",
+          "name": "ExtractFaces",
+          "ioValues": [
+            {
+              "name": "Assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-87819",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-87820",
+              "name": "Assembly",
+              "type": "faceselect",
+              "selectedFaceData": {}
+            },
+            {
+              "atomType": "Code",
+              "x": 0.2565104166666667,
+              "y": 0.7599999999999999,
+              "uniqueID": "id-87821",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-87820",
+              "ap2ID": "id-87821"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-87821",
+              "ap2ID": "id-87819"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-08-19T18:23:39.128Z",
+            "privateRepo": false,
+            "repoName": "ExtractFaces",
+            "dateCreated": "2026-07-24T19:57:30Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-34810",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ExtractFaces",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739821",
+            "ranking": 4.2,
+            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787183470553
         }
       ],
       "allConnectors": [
@@ -16580,11 +16647,6 @@
           "ap2ID": "id-87806"
         },
         {
-          "ap2Name": "selectionTwo",
-          "ap1ID": "id-85642",
-          "ap2ID": "id-87594"
-        },
-        {
           "ap2Name": "Geometry",
           "ap1ID": "id-85140",
           "ap2ID": "id-85565"
@@ -16595,6 +16657,11 @@
           "ap2ID": "id-85642"
         },
         {
+          "ap2Name": "selectionTwo",
+          "ap1ID": "id-87515",
+          "ap2ID": "id-87594"
+        },
+        {
           "ap2Name": "selection",
           "ap1ID": "id-87524",
           "ap2ID": "id-87568"
@@ -16603,6 +16670,11 @@
           "ap2Name": "faceSelection",
           "ap1ID": "id-87524",
           "ap2ID": "id-87788"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-87524",
+          "ap2ID": "id-87552"
         },
         {
           "ap2Name": "faces",
@@ -16623,11 +16695,6 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-87568",
           "ap2ID": "id-82172"
-        },
-        {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-87594",
-          "ap2ID": "id-87552"
         },
         {
           "ap2Name": "xDir",
@@ -16663,6 +16730,11 @@
           "ap2Name": "Input",
           "ap1ID": "id-87750",
           "ap2ID": "id-87727"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-87750",
+          "ap2ID": "id-87822"
         },
         {
           "ap2Name": "exclude",
