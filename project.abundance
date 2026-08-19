@@ -10032,22 +10032,6 @@
           "compiledCode": "\"use strict\";\nfunction run(face, drawingsAssembly) {\n    if (!face.isLeaf()) {\n        throw new Error(\"face must be singleton leaf\");\n    }\n    let replFace;\n    if (face.geometry instanceof replicad.Face) {\n        replFace = face.geometry;\n    }\n    else {\n        throw new Error(\"Face must be a bare face\");\n    }\n    const targetCenter = replFace.pointOnSurface(0.5, 0.5);\n    const targetNormal = replFace.normalAt(targetCenter);\n    const result = drawingsAssembly.onLeafs((leaf) => {\n        const baseCenter = leaf.plane.origin;\n        const baseNormal = leaf.plane.zDir;\n        let newPlane = leaf.plane.pivot(baseNormal.getAngle(targetNormal), baseNormal.cross(targetNormal));\n        newPlane = newPlane.translate(targetCenter.add(baseCenter.multiply(-1)));\n        console.log(replFace.UVBounds);\n        console.log(replFace.boundingBox.bounds);\n        console.log(replFace.uvCoordinates(replFace.boundingBox.center));\n        replFace.edges.map((e) => { console.log(e.length); });\n        newPlane = replicad.makePlaneFromFace(replFace, [0.5, 0.5]);\n        return new Assembly({\n            ...leaf,\n            plane: newPlane\n        });\n    });\n    if (result != null) {\n        return result;\n    }\n    else {\n        throw new Error(\"result unexpectedly null\");\n    }\n}\n"
         },
         {
-          "atomType": "Extrude",
-          "x": 0.7962239583333333,
-          "y": 0.5657142857142857,
-          "uniqueID": "id-82221",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 10
-            }
-          ]
-        },
-        {
           "atomType": "Code",
           "x": 0.3248697916666667,
           "y": 0.09428571428571429,
@@ -10095,52 +10079,6 @@
           "interpreterVersion": 1,
           "code": "// select.faceByNormal\n\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n  const tol = toleranceDeg * replicad.DEG2RAD\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center))\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= tol;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })\n}",
           "compiledCode": "\"use strict\";\n// select.faceByNormal\nfunction run(facesOf, normal, toleranceDeg = 0) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    const tol = toleranceDeg * replicad.DEG2RAD;\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt(arg.element.uvCoordinates(arg.element.boundingBox.center));\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= tol;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    });\n}\n"
-        },
-        {
-          "atomType": "Code",
-          "x": 0.7005208333333334,
-          "y": 0.6714285714285715,
-          "uniqueID": "id-83585",
-          "ioValues": [
-            {
-              "name": "face",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "u",
-              "ioValue": 0.5
-            },
-            {
-              "name": "v",
-              "ioValue": 0.6
-            },
-            {
-              "name": "xPos",
-              "ioValue": []
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "// face.asPlane\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5, xPos: number[]) {\n  let xposOverride = undefined;\n  if (xPos.length == 3 && new replicad.Vector(xPos as [number, number, number]).Length > 0) {\n    xposOverride = new replicad.Vector(xPos as [number, number, number])\n  }\n\n  const normUV = (uV: number, min: number, max: number) => {\n    return min + (max - min) * uV\n  }\n  return face.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v])\n      if (xposOverride) {\n        const projXDir = xposOverride.projectToPlane(leaf.plane)\n        if (projXDir.Length == 0) {\n          throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`)\n        }\n        const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD\n        const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)))\n        leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1)\n        console.log(`degrees different: ${deg} sign: ${sign}.`)\n      }\n      leaf.geometry = replicad.drawRectangle(1,0.5)\n    }\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// face.asPlane\nfunction run(face, u = 0.5, v = 0.5, xPos) {\n    let xposOverride = undefined;\n    if (xPos.length == 3 && new replicad.Vector(xPos).Length > 0) {\n        xposOverride = new replicad.Vector(xPos);\n    }\n    const normUV = (uV, min, max) => {\n        return min + (max - min) * uV;\n    };\n    return face.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v]);\n            if (xposOverride) {\n                const projXDir = xposOverride.projectToPlane(leaf.plane);\n                if (projXDir.Length == 0) {\n                    throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`);\n                }\n                const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD;\n                const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)));\n                leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1);\n                console.log(`degrees different: ${deg} sign: ${sign}.`);\n            }\n            leaf.geometry = replicad.drawRectangle(1, 0.5);\n        }\n        return leaf;\n    });\n}\n"
-        },
-        {
-          "atomType": "Code",
-          "x": 0.7682291666666667,
-          "y": 0.8714285714285714,
-          "uniqueID": "id-83608",
-          "ioValues": [
-            {
-              "name": "shape",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "planes",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "// moveToPlane\nfunction run(shape: Assembly, planes: Assembly) {\n  return shape.onLeafs((leaf) => {\n    const subLeafs: Assembly[] = []\n    planes.onLeafs((plane) => {\n      if (leaf.geometry instanceof replicad.Drawing) {\n        subLeafs.push(new Assembly({\n          ...leaf,\n          plane: plane.plane\n        }))\n      } else {\n        // do an actual transpose based on the relative positions of planes\n        const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, plane.plane)\n        subLeafs.push(new Assembly({\n          ...leaf,\n          geometry: moved,\n          plane: plane.plane\n        }))\n      }\n      return plane;\n    });\n    return new Assembly({\n      geometry: subLeafs\n    })\n  })\n}\n\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape: replicad.AnyShape, fromPlane: replicad.Plane, toPlane: replicad.Plane) {\n  const vec3 = (value: any): [number, number, number] =>\n    Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n      ? value as [number, number, number]\n      : [value.x, value.y, value.z];\n\n  const fromOrigin = vec3(fromPlane.origin);\n  const toOrigin = vec3(toPlane.origin);\n\n  const fromBasis = [\n    vec3(fromPlane.xDir),\n    vec3(fromPlane.yDir),\n    vec3(fromPlane.zDir),\n  ];\n\n  const toBasis = [\n    vec3(toPlane.xDir),\n    vec3(toPlane.yDir),\n    vec3(toPlane.zDir),\n  ];\n\n  // R = B_to * transpose(B_from)\n  const rotation = Array.from({ length: 3 }, (_, row) =>\n    Array.from({ length: 3 }, (_, column) =>\n      toBasis.reduce(\n        (sum, toAxis, axis) =>\n          sum + toAxis[row] * fromBasis[axis][column],\n        0,\n      ),\n    ),\n  );\n\n  const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));\n  const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n  const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n  const epsilon = 1e-8;\n\n  let result = shape;\n\n  if (angleRadians > epsilon) {\n    let axis: [number, number, number];\n\n    // The usual formula becomes unstable for rotations near 180 degrees.\n    if (Math.PI - angleRadians < epsilon) {\n      const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n      const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n      const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n\n      axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n\n      if (rotation[0][1] + rotation[1][0] < 0) axis[1] = -axis[1];\n      if (rotation[0][2] + rotation[2][0] < 0) axis[2] = -axis[2];\n    } else {\n      const denominator = 2 * Math.sin(angleRadians);\n      axis = [\n        (rotation[2][1] - rotation[1][2]) / denominator,\n        (rotation[0][2] - rotation[2][0]) / denominator,\n        (rotation[1][0] - rotation[0][1]) / denominator,\n      ];\n    }\n\n    const axisLength = Math.hypot(...axis);\n    axis = axis.map((component) => component / axisLength);\n\n    result = result.rotate(\n      angleRadians * (180 / Math.PI),\n      fromOrigin,\n      axis,\n    );\n  }\n\n  // Rotation was around fromOrigin, so only the origin delta is needed.\n  return result.translate(\n    toOrigin[0] - fromOrigin[0],\n    toOrigin[1] - fromOrigin[1],\n    toOrigin[2] - fromOrigin[2],\n  );\n}",
-          "compiledCode": "\"use strict\";\n// moveToPlane\nfunction run(shape, planes) {\n    return shape.onLeafs((leaf) => {\n        const subLeafs = [];\n        planes.onLeafs((plane) => {\n            if (leaf.geometry instanceof replicad.Drawing) {\n                subLeafs.push(new Assembly({\n                    ...leaf,\n                    plane: plane.plane\n                }));\n            }\n            else {\n                // do an actual transpose based on the relative positions of planes\n                const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, plane.plane);\n                subLeafs.push(new Assembly({\n                    ...leaf,\n                    geometry: moved,\n                    plane: plane.plane\n                }));\n            }\n            return plane;\n        });\n        return new Assembly({\n            geometry: subLeafs\n        });\n    });\n}\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape, fromPlane, toPlane) {\n    const vec3 = (value) => Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n        ? value\n        : [value.x, value.y, value.z];\n    const fromOrigin = vec3(fromPlane.origin);\n    const toOrigin = vec3(toPlane.origin);\n    const fromBasis = [\n        vec3(fromPlane.xDir),\n        vec3(fromPlane.yDir),\n        vec3(fromPlane.zDir),\n    ];\n    const toBasis = [\n        vec3(toPlane.xDir),\n        vec3(toPlane.yDir),\n        vec3(toPlane.zDir),\n    ];\n    // R = B_to * transpose(B_from)\n    const rotation = Array.from({ length: 3 }, (_, row) => Array.from({ length: 3 }, (_, column) => toBasis.reduce((sum, toAxis, axis) => sum + toAxis[row] * fromBasis[axis][column], 0)));\n    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));\n    const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n    const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n    const epsilon = 1e-8;\n    let result = shape;\n    if (angleRadians > epsilon) {\n        let axis;\n        // The usual formula becomes unstable for rotations near 180 degrees.\n        if (Math.PI - angleRadians < epsilon) {\n            const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n            const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n            const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n            axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n            if (rotation[0][1] + rotation[1][0] < 0)\n                axis[1] = -axis[1];\n            if (rotation[0][2] + rotation[2][0] < 0)\n                axis[2] = -axis[2];\n        }\n        else {\n            const denominator = 2 * Math.sin(angleRadians);\n            axis = [\n                (rotation[2][1] - rotation[1][2]) / denominator,\n                (rotation[0][2] - rotation[2][0]) / denominator,\n                (rotation[1][0] - rotation[0][1]) / denominator,\n            ];\n        }\n        const axisLength = Math.hypot(...axis);\n        axis = axis.map((component) => component / axisLength);\n        result = result.rotate(angleRadians * (180 / Math.PI), fromOrigin, axis);\n    }\n    // Rotation was around fromOrigin, so only the origin delta is needed.\n    return result.translate(toOrigin[0] - fromOrigin[0], toOrigin[1] - fromOrigin[1], toOrigin[2] - fromOrigin[2]);\n}\n"
         },
         {
           "atomType": "Rectangle",
@@ -10221,99 +10159,6 @@
               "ioValue": -1
             }
           ]
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.4388020833333333,
-          "y": 0.1857142857142857,
-          "uniqueID": "id-80997",
-          "name": "ExtractFaces",
-          "ioValues": [
-            {
-              "name": "Assembly",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-80994",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-80995",
-              "name": "Assembly",
-              "type": "faceselect",
-              "selectedFaceData": {}
-            },
-            {
-              "atomType": "Code",
-              "x": 0.2565104166666667,
-              "y": 0.7599999999999999,
-              "uniqueID": "id-80996",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-80995",
-              "ap2ID": "id-80996"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-80996",
-              "ap2ID": "id-80994"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-18T18:23:39.146Z",
-            "privateRepo": false,
-            "repoName": "ExtractFaces",
-            "dateCreated": "2026-07-24T19:57:30Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34810",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractFaces",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 4.2,
-            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787078543674
         },
         {
           "atomType": "GitHubMolecule",
@@ -10407,119 +10252,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787078543674
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.6490885416666667,
-          "y": 0.2,
-          "uniqueID": "id-82189",
-          "name": "util.DrawingOnFace",
-          "ioValues": [
-            {
-              "name": "Face",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "Drawing",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-82185",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4010416666666667,
-              "y": 0.6114285714285714,
-              "uniqueID": "id-82186",
-              "ioValues": [
-                {
-                  "name": "face",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "drawingsAssembly",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(\n  face: Assembly,\n  drawingsAssembly: Assembly,\n): Assembly {\n  if (!face.isLeaf()) {\n    throw new Error(\"face must be singleton leaf\")\n  }\n  let replFace: replicad.Face;\n  if (face.geometry instanceof replicad.Face) {\n    replFace = face.geometry\n  } else {\n    throw new Error(\"Face must be a bare face\")\n  }\n\n  const targetCenter = replFace.pointOnSurface(0.5, 0.5)\n  const targetNormal = replFace.normalAt(targetCenter);\n\n  const result = drawingsAssembly.onLeafs((leaf) => {\n    const baseCenter = leaf.plane.origin;\n    const baseNormal = leaf.plane.zDir;\n\n    let newPlane = leaf.plane.pivot(baseNormal.getAngle(targetNormal), baseNormal.cross(targetNormal))\n    newPlane = newPlane.translate(targetCenter.add(baseCenter.multiply(-1)))\n\n    return new Assembly({\n      ...leaf,\n      plane: newPlane\n    })\n  })\n\n  if (result != null) {\n    return result\n  } else {\n    throw new Error(\"result unexpectedly null\")\n  }\n}",
-              "compiledCode": "\"use strict\";\nfunction run(face, drawingsAssembly) {\n    if (!face.isLeaf()) {\n        throw new Error(\"face must be singleton leaf\");\n    }\n    let replFace;\n    if (face.geometry instanceof replicad.Face) {\n        replFace = face.geometry;\n    }\n    else {\n        throw new Error(\"Face must be a bare face\");\n    }\n    const targetCenter = replFace.pointOnSurface(0.5, 0.5);\n    const targetNormal = replFace.normalAt(targetCenter);\n    const result = drawingsAssembly.onLeafs((leaf) => {\n        const baseCenter = leaf.plane.origin;\n        const baseNormal = leaf.plane.zDir;\n        let newPlane = leaf.plane.pivot(baseNormal.getAngle(targetNormal), baseNormal.cross(targetNormal));\n        newPlane = newPlane.translate(targetCenter.add(baseCenter.multiply(-1)));\n        return new Assembly({\n            ...leaf,\n            plane: newPlane\n        });\n    });\n    if (result != null) {\n        return result;\n    }\n    else {\n        throw new Error(\"result unexpectedly null\");\n    }\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-82187",
-              "name": "Face",
-              "type": "geometry"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.22400000000000003,
-              "uniqueID": "id-82188",
-              "name": "Drawing",
-              "type": "geometry"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-82186",
-              "ap2ID": "id-82185"
-            },
-            {
-              "ap2Name": "face",
-              "ap1ID": "id-82187",
-              "ap2ID": "id-82186"
-            },
-            {
-              "ap2Name": "drawingsAssembly",
-              "ap1ID": "id-82188",
-              "ap2ID": "id-82186"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-18T18:23:39.146Z",
-            "privateRepo": false,
-            "repoName": "util.DrawingOnFace",
-            "dateCreated": "2026-06-15T21:20:49Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/util.DrawingOnFace/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-1",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/util.DrawingOnFace",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739782",
-            "ranking": 0.6,
-            "searchField": "util.drawingonface tristan-huber orient a drawing onto a face. aligns each drawing origin with face centerpoint and matches drawing z to face normal abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Orient a drawing onto a face. Aligns each drawing origin with face centerpoint and matches drawing z to face normal",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.DrawingOnFace/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.DrawingOnFace/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787079495116
         },
         {
           "atomType": "Molecule",
@@ -10675,112 +10407,6 @@
             }
           ],
           "fileTypeVersion": 1
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.619140625,
-          "y": 0.4342857142857143,
-          "uniqueID": "id-83557",
-          "name": "ExtractFaces",
-          "ioValues": [
-            {
-              "name": "Assembly",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-83558",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-83559",
-              "name": "Assembly",
-              "type": "faceselect",
-              "selectedFaceData": {
-                "0": [
-                  3
-                ],
-                "1": [
-                  3
-                ],
-                "2": [
-                  3
-                ],
-                "3": [
-                  3
-                ]
-              }
-            },
-            {
-              "atomType": "Code",
-              "x": 0.2565104166666667,
-              "y": 0.7599999999999999,
-              "uniqueID": "id-83560",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-83559",
-              "ap2ID": "id-83560"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-83560",
-              "ap2ID": "id-83558"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-18T18:23:39.146Z",
-            "privateRepo": false,
-            "repoName": "ExtractFaces",
-            "dateCreated": "2026-07-24T19:57:30Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34810",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractFaces",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 4.2,
-            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787078543674
         },
         {
           "atomType": "GitHubMolecule",
@@ -16409,6 +16035,44 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787179737553
+        },
+        {
+          "atomType": "Code",
+          "x": 0.5592447916666666,
+          "y": 0.6771428571428572,
+          "uniqueID": "id-87736",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "planes",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "// moveToPlane\nfunction run(shape: Assembly, planes: Assembly) {\n  return shape.onLeafs((leaf) => {\n    const subLeafs: Assembly[] = []\n    planes.onLeafs((plane) => {\n      if (leaf.geometry instanceof replicad.Drawing) {\n        subLeafs.push(new Assembly({\n          ...leaf,\n          plane: plane.plane\n        }))\n      } else {\n        // do an actual transpose based on the relative positions of planes\n        const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, plane.plane)\n        subLeafs.push(new Assembly({\n          ...leaf,\n          geometry: moved,\n          plane: plane.plane\n        }))\n      }\n      return plane;\n    });\n    return new Assembly({\n      geometry: subLeafs\n    })\n  })\n}\n\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape: replicad.AnyShape, fromPlane: replicad.Plane, toPlane: replicad.Plane) {\n  const vec3 = (value: any): [number, number, number] =>\n    Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n      ? value as [number, number, number]\n      : [value.x, value.y, value.z];\n\n  const fromOrigin = vec3(fromPlane.origin);\n  const toOrigin = vec3(toPlane.origin);\n\n  const fromBasis = [\n    vec3(fromPlane.xDir),\n    vec3(fromPlane.yDir),\n    vec3(fromPlane.zDir),\n  ];\n\n  const toBasis = [\n    vec3(toPlane.xDir),\n    vec3(toPlane.yDir),\n    vec3(toPlane.zDir),\n  ];\n\n  // R = B_to * transpose(B_from)\n  const rotation = Array.from({ length: 3 }, (_, row) =>\n    Array.from({ length: 3 }, (_, column) =>\n      toBasis.reduce(\n        (sum, toAxis, axis) =>\n          sum + toAxis[row] * fromBasis[axis][column],\n        0,\n      ),\n    ),\n  );\n\n  const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));\n  const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n  const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n  const epsilon = 1e-8;\n\n  let result = shape;\n\n  if (angleRadians > epsilon) {\n    let axis: [number, number, number];\n\n    // The usual formula becomes unstable for rotations near 180 degrees.\n    if (Math.PI - angleRadians < epsilon) {\n      const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n      const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n      const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n\n      axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n\n      if (rotation[0][1] + rotation[1][0] < 0) axis[1] = -axis[1];\n      if (rotation[0][2] + rotation[2][0] < 0) axis[2] = -axis[2];\n    } else {\n      const denominator = 2 * Math.sin(angleRadians);\n      axis = [\n        (rotation[2][1] - rotation[1][2]) / denominator,\n        (rotation[0][2] - rotation[2][0]) / denominator,\n        (rotation[1][0] - rotation[0][1]) / denominator,\n      ];\n    }\n\n    const axisLength = Math.hypot(...axis);\n    axis = axis.map((component) => component / axisLength);\n\n    result = result.rotate(\n      angleRadians * (180 / Math.PI),\n      fromOrigin,\n      axis,\n    );\n  }\n\n  // Rotation was around fromOrigin, so only the origin delta is needed.\n  return result.translate(\n    toOrigin[0] - fromOrigin[0],\n    toOrigin[1] - fromOrigin[1],\n    toOrigin[2] - fromOrigin[2],\n  );\n}",
+          "compiledCode": "\"use strict\";\n// moveToPlane\nfunction run(shape, planes) {\n    return shape.onLeafs((leaf) => {\n        const subLeafs = [];\n        planes.onLeafs((plane) => {\n            if (leaf.geometry instanceof replicad.Drawing) {\n                subLeafs.push(new Assembly({\n                    ...leaf,\n                    plane: plane.plane\n                }));\n            }\n            else {\n                // do an actual transpose based on the relative positions of planes\n                const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, plane.plane);\n                subLeafs.push(new Assembly({\n                    ...leaf,\n                    geometry: moved,\n                    plane: plane.plane\n                }));\n            }\n            return plane;\n        });\n        return new Assembly({\n            geometry: subLeafs\n        });\n    });\n}\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape, fromPlane, toPlane) {\n    const vec3 = (value) => Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n        ? value\n        : [value.x, value.y, value.z];\n    const fromOrigin = vec3(fromPlane.origin);\n    const toOrigin = vec3(toPlane.origin);\n    const fromBasis = [\n        vec3(fromPlane.xDir),\n        vec3(fromPlane.yDir),\n        vec3(fromPlane.zDir),\n    ];\n    const toBasis = [\n        vec3(toPlane.xDir),\n        vec3(toPlane.yDir),\n        vec3(toPlane.zDir),\n    ];\n    // R = B_to * transpose(B_from)\n    const rotation = Array.from({ length: 3 }, (_, row) => Array.from({ length: 3 }, (_, column) => toBasis.reduce((sum, toAxis, axis) => sum + toAxis[row] * fromBasis[axis][column], 0)));\n    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));\n    const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n    const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n    const epsilon = 1e-8;\n    let result = shape;\n    if (angleRadians > epsilon) {\n        let axis;\n        // The usual formula becomes unstable for rotations near 180 degrees.\n        if (Math.PI - angleRadians < epsilon) {\n            const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n            const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n            const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n            axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n            if (rotation[0][1] + rotation[1][0] < 0)\n                axis[1] = -axis[1];\n            if (rotation[0][2] + rotation[2][0] < 0)\n                axis[2] = -axis[2];\n        }\n        else {\n            const denominator = 2 * Math.sin(angleRadians);\n            axis = [\n                (rotation[2][1] - rotation[1][2]) / denominator,\n                (rotation[0][2] - rotation[2][0]) / denominator,\n                (rotation[1][0] - rotation[0][1]) / denominator,\n            ];\n        }\n        const axisLength = Math.hypot(...axis);\n        axis = axis.map((component) => component / axisLength);\n        result = result.rotate(angleRadians * (180 / Math.PI), fromOrigin, axis);\n    }\n    // Rotation was around fromOrigin, so only the origin delta is needed.\n    return result.translate(toOrigin[0] - fromOrigin[0], toOrigin[1] - fromOrigin[1], toOrigin[2] - fromOrigin[2]);\n}\n"
+        },
+        {
+          "atomType": "Code",
+          "x": 0.7682291666666667,
+          "y": 0.8714285714285714,
+          "uniqueID": "id-83608",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "planes",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "// moveToPlane\nfunction run(shape: Assembly, planes: Assembly) {\n  return shape.onLeafs((leaf) => {\n    const subLeafs: Assembly[] = []\n    planes.onLeafs((plane) => {\n      if (leaf.geometry instanceof replicad.Drawing) {\n        subLeafs.push(new Assembly({\n          ...leaf,\n          plane: plane.plane\n        }))\n      } else {\n        // do an actual transpose based on the relative positions of planes\n        const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, plane.plane)\n        subLeafs.push(new Assembly({\n          ...leaf,\n          geometry: moved,\n          plane: plane.plane\n        }))\n      }\n      return plane;\n    });\n    return new Assembly({\n      geometry: subLeafs\n    })\n  })\n}\n\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape: replicad.AnyShape, fromPlane: replicad.Plane, toPlane: replicad.Plane) {\n  const vec3 = (value: any): [number, number, number] =>\n    Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n      ? value as [number, number, number]\n      : [value.x, value.y, value.z];\n\n  const fromOrigin = vec3(fromPlane.origin);\n  const toOrigin = vec3(toPlane.origin);\n\n  const fromBasis = [\n    vec3(fromPlane.xDir),\n    vec3(fromPlane.yDir),\n    vec3(fromPlane.zDir),\n  ];\n\n  const toBasis = [\n    vec3(toPlane.xDir),\n    vec3(toPlane.yDir),\n    vec3(toPlane.zDir),\n  ];\n\n  // R = B_to * transpose(B_from)\n  const rotation = Array.from({ length: 3 }, (_, row) =>\n    Array.from({ length: 3 }, (_, column) =>\n      toBasis.reduce(\n        (sum, toAxis, axis) =>\n          sum + toAxis[row] * fromBasis[axis][column],\n        0,\n      ),\n    ),\n  );\n\n  const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));\n  const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n  const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n  const epsilon = 1e-8;\n\n  let result = shape;\n\n  if (angleRadians > epsilon) {\n    let axis: [number, number, number];\n\n    // The usual formula becomes unstable for rotations near 180 degrees.\n    if (Math.PI - angleRadians < epsilon) {\n      const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n      const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n      const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n\n      axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n\n      if (rotation[0][1] + rotation[1][0] < 0) axis[1] = -axis[1];\n      if (rotation[0][2] + rotation[2][0] < 0) axis[2] = -axis[2];\n    } else {\n      const denominator = 2 * Math.sin(angleRadians);\n      axis = [\n        (rotation[2][1] - rotation[1][2]) / denominator,\n        (rotation[0][2] - rotation[2][0]) / denominator,\n        (rotation[1][0] - rotation[0][1]) / denominator,\n      ];\n    }\n\n    const axisLength = Math.hypot(...axis);\n    axis = axis.map((component) => component / axisLength);\n\n    result = result.rotate(\n      angleRadians * (180 / Math.PI),\n      fromOrigin,\n      axis,\n    );\n  }\n\n  // Rotation was around fromOrigin, so only the origin delta is needed.\n  return result.translate(\n    toOrigin[0] - fromOrigin[0],\n    toOrigin[1] - fromOrigin[1],\n    toOrigin[2] - fromOrigin[2],\n  );\n}",
+          "compiledCode": "\"use strict\";\n// moveToPlane\nfunction run(shape, planes) {\n    return shape.onLeafs((leaf) => {\n        const subLeafs = [];\n        planes.onLeafs((plane) => {\n            if (leaf.geometry instanceof replicad.Drawing) {\n                subLeafs.push(new Assembly({\n                    ...leaf,\n                    plane: plane.plane\n                }));\n            }\n            else {\n                // do an actual transpose based on the relative positions of planes\n                const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, plane.plane);\n                subLeafs.push(new Assembly({\n                    ...leaf,\n                    geometry: moved,\n                    plane: plane.plane\n                }));\n            }\n            return plane;\n        });\n        return new Assembly({\n            geometry: subLeafs\n        });\n    });\n}\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape, fromPlane, toPlane) {\n    const vec3 = (value) => Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n        ? value\n        : [value.x, value.y, value.z];\n    const fromOrigin = vec3(fromPlane.origin);\n    const toOrigin = vec3(toPlane.origin);\n    const fromBasis = [\n        vec3(fromPlane.xDir),\n        vec3(fromPlane.yDir),\n        vec3(fromPlane.zDir),\n    ];\n    const toBasis = [\n        vec3(toPlane.xDir),\n        vec3(toPlane.yDir),\n        vec3(toPlane.zDir),\n    ];\n    // R = B_to * transpose(B_from)\n    const rotation = Array.from({ length: 3 }, (_, row) => Array.from({ length: 3 }, (_, column) => toBasis.reduce((sum, toAxis, axis) => sum + toAxis[row] * fromBasis[axis][column], 0)));\n    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));\n    const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n    const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n    const epsilon = 1e-8;\n    let result = shape;\n    if (angleRadians > epsilon) {\n        let axis;\n        // The usual formula becomes unstable for rotations near 180 degrees.\n        if (Math.PI - angleRadians < epsilon) {\n            const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n            const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n            const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n            axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n            if (rotation[0][1] + rotation[1][0] < 0)\n                axis[1] = -axis[1];\n            if (rotation[0][2] + rotation[2][0] < 0)\n                axis[2] = -axis[2];\n        }\n        else {\n            const denominator = 2 * Math.sin(angleRadians);\n            axis = [\n                (rotation[2][1] - rotation[1][2]) / denominator,\n                (rotation[0][2] - rotation[2][0]) / denominator,\n                (rotation[1][0] - rotation[0][1]) / denominator,\n            ];\n        }\n        const axisLength = Math.hypot(...axis);\n        axis = axis.map((component) => component / axisLength);\n        result = result.rotate(angleRadians * (180 / Math.PI), fromOrigin, axis);\n    }\n    // Rotation was around fromOrigin, so only the origin delta is needed.\n    return result.translate(toOrigin[0] - fromOrigin[0], toOrigin[1] - fromOrigin[1], toOrigin[2] - fromOrigin[2]);\n}\n"
         }
       ],
       "allConnectors": [
@@ -16443,21 +16107,6 @@
           "ap2ID": "id-80969"
         },
         {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-83431",
-          "ap2ID": "id-80997"
-        },
-        {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-83556",
-          "ap2ID": "id-83557"
-        },
-        {
-          "ap2Name": "planes",
-          "ap1ID": "id-83585",
-          "ap2ID": "id-83608"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-83620",
           "ap2ID": "id-83624"
@@ -16473,34 +16122,14 @@
           "ap2ID": "id-83608"
         },
         {
-          "ap2Name": "Face",
-          "ap1ID": "id-82172",
-          "ap2ID": "id-82189"
-        },
-        {
           "ap2Name": "face",
           "ap1ID": "id-82172",
           "ap2ID": "id-81037"
         },
         {
           "ap2Name": "geometry",
-          "ap1ID": "id-82189",
-          "ap2ID": "id-82221"
-        },
-        {
-          "ap2Name": "Drawing",
-          "ap1ID": "id-83521",
-          "ap2ID": "id-82189"
-        },
-        {
-          "ap2Name": "geometry",
           "ap1ID": "id-83521",
           "ap2ID": "id-83620"
-        },
-        {
-          "ap2Name": "face",
-          "ap1ID": "id-83557",
-          "ap2ID": "id-83585"
         },
         {
           "ap2Name": "Shape",
