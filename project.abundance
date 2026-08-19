@@ -2312,8 +2312,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.6321614583333334,
-          "y": 0.6971428571428572,
+          "x": 0.619140625,
+          "y": 0.4342857142857143,
           "uniqueID": "id-83557",
           "name": "ExtractFaces",
           "ioValues": [
@@ -2441,8 +2441,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.71484375,
-          "y": 0.7771428571428571,
+          "x": 0.7005208333333334,
+          "y": 0.6714285714285715,
           "uniqueID": "id-83585",
           "ioValues": [
             {
@@ -2472,8 +2472,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.8001302083333334,
-          "y": 0.7714285714285715,
+          "x": 0.8352864583333333,
+          "y": 0.7257142857142858,
           "uniqueID": "id-83595",
           "name": "IthFromAssembly",
           "ioValues": [
@@ -2581,6 +2581,37 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787163293321
+        },
+        {
+          "atomType": "Code",
+          "x": 0.751953125,
+          "y": 0.8942857142857142,
+          "uniqueID": "id-83608",
+          "ioValues": [
+            {
+              "name": "face",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "u",
+              "ioValue": 0.5
+            },
+            {
+              "name": "v",
+              "ioValue": 0.6
+            },
+            {
+              "name": "xPos",
+              "ioValue": [
+                1,
+                0,
+                0
+              ]
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "// face.asPlane\nfunction run(face: Assembly, u: number = 0.5, v: number = 0.5, xPos: number[]) {\n  let xposOverride = undefined;\n  if (xPos.length == 3 && new replicad.Vector(xPos as [number, number, number]).Length > 0) {\n    xposOverride = new replicad.Vector(xPos as [number, number, number])\n  }\n\n  const normUV = (uV: number, min: number, max: number) => {\n    return min + (max - min) * uV\n  }\n  return face.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v])\n      if (xposOverride) {\n        const projXDir = xposOverride.projectToPlane(leaf.plane)\n        if (projXDir.Length == 0) {\n          throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`)\n        }\n        const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD\n        const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)))\n        leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1)\n        console.log(`degrees different: ${deg} sign: ${sign}.`)\n      }\n      leaf.geometry = replicad.drawRectangle(1,0.5)\n    }\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// face.asPlane\nfunction run(face, u = 0.5, v = 0.5, xPos) {\n    let xposOverride = undefined;\n    if (xPos.length == 3 && new replicad.Vector(xPos).Length > 0) {\n        xposOverride = new replicad.Vector(xPos);\n    }\n    const normUV = (uV, min, max) => {\n        return min + (max - min) * uV;\n    };\n    return face.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v]);\n            if (xposOverride) {\n                const projXDir = xposOverride.projectToPlane(leaf.plane);\n                if (projXDir.Length == 0) {\n                    throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`);\n                }\n                const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD;\n                const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)));\n                leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1);\n                console.log(`degrees different: ${deg} sign: ${sign}.`);\n            }\n            leaf.geometry = replicad.drawRectangle(1, 0.5);\n        }\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -2690,6 +2721,11 @@
           "ap2ID": "id-83585"
         },
         {
+          "ap2Name": "xPos",
+          "ap1ID": "id-83491",
+          "ap2ID": "id-83608"
+        },
+        {
           "ap2Name": "Assembly",
           "ap1ID": "id-83497",
           "ap2ID": "id-83504"
@@ -2708,6 +2744,11 @@
           "ap2Name": "face",
           "ap1ID": "id-83557",
           "ap2ID": "id-83585"
+        },
+        {
+          "ap2Name": "face",
+          "ap1ID": "id-83557",
+          "ap2ID": "id-83608"
         },
         {
           "ap2Name": "normal",
