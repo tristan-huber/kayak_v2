@@ -6604,8 +6604,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.33723958333333337,
-          "y": 0.8457142857142858,
+          "x": 0.28645833333333337,
+          "y": 0.8857142857142857,
           "uniqueID": "id-85669",
           "ioValues": [
             {
@@ -6708,6 +6708,21 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787175572709
+        },
+        {
+          "atomType": "Code",
+          "x": 0.36588541666666663,
+          "y": 0.8971428571428571,
+          "uniqueID": "id-85686",
+          "ioValues": [
+            {
+              "name": "a1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "// select.adjascentFaces\nfunction run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined) {\n      leaf.selection = {edges: [], faces: [], part: false}\n      return leaf;\n    }\n    const edges = leaf.geometry.edges;\n    const selectedEdgeIndexes = new Set<number>();\n    leaf.getSelectedFaces().forEach((face) => {\n      const indexes: number[] = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)))\n      indexes.forEach((i) =>{\n        selectedEdgeIndexes.add(i)\n      })\n    })\n    leaf.selection.edges = [...selectedEdgeIndexes]\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\n// select.adjascentFaces\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [], faces: [], part: false };\n            return leaf;\n        }\n        const edges = leaf.geometry.edges;\n        const selectedEdgeIndexes = new Set();\n        leaf.getSelectedFaces().forEach((face) => {\n            const indexes = face.edges.map((e) => edges.findIndex((e1) => e1.isSame(e)));\n            indexes.forEach((i) => {\n                selectedEdgeIndexes.add(i);\n            });\n        });\n        leaf.selection.edges = [...selectedEdgeIndexes];\n        return leaf;\n    });\n}\n"
         }
       ],
       "allConnectors": [
@@ -6880,6 +6895,11 @@
           "ap2Name": "Input",
           "ap1ID": "id-85669",
           "ap2ID": "id-85677"
+        },
+        {
+          "ap2Name": "a1",
+          "ap1ID": "id-85669",
+          "ap2ID": "id-85686"
         }
       ],
       "fileTypeVersion": 1
