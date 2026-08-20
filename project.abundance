@@ -11522,8 +11522,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.28125,
-          "y": 0.44857142857142857,
+          "x": 0.3255208333333333,
+          "y": 0.4657142857142857,
           "uniqueID": "id-98288",
           "name": "undersidePanels",
           "ioValues": [
@@ -12243,22 +12243,6 @@
           "tags": [
             "1/8inchply"
           ]
-        },
-        {
-          "atomType": "Difference",
-          "x": 0.26953125,
-          "y": 0.6828571428571429,
-          "uniqueID": "id-98568",
-          "ioValues": [
-            {
-              "name": "retain",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "remove",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
         }
       ],
       "allConnectors": [
@@ -12273,19 +12257,9 @@
           "ap2ID": "id-98181"
         },
         {
-          "ap2Name": "remove",
-          "ap1ID": "id-95411",
-          "ap2ID": "id-98568"
-        },
-        {
           "ap2Name": "body",
           "ap1ID": "id-95414",
           "ap2ID": "id-98288"
-        },
-        {
-          "ap2Name": "retain",
-          "ap1ID": "id-95414",
-          "ap2ID": "id-98568"
         },
         {
           "ap2Name": "geometry",
