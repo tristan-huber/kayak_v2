@@ -13346,8 +13346,8 @@
         },
         {
           "atomType": "CutLayout",
-          "x": 0.8294270833333334,
-          "y": 0.7085714285714285,
+          "x": 0.748046875,
+          "y": 0.8171428571428572,
           "uniqueID": "id-100925",
           "name": "Cut Layout",
           "ioValues": [
@@ -13411,6 +13411,36 @@
               }
             ]
           ]
+        },
+        {
+          "atomType": "Export",
+          "x": 0.8717447916666667,
+          "y": 0.62,
+          "uniqueID": "id-100951",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "File Type",
+              "ioValue": "STEP",
+              "currentEquation": "STEP"
+            },
+            {
+              "name": "Resolution (dpi)",
+              "ioValue": 96
+            },
+            {
+              "name": "Part Name",
+              "ioValue": "halfScaleEighthPly",
+              "currentEquation": "halfScaleEighthPly"
+            }
+          ],
+          "type": null,
+          "resolution": 96,
+          "importIndex": 0,
+          "partName": "halfScaleEighthPly"
         }
       ],
       "allConnectors": [
@@ -13523,6 +13553,11 @@
           "ap2Name": "geometry",
           "ap1ID": "id-100920",
           "ap2ID": "id-100731"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-100925",
+          "ap2ID": "id-100951"
         }
       ],
       "fileTypeVersion": 1
