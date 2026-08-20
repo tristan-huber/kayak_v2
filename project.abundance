@@ -11031,98 +11031,6 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.8268229166666666,
-          "y": 0.21999999999999997,
-          "uniqueID": "id-85677",
-          "name": "ExtractEdges",
-          "ioValues": [
-            {
-              "name": "Input",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-85674",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-85675",
-              "type": "edgeselect",
-              "selectedEdgeData": {}
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4309895833333333,
-              "y": 0.4342857142857143,
-              "uniqueID": "id-85676",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      const edges = leaf.geometry.edges;\n      const edgeIndexes = leaf.selection.edges\n      if (edgeIndexes.length == 1) {\n        leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]])\n        return leaf;\n      } else {\n        const res = edgeIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]])})\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            const edges = leaf.geometry.edges;\n            const edgeIndexes = leaf.selection.edges;\n            if (edgeIndexes.length == 1) {\n                leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]]);\n                return leaf;\n            }\n            else {\n                const res = edgeIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]]) });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-85675",
-              "ap2ID": "id-85676"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-85676",
-              "ap2ID": "id-85674"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-19T18:23:39.128Z",
-            "privateRepo": false,
-            "repoName": "ExtractEdges",
-            "dateCreated": "2026-07-24T20:38:56Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34874",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractEdges",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739824",
-            "ranking": 0.6,
-            "searchField": "extractedges tristan-huber select edges from an assembly by clicking on them. returns a new assembly of just those edges as wires. selection is saved as index of each edge in it's leaf. abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Select edges from an assembly by clicking on them. Returns a new assembly of just those edges as wires. Selection is saved as index of each edge in it's leaf.",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787175572709
-        },
-        {
-          "atomType": "GitHubMolecule",
           "x": 0.5169270833333334,
           "y": 0.28285714285714286,
           "uniqueID": "id-85140",
@@ -15780,8 +15688,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.6087239583333334,
-          "y": 0.5327380952380952,
+          "x": 0.71875,
+          "y": 0.375,
           "uniqueID": "id-87640",
           "ioValues": [
             {
@@ -15799,8 +15707,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.546875,
-          "y": 0.7142857142857143,
+          "x": 0.5319010416666666,
+          "y": 0.744047619047619,
           "uniqueID": "id-87699",
           "ioValues": [
             {
@@ -16000,8 +15908,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.8033854166666666,
-          "y": 0.4542857142857143,
+          "x": 0.8229166666666666,
+          "y": 0.375,
           "uniqueID": "id-87736",
           "ioValues": [
             {
@@ -16397,8 +16305,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.7037760416666667,
-          "y": 0.6309523809523809,
+          "x": 0.73046875,
+          "y": 0.6904761904761905,
           "uniqueID": "id-87801",
           "ioValues": [
             {
@@ -16748,34 +16656,9 @@
           ]
         },
         {
-          "atomType": "Rotate",
-          "x": 0.91796875,
-          "y": 0.19642857142857142,
-          "uniqueID": "id-87867",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "x-axis degrees",
-              "ioValue": 0
-            },
-            {
-              "name": "y-axis degrees",
-              "ioValue": 90,
-              "currentEquation": "90"
-            },
-            {
-              "name": "z-axis degrees",
-              "ioValue": 0
-            }
-          ]
-        },
-        {
           "atomType": "Move",
-          "x": 0.685546875,
-          "y": 0.49702380952380953,
+          "x": 0.6002604166666667,
+          "y": 0.5476190476190477,
           "uniqueID": "id-87873",
           "ioValues": [
             {
@@ -16935,7 +16818,7 @@
           "ap2ID": "id-87801"
         },
         {
-          "ap2Name": "xDir",
+          "ap2Name": "zDir",
           "ap1ID": "id-87640",
           "ap2ID": "id-87833"
         },
@@ -16943,16 +16826,6 @@
           "ap2Name": "points",
           "ap1ID": "id-87699",
           "ap2ID": "id-87801"
-        },
-        {
-          "ap2Name": "points",
-          "ap1ID": "id-87699",
-          "ap2ID": "id-87640"
-        },
-        {
-          "ap2Name": "points",
-          "ap1ID": "id-87699",
-          "ap2ID": "id-87833"
         },
         {
           "ap2Name": "geometry",
@@ -17005,7 +16878,7 @@
           "ap2ID": "id-87736"
         },
         {
-          "ap2Name": "zDir",
+          "ap2Name": "xDir",
           "ap1ID": "id-87845",
           "ap2ID": "id-87833"
         },
@@ -17015,13 +16888,18 @@
           "ap2ID": "id-87863"
         },
         {
-          "ap2Name": "geometry",
+          "ap2Name": "shape",
           "ap1ID": "id-87863",
-          "ap2ID": "id-87867"
+          "ap2ID": "id-87833"
         },
         {
-          "ap2Name": "shape",
-          "ap1ID": "id-87867",
+          "ap2Name": "points",
+          "ap1ID": "id-87873",
+          "ap2ID": "id-87640"
+        },
+        {
+          "ap2Name": "points",
+          "ap1ID": "id-87873",
           "ap2ID": "id-87833"
         }
       ],
