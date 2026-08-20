@@ -10162,8 +10162,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.3079427083333333,
-          "y": 0.33999999999999997,
+          "x": 0.375,
+          "y": 0.21428571428571427,
           "uniqueID": "id-82172",
           "name": "ExtractFaces",
           "ioValues": [
@@ -15042,8 +15042,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.2962239583333333,
-          "y": 0.4828571428571429,
+          "x": 0.3177083333333333,
+          "y": 0.35416666666666663,
           "uniqueID": "id-87552",
           "name": "ExtractFaces",
           "ioValues": [
@@ -15780,8 +15780,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.4192708333333333,
-          "y": 0.38095238095238093,
+          "x": 0.6087239583333334,
+          "y": 0.5327380952380952,
           "uniqueID": "id-87640",
           "ioValues": [
             {
@@ -15794,8 +15794,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// face.normalsFrom\nfunction run(basis: Assembly, points: Assembly) {\n  let selectedFaces = basis.getSelectedFaces();\n  if (!selectedFaces || selectedFaces.filter((f) => f != null)).length == 0) {\n    // get faces directly\n    basis.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        selectedFaces.push(leaf.geometry)\n      } else if (leaf.is3D()) {\n        selectedFaces.push(...leaf.geometry.faces)\n      }\n      return leaf;\n    })\n  }\n  points.onLeafs((point) => {\n    if (point.isPoint()) {\n      \n    }\n  })\n\n  let xposOverride = undefined;\n  if (xPos.length == 3 && new replicad.Vector(xPos as [number, number, number]).Length > 0) {\n    xposOverride = new replicad.Vector(xPos as [number, number, number])\n  }\n\n  const bboxNormalize = (u: number, v: number, face: replicad.Face): [number,number] => {\n    const bbox = face.boundingBox.bounds;\n    const corner1 = face.uvCoordinates(bbox[0])\n    const corner2 = face.uvCoordinates(bbox[1])\n    const helper = (arg: number, limit1: number, limit2: number) =>{\n      const min = Math.min(limit1, limit2)\n      const max = Math.max(limit1, limit2)\n      return normUV(arg, min, max)\n    }\n    \n    return [helper(u, corner1[0], corner2[0]), helper(v, corner1[1], corner2[1])]\n  }\n\n  const normUV = (uV: number, min: number, max: number) => {\n    return min + (max - min) * uV\n  }\n  return face.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      const bounds = leaf.geometry.UVBounds\n\n      leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u,v])\n      // origin corrective.\n      if (xposOverride) {\n        leaf.plane = new replicad.Plane(leaf.geometry.pointOnSurface(u,v), xposOverride, leaf.geometry.normalAt([u,v]))\n/*        const projXDir = xposOverride.projectToPlane(leaf.plane)\n        if (projXDir.Length == 0) {\n          throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`)\n        }\n        const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD\n        const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)))\n        leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1)\n        console.log(`degrees different: ${deg} sign: ${sign}.`)*/\n      }\n      leaf.geometry = replicad.drawRectangle(1, 0.5)\n    }\n    return leaf;\n  })\n}",
-          "compiledCode": "\"use strict\";\n// face.normalsFrom\nfunction run(basis, points) {\n    let selectedFaces = basis.getSelectedFaces();\n    if (!selectedFaces || selectedFaces.filter((f) => f != null))\n        .length == 0;\n    {\n        // get faces directly\n        basis.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                selectedFaces.push(leaf.geometry);\n            }\n            else if (leaf.is3D()) {\n                selectedFaces.push(...leaf.geometry.faces);\n            }\n            return leaf;\n        });\n    }\n    points.onLeafs((point) => {\n        if (point.isPoint()) {\n        }\n    });\n    let xposOverride = undefined;\n    if (xPos.length == 3 && new replicad.Vector(xPos).Length > 0) {\n        xposOverride = new replicad.Vector(xPos);\n    }\n    const bboxNormalize = (u, v, face) => {\n        const bbox = face.boundingBox.bounds;\n        const corner1 = face.uvCoordinates(bbox[0]);\n        const corner2 = face.uvCoordinates(bbox[1]);\n        const helper = (arg, limit1, limit2) => {\n            const min = Math.min(limit1, limit2);\n            const max = Math.max(limit1, limit2);\n            return normUV(arg, min, max);\n        };\n        return [helper(u, corner1[0], corner2[0]), helper(v, corner1[1], corner2[1])];\n    };\n    const normUV = (uV, min, max) => {\n        return min + (max - min) * uV;\n    };\n    return face.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            const bounds = leaf.geometry.UVBounds;\n            leaf.plane = replicad.makePlaneFromFace(leaf.geometry, [u, v]);\n            // origin corrective.\n            if (xposOverride) {\n                leaf.plane = new replicad.Plane(leaf.geometry.pointOnSurface(u, v), xposOverride, leaf.geometry.normalAt([u, v]));\n                /*        const projXDir = xposOverride.projectToPlane(leaf.plane)\n                        if (projXDir.Length == 0) {\n                          throw new Error(`xPos direction (${xposOverride.normalize()}) is parallel to z Axis: ${leaf.plane.zDir}.`)\n                        }\n                        const deg = Math.acos(projXDir.dot(leaf.plane.xDir)) / replicad.DEG2RAD\n                        const sign = Math.sign(leaf.plane.zDir.dot(projXDir.cross(leaf.plane.xDir)))\n                        leaf.plane = leaf.plane.rotate2DAxes(deg * sign * -1)\n                        console.log(`degrees different: ${deg} sign: ${sign}.`)*/\n            }\n            leaf.geometry = replicad.drawRectangle(1, 0.5);\n        }\n        return leaf;\n    });\n}\n"
+          "code": "// face.normalsFrom\nfunction run(basis: Assembly, points: Assembly) {\n  let selectedFaces = basis.getSelectedFaces();\n  if (!selectedFaces || selectedFaces.filter((f) => f != null)).length == 0) {\n    // get faces directly\n    basis.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        selectedFaces.push(leaf.geometry)\n      } else if (leaf.is3D()) {\n        selectedFaces.push(...leaf.geometry.faces)\n      }\n      return leaf;\n    })\n  }\n  return points.onLeafs((point) => {\n    if (point.isPoint()) {\n      const dists = selectedFaces.map((face) => {\n        return projectVertexOntoFace(face, point.geometry)\n      })\n      dists.sort((a, b) => a[0] - b[0])\n      console.log(dists.map((i) => i[0]))\n      point.geometry = replicad.makeVertex(dists[0][2].normalAt(dists[0][1]).normalize())\n    }\n    return point;\n  })\n}\n\nfunction projectVertexOntoFace(\n  face: replicad.Face,\n  vertex: replicad.Vertex,\n): [number, [number, number], replicad.Face] {\n  const asVec = new replicad.Vector(vertex.asTuple())\n  const uv = face.uvCoordinates(asVec)\n  const res =  face.pointOnSurface(uv[0], uv[1]);\n  return [res.add(asVec.multiply(-1)).Length, uv, face]\n}\n}",
+          "compiledCode": "\"use strict\";\n// face.normalsFrom\nfunction run(basis, points) {\n    let selectedFaces = basis.getSelectedFaces();\n    if (!selectedFaces || selectedFaces.filter((f) => f != null))\n        .length == 0;\n    {\n        // get faces directly\n        basis.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                selectedFaces.push(leaf.geometry);\n            }\n            else if (leaf.is3D()) {\n                selectedFaces.push(...leaf.geometry.faces);\n            }\n            return leaf;\n        });\n    }\n    return points.onLeafs((point) => {\n        if (point.isPoint()) {\n            const dists = selectedFaces.map((face) => {\n                return projectVertexOntoFace(face, point.geometry);\n            });\n            dists.sort((a, b) => a[0] - b[0]);\n            console.log(dists.map((i) => i[0]));\n            point.geometry = replicad.makeVertex(dists[0][2].normalAt(dists[0][1]).normalize());\n        }\n        return point;\n    });\n}\nfunction projectVertexOntoFace(face, vertex) {\n    const asVec = new replicad.Vector(vertex.asTuple());\n    const uv = face.uvCoordinates(asVec);\n    const res = face.pointOnSurface(uv[0], uv[1]);\n    return [res.add(asVec.multiply(-1)).Length, uv, face];\n}\n"
         },
         {
           "atomType": "Code",
@@ -16660,14 +16660,14 @@
           "ap2ID": "id-87788"
         },
         {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-87524",
-          "ap2ID": "id-87552"
-        },
-        {
           "ap2Name": "faces",
           "ap1ID": "id-87552",
           "ap2ID": "id-87613"
+        },
+        {
+          "ap2Name": "basis",
+          "ap1ID": "id-87552",
+          "ap2ID": "id-87640"
         },
         {
           "ap2Name": "selectionOne",
@@ -16678,6 +16678,11 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-87568",
           "ap2ID": "id-82172"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-87594",
+          "ap2ID": "id-87552"
         },
         {
           "ap2Name": "xDir",
@@ -16693,6 +16698,11 @@
           "ap2Name": "points",
           "ap1ID": "id-87699",
           "ap2ID": "id-87801"
+        },
+        {
+          "ap2Name": "points",
+          "ap1ID": "id-87699",
+          "ap2ID": "id-87640"
         },
         {
           "ap2Name": "selection",
