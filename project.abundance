@@ -10275,30 +10275,6 @@
           ]
         },
         {
-          "atomType": "Rotate",
-          "x": 0.6295572916666667,
-          "y": 0.7285714285714285,
-          "uniqueID": "id-83624",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "x-axis degrees",
-              "ioValue": 0
-            },
-            {
-              "name": "y-axis degrees",
-              "ioValue": 0
-            },
-            {
-              "name": "z-axis degrees",
-              "ioValue": 45
-            }
-          ]
-        },
-        {
           "atomType": "Move",
           "x": 0.6595052083333334,
           "y": 0.8628571428571429,
@@ -10324,8 +10300,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.71875,
-          "y": 0.375,
+          "x": 0.671875,
+          "y": 0.52,
           "uniqueID": "id-87640",
           "ioValues": [
             {
@@ -10338,8 +10314,8 @@
             }
           ],
           "interpreterVersion": 1,
-          "code": "// face.normalsFrom\nfunction run(basis: Assembly, points: Assembly) {\n  let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n  if (!selectedFaces || selectedFaces.length == 0) {\n    // get faces directly\n    basis.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        selectedFaces.push(leaf.geometry)\n      } else if (leaf.is3D()) {\n        selectedFaces.push(...leaf.geometry.faces)\n      }\n      return leaf;\n    })\n  }\n  return points.onLeafs((point) => {\n    if (point.isPoint()) {\n      const dists = selectedFaces.map((face) => {\n        return projectVertexOntoFace(face, point.geometry)\n      })\n      dists.sort((a, b) => a[0] - b[0])\n      console.log(dists.map((i) => i[0]))\n      point.geometry = replicad.makeVertex(dists[0][2].normalAt(dists[0][1]).normalize())\n    }\n    return point;\n  })\n}\n\nfunction projectVertexOntoFace(\n  face: replicad.Face,\n  vertex: replicad.Vertex,\n): [number, [number, number], replicad.Face] {\n  const asVec = new replicad.Vector(vertex.asTuple())\n  const uv = face.uvCoordinates(asVec)\n  const res =  face.pointOnSurface(uv[0], uv[1]);\n  return [res.add(asVec.multiply(-1)).Length, uv, face]\n}\n}",
-          "compiledCode": "\"use strict\";\n// face.normalsFrom\nfunction run(basis, points) {\n    let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n    if (!selectedFaces || selectedFaces.length == 0) {\n        // get faces directly\n        basis.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                selectedFaces.push(leaf.geometry);\n            }\n            else if (leaf.is3D()) {\n                selectedFaces.push(...leaf.geometry.faces);\n            }\n            return leaf;\n        });\n    }\n    return points.onLeafs((point) => {\n        if (point.isPoint()) {\n            const dists = selectedFaces.map((face) => {\n                return projectVertexOntoFace(face, point.geometry);\n            });\n            dists.sort((a, b) => a[0] - b[0]);\n            console.log(dists.map((i) => i[0]));\n            point.geometry = replicad.makeVertex(dists[0][2].normalAt(dists[0][1]).normalize());\n        }\n        return point;\n    });\n}\nfunction projectVertexOntoFace(face, vertex) {\n    const asVec = new replicad.Vector(vertex.asTuple());\n    const uv = face.uvCoordinates(asVec);\n    const res = face.pointOnSurface(uv[0], uv[1]);\n    return [res.add(asVec.multiply(-1)).Length, uv, face];\n}\n"
+          "code": "// face.normalsFrom\nfunction run(basis: Assembly, points: Assembly) {\n  let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n  console.log(selectedFaces.length)\n  if (!selectedFaces || selectedFaces.length == 0) {\n    // get faces directly\n    basis.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        selectedFaces.push(leaf.geometry)\n      } else if (leaf.is3D()) {\n        selectedFaces.push(...leaf.geometry.faces)\n      }\n      return leaf;\n    })\n  }\n  console.log(selectedFaces.length)\n  const result = points.onLeafs((point) => {\n    if (point.isPoint()) {\n      const dists = selectedFaces.map((face) => {\n        return projectVertexOntoFace(face, point.geometry)\n      })\n      dists.sort((a, b) => a[0] - b[0])\n      console.log(dists.map((i) => i[0]))\n      point.geometry = replicad.makeVertex(dists[0][2].normalAt(dists[0][1]).normalize())\n    }\n    return point;\n  })\n\n  console.log(result)\n  return result\n}\n\nfunction projectVertexOntoFace(\n  face: replicad.Face,\n  vertex: replicad.Vertex,\n): [number, [number, number], replicad.Face] {\n  const asVec = new replicad.Vector(vertex.asTuple())\n  const uv = face.uvCoordinates(asVec)\n  const res =  face.pointOnSurface(uv[0], uv[1]);\n  return [res.add(asVec.multiply(-1)).Length, uv, face]\n}",
+          "compiledCode": "\"use strict\";\n// face.normalsFrom\nfunction run(basis, points) {\n    let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n    console.log(selectedFaces.length);\n    if (!selectedFaces || selectedFaces.length == 0) {\n        // get faces directly\n        basis.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                selectedFaces.push(leaf.geometry);\n            }\n            else if (leaf.is3D()) {\n                selectedFaces.push(...leaf.geometry.faces);\n            }\n            return leaf;\n        });\n    }\n    console.log(selectedFaces.length);\n    const result = points.onLeafs((point) => {\n        if (point.isPoint()) {\n            const dists = selectedFaces.map((face) => {\n                return projectVertexOntoFace(face, point.geometry);\n            });\n            dists.sort((a, b) => a[0] - b[0]);\n            console.log(dists.map((i) => i[0]));\n            point.geometry = replicad.makeVertex(dists[0][2].normalAt(dists[0][1]).normalize());\n        }\n        return point;\n    });\n    console.log(result);\n    return result;\n}\nfunction projectVertexOntoFace(face, vertex) {\n    const asVec = new replicad.Vector(vertex.asTuple());\n    const uv = face.uvCoordinates(asVec);\n    const res = face.pointOnSurface(uv[0], uv[1]);\n    return [res.add(asVec.multiply(-1)).Length, uv, face];\n}\n"
         },
         {
           "atomType": "Code",
@@ -10400,8 +10376,8 @@
         },
         {
           "atomType": "Code",
-          "x": 0.73046875,
-          "y": 0.6904761904761905,
+          "x": 0.7044270833333334,
+          "y": 0.7314285714285714,
           "uniqueID": "id-87801",
           "ioValues": [
             {
@@ -12078,7 +12054,8 @@
             },
             {
               "name": "v",
-              "ioValue": 0.5
+              "ioValue": 0.5,
+              "currentEquation": "0.5"
             },
             {
               "name": "xDir",
@@ -16961,6 +16938,22 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787171044415
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.5,
+          "y": 0.5,
+          "uniqueID": "id-87874",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 10
+            }
+          ]
         }
       ],
       "allConnectors": [
@@ -16997,22 +16990,12 @@
         {
           "ap2Name": "geometry",
           "ap1ID": "id-83620",
-          "ap2ID": "id-83624"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-83620",
           "ap2ID": "id-84990"
         },
         {
           "ap2Name": "shape",
           "ap1ID": "id-84990",
           "ap2ID": "id-83608"
-        },
-        {
-          "ap2Name": "planes",
-          "ap1ID": "id-87640",
-          "ap2ID": "id-87801"
         },
         {
           "ap2Name": "zDir",
@@ -17045,11 +17028,6 @@
           "ap2ID": "id-87812"
         },
         {
-          "ap2Name": "shape",
-          "ap1ID": "id-87812",
-          "ap2ID": "id-87736"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-87860",
           "ap2ID": "id-87863"
@@ -17058,6 +17036,11 @@
           "ap2Name": "shape",
           "ap1ID": "id-87863",
           "ap2ID": "id-87833"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-87863",
+          "ap2ID": "id-87736"
         },
         {
           "ap2Name": "points",
@@ -17143,6 +17126,11 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-87594",
           "ap2ID": "id-87552"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-87613",
+          "ap2ID": "id-87874"
         },
         {
           "ap2Name": "xDir",
