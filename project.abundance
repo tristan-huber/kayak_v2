@@ -11638,8 +11638,8 @@
             },
             {
               "atomType": "Move",
-              "x": 0.3125,
-              "y": 0.41714285714285715,
+              "x": 0.2649739583333333,
+              "y": 0.52,
               "uniqueID": "id-98299",
               "ioValues": [
                 {
@@ -11648,12 +11648,12 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": -20,
-                  "currentEquation": "-20"
+                  "ioValue": 0
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 0
+                  "ioValue": 1,
+                  "currentEquation": "1"
                 },
                 {
                   "name": "zDist",
@@ -11671,16 +11671,16 @@
             },
             {
               "atomType": "Assembly",
-              "x": 0.357421875,
-              "y": 0.6342857142857142,
+              "x": 0.34765625,
+              "y": 0.6371428571428571,
               "uniqueID": "id-98354",
               "ioValues": [
                 {
-                  "name": "Shape 1",
+                  "name": "Shape 2",
                   "ioValue": null
                 },
                 {
-                  "name": "Shape 2",
+                  "name": "Shape 3",
                   "ioValue": null
                 }
               ]
@@ -12122,11 +12122,87 @@
               "unitsKey": "Unitless",
               "fileTypeVersion": 1,
               "lastReloadedFromGithubAt": 1787264293200
+            },
+            {
+              "atomType": "Rotate",
+              "x": 0.2923177083333333,
+              "y": 0.21999999999999997,
+              "uniqueID": "id-100932",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "x-axis degrees",
+                  "ioValue": 0
+                },
+                {
+                  "name": "y-axis degrees",
+                  "ioValue": 0
+                },
+                {
+                  "name": "z-axis degrees",
+                  "ioValue": 49,
+                  "currentEquation": "49"
+                }
+              ]
+            },
+            {
+              "atomType": "Rotate",
+              "x": 0.27734375,
+              "y": 0.9028571428571429,
+              "uniqueID": "id-100938",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "x-axis degrees",
+                  "ioValue": 0
+                },
+                {
+                  "name": "y-axis degrees",
+                  "ioValue": 0
+                },
+                {
+                  "name": "z-axis degrees",
+                  "ioValue": 72,
+                  "currentEquation": "72"
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.37630208333333337,
+              "y": 0.8799999999999999,
+              "uniqueID": "id-100944",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 0,
+                  "currentEquation": "0"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 15,
+                  "currentEquation": "15"
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0
+                }
+              ]
             }
           ],
           "allConnectors": [
             {
-              "ap2Name": "Shape 1",
+              "ap2Name": "Shape 2",
               "ap1ID": "id-98299",
               "ap2ID": "id-98354"
             },
@@ -12168,11 +12244,26 @@
             {
               "ap2Name": "geometry",
               "ap1ID": "id-100677",
+              "ap2ID": "id-100932"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-100696",
+              "ap2ID": "id-100938"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-100932",
               "ap2ID": "id-98299"
             },
             {
-              "ap2Name": "Shape 2",
-              "ap1ID": "id-100696",
+              "ap2Name": "geometry",
+              "ap1ID": "id-100938",
+              "ap2ID": "id-100944"
+            },
+            {
+              "ap2Name": "Shape 3",
+              "ap1ID": "id-100944",
               "ap2ID": "id-98354"
             }
           ],
@@ -12180,8 +12271,8 @@
         },
         {
           "atomType": "ExtractTag",
-          "x": 0.20703125,
-          "y": 0.6028571428571429,
+          "x": 0.19856770833333331,
+          "y": 0.7342857142857142,
           "uniqueID": "id-100663",
           "name": "Extract fastener",
           "ioValues": [
@@ -13285,34 +13376,34 @@
             [
               {
                 "id": 3,
-                "rotate": 330,
+                "rotate": 150,
                 "translate": {
-                  "x": 0.8393204212188721,
-                  "y": 0.8825948238372803
-                }
-              },
-              {
-                "id": 1,
-                "rotate": 0,
-                "translate": {
-                  "x": 27.479999542236328,
-                  "y": 64.81999969482422
+                  "x": 17.568124771118164,
+                  "y": 65.39775085449219
                 }
               },
               {
                 "id": 2,
-                "rotate": 120,
+                "rotate": 330,
                 "translate": {
-                  "x": 16.42392349243164,
-                  "y": 104.58267211914062
+                  "x": 44.05185317993164,
+                  "y": -8.034134864807129
                 }
               },
               {
                 "id": 0,
+                "rotate": 60,
+                "translate": {
+                  "x": 30.1674747467041,
+                  "y": 94.14582824707031
+                }
+              },
+              {
+                "id": 1,
                 "rotate": 30,
                 "translate": {
-                  "x": 49.555824279785156,
-                  "y": 79.6925277709961
+                  "x": 29.03099822998047,
+                  "y": 83.7767333984375
                 }
               }
             ]
