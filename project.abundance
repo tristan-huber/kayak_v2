@@ -9949,8 +9949,8 @@
             },
             {
               "atomType": "Difference",
-              "x": 0.4990234375,
-              "y": 0.8375,
+              "x": 0.49479166666666663,
+              "y": 0.84,
               "uniqueID": "id-76340",
               "ioValues": [
                 {
@@ -10030,7 +10030,8 @@
                 },
                 {
                   "name": "zDist",
-                  "ioValue": 0.75
+                  "ioValue": 0.36,
+                  "currentEquation": "hullThickness * 3"
                 }
               ]
             },
@@ -10433,7 +10434,7 @@
                   "ioValue": [
                     0,
                     0,
-                    0.12
+                    20
                   ]
                 }
               ],
@@ -10466,7 +10467,7 @@
                       "ioValue": [
                         0,
                         0,
-                        0.12
+                        20
                       ]
                     }
                   ],
@@ -10538,8 +10539,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.4033203125,
-              "y": 0.4854166666666667,
+              "x": 0.4069010416666667,
+              "y": 0.4828571428571429,
               "uniqueID": "id-76377",
               "name": "extrudeFaceDirected",
               "ioValues": [
@@ -10552,7 +10553,7 @@
                   "ioValue": [
                     0,
                     0,
-                    0.25
+                    0.12
                   ]
                 }
               ],
@@ -10585,7 +10586,7 @@
                       "ioValue": [
                         0,
                         0,
-                        0.25
+                        0.12
                       ]
                     }
                   ],
@@ -10680,7 +10681,8 @@
                 },
                 {
                   "name": "distZ",
-                  "ioValue": 0.25
+                  "ioValue": 0.12,
+                  "currentEquation": "hullThickness"
                 }
               ],
               "topLevel": false,
@@ -10839,7 +10841,7 @@
                     },
                     {
                       "name": "distZ",
-                      "ioValue": 0.25
+                      "ioValue": 0.12
                     }
                   ],
                   "interpreterVersion": 1,
@@ -10998,7 +11000,7 @@
                   "ioValue": [
                     0,
                     0,
-                    0.25
+                    0.12
                   ]
                 }
               ],
@@ -11031,7 +11033,7 @@
                       "ioValue": [
                         0,
                         0,
-                        0.25
+                        0.12
                       ]
                     }
                   ],
@@ -12036,7 +12038,12 @@
             {
               "ap2Name": "extrusionVec",
               "ap1ID": "id-95376",
-              "ap2ID": "id-76372"
+              "ap2ID": "id-76377"
+            },
+            {
+              "ap2Name": "extrusionVec",
+              "ap1ID": "id-95376",
+              "ap2ID": "id-76402"
             },
             {
               "ap2Name": "vector",
