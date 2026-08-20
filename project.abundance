@@ -10419,8 +10419,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.32275390625,
-              "y": 0.1875,
+              "x": 0.34505208333333337,
+              "y": 0.17142857142857143,
               "uniqueID": "id-76372",
               "name": "extrudeFaceDirected",
               "ioValues": [
@@ -10433,7 +10433,7 @@
                   "ioValue": [
                     0,
                     0,
-                    10
+                    0.12
                   ]
                 }
               ],
@@ -10466,7 +10466,7 @@
                       "ioValue": [
                         0,
                         0,
-                        10
+                        0.12
                       ]
                     }
                   ],
@@ -11708,6 +11708,193 @@
                 }
               ],
               "fileTypeVersion": 1
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.2897135416666667,
+              "y": 0.27714285714285714,
+              "uniqueID": "id-95376",
+              "name": "vec.Scale",
+              "ioValues": [
+                {
+                  "name": "vector",
+                  "ioValue": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "scale",
+                  "ioValue": 0.12,
+                  "currentEquation": "hullThickness"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 0.98,
+                  "y": 0.5,
+                  "uniqueID": "id-95372",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.0231,
+                  "y": 0.14,
+                  "uniqueID": "id-95373",
+                  "name": "vector",
+                  "type": "point3d",
+                  "pointValue": null
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.0231,
+                  "y": 0.22400000000000003,
+                  "uniqueID": "id-95374",
+                  "name": "scale"
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.43619791666666663,
+                  "y": 0.46,
+                  "uniqueID": "id-95375",
+                  "ioValues": [
+                    {
+                      "name": "vector",
+                      "ioValue": [
+                        0,
+                        0,
+                        1
+                      ]
+                    },
+                    {
+                      "name": "scale",
+                      "ioValue": 0.12
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "function run(vector: number[], scale: number) {\n  if (vector.length != 3) {\n    throw new Error(\"Vector must be length 3. Was: \" + vector.length)\n  }\n  return new replicad.Vector(vector as [number, number, number]).multiply(scale).toTuple()\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(vector, scale) {\n    if (vector.length != 3) {\n        throw new Error(\"Vector must be length 3. Was: \" + vector.length);\n    }\n    return new replicad.Vector(vector).multiply(scale).toTuple();\n}\n"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "vector",
+                  "ap1ID": "id-95373",
+                  "ap2ID": "id-95375"
+                },
+                {
+                  "ap2Name": "scale",
+                  "ap1ID": "id-95374",
+                  "ap2ID": "id-95375"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-95375",
+                  "ap2ID": "id-95372"
+                }
+              ],
+              "parentRepo": {
+                "privateRepo": false,
+                "repoName": "vec.Scale",
+                "dateCreated": "2026-08-20T20:32:55Z",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/vec.Scale/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-95",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/vec.Scale",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739848",
+                "ranking": 0,
+                "searchField": "vec.scale tristan-huber scale a vector by the given factor. sets the length of the vector. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Scale a vector by the given factor. Sets the length of the vector.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/vec.Scale/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/vec.Scale/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1787258265836
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.19401041666666669,
+              "y": 0.22571428571428573,
+              "uniqueID": "id-95400",
+              "name": "vec.Z",
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 0.98,
+                  "y": 0.5,
+                  "uniqueID": "id-95398",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.45182291666666663,
+                  "y": 0.40571428571428575,
+                  "uniqueID": "id-95399",
+                  "interpreterVersion": 1,
+                  "code": "// edges.inShape\n\nfunction run() {\n  return [0, 0, 1]\n}",
+                  "compiledCode": "\"use strict\";\n// edges.inShape\nfunction run() {\n    return [0, 0, 1];\n}\n"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-95399",
+                  "ap2ID": "id-95398"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-08-20T18:23:39.118Z",
+                "privateRepo": false,
+                "repoName": "vec.Z",
+                "dateCreated": "2026-08-19T20:14:18Z",
+                "pngURL": "https://raw.githubusercontent.com/tristan-huber/vec.Z/main/project.png",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/vec.Z/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-46",
+                "userSetAsThumbnail": false,
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/vec.Z",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739848",
+                "ranking": 0,
+                "searchField": "vec.z tristan-huber returns the z axis unit vector, ie [0,0,1] abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Returns the z axis unit vector, ie [0,0,1]",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/vec.Z/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/vec.Z/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1787258298246
             }
           ],
           "allConnectors": [
@@ -11845,6 +12032,16 @@
               "ap2Name": "face",
               "ap1ID": "id-76896",
               "ap2ID": "id-76402"
+            },
+            {
+              "ap2Name": "extrusionVec",
+              "ap1ID": "id-95376",
+              "ap2ID": "id-76372"
+            },
+            {
+              "ap2Name": "vector",
+              "ap1ID": "id-95400",
+              "ap2ID": "id-95376"
             }
           ],
           "fileTypeVersion": 1
