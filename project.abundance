@@ -18157,8 +18157,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.25260416666666663,
-          "y": 0.2914285714285714,
+          "x": 0.26302083333333337,
+          "y": 0.3714285714285714,
           "uniqueID": "id-89944",
           "name": "select.EdgesOnFace",
           "ioValues": [
@@ -18630,8 +18630,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.49414062500000006,
-          "y": 0.8714285714285714,
+          "x": 0.4029947916666667,
+          "y": 0.7942857142857144,
           "uniqueID": "id-90175",
           "name": "-6-Wood-Screw-inches",
           "ioValues": [
@@ -19070,8 +19070,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.8072916666666666,
-          "y": 0.4828571428571429,
+          "x": 0.8359375000000001,
+          "y": 0.45142857142857146,
           "uniqueID": "id-90234",
           "name": "moveToPoints",
           "ioValues": [
@@ -19231,8 +19231,7 @@
           "ioValues": [
             {
               "name": "X",
-              "ioValue": 1,
-              "currentEquation": "1"
+              "ioValue": 2
             },
             {
               "name": "Y",
@@ -19272,7 +19271,7 @@
               "ioValues": [
                 {
                   "name": "x",
-                  "ioValue": 1
+                  "ioValue": 2
                 },
                 {
                   "name": "y",
@@ -19356,8 +19355,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.6770833333333333,
-          "y": 0.5342857142857143,
+          "x": 0.7662760416666666,
+          "y": 0.8200000000000001,
           "uniqueID": "id-90273",
           "name": "crv.Point",
           "ioValues": [
@@ -19485,6 +19484,32 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787251116013
+        },
+        {
+          "atomType": "Move",
+          "x": 0.48502604166666663,
+          "y": 0.8742857142857143,
+          "uniqueID": "id-90306",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0.25,
+              "currentEquation": "hullThickness"
+            }
+          ]
         }
       ],
       "allConnectors": [
@@ -19579,13 +19604,18 @@
           "ap2ID": "id-90234"
         },
         {
-          "ap2Name": "xDirOverride",
-          "ap1ID": "id-90258",
-          "ap2ID": "id-90234"
+          "ap2Name": "geometry",
+          "ap1ID": "id-90175",
+          "ap2ID": "id-90306"
         },
         {
           "ap2Name": "zDirOverride",
-          "ap1ID": "id-90273",
+          "ap1ID": "id-90215",
+          "ap2ID": "id-90234"
+        },
+        {
+          "ap2Name": "xDirOverride",
+          "ap1ID": "id-90258",
           "ap2ID": "id-90234"
         }
       ],
