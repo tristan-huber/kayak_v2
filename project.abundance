@@ -903,6 +903,10 @@
           "name": "(x - y) / 2",
           "ioValues": [
             {
+              "name": "x",
+              "ioValue": 72.24000000000001
+            },
+            {
               "name": "y",
               "ioValue": 120
             }
@@ -918,6 +922,10 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": -23.879999999999995
             },
             {
               "name": "yDist",
@@ -3714,8 +3722,8 @@
             },
             {
               "name": "zDist",
-              "ioValue": 0.12,
-              "currentEquation": "hullThickness"
+              "ioValue": 0.22,
+              "currentEquation": "hullThickness + 0.1"
             }
           ]
         },
@@ -4696,13 +4704,13 @@
               "type": "edgeselect",
               "selectedEdgeData": {
                 "0": [
-                  7,
+                  8,
                   10,
                   11,
                   13
                 ],
                 "1": [
-                  7,
+                  8,
                   10,
                   11,
                   13
@@ -6094,8 +6102,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.36067708333333337,
-          "y": 0.6171428571428571,
+          "x": 0.3248697916666667,
+          "y": 0.6342857142857142,
           "uniqueID": "id-92956",
           "name": "panheadscew",
           "topLevel": false,
@@ -6114,8 +6122,8 @@
             },
             {
               "atomType": "Circle",
-              "x": 0.3626302083333333,
-              "y": 0.52,
+              "x": 0.18619791666666666,
+              "y": 0.39428571428571424,
               "uniqueID": "id-92960",
               "ioValues": [
                 {
@@ -6127,8 +6135,8 @@
             },
             {
               "atomType": "Extrude",
-              "x": 0.5,
-              "y": 0.5,
+              "x": 0.2604166666666667,
+              "y": 0.38571428571428573,
               "uniqueID": "id-92963",
               "ioValues": [
                 {
@@ -6137,8 +6145,155 @@
                 },
                 {
                   "name": "height",
-                  "ioValue": -0.75
+                  "ioValue": -0.75,
+                  "currentEquation": "-0.75"
                 }
+              ]
+            },
+            {
+              "atomType": "Circle",
+              "x": 0.166015625,
+              "y": 0.5771428571428572,
+              "uniqueID": "id-92967",
+              "ioValues": [
+                {
+                  "name": "diameter",
+                  "ioValue": 0.5,
+                  "currentEquation": "1/2"
+                }
+              ]
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.2513020833333333,
+              "y": 0.5885714285714286,
+              "uniqueID": "id-92970",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": 0.125,
+                  "currentEquation": "1/8"
+                }
+              ]
+            },
+            {
+              "atomType": "Fusion",
+              "x": 0.3723958333333333,
+              "y": 0.4685714285714285,
+              "uniqueID": "id-92979",
+              "ioValues": [
+                {
+                  "name": "Shape 1",
+                  "ioValue": {
+                    "geometry": "extrude-circle-0.078125-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}--0.75",
+                    "dimension": "3D",
+                    "tags": [],
+                    "plane": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "xDir": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "normal": [
+                        0,
+                        0,
+                        1
+                      ]
+                    },
+                    "color": "#aad7f2",
+                    "bom": []
+                  }
+                },
+                {
+                  "name": "Shape 2",
+                  "ioValue": {
+                    "geometry": "extrude-circle-0.25-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-0.125",
+                    "dimension": "3D",
+                    "tags": [],
+                    "plane": {
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "xDir": [
+                        1,
+                        0,
+                        0
+                      ],
+                      "normal": [
+                        0,
+                        0,
+                        1
+                      ]
+                    },
+                    "color": "#aad7f2",
+                    "bom": []
+                  }
+                }
+              ],
+              "unionType": "Fusion"
+            },
+            {
+              "atomType": "Add-BOM-Tag",
+              "x": 0.47981770833333337,
+              "y": 0.62,
+              "uniqueID": "id-92984",
+              "name": "Add BOM Tag",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Item Name",
+                  "ioValue": "Steel Pan Head Screw",
+                  "currentEquation": "Steel Pan Head Screw"
+                },
+                {
+                  "name": "Number Needed",
+                  "ioValue": 1
+                },
+                {
+                  "name": "Cost (USD)",
+                  "ioValue": 0.08
+                },
+                {
+                  "name": "Source Link",
+                  "ioValue": "https://www.homedepot.com/p/Teks-8-x-3-4-in-Philips-Truss-Head-Drill-Point-Lath-Screws-200-Pack-21524/100175766",
+                  "currentEquation": "https://www.homedepot.com/p/Teks-8-x-3-4-in-Philips-Truss-Head-Drill-Point-Lath-Screws-200-Pack-21524/100175766"
+                }
+              ],
+              "BOMitem": {
+                "BOMitemName": "Steel Pan Head Screw",
+                "numberNeeded": 1,
+                "costUSD": 0.08,
+                "source": "https://www.homedepot.com/p/Teks-8-x-3-4-in-Philips-Truss-Head-Drill-Point-Lath-Screws-200-Pack-21524/100175766"
+              }
+            },
+            {
+              "atomType": "Tag",
+              "x": 0.5807291666666666,
+              "y": 0.5685714285714285,
+              "uniqueID": "id-92991",
+              "name": "fastener",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "tags": [
+                "fastener"
               ]
             }
           ],
@@ -6147,6 +6302,36 @@
               "ap2Name": "geometry",
               "ap1ID": "id-92960",
               "ap2ID": "id-92963"
+            },
+            {
+              "ap2Name": "Shape 1",
+              "ap1ID": "id-92963",
+              "ap2ID": "id-92979"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-92967",
+              "ap2ID": "id-92970"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-92970",
+              "ap2ID": "id-92979"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-92979",
+              "ap2ID": "id-92984"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-92984",
+              "ap2ID": "id-92991"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-92991",
+              "ap2ID": "id-92958"
             }
           ],
           "fileTypeVersion": 1
@@ -6246,11 +6431,6 @@
         {
           "ap2Name": "geometry",
           "ap1ID": "id-90175",
-          "ap2ID": "id-90306"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-90175",
           "ap2ID": "id-90322"
         },
         {
@@ -6277,6 +6457,11 @@
           "ap2Name": "faceSelection",
           "ap1ID": "id-89916",
           "ap2ID": "id-89944"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-92956",
+          "ap2ID": "id-90306"
         }
       ],
       "fileTypeVersion": 1
@@ -18523,6 +18708,11 @@
       "ap2Name": "profileShape",
       "ap1ID": "id-92674",
       "ap2ID": "id-92739"
+    },
+    {
+      "ap2Name": "bulkheads",
+      "ap1ID": "id-92739",
+      "ap2ID": "id-89799"
     }
   ],
   "unitsKey": "MM",
