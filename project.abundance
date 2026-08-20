@@ -18630,8 +18630,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.4029947916666667,
-          "y": 0.7942857142857144,
+          "x": 0.33984375,
+          "y": 0.7914285714285715,
           "uniqueID": "id-90175",
           "name": "-6-Wood-Screw-inches",
           "ioValues": [
@@ -19070,8 +19070,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.8359375000000001,
-          "y": 0.45142857142857146,
+          "x": 0.736328125,
+          "y": 0.6,
           "uniqueID": "id-90234",
           "name": "moveToPoints",
           "ioValues": [
@@ -19510,14 +19510,77 @@
               "currentEquation": "hullThickness"
             }
           ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.9095052083333333,
+          "y": 0.24571428571428572,
+          "uniqueID": "id-90312",
+          "ioValues": [
+            {
+              "name": "Shape 1",
+              "ioValue": null
+            },
+            {
+              "name": "Shape 2",
+              "ioValue": null
+            }
+          ]
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.8450520833333333,
+          "y": 0.6571428571428571,
+          "uniqueID": "id-90317",
+          "name": "AssemblyFasteners",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "AssemblyFasteners"
+          ]
+        },
+        {
+          "atomType": "Add-BOM-Tag",
+          "x": 0.42578125,
+          "y": 0.6114285714285714,
+          "uniqueID": "id-90322",
+          "name": "Add BOM Tag",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Item Name",
+              "ioValue": "Wood Screw #6",
+              "currentEquation": "Wood Screw #6"
+            },
+            {
+              "name": "Number Needed",
+              "ioValue": 1
+            },
+            {
+              "name": "Cost (USD)",
+              "ioValue": 0
+            },
+            {
+              "name": "Source Link",
+              "ioValue": ""
+            }
+          ],
+          "BOMitem": {
+            "BOMitemName": "Wood Screw #6",
+            "numberNeeded": 1,
+            "costUSD": 0,
+            "source": ""
+          }
         }
       ],
       "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-89803",
-          "ap2ID": "id-89801"
-        },
         {
           "ap2Name": "shape",
           "ap1ID": "id-89803",
@@ -19527,6 +19590,11 @@
           "ap2Name": "shape",
           "ap1ID": "id-89803",
           "ap2ID": "id-89861"
+        },
+        {
+          "ap2Name": "Shape 2",
+          "ap1ID": "id-89803",
+          "ap2ID": "id-90312"
         },
         {
           "ap2Name": "faceSelection",
@@ -19599,14 +19667,14 @@
           "ap2ID": "id-90234"
         },
         {
-          "ap2Name": "shapeToMove",
+          "ap2Name": "geometry",
           "ap1ID": "id-90175",
-          "ap2ID": "id-90234"
+          "ap2ID": "id-90306"
         },
         {
           "ap2Name": "geometry",
           "ap1ID": "id-90175",
-          "ap2ID": "id-90306"
+          "ap2ID": "id-90322"
         },
         {
           "ap2Name": "zDirOverride",
@@ -19614,9 +19682,29 @@
           "ap2ID": "id-90234"
         },
         {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-90234",
+          "ap2ID": "id-90312"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-90234",
+          "ap2ID": "id-90317"
+        },
+        {
           "ap2Name": "xDirOverride",
           "ap1ID": "id-90258",
           "ap2ID": "id-90234"
+        },
+        {
+          "ap2Name": "shapeToMove",
+          "ap1ID": "id-90306",
+          "ap2ID": "id-90234"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-90312",
+          "ap2ID": "id-89801"
         }
       ],
       "fileTypeVersion": 1
@@ -19701,11 +19789,6 @@
     {
       "ap2Name": "bulkheads",
       "ap1ID": "id-76160",
-      "ap2ID": "id-44622"
-    },
-    {
-      "ap2Name": "bulkheads",
-      "ap1ID": "id-76160",
       "ap2ID": "id-80967"
     },
     {
@@ -19722,6 +19805,11 @@
       "ap2Name": "Shape 2",
       "ap1ID": "id-80967",
       "ap2ID": "id-84960"
+    },
+    {
+      "ap2Name": "bulkheads",
+      "ap1ID": "id-89799",
+      "ap2ID": "id-44622"
     }
   ],
   "unitsKey": "MM",
