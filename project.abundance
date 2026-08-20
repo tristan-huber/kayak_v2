@@ -19565,7 +19565,7 @@
             },
             {
               "name": "Cost (USD)",
-              "ioValue": 0
+              "ioValue": 0.45
             },
             {
               "name": "Source Link",
@@ -19575,7 +19575,7 @@
           "BOMitem": {
             "BOMitemName": "Wood Screw #6",
             "numberNeeded": 1,
-            "costUSD": 0,
+            "costUSD": 0.45,
             "source": ""
           }
         }
