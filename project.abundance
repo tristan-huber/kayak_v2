@@ -11239,7 +11239,7 @@
         {
           "atomType": "Input",
           "x": 0.0231,
-          "y": 0.22400000000000003,
+          "y": 0.26857142857142857,
           "uniqueID": "id-95414",
           "name": "bodyPanels",
           "type": "geometry"
@@ -11247,7 +11247,7 @@
         {
           "atomType": "Input",
           "x": 0.0231,
-          "y": 0.30800000000000005,
+          "y": 0.4085714285714286,
           "uniqueID": "id-95417",
           "name": "superstructure",
           "type": "geometry"
@@ -11287,37 +11287,6 @@
           "selectedTags": [],
           "includeUntagged": true,
           "notKeepOut": false
-        },
-        {
-          "atomType": "Code",
-          "x": 0.6080729166666666,
-          "y": 0.8171428571428572,
-          "uniqueID": "id-95934",
-          "ioValues": [
-            {
-              "name": "primaryGuideWire",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "secondaryGuideWire",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "holes",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "numRulings",
-              "ioValue": 24
-            },
-            {
-              "name": "holeSamples",
-              "ioValue": 64
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "/**\n * Unrolls (flattens) a ruled surface into a 2D Drawing of its boundary,\n * using the same primary/secondary ruling extractor as the rulings atom\n * (see atomimpl.ts and Wang et al., JCISE 2021).\n *\n * Because the 2-neighbour shortest path advances exactly one of (i, j) per\n * step, every pair of consecutive rulings shares an endpoint. The strip\n * between them is therefore a TRIANGLE, which is intrinsically planar and\n * unrolls exactly — no quad-skew distortion. The first ruling is laid along\n * +X; each subsequent triangle hinges across the shared ruling and is\n * placed on the opposite side from the prior triangle's apex.\n *\n * The two long edges (primary chain and secondary chain) are emitted as\n * smooth splines through the placed vertices; the two short edges (first\n * and last rulings) are straight line segments. Splines play better with\n * downstream CAM than dense polylines.\n *\n *   primaryEdgeIndex → cyclic index into face.outerWire().edges. The two\n *                      neighbouring edges are excluded; remaining edges form\n *                      the secondary, identical to atomimpl.ts.\n */\nfunction run(\n  primaryGuideWire: Assembly,\n  secondaryGuideWire: Assembly,\n  holes: Assembly,\n  numRulings: number = 24,\n  holeSamples: number = 64,\n): Assembly {\n  if (!Number.isFinite(numRulings) || numRulings < 2) {\n    throw new Error(\n      \"Unroll surface: numRulings must be an integer ≥ 2 (two rulings \" +\n      \"needed to define a strip). was: \" + numRulings,\n    );\n  }\n  if (!Number.isFinite(holeSamples) || holeSamples < 8) {\n    throw new Error(\"Unroll surface: holeSamples must be an integer ≥ 8. was: \" + holeSamples);\n  }\n\n\n  const conformOrientations = (edges: replicad.Edge[], targetOrientation: string) => {\n    return edges.map((e) => e.orientation == targetOrientation ? e : e.flipOrientation())\n  }\n\n  const extractWire = (assembly: Assembly) => {\n    if (assembly.isLeaf() && assembly.geometry instanceof replicad.Wire) {\n      return assembly.geometry;\n    }\n    return replicad.assembleWire(assembly.getSelectedEdges())\n  }\n  const primaryWire = extractWire(primaryGuideWire)\n\n\n  let secondaryWire = extractWire(secondaryGuideWire)\n  const dist = (v1: replicad.Vector, v2: replicad.Vector) => {\n    return v1.multiply(-1).add(v2).Length\n  }\n  if (dist(primaryWire.startPoint, secondaryWire.startPoint) > dist(primaryWire.startPoint, secondaryWire.endPoint)) {\n    secondaryWire = secondaryWire.flipOrientation()\n  }\n\n  const holeList: replicad.Wire[] = []\n  if (holes != undefined) {\n    holes.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        holeList.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n\n  console.log(\"blah\")\n  return unrollFaceToDrawing(primaryWire, secondaryWire, numRulings, holeList, holeSamples).drawing\n\n  const results: Assembly[] = [];\n  let index = 0;\n  const noneSelected = surface.getSelectedFaces().length == 0;\n  (surface as any).onLeafs((leaf: Assembly<LeafGeom>) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      console.warn(\"drawings cannot be unrolled\");\n      return leaf;\n    }\n    const faces: replicad.Face[] = [];\n    if (noneSelected) {\n      faces.push(\n        ...(leaf.geometry instanceof replicad.Face\n          ? [leaf.geometry]\n          : leaf.geometry.faces),\n      );\n    } else {\n      // Else the user has made a selection, only unroll selected faces\n      if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n        faces.push(\n          ...leaf.selection.faces.map((idx) => leaf.geometry.faces[idx]),\n        );\n      }\n    }\n    for (const face of faces) {\n      const resolvedEdgeIndex =\n        primaryEdgeIndex < 0 ? selectBestPrimaryEdge(face) : primaryEdgeIndex;\n      const { primaryWire, secondaryWire, pIdx } = assembleRulingWires(\n        face,\n        resolvedEdgeIndex,\n      );\n      // eslint-disable-next-line @typescript-eslint/no-explicit-any\n      const holeWires: any[] = face.clone().innerWires() ?? [];\n      const { drawing } = unrollFaceToDrawing(\n        primaryWire,\n        secondaryWire,\n        numRulings,\n        holeWires,\n        holeSamples,\n      );\n      results.push(\n        new Assembly({\n          ...leaf,\n          geometry: drawing,\n          tags: [...(leaf.tags ?? []), \"developed\", \"ruling-primary:\" + pIdx],\n          plane: replicad.makePlane(\"XY\", [0, 0, index]),\n        }),\n      );\n      index++;\n    }\n    return leaf;\n  });\n  console.log(results);\n  return results;\n}\n\n/**\n * Split the face's outer wire into a primary edge + a secondary edge chain\n * (see partitionOuterWire), then assemble each side into a proper\n * replicad.Wire via replicad.assembleWire. The secondary chain's edge order\n * is reversed first if its leading edge shares primary's orientation flag —\n * that indicates the chain, sampled in its natural wire-cyclic order, would\n * run anti-parallel to primary.\n */\nfunction assembleRulingWires(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  face: any,\n  primaryEdgeIndex: number,\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n): { primaryWire: any; secondaryWire: any; pIdx: number } {\n  const { primary, secondaryEdges, pIdx } = partitionOuterWire(\n    face,\n    primaryEdgeIndex,\n  );\n  console.log(\n    \"should reverse: \",\n    primary.orientation == secondaryEdges[0].orientation,\n  );\n  /*  const reversed = primary.orientation == secondaryEdges[0].orientation;\n  const orderedSecondaryEdges = reversed\n    ? [...secondaryEdges].reverse()\n    : secondaryEdges;*/\n  const primaryWire = replicad.assembleWire([primary]);\n  const secondaryWire = replicad.assembleWire(secondaryEdges).flipOrientation();\n  return { primaryWire, secondaryWire, pIdx };\n}\n\n/**\n * Uniformly sample a Wire (single-edge or multi-edge/compound) at n points\n * across its full parametric range [0, 1], which replicad's Wire.pointAt\n * parametrizes continuously by cumulative arc length across all of its\n * constituent edges. t=0 and t=n-1 land exactly on the wire's two\n * endpoints.\n */\nfunction sampleWireUniform(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  wire: any,\n  n: number,\n): T3[] {\n  const out: T3[] = new Array(n);\n  const [keep, cleanup] = replicad.localGC();\n  try {\n    for (let i = 0; i < n; i++) {\n      const t = n === 1 ? 0 : i / (n - 1);\n      out[i] = toT3(keep(wire.pointAt(t)));\n    }\n  } finally {\n    cleanup();\n  }\n  return out;\n}\n\n/**\n * Uniformly sample a Wire at n points, capturing both position and tangent\n * direction at each parameter. Used instead of sampleWireUniform wherever a\n * per-sample surface-normal proxy is needed without querying a face (see\n * buildCostGridFromTangents) — this lets primary/secondary wires span\n * multiple faces, since no single `face` needs to be queried.\n *\n * `tangents[i]` is null when `tangentAt` fails or reports a zero-length\n * vector — this happens at a discontinuity where the sample parameter lands\n * exactly on a seam between two edges of a compound wire. Callers should\n * treat a null tangent the same way normalAtSafe's null is treated: skip\n * any ruling touching that index (cost = Infinity).\n */\nfunction sampleWireWithTangents(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  wire: any,\n  n: number,\n): { points: T3[]; tangents: (T3 | null)[] } {\n  const points: T3[] = new Array(n);\n  const tangents: (T3 | null)[] = new Array(n);\n  const [keep, cleanup] = replicad.localGC();\n  try {\n    for (let i = 0; i < n; i++) {\n      const t = n === 1 ? 0 : i / (n - 1);\n      points[i] = toT3(keep(wire.pointAt(t)));\n      try {\n        const tv = keep(wire.tangentAt(t));\n        const tx = tv.x,\n          ty = tv.y,\n          tz = tv.z;\n        const tl = Math.hypot(tx, ty, tz);\n        tangents[i] = tl > 0 ? [tx / tl, ty / tl, tz / tl] : null;\n      } catch {\n        tangents[i] = null;\n      }\n    }\n  } finally {\n    cleanup();\n  }\n  return { points, tangents };\n}\n\n/**\n * Probe every outer edge of `face` at a low ruling count and return the\n * index of the edge that yields the lowest total ruling cost. Used when\n * primaryEdgeIndex < 0 (auto-select mode).\n */\nconst UNROLL2_PROBE_N = 8;\nfunction selectBestPrimaryEdge(\n  face: any, // eslint-disable-line @typescript-eslint/no-explicit-any\n): number {\n  const [keep, cleanup] = replicad.localGC();\n  let bestIdx = 0;\n  try {\n    const outerWire = keep(face.clone().outerWire());\n    const allEdges: any[] = outerWire.edges ?? []; // eslint-disable-line @typescript-eslint/no-explicit-any\n    const m = allEdges.length;\n    let bestCost = Infinity;\n    for (let k = 0; k < m; k++) {\n      try {\n        const { primaryWire, secondaryWire } = assembleRulingWires(face, k);\n        keep(primaryWire);\n        keep(secondaryWire);\n        const P3 = sampleWireUniform(primaryWire, UNROLL2_PROBE_N);\n        const S3 = sampleWireUniform(secondaryWire, UNROLL2_PROBE_N);\n        const cost = buildCostGrid(face, P3, S3);\n        const { totalCost } = findOptimalRulingPath(cost, P3, S3);\n        if (totalCost < bestCost) {\n          bestCost = totalCost;\n          bestIdx = k;\n        }\n      } catch {\n        // edge produced a degenerate partition; skip\n      }\n    }\n    console.log(\n      `Unroll auto-select: chose primaryEdgeIndex=${bestIdx} (cost=${bestCost.toExponential(2)}) from ${m} candidates`,\n    );\n  } finally {\n    cleanup();\n  }\n  return bestIdx;\n}\n\n/**\n * Unrolls a single replicad.Face into a 2D Drawing, given pre-assembled\n * primary/secondary boundary wires and an explicit list of hole wires to\n * punch. Returns the drawing; the caller already knows pIdx since it built\n * the wires via assembleRulingWires.\n *\n * No `face` parameter is needed: the ruling-twist cost metric is derived\n * purely from each wire's own tangent direction crossed with the ruling\n * direction (see buildCostGridFromTangents), so primary/secondary wires may\n * span multiple faces without this function needing to know which face to\n * query at any given sample.\n */\nfunction unrollFaceToDrawing(\n  primaryWire: any, // eslint-disable-line @typescript-eslint/no-explicit-any\n  secondaryWire: any, // eslint-disable-line @typescript-eslint/no-explicit-any\n  numRulings: number,\n  holeWires: any[], // eslint-disable-line @typescript-eslint/no-explicit-any\n  holeSamples: number,\n): { drawing: any } {\n  // eslint-disable-line @typescript-eslint/no-explicit-any\n  const n = Math.max(2, Math.floor(numRulings));\n  const holeN = Math.max(8, Math.floor(holeSamples));\n\n  const { points: P3, tangents: PT } = sampleWireWithTangents(primaryWire, n);\n  const { points: S3, tangents: ST } = sampleWireWithTangents(secondaryWire, n);\n  // primaryWire/secondaryWire are only needed for sampling; nothing below\n  // this point touches them again.\n  primaryWire.delete();\n  secondaryWire.delete();\n  const cost = buildCostGridFromTangents(P3, PT, S3, ST);\n  const { path, totalCost } = findOptimalRulingPath(cost, P3, S3);\n  console.log(\n    `Unroll: ${path.length} rulings, total cost=${totalCost.toExponential(2)}`,\n  );\n\n  // ── Unfold triangles ────────────────────────────────────────────────────\n  // P2[i] / S2[j] hold the 2D position of primary sample i / secondary\n  // sample j once it's been placed. Each path step extends exactly one of\n  // these arrays by one new entry.\n  const P2: (T2 | undefined)[] = new Array(n);\n  const S2: (T2 | undefined)[] = new Array(n);\n  const [i0, j0] = path[0];\n  const L0 = dist3(P3[i0], S3[j0]);\n  if (!(L0 > 0)) {\n    throw new Error(\"Unroll: first ruling has zero length; cannot orient.\");\n  }\n  // First ruling along +X: primary endpoint at origin, secondary endpoint at +X.\n  P2[i0] = [0, 0];\n  S2[j0] = [L0, 0];\n\n  // Per-strip triangle records, populated alongside the unfold. Vertex order\n  // is (hinge-primary, hinge-secondary, apex).\n  const tris2D: [T2, T2, T2][] = [];\n  const tris3D: [T3, T3, T3][] = [];\n\n  for (let k = 0; k < path.length - 1; k++) {\n    const [i, j] = path[k];\n    const [iN, jN] = path[k + 1];\n    const advancedP = iN > i;\n    const newP3 = advancedP ? P3[iN] : S3[jN];\n    const r0 = dist3(P3[i], newP3);\n    const r1 = dist3(S3[j], newP3);\n    const p0 = P2[i]!;\n    const p1 = S2[j]!;\n\n    // Side choice: place the new apex on the opposite side of the current\n    // hinge (P2[i] → S2[j]) from the previous triangle's apex. For the\n    // first triangle there's no prior apex, so pick +1 (left of p0→p1)\n    // arbitrarily — the whole pattern just unfolds toward +Y.\n    let side: number;\n    if (k === 0) {\n      side = 1;\n    } else {\n      const [iPrev, jPrev] = path[k - 1];\n      // The previous triangle's apex is whichever of (P2[iPrev], S2[jPrev])\n      // is NOT shared with the current hinge. Exactly one of iPrev, jPrev\n      // differs from (i, j) — that one is the apex.\n      const otherPt: T2 = iPrev !== i ? P2[iPrev]! : S2[jPrev]!;\n      const ox = otherPt[0] - p0[0];\n      const oy = otherPt[1] - p0[1];\n      const hx = p1[0] - p0[0];\n      const hy = p1[1] - p0[1];\n      const sideOfOther = Math.sign(hx * oy - hy * ox);\n      side = -sideOfOther || 1;\n    }\n\n    const newP2 = circleIntersect(p0, r0, p1, r1, side, k);\n    if (advancedP) P2[iN] = newP2;\n    else S2[jN] = newP2;\n\n    tris2D.push([p0, p1, newP2]);\n    tris3D.push([P3[i], S3[j], newP3]);\n  }\n\n  // ── Build the two long chains in path order ────────────────────────────\n  // primaryChain = the 2D positions of the primary samples actually visited,\n  // in the order they appear along the path. Same for secondaryChain.\n  const primaryChain: T2[] = [];\n  const secondaryChain: T2[] = [];\n  let lastI = -1;\n  let lastJ = -1;\n  for (const [i, j] of path) {\n    if (i !== lastI) {\n      primaryChain.push(P2[i]!);\n      lastI = i;\n    }\n    if (j !== lastJ) {\n      secondaryChain.push(S2[j]!);\n      lastJ = j;\n    }\n  }\n  if (primaryChain.length < 2 || secondaryChain.length < 2) {\n    throw new Error(\n      `Unroll: degenerate chains (primary=${primaryChain.length}, ` +\n      `secondary=${secondaryChain.length}); need ≥2 on each side.`,\n    );\n  }\n\n  // ── Build the boundary drawing ─────────────────────────────────────────\n  // Primary chain (spline) → last ruling (straight) → reversed secondary\n  // chain (spline) → close back along first ruling (straight).\n  const pen = replicad.draw(primaryChain[0]);\n  for (let i = 1; i < primaryChain.length; i++) {\n    pen.lineTo(primaryChain[i]);\n  }\n  pen.lineTo(secondaryChain[secondaryChain.length - 1]);\n  for (let i = secondaryChain.length - 2; i >= 0; i--) {\n    pen.lineTo(secondaryChain[i]);\n  }\n  let drawing = pen.close();\n\n  // ── Punch holes from the explicitly provided hole wires (if any) ──────\n  const [keepHoles, cleanupHoles] = replicad.localGC();\n  try {\n    for (let h = 0; h < holeWires.length; h++) {\n      const wire = holeWires[h];\n      // Pass 1: dense 3D samples around the wire.\n      const samples3D: T3[] = [];\n      for (let i = 0; i < holeN; i++) {\n        const t = i / holeN;\n        samples3D.push(toT3(keepHoles(wire.pointAt(t))));\n      }\n      // wire has yielded all the samples we need; nothing later reuses it.\n      wire.delete();\n      if (samples3D.length < 3) continue;\n\n      // Pass 2: map 3D→2D using nearest physical triangle.\n      const samples2D: T2[] = samples3D\n        .map((p) => {\n          const k = findBestTriangle3D(p, tris3D);\n          return k >= 0 ? mapWithTriangle3D(p, k, tris3D, tris2D) : null;\n        })\n        .filter((p): p is T2 => p !== null);\n\n      if (samples2D.length < 3) continue;\n\n      // Pass 3: Draw the hole.\n      const holePen = replicad.draw(samples2D[0]);\n      for (let i = 1; i < samples2D.length; i++) {\n        holePen.lineTo(samples2D[i]);\n      }\n      const holeDrawing = holePen.close();\n      // Drawing is a JS-side 2D path wrapper (not a raw WASM handle), so it\n      // doesn't need explicit deletion here.\n      drawing = drawing.cut(holeDrawing);\n    }\n  } finally {\n    cleanupHoles();\n  }\n\n  return { drawing };\n}\n\n// ─── Shared helpers (mirror atomimpl.ts; sandboxed files can't import) ───\n\ntype T3 = [number, number, number];\ntype T2 = [number, number];\n\nfunction toT3(v: { x: number; y: number; z: number }): T3 {\n  return [v.x, v.y, v.z];\n}\n\nfunction dist3(a: T3, b: T3): number {\n  return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);\n}\n\nfunction partitionOuterWire(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  face: any,\n  primaryEdgeIndex: number,\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n): { primary: any; secondaryEdges: any[]; pIdx: number } {\n  const outerWire = face.clone().outerWire();\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  const allEdges: any[] = outerWire.edges ?? [];\n  const m = allEdges.length;\n  const pIdx = ((Math.floor(primaryEdgeIndex) % m) + m) % m;\n  const primary = allEdges[pIdx];\n\n  const excludedIdx = new Set([pIdx]);\n  if (primary.isClosed) {\n    if (pIdx == 0) {\n      excludedIdx.add(1);\n    } else if (pIdx == allEdges.length - 1) {\n      excludedIdx.add(allEdges.length - 2);\n    } else {\n      console.warn(\"found a closed face with two neighbors..\");\n    }\n  } else {\n    excludedIdx.add((pIdx - 1 + m) % m);\n    excludedIdx.add((pIdx + 1) % m);\n  }\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  const secondaryEdges: any[] = [];\n  for (let k = 0; k < m; k++) {\n    const idx = (pIdx + 2 + k) % m;\n    if (!excludedIdx.has(idx)) secondaryEdges.push(allEdges[idx]);\n  }\n  if (secondaryEdges.length === 0) {\n    console.warn(\"less than 4 edges total. this may cause bugs later\");\n    secondaryEdges.push(allEdges[(pIdx + 1) % m]);\n  }\n  return { primary, secondaryEdges, pIdx };\n}\n\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nfunction normalAtSafe(\n  face: any,\n  p: T3,\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  keep: (v: any) => any,\n): T3 | null {\n  try {\n    const nv = keep(face.normalAt(p));\n    const x = nv.x,\n      y = nv.y,\n      z = nv.z;\n    const len = Math.hypot(x, y, z);\n    if (!(len > 0)) return null;\n    return [x / len, y / len, z / len];\n  } catch {\n    return null;\n  }\n}\n\nfunction buildCostGrid(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  face: any,\n  primarySamples: T3[],\n  secondarySamples: T3[],\n): number[][] {\n  const n = primarySamples.length;\n  const ns = secondarySamples.length;\n  const [keep, cleanup] = replicad.localGC();\n  let primaryNormals: (T3 | null)[];\n  let secondaryNormals: (T3 | null)[];\n  try {\n    primaryNormals = primarySamples.map((p) => normalAtSafe(face, p, keep));\n    secondaryNormals = secondarySamples.map((p) => normalAtSafe(face, p, keep));\n  } finally {\n    cleanup();\n  }\n  const cost: number[][] = new Array(n);\n  for (let i = 0; i < n; i++) {\n    const row: number[] = new Array(ns);\n    const nA = primaryNormals[i];\n    for (let j = 0; j < ns; j++) {\n      const nB = secondaryNormals[j];\n      if (!nA || !nB) {\n        row[j] = Infinity;\n        continue;\n      }\n      const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n      row[j] = 1 - Math.abs(dot);\n    }\n    cost[i] = row;\n  }\n  return cost;\n}\n\n/**\n * Normalize the direction from a to b; null if a and b coincide.\n */\nfunction normalizedDir(a: T3, b: T3): T3 | null {\n  const dx = b[0] - a[0];\n  const dy = b[1] - a[1];\n  const dz = b[2] - a[2];\n  const len = Math.hypot(dx, dy, dz);\n  if (!(len > 0)) return null;\n  return [dx / len, dy / len, dz / len];\n}\n\n/**\n * Cross a wire tangent with a ruling direction and normalize the result;\n * null if either input is null/missing or the two are (near-)parallel,\n * which yields a degenerate (near-zero) cross product.\n */\nfunction crossNormalize(tangent: T3 | null, rulingDir: T3): T3 | null {\n  if (!tangent) return null;\n  const cx = tangent[1] * rulingDir[2] - tangent[2] * rulingDir[1];\n  const cy = tangent[2] * rulingDir[0] - tangent[0] * rulingDir[2];\n  const cz = tangent[0] * rulingDir[1] - tangent[1] * rulingDir[0];\n  const len = Math.hypot(cx, cy, cz);\n  if (!(len > 0)) return null;\n  return [cx / len, cy / len, cz / len];\n}\n\n/**\n * Face-free alternative to buildCostGrid: approximates the surface normal\n * at each end of a candidate ruling as cross(wireTangent, rulingDirection),\n * then scores the ruling by 1 - |dot(normalA, normalB)| \\u2014 same twist\n * metric as buildCostGrid, but derived purely from the two boundary wires'\n * own tangents rather than a face.normalAt() query. This lets primary and\n * secondary wires span multiple faces, since no single `face` is queried.\n *\n * A null tangent (see sampleWireWithTangents \\u2014 typically a discontinuity\n * at a compound-wire seam) or a ruling direction parallel to a tangent\n * propagates to Infinity for that cell, same convention as buildCostGrid.\n */\nfunction buildCostGridFromTangents(\n  primarySamples: T3[],\n  primaryTangents: (T3 | null)[],\n  secondarySamples: T3[],\n  secondaryTangents: (T3 | null)[],\n): number[][] {\n  const n = primarySamples.length;\n  const ns = secondarySamples.length;\n  const cost: number[][] = new Array(n);\n  for (let i = 0; i < n; i++) {\n    const row: number[] = new Array(ns);\n    for (let j = 0; j < ns; j++) {\n      const rulingDir = normalizedDir(primarySamples[i], secondarySamples[j]);\n      if (!rulingDir) {\n        row[j] = Infinity;\n        continue;\n      }\n      const nA = crossNormalize(primaryTangents[i], rulingDir);\n      const nB = crossNormalize(secondaryTangents[j], rulingDir);\n      if (!nA || !nB) {\n        row[j] = Infinity;\n        continue;\n      }\n      const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n      row[j] = 1 - Math.abs(dot);\n    }\n    cost[i] = row;\n  }\n  return cost;\n}\n\nfunction quadTwist(\n  P: T3[],\n  S: T3[],\n  i: number,\n  j: number,\n  iN: number,\n  jN: number,\n): number {\n  const A = P[i];\n  const Ap = P[iN];\n  const B = S[j];\n  const Bp = S[jN];\n  const e1x = Ap[0] - A[0],\n    e1y = Ap[1] - A[1],\n    e1z = Ap[2] - A[2];\n  const e2x = Bp[0] - A[0],\n    e2y = Bp[1] - A[1],\n    e2z = Bp[2] - A[2];\n  const e3x = B[0] - A[0],\n    e3y = B[1] - A[1],\n    e3z = B[2] - A[2];\n  const nx = e1y * e2z - e1z * e2y;\n  const ny = e1z * e2x - e1x * e2z;\n  const nz = e1x * e2y - e1y * e2x;\n  const nMag = Math.hypot(nx, ny, nz);\n  const height = nMag > 0 ? Math.abs(nx * e3x + ny * e3y + nz * e3z) / nMag : 0;\n  const avgEdge =\n    0.25 * (dist3(A, Ap) + dist3(Ap, Bp) + dist3(Bp, B) + dist3(B, A));\n  return avgEdge > 0 ? height / avgEdge : 0;\n}\n\n/**\n * 2-neighbour anti-diagonal DP: from (i, j) you may only advance to\n * (i+1, j) or (i, j+1). Every path has 2(n-1) steps and emits 2n-1 rulings.\n * Identical to the implementation in atomimpl.ts.\n */\nfunction findOptimalRulingPath(\n  cost: number[][],\n  P: T3[],\n  S: T3[],\n): { path: [number, number][]; totalCost: number } {\n  const n = cost.length;\n  const INF = Number.POSITIVE_INFINITY;\n  const dist: number[][] = new Array(n);\n  const prevDir: number[][] = new Array(n);\n  for (let i = 0; i < n; i++) {\n    dist[i] = new Array(n).fill(INF);\n    prevDir[i] = new Array(n).fill(-1);\n  }\n  dist[0][0] = cost[0][0];\n\n  for (let s = 1; s <= 2 * (n - 1); s++) {\n    const iLo = Math.max(0, s - (n - 1));\n    const iHi = Math.min(n - 1, s);\n    for (let iN = iLo; iN <= iHi; iN++) {\n      const jN = s - iN;\n      const rulingCost = cost[iN][jN];\n      if (!isFinite(rulingCost)) continue;\n      let best = INF;\n      let bestDir = -1;\n      if (iN > 0 && isFinite(dist[iN - 1][jN])) {\n        const cand =\n          dist[iN - 1][jN] + rulingCost + quadTwist(P, S, iN - 1, jN, iN, jN);\n        if (cand < best) {\n          best = cand;\n          bestDir = 0;\n        }\n      }\n      if (jN > 0 && isFinite(dist[iN][jN - 1])) {\n        const cand =\n          dist[iN][jN - 1] + rulingCost + quadTwist(P, S, iN, jN - 1, iN, jN);\n        if (cand < best) {\n          best = cand;\n          bestDir = 1;\n        }\n      }\n      if (best < INF) {\n        dist[iN][jN] = best;\n        prevDir[iN][jN] = bestDir;\n      }\n    }\n  }\n\n  const path: [number, number][] = [];\n  if (isFinite(dist[n - 1][n - 1])) {\n    let ci = n - 1;\n    let cj = n - 1;\n    while (ci >= 0 && cj >= 0) {\n      path.push([ci, cj]);\n      if (ci === 0 && cj === 0) break;\n      const dir = prevDir[ci][cj];\n      if (dir === 0) ci -= 1;\n      else if (dir === 1) cj -= 1;\n      else break;\n    }\n    path.reverse();\n    return { path, totalCost: dist[n - 1][n - 1] };\n  }\n  console.warn(\"Unroll: DAG search found no path; falling back to diagonal.\");\n  for (let k = 0; k < n; k++) path.push([k, k]);\n  return { path, totalCost: INF };\n}\n\n/**\n * Identify the best 3D triangle for a point P. We prefer the one where P\n * projects inside (positive barycentric), using physical distance to the\n * triangle plane as a tie-breaker.\n */\nfunction findBestTriangle3D(p: T3, tris3D: [T3, T3, T3][]): number {\n  let bestK = -1;\n  let minScore = Infinity;\n\n  for (let k = 0; k < tris3D.length; k++) {\n    const tri = tris3D[k];\n    const bary = bary3D(p, tri[0], tri[1], tri[2]);\n    if (!bary) continue;\n\n    const [u, v, w] = bary;\n    // Penalty for being physically outside the triangle footprint\n    const outsideDist = Math.max(0, -u, -v, -w);\n    // Distance to triangle plane\n    const planeDist = distToPlane(p, tri[0], tri[1], tri[2]);\n\n    // Combined score: proximity to plane + penalty for being outside.\n    // Being outside is penalized much more heavily than being slightly\n    // off-plane.\n    const score = planeDist + outsideDist * 1000;\n\n    if (score < minScore) {\n      minScore = score;\n      bestK = k;\n    }\n  }\n  return bestK;\n}\n\n/**\n * Project 3D point p into triangle k and return its 2D coordinates.\n */\nfunction mapWithTriangle3D(\n  p: T3,\n  k: number,\n  tris3D: [T3, T3, T3][],\n  tris2D: [T2, T2, T2][],\n): T2 {\n  const tri3 = tris3D[k];\n  const tri2 = tris2D[k];\n  const bary = bary3D(p, tri3[0], tri3[1], tri3[2]);\n  if (!bary) return [0, 0];\n\n  const [u, v, w] = bary;\n  const [a2, b2, c2] = tri2;\n\n  return [u * a2[0] + v * b2[0] + w * c2[0], u * a2[1] + v * b2[1] + w * c2[1]];\n}\n\nfunction distToPlane(p: T3, a: T3, b: T3, c: T3): number {\n  const v1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n  const v2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n\n  const nx = v1[1] * v2[2] - v1[2] * v2[1];\n  const ny = v1[2] * v2[0] - v1[0] * v2[2];\n  const nz = v1[0] * v2[1] - v1[1] * v2[0];\n  const nLen = Math.hypot(nx, ny, nz);\n  if (nLen === 0) return dist3(p, a);\n\n  const dx = p[0] - a[0];\n  const dy = p[1] - a[1];\n  const dz = p[2] - a[2];\n\n  return Math.abs(dx * nx + dy * ny + dz * nz) / nLen;\n}\n\n/**\n * 3D Barycentric coordinates of P in triangle (A, B, C).\n * P is projected onto the plane of ABC.\n */\nfunction bary3D(p: T3, a: T3, b: T3, c: T3): [number, number, number] | null {\n  const v0 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n  const v1 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n  const v2 = [p[0] - a[0], p[1] - a[1], p[2] - a[2]];\n\n  const d00 = v0[0] * v0[0] + v0[1] * v0[1] + v0[2] * v0[2];\n  const d01 = v0[0] * v1[0] + v0[1] * v1[1] + v0[2] * v1[2];\n  const d11 = v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2];\n  const d20 = v2[0] * v0[0] + v2[1] * v0[1] + v2[2] * v0[2];\n  const d21 = v2[0] * v1[0] + v2[1] * v1[1] + v2[2] * v1[2];\n\n  const denom = d00 * d11 - d01 * d01;\n  if (Math.abs(denom) < 1e-12) return null;\n\n  const invDenom = 1.0 / denom;\n  const v = (d11 * d20 - d01 * d21) * invDenom;\n  const w = (d00 * d21 - d01 * d20) * invDenom;\n  const u = 1.0 - v - w;\n\n  return [u, v, w];\n}\n\n/** Place a new 2D point at distance r0 from p0 and r1 from p1, on the\n * sideSign side of the directed line p0→p1 (+1 = left, −1 = right). */\nfunction circleIntersect(\n  p0: T2,\n  r0: number,\n  p1: T2,\n  r1: number,\n  sideSign: number,\n  stripIdx: number,\n): T2 {\n  const dx = p1[0] - p0[0];\n  const dy = p1[1] - p0[1];\n  const d = Math.hypot(dx, dy);\n  const sum = r0 + r1;\n  const diff = Math.abs(r0 - r1);\n  const EPS = 1e-6;\n  if (d === 0 || d > sum * (1 + EPS) || d < diff * (1 - EPS)) {\n    throw new Error(\n      `Unroll: degenerate triangle at strip ${stripIdx} ` +\n      `(r0=${r0.toFixed(4)}, r1=${r1.toFixed(4)}, hinge=${d.toFixed(4)}).`,\n    );\n  }\n  const dC = Math.max(diff, Math.min(sum, d));\n  const a = (r0 * r0 - r1 * r1 + dC * dC) / (2 * dC);\n  const h = Math.sqrt(Math.max(0, r0 * r0 - a * a));\n  const ux = dx / d;\n  const uy = dy / d;\n  const mx = p0[0] + a * ux;\n  const my = p0[1] + a * uy;\n  return [mx + h * -uy * sideSign, my + h * ux * sideSign];\n}\n",
-          "compiledCode": "\"use strict\";\n/**\n * Unrolls (flattens) a ruled surface into a 2D Drawing of its boundary,\n * using the same primary/secondary ruling extractor as the rulings atom\n * (see atomimpl.ts and Wang et al., JCISE 2021).\n *\n * Because the 2-neighbour shortest path advances exactly one of (i, j) per\n * step, every pair of consecutive rulings shares an endpoint. The strip\n * between them is therefore a TRIANGLE, which is intrinsically planar and\n * unrolls exactly — no quad-skew distortion. The first ruling is laid along\n * +X; each subsequent triangle hinges across the shared ruling and is\n * placed on the opposite side from the prior triangle's apex.\n *\n * The two long edges (primary chain and secondary chain) are emitted as\n * smooth splines through the placed vertices; the two short edges (first\n * and last rulings) are straight line segments. Splines play better with\n * downstream CAM than dense polylines.\n *\n *   primaryEdgeIndex → cyclic index into face.outerWire().edges. The two\n *                      neighbouring edges are excluded; remaining edges form\n *                      the secondary, identical to atomimpl.ts.\n */\nfunction run(primaryGuideWire, secondaryGuideWire, holes, numRulings = 24, holeSamples = 64) {\n    if (!Number.isFinite(numRulings) || numRulings < 2) {\n        throw new Error(\"Unroll surface: numRulings must be an integer ≥ 2 (two rulings \" +\n            \"needed to define a strip). was: \" + numRulings);\n    }\n    if (!Number.isFinite(holeSamples) || holeSamples < 8) {\n        throw new Error(\"Unroll surface: holeSamples must be an integer ≥ 8. was: \" + holeSamples);\n    }\n    const conformOrientations = (edges, targetOrientation) => {\n        return edges.map((e) => e.orientation == targetOrientation ? e : e.flipOrientation());\n    };\n    const extractWire = (assembly) => {\n        if (assembly.isLeaf() && assembly.geometry instanceof replicad.Wire) {\n            return assembly.geometry;\n        }\n        return replicad.assembleWire(assembly.getSelectedEdges());\n    };\n    const primaryWire = extractWire(primaryGuideWire);\n    let secondaryWire = extractWire(secondaryGuideWire);\n    const dist = (v1, v2) => {\n        return v1.multiply(-1).add(v2).Length;\n    };\n    if (dist(primaryWire.startPoint, secondaryWire.startPoint) > dist(primaryWire.startPoint, secondaryWire.endPoint)) {\n        secondaryWire = secondaryWire.flipOrientation();\n    }\n    const holeList = [];\n    if (holes != undefined) {\n        holes.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                holeList.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    console.log(\"blah\");\n    return unrollFaceToDrawing(primaryWire, secondaryWire, numRulings, holeList, holeSamples).drawing;\n    const results = [];\n    let index = 0;\n    const noneSelected = surface.getSelectedFaces().length == 0;\n    surface.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            console.warn(\"drawings cannot be unrolled\");\n            return leaf;\n        }\n        const faces = [];\n        if (noneSelected) {\n            faces.push(...(leaf.geometry instanceof replicad.Face\n                ? [leaf.geometry]\n                : leaf.geometry.faces));\n        }\n        else {\n            // Else the user has made a selection, only unroll selected faces\n            if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n                faces.push(...leaf.selection.faces.map((idx) => leaf.geometry.faces[idx]));\n            }\n        }\n        for (const face of faces) {\n            const resolvedEdgeIndex = primaryEdgeIndex < 0 ? selectBestPrimaryEdge(face) : primaryEdgeIndex;\n            const { primaryWire, secondaryWire, pIdx } = assembleRulingWires(face, resolvedEdgeIndex);\n            // eslint-disable-next-line @typescript-eslint/no-explicit-any\n            const holeWires = face.clone().innerWires() ?? [];\n            const { drawing } = unrollFaceToDrawing(primaryWire, secondaryWire, numRulings, holeWires, holeSamples);\n            results.push(new Assembly({\n                ...leaf,\n                geometry: drawing,\n                tags: [...(leaf.tags ?? []), \"developed\", \"ruling-primary:\" + pIdx],\n                plane: replicad.makePlane(\"XY\", [0, 0, index]),\n            }));\n            index++;\n        }\n        return leaf;\n    });\n    console.log(results);\n    return results;\n}\n/**\n * Split the face's outer wire into a primary edge + a secondary edge chain\n * (see partitionOuterWire), then assemble each side into a proper\n * replicad.Wire via replicad.assembleWire. The secondary chain's edge order\n * is reversed first if its leading edge shares primary's orientation flag —\n * that indicates the chain, sampled in its natural wire-cyclic order, would\n * run anti-parallel to primary.\n */\nfunction assembleRulingWires(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primaryEdgeIndex) {\n    const { primary, secondaryEdges, pIdx } = partitionOuterWire(face, primaryEdgeIndex);\n    console.log(\"should reverse: \", primary.orientation == secondaryEdges[0].orientation);\n    /*  const reversed = primary.orientation == secondaryEdges[0].orientation;\n    const orderedSecondaryEdges = reversed\n      ? [...secondaryEdges].reverse()\n      : secondaryEdges;*/\n    const primaryWire = replicad.assembleWire([primary]);\n    const secondaryWire = replicad.assembleWire(secondaryEdges).flipOrientation();\n    return { primaryWire, secondaryWire, pIdx };\n}\n/**\n * Uniformly sample a Wire (single-edge or multi-edge/compound) at n points\n * across its full parametric range [0, 1], which replicad's Wire.pointAt\n * parametrizes continuously by cumulative arc length across all of its\n * constituent edges. t=0 and t=n-1 land exactly on the wire's two\n * endpoints.\n */\nfunction sampleWireUniform(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nwire, n) {\n    const out = new Array(n);\n    const [keep, cleanup] = replicad.localGC();\n    try {\n        for (let i = 0; i < n; i++) {\n            const t = n === 1 ? 0 : i / (n - 1);\n            out[i] = toT3(keep(wire.pointAt(t)));\n        }\n    }\n    finally {\n        cleanup();\n    }\n    return out;\n}\n/**\n * Uniformly sample a Wire at n points, capturing both position and tangent\n * direction at each parameter. Used instead of sampleWireUniform wherever a\n * per-sample surface-normal proxy is needed without querying a face (see\n * buildCostGridFromTangents) — this lets primary/secondary wires span\n * multiple faces, since no single `face` needs to be queried.\n *\n * `tangents[i]` is null when `tangentAt` fails or reports a zero-length\n * vector — this happens at a discontinuity where the sample parameter lands\n * exactly on a seam between two edges of a compound wire. Callers should\n * treat a null tangent the same way normalAtSafe's null is treated: skip\n * any ruling touching that index (cost = Infinity).\n */\nfunction sampleWireWithTangents(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nwire, n) {\n    const points = new Array(n);\n    const tangents = new Array(n);\n    const [keep, cleanup] = replicad.localGC();\n    try {\n        for (let i = 0; i < n; i++) {\n            const t = n === 1 ? 0 : i / (n - 1);\n            points[i] = toT3(keep(wire.pointAt(t)));\n            try {\n                const tv = keep(wire.tangentAt(t));\n                const tx = tv.x, ty = tv.y, tz = tv.z;\n                const tl = Math.hypot(tx, ty, tz);\n                tangents[i] = tl > 0 ? [tx / tl, ty / tl, tz / tl] : null;\n            }\n            catch {\n                tangents[i] = null;\n            }\n        }\n    }\n    finally {\n        cleanup();\n    }\n    return { points, tangents };\n}\n/**\n * Probe every outer edge of `face` at a low ruling count and return the\n * index of the edge that yields the lowest total ruling cost. Used when\n * primaryEdgeIndex < 0 (auto-select mode).\n */\nconst UNROLL2_PROBE_N = 8;\nfunction selectBestPrimaryEdge(face) {\n    const [keep, cleanup] = replicad.localGC();\n    let bestIdx = 0;\n    try {\n        const outerWire = keep(face.clone().outerWire());\n        const allEdges = outerWire.edges ?? []; // eslint-disable-line @typescript-eslint/no-explicit-any\n        const m = allEdges.length;\n        let bestCost = Infinity;\n        for (let k = 0; k < m; k++) {\n            try {\n                const { primaryWire, secondaryWire } = assembleRulingWires(face, k);\n                keep(primaryWire);\n                keep(secondaryWire);\n                const P3 = sampleWireUniform(primaryWire, UNROLL2_PROBE_N);\n                const S3 = sampleWireUniform(secondaryWire, UNROLL2_PROBE_N);\n                const cost = buildCostGrid(face, P3, S3);\n                const { totalCost } = findOptimalRulingPath(cost, P3, S3);\n                if (totalCost < bestCost) {\n                    bestCost = totalCost;\n                    bestIdx = k;\n                }\n            }\n            catch {\n                // edge produced a degenerate partition; skip\n            }\n        }\n        console.log(`Unroll auto-select: chose primaryEdgeIndex=${bestIdx} (cost=${bestCost.toExponential(2)}) from ${m} candidates`);\n    }\n    finally {\n        cleanup();\n    }\n    return bestIdx;\n}\n/**\n * Unrolls a single replicad.Face into a 2D Drawing, given pre-assembled\n * primary/secondary boundary wires and an explicit list of hole wires to\n * punch. Returns the drawing; the caller already knows pIdx since it built\n * the wires via assembleRulingWires.\n *\n * No `face` parameter is needed: the ruling-twist cost metric is derived\n * purely from each wire's own tangent direction crossed with the ruling\n * direction (see buildCostGridFromTangents), so primary/secondary wires may\n * span multiple faces without this function needing to know which face to\n * query at any given sample.\n */\nfunction unrollFaceToDrawing(primaryWire, // eslint-disable-line @typescript-eslint/no-explicit-any\nsecondaryWire, // eslint-disable-line @typescript-eslint/no-explicit-any\nnumRulings, holeWires, // eslint-disable-line @typescript-eslint/no-explicit-any\nholeSamples) {\n    // eslint-disable-line @typescript-eslint/no-explicit-any\n    const n = Math.max(2, Math.floor(numRulings));\n    const holeN = Math.max(8, Math.floor(holeSamples));\n    const { points: P3, tangents: PT } = sampleWireWithTangents(primaryWire, n);\n    const { points: S3, tangents: ST } = sampleWireWithTangents(secondaryWire, n);\n    // primaryWire/secondaryWire are only needed for sampling; nothing below\n    // this point touches them again.\n    primaryWire.delete();\n    secondaryWire.delete();\n    const cost = buildCostGridFromTangents(P3, PT, S3, ST);\n    const { path, totalCost } = findOptimalRulingPath(cost, P3, S3);\n    console.log(`Unroll: ${path.length} rulings, total cost=${totalCost.toExponential(2)}`);\n    // ── Unfold triangles ────────────────────────────────────────────────────\n    // P2[i] / S2[j] hold the 2D position of primary sample i / secondary\n    // sample j once it's been placed. Each path step extends exactly one of\n    // these arrays by one new entry.\n    const P2 = new Array(n);\n    const S2 = new Array(n);\n    const [i0, j0] = path[0];\n    const L0 = dist3(P3[i0], S3[j0]);\n    if (!(L0 > 0)) {\n        throw new Error(\"Unroll: first ruling has zero length; cannot orient.\");\n    }\n    // First ruling along +X: primary endpoint at origin, secondary endpoint at +X.\n    P2[i0] = [0, 0];\n    S2[j0] = [L0, 0];\n    // Per-strip triangle records, populated alongside the unfold. Vertex order\n    // is (hinge-primary, hinge-secondary, apex).\n    const tris2D = [];\n    const tris3D = [];\n    for (let k = 0; k < path.length - 1; k++) {\n        const [i, j] = path[k];\n        const [iN, jN] = path[k + 1];\n        const advancedP = iN > i;\n        const newP3 = advancedP ? P3[iN] : S3[jN];\n        const r0 = dist3(P3[i], newP3);\n        const r1 = dist3(S3[j], newP3);\n        const p0 = P2[i];\n        const p1 = S2[j];\n        // Side choice: place the new apex on the opposite side of the current\n        // hinge (P2[i] → S2[j]) from the previous triangle's apex. For the\n        // first triangle there's no prior apex, so pick +1 (left of p0→p1)\n        // arbitrarily — the whole pattern just unfolds toward +Y.\n        let side;\n        if (k === 0) {\n            side = 1;\n        }\n        else {\n            const [iPrev, jPrev] = path[k - 1];\n            // The previous triangle's apex is whichever of (P2[iPrev], S2[jPrev])\n            // is NOT shared with the current hinge. Exactly one of iPrev, jPrev\n            // differs from (i, j) — that one is the apex.\n            const otherPt = iPrev !== i ? P2[iPrev] : S2[jPrev];\n            const ox = otherPt[0] - p0[0];\n            const oy = otherPt[1] - p0[1];\n            const hx = p1[0] - p0[0];\n            const hy = p1[1] - p0[1];\n            const sideOfOther = Math.sign(hx * oy - hy * ox);\n            side = -sideOfOther || 1;\n        }\n        const newP2 = circleIntersect(p0, r0, p1, r1, side, k);\n        if (advancedP)\n            P2[iN] = newP2;\n        else\n            S2[jN] = newP2;\n        tris2D.push([p0, p1, newP2]);\n        tris3D.push([P3[i], S3[j], newP3]);\n    }\n    // ── Build the two long chains in path order ────────────────────────────\n    // primaryChain = the 2D positions of the primary samples actually visited,\n    // in the order they appear along the path. Same for secondaryChain.\n    const primaryChain = [];\n    const secondaryChain = [];\n    let lastI = -1;\n    let lastJ = -1;\n    for (const [i, j] of path) {\n        if (i !== lastI) {\n            primaryChain.push(P2[i]);\n            lastI = i;\n        }\n        if (j !== lastJ) {\n            secondaryChain.push(S2[j]);\n            lastJ = j;\n        }\n    }\n    if (primaryChain.length < 2 || secondaryChain.length < 2) {\n        throw new Error(`Unroll: degenerate chains (primary=${primaryChain.length}, ` +\n            `secondary=${secondaryChain.length}); need ≥2 on each side.`);\n    }\n    // ── Build the boundary drawing ─────────────────────────────────────────\n    // Primary chain (spline) → last ruling (straight) → reversed secondary\n    // chain (spline) → close back along first ruling (straight).\n    const pen = replicad.draw(primaryChain[0]);\n    for (let i = 1; i < primaryChain.length; i++) {\n        pen.lineTo(primaryChain[i]);\n    }\n    pen.lineTo(secondaryChain[secondaryChain.length - 1]);\n    for (let i = secondaryChain.length - 2; i >= 0; i--) {\n        pen.lineTo(secondaryChain[i]);\n    }\n    let drawing = pen.close();\n    // ── Punch holes from the explicitly provided hole wires (if any) ──────\n    const [keepHoles, cleanupHoles] = replicad.localGC();\n    try {\n        for (let h = 0; h < holeWires.length; h++) {\n            const wire = holeWires[h];\n            // Pass 1: dense 3D samples around the wire.\n            const samples3D = [];\n            for (let i = 0; i < holeN; i++) {\n                const t = i / holeN;\n                samples3D.push(toT3(keepHoles(wire.pointAt(t))));\n            }\n            // wire has yielded all the samples we need; nothing later reuses it.\n            wire.delete();\n            if (samples3D.length < 3)\n                continue;\n            // Pass 2: map 3D→2D using nearest physical triangle.\n            const samples2D = samples3D\n                .map((p) => {\n                const k = findBestTriangle3D(p, tris3D);\n                return k >= 0 ? mapWithTriangle3D(p, k, tris3D, tris2D) : null;\n            })\n                .filter((p) => p !== null);\n            if (samples2D.length < 3)\n                continue;\n            // Pass 3: Draw the hole.\n            const holePen = replicad.draw(samples2D[0]);\n            for (let i = 1; i < samples2D.length; i++) {\n                holePen.lineTo(samples2D[i]);\n            }\n            const holeDrawing = holePen.close();\n            // Drawing is a JS-side 2D path wrapper (not a raw WASM handle), so it\n            // doesn't need explicit deletion here.\n            drawing = drawing.cut(holeDrawing);\n        }\n    }\n    finally {\n        cleanupHoles();\n    }\n    return { drawing };\n}\nfunction toT3(v) {\n    return [v.x, v.y, v.z];\n}\nfunction dist3(a, b) {\n    return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);\n}\nfunction partitionOuterWire(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primaryEdgeIndex) {\n    const outerWire = face.clone().outerWire();\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    const allEdges = outerWire.edges ?? [];\n    const m = allEdges.length;\n    const pIdx = ((Math.floor(primaryEdgeIndex) % m) + m) % m;\n    const primary = allEdges[pIdx];\n    const excludedIdx = new Set([pIdx]);\n    if (primary.isClosed) {\n        if (pIdx == 0) {\n            excludedIdx.add(1);\n        }\n        else if (pIdx == allEdges.length - 1) {\n            excludedIdx.add(allEdges.length - 2);\n        }\n        else {\n            console.warn(\"found a closed face with two neighbors..\");\n        }\n    }\n    else {\n        excludedIdx.add((pIdx - 1 + m) % m);\n        excludedIdx.add((pIdx + 1) % m);\n    }\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    const secondaryEdges = [];\n    for (let k = 0; k < m; k++) {\n        const idx = (pIdx + 2 + k) % m;\n        if (!excludedIdx.has(idx))\n            secondaryEdges.push(allEdges[idx]);\n    }\n    if (secondaryEdges.length === 0) {\n        console.warn(\"less than 4 edges total. this may cause bugs later\");\n        secondaryEdges.push(allEdges[(pIdx + 1) % m]);\n    }\n    return { primary, secondaryEdges, pIdx };\n}\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nfunction normalAtSafe(face, p, \n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nkeep) {\n    try {\n        const nv = keep(face.normalAt(p));\n        const x = nv.x, y = nv.y, z = nv.z;\n        const len = Math.hypot(x, y, z);\n        if (!(len > 0))\n            return null;\n        return [x / len, y / len, z / len];\n    }\n    catch {\n        return null;\n    }\n}\nfunction buildCostGrid(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primarySamples, secondarySamples) {\n    const n = primarySamples.length;\n    const ns = secondarySamples.length;\n    const [keep, cleanup] = replicad.localGC();\n    let primaryNormals;\n    let secondaryNormals;\n    try {\n        primaryNormals = primarySamples.map((p) => normalAtSafe(face, p, keep));\n        secondaryNormals = secondarySamples.map((p) => normalAtSafe(face, p, keep));\n    }\n    finally {\n        cleanup();\n    }\n    const cost = new Array(n);\n    for (let i = 0; i < n; i++) {\n        const row = new Array(ns);\n        const nA = primaryNormals[i];\n        for (let j = 0; j < ns; j++) {\n            const nB = secondaryNormals[j];\n            if (!nA || !nB) {\n                row[j] = Infinity;\n                continue;\n            }\n            const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n            row[j] = 1 - Math.abs(dot);\n        }\n        cost[i] = row;\n    }\n    return cost;\n}\n/**\n * Normalize the direction from a to b; null if a and b coincide.\n */\nfunction normalizedDir(a, b) {\n    const dx = b[0] - a[0];\n    const dy = b[1] - a[1];\n    const dz = b[2] - a[2];\n    const len = Math.hypot(dx, dy, dz);\n    if (!(len > 0))\n        return null;\n    return [dx / len, dy / len, dz / len];\n}\n/**\n * Cross a wire tangent with a ruling direction and normalize the result;\n * null if either input is null/missing or the two are (near-)parallel,\n * which yields a degenerate (near-zero) cross product.\n */\nfunction crossNormalize(tangent, rulingDir) {\n    if (!tangent)\n        return null;\n    const cx = tangent[1] * rulingDir[2] - tangent[2] * rulingDir[1];\n    const cy = tangent[2] * rulingDir[0] - tangent[0] * rulingDir[2];\n    const cz = tangent[0] * rulingDir[1] - tangent[1] * rulingDir[0];\n    const len = Math.hypot(cx, cy, cz);\n    if (!(len > 0))\n        return null;\n    return [cx / len, cy / len, cz / len];\n}\n/**\n * Face-free alternative to buildCostGrid: approximates the surface normal\n * at each end of a candidate ruling as cross(wireTangent, rulingDirection),\n * then scores the ruling by 1 - |dot(normalA, normalB)| \\u2014 same twist\n * metric as buildCostGrid, but derived purely from the two boundary wires'\n * own tangents rather than a face.normalAt() query. This lets primary and\n * secondary wires span multiple faces, since no single `face` is queried.\n *\n * A null tangent (see sampleWireWithTangents \\u2014 typically a discontinuity\n * at a compound-wire seam) or a ruling direction parallel to a tangent\n * propagates to Infinity for that cell, same convention as buildCostGrid.\n */\nfunction buildCostGridFromTangents(primarySamples, primaryTangents, secondarySamples, secondaryTangents) {\n    const n = primarySamples.length;\n    const ns = secondarySamples.length;\n    const cost = new Array(n);\n    for (let i = 0; i < n; i++) {\n        const row = new Array(ns);\n        for (let j = 0; j < ns; j++) {\n            const rulingDir = normalizedDir(primarySamples[i], secondarySamples[j]);\n            if (!rulingDir) {\n                row[j] = Infinity;\n                continue;\n            }\n            const nA = crossNormalize(primaryTangents[i], rulingDir);\n            const nB = crossNormalize(secondaryTangents[j], rulingDir);\n            if (!nA || !nB) {\n                row[j] = Infinity;\n                continue;\n            }\n            const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n            row[j] = 1 - Math.abs(dot);\n        }\n        cost[i] = row;\n    }\n    return cost;\n}\nfunction quadTwist(P, S, i, j, iN, jN) {\n    const A = P[i];\n    const Ap = P[iN];\n    const B = S[j];\n    const Bp = S[jN];\n    const e1x = Ap[0] - A[0], e1y = Ap[1] - A[1], e1z = Ap[2] - A[2];\n    const e2x = Bp[0] - A[0], e2y = Bp[1] - A[1], e2z = Bp[2] - A[2];\n    const e3x = B[0] - A[0], e3y = B[1] - A[1], e3z = B[2] - A[2];\n    const nx = e1y * e2z - e1z * e2y;\n    const ny = e1z * e2x - e1x * e2z;\n    const nz = e1x * e2y - e1y * e2x;\n    const nMag = Math.hypot(nx, ny, nz);\n    const height = nMag > 0 ? Math.abs(nx * e3x + ny * e3y + nz * e3z) / nMag : 0;\n    const avgEdge = 0.25 * (dist3(A, Ap) + dist3(Ap, Bp) + dist3(Bp, B) + dist3(B, A));\n    return avgEdge > 0 ? height / avgEdge : 0;\n}\n/**\n * 2-neighbour anti-diagonal DP: from (i, j) you may only advance to\n * (i+1, j) or (i, j+1). Every path has 2(n-1) steps and emits 2n-1 rulings.\n * Identical to the implementation in atomimpl.ts.\n */\nfunction findOptimalRulingPath(cost, P, S) {\n    const n = cost.length;\n    const INF = Number.POSITIVE_INFINITY;\n    const dist = new Array(n);\n    const prevDir = new Array(n);\n    for (let i = 0; i < n; i++) {\n        dist[i] = new Array(n).fill(INF);\n        prevDir[i] = new Array(n).fill(-1);\n    }\n    dist[0][0] = cost[0][0];\n    for (let s = 1; s <= 2 * (n - 1); s++) {\n        const iLo = Math.max(0, s - (n - 1));\n        const iHi = Math.min(n - 1, s);\n        for (let iN = iLo; iN <= iHi; iN++) {\n            const jN = s - iN;\n            const rulingCost = cost[iN][jN];\n            if (!isFinite(rulingCost))\n                continue;\n            let best = INF;\n            let bestDir = -1;\n            if (iN > 0 && isFinite(dist[iN - 1][jN])) {\n                const cand = dist[iN - 1][jN] + rulingCost + quadTwist(P, S, iN - 1, jN, iN, jN);\n                if (cand < best) {\n                    best = cand;\n                    bestDir = 0;\n                }\n            }\n            if (jN > 0 && isFinite(dist[iN][jN - 1])) {\n                const cand = dist[iN][jN - 1] + rulingCost + quadTwist(P, S, iN, jN - 1, iN, jN);\n                if (cand < best) {\n                    best = cand;\n                    bestDir = 1;\n                }\n            }\n            if (best < INF) {\n                dist[iN][jN] = best;\n                prevDir[iN][jN] = bestDir;\n            }\n        }\n    }\n    const path = [];\n    if (isFinite(dist[n - 1][n - 1])) {\n        let ci = n - 1;\n        let cj = n - 1;\n        while (ci >= 0 && cj >= 0) {\n            path.push([ci, cj]);\n            if (ci === 0 && cj === 0)\n                break;\n            const dir = prevDir[ci][cj];\n            if (dir === 0)\n                ci -= 1;\n            else if (dir === 1)\n                cj -= 1;\n            else\n                break;\n        }\n        path.reverse();\n        return { path, totalCost: dist[n - 1][n - 1] };\n    }\n    console.warn(\"Unroll: DAG search found no path; falling back to diagonal.\");\n    for (let k = 0; k < n; k++)\n        path.push([k, k]);\n    return { path, totalCost: INF };\n}\n/**\n * Identify the best 3D triangle for a point P. We prefer the one where P\n * projects inside (positive barycentric), using physical distance to the\n * triangle plane as a tie-breaker.\n */\nfunction findBestTriangle3D(p, tris3D) {\n    let bestK = -1;\n    let minScore = Infinity;\n    for (let k = 0; k < tris3D.length; k++) {\n        const tri = tris3D[k];\n        const bary = bary3D(p, tri[0], tri[1], tri[2]);\n        if (!bary)\n            continue;\n        const [u, v, w] = bary;\n        // Penalty for being physically outside the triangle footprint\n        const outsideDist = Math.max(0, -u, -v, -w);\n        // Distance to triangle plane\n        const planeDist = distToPlane(p, tri[0], tri[1], tri[2]);\n        // Combined score: proximity to plane + penalty for being outside.\n        // Being outside is penalized much more heavily than being slightly\n        // off-plane.\n        const score = planeDist + outsideDist * 1000;\n        if (score < minScore) {\n            minScore = score;\n            bestK = k;\n        }\n    }\n    return bestK;\n}\n/**\n * Project 3D point p into triangle k and return its 2D coordinates.\n */\nfunction mapWithTriangle3D(p, k, tris3D, tris2D) {\n    const tri3 = tris3D[k];\n    const tri2 = tris2D[k];\n    const bary = bary3D(p, tri3[0], tri3[1], tri3[2]);\n    if (!bary)\n        return [0, 0];\n    const [u, v, w] = bary;\n    const [a2, b2, c2] = tri2;\n    return [u * a2[0] + v * b2[0] + w * c2[0], u * a2[1] + v * b2[1] + w * c2[1]];\n}\nfunction distToPlane(p, a, b, c) {\n    const v1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n    const v2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n    const nx = v1[1] * v2[2] - v1[2] * v2[1];\n    const ny = v1[2] * v2[0] - v1[0] * v2[2];\n    const nz = v1[0] * v2[1] - v1[1] * v2[0];\n    const nLen = Math.hypot(nx, ny, nz);\n    if (nLen === 0)\n        return dist3(p, a);\n    const dx = p[0] - a[0];\n    const dy = p[1] - a[1];\n    const dz = p[2] - a[2];\n    return Math.abs(dx * nx + dy * ny + dz * nz) / nLen;\n}\n/**\n * 3D Barycentric coordinates of P in triangle (A, B, C).\n * P is projected onto the plane of ABC.\n */\nfunction bary3D(p, a, b, c) {\n    const v0 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n    const v1 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n    const v2 = [p[0] - a[0], p[1] - a[1], p[2] - a[2]];\n    const d00 = v0[0] * v0[0] + v0[1] * v0[1] + v0[2] * v0[2];\n    const d01 = v0[0] * v1[0] + v0[1] * v1[1] + v0[2] * v1[2];\n    const d11 = v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2];\n    const d20 = v2[0] * v0[0] + v2[1] * v0[1] + v2[2] * v0[2];\n    const d21 = v2[0] * v1[0] + v2[1] * v1[1] + v2[2] * v1[2];\n    const denom = d00 * d11 - d01 * d01;\n    if (Math.abs(denom) < 1e-12)\n        return null;\n    const invDenom = 1.0 / denom;\n    const v = (d11 * d20 - d01 * d21) * invDenom;\n    const w = (d00 * d21 - d01 * d20) * invDenom;\n    const u = 1.0 - v - w;\n    return [u, v, w];\n}\n/** Place a new 2D point at distance r0 from p0 and r1 from p1, on the\n * sideSign side of the directed line p0→p1 (+1 = left, −1 = right). */\nfunction circleIntersect(p0, r0, p1, r1, sideSign, stripIdx) {\n    const dx = p1[0] - p0[0];\n    const dy = p1[1] - p0[1];\n    const d = Math.hypot(dx, dy);\n    const sum = r0 + r1;\n    const diff = Math.abs(r0 - r1);\n    const EPS = 1e-6;\n    if (d === 0 || d > sum * (1 + EPS) || d < diff * (1 - EPS)) {\n        throw new Error(`Unroll: degenerate triangle at strip ${stripIdx} ` +\n            `(r0=${r0.toFixed(4)}, r1=${r1.toFixed(4)}, hinge=${d.toFixed(4)}).`);\n    }\n    const dC = Math.max(diff, Math.min(sum, d));\n    const a = (r0 * r0 - r1 * r1 + dC * dC) / (2 * dC);\n    const h = Math.sqrt(Math.max(0, r0 * r0 - a * a));\n    const ux = dx / d;\n    const uy = dy / d;\n    const mx = p0[0] + a * ux;\n    const my = p0[1] + a * uy;\n    return [mx + h * -uy * sideSign, my + h * ux * sideSign];\n}\n"
         },
         {
           "atomType": "GitHubMolecule",
@@ -11418,930 +11387,6 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1787258887111
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.15234375,
-          "y": 0.7714285714285715,
-          "uniqueID": "id-95501",
-          "name": "crv.Point",
-          "ioValues": [
-            {
-              "name": "X",
-              "ioValue": 0
-            },
-            {
-              "name": "Y",
-              "ioValue": 0
-            },
-            {
-              "name": "Z",
-              "ioValue": 0
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-95496",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-95497",
-              "name": "X"
-            },
-            {
-              "atomType": "Code",
-              "x": 0.2688802083333333,
-              "y": 0.42857142857142855,
-              "uniqueID": "id-95498",
-              "ioValues": [
-                {
-                  "name": "x",
-                  "ioValue": 0
-                },
-                {
-                  "name": "y",
-                  "ioValue": 0
-                },
-                {
-                  "name": "z",
-                  "ioValue": 0
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "\nfunction run(x: number = 0, y: number = 0, z: number = 0) {\n  return replicad.makeVertex([x,y,z])\n}",
-              "compiledCode": "\"use strict\";\nfunction run(x = 0, y = 0, z = 0) {\n    return replicad.makeVertex([x, y, z]);\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.22400000000000003,
-              "uniqueID": "id-95499",
-              "name": "Y"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.30800000000000005,
-              "uniqueID": "id-95500",
-              "name": "Z"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "x",
-              "ap1ID": "id-95497",
-              "ap2ID": "id-95498"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-95498",
-              "ap2ID": "id-95496"
-            },
-            {
-              "ap2Name": "y",
-              "ap1ID": "id-95499",
-              "ap2ID": "id-95498"
-            },
-            {
-              "ap2Name": "z",
-              "ap1ID": "id-95500",
-              "ap2ID": "id-95498"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-20T18:23:39.118Z",
-            "privateRepo": false,
-            "repoName": "crv.Point",
-            "dateCreated": "2026-05-08T22:20:14Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-1",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/crv.Point",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739847",
-            "ranking": 6.9,
-            "searchField": "crv.point tristan-huber simple 3d point defined by it's xyz position abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Simple 3d Point defined by it's xyz position",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787258950485
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.21484375,
-          "y": 0.6657142857142857,
-          "uniqueID": "id-95899",
-          "name": "ExtractFaces",
-          "ioValues": [
-            {
-              "name": "Assembly",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-95896",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-95897",
-              "name": "Assembly",
-              "type": "faceselect",
-              "selectedFaceData": {
-                "0": [
-                  3
-                ]
-              }
-            },
-            {
-              "atomType": "Code",
-              "x": 0.2565104166666667,
-              "y": 0.7599999999999999,
-              "uniqueID": "id-95898",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-95897",
-              "ap2ID": "id-95898"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-95898",
-              "ap2ID": "id-95896"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-20T18:23:39.118Z",
-            "privateRepo": false,
-            "repoName": "ExtractFaces",
-            "dateCreated": "2026-07-24T19:57:30Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34810",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractFaces",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 4.2,
-            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787259759914
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.20963541666666666,
-          "y": 0.9142857142857143,
-          "uniqueID": "id-95948",
-          "name": "ExtractFaces",
-          "ioValues": [
-            {
-              "name": "Assembly",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-95949",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-95950",
-              "name": "Assembly",
-              "type": "faceselect",
-              "selectedFaceData": {
-                "9": [
-                  4
-                ]
-              }
-            },
-            {
-              "atomType": "Code",
-              "x": 0.2565104166666667,
-              "y": 0.7599999999999999,
-              "uniqueID": "id-95951",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-95950",
-              "ap2ID": "id-95951"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-95951",
-              "ap2ID": "id-95949"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-20T18:23:39.118Z",
-            "privateRepo": false,
-            "repoName": "ExtractFaces",
-            "dateCreated": "2026-07-24T19:57:30Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34810",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractFaces",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 4.2,
-            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787259759914
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.4537760416666667,
-          "y": 0.6114285714285714,
-          "uniqueID": "id-95964",
-          "name": "util.FuseWire",
-          "ioValues": [
-            {
-              "name": "wires",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-95961",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4290364583333333,
-              "y": 0.5228571428571429,
-              "uniqueID": "id-95962",
-              "ioValues": [
-                {
-                  "name": "shape",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "// as edges\nfunction run(\n  shape: Assembly,\n) {\n  let edges: replicad.Edge[] = shape.getSelectedEdges()\n  if (edges.length == 0) {\n    shape.onLeafs((leaf) => {\n      if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n        edges.push(...leaf.geometry.edges)\n      } else {\n        return undefined\n      }\n      return leaf;\n    })\n  }\n  console.log(edges.map((e) => e.orientation))\n  edges = sortEdgesByContinuity(edges, 0.001)\n  //  return replicad.assembleWire([edges[2], edges[3], edges[0], edges[1]])\n  return replicad.assembleWire(edges);\n}\n\nimport type { Edge } from \"replicad\";\n\ntype Tuple3 = readonly [number, number, number];\n\n/**\n * Sort a collection of replicad Edges so that each edge's endPoint matches the\n * next edge's startPoint (flipping orientation when necessary).\n *\n * - Starts from an edge whose startPoint is shared by no other edge's endPoint.\n * - If no such start exists (closed loop), starts with edges[0].\n * - Throws if any vertex is shared by more than two edges.\n * - Throws if the edges are not fully connected into a single chain.\n *\n * @param edges     Input edges in arbitrary order.\n * @param tolerance Distance under which two points are considered equal.\n */\nexport function sortEdgesByContinuity(\n  edges: Edge[],\n  tolerance = 1e-6,\n): Edge[] {\n  if (edges.length <= 1) return edges.slice();\n\n  const tol2 = tolerance * tolerance;\n\n  const dist2 = (a: Tuple3, b: Tuple3): number => {\n    const dx = a[0] - b[0];\n    const dy = a[1] - b[1];\n    const dz = a[2] - b[2];\n    return dx * dx + dy * dy + dz * dz;\n  };\n  const eq = (a: Tuple3, b: Tuple3): boolean => dist2(a, b) <= tol2;\n\n  // Cache endpoint tuples so we only query replicad once per edge.\n  type EndpointInfo = { edge: Edge; start: Tuple3; end: Tuple3 };\n  const infos: EndpointInfo[] = edges.map((edge) => ({\n    edge,\n    start: edge.startPoint.toTuple() as Tuple3,\n    end: edge.endPoint.toTuple() as Tuple3,\n  }));\n\n  // Bucket endpoint tuples into equivalence classes under the tolerance.\n  type VertexNode = { point: Tuple3; incidences: number };\n  const nodes: VertexNode[] = [];\n  const findOrAddNode = (p: Tuple3): VertexNode => {\n    for (const n of nodes) {\n      if (eq(n.point, p)) return n;\n    }\n    const n: VertexNode = { point: p, incidences: 0 };\n    nodes.push(n);\n    return n;\n  };\n\n  // Per-edge vertex nodes and per-node incidence count for validation.\n  const edgeNodes = infos.map((info) => {\n    const s = findOrAddNode(info.start);\n    const e = findOrAddNode(info.end);\n    s.incidences++;\n    e.incidences++;\n    return { start: s, end: e };\n  });\n\n  for (const n of nodes) {\n    if (n.incidences > 2) {\n      throw new Error(\n        `Vertex (${n.point.join(\", \")}) is shared by ${n.incidences} edge endpoints; expected at most 2.`,\n      );\n    }\n  }\n  // Pick a starting edge using the incidence counts we already computed.\n  // A chain terminus is a vertex with incidences === 1. Prefer an edge whose\n  // start is a terminus (no flip); otherwise flip an edge whose end is one.\n  let startIdx = edgeNodes.findIndex((n) => n.start.incidences === 1);\n  let startFlipped = false;\n  if (startIdx === -1) {\n    startIdx = edgeNodes.findIndex((n) => n.end.incidences === 1);\n    startFlipped = startIdx !== -1;\n  }\n\n  // Closed loop: no terminus. Just start from edge 0.\n  if (startIdx === -1) startIdx = 0;\n\n  const used = new Array<boolean>(infos.length).fill(false);\n  const result: Edge[] = [];\n\n  const firstEdge = startFlipped\n    ? infos[startIdx].edge.flipOrientation()\n    : infos[startIdx].edge;\n  let currentEndPoint: Tuple3 = startFlipped\n    ? infos[startIdx].start\n    : infos[startIdx].end;\n  result.push(firstEdge);\n  used[startIdx] = true;\n\n  while (result.length < infos.length) {\n    let nextIdx = -1;\n    let flip = false;\n    for (let i = 0; i < infos.length; i++) {\n      if (used[i]) continue;\n      if (eq(infos[i].start, currentEndPoint)) {\n        nextIdx = i;\n        flip = false;\n        break;\n      }\n      if (eq(infos[i].end, currentEndPoint)) {\n        nextIdx = i;\n        flip = true;\n        break;\n      }\n    }\n\n    if (nextIdx === -1) {\n      throw new Error(\n        \"Edges are not fully connected: could not find a continuation from \" +\n        `(${currentEndPoint.join(\", \")}).`,\n      );\n    }\n\n    const info = infos[nextIdx];\n    result.push(flip ? info.edge.flipOrientation() : info.edge);\n    currentEndPoint = flip ? info.start : info.end;\n    used[nextIdx] = true;\n  }\n\n  return result;\n}\n",
-              "compiledCode": "// as edges\nfunction run(shape) {\n    let edges = shape.getSelectedEdges();\n    if (edges.length == 0) {\n        shape.onLeafs((leaf) => {\n            if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n                edges.push(...leaf.geometry.edges);\n            }\n            else {\n                return undefined;\n            }\n            return leaf;\n        });\n    }\n    console.log(edges.map((e) => e.orientation));\n    edges = sortEdgesByContinuity(edges, 0.001);\n    //  return replicad.assembleWire([edges[2], edges[3], edges[0], edges[1]])\n    return replicad.assembleWire(edges);\n}\n/**\n * Sort a collection of replicad Edges so that each edge's endPoint matches the\n * next edge's startPoint (flipping orientation when necessary).\n *\n * - Starts from an edge whose startPoint is shared by no other edge's endPoint.\n * - If no such start exists (closed loop), starts with edges[0].\n * - Throws if any vertex is shared by more than two edges.\n * - Throws if the edges are not fully connected into a single chain.\n *\n * @param edges     Input edges in arbitrary order.\n * @param tolerance Distance under which two points are considered equal.\n */\nexport function sortEdgesByContinuity(edges, tolerance = 1e-6) {\n    if (edges.length <= 1)\n        return edges.slice();\n    const tol2 = tolerance * tolerance;\n    const dist2 = (a, b) => {\n        const dx = a[0] - b[0];\n        const dy = a[1] - b[1];\n        const dz = a[2] - b[2];\n        return dx * dx + dy * dy + dz * dz;\n    };\n    const eq = (a, b) => dist2(a, b) <= tol2;\n    const infos = edges.map((edge) => ({\n        edge,\n        start: edge.startPoint.toTuple(),\n        end: edge.endPoint.toTuple(),\n    }));\n    const nodes = [];\n    const findOrAddNode = (p) => {\n        for (const n of nodes) {\n            if (eq(n.point, p))\n                return n;\n        }\n        const n = { point: p, incidences: 0 };\n        nodes.push(n);\n        return n;\n    };\n    // Per-edge vertex nodes and per-node incidence count for validation.\n    const edgeNodes = infos.map((info) => {\n        const s = findOrAddNode(info.start);\n        const e = findOrAddNode(info.end);\n        s.incidences++;\n        e.incidences++;\n        return { start: s, end: e };\n    });\n    for (const n of nodes) {\n        if (n.incidences > 2) {\n            throw new Error(`Vertex (${n.point.join(\", \")}) is shared by ${n.incidences} edge endpoints; expected at most 2.`);\n        }\n    }\n    // Pick a starting edge using the incidence counts we already computed.\n    // A chain terminus is a vertex with incidences === 1. Prefer an edge whose\n    // start is a terminus (no flip); otherwise flip an edge whose end is one.\n    let startIdx = edgeNodes.findIndex((n) => n.start.incidences === 1);\n    let startFlipped = false;\n    if (startIdx === -1) {\n        startIdx = edgeNodes.findIndex((n) => n.end.incidences === 1);\n        startFlipped = startIdx !== -1;\n    }\n    // Closed loop: no terminus. Just start from edge 0.\n    if (startIdx === -1)\n        startIdx = 0;\n    const used = new Array(infos.length).fill(false);\n    const result = [];\n    const firstEdge = startFlipped\n        ? infos[startIdx].edge.flipOrientation()\n        : infos[startIdx].edge;\n    let currentEndPoint = startFlipped\n        ? infos[startIdx].start\n        : infos[startIdx].end;\n    result.push(firstEdge);\n    used[startIdx] = true;\n    while (result.length < infos.length) {\n        let nextIdx = -1;\n        let flip = false;\n        for (let i = 0; i < infos.length; i++) {\n            if (used[i])\n                continue;\n            if (eq(infos[i].start, currentEndPoint)) {\n                nextIdx = i;\n                flip = false;\n                break;\n            }\n            if (eq(infos[i].end, currentEndPoint)) {\n                nextIdx = i;\n                flip = true;\n                break;\n            }\n        }\n        if (nextIdx === -1) {\n            throw new Error(\"Edges are not fully connected: could not find a continuation from \" +\n                `(${currentEndPoint.join(\", \")}).`);\n        }\n        const info = infos[nextIdx];\n        result.push(flip ? info.edge.flipOrientation() : info.edge);\n        currentEndPoint = flip ? info.start : info.end;\n        used[nextIdx] = true;\n    }\n    return result;\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-95963",
-              "name": "wires",
-              "type": "geometry"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-95962",
-              "ap2ID": "id-95961"
-            },
-            {
-              "ap2Name": "shape",
-              "ap1ID": "id-95963",
-              "ap2ID": "id-95962"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-20T18:23:39.118Z",
-            "privateRepo": false,
-            "repoName": "util.FuseWire",
-            "dateCreated": "2026-07-20T22:27:14Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-42",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/util.FuseWire",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739826",
-            "ranking": 3.6,
-            "searchField": "util.fusewire tristan-huber fuse a collection of wires into one wire object. also called join wire, assemble wire, or concatenate wire. this is a thin wrapper of assemblewire and can return a branching wire. abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Fuse a collection of wires into one wire object. Also called join wire, assemble wire, or concatenate wire. This is a thin wrapper of assembleWire and can return a branching wire.",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787259966871
-        },
-        {
-          "atomType": "Molecule",
-          "x": 0.3391927083333333,
-          "y": 0.5971428571428571,
-          "uniqueID": "id-95986",
-          "name": "Molecule",
-          "ioValues": [
-            {
-              "name": "Input",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-95988",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-95990",
-              "type": "edgeselect",
-              "selectedEdgeData": {
-                "0": [
-                  4,
-                  3,
-                  1,
-                  2
-                ]
-              }
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-95990",
-              "ap2ID": "id-95988"
-            }
-          ],
-          "fileTypeVersion": 1
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.5533854166666666,
-          "y": 0.45714285714285713,
-          "uniqueID": "id-95997",
-          "name": "util.Mirror",
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-95994",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4387814879906269,
-              "y": 0.2325,
-              "uniqueID": "id-95995",
-              "ioValues": [
-                {
-                  "name": "assembly",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\")\n    } else {\n      leaf.geometry = leaf.geometry.mirror(\"XZ\")\n      if (leaf.geometry instanceof replicad.Face) {\n        leaf.geometry = leaf.geometry.flipOrientation()\n      }\n    }\n    return leaf\n  })\n}",
-              "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\");\n        }\n        else {\n            leaf.geometry = leaf.geometry.mirror(\"XZ\");\n            if (leaf.geometry instanceof replicad.Face) {\n                leaf.geometry = leaf.geometry.flipOrientation();\n            }\n        }\n        return leaf;\n    });\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-95996",
-              "name": "assembly"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-95995",
-              "ap2ID": "id-95994"
-            },
-            {
-              "ap2Name": "assembly",
-              "ap1ID": "id-95996",
-              "ap2ID": "id-95995"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-20T18:23:39.118Z",
-            "privateRepo": false,
-            "repoName": "util.Mirror",
-            "dateCreated": "2026-07-09T18:32:34Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-21902",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/util.Mirror",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739814",
-            "ranking": 7.8,
-            "searchField": "util.mirror tristan-huber mirror an assembly across the xz plane. abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Mirror an assembly across the XZ plane.",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787260048567
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.38281250000000006,
-          "y": 0.8485714285714286,
-          "uniqueID": "id-95447",
-          "name": "crv.UnrollFromWires",
-          "ioValues": [
-            {
-              "name": "primaryWire",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "secondaryWire",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "holes",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "rulings",
-              "ioValue": 50
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-95433",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.6142578125,
-              "y": 0.28750000000000003,
-              "uniqueID": "id-95434",
-              "ioValues": [
-                {
-                  "name": "primaryGuideWire",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "secondaryGuideWire",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "holes",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "numRulings",
-                  "ioValue": 50
-                },
-                {
-                  "name": "holeSamples",
-                  "ioValue": 64
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "/**\n * Unrolls (flattens) a ruled surface into a 2D Drawing of its boundary,\n * using the same primary/secondary ruling extractor as the rulings atom\n * (see atomimpl.ts and Wang et al., JCISE 2021).\n *\n * Because the 2-neighbour shortest path advances exactly one of (i, j) per\n * step, every pair of consecutive rulings shares an endpoint. The strip\n * between them is therefore a TRIANGLE, which is intrinsically planar and\n * unrolls exactly — no quad-skew distortion. The first ruling is laid along\n * +X; each subsequent triangle hinges across the shared ruling and is\n * placed on the opposite side from the prior triangle's apex.\n *\n * The two long edges (primary chain and secondary chain) are emitted as\n * smooth splines through the placed vertices; the two short edges (first\n * and last rulings) are straight line segments. Splines play better with\n * downstream CAM than dense polylines.\n *\n *   primaryEdgeIndex → cyclic index into face.outerWire().edges. The two\n *                      neighbouring edges are excluded; remaining edges form\n *                      the secondary, identical to atomimpl.ts.\n */\nfunction run(\n  primaryGuideWire: Assembly,\n  secondaryGuideWire: Assembly,\n  holes: Assembly,\n  numRulings: number = 24,\n  holeSamples: number = 64,\n): Assembly {\n  if (!Number.isFinite(numRulings) || numRulings < 2) {\n    throw new Error(\n      \"Unroll surface: numRulings must be an integer ≥ 2 (two rulings \" +\n      \"needed to define a strip). was: \" + numRulings,\n    );\n  }\n  if (!Number.isFinite(holeSamples) || holeSamples < 8) {\n    throw new Error(\"Unroll surface: holeSamples must be an integer ≥ 8. was: \" + holeSamples);\n  }\n\n\n  const conformOrientations = (edges: replicad.Edge[], targetOrientation: string) => {\n    return edges.map((e) => e.orientation == targetOrientation ? e : e.flipOrientation())\n  }\n\n  const extractWire = (assembly: Assembly) => {\n    if (assembly.isLeaf() && assembly.geometry instanceof replicad.Wire) {\n      return assembly.geometry;\n    }\n    return replicad.assembleWire(assembly.getSelectedEdges())\n  }\n  const primaryWire = extractWire(primaryGuideWire)\n\n\n  let secondaryWire = extractWire(secondaryGuideWire)\n  const dist = (v1: replicad.Vector, v2: replicad.Vector) => {\n    return v1.multiply(-1).add(v2).Length\n  }\n  if (dist(primaryWire.startPoint, secondaryWire.startPoint) > dist(primaryWire.startPoint, secondaryWire.endPoint)) {\n    secondaryWire = secondaryWire.flipOrientation()\n  }\n\n  const holeList: replicad.Wire[] = []\n  if (holes != undefined) {\n    holes.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Wire) {\n        holeList.push(leaf.geometry)\n      }\n      return leaf;\n    })\n  }\n\n  console.log(\"blah\")\n  return unrollFaceToDrawing(primaryWire, secondaryWire, numRulings, holeList, holeSamples).drawing\n\n  const results: Assembly[] = [];\n  let index = 0;\n  const noneSelected = surface.getSelectedFaces().length == 0;\n  (surface as any).onLeafs((leaf: Assembly<LeafGeom>) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      console.warn(\"drawings cannot be unrolled\");\n      return leaf;\n    }\n    const faces: replicad.Face[] = [];\n    if (noneSelected) {\n      faces.push(\n        ...(leaf.geometry instanceof replicad.Face\n          ? [leaf.geometry]\n          : leaf.geometry.faces),\n      );\n    } else {\n      // Else the user has made a selection, only unroll selected faces\n      if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n        faces.push(\n          ...leaf.selection.faces.map((idx) => leaf.geometry.faces[idx]),\n        );\n      }\n    }\n    for (const face of faces) {\n      const resolvedEdgeIndex =\n        primaryEdgeIndex < 0 ? selectBestPrimaryEdge(face) : primaryEdgeIndex;\n      const { primaryWire, secondaryWire, pIdx } = assembleRulingWires(\n        face,\n        resolvedEdgeIndex,\n      );\n      // eslint-disable-next-line @typescript-eslint/no-explicit-any\n      const holeWires: any[] = face.clone().innerWires() ?? [];\n      const { drawing } = unrollFaceToDrawing(\n        primaryWire,\n        secondaryWire,\n        numRulings,\n        holeWires,\n        holeSamples,\n      );\n      results.push(\n        new Assembly({\n          ...leaf,\n          geometry: drawing,\n          tags: [...(leaf.tags ?? []), \"developed\", \"ruling-primary:\" + pIdx],\n          plane: replicad.makePlane(\"XY\", [0, 0, index]),\n        }),\n      );\n      index++;\n    }\n    return leaf;\n  });\n  console.log(results);\n  return results;\n}\n\n/**\n * Split the face's outer wire into a primary edge + a secondary edge chain\n * (see partitionOuterWire), then assemble each side into a proper\n * replicad.Wire via replicad.assembleWire. The secondary chain's edge order\n * is reversed first if its leading edge shares primary's orientation flag —\n * that indicates the chain, sampled in its natural wire-cyclic order, would\n * run anti-parallel to primary.\n */\nfunction assembleRulingWires(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  face: any,\n  primaryEdgeIndex: number,\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n): { primaryWire: any; secondaryWire: any; pIdx: number } {\n  const { primary, secondaryEdges, pIdx } = partitionOuterWire(\n    face,\n    primaryEdgeIndex,\n  );\n  console.log(\n    \"should reverse: \",\n    primary.orientation == secondaryEdges[0].orientation,\n  );\n  /*  const reversed = primary.orientation == secondaryEdges[0].orientation;\n  const orderedSecondaryEdges = reversed\n    ? [...secondaryEdges].reverse()\n    : secondaryEdges;*/\n  const primaryWire = replicad.assembleWire([primary]);\n  const secondaryWire = replicad.assembleWire(secondaryEdges).flipOrientation();\n  return { primaryWire, secondaryWire, pIdx };\n}\n\n/**\n * Uniformly sample a Wire (single-edge or multi-edge/compound) at n points\n * across its full parametric range [0, 1], which replicad's Wire.pointAt\n * parametrizes continuously by cumulative arc length across all of its\n * constituent edges. t=0 and t=n-1 land exactly on the wire's two\n * endpoints.\n */\nfunction sampleWireUniform(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  wire: any,\n  n: number,\n): T3[] {\n  const out: T3[] = new Array(n);\n  const [keep, cleanup] = replicad.localGC();\n  try {\n    for (let i = 0; i < n; i++) {\n      const t = n === 1 ? 0 : i / (n - 1);\n      out[i] = toT3(keep(wire.pointAt(t)));\n    }\n  } finally {\n    cleanup();\n  }\n  return out;\n}\n\n/**\n * Uniformly sample a Wire at n points, capturing both position and tangent\n * direction at each parameter. Used instead of sampleWireUniform wherever a\n * per-sample surface-normal proxy is needed without querying a face (see\n * buildCostGridFromTangents) — this lets primary/secondary wires span\n * multiple faces, since no single `face` needs to be queried.\n *\n * `tangents[i]` is null when `tangentAt` fails or reports a zero-length\n * vector — this happens at a discontinuity where the sample parameter lands\n * exactly on a seam between two edges of a compound wire. Callers should\n * treat a null tangent the same way normalAtSafe's null is treated: skip\n * any ruling touching that index (cost = Infinity).\n */\nfunction sampleWireWithTangents(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  wire: any,\n  n: number,\n): { points: T3[]; tangents: (T3 | null)[] } {\n  const points: T3[] = new Array(n);\n  const tangents: (T3 | null)[] = new Array(n);\n  const [keep, cleanup] = replicad.localGC();\n  try {\n    for (let i = 0; i < n; i++) {\n      const t = n === 1 ? 0 : i / (n - 1);\n      points[i] = toT3(keep(wire.pointAt(t)));\n      try {\n        const tv = keep(wire.tangentAt(t));\n        const tx = tv.x,\n          ty = tv.y,\n          tz = tv.z;\n        const tl = Math.hypot(tx, ty, tz);\n        tangents[i] = tl > 0 ? [tx / tl, ty / tl, tz / tl] : null;\n      } catch {\n        tangents[i] = null;\n      }\n    }\n  } finally {\n    cleanup();\n  }\n  return { points, tangents };\n}\n\n/**\n * Probe every outer edge of `face` at a low ruling count and return the\n * index of the edge that yields the lowest total ruling cost. Used when\n * primaryEdgeIndex < 0 (auto-select mode).\n */\nconst UNROLL2_PROBE_N = 8;\nfunction selectBestPrimaryEdge(\n  face: any, // eslint-disable-line @typescript-eslint/no-explicit-any\n): number {\n  const [keep, cleanup] = replicad.localGC();\n  let bestIdx = 0;\n  try {\n    const outerWire = keep(face.clone().outerWire());\n    const allEdges: any[] = outerWire.edges ?? []; // eslint-disable-line @typescript-eslint/no-explicit-any\n    const m = allEdges.length;\n    let bestCost = Infinity;\n    for (let k = 0; k < m; k++) {\n      try {\n        const { primaryWire, secondaryWire } = assembleRulingWires(face, k);\n        keep(primaryWire);\n        keep(secondaryWire);\n        const P3 = sampleWireUniform(primaryWire, UNROLL2_PROBE_N);\n        const S3 = sampleWireUniform(secondaryWire, UNROLL2_PROBE_N);\n        const cost = buildCostGrid(face, P3, S3);\n        const { totalCost } = findOptimalRulingPath(cost, P3, S3);\n        if (totalCost < bestCost) {\n          bestCost = totalCost;\n          bestIdx = k;\n        }\n      } catch {\n        // edge produced a degenerate partition; skip\n      }\n    }\n    console.log(\n      `Unroll auto-select: chose primaryEdgeIndex=${bestIdx} (cost=${bestCost.toExponential(2)}) from ${m} candidates`,\n    );\n  } finally {\n    cleanup();\n  }\n  return bestIdx;\n}\n\n/**\n * Unrolls a single replicad.Face into a 2D Drawing, given pre-assembled\n * primary/secondary boundary wires and an explicit list of hole wires to\n * punch. Returns the drawing; the caller already knows pIdx since it built\n * the wires via assembleRulingWires.\n *\n * No `face` parameter is needed: the ruling-twist cost metric is derived\n * purely from each wire's own tangent direction crossed with the ruling\n * direction (see buildCostGridFromTangents), so primary/secondary wires may\n * span multiple faces without this function needing to know which face to\n * query at any given sample.\n */\nfunction unrollFaceToDrawing(\n  primaryWire: any, // eslint-disable-line @typescript-eslint/no-explicit-any\n  secondaryWire: any, // eslint-disable-line @typescript-eslint/no-explicit-any\n  numRulings: number,\n  holeWires: any[], // eslint-disable-line @typescript-eslint/no-explicit-any\n  holeSamples: number,\n): { drawing: any } {\n  // eslint-disable-line @typescript-eslint/no-explicit-any\n  const n = Math.max(2, Math.floor(numRulings));\n  const holeN = Math.max(8, Math.floor(holeSamples));\n\n  const { points: P3, tangents: PT } = sampleWireWithTangents(primaryWire, n);\n  const { points: S3, tangents: ST } = sampleWireWithTangents(secondaryWire, n);\n  // primaryWire/secondaryWire are only needed for sampling; nothing below\n  // this point touches them again.\n  primaryWire.delete();\n  secondaryWire.delete();\n  const cost = buildCostGridFromTangents(P3, PT, S3, ST);\n  const { path, totalCost } = findOptimalRulingPath(cost, P3, S3);\n  console.log(\n    `Unroll: ${path.length} rulings, total cost=${totalCost.toExponential(2)}`,\n  );\n\n  // ── Unfold triangles ────────────────────────────────────────────────────\n  // P2[i] / S2[j] hold the 2D position of primary sample i / secondary\n  // sample j once it's been placed. Each path step extends exactly one of\n  // these arrays by one new entry.\n  const P2: (T2 | undefined)[] = new Array(n);\n  const S2: (T2 | undefined)[] = new Array(n);\n  const [i0, j0] = path[0];\n  const L0 = dist3(P3[i0], S3[j0]);\n  if (!(L0 > 0)) {\n    throw new Error(\"Unroll: first ruling has zero length; cannot orient.\");\n  }\n  // First ruling along +X: primary endpoint at origin, secondary endpoint at +X.\n  P2[i0] = [0, 0];\n  S2[j0] = [L0, 0];\n\n  // Per-strip triangle records, populated alongside the unfold. Vertex order\n  // is (hinge-primary, hinge-secondary, apex).\n  const tris2D: [T2, T2, T2][] = [];\n  const tris3D: [T3, T3, T3][] = [];\n\n  for (let k = 0; k < path.length - 1; k++) {\n    const [i, j] = path[k];\n    const [iN, jN] = path[k + 1];\n    const advancedP = iN > i;\n    const newP3 = advancedP ? P3[iN] : S3[jN];\n    const r0 = dist3(P3[i], newP3);\n    const r1 = dist3(S3[j], newP3);\n    const p0 = P2[i]!;\n    const p1 = S2[j]!;\n\n    // Side choice: place the new apex on the opposite side of the current\n    // hinge (P2[i] → S2[j]) from the previous triangle's apex. For the\n    // first triangle there's no prior apex, so pick +1 (left of p0→p1)\n    // arbitrarily — the whole pattern just unfolds toward +Y.\n    let side: number;\n    if (k === 0) {\n      side = 1;\n    } else {\n      const [iPrev, jPrev] = path[k - 1];\n      // The previous triangle's apex is whichever of (P2[iPrev], S2[jPrev])\n      // is NOT shared with the current hinge. Exactly one of iPrev, jPrev\n      // differs from (i, j) — that one is the apex.\n      const otherPt: T2 = iPrev !== i ? P2[iPrev]! : S2[jPrev]!;\n      const ox = otherPt[0] - p0[0];\n      const oy = otherPt[1] - p0[1];\n      const hx = p1[0] - p0[0];\n      const hy = p1[1] - p0[1];\n      const sideOfOther = Math.sign(hx * oy - hy * ox);\n      side = -sideOfOther || 1;\n    }\n\n    const newP2 = circleIntersect(p0, r0, p1, r1, side, k);\n    if (advancedP) P2[iN] = newP2;\n    else S2[jN] = newP2;\n\n    tris2D.push([p0, p1, newP2]);\n    tris3D.push([P3[i], S3[j], newP3]);\n  }\n\n  // ── Build the two long chains in path order ────────────────────────────\n  // primaryChain = the 2D positions of the primary samples actually visited,\n  // in the order they appear along the path. Same for secondaryChain.\n  const primaryChain: T2[] = [];\n  const secondaryChain: T2[] = [];\n  let lastI = -1;\n  let lastJ = -1;\n  for (const [i, j] of path) {\n    if (i !== lastI) {\n      primaryChain.push(P2[i]!);\n      lastI = i;\n    }\n    if (j !== lastJ) {\n      secondaryChain.push(S2[j]!);\n      lastJ = j;\n    }\n  }\n  if (primaryChain.length < 2 || secondaryChain.length < 2) {\n    throw new Error(\n      `Unroll: degenerate chains (primary=${primaryChain.length}, ` +\n      `secondary=${secondaryChain.length}); need ≥2 on each side.`,\n    );\n  }\n\n  // ── Build the boundary drawing ─────────────────────────────────────────\n  // Primary chain (spline) → last ruling (straight) → reversed secondary\n  // chain (spline) → close back along first ruling (straight).\n  const pen = replicad.draw(primaryChain[0]);\n  for (let i = 1; i < primaryChain.length; i++) {\n    pen.lineTo(primaryChain[i]);\n  }\n  pen.lineTo(secondaryChain[secondaryChain.length - 1]);\n  for (let i = secondaryChain.length - 2; i >= 0; i--) {\n    pen.lineTo(secondaryChain[i]);\n  }\n  let drawing = pen.close();\n\n  // ── Punch holes from the explicitly provided hole wires (if any) ──────\n  const [keepHoles, cleanupHoles] = replicad.localGC();\n  try {\n    for (let h = 0; h < holeWires.length; h++) {\n      const wire = holeWires[h];\n      // Pass 1: dense 3D samples around the wire.\n      const samples3D: T3[] = [];\n      for (let i = 0; i < holeN; i++) {\n        const t = i / holeN;\n        samples3D.push(toT3(keepHoles(wire.pointAt(t))));\n      }\n      // wire has yielded all the samples we need; nothing later reuses it.\n      wire.delete();\n      if (samples3D.length < 3) continue;\n\n      // Pass 2: map 3D→2D using nearest physical triangle.\n      const samples2D: T2[] = samples3D\n        .map((p) => {\n          const k = findBestTriangle3D(p, tris3D);\n          return k >= 0 ? mapWithTriangle3D(p, k, tris3D, tris2D) : null;\n        })\n        .filter((p): p is T2 => p !== null);\n\n      if (samples2D.length < 3) continue;\n\n      // Pass 3: Draw the hole.\n      const holePen = replicad.draw(samples2D[0]);\n      for (let i = 1; i < samples2D.length; i++) {\n        holePen.lineTo(samples2D[i]);\n      }\n      const holeDrawing = holePen.close();\n      // Drawing is a JS-side 2D path wrapper (not a raw WASM handle), so it\n      // doesn't need explicit deletion here.\n      drawing = drawing.cut(holeDrawing);\n    }\n  } finally {\n    cleanupHoles();\n  }\n\n  return { drawing };\n}\n\n// ─── Shared helpers (mirror atomimpl.ts; sandboxed files can't import) ───\n\ntype T3 = [number, number, number];\ntype T2 = [number, number];\n\nfunction toT3(v: { x: number; y: number; z: number }): T3 {\n  return [v.x, v.y, v.z];\n}\n\nfunction dist3(a: T3, b: T3): number {\n  return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);\n}\n\nfunction partitionOuterWire(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  face: any,\n  primaryEdgeIndex: number,\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n): { primary: any; secondaryEdges: any[]; pIdx: number } {\n  const outerWire = face.clone().outerWire();\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  const allEdges: any[] = outerWire.edges ?? [];\n  const m = allEdges.length;\n  const pIdx = ((Math.floor(primaryEdgeIndex) % m) + m) % m;\n  const primary = allEdges[pIdx];\n\n  const excludedIdx = new Set([pIdx]);\n  if (primary.isClosed) {\n    if (pIdx == 0) {\n      excludedIdx.add(1);\n    } else if (pIdx == allEdges.length - 1) {\n      excludedIdx.add(allEdges.length - 2);\n    } else {\n      console.warn(\"found a closed face with two neighbors..\");\n    }\n  } else {\n    excludedIdx.add((pIdx - 1 + m) % m);\n    excludedIdx.add((pIdx + 1) % m);\n  }\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  const secondaryEdges: any[] = [];\n  for (let k = 0; k < m; k++) {\n    const idx = (pIdx + 2 + k) % m;\n    if (!excludedIdx.has(idx)) secondaryEdges.push(allEdges[idx]);\n  }\n  if (secondaryEdges.length === 0) {\n    console.warn(\"less than 4 edges total. this may cause bugs later\");\n    secondaryEdges.push(allEdges[(pIdx + 1) % m]);\n  }\n  return { primary, secondaryEdges, pIdx };\n}\n\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nfunction normalAtSafe(\n  face: any,\n  p: T3,\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  keep: (v: any) => any,\n): T3 | null {\n  try {\n    const nv = keep(face.normalAt(p));\n    const x = nv.x,\n      y = nv.y,\n      z = nv.z;\n    const len = Math.hypot(x, y, z);\n    if (!(len > 0)) return null;\n    return [x / len, y / len, z / len];\n  } catch {\n    return null;\n  }\n}\n\nfunction buildCostGrid(\n  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  face: any,\n  primarySamples: T3[],\n  secondarySamples: T3[],\n): number[][] {\n  const n = primarySamples.length;\n  const ns = secondarySamples.length;\n  const [keep, cleanup] = replicad.localGC();\n  let primaryNormals: (T3 | null)[];\n  let secondaryNormals: (T3 | null)[];\n  try {\n    primaryNormals = primarySamples.map((p) => normalAtSafe(face, p, keep));\n    secondaryNormals = secondarySamples.map((p) => normalAtSafe(face, p, keep));\n  } finally {\n    cleanup();\n  }\n  const cost: number[][] = new Array(n);\n  for (let i = 0; i < n; i++) {\n    const row: number[] = new Array(ns);\n    const nA = primaryNormals[i];\n    for (let j = 0; j < ns; j++) {\n      const nB = secondaryNormals[j];\n      if (!nA || !nB) {\n        row[j] = Infinity;\n        continue;\n      }\n      const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n      row[j] = 1 - Math.abs(dot);\n    }\n    cost[i] = row;\n  }\n  return cost;\n}\n\n/**\n * Normalize the direction from a to b; null if a and b coincide.\n */\nfunction normalizedDir(a: T3, b: T3): T3 | null {\n  const dx = b[0] - a[0];\n  const dy = b[1] - a[1];\n  const dz = b[2] - a[2];\n  const len = Math.hypot(dx, dy, dz);\n  if (!(len > 0)) return null;\n  return [dx / len, dy / len, dz / len];\n}\n\n/**\n * Cross a wire tangent with a ruling direction and normalize the result;\n * null if either input is null/missing or the two are (near-)parallel,\n * which yields a degenerate (near-zero) cross product.\n */\nfunction crossNormalize(tangent: T3 | null, rulingDir: T3): T3 | null {\n  if (!tangent) return null;\n  const cx = tangent[1] * rulingDir[2] - tangent[2] * rulingDir[1];\n  const cy = tangent[2] * rulingDir[0] - tangent[0] * rulingDir[2];\n  const cz = tangent[0] * rulingDir[1] - tangent[1] * rulingDir[0];\n  const len = Math.hypot(cx, cy, cz);\n  if (!(len > 0)) return null;\n  return [cx / len, cy / len, cz / len];\n}\n\n/**\n * Face-free alternative to buildCostGrid: approximates the surface normal\n * at each end of a candidate ruling as cross(wireTangent, rulingDirection),\n * then scores the ruling by 1 - |dot(normalA, normalB)| \\u2014 same twist\n * metric as buildCostGrid, but derived purely from the two boundary wires'\n * own tangents rather than a face.normalAt() query. This lets primary and\n * secondary wires span multiple faces, since no single `face` is queried.\n *\n * A null tangent (see sampleWireWithTangents \\u2014 typically a discontinuity\n * at a compound-wire seam) or a ruling direction parallel to a tangent\n * propagates to Infinity for that cell, same convention as buildCostGrid.\n */\nfunction buildCostGridFromTangents(\n  primarySamples: T3[],\n  primaryTangents: (T3 | null)[],\n  secondarySamples: T3[],\n  secondaryTangents: (T3 | null)[],\n): number[][] {\n  const n = primarySamples.length;\n  const ns = secondarySamples.length;\n  const cost: number[][] = new Array(n);\n  for (let i = 0; i < n; i++) {\n    const row: number[] = new Array(ns);\n    for (let j = 0; j < ns; j++) {\n      const rulingDir = normalizedDir(primarySamples[i], secondarySamples[j]);\n      if (!rulingDir) {\n        row[j] = Infinity;\n        continue;\n      }\n      const nA = crossNormalize(primaryTangents[i], rulingDir);\n      const nB = crossNormalize(secondaryTangents[j], rulingDir);\n      if (!nA || !nB) {\n        row[j] = Infinity;\n        continue;\n      }\n      const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n      row[j] = 1 - Math.abs(dot);\n    }\n    cost[i] = row;\n  }\n  return cost;\n}\n\nfunction quadTwist(\n  P: T3[],\n  S: T3[],\n  i: number,\n  j: number,\n  iN: number,\n  jN: number,\n): number {\n  const A = P[i];\n  const Ap = P[iN];\n  const B = S[j];\n  const Bp = S[jN];\n  const e1x = Ap[0] - A[0],\n    e1y = Ap[1] - A[1],\n    e1z = Ap[2] - A[2];\n  const e2x = Bp[0] - A[0],\n    e2y = Bp[1] - A[1],\n    e2z = Bp[2] - A[2];\n  const e3x = B[0] - A[0],\n    e3y = B[1] - A[1],\n    e3z = B[2] - A[2];\n  const nx = e1y * e2z - e1z * e2y;\n  const ny = e1z * e2x - e1x * e2z;\n  const nz = e1x * e2y - e1y * e2x;\n  const nMag = Math.hypot(nx, ny, nz);\n  const height = nMag > 0 ? Math.abs(nx * e3x + ny * e3y + nz * e3z) / nMag : 0;\n  const avgEdge =\n    0.25 * (dist3(A, Ap) + dist3(Ap, Bp) + dist3(Bp, B) + dist3(B, A));\n  return avgEdge > 0 ? height / avgEdge : 0;\n}\n\n/**\n * 2-neighbour anti-diagonal DP: from (i, j) you may only advance to\n * (i+1, j) or (i, j+1). Every path has 2(n-1) steps and emits 2n-1 rulings.\n * Identical to the implementation in atomimpl.ts.\n */\nfunction findOptimalRulingPath(\n  cost: number[][],\n  P: T3[],\n  S: T3[],\n): { path: [number, number][]; totalCost: number } {\n  const n = cost.length;\n  const INF = Number.POSITIVE_INFINITY;\n  const dist: number[][] = new Array(n);\n  const prevDir: number[][] = new Array(n);\n  for (let i = 0; i < n; i++) {\n    dist[i] = new Array(n).fill(INF);\n    prevDir[i] = new Array(n).fill(-1);\n  }\n  dist[0][0] = cost[0][0];\n\n  for (let s = 1; s <= 2 * (n - 1); s++) {\n    const iLo = Math.max(0, s - (n - 1));\n    const iHi = Math.min(n - 1, s);\n    for (let iN = iLo; iN <= iHi; iN++) {\n      const jN = s - iN;\n      const rulingCost = cost[iN][jN];\n      if (!isFinite(rulingCost)) continue;\n      let best = INF;\n      let bestDir = -1;\n      if (iN > 0 && isFinite(dist[iN - 1][jN])) {\n        const cand =\n          dist[iN - 1][jN] + rulingCost + quadTwist(P, S, iN - 1, jN, iN, jN);\n        if (cand < best) {\n          best = cand;\n          bestDir = 0;\n        }\n      }\n      if (jN > 0 && isFinite(dist[iN][jN - 1])) {\n        const cand =\n          dist[iN][jN - 1] + rulingCost + quadTwist(P, S, iN, jN - 1, iN, jN);\n        if (cand < best) {\n          best = cand;\n          bestDir = 1;\n        }\n      }\n      if (best < INF) {\n        dist[iN][jN] = best;\n        prevDir[iN][jN] = bestDir;\n      }\n    }\n  }\n\n  const path: [number, number][] = [];\n  if (isFinite(dist[n - 1][n - 1])) {\n    let ci = n - 1;\n    let cj = n - 1;\n    while (ci >= 0 && cj >= 0) {\n      path.push([ci, cj]);\n      if (ci === 0 && cj === 0) break;\n      const dir = prevDir[ci][cj];\n      if (dir === 0) ci -= 1;\n      else if (dir === 1) cj -= 1;\n      else break;\n    }\n    path.reverse();\n    return { path, totalCost: dist[n - 1][n - 1] };\n  }\n  console.warn(\"Unroll: DAG search found no path; falling back to diagonal.\");\n  for (let k = 0; k < n; k++) path.push([k, k]);\n  return { path, totalCost: INF };\n}\n\n/**\n * Identify the best 3D triangle for a point P. We prefer the one where P\n * projects inside (positive barycentric), using physical distance to the\n * triangle plane as a tie-breaker.\n */\nfunction findBestTriangle3D(p: T3, tris3D: [T3, T3, T3][]): number {\n  let bestK = -1;\n  let minScore = Infinity;\n\n  for (let k = 0; k < tris3D.length; k++) {\n    const tri = tris3D[k];\n    const bary = bary3D(p, tri[0], tri[1], tri[2]);\n    if (!bary) continue;\n\n    const [u, v, w] = bary;\n    // Penalty for being physically outside the triangle footprint\n    const outsideDist = Math.max(0, -u, -v, -w);\n    // Distance to triangle plane\n    const planeDist = distToPlane(p, tri[0], tri[1], tri[2]);\n\n    // Combined score: proximity to plane + penalty for being outside.\n    // Being outside is penalized much more heavily than being slightly\n    // off-plane.\n    const score = planeDist + outsideDist * 1000;\n\n    if (score < minScore) {\n      minScore = score;\n      bestK = k;\n    }\n  }\n  return bestK;\n}\n\n/**\n * Project 3D point p into triangle k and return its 2D coordinates.\n */\nfunction mapWithTriangle3D(\n  p: T3,\n  k: number,\n  tris3D: [T3, T3, T3][],\n  tris2D: [T2, T2, T2][],\n): T2 {\n  const tri3 = tris3D[k];\n  const tri2 = tris2D[k];\n  const bary = bary3D(p, tri3[0], tri3[1], tri3[2]);\n  if (!bary) return [0, 0];\n\n  const [u, v, w] = bary;\n  const [a2, b2, c2] = tri2;\n\n  return [u * a2[0] + v * b2[0] + w * c2[0], u * a2[1] + v * b2[1] + w * c2[1]];\n}\n\nfunction distToPlane(p: T3, a: T3, b: T3, c: T3): number {\n  const v1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n  const v2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n\n  const nx = v1[1] * v2[2] - v1[2] * v2[1];\n  const ny = v1[2] * v2[0] - v1[0] * v2[2];\n  const nz = v1[0] * v2[1] - v1[1] * v2[0];\n  const nLen = Math.hypot(nx, ny, nz);\n  if (nLen === 0) return dist3(p, a);\n\n  const dx = p[0] - a[0];\n  const dy = p[1] - a[1];\n  const dz = p[2] - a[2];\n\n  return Math.abs(dx * nx + dy * ny + dz * nz) / nLen;\n}\n\n/**\n * 3D Barycentric coordinates of P in triangle (A, B, C).\n * P is projected onto the plane of ABC.\n */\nfunction bary3D(p: T3, a: T3, b: T3, c: T3): [number, number, number] | null {\n  const v0 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n  const v1 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n  const v2 = [p[0] - a[0], p[1] - a[1], p[2] - a[2]];\n\n  const d00 = v0[0] * v0[0] + v0[1] * v0[1] + v0[2] * v0[2];\n  const d01 = v0[0] * v1[0] + v0[1] * v1[1] + v0[2] * v1[2];\n  const d11 = v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2];\n  const d20 = v2[0] * v0[0] + v2[1] * v0[1] + v2[2] * v0[2];\n  const d21 = v2[0] * v1[0] + v2[1] * v1[1] + v2[2] * v1[2];\n\n  const denom = d00 * d11 - d01 * d01;\n  if (Math.abs(denom) < 1e-12) return null;\n\n  const invDenom = 1.0 / denom;\n  const v = (d11 * d20 - d01 * d21) * invDenom;\n  const w = (d00 * d21 - d01 * d20) * invDenom;\n  const u = 1.0 - v - w;\n\n  return [u, v, w];\n}\n\n/** Place a new 2D point at distance r0 from p0 and r1 from p1, on the\n * sideSign side of the directed line p0→p1 (+1 = left, −1 = right). */\nfunction circleIntersect(\n  p0: T2,\n  r0: number,\n  p1: T2,\n  r1: number,\n  sideSign: number,\n  stripIdx: number,\n): T2 {\n  const dx = p1[0] - p0[0];\n  const dy = p1[1] - p0[1];\n  const d = Math.hypot(dx, dy);\n  const sum = r0 + r1;\n  const diff = Math.abs(r0 - r1);\n  const EPS = 1e-6;\n  if (d === 0 || d > sum * (1 + EPS) || d < diff * (1 - EPS)) {\n    throw new Error(\n      `Unroll: degenerate triangle at strip ${stripIdx} ` +\n      `(r0=${r0.toFixed(4)}, r1=${r1.toFixed(4)}, hinge=${d.toFixed(4)}).`,\n    );\n  }\n  const dC = Math.max(diff, Math.min(sum, d));\n  const a = (r0 * r0 - r1 * r1 + dC * dC) / (2 * dC);\n  const h = Math.sqrt(Math.max(0, r0 * r0 - a * a));\n  const ux = dx / d;\n  const uy = dy / d;\n  const mx = p0[0] + a * ux;\n  const my = p0[1] + a * uy;\n  return [mx + h * -uy * sideSign, my + h * ux * sideSign];\n}\n",
-              "compiledCode": "\"use strict\";\n/**\n * Unrolls (flattens) a ruled surface into a 2D Drawing of its boundary,\n * using the same primary/secondary ruling extractor as the rulings atom\n * (see atomimpl.ts and Wang et al., JCISE 2021).\n *\n * Because the 2-neighbour shortest path advances exactly one of (i, j) per\n * step, every pair of consecutive rulings shares an endpoint. The strip\n * between them is therefore a TRIANGLE, which is intrinsically planar and\n * unrolls exactly — no quad-skew distortion. The first ruling is laid along\n * +X; each subsequent triangle hinges across the shared ruling and is\n * placed on the opposite side from the prior triangle's apex.\n *\n * The two long edges (primary chain and secondary chain) are emitted as\n * smooth splines through the placed vertices; the two short edges (first\n * and last rulings) are straight line segments. Splines play better with\n * downstream CAM than dense polylines.\n *\n *   primaryEdgeIndex → cyclic index into face.outerWire().edges. The two\n *                      neighbouring edges are excluded; remaining edges form\n *                      the secondary, identical to atomimpl.ts.\n */\nfunction run(primaryGuideWire, secondaryGuideWire, holes, numRulings = 24, holeSamples = 64) {\n    if (!Number.isFinite(numRulings) || numRulings < 2) {\n        throw new Error(\"Unroll surface: numRulings must be an integer ≥ 2 (two rulings \" +\n            \"needed to define a strip). was: \" + numRulings);\n    }\n    if (!Number.isFinite(holeSamples) || holeSamples < 8) {\n        throw new Error(\"Unroll surface: holeSamples must be an integer ≥ 8. was: \" + holeSamples);\n    }\n    const conformOrientations = (edges, targetOrientation) => {\n        return edges.map((e) => e.orientation == targetOrientation ? e : e.flipOrientation());\n    };\n    const extractWire = (assembly) => {\n        if (assembly.isLeaf() && assembly.geometry instanceof replicad.Wire) {\n            return assembly.geometry;\n        }\n        return replicad.assembleWire(assembly.getSelectedEdges());\n    };\n    const primaryWire = extractWire(primaryGuideWire);\n    let secondaryWire = extractWire(secondaryGuideWire);\n    const dist = (v1, v2) => {\n        return v1.multiply(-1).add(v2).Length;\n    };\n    if (dist(primaryWire.startPoint, secondaryWire.startPoint) > dist(primaryWire.startPoint, secondaryWire.endPoint)) {\n        secondaryWire = secondaryWire.flipOrientation();\n    }\n    const holeList = [];\n    if (holes != undefined) {\n        holes.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Wire) {\n                holeList.push(leaf.geometry);\n            }\n            return leaf;\n        });\n    }\n    console.log(\"blah\");\n    return unrollFaceToDrawing(primaryWire, secondaryWire, numRulings, holeList, holeSamples).drawing;\n    const results = [];\n    let index = 0;\n    const noneSelected = surface.getSelectedFaces().length == 0;\n    surface.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            console.warn(\"drawings cannot be unrolled\");\n            return leaf;\n        }\n        const faces = [];\n        if (noneSelected) {\n            faces.push(...(leaf.geometry instanceof replicad.Face\n                ? [leaf.geometry]\n                : leaf.geometry.faces));\n        }\n        else {\n            // Else the user has made a selection, only unroll selected faces\n            if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n                faces.push(...leaf.selection.faces.map((idx) => leaf.geometry.faces[idx]));\n            }\n        }\n        for (const face of faces) {\n            const resolvedEdgeIndex = primaryEdgeIndex < 0 ? selectBestPrimaryEdge(face) : primaryEdgeIndex;\n            const { primaryWire, secondaryWire, pIdx } = assembleRulingWires(face, resolvedEdgeIndex);\n            // eslint-disable-next-line @typescript-eslint/no-explicit-any\n            const holeWires = face.clone().innerWires() ?? [];\n            const { drawing } = unrollFaceToDrawing(primaryWire, secondaryWire, numRulings, holeWires, holeSamples);\n            results.push(new Assembly({\n                ...leaf,\n                geometry: drawing,\n                tags: [...(leaf.tags ?? []), \"developed\", \"ruling-primary:\" + pIdx],\n                plane: replicad.makePlane(\"XY\", [0, 0, index]),\n            }));\n            index++;\n        }\n        return leaf;\n    });\n    console.log(results);\n    return results;\n}\n/**\n * Split the face's outer wire into a primary edge + a secondary edge chain\n * (see partitionOuterWire), then assemble each side into a proper\n * replicad.Wire via replicad.assembleWire. The secondary chain's edge order\n * is reversed first if its leading edge shares primary's orientation flag —\n * that indicates the chain, sampled in its natural wire-cyclic order, would\n * run anti-parallel to primary.\n */\nfunction assembleRulingWires(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primaryEdgeIndex) {\n    const { primary, secondaryEdges, pIdx } = partitionOuterWire(face, primaryEdgeIndex);\n    console.log(\"should reverse: \", primary.orientation == secondaryEdges[0].orientation);\n    /*  const reversed = primary.orientation == secondaryEdges[0].orientation;\n    const orderedSecondaryEdges = reversed\n      ? [...secondaryEdges].reverse()\n      : secondaryEdges;*/\n    const primaryWire = replicad.assembleWire([primary]);\n    const secondaryWire = replicad.assembleWire(secondaryEdges).flipOrientation();\n    return { primaryWire, secondaryWire, pIdx };\n}\n/**\n * Uniformly sample a Wire (single-edge or multi-edge/compound) at n points\n * across its full parametric range [0, 1], which replicad's Wire.pointAt\n * parametrizes continuously by cumulative arc length across all of its\n * constituent edges. t=0 and t=n-1 land exactly on the wire's two\n * endpoints.\n */\nfunction sampleWireUniform(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nwire, n) {\n    const out = new Array(n);\n    const [keep, cleanup] = replicad.localGC();\n    try {\n        for (let i = 0; i < n; i++) {\n            const t = n === 1 ? 0 : i / (n - 1);\n            out[i] = toT3(keep(wire.pointAt(t)));\n        }\n    }\n    finally {\n        cleanup();\n    }\n    return out;\n}\n/**\n * Uniformly sample a Wire at n points, capturing both position and tangent\n * direction at each parameter. Used instead of sampleWireUniform wherever a\n * per-sample surface-normal proxy is needed without querying a face (see\n * buildCostGridFromTangents) — this lets primary/secondary wires span\n * multiple faces, since no single `face` needs to be queried.\n *\n * `tangents[i]` is null when `tangentAt` fails or reports a zero-length\n * vector — this happens at a discontinuity where the sample parameter lands\n * exactly on a seam between two edges of a compound wire. Callers should\n * treat a null tangent the same way normalAtSafe's null is treated: skip\n * any ruling touching that index (cost = Infinity).\n */\nfunction sampleWireWithTangents(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nwire, n) {\n    const points = new Array(n);\n    const tangents = new Array(n);\n    const [keep, cleanup] = replicad.localGC();\n    try {\n        for (let i = 0; i < n; i++) {\n            const t = n === 1 ? 0 : i / (n - 1);\n            points[i] = toT3(keep(wire.pointAt(t)));\n            try {\n                const tv = keep(wire.tangentAt(t));\n                const tx = tv.x, ty = tv.y, tz = tv.z;\n                const tl = Math.hypot(tx, ty, tz);\n                tangents[i] = tl > 0 ? [tx / tl, ty / tl, tz / tl] : null;\n            }\n            catch {\n                tangents[i] = null;\n            }\n        }\n    }\n    finally {\n        cleanup();\n    }\n    return { points, tangents };\n}\n/**\n * Probe every outer edge of `face` at a low ruling count and return the\n * index of the edge that yields the lowest total ruling cost. Used when\n * primaryEdgeIndex < 0 (auto-select mode).\n */\nconst UNROLL2_PROBE_N = 8;\nfunction selectBestPrimaryEdge(face) {\n    const [keep, cleanup] = replicad.localGC();\n    let bestIdx = 0;\n    try {\n        const outerWire = keep(face.clone().outerWire());\n        const allEdges = outerWire.edges ?? []; // eslint-disable-line @typescript-eslint/no-explicit-any\n        const m = allEdges.length;\n        let bestCost = Infinity;\n        for (let k = 0; k < m; k++) {\n            try {\n                const { primaryWire, secondaryWire } = assembleRulingWires(face, k);\n                keep(primaryWire);\n                keep(secondaryWire);\n                const P3 = sampleWireUniform(primaryWire, UNROLL2_PROBE_N);\n                const S3 = sampleWireUniform(secondaryWire, UNROLL2_PROBE_N);\n                const cost = buildCostGrid(face, P3, S3);\n                const { totalCost } = findOptimalRulingPath(cost, P3, S3);\n                if (totalCost < bestCost) {\n                    bestCost = totalCost;\n                    bestIdx = k;\n                }\n            }\n            catch {\n                // edge produced a degenerate partition; skip\n            }\n        }\n        console.log(`Unroll auto-select: chose primaryEdgeIndex=${bestIdx} (cost=${bestCost.toExponential(2)}) from ${m} candidates`);\n    }\n    finally {\n        cleanup();\n    }\n    return bestIdx;\n}\n/**\n * Unrolls a single replicad.Face into a 2D Drawing, given pre-assembled\n * primary/secondary boundary wires and an explicit list of hole wires to\n * punch. Returns the drawing; the caller already knows pIdx since it built\n * the wires via assembleRulingWires.\n *\n * No `face` parameter is needed: the ruling-twist cost metric is derived\n * purely from each wire's own tangent direction crossed with the ruling\n * direction (see buildCostGridFromTangents), so primary/secondary wires may\n * span multiple faces without this function needing to know which face to\n * query at any given sample.\n */\nfunction unrollFaceToDrawing(primaryWire, // eslint-disable-line @typescript-eslint/no-explicit-any\nsecondaryWire, // eslint-disable-line @typescript-eslint/no-explicit-any\nnumRulings, holeWires, // eslint-disable-line @typescript-eslint/no-explicit-any\nholeSamples) {\n    // eslint-disable-line @typescript-eslint/no-explicit-any\n    const n = Math.max(2, Math.floor(numRulings));\n    const holeN = Math.max(8, Math.floor(holeSamples));\n    const { points: P3, tangents: PT } = sampleWireWithTangents(primaryWire, n);\n    const { points: S3, tangents: ST } = sampleWireWithTangents(secondaryWire, n);\n    // primaryWire/secondaryWire are only needed for sampling; nothing below\n    // this point touches them again.\n    primaryWire.delete();\n    secondaryWire.delete();\n    const cost = buildCostGridFromTangents(P3, PT, S3, ST);\n    const { path, totalCost } = findOptimalRulingPath(cost, P3, S3);\n    console.log(`Unroll: ${path.length} rulings, total cost=${totalCost.toExponential(2)}`);\n    // ── Unfold triangles ────────────────────────────────────────────────────\n    // P2[i] / S2[j] hold the 2D position of primary sample i / secondary\n    // sample j once it's been placed. Each path step extends exactly one of\n    // these arrays by one new entry.\n    const P2 = new Array(n);\n    const S2 = new Array(n);\n    const [i0, j0] = path[0];\n    const L0 = dist3(P3[i0], S3[j0]);\n    if (!(L0 > 0)) {\n        throw new Error(\"Unroll: first ruling has zero length; cannot orient.\");\n    }\n    // First ruling along +X: primary endpoint at origin, secondary endpoint at +X.\n    P2[i0] = [0, 0];\n    S2[j0] = [L0, 0];\n    // Per-strip triangle records, populated alongside the unfold. Vertex order\n    // is (hinge-primary, hinge-secondary, apex).\n    const tris2D = [];\n    const tris3D = [];\n    for (let k = 0; k < path.length - 1; k++) {\n        const [i, j] = path[k];\n        const [iN, jN] = path[k + 1];\n        const advancedP = iN > i;\n        const newP3 = advancedP ? P3[iN] : S3[jN];\n        const r0 = dist3(P3[i], newP3);\n        const r1 = dist3(S3[j], newP3);\n        const p0 = P2[i];\n        const p1 = S2[j];\n        // Side choice: place the new apex on the opposite side of the current\n        // hinge (P2[i] → S2[j]) from the previous triangle's apex. For the\n        // first triangle there's no prior apex, so pick +1 (left of p0→p1)\n        // arbitrarily — the whole pattern just unfolds toward +Y.\n        let side;\n        if (k === 0) {\n            side = 1;\n        }\n        else {\n            const [iPrev, jPrev] = path[k - 1];\n            // The previous triangle's apex is whichever of (P2[iPrev], S2[jPrev])\n            // is NOT shared with the current hinge. Exactly one of iPrev, jPrev\n            // differs from (i, j) — that one is the apex.\n            const otherPt = iPrev !== i ? P2[iPrev] : S2[jPrev];\n            const ox = otherPt[0] - p0[0];\n            const oy = otherPt[1] - p0[1];\n            const hx = p1[0] - p0[0];\n            const hy = p1[1] - p0[1];\n            const sideOfOther = Math.sign(hx * oy - hy * ox);\n            side = -sideOfOther || 1;\n        }\n        const newP2 = circleIntersect(p0, r0, p1, r1, side, k);\n        if (advancedP)\n            P2[iN] = newP2;\n        else\n            S2[jN] = newP2;\n        tris2D.push([p0, p1, newP2]);\n        tris3D.push([P3[i], S3[j], newP3]);\n    }\n    // ── Build the two long chains in path order ────────────────────────────\n    // primaryChain = the 2D positions of the primary samples actually visited,\n    // in the order they appear along the path. Same for secondaryChain.\n    const primaryChain = [];\n    const secondaryChain = [];\n    let lastI = -1;\n    let lastJ = -1;\n    for (const [i, j] of path) {\n        if (i !== lastI) {\n            primaryChain.push(P2[i]);\n            lastI = i;\n        }\n        if (j !== lastJ) {\n            secondaryChain.push(S2[j]);\n            lastJ = j;\n        }\n    }\n    if (primaryChain.length < 2 || secondaryChain.length < 2) {\n        throw new Error(`Unroll: degenerate chains (primary=${primaryChain.length}, ` +\n            `secondary=${secondaryChain.length}); need ≥2 on each side.`);\n    }\n    // ── Build the boundary drawing ─────────────────────────────────────────\n    // Primary chain (spline) → last ruling (straight) → reversed secondary\n    // chain (spline) → close back along first ruling (straight).\n    const pen = replicad.draw(primaryChain[0]);\n    for (let i = 1; i < primaryChain.length; i++) {\n        pen.lineTo(primaryChain[i]);\n    }\n    pen.lineTo(secondaryChain[secondaryChain.length - 1]);\n    for (let i = secondaryChain.length - 2; i >= 0; i--) {\n        pen.lineTo(secondaryChain[i]);\n    }\n    let drawing = pen.close();\n    // ── Punch holes from the explicitly provided hole wires (if any) ──────\n    const [keepHoles, cleanupHoles] = replicad.localGC();\n    try {\n        for (let h = 0; h < holeWires.length; h++) {\n            const wire = holeWires[h];\n            // Pass 1: dense 3D samples around the wire.\n            const samples3D = [];\n            for (let i = 0; i < holeN; i++) {\n                const t = i / holeN;\n                samples3D.push(toT3(keepHoles(wire.pointAt(t))));\n            }\n            // wire has yielded all the samples we need; nothing later reuses it.\n            wire.delete();\n            if (samples3D.length < 3)\n                continue;\n            // Pass 2: map 3D→2D using nearest physical triangle.\n            const samples2D = samples3D\n                .map((p) => {\n                const k = findBestTriangle3D(p, tris3D);\n                return k >= 0 ? mapWithTriangle3D(p, k, tris3D, tris2D) : null;\n            })\n                .filter((p) => p !== null);\n            if (samples2D.length < 3)\n                continue;\n            // Pass 3: Draw the hole.\n            const holePen = replicad.draw(samples2D[0]);\n            for (let i = 1; i < samples2D.length; i++) {\n                holePen.lineTo(samples2D[i]);\n            }\n            const holeDrawing = holePen.close();\n            // Drawing is a JS-side 2D path wrapper (not a raw WASM handle), so it\n            // doesn't need explicit deletion here.\n            drawing = drawing.cut(holeDrawing);\n        }\n    }\n    finally {\n        cleanupHoles();\n    }\n    return { drawing };\n}\nfunction toT3(v) {\n    return [v.x, v.y, v.z];\n}\nfunction dist3(a, b) {\n    return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);\n}\nfunction partitionOuterWire(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primaryEdgeIndex) {\n    const outerWire = face.clone().outerWire();\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    const allEdges = outerWire.edges ?? [];\n    const m = allEdges.length;\n    const pIdx = ((Math.floor(primaryEdgeIndex) % m) + m) % m;\n    const primary = allEdges[pIdx];\n    const excludedIdx = new Set([pIdx]);\n    if (primary.isClosed) {\n        if (pIdx == 0) {\n            excludedIdx.add(1);\n        }\n        else if (pIdx == allEdges.length - 1) {\n            excludedIdx.add(allEdges.length - 2);\n        }\n        else {\n            console.warn(\"found a closed face with two neighbors..\");\n        }\n    }\n    else {\n        excludedIdx.add((pIdx - 1 + m) % m);\n        excludedIdx.add((pIdx + 1) % m);\n    }\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    const secondaryEdges = [];\n    for (let k = 0; k < m; k++) {\n        const idx = (pIdx + 2 + k) % m;\n        if (!excludedIdx.has(idx))\n            secondaryEdges.push(allEdges[idx]);\n    }\n    if (secondaryEdges.length === 0) {\n        console.warn(\"less than 4 edges total. this may cause bugs later\");\n        secondaryEdges.push(allEdges[(pIdx + 1) % m]);\n    }\n    return { primary, secondaryEdges, pIdx };\n}\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nfunction normalAtSafe(face, p, \n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nkeep) {\n    try {\n        const nv = keep(face.normalAt(p));\n        const x = nv.x, y = nv.y, z = nv.z;\n        const len = Math.hypot(x, y, z);\n        if (!(len > 0))\n            return null;\n        return [x / len, y / len, z / len];\n    }\n    catch {\n        return null;\n    }\n}\nfunction buildCostGrid(\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nface, primarySamples, secondarySamples) {\n    const n = primarySamples.length;\n    const ns = secondarySamples.length;\n    const [keep, cleanup] = replicad.localGC();\n    let primaryNormals;\n    let secondaryNormals;\n    try {\n        primaryNormals = primarySamples.map((p) => normalAtSafe(face, p, keep));\n        secondaryNormals = secondarySamples.map((p) => normalAtSafe(face, p, keep));\n    }\n    finally {\n        cleanup();\n    }\n    const cost = new Array(n);\n    for (let i = 0; i < n; i++) {\n        const row = new Array(ns);\n        const nA = primaryNormals[i];\n        for (let j = 0; j < ns; j++) {\n            const nB = secondaryNormals[j];\n            if (!nA || !nB) {\n                row[j] = Infinity;\n                continue;\n            }\n            const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n            row[j] = 1 - Math.abs(dot);\n        }\n        cost[i] = row;\n    }\n    return cost;\n}\n/**\n * Normalize the direction from a to b; null if a and b coincide.\n */\nfunction normalizedDir(a, b) {\n    const dx = b[0] - a[0];\n    const dy = b[1] - a[1];\n    const dz = b[2] - a[2];\n    const len = Math.hypot(dx, dy, dz);\n    if (!(len > 0))\n        return null;\n    return [dx / len, dy / len, dz / len];\n}\n/**\n * Cross a wire tangent with a ruling direction and normalize the result;\n * null if either input is null/missing or the two are (near-)parallel,\n * which yields a degenerate (near-zero) cross product.\n */\nfunction crossNormalize(tangent, rulingDir) {\n    if (!tangent)\n        return null;\n    const cx = tangent[1] * rulingDir[2] - tangent[2] * rulingDir[1];\n    const cy = tangent[2] * rulingDir[0] - tangent[0] * rulingDir[2];\n    const cz = tangent[0] * rulingDir[1] - tangent[1] * rulingDir[0];\n    const len = Math.hypot(cx, cy, cz);\n    if (!(len > 0))\n        return null;\n    return [cx / len, cy / len, cz / len];\n}\n/**\n * Face-free alternative to buildCostGrid: approximates the surface normal\n * at each end of a candidate ruling as cross(wireTangent, rulingDirection),\n * then scores the ruling by 1 - |dot(normalA, normalB)| \\u2014 same twist\n * metric as buildCostGrid, but derived purely from the two boundary wires'\n * own tangents rather than a face.normalAt() query. This lets primary and\n * secondary wires span multiple faces, since no single `face` is queried.\n *\n * A null tangent (see sampleWireWithTangents \\u2014 typically a discontinuity\n * at a compound-wire seam) or a ruling direction parallel to a tangent\n * propagates to Infinity for that cell, same convention as buildCostGrid.\n */\nfunction buildCostGridFromTangents(primarySamples, primaryTangents, secondarySamples, secondaryTangents) {\n    const n = primarySamples.length;\n    const ns = secondarySamples.length;\n    const cost = new Array(n);\n    for (let i = 0; i < n; i++) {\n        const row = new Array(ns);\n        for (let j = 0; j < ns; j++) {\n            const rulingDir = normalizedDir(primarySamples[i], secondarySamples[j]);\n            if (!rulingDir) {\n                row[j] = Infinity;\n                continue;\n            }\n            const nA = crossNormalize(primaryTangents[i], rulingDir);\n            const nB = crossNormalize(secondaryTangents[j], rulingDir);\n            if (!nA || !nB) {\n                row[j] = Infinity;\n                continue;\n            }\n            const dot = nA[0] * nB[0] + nA[1] * nB[1] + nA[2] * nB[2];\n            row[j] = 1 - Math.abs(dot);\n        }\n        cost[i] = row;\n    }\n    return cost;\n}\nfunction quadTwist(P, S, i, j, iN, jN) {\n    const A = P[i];\n    const Ap = P[iN];\n    const B = S[j];\n    const Bp = S[jN];\n    const e1x = Ap[0] - A[0], e1y = Ap[1] - A[1], e1z = Ap[2] - A[2];\n    const e2x = Bp[0] - A[0], e2y = Bp[1] - A[1], e2z = Bp[2] - A[2];\n    const e3x = B[0] - A[0], e3y = B[1] - A[1], e3z = B[2] - A[2];\n    const nx = e1y * e2z - e1z * e2y;\n    const ny = e1z * e2x - e1x * e2z;\n    const nz = e1x * e2y - e1y * e2x;\n    const nMag = Math.hypot(nx, ny, nz);\n    const height = nMag > 0 ? Math.abs(nx * e3x + ny * e3y + nz * e3z) / nMag : 0;\n    const avgEdge = 0.25 * (dist3(A, Ap) + dist3(Ap, Bp) + dist3(Bp, B) + dist3(B, A));\n    return avgEdge > 0 ? height / avgEdge : 0;\n}\n/**\n * 2-neighbour anti-diagonal DP: from (i, j) you may only advance to\n * (i+1, j) or (i, j+1). Every path has 2(n-1) steps and emits 2n-1 rulings.\n * Identical to the implementation in atomimpl.ts.\n */\nfunction findOptimalRulingPath(cost, P, S) {\n    const n = cost.length;\n    const INF = Number.POSITIVE_INFINITY;\n    const dist = new Array(n);\n    const prevDir = new Array(n);\n    for (let i = 0; i < n; i++) {\n        dist[i] = new Array(n).fill(INF);\n        prevDir[i] = new Array(n).fill(-1);\n    }\n    dist[0][0] = cost[0][0];\n    for (let s = 1; s <= 2 * (n - 1); s++) {\n        const iLo = Math.max(0, s - (n - 1));\n        const iHi = Math.min(n - 1, s);\n        for (let iN = iLo; iN <= iHi; iN++) {\n            const jN = s - iN;\n            const rulingCost = cost[iN][jN];\n            if (!isFinite(rulingCost))\n                continue;\n            let best = INF;\n            let bestDir = -1;\n            if (iN > 0 && isFinite(dist[iN - 1][jN])) {\n                const cand = dist[iN - 1][jN] + rulingCost + quadTwist(P, S, iN - 1, jN, iN, jN);\n                if (cand < best) {\n                    best = cand;\n                    bestDir = 0;\n                }\n            }\n            if (jN > 0 && isFinite(dist[iN][jN - 1])) {\n                const cand = dist[iN][jN - 1] + rulingCost + quadTwist(P, S, iN, jN - 1, iN, jN);\n                if (cand < best) {\n                    best = cand;\n                    bestDir = 1;\n                }\n            }\n            if (best < INF) {\n                dist[iN][jN] = best;\n                prevDir[iN][jN] = bestDir;\n            }\n        }\n    }\n    const path = [];\n    if (isFinite(dist[n - 1][n - 1])) {\n        let ci = n - 1;\n        let cj = n - 1;\n        while (ci >= 0 && cj >= 0) {\n            path.push([ci, cj]);\n            if (ci === 0 && cj === 0)\n                break;\n            const dir = prevDir[ci][cj];\n            if (dir === 0)\n                ci -= 1;\n            else if (dir === 1)\n                cj -= 1;\n            else\n                break;\n        }\n        path.reverse();\n        return { path, totalCost: dist[n - 1][n - 1] };\n    }\n    console.warn(\"Unroll: DAG search found no path; falling back to diagonal.\");\n    for (let k = 0; k < n; k++)\n        path.push([k, k]);\n    return { path, totalCost: INF };\n}\n/**\n * Identify the best 3D triangle for a point P. We prefer the one where P\n * projects inside (positive barycentric), using physical distance to the\n * triangle plane as a tie-breaker.\n */\nfunction findBestTriangle3D(p, tris3D) {\n    let bestK = -1;\n    let minScore = Infinity;\n    for (let k = 0; k < tris3D.length; k++) {\n        const tri = tris3D[k];\n        const bary = bary3D(p, tri[0], tri[1], tri[2]);\n        if (!bary)\n            continue;\n        const [u, v, w] = bary;\n        // Penalty for being physically outside the triangle footprint\n        const outsideDist = Math.max(0, -u, -v, -w);\n        // Distance to triangle plane\n        const planeDist = distToPlane(p, tri[0], tri[1], tri[2]);\n        // Combined score: proximity to plane + penalty for being outside.\n        // Being outside is penalized much more heavily than being slightly\n        // off-plane.\n        const score = planeDist + outsideDist * 1000;\n        if (score < minScore) {\n            minScore = score;\n            bestK = k;\n        }\n    }\n    return bestK;\n}\n/**\n * Project 3D point p into triangle k and return its 2D coordinates.\n */\nfunction mapWithTriangle3D(p, k, tris3D, tris2D) {\n    const tri3 = tris3D[k];\n    const tri2 = tris2D[k];\n    const bary = bary3D(p, tri3[0], tri3[1], tri3[2]);\n    if (!bary)\n        return [0, 0];\n    const [u, v, w] = bary;\n    const [a2, b2, c2] = tri2;\n    return [u * a2[0] + v * b2[0] + w * c2[0], u * a2[1] + v * b2[1] + w * c2[1]];\n}\nfunction distToPlane(p, a, b, c) {\n    const v1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n    const v2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n    const nx = v1[1] * v2[2] - v1[2] * v2[1];\n    const ny = v1[2] * v2[0] - v1[0] * v2[2];\n    const nz = v1[0] * v2[1] - v1[1] * v2[0];\n    const nLen = Math.hypot(nx, ny, nz);\n    if (nLen === 0)\n        return dist3(p, a);\n    const dx = p[0] - a[0];\n    const dy = p[1] - a[1];\n    const dz = p[2] - a[2];\n    return Math.abs(dx * nx + dy * ny + dz * nz) / nLen;\n}\n/**\n * 3D Barycentric coordinates of P in triangle (A, B, C).\n * P is projected onto the plane of ABC.\n */\nfunction bary3D(p, a, b, c) {\n    const v0 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];\n    const v1 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];\n    const v2 = [p[0] - a[0], p[1] - a[1], p[2] - a[2]];\n    const d00 = v0[0] * v0[0] + v0[1] * v0[1] + v0[2] * v0[2];\n    const d01 = v0[0] * v1[0] + v0[1] * v1[1] + v0[2] * v1[2];\n    const d11 = v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2];\n    const d20 = v2[0] * v0[0] + v2[1] * v0[1] + v2[2] * v0[2];\n    const d21 = v2[0] * v1[0] + v2[1] * v1[1] + v2[2] * v1[2];\n    const denom = d00 * d11 - d01 * d01;\n    if (Math.abs(denom) < 1e-12)\n        return null;\n    const invDenom = 1.0 / denom;\n    const v = (d11 * d20 - d01 * d21) * invDenom;\n    const w = (d00 * d21 - d01 * d20) * invDenom;\n    const u = 1.0 - v - w;\n    return [u, v, w];\n}\n/** Place a new 2D point at distance r0 from p0 and r1 from p1, on the\n * sideSign side of the directed line p0→p1 (+1 = left, −1 = right). */\nfunction circleIntersect(p0, r0, p1, r1, sideSign, stripIdx) {\n    const dx = p1[0] - p0[0];\n    const dy = p1[1] - p0[1];\n    const d = Math.hypot(dx, dy);\n    const sum = r0 + r1;\n    const diff = Math.abs(r0 - r1);\n    const EPS = 1e-6;\n    if (d === 0 || d > sum * (1 + EPS) || d < diff * (1 - EPS)) {\n        throw new Error(`Unroll: degenerate triangle at strip ${stripIdx} ` +\n            `(r0=${r0.toFixed(4)}, r1=${r1.toFixed(4)}, hinge=${d.toFixed(4)}).`);\n    }\n    const dC = Math.max(diff, Math.min(sum, d));\n    const a = (r0 * r0 - r1 * r1 + dC * dC) / (2 * dC);\n    const h = Math.sqrt(Math.max(0, r0 * r0 - a * a));\n    const ux = dx / d;\n    const uy = dy / d;\n    const mx = p0[0] + a * ux;\n    const my = p0[1] + a * uy;\n    return [mx + h * -uy * sideSign, my + h * ux * sideSign];\n}\n"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.14,
-              "uniqueID": "id-95435",
-              "name": "primaryWire",
-              "type": "edgeselect",
-              "selectedEdgeData": {
-                "0": [
-                  5,
-                  6,
-                  7,
-                  0
-                ]
-              }
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.22400000000000003,
-              "uniqueID": "id-95436",
-              "name": "secondaryWire",
-              "type": "edgeselect",
-              "selectedEdgeData": {
-                "0": [
-                  4,
-                  3,
-                  2,
-                  1
-                ]
-              }
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.30800000000000005,
-              "uniqueID": "id-95437",
-              "name": "holes",
-              "type": "geometry"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.0231,
-              "y": 0.39200000000000007,
-              "uniqueID": "id-95438",
-              "name": "rulings"
-            },
-            {
-              "atomType": "GitHubMolecule",
-              "x": 0.2724609375,
-              "y": 0.1,
-              "uniqueID": "id-95439",
-              "name": "util.FuseWire",
-              "ioValues": [
-                {
-                  "name": "wires",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 0.98,
-                  "y": 0.5,
-                  "uniqueID": "id-95440",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.4290364583333333,
-                  "y": 0.5228571428571429,
-                  "uniqueID": "id-95441",
-                  "ioValues": [
-                    {
-                      "name": "shape",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "interpreterVersion": 1,
-                  "code": "// as edges\nfunction run(\n  shape: Assembly,\n) {\n  let edges: replicad.Edge[] = shape.getSelectedEdges()\n  if (edges.length == 0) {\n    shape.onLeafs((leaf) => {\n      if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n        edges.push(...leaf.geometry.edges)\n      } else {\n        return undefined\n      }\n      return leaf;\n    })\n  }\n  console.log(edges.map((e) => e.orientation))\n  edges = sortEdgesByContinuity(edges, 0.001)\n  //  return replicad.assembleWire([edges[2], edges[3], edges[0], edges[1]])\n  return replicad.assembleWire(edges);\n}\n\nimport type { Edge } from \"replicad\";\n\ntype Tuple3 = readonly [number, number, number];\n\n/**\n * Sort a collection of replicad Edges so that each edge's endPoint matches the\n * next edge's startPoint (flipping orientation when necessary).\n *\n * - Starts from an edge whose startPoint is shared by no other edge's endPoint.\n * - If no such start exists (closed loop), starts with edges[0].\n * - Throws if any vertex is shared by more than two edges.\n * - Throws if the edges are not fully connected into a single chain.\n *\n * @param edges     Input edges in arbitrary order.\n * @param tolerance Distance under which two points are considered equal.\n */\nexport function sortEdgesByContinuity(\n  edges: Edge[],\n  tolerance = 1e-6,\n): Edge[] {\n  if (edges.length <= 1) return edges.slice();\n\n  const tol2 = tolerance * tolerance;\n\n  const dist2 = (a: Tuple3, b: Tuple3): number => {\n    const dx = a[0] - b[0];\n    const dy = a[1] - b[1];\n    const dz = a[2] - b[2];\n    return dx * dx + dy * dy + dz * dz;\n  };\n  const eq = (a: Tuple3, b: Tuple3): boolean => dist2(a, b) <= tol2;\n\n  // Cache endpoint tuples so we only query replicad once per edge.\n  type EndpointInfo = { edge: Edge; start: Tuple3; end: Tuple3 };\n  const infos: EndpointInfo[] = edges.map((edge) => ({\n    edge,\n    start: edge.startPoint.toTuple() as Tuple3,\n    end: edge.endPoint.toTuple() as Tuple3,\n  }));\n\n  // Bucket endpoint tuples into equivalence classes under the tolerance.\n  type VertexNode = { point: Tuple3; incidences: number };\n  const nodes: VertexNode[] = [];\n  const findOrAddNode = (p: Tuple3): VertexNode => {\n    for (const n of nodes) {\n      if (eq(n.point, p)) return n;\n    }\n    const n: VertexNode = { point: p, incidences: 0 };\n    nodes.push(n);\n    return n;\n  };\n\n  // Per-edge vertex nodes and per-node incidence count for validation.\n  const edgeNodes = infos.map((info) => {\n    const s = findOrAddNode(info.start);\n    const e = findOrAddNode(info.end);\n    s.incidences++;\n    e.incidences++;\n    return { start: s, end: e };\n  });\n\n  for (const n of nodes) {\n    if (n.incidences > 2) {\n      throw new Error(\n        `Vertex (${n.point.join(\", \")}) is shared by ${n.incidences} edge endpoints; expected at most 2.`,\n      );\n    }\n  }\n  // Pick a starting edge using the incidence counts we already computed.\n  // A chain terminus is a vertex with incidences === 1. Prefer an edge whose\n  // start is a terminus (no flip); otherwise flip an edge whose end is one.\n  let startIdx = edgeNodes.findIndex((n) => n.start.incidences === 1);\n  let startFlipped = false;\n  if (startIdx === -1) {\n    startIdx = edgeNodes.findIndex((n) => n.end.incidences === 1);\n    startFlipped = startIdx !== -1;\n  }\n\n  // Closed loop: no terminus. Just start from edge 0.\n  if (startIdx === -1) startIdx = 0;\n\n  const used = new Array<boolean>(infos.length).fill(false);\n  const result: Edge[] = [];\n\n  const firstEdge = startFlipped\n    ? infos[startIdx].edge.flipOrientation()\n    : infos[startIdx].edge;\n  let currentEndPoint: Tuple3 = startFlipped\n    ? infos[startIdx].start\n    : infos[startIdx].end;\n  result.push(firstEdge);\n  used[startIdx] = true;\n\n  while (result.length < infos.length) {\n    let nextIdx = -1;\n    let flip = false;\n    for (let i = 0; i < infos.length; i++) {\n      if (used[i]) continue;\n      if (eq(infos[i].start, currentEndPoint)) {\n        nextIdx = i;\n        flip = false;\n        break;\n      }\n      if (eq(infos[i].end, currentEndPoint)) {\n        nextIdx = i;\n        flip = true;\n        break;\n      }\n    }\n\n    if (nextIdx === -1) {\n      throw new Error(\n        \"Edges are not fully connected: could not find a continuation from \" +\n        `(${currentEndPoint.join(\", \")}).`,\n      );\n    }\n\n    const info = infos[nextIdx];\n    result.push(flip ? info.edge.flipOrientation() : info.edge);\n    currentEndPoint = flip ? info.start : info.end;\n    used[nextIdx] = true;\n  }\n\n  return result;\n}\n",
-                  "compiledCode": "// as edges\nfunction run(shape) {\n    let edges = shape.getSelectedEdges();\n    if (edges.length == 0) {\n        shape.onLeafs((leaf) => {\n            if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n                edges.push(...leaf.geometry.edges);\n            }\n            else {\n                return undefined;\n            }\n            return leaf;\n        });\n    }\n    console.log(edges.map((e) => e.orientation));\n    edges = sortEdgesByContinuity(edges, 0.001);\n    //  return replicad.assembleWire([edges[2], edges[3], edges[0], edges[1]])\n    return replicad.assembleWire(edges);\n}\n/**\n * Sort a collection of replicad Edges so that each edge's endPoint matches the\n * next edge's startPoint (flipping orientation when necessary).\n *\n * - Starts from an edge whose startPoint is shared by no other edge's endPoint.\n * - If no such start exists (closed loop), starts with edges[0].\n * - Throws if any vertex is shared by more than two edges.\n * - Throws if the edges are not fully connected into a single chain.\n *\n * @param edges     Input edges in arbitrary order.\n * @param tolerance Distance under which two points are considered equal.\n */\nexport function sortEdgesByContinuity(edges, tolerance = 1e-6) {\n    if (edges.length <= 1)\n        return edges.slice();\n    const tol2 = tolerance * tolerance;\n    const dist2 = (a, b) => {\n        const dx = a[0] - b[0];\n        const dy = a[1] - b[1];\n        const dz = a[2] - b[2];\n        return dx * dx + dy * dy + dz * dz;\n    };\n    const eq = (a, b) => dist2(a, b) <= tol2;\n    const infos = edges.map((edge) => ({\n        edge,\n        start: edge.startPoint.toTuple(),\n        end: edge.endPoint.toTuple(),\n    }));\n    const nodes = [];\n    const findOrAddNode = (p) => {\n        for (const n of nodes) {\n            if (eq(n.point, p))\n                return n;\n        }\n        const n = { point: p, incidences: 0 };\n        nodes.push(n);\n        return n;\n    };\n    // Per-edge vertex nodes and per-node incidence count for validation.\n    const edgeNodes = infos.map((info) => {\n        const s = findOrAddNode(info.start);\n        const e = findOrAddNode(info.end);\n        s.incidences++;\n        e.incidences++;\n        return { start: s, end: e };\n    });\n    for (const n of nodes) {\n        if (n.incidences > 2) {\n            throw new Error(`Vertex (${n.point.join(\", \")}) is shared by ${n.incidences} edge endpoints; expected at most 2.`);\n        }\n    }\n    // Pick a starting edge using the incidence counts we already computed.\n    // A chain terminus is a vertex with incidences === 1. Prefer an edge whose\n    // start is a terminus (no flip); otherwise flip an edge whose end is one.\n    let startIdx = edgeNodes.findIndex((n) => n.start.incidences === 1);\n    let startFlipped = false;\n    if (startIdx === -1) {\n        startIdx = edgeNodes.findIndex((n) => n.end.incidences === 1);\n        startFlipped = startIdx !== -1;\n    }\n    // Closed loop: no terminus. Just start from edge 0.\n    if (startIdx === -1)\n        startIdx = 0;\n    const used = new Array(infos.length).fill(false);\n    const result = [];\n    const firstEdge = startFlipped\n        ? infos[startIdx].edge.flipOrientation()\n        : infos[startIdx].edge;\n    let currentEndPoint = startFlipped\n        ? infos[startIdx].start\n        : infos[startIdx].end;\n    result.push(firstEdge);\n    used[startIdx] = true;\n    while (result.length < infos.length) {\n        let nextIdx = -1;\n        let flip = false;\n        for (let i = 0; i < infos.length; i++) {\n            if (used[i])\n                continue;\n            if (eq(infos[i].start, currentEndPoint)) {\n                nextIdx = i;\n                flip = false;\n                break;\n            }\n            if (eq(infos[i].end, currentEndPoint)) {\n                nextIdx = i;\n                flip = true;\n                break;\n            }\n        }\n        if (nextIdx === -1) {\n            throw new Error(\"Edges are not fully connected: could not find a continuation from \" +\n                `(${currentEndPoint.join(\", \")}).`);\n        }\n        const info = infos[nextIdx];\n        result.push(flip ? info.edge.flipOrientation() : info.edge);\n        currentEndPoint = flip ? info.start : info.end;\n        used[nextIdx] = true;\n    }\n    return result;\n}\n"
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.0231,
-                  "y": 0.14,
-                  "uniqueID": "id-95442",
-                  "name": "wires",
-                  "type": "geometry"
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-95441",
-                  "ap2ID": "id-95440"
-                },
-                {
-                  "ap2Name": "shape",
-                  "ap1ID": "id-95442",
-                  "ap2ID": "id-95441"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-07-29T20:40:13.596Z",
-                "privateRepo": false,
-                "repoName": "util.FuseWire",
-                "dateCreated": "2026-07-20T22:27:14Z",
-                "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/README.md?sanitize=true",
-                "yyyy": 2026,
-                "topMoleculeID": "id-42",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/tristan-huber/util.FuseWire",
-                "topics": [
-                  "abundance-tool"
-                ],
-                "pullRequests": [],
-                "parentRepo": null,
-                "forks": 0,
-                "dateModified": "739826",
-                "ranking": 0.6,
-                "searchField": "util.fusewire tristan-huber fuse a collection of wires into one wire object. also called join wire, assemble wire, or concatenate wire. this is a thin wrapper of assemblewire and can return a branching wire. abundance-tool",
-                "owner": "tristan-huber",
-                "description": "Fuse a collection of wires into one wire object. Also called join wire, assemble wire, or concatenate wire. This is a thin wrapper of assembleWire and can return a branching wire.",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Unitless",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1785948388414
-            },
-            {
-              "atomType": "GitHubMolecule",
-              "x": 0.2275390625,
-              "y": 0.2520833333333333,
-              "uniqueID": "id-95443",
-              "name": "util.FuseWire",
-              "ioValues": [
-                {
-                  "name": "wires",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 0.98,
-                  "y": 0.5,
-                  "uniqueID": "id-95444",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.4290364583333333,
-                  "y": 0.5228571428571429,
-                  "uniqueID": "id-95445",
-                  "ioValues": [
-                    {
-                      "name": "shape",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "interpreterVersion": 1,
-                  "code": "// as edges\nfunction run(\n  shape: Assembly,\n) {\n  let edges: replicad.Edge[] = shape.getSelectedEdges()\n  if (edges.length == 0) {\n    shape.onLeafs((leaf) => {\n      if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n        edges.push(...leaf.geometry.edges)\n      } else {\n        return undefined\n      }\n      return leaf;\n    })\n  }\n  console.log(edges.map((e) => e.orientation))\n  edges = sortEdgesByContinuity(edges, 0.001)\n  //  return replicad.assembleWire([edges[2], edges[3], edges[0], edges[1]])\n  return replicad.assembleWire(edges);\n}\n\nimport type { Edge } from \"replicad\";\n\ntype Tuple3 = readonly [number, number, number];\n\n/**\n * Sort a collection of replicad Edges so that each edge's endPoint matches the\n * next edge's startPoint (flipping orientation when necessary).\n *\n * - Starts from an edge whose startPoint is shared by no other edge's endPoint.\n * - If no such start exists (closed loop), starts with edges[0].\n * - Throws if any vertex is shared by more than two edges.\n * - Throws if the edges are not fully connected into a single chain.\n *\n * @param edges     Input edges in arbitrary order.\n * @param tolerance Distance under which two points are considered equal.\n */\nexport function sortEdgesByContinuity(\n  edges: Edge[],\n  tolerance = 1e-6,\n): Edge[] {\n  if (edges.length <= 1) return edges.slice();\n\n  const tol2 = tolerance * tolerance;\n\n  const dist2 = (a: Tuple3, b: Tuple3): number => {\n    const dx = a[0] - b[0];\n    const dy = a[1] - b[1];\n    const dz = a[2] - b[2];\n    return dx * dx + dy * dy + dz * dz;\n  };\n  const eq = (a: Tuple3, b: Tuple3): boolean => dist2(a, b) <= tol2;\n\n  // Cache endpoint tuples so we only query replicad once per edge.\n  type EndpointInfo = { edge: Edge; start: Tuple3; end: Tuple3 };\n  const infos: EndpointInfo[] = edges.map((edge) => ({\n    edge,\n    start: edge.startPoint.toTuple() as Tuple3,\n    end: edge.endPoint.toTuple() as Tuple3,\n  }));\n\n  // Bucket endpoint tuples into equivalence classes under the tolerance.\n  type VertexNode = { point: Tuple3; incidences: number };\n  const nodes: VertexNode[] = [];\n  const findOrAddNode = (p: Tuple3): VertexNode => {\n    for (const n of nodes) {\n      if (eq(n.point, p)) return n;\n    }\n    const n: VertexNode = { point: p, incidences: 0 };\n    nodes.push(n);\n    return n;\n  };\n\n  // Per-edge vertex nodes and per-node incidence count for validation.\n  const edgeNodes = infos.map((info) => {\n    const s = findOrAddNode(info.start);\n    const e = findOrAddNode(info.end);\n    s.incidences++;\n    e.incidences++;\n    return { start: s, end: e };\n  });\n\n  for (const n of nodes) {\n    if (n.incidences > 2) {\n      throw new Error(\n        `Vertex (${n.point.join(\", \")}) is shared by ${n.incidences} edge endpoints; expected at most 2.`,\n      );\n    }\n  }\n  // Pick a starting edge using the incidence counts we already computed.\n  // A chain terminus is a vertex with incidences === 1. Prefer an edge whose\n  // start is a terminus (no flip); otherwise flip an edge whose end is one.\n  let startIdx = edgeNodes.findIndex((n) => n.start.incidences === 1);\n  let startFlipped = false;\n  if (startIdx === -1) {\n    startIdx = edgeNodes.findIndex((n) => n.end.incidences === 1);\n    startFlipped = startIdx !== -1;\n  }\n\n  // Closed loop: no terminus. Just start from edge 0.\n  if (startIdx === -1) startIdx = 0;\n\n  const used = new Array<boolean>(infos.length).fill(false);\n  const result: Edge[] = [];\n\n  const firstEdge = startFlipped\n    ? infos[startIdx].edge.flipOrientation()\n    : infos[startIdx].edge;\n  let currentEndPoint: Tuple3 = startFlipped\n    ? infos[startIdx].start\n    : infos[startIdx].end;\n  result.push(firstEdge);\n  used[startIdx] = true;\n\n  while (result.length < infos.length) {\n    let nextIdx = -1;\n    let flip = false;\n    for (let i = 0; i < infos.length; i++) {\n      if (used[i]) continue;\n      if (eq(infos[i].start, currentEndPoint)) {\n        nextIdx = i;\n        flip = false;\n        break;\n      }\n      if (eq(infos[i].end, currentEndPoint)) {\n        nextIdx = i;\n        flip = true;\n        break;\n      }\n    }\n\n    if (nextIdx === -1) {\n      throw new Error(\n        \"Edges are not fully connected: could not find a continuation from \" +\n        `(${currentEndPoint.join(\", \")}).`,\n      );\n    }\n\n    const info = infos[nextIdx];\n    result.push(flip ? info.edge.flipOrientation() : info.edge);\n    currentEndPoint = flip ? info.start : info.end;\n    used[nextIdx] = true;\n  }\n\n  return result;\n}\n",
-                  "compiledCode": "// as edges\nfunction run(shape) {\n    let edges = shape.getSelectedEdges();\n    if (edges.length == 0) {\n        shape.onLeafs((leaf) => {\n            if (leaf.is3D() || leaf.geometry instanceof replicad.Wire) {\n                edges.push(...leaf.geometry.edges);\n            }\n            else {\n                return undefined;\n            }\n            return leaf;\n        });\n    }\n    console.log(edges.map((e) => e.orientation));\n    edges = sortEdgesByContinuity(edges, 0.001);\n    //  return replicad.assembleWire([edges[2], edges[3], edges[0], edges[1]])\n    return replicad.assembleWire(edges);\n}\n/**\n * Sort a collection of replicad Edges so that each edge's endPoint matches the\n * next edge's startPoint (flipping orientation when necessary).\n *\n * - Starts from an edge whose startPoint is shared by no other edge's endPoint.\n * - If no such start exists (closed loop), starts with edges[0].\n * - Throws if any vertex is shared by more than two edges.\n * - Throws if the edges are not fully connected into a single chain.\n *\n * @param edges     Input edges in arbitrary order.\n * @param tolerance Distance under which two points are considered equal.\n */\nexport function sortEdgesByContinuity(edges, tolerance = 1e-6) {\n    if (edges.length <= 1)\n        return edges.slice();\n    const tol2 = tolerance * tolerance;\n    const dist2 = (a, b) => {\n        const dx = a[0] - b[0];\n        const dy = a[1] - b[1];\n        const dz = a[2] - b[2];\n        return dx * dx + dy * dy + dz * dz;\n    };\n    const eq = (a, b) => dist2(a, b) <= tol2;\n    const infos = edges.map((edge) => ({\n        edge,\n        start: edge.startPoint.toTuple(),\n        end: edge.endPoint.toTuple(),\n    }));\n    const nodes = [];\n    const findOrAddNode = (p) => {\n        for (const n of nodes) {\n            if (eq(n.point, p))\n                return n;\n        }\n        const n = { point: p, incidences: 0 };\n        nodes.push(n);\n        return n;\n    };\n    // Per-edge vertex nodes and per-node incidence count for validation.\n    const edgeNodes = infos.map((info) => {\n        const s = findOrAddNode(info.start);\n        const e = findOrAddNode(info.end);\n        s.incidences++;\n        e.incidences++;\n        return { start: s, end: e };\n    });\n    for (const n of nodes) {\n        if (n.incidences > 2) {\n            throw new Error(`Vertex (${n.point.join(\", \")}) is shared by ${n.incidences} edge endpoints; expected at most 2.`);\n        }\n    }\n    // Pick a starting edge using the incidence counts we already computed.\n    // A chain terminus is a vertex with incidences === 1. Prefer an edge whose\n    // start is a terminus (no flip); otherwise flip an edge whose end is one.\n    let startIdx = edgeNodes.findIndex((n) => n.start.incidences === 1);\n    let startFlipped = false;\n    if (startIdx === -1) {\n        startIdx = edgeNodes.findIndex((n) => n.end.incidences === 1);\n        startFlipped = startIdx !== -1;\n    }\n    // Closed loop: no terminus. Just start from edge 0.\n    if (startIdx === -1)\n        startIdx = 0;\n    const used = new Array(infos.length).fill(false);\n    const result = [];\n    const firstEdge = startFlipped\n        ? infos[startIdx].edge.flipOrientation()\n        : infos[startIdx].edge;\n    let currentEndPoint = startFlipped\n        ? infos[startIdx].start\n        : infos[startIdx].end;\n    result.push(firstEdge);\n    used[startIdx] = true;\n    while (result.length < infos.length) {\n        let nextIdx = -1;\n        let flip = false;\n        for (let i = 0; i < infos.length; i++) {\n            if (used[i])\n                continue;\n            if (eq(infos[i].start, currentEndPoint)) {\n                nextIdx = i;\n                flip = false;\n                break;\n            }\n            if (eq(infos[i].end, currentEndPoint)) {\n                nextIdx = i;\n                flip = true;\n                break;\n            }\n        }\n        if (nextIdx === -1) {\n            throw new Error(\"Edges are not fully connected: could not find a continuation from \" +\n                `(${currentEndPoint.join(\", \")}).`);\n        }\n        const info = infos[nextIdx];\n        result.push(flip ? info.edge.flipOrientation() : info.edge);\n        currentEndPoint = flip ? info.start : info.end;\n        used[nextIdx] = true;\n    }\n    return result;\n}\n"
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0.0231,
-                  "y": 0.14,
-                  "uniqueID": "id-95446",
-                  "name": "wires",
-                  "type": "geometry"
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-95445",
-                  "ap2ID": "id-95444"
-                },
-                {
-                  "ap2Name": "shape",
-                  "ap1ID": "id-95446",
-                  "ap2ID": "id-95445"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-07-29T20:40:13.596Z",
-                "privateRepo": false,
-                "repoName": "util.FuseWire",
-                "dateCreated": "2026-07-20T22:27:14Z",
-                "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/README.md?sanitize=true",
-                "yyyy": 2026,
-                "topMoleculeID": "id-42",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/tristan-huber/util.FuseWire",
-                "topics": [
-                  "abundance-tool"
-                ],
-                "pullRequests": [],
-                "parentRepo": null,
-                "forks": 0,
-                "dateModified": "739826",
-                "ranking": 0.6,
-                "searchField": "util.fusewire tristan-huber fuse a collection of wires into one wire object. also called join wire, assemble wire, or concatenate wire. this is a thin wrapper of assemblewire and can return a branching wire. abundance-tool",
-                "owner": "tristan-huber",
-                "description": "Fuse a collection of wires into one wire object. Also called join wire, assemble wire, or concatenate wire. This is a thin wrapper of assembleWire and can return a branching wire.",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.FuseWire/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Unitless",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1785948391126
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "wires",
-              "ap1ID": "id-95435",
-              "ap2ID": "id-95439"
-            },
-            {
-              "ap2Name": "wires",
-              "ap1ID": "id-95436",
-              "ap2ID": "id-95443"
-            },
-            {
-              "ap2Name": "holes",
-              "ap1ID": "id-95437",
-              "ap2ID": "id-95434"
-            },
-            {
-              "ap2Name": "numRulings",
-              "ap1ID": "id-95438",
-              "ap2ID": "id-95434"
-            },
-            {
-              "ap2Name": "primaryGuideWire",
-              "ap1ID": "id-95439",
-              "ap2ID": "id-95434"
-            },
-            {
-              "ap2Name": "secondaryGuideWire",
-              "ap1ID": "id-95443",
-              "ap2ID": "id-95434"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-08-20T18:23:39.118Z",
-            "privateRepo": false,
-            "repoName": "crv.UnrollFromWires",
-            "dateCreated": "2026-07-29T18:57:17Z",
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.UnrollFromWires/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-57",
-            "githubMoleculesUsed": [
-              {
-                "owner": "tristan-huber",
-                "repoName": "util.FuseWire"
-              },
-              {
-                "owner": "tristan-huber",
-                "repoName": "util.FuseWire"
-              }
-            ],
-            "html_url": "https://github.com/tristan-huber/crv.UnrollFromWires",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739839",
-            "ranking": 0,
-            "searchField": "crv.unrollfromwires tristan-huber select specific boundary wires of the face to unroll. allows unrolling of multiple faces. holes are still supported. more customizable than crv.unroll abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Select specific boundary wires of the face to unroll. Allows unrolling of multiple faces. Holes are still supported. More customizable than crv.Unroll",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.UnrollFromWires/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.UnrollFromWires/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1787258856036
         },
         {
           "atomType": "CutOrient",
@@ -12480,7 +11525,7 @@
           "x": 0.28125,
           "y": 0.44857142857142857,
           "uniqueID": "id-98288",
-          "name": "New Molecule",
+          "name": "undersidePanels",
           "ioValues": [
             {
               "name": "body",
@@ -13044,8 +12089,8 @@
         },
         {
           "atomType": "CutOrient",
-          "x": 0.41796875000000006,
-          "y": 0.4342857142857143,
+          "x": 0.419921875,
+          "y": 0.42857142857142855,
           "uniqueID": "id-98390",
           "name": "Cut Orient",
           "ioValues": [
@@ -13072,8 +12117,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.6653645833333334,
-          "y": 0.48571428571428577,
+          "x": 0.7194010416666667,
+          "y": 0.6314285714285715,
           "uniqueID": "id-98393",
           "ioValues": [
             {
@@ -13082,7 +12127,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 0
+              "ioValue": 45.51696318692004
             },
             {
               "name": "yDist",
@@ -13091,6 +12136,127 @@
             {
               "name": "zDist",
               "ioValue": 0
+            }
+          ]
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.7239583333333333,
+          "y": 0.3514285714285714,
+          "uniqueID": "id-98403",
+          "name": "Width",
+          "ioValues": [
+            {
+              "name": "Shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-98400",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-98401",
+              "name": "Shape",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Code",
+              "x": 0.380178716490658,
+              "y": 0.47632311977715874,
+              "uniqueID": "id-98402",
+              "ioValues": [
+                {
+                  "name": "A",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 0,
+              "code": "/**\n Inputs for this Code Atom:\n - Takes a single geometry input \"A\" and returns its width (X size) as measured by the bounding box.\n*/\nInputs = [\n  { inputName: \"A\", type: \"geometry\", defaultValue: null }\n]\n\nif (!A) {\n  // No input provided — return null to indicate absence.\n  return null\n}\n\n// Get bounding box of A. boundsA.min and boundsA.max are arrays [x, y, z]\nlet boundsA = await GetBounds(A);\nlet min = boundsA.min;\nlet max = boundsA.max;\n\n// Compute width along X (maxX - minX)\nlet width = max[0] - min[0];\n\n// Ensure a non-negative numeric result\nwidth = typeof width === 'number' && isFinite(width) ? Math.max(0, width) : null;\n\nreturn width;"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "A",
+              "ap1ID": "id-98401",
+              "ap2ID": "id-98402"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-98402",
+              "ap2ID": "id-98400"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-08-20T18:23:39.118Z",
+            "privateRepo": false,
+            "repoName": "Width",
+            "dateCreated": "2025-12-04T20:14:11Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/BarbourSmith/Width/master/README.md?sanitize=true",
+            "yyyy": 2025,
+            "topMoleculeID": "id-386",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/BarbourSmith/Width",
+            "topics": [],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739589",
+            "ranking": 6.6,
+            "searchField": "width barboursmith takes a shape and returns the width as measured by the shapes bounding box in the x direction ",
+            "owner": "BarbourSmith",
+            "description": "Takes a shape and returns the width as measured by the shapes bounding box in the X direction",
+            "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "MM",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1787263603705
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.5885416666666666,
+          "y": 0.6228571428571429,
+          "uniqueID": "id-98565",
+          "name": "1/8inchply",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "1/8inchply"
+          ]
+        },
+        {
+          "atomType": "Difference",
+          "x": 0.26953125,
+          "y": 0.6828571428571429,
+          "uniqueID": "id-98568",
+          "ioValues": [
+            {
+              "name": "retain",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "remove",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         }
@@ -13107,9 +12273,9 @@
           "ap2ID": "id-98181"
         },
         {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-95414",
-          "ap2ID": "id-95899"
+          "ap2Name": "remove",
+          "ap1ID": "id-95411",
+          "ap2ID": "id-98568"
         },
         {
           "ap2Name": "body",
@@ -13117,14 +12283,14 @@
           "ap2ID": "id-98288"
         },
         {
+          "ap2Name": "retain",
+          "ap1ID": "id-95414",
+          "ap2ID": "id-98568"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-95417",
           "ap2ID": "id-95429"
-        },
-        {
-          "ap2Name": "Assembly",
-          "ap1ID": "id-95417",
-          "ap2ID": "id-95948"
         },
         {
           "ap2Name": "geometry",
@@ -13135,51 +12301,6 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-95429",
           "ap2ID": "id-95486"
-        },
-        {
-          "ap2Name": "holes",
-          "ap1ID": "id-95501",
-          "ap2ID": "id-95447"
-        },
-        {
-          "ap2Name": "holes",
-          "ap1ID": "id-95501",
-          "ap2ID": "id-95934"
-        },
-        {
-          "ap2Name": "primaryWire",
-          "ap1ID": "id-95899",
-          "ap2ID": "id-95447"
-        },
-        {
-          "ap2Name": "secondaryWire",
-          "ap1ID": "id-95899",
-          "ap2ID": "id-95447"
-        },
-        {
-          "ap2Name": "Input",
-          "ap1ID": "id-95899",
-          "ap2ID": "id-95986"
-        },
-        {
-          "ap2Name": "assembly",
-          "ap1ID": "id-95964",
-          "ap2ID": "id-95997"
-        },
-        {
-          "ap2Name": "secondaryGuideWire",
-          "ap1ID": "id-95964",
-          "ap2ID": "id-95934"
-        },
-        {
-          "ap2Name": "wires",
-          "ap1ID": "id-95986",
-          "ap2ID": "id-95964"
-        },
-        {
-          "ap2Name": "primaryGuideWire",
-          "ap1ID": "id-95997",
-          "ap2ID": "id-95934"
         },
         {
           "ap2Name": "geometry",
@@ -13207,6 +12328,11 @@
           "ap2ID": "id-98206"
         },
         {
+          "ap2Name": "Shape",
+          "ap1ID": "id-98201",
+          "ap2ID": "id-98403"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-98288",
           "ap2ID": "id-98390"
@@ -13214,6 +12340,11 @@
         {
           "ap2Name": "geometry",
           "ap1ID": "id-98390",
+          "ap2ID": "id-98393"
+        },
+        {
+          "ap2Name": "xDist",
+          "ap1ID": "id-98403",
           "ap2ID": "id-98393"
         }
       ],
