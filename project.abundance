@@ -13357,53 +13357,56 @@
             },
             {
               "name": "Sheet Width",
-              "ioValue": 48
-            },
-            {
-              "name": "Sheet Height",
               "ioValue": 96
             },
             {
+              "name": "Sheet Height",
+              "ioValue": 48,
+              "currentEquation": "48"
+            },
+            {
               "name": "Part Padding",
-              "ioValue": 1
+              "ioValue": 1,
+              "currentEquation": "1"
             },
             {
               "name": "Orientations",
-              "ioValue": 12
+              "ioValue": 1,
+              "currentEquation": "1"
             }
           ],
           "placements": [
             [
               {
-                "id": 3,
-                "rotate": 150,
+                "id": 1,
+                "rotate": 0,
                 "translate": {
-                  "x": 17.568124771118164,
-                  "y": 65.39775085449219
+                  "x": 67.33000183105469,
+                  "y": 22.690000534057617
+                }
+              },
+              {
+                "id": 3,
+                "rotate": 0,
+                "translate": {
+                  "x": 67.33000183105469,
+                  "y": -5.890000343322754
                 }
               },
               {
                 "id": 2,
-                "rotate": 330,
+                "rotate": 0,
                 "translate": {
-                  "x": 44.05185317993164,
-                  "y": -8.034134864807129
+                  "x": 70.38999938964844,
+                  "y": 15.859999656677246
                 }
               },
               {
                 "id": 0,
-                "rotate": 60,
+                "rotate": 0,
                 "translate": {
-                  "x": 30.1674747467041,
-                  "y": 94.14582824707031
-                }
-              },
-              {
-                "id": 1,
-                "rotate": 30,
-                "translate": {
-                  "x": 29.03099822998047,
-                  "y": 83.7767333984375
+                  "x": 70.38999938964844,
+                  "y": 25.600000381469727
                 }
               }
             ]
