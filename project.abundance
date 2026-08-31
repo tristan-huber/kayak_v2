@@ -14485,8 +14485,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.5428385416666667,
-              "y": 0.45,
+              "x": 0.4817708333333333,
+              "y": 0.6542857142857142,
               "uniqueID": "id-105789",
               "name": "ExtractFaces",
               "ioValues": [
@@ -14516,42 +14516,7 @@
                   "uniqueID": "id-105791",
                   "name": "Assembly",
                   "type": "faceselect",
-                  "selectedFaceData": {
-                    "0": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6
-                    ],
-                    "1": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6
-                    ],
-                    "2": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6,
-                      7,
-                      8
-                    ],
-                    "3": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6
-                    ]
-                  }
+                  "selectedFaceData": {}
                 },
                 {
                   "atomType": "Code",
@@ -14723,7 +14688,7 @@
                 },
                 {
                   "name": "toleranceDeg",
-                  "ioValue": 45
+                  "ioValue": 46
                 },
                 {
                   "name": "u",
@@ -14768,7 +14733,7 @@
                     },
                     {
                       "name": "toleranceDeg",
-                      "ioValue": 45
+                      "ioValue": 46
                     },
                     {
                       "name": "u",
@@ -14976,8 +14941,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.31302083333333336,
-              "y": 0.3214285714285714,
+              "x": 0.357421875,
+              "y": 0.4257142857142857,
               "uniqueID": "id-105809",
               "name": "select.EdgesOnFace",
               "ioValues": [
@@ -15209,7 +15174,32 @@
                   "y": 0.14,
                   "uniqueID": "id-105820",
                   "type": "edgeselect",
-                  "selectedEdgeData": {}
+                  "selectedEdgeData": {
+                    "0": [
+                      8,
+                      10,
+                      11,
+                      13
+                    ],
+                    "1": [
+                      8,
+                      10,
+                      11,
+                      13
+                    ],
+                    "2": [
+                      9,
+                      12,
+                      13,
+                      15
+                    ],
+                    "3": [
+                      7,
+                      10,
+                      11,
+                      13
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -16144,6 +16134,98 @@
               "y": 0.30800000000000005,
               "uniqueID": "id-105862",
               "name": "inset"
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.5501302083333334,
+              "y": 0.6657142857142857,
+              "uniqueID": "id-106057",
+              "name": "ExtractEdges",
+              "ioValues": [
+                {
+                  "name": "Input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 0.98,
+                  "y": 0.5,
+                  "uniqueID": "id-106058",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0.0231,
+                  "y": 0.14,
+                  "uniqueID": "id-106059",
+                  "type": "edgeselect",
+                  "selectedEdgeData": {}
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.4309895833333333,
+                  "y": 0.4342857142857143,
+                  "uniqueID": "id-106060",
+                  "ioValues": [
+                    {
+                      "name": "input",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      const edges = leaf.geometry.edges;\n      const edgeIndexes = leaf.selection.edges\n      if (edgeIndexes.length == 1) {\n        leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]])\n        return leaf;\n      } else {\n        const res = edgeIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]])})\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  return res;\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            const edges = leaf.geometry.edges;\n            const edgeIndexes = leaf.selection.edges;\n            if (edgeIndexes.length == 1) {\n                leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]]);\n                return leaf;\n            }\n            else {\n                const res = edgeIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]]) });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    return res;\n}\n"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "input",
+                  "ap1ID": "id-106059",
+                  "ap2ID": "id-106060"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-106060",
+                  "ap2ID": "id-106058"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-08-20T18:23:39.118Z",
+                "privateRepo": false,
+                "repoName": "ExtractEdges",
+                "dateCreated": "2026-07-24T20:38:56Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-34874",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/ExtractEdges",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739824",
+                "ranking": 0.6,
+                "searchField": "extractedges tristan-huber select edges from an assembly by clicking on them. returns a new assembly of just those edges as wires. selection is saved as index of each edge in it's leaf. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Select edges from an assembly by clicking on them. Returns a new assembly of just those edges as wires. Selection is saved as index of each edge in it's leaf.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1787250868421
             }
           ],
           "allConnectors": [
@@ -16188,11 +16270,6 @@
               "ap2ID": "id-105805"
             },
             {
-              "ap2Name": "faces",
-              "ap1ID": "id-105789",
-              "ap2ID": "id-105829"
-            },
-            {
               "ap2Name": "selectionOne",
               "ap1ID": "id-105793",
               "ap2ID": "id-105813"
@@ -16208,14 +16285,14 @@
               "ap2ID": "id-105847"
             },
             {
-              "ap2Name": "Assembly",
-              "ap1ID": "id-105805",
-              "ap2ID": "id-105789"
-            },
-            {
               "ap2Name": "selectionTwo",
               "ap1ID": "id-105809",
               "ap2ID": "id-105813"
+            },
+            {
+              "ap2Name": "Input",
+              "ap1ID": "id-105809",
+              "ap2ID": "id-106057"
             },
             {
               "ap2Name": "Input",
@@ -16256,6 +16333,11 @@
               "ap2Name": "faceSelection",
               "ap1ID": "id-105847",
               "ap2ID": "id-105809"
+            },
+            {
+              "ap2Name": "Assembly",
+              "ap1ID": "id-105847",
+              "ap2ID": "id-105789"
             }
           ],
           "fileTypeVersion": 1
