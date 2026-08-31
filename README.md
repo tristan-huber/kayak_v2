@@ -2,7 +2,7 @@
 
 # kayak_v2
 
-![](/project.svg)
+![](/project.png)
 
 ## Inputs
 
