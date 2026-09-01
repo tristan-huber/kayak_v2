@@ -23597,8 +23597,8 @@
             },
             {
               "name": "Part Name",
-              "ioValue": "tocut",
-              "currentEquation": "tocut"
+              "ioValue": "blah",
+              "currentEquation": "blah"
             }
           ],
           "partName": "tocut",
