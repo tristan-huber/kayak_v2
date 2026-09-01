@@ -21660,10 +21660,6 @@
             {
               "name": "Shape 1",
               "ioValue": null
-            },
-            {
-              "name": "Shape 2",
-              "ioValue": null
             }
           ]
         },
@@ -23597,12 +23593,12 @@
             },
             {
               "name": "Part Name",
-              "ioValue": "blah",
-              "currentEquation": "blah"
+              "ioValue": "strongback",
+              "currentEquation": "strongback"
             }
           ],
           "partName": "tocut",
-          "sortDirection": "Left"
+          "sortDirection": "Bottom"
         },
         {
           "atomType": "Move",
@@ -24793,7 +24789,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 81.51657320291251
+              "ioValue": 59.00000030000001
             },
             {
               "name": "yDist",
@@ -24931,11 +24927,6 @@
           "ap2Name": "geometry",
           "ap1ID": "id-100743",
           "ap2ID": "id-98195"
-        },
-        {
-          "ap2Name": "Shape 2",
-          "ap1ID": "id-100749",
-          "ap2ID": "id-100920"
         },
         {
           "ap2Name": "Shape",
