@@ -21944,7 +21944,7 @@
                 },
                 {
                   "name": "NumRulings",
-                  "ioValue": 50
+                  "ioValue": 30
                 },
                 {
                   "name": "StartFromEdge",
@@ -21977,7 +21977,7 @@
                     },
                     {
                       "name": "numRulings",
-                      "ioValue": 50
+                      "ioValue": 30
                     },
                     {
                       "name": "primaryEdgeIndex",
@@ -21999,7 +21999,11 @@
                   "uniqueID": "id-106152",
                   "name": "Face",
                   "type": "faceselect",
-                  "selectedFaceData": {}
+                  "selectedFaceData": {
+                    "0": [
+                      7
+                    ]
+                  }
                 },
                 {
                   "atomType": "Input",
@@ -22100,7 +22104,7 @@
                 },
                 {
                   "name": "NumRulings",
-                  "ioValue": 50
+                  "ioValue": 30
                 },
                 {
                   "name": "StartFromEdge",
@@ -22133,7 +22137,7 @@
                     },
                     {
                       "name": "numRulings",
-                      "ioValue": 50
+                      "ioValue": 30
                     },
                     {
                       "name": "primaryEdgeIndex",
@@ -22155,7 +22159,11 @@
                   "uniqueID": "id-106159",
                   "name": "Face",
                   "type": "faceselect",
-                  "selectedFaceData": {}
+                  "selectedFaceData": {
+                    "0": [
+                      26
+                    ]
+                  }
                 },
                 {
                   "atomType": "Input",
