@@ -20737,11 +20737,12 @@
             },
             {
               "name": "xDist",
-              "ioValue": 1
+              "ioValue": -20
             },
             {
               "name": "yDist",
-              "ioValue": 5
+              "ioValue": -6,
+              "currentEquation": "-6"
             },
             {
               "name": "zDist",
@@ -23913,6 +23914,135 @@
           "type": "geometry"
         },
         {
+          "atomType": "GitHubMolecule",
+          "x": 0.3665364583333333,
+          "y": 0.5178571428571428,
+          "uniqueID": "id-112140",
+          "name": "ExtractParts",
+          "ioValues": [
+            {
+              "name": "Input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 0.98,
+              "y": 0.5,
+              "uniqueID": "id-112137",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0.0231,
+              "y": 0.14,
+              "uniqueID": "id-112138",
+              "type": "partselect",
+              "selectedLeafIndexes": [
+                2
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.3912760416666667,
+              "y": 0.7742857142857142,
+              "uniqueID": "id-112139",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.selection?.part && leaf.selection.part) {\n      return leaf;\n    } else {\n      return null;\n    }\n  })\n  console.log(res)\n  return res;\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.selection?.part && leaf.selection.part) {\n            return leaf;\n        }\n        else {\n            return null;\n        }\n    });\n    console.log(res);\n    return res;\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-112138",
+              "ap2ID": "id-112139"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-112139",
+              "ap2ID": "id-112137"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-01T18:23:39.199Z",
+            "privateRepo": false,
+            "repoName": "ExtractParts",
+            "dateCreated": "2026-07-24T20:42:33Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-34890",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ExtractParts",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739821",
+            "ranking": 2.4,
+            "searchField": "extractparts tristan-huber select sub-component parts of an assembly by click and return a new assembly with just the selected parts abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Select sub-component parts of an assembly by click and return a new assembly with just the selected parts",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1788305515513
+        },
+        {
+          "atomType": "Gcode",
+          "x": 0.509765625,
+          "y": 0.4494047619047619,
+          "uniqueID": "id-112149",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Tool Size",
+              "ioValue": 0.125
+            },
+            {
+              "name": "Passes",
+              "ioValue": 3
+            },
+            {
+              "name": "Speed",
+              "ioValue": 1500
+            },
+            {
+              "name": "Cut Through",
+              "ioValue": 0.1
+            },
+            {
+              "name": "Part Name",
+              "ioValue": "missing",
+              "currentEquation": "missing"
+            }
+          ],
+          "partName": "tocut",
+          "sortDirection": "Left"
+        },
+        {
           "atomType": "Output",
           "x": 0.98,
           "y": 0.5,
@@ -24990,6 +25120,11 @@
           "ap2ID": "id-98195"
         },
         {
+          "ap2Name": "geometry",
+          "ap1ID": "id-100749",
+          "ap2ID": "id-112149"
+        },
+        {
           "ap2Name": "Shape",
           "ap1ID": "id-100920",
           "ap2ID": "id-98403"
@@ -25075,6 +25210,11 @@
           "ap2ID": "id-100762"
         },
         {
+          "ap2Name": "Input",
+          "ap1ID": "id-98185",
+          "ap2ID": "id-112140"
+        },
+        {
           "ap2Name": "Shape 1",
           "ap1ID": "id-98195",
           "ap2ID": "id-100920"
@@ -25096,13 +25236,13 @@
         },
         {
           "ap2Name": "geometry",
-          "ap1ID": "id-100762",
-          "ap2ID": "id-100749"
+          "ap1ID": "id-98288",
+          "ap2ID": "id-98565"
         },
         {
           "ap2Name": "geometry",
-          "ap1ID": "id-98288",
-          "ap2ID": "id-98565"
+          "ap1ID": "id-112140",
+          "ap2ID": "id-100749"
         }
       ],
       "fileTypeVersion": 1
