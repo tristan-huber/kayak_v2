@@ -20628,6 +20628,10 @@
         {
           "name": "superstructure",
           "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Input",
+          "ioValue": "__GEOMETRY_INPUT__"
         }
       ],
       "topLevel": false,
@@ -23852,6 +23856,13 @@
           "lastReloadedFromGithubAt": 1788287265158
         },
         {
+          "atomType": "Input",
+          "x": 0.0231,
+          "y": 0.39200000000000007,
+          "uniqueID": "id-109319",
+          "type": "geometry"
+        },
+        {
           "atomType": "Output",
           "x": 0.98,
           "y": 0.5,
@@ -24959,11 +24970,6 @@
           "ap2ID": "id-98181"
         },
         {
-          "ap2Name": "geometry",
-          "ap1ID": "id-95411",
-          "ap2ID": "id-100663"
-        },
-        {
           "ap2Name": "retain",
           "ap1ID": "id-95414",
           "ap2ID": "id-100666"
@@ -25042,6 +25048,11 @@
           "ap2Name": "Shape",
           "ap1ID": "id-109272",
           "ap2ID": "id-109288"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-109319",
+          "ap2ID": "id-100663"
         }
       ],
       "fileTypeVersion": 1
@@ -25168,6 +25179,11 @@
       "ap2Name": "bulkheads",
       "ap1ID": "id-89799",
       "ap2ID": "id-93010"
+    },
+    {
+      "ap2Name": "Input",
+      "ap1ID": "id-89799",
+      "ap2ID": "id-95407"
     }
   ],
   "unitsKey": "Inches",
