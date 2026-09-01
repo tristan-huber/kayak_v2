@@ -23577,19 +23577,23 @@
             },
             {
               "name": "Tool Size",
-              "ioValue": 0.125
+              "ioValue": 0.125,
+              "currentEquation": "0.125"
             },
             {
               "name": "Passes",
-              "ioValue": 4
+              "ioValue": 4,
+              "currentEquation": "4"
             },
             {
               "name": "Speed",
-              "ioValue": 2000
+              "ioValue": 2000,
+              "currentEquation": "2000"
             },
             {
               "name": "Cut Through",
-              "ioValue": 2
+              "ioValue": 2,
+              "currentEquation": "2"
             },
             {
               "name": "Part Name",
@@ -23620,8 +23624,8 @@
             },
             {
               "name": "zDist",
-              "ioValue": -0.5,
-              "currentEquation": "-0.5"
+              "ioValue": 0,
+              "currentEquation": "0"
             }
           ]
         },
@@ -25175,7 +25179,7 @@
       "ap2ID": "id-93010"
     }
   ],
-  "unitsKey": "MM",
+  "unitsKey": "Inches",
   "fileTypeVersion": 1,
   "filetypeVersion": 1
 }
