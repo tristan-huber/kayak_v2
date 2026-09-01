@@ -20618,6 +20618,10 @@
       "name": "tocut",
       "ioValues": [
         {
+          "name": "Input",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
           "name": "falsework",
           "ioValue": "__GEOMETRY_INPUT__"
         },
@@ -20627,10 +20631,6 @@
         },
         {
           "name": "superstructure",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Input",
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ],
@@ -20737,8 +20737,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 1,
-              "currentEquation": "1"
+              "ioValue": 1
             },
             {
               "name": "yDist",
@@ -22000,11 +21999,7 @@
                   "uniqueID": "id-106152",
                   "name": "Face",
                   "type": "faceselect",
-                  "selectedFaceData": {
-                    "0": [
-                      7
-                    ]
-                  }
+                  "selectedFaceData": {}
                 },
                 {
                   "atomType": "Input",
@@ -22533,8 +22528,8 @@
                   "type": "faceselect",
                   "selectedFaceData": {
                     "0": [
-                      21,
                       19,
+                      21,
                       9,
                       8
                     ]
@@ -22630,22 +22625,7 @@
                   "y": 0.14,
                   "uniqueID": "id-106320",
                   "type": "edgeselect",
-                  "selectedEdgeData": {
-                    "0": [
-                      4
-                    ],
-                    "1": [
-                      11,
-                      10
-                    ],
-                    "2": [
-                      11,
-                      10
-                    ],
-                    "3": [
-                      4
-                    ]
-                  }
+                  "selectedEdgeData": {}
                 },
                 {
                   "atomType": "Code",
@@ -22739,10 +22719,10 @@
                   "type": "edgeselect",
                   "selectedEdgeData": {
                     "0": [
-                      2
+                      3
                     ],
                     "1": [
-                      3
+                      2
                     ],
                     "2": [
                       8
@@ -22875,10 +22855,10 @@
                   "type": "edgeselect",
                   "selectedEdgeData": {
                     "0": [
-                      0
+                      1
                     ],
                     "1": [
-                      1
+                      0
                     ],
                     "2": [
                       0
@@ -23221,20 +23201,7 @@
                   "uniqueID": "id-109333",
                   "name": "primaryWire",
                   "type": "edgeselect",
-                  "selectedEdgeData": {
-                    "0": [
-                      2
-                    ],
-                    "1": [
-                      3
-                    ],
-                    "2": [
-                      8
-                    ],
-                    "3": [
-                      2
-                    ]
-                  }
+                  "selectedEdgeData": {}
                 },
                 {
                   "atomType": "Input",
@@ -23243,20 +23210,7 @@
                   "uniqueID": "id-109334",
                   "name": "secondaryWire",
                   "type": "edgeselect",
-                  "selectedEdgeData": {
-                    "0": [
-                      0
-                    ],
-                    "1": [
-                      1
-                    ],
-                    "2": [
-                      0
-                    ],
-                    "3": [
-                      0
-                    ]
-                  }
+                  "selectedEdgeData": {}
                 },
                 {
                   "atomType": "Input",
@@ -23438,8 +23392,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.6497395833333334,
-              "y": 0.39428571428571424,
+              "x": 0.6634114583333334,
+              "y": 0.15476190476190477,
               "uniqueID": "id-109402",
               "name": "util.FuseWire",
               "ioValues": [
@@ -23631,11 +23585,6 @@
               "ap2ID": "id-109337"
             },
             {
-              "ap2Name": "holes",
-              "ap1ID": "id-106322",
-              "ap2ID": "id-106531"
-            },
-            {
               "ap2Name": "wires",
               "ap1ID": "id-106383",
               "ap2ID": "id-109376"
@@ -23675,23 +23624,19 @@
             },
             {
               "name": "Tool Size",
-              "ioValue": 0.125,
-              "currentEquation": "0.125"
+              "ioValue": 0.125
             },
             {
               "name": "Passes",
-              "ioValue": 4,
-              "currentEquation": "4"
+              "ioValue": 4
             },
             {
               "name": "Speed",
-              "ioValue": 2000,
-              "currentEquation": "2000"
+              "ioValue": 2000
             },
             {
               "name": "Cut Through",
-              "ioValue": 2,
-              "currentEquation": "2"
+              "ioValue": 2
             },
             {
               "name": "Part Name",
@@ -23722,8 +23667,7 @@
             },
             {
               "name": "zDist",
-              "ioValue": 0,
-              "currentEquation": "0"
+              "ioValue": 0
             }
           ]
         },
@@ -23956,7 +23900,7 @@
         {
           "atomType": "Input",
           "x": 0.0231,
-          "y": 0.39200000000000007,
+          "y": 0.14,
           "uniqueID": "id-109319",
           "type": "geometry"
         },
@@ -23975,7 +23919,7 @@
         {
           "atomType": "Input",
           "x": 0.0231,
-          "y": 0.14,
+          "y": 0.7053571428571429,
           "uniqueID": "id-95411",
           "name": "falsework",
           "type": "geometry"
@@ -23983,7 +23927,7 @@
         {
           "atomType": "Input",
           "x": 0.0231,
-          "y": 0.22400000000000003,
+          "y": 0.34523809523809523,
           "uniqueID": "id-95414",
           "name": "bodyPanels",
           "type": "geometry"
@@ -23991,7 +23935,7 @@
         {
           "atomType": "Input",
           "x": 0.0231,
-          "y": 0.30800000000000005,
+          "y": 0.4613095238095238,
           "uniqueID": "id-95417",
           "name": "superstructure",
           "type": "geometry"
@@ -25059,6 +25003,21 @@
         },
         {
           "ap2Name": "geometry",
+          "ap1ID": "id-109272",
+          "ap2ID": "id-109265"
+        },
+        {
+          "ap2Name": "Shape",
+          "ap1ID": "id-109272",
+          "ap2ID": "id-109288"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-109319",
+          "ap2ID": "id-100663"
+        },
+        {
+          "ap2Name": "geometry",
           "ap1ID": "id-95411",
           "ap2ID": "id-95420"
         },
@@ -25136,21 +25095,6 @@
           "ap2Name": "geometry",
           "ap1ID": "id-98288",
           "ap2ID": "id-98565"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-109272",
-          "ap2ID": "id-109265"
-        },
-        {
-          "ap2Name": "Shape",
-          "ap1ID": "id-109272",
-          "ap2ID": "id-109288"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-109319",
-          "ap2ID": "id-100663"
         }
       ],
       "fileTypeVersion": 1
