@@ -7,7 +7,7 @@
   "ioValues": [
     {
       "name": "hullThickness",
-      "ioValue": 0.12
+      "ioValue": 0.25
     },
     {
       "name": "bulkheadThickness",
@@ -25,118 +25,6 @@
   ],
   "topLevel": true,
   "allAtoms": [
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.18619791666666666,
-      "y": 0.7971428571428572,
-      "uniqueID": "id-114705",
-      "name": "util.Offset",
-      "ioValues": [
-        {
-          "name": "Shape",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Offset",
-          "ioValue": -0.12
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-114701",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.36328124999999994,
-          "y": 0.5657142857142857,
-          "uniqueID": "id-114702",
-          "ioValues": [
-            {
-              "name": "shape",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "offset",
-              "ioValue": -0.12
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.offset(offset)\n      return leaf;\n    }\n\n    if (leaf.geometry instanceof replicad.Face) {\n      leaf.geometry = replicad.makeOffset(leaf.geometry, offset)\n      return leaf;\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
-          "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.offset(offset);\n            return leaf;\n        }\n        if (leaf.geometry instanceof replicad.Face) {\n            leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n            return leaf;\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.0231,
-          "y": 0.14,
-          "uniqueID": "id-114703",
-          "name": "Shape",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.0231,
-          "y": 0.22400000000000003,
-          "uniqueID": "id-114704",
-          "name": "Offset"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-114702",
-          "ap2ID": "id-114701"
-        },
-        {
-          "ap2Name": "shape",
-          "ap1ID": "id-114703",
-          "ap2ID": "id-114702"
-        },
-        {
-          "ap2Name": "offset",
-          "ap1ID": "id-114704",
-          "ap2ID": "id-114702"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-08-18T10:23:39.059Z",
-        "privateRepo": false,
-        "repoName": "util.Offset",
-        "dateCreated": "2026-07-17T21:53:37Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/tristan-huber/util.Offset/master/README.md?sanitize=true",
-        "yyyy": 2026,
-        "topMoleculeID": "id-66747",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/tristan-huber/util.Offset",
-        "topics": [
-          "abundance-tool"
-        ],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739840",
-        "ranking": 3.6,
-        "searchField": "util.offset tristan-huber offset an assembly of solids by some constant distance. positive value corresponds to a larger result, negative offsets correspond to a smaller result. abundance-tool",
-        "owner": "tristan-huber",
-        "description": "Offset an assembly of solids by some constant distance. Positive value corresponds to a larger result, negative offsets correspond to a smaller result.",
-        "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.Offset/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.Offset/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Unitless",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1788472257709
-    },
     {
       "atomType": "GitHubMolecule",
       "x": 0.2727864583333333,
@@ -235,17 +123,7 @@
               "atomType": "Rectangle",
               "x": 0.21940104166666666,
               "y": 0.7457142857142858,
-              "uniqueID": "id-117124",
-              "ioValues": [
-                {
-                  "name": "x length",
-                  "ioValue": 10.629240796730004
-                },
-                {
-                  "name": "y length",
-                  "ioValue": 28.5165729029125
-                }
-              ]
+              "uniqueID": "id-117124"
             },
             {
               "atomType": "Extrude",
@@ -1194,6 +1072,118 @@
       "unitsKey": "MM",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1788472611976
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.18619791666666666,
+      "y": 0.7971428571428572,
+      "uniqueID": "id-121974",
+      "name": "util.Offset",
+      "ioValues": [
+        {
+          "name": "Shape",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Offset",
+          "ioValue": -0.25
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-121970",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.36328124999999994,
+          "y": 0.5657142857142857,
+          "uniqueID": "id-121971",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "offset",
+              "ioValue": -0.25
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(shape: Assembly, offset: number = 1) {\n  return shape.onLeafs((leaf) => {\n    console.log(leaf)\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.offset(offset)\n      return leaf;\n    }\n\n    if (leaf.geometry instanceof replicad.Face) {\n      leaf.geometry = replicad.makeOffset(leaf.geometry, offset)\n      return leaf;\n    }\n\n    const oc = replicad.getOC();\n    const progress = new oc.Message_ProgressRange();\n    const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n    offsetBuilder.PerformByJoin(\n      leaf.geometry.wrapped,\n      offset,\n      0.000001,\n      oc.BRepOffset_Mode.BRepOffset_Skin,\n      true, // for interior offsets this seems to work better when set to true.\n      false,\n      oc.GeomAbs_JoinType.GeomAbs_Arc,\n      false,\n      progress\n    );\n\n    //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n    leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()))\n    if (leaf.geometry instanceof replicad.Shell) {\n      console.log(\"got shell, trying to make solid\")\n      leaf.geometry = replicad.makeSolid([leaf.geometry])\n    }\n\n    offsetBuilder.delete();\n    progress.delete();\n\n    return leaf;\n    //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(shape, offset = 1) {\n    return shape.onLeafs((leaf) => {\n        console.log(leaf);\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.offset(offset);\n            return leaf;\n        }\n        if (leaf.geometry instanceof replicad.Face) {\n            leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n            return leaf;\n        }\n        const oc = replicad.getOC();\n        const progress = new oc.Message_ProgressRange();\n        const offsetBuilder = new oc.BRepOffsetAPI_MakeOffsetShape();\n        offsetBuilder.PerformByJoin(leaf.geometry.wrapped, offset, 0.000001, oc.BRepOffset_Mode.BRepOffset_Skin, true, // for interior offsets this seems to work better when set to true.\n        false, oc.GeomAbs_JoinType.GeomAbs_Arc, false, progress);\n        //      offsetBuilder.PerformBySimple(leaf.geometry.wrapped, offset)\n        leaf.geometry = replicad.cast(replicad.downcast(offsetBuilder.Shape()));\n        if (leaf.geometry instanceof replicad.Shell) {\n            console.log(\"got shell, trying to make solid\");\n            leaf.geometry = replicad.makeSolid([leaf.geometry]);\n        }\n        offsetBuilder.delete();\n        progress.delete();\n        return leaf;\n        //leaf.geometry = replicad.makeOffset(leaf.geometry, offset);\n    });\n}\n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0231,
+          "y": 0.14,
+          "uniqueID": "id-121972",
+          "name": "Shape",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0231,
+          "y": 0.22400000000000003,
+          "uniqueID": "id-121973",
+          "name": "Offset"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-121971",
+          "ap2ID": "id-121970"
+        },
+        {
+          "ap2Name": "shape",
+          "ap1ID": "id-121972",
+          "ap2ID": "id-121971"
+        },
+        {
+          "ap2Name": "offset",
+          "ap1ID": "id-121973",
+          "ap2ID": "id-121971"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-08-18T10:23:39.059Z",
+        "privateRepo": false,
+        "repoName": "util.Offset",
+        "dateCreated": "2026-07-17T21:53:37Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/util.Offset/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-66747",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/util.Offset",
+        "topics": [
+          "abundance-tool"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739840",
+        "ranking": 3.6,
+        "searchField": "util.offset tristan-huber offset an assembly of solids by some constant distance. positive value corresponds to a larger result, negative offsets correspond to a smaller result. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Offset an assembly of solids by some constant distance. Positive value corresponds to a larger result, negative offsets correspond to a smaller result.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.Offset/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.Offset/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1788474235943
     },
     {
       "atomType": "Output",
@@ -3476,7 +3466,7 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 0.12
+          "ioValue": 0.25
         }
       ],
       "currentEquation": "-1 * x"
@@ -3822,8 +3812,7 @@
             },
             {
               "name": "u",
-              "ioValue": 0.5,
-              "currentEquation": "0.5"
+              "ioValue": 0.5
             },
             {
               "name": "v",
@@ -4197,7 +4186,7 @@
                 },
                 {
                   "name": "zDist",
-                  "ioValue": 0.24,
+                  "ioValue": 0.5,
                   "currentEquation": "hullThickness * 2"
                 }
               ]
@@ -4426,7 +4415,7 @@
                   "ioValue": [
                     0,
                     0,
-                    0.12
+                    0.25
                   ]
                 }
               ],
@@ -4459,7 +4448,7 @@
                       "ioValue": [
                         0,
                         0,
-                        0.12
+                        0.25
                       ]
                     }
                   ],
@@ -4554,7 +4543,7 @@
                 },
                 {
                   "name": "distZ",
-                  "ioValue": 0.12,
+                  "ioValue": 0.25,
                   "currentEquation": "hullThickness"
                 }
               ],
@@ -4714,7 +4703,7 @@
                     },
                     {
                       "name": "distZ",
-                      "ioValue": 0.12
+                      "ioValue": 0.25
                     }
                   ],
                   "interpreterVersion": 1,
@@ -4873,7 +4862,7 @@
                   "ioValue": [
                     0,
                     0,
-                    0.12
+                    0.25
                   ]
                 }
               ],
@@ -4906,7 +4895,7 @@
                       "ioValue": [
                         0,
                         0,
-                        0.12
+                        0.25
                       ]
                     }
                   ],
@@ -5255,7 +5244,7 @@
                 },
                 {
                   "name": "scale",
-                  "ioValue": 0.12,
+                  "ioValue": 0.25,
                   "currentEquation": "hullThickness"
                 }
               ],
@@ -5305,7 +5294,7 @@
                     },
                     {
                       "name": "scale",
-                      "ioValue": 0.12
+                      "ioValue": 0.25
                     }
                   ],
                   "interpreterVersion": 1,
@@ -5593,7 +5582,11 @@
               "uniqueID": "id-76425",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  8
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -6299,7 +6292,7 @@
                 },
                 {
                   "name": "height",
-                  "ioValue": -0.12,
+                  "ioValue": -0.25,
                   "currentEquation": "-1 * hullThickness"
                 }
               ]
@@ -6512,11 +6505,6 @@
               "ap2ID": "id-76692"
             },
             {
-              "ap2Name": "geometry",
-              "ap1ID": "id-76699",
-              "ap2ID": "id-76681"
-            },
-            {
               "ap2Name": "retain",
               "ap1ID": "id-120152",
               "ap2ID": "id-76684"
@@ -6530,6 +6518,11 @@
               "ap2Name": "remove",
               "ap1ID": "id-120169",
               "ap2ID": "id-76687"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-76699",
+              "ap2ID": "id-76681"
             }
           ],
           "fileTypeVersion": 1
@@ -6568,21 +6561,6 @@
           "ap2ID": "id-76330"
         },
         {
-          "ap2Name": "cockpitShape",
-          "ap1ID": "id-76423",
-          "ap2ID": "id-76332"
-        },
-        {
-          "ap2Name": "Shape 2",
-          "ap1ID": "id-76332",
-          "ap2ID": "id-80958"
-        },
-        {
-          "ap2Name": "Shape 1",
-          "ap1ID": "id-76675",
-          "ap2ID": "id-80958"
-        },
-        {
           "ap2Name": "Assembly",
           "ap1ID": "id-120072",
           "ap2ID": "id-76423"
@@ -6596,6 +6574,21 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-120111",
           "ap2ID": "id-120107"
+        },
+        {
+          "ap2Name": "cockpitShape",
+          "ap1ID": "id-76423",
+          "ap2ID": "id-76332"
+        },
+        {
+          "ap2Name": "Shape 2",
+          "ap1ID": "id-76332",
+          "ap2ID": "id-80958"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-76675",
+          "ap2ID": "id-80958"
         }
       ],
       "fileTypeVersion": 1
@@ -11883,7 +11876,7 @@
             },
             {
               "name": "zDist",
-              "ioValue": 0.37,
+              "ioValue": 0.5,
               "currentEquation": "hullThickness + 0.25"
             }
           ]
@@ -13569,10 +13562,6 @@
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "xDist",
-              "ioValue": 6.6200000000000045
-            },
-            {
               "name": "yDist",
               "ioValue": 0
             },
@@ -13589,10 +13578,6 @@
           "uniqueID": "id-93277",
           "name": "(x - y) / 2",
           "ioValues": [
-            {
-              "name": "x",
-              "ioValue": 72.24000000000001
-            },
             {
               "name": "y",
               "ioValue": 59
@@ -16156,7 +16141,7 @@
                 },
                 {
                   "name": "height",
-                  "ioValue": 0.12,
+                  "ioValue": 0.25,
                   "currentEquation": "hullThickness"
                 }
               ]
@@ -16240,10 +16225,6 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 59.00000030000001
             },
             {
               "name": "yDist",
@@ -16505,7 +16486,7 @@
     {
       "ap2Name": "Offset",
       "ap1ID": "id-76300",
-      "ap2ID": "id-114705"
+      "ap2ID": "id-121974"
     },
     {
       "ap2Name": "sliceThickness",
@@ -16533,16 +16514,6 @@
       "ap2ID": "id-80974"
     },
     {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-114705",
-      "ap2ID": "id-130"
-    },
-    {
-      "ap2Name": "profileShape",
-      "ap1ID": "id-114705",
-      "ap2ID": "id-117163"
-    },
-    {
       "ap2Name": "Shape",
       "ap1ID": "id-92566",
       "ap2ID": "id-92619"
@@ -16565,7 +16536,7 @@
     {
       "ap2Name": "Shape",
       "ap1ID": "id-92566",
-      "ap2ID": "id-114705"
+      "ap2ID": "id-121974"
     },
     {
       "ap2Name": "falsework",
@@ -16596,6 +16567,16 @@
       "ap2Name": "Input",
       "ap1ID": "id-89799",
       "ap2ID": "id-95407"
+    },
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-121974",
+      "ap2ID": "id-130"
+    },
+    {
+      "ap2Name": "profileShape",
+      "ap1ID": "id-121974",
+      "ap2ID": "id-117163"
     }
   ],
   "unitsKey": "Inches",
