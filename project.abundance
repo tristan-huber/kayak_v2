@@ -13741,10 +13741,6 @@
           "name": "sideScrews",
           "ioValues": [
             {
-              "name": "bulkheads",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
               "name": "inset",
               "ioValue": 0.51
             }
@@ -13837,7 +13833,42 @@
                   "uniqueID": "id-105499",
                   "name": "Assembly",
                   "type": "faceselect",
-                  "selectedFaceData": {}
+                  "selectedFaceData": {
+                    "0": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                    ],
+                    "1": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                    ],
+                    "2": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8
+                    ],
+                    "3": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -14110,7 +14141,32 @@
                   "y": 0.14,
                   "uniqueID": "id-105528",
                   "type": "edgeselect",
-                  "selectedEdgeData": {}
+                  "selectedEdgeData": {
+                    "0": [
+                      12,
+                      14,
+                      15,
+                      17
+                    ],
+                    "1": [
+                      12,
+                      14,
+                      15,
+                      17
+                    ],
+                    "2": [
+                      18,
+                      20,
+                      21,
+                      23
+                    ],
+                    "3": [
+                      12,
+                      14,
+                      15,
+                      17
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -15735,10 +15791,6 @@
           "name": "topscrews",
           "ioValues": [
             {
-              "name": "bulkheads",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
               "name": "inset",
               "ioValue": 1
             }
@@ -15831,7 +15883,32 @@
                   "uniqueID": "id-105791",
                   "name": "Assembly",
                   "type": "faceselect",
-                  "selectedFaceData": {}
+                  "selectedFaceData": {
+                    "0": [
+                      3,
+                      4,
+                      5,
+                      6
+                    ],
+                    "1": [
+                      3,
+                      4,
+                      5,
+                      6
+                    ],
+                    "2": [
+                      5,
+                      6,
+                      7,
+                      8
+                    ],
+                    "3": [
+                      3,
+                      4,
+                      5,
+                      6
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -16493,7 +16570,26 @@
                   "y": 0.14,
                   "uniqueID": "id-106059",
                   "type": "edgeselect",
-                  "selectedEdgeData": {}
+                  "selectedEdgeData": {
+                    "0": [
+                      6,
+                      10
+                    ],
+                    "1": [
+                      6,
+                      10
+                    ],
+                    "2": [
+                      10,
+                      11,
+                      14,
+                      15
+                    ],
+                    "3": [
+                      7,
+                      9
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -16585,7 +16681,26 @@
                   "y": 0.14,
                   "uniqueID": "id-106071",
                   "type": "edgeselect",
-                  "selectedEdgeData": {}
+                  "selectedEdgeData": {
+                    "0": [
+                      6,
+                      10
+                    ],
+                    "1": [
+                      6,
+                      10
+                    ],
+                    "2": [
+                      10,
+                      11,
+                      14,
+                      15
+                    ],
+                    "3": [
+                      7,
+                      9
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -21771,7 +21886,20 @@
               "uniqueID": "id-103201",
               "name": "Face",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "27": [
+                  8
+                ],
+                "28": [
+                  8
+                ],
+                "29": [
+                  8
+                ],
+                "30": [
+                  8
+                ]
+              }
             },
             {
               "atomType": "Input",
@@ -23355,6 +23483,11 @@
       "ap2Name": "falsework",
       "ap1ID": "id-93010",
       "ap2ID": "id-95407"
+    },
+    {
+      "ap2Name": "bulkheads",
+      "ap1ID": "id-117163",
+      "ap2ID": "id-89799"
     },
     {
       "ap2Name": "geometry",
