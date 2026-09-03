@@ -17920,8 +17920,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.33984375,
-          "y": 0.7914285714285715,
+          "x": 0.10546875,
+          "y": 0.8,
           "uniqueID": "id-90175",
           "name": "-6-Wood-Screw-inches",
           "ioValues": [
@@ -18403,8 +18403,8 @@
         },
         {
           "atomType": "Assembly",
-          "x": 0.8867187499999999,
-          "y": 0.24,
+          "x": 0.8665364583333334,
+          "y": 0.24857142857142855,
           "uniqueID": "id-90312",
           "ioValues": [
             {
@@ -18423,8 +18423,8 @@
         },
         {
           "atomType": "Add-BOM-Tag",
-          "x": 0.447265625,
-          "y": 0.7599999999999999,
+          "x": 0.18359375,
+          "y": 0.7914285714285715,
           "uniqueID": "id-90322",
           "name": "Add BOM Tag",
           "ioValues": [
@@ -18443,18 +18443,19 @@
             },
             {
               "name": "Cost (USD)",
-              "ioValue": 0.45
+              "ioValue": 0.04
             },
             {
               "name": "Source Link",
-              "ioValue": ""
+              "ioValue": "www.tractorsupply.com/tsc/product/hillman-fas-n-tite-bugle-head-phillips-all-purpose-wood-screws-(-6-x-1-1-4)-1lb-1549385",
+              "currentEquation": "www.tractorsupply.com/tsc/product/hillman-fas-n-tite-bugle-head-phillips-all-purpose-wood-screws-(-6-x-1-1-4)-1lb-1549385"
             }
           ],
           "BOMitem": {
             "BOMitemName": "Wood Screw #6",
             "numberNeeded": 1,
-            "costUSD": 0.45,
-            "source": ""
+            "costUSD": 0.04,
+            "source": "www.tractorsupply.com/tsc/product/hillman-fas-n-tite-bugle-head-phillips-all-purpose-wood-screws-(-6-x-1-1-4)-1lb-1549385"
           }
         },
         {
@@ -18732,6 +18733,11 @@
           "ap2ID": "id-89801"
         },
         {
+          "ap2Name": "geometry",
+          "ap1ID": "id-90322",
+          "ap2ID": "id-90306"
+        },
+        {
           "ap2Name": "inset",
           "ap1ID": "id-92994",
           "ap2ID": "id-105483"
@@ -18740,11 +18746,6 @@
           "ap2Name": "geometry",
           "ap1ID": "id-90175",
           "ap2ID": "id-90322"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-92956",
-          "ap2ID": "id-90306"
         },
         {
           "ap2Name": "Shape 5",
@@ -20081,10 +20082,6 @@
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "xDist",
-              "ioValue": 6.6200000000000045
-            },
-            {
               "name": "yDist",
               "ioValue": 0
             },
@@ -20101,10 +20098,6 @@
           "uniqueID": "id-93277",
           "name": "(x - y) / 2",
           "ioValues": [
-            {
-              "name": "x",
-              "ioValue": 72.24000000000001
-            },
             {
               "name": "y",
               "ioValue": 59
@@ -22741,10 +22734,6 @@
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "xDist",
-              "ioValue": 59.00000030000001
-            },
-            {
               "name": "yDist",
               "ioValue": 0
             },
@@ -23090,11 +23079,6 @@
       "ap2Name": "Input",
       "ap1ID": "id-89799",
       "ap2ID": "id-95407"
-    },
-    {
-      "ap2Name": "bulkheads",
-      "ap1ID": "id-117163",
-      "ap2ID": "id-89799"
     }
   ],
   "unitsKey": "Inches",
