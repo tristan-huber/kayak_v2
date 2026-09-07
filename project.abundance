@@ -10284,7 +10284,7 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.2,
+              "x": 0.1,
               "y": 0.4,
               "uniqueID": "id-117338",
               "name": "select.FacesByNormal",
