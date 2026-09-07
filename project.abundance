@@ -19,6 +19,7 @@
         "16",
         "40",
         "90",
+        "115",
         "130"
       ]
     }
@@ -46,6 +47,7 @@
             "16",
             "40",
             "90",
+            "115",
             "130"
           ]
         }
@@ -81,6 +83,7 @@
                 "16",
                 "40",
                 "90",
+                "115",
                 "130"
               ]
             },
@@ -745,6 +748,7 @@
                     "16",
                     "40",
                     "90",
+                    "115",
                     "130"
                   ]
                 },
@@ -812,6 +816,7 @@
                         "16",
                         "40",
                         "90",
+                        "115",
                         "130"
                       ]
                     },
@@ -3201,113 +3206,6 @@
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1788813137755
-    },
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.3,
-      "y": 0.3,
-      "uniqueID": "id-126086",
-      "name": "Width",
-      "ioValues": [
-        {
-          "name": "Shape",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 1,
-          "y": 0.5,
-          "uniqueID": "id-126083",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Input",
-          "x": 0,
-          "y": 0.1,
-          "uniqueID": "id-126084",
-          "name": "Shape",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Code",
-          "x": 0.4,
-          "y": 0.5,
-          "uniqueID": "id-126085",
-          "ioValues": [
-            {
-              "name": "A",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "interpreterVersion": 0,
-          "code": "/**\n Inputs for this Code Atom:\n - Takes a single geometry input \"A\" and returns its width (X size) as measured by the bounding box.\n*/\nInputs = [\n  { inputName: \"A\", type: \"geometry\", defaultValue: null }\n]\n\nif (!A) {\n  // No input provided — return null to indicate absence.\n  return null\n}\n\n// Get bounding box of A. boundsA.min and boundsA.max are arrays [x, y, z]\nlet boundsA = await GetBounds(A);\nlet min = boundsA.min;\nlet max = boundsA.max;\n\n// Compute width along X (maxX - minX)\nlet width = max[0] - min[0];\n\n// Ensure a non-negative numeric result\nwidth = typeof width === 'number' && isFinite(width) ? Math.max(0, width) : null;\n\nreturn width;"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "A",
-          "ap1ID": "id-126084",
-          "ap2ID": "id-126085"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-126085",
-          "ap2ID": "id-126083"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-09-07T18:23:39.102Z",
-        "privateRepo": false,
-        "repoName": "Width",
-        "dateCreated": "2025-12-04T20:14:11Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/BarbourSmith/Width/master/README.md?sanitize=true",
-        "yyyy": 2025,
-        "topMoleculeID": "id-386",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/BarbourSmith/Width",
-        "topics": [],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739589",
-        "ranking": 9.6,
-        "searchField": "width barboursmith takes a shape and returns the width as measured by the shapes bounding box in the x direction ",
-        "owner": "BarbourSmith",
-        "description": "Takes a shape and returns the width as measured by the shapes bounding box in the X direction",
-        "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "MM",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1788813312607
-    },
-    {
-      "atomType": "Equation",
-      "x": 0.4,
-      "y": 0.4,
-      "uniqueID": "id-126095",
-      "name": "x + y",
-      "ioValues": [
-        {
-          "name": "x",
-          "ioValue": 144.0000002
-        },
-        {
-          "name": "y",
-          "ioValue": 1
-        }
-      ],
-      "currentEquation": "x + y"
     },
     {
       "atomType": "Output",
@@ -9016,6 +8914,14 @@
                       4,
                       5,
                       6
+                    ],
+                    "4": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
                     ]
                   }
                 },
@@ -9310,6 +9216,12 @@
                       16
                     ],
                     "3": [
+                      7,
+                      10,
+                      11,
+                      13
+                    ],
+                    "4": [
                       7,
                       10,
                       11,
@@ -11056,6 +10968,12 @@
                       2,
                       3,
                       4
+                    ],
+                    "4": [
+                      1,
+                      2,
+                      3,
+                      4
                     ]
                   }
                 },
@@ -11737,6 +11655,10 @@
                     "3": [
                       15,
                       17
+                    ],
+                    "4": [
+                      15,
+                      17
                     ]
                   }
                 },
@@ -11846,6 +11768,10 @@
                       23
                     ],
                     "3": [
+                      15,
+                      17
+                    ],
+                    "4": [
                       15,
                       17
                     ]
@@ -14547,95 +14473,6 @@
       "lastReloadedFromGithubAt": 1787255262451
     },
     {
-      "atomType": "GitHubMolecule",
-      "x": 0.3,
-      "y": 0.9,
-      "uniqueID": "id-93001",
-      "name": "Width",
-      "ioValues": [
-        {
-          "name": "Shape",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 1,
-          "y": 0.5,
-          "uniqueID": "id-92998",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Input",
-          "x": 0,
-          "y": 0.1,
-          "uniqueID": "id-92999",
-          "name": "Shape",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Code",
-          "x": 0.4,
-          "y": 0.5,
-          "uniqueID": "id-93000",
-          "ioValues": [
-            {
-              "name": "A",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "interpreterVersion": 0,
-          "code": "/**\n Inputs for this Code Atom:\n - Takes a single geometry input \"A\" and returns its width (X size) as measured by the bounding box.\n*/\nInputs = [\n  { inputName: \"A\", type: \"geometry\", defaultValue: null }\n]\n\nif (!A) {\n  // No input provided — return null to indicate absence.\n  return null\n}\n\n// Get bounding box of A. boundsA.min and boundsA.max are arrays [x, y, z]\nlet boundsA = await GetBounds(A);\nlet min = boundsA.min;\nlet max = boundsA.max;\n\n// Compute width along X (maxX - minX)\nlet width = max[0] - min[0];\n\n// Ensure a non-negative numeric result\nwidth = typeof width === 'number' && isFinite(width) ? Math.max(0, width) : null;\n\nreturn width;"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "A",
-          "ap1ID": "id-92999",
-          "ap2ID": "id-93000"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-93000",
-          "ap2ID": "id-92998"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-08-20T18:23:39.118Z",
-        "privateRepo": false,
-        "repoName": "Width",
-        "dateCreated": "2025-12-04T20:14:11Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/BarbourSmith/Width/master/README.md?sanitize=true",
-        "yyyy": 2025,
-        "topMoleculeID": "id-386",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/BarbourSmith/Width",
-        "topics": [],
-        "pullRequests": [],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739589",
-        "ranking": 6.6,
-        "searchField": "width barboursmith takes a shape and returns the width as measured by the shapes bounding box in the x direction ",
-        "owner": "BarbourSmith",
-        "description": "Takes a shape and returns the width as measured by the shapes bounding box in the X direction",
-        "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "MM",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1787256185945
-    },
-    {
       "atomType": "Molecule",
       "x": 0.4,
       "y": 0.9,
@@ -14648,7 +14485,8 @@
         },
         {
           "name": "foreHeight",
-          "ioValue": 3
+          "ioValue": 3,
+          "currentEquation": "3"
         },
         {
           "name": "breadth",
@@ -15594,8 +15432,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.8,
-      "y": 0.2,
+      "x": 0.9,
+      "y": 0.1,
       "uniqueID": "id-95407",
       "name": "tocut",
       "ioValues": [
@@ -18067,7 +17905,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 59.00000030000001
+              "ioValue": 130.00000999999997
             },
             {
               "name": "yDist",
@@ -18345,11 +18183,6 @@
       "ap2Name": "ShapeToExplode",
       "ap1ID": "id-124027",
       "ap2ID": "id-124040"
-    },
-    {
-      "ap2Name": "Shape",
-      "ap1ID": "id-76088",
-      "ap2ID": "id-126086"
     },
     {
       "ap2Name": "Shape",
