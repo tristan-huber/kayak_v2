@@ -12480,6 +12480,11 @@
       ],
       "allConnectors": [
         {
+          "ap2Name": "geometry",
+          "ap1ID": "id-129937",
+          "ap2ID": "id-90306"
+        },
+        {
           "ap2Name": "bulkheads",
           "ap1ID": "id-89803",
           "ap2ID": "id-105483"
@@ -12533,11 +12538,6 @@
           "ap2Name": "Shape 6",
           "ap1ID": "id-105777",
           "ap2ID": "id-90312"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-129937",
-          "ap2ID": "id-90306"
         }
       ],
       "fileTypeVersion": 1
