@@ -1223,8 +1223,9 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.3,
-          "uniqueID": "id-128091"
+          "y": 0.1,
+          "uniqueID": "id-128091",
+          "type": "number"
         },
         {
           "atomType": "GitHubMolecule",
@@ -1251,8 +1252,7 @@
             },
             {
               "name": "u",
-              "ioValue": 0.5,
-              "currentEquation": "0.5"
+              "ioValue": 0.5
             },
             {
               "name": "v",
@@ -1442,7 +1442,22 @@
               "uniqueID": "id-128125",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  9,
+                  10,
+                  11,
+                  12
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -1606,8 +1621,7 @@
             },
             {
               "name": "height",
-              "ioValue": -0.25,
-              "currentEquation": "-0.25"
+              "ioValue": -0.25
             }
           ]
         }
@@ -1617,6 +1631,11 @@
           "ap2Name": "shape",
           "ap1ID": "id-128091",
           "ap2ID": "id-128102"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-128149",
+          "ap2ID": "id-128089"
         },
         {
           "ap2Name": "selection",
@@ -1632,11 +1651,6 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-128140",
           "ap2ID": "id-128127"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-128149",
-          "ap2ID": "id-128089"
         }
       ],
       "fileTypeVersion": 1
@@ -4171,7 +4185,19 @@
               "uniqueID": "id-120109",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -4479,6 +4505,10 @@
               "name": "(width + 2 * t) / width",
               "ioValues": [
                 {
+                  "name": "width",
+                  "ioValue": 27.584363180939746
+                },
+                {
                   "name": "t",
                   "ioValue": 0.5
                 }
@@ -4532,6 +4562,10 @@
               "uniqueID": "id-76339",
               "name": "(width + 2 * t + 1.5) / width",
               "ioValues": [
+                {
+                  "name": "width",
+                  "ioValue": 27.584363180939746
+                },
                 {
                   "name": "t",
                   "ioValue": 0.5
@@ -5413,6 +5447,10 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
+                  "name": "factor",
+                  "ioValue": 1.0362524229194814
+                },
+                {
                   "name": "center",
                   "ioValue": 10
                 }
@@ -5440,6 +5478,10 @@
                     {
                       "name": "shape",
                       "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "factor",
+                      "ioValue": 1.0362524229194814
                     },
                     {
                       "name": "center",
@@ -5536,6 +5578,10 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
+                  "name": "factor",
+                  "ioValue": 1.0906310572987037
+                },
+                {
                   "name": "center",
                   "ioValue": 10
                 }
@@ -5563,6 +5609,10 @@
                     {
                       "name": "shape",
                       "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "factor",
+                      "ioValue": 1.0906310572987037
                     },
                     {
                       "name": "center",
@@ -6002,7 +6052,11 @@
               "uniqueID": "id-76425",
               "name": "Assembly",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  8
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -6072,22 +6126,22 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.3,
+          "x": 0.4,
           "y": 0.7,
           "uniqueID": "id-76675",
           "name": "hatch",
           "ioValues": [
             {
               "name": "distFromBow",
-              "ioValue": 48
+              "ioValue": 95
             },
             {
               "name": "width",
-              "ioValue": 7
+              "ioValue": 14
             },
             {
               "name": "length",
-              "ioValue": 6
+              "ioValue": 12
             }
           ],
           "topLevel": false,
@@ -6368,7 +6422,7 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": 51,
+                  "ioValue": 101,
                   "currentEquation": "distFromBow + length / 2"
                 },
                 {
@@ -6378,22 +6432,6 @@
                 {
                   "name": "zDist",
                   "ioValue": 3
-                }
-              ]
-            },
-            {
-              "atomType": "Difference",
-              "x": 0.4,
-              "y": 0.1,
-              "uniqueID": "id-76683",
-              "ioValues": [
-                {
-                  "name": "retain",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "remove",
-                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -6479,8 +6517,8 @@
             },
             {
               "atomType": "Assembly",
-              "x": 0.6,
-              "y": 0.8,
+              "x": 0.7,
+              "y": 0.9,
               "uniqueID": "id-76690",
               "ioValues": [
                 {
@@ -6550,11 +6588,11 @@
               "ioValues": [
                 {
                   "name": "width",
-                  "ioValue": 7
+                  "ioValue": 14
                 },
                 {
                   "name": "length",
-                  "ioValue": 6
+                  "ioValue": 12
                 },
                 {
                   "name": "radius",
@@ -6587,11 +6625,11 @@
                   "ioValues": [
                     {
                       "name": "width",
-                      "ioValue": 7
+                      "ioValue": 14
                     },
                     {
                       "name": "length",
-                      "ioValue": 6
+                      "ioValue": 12
                     },
                     {
                       "name": "rad",
@@ -6821,11 +6859,6 @@
               "ap2ID": "id-76684"
             },
             {
-              "ap2Name": "remove",
-              "ap1ID": "id-76681",
-              "ap2ID": "id-76683"
-            },
-            {
               "ap2Name": "geometry2",
               "ap1ID": "id-76681",
               "ap2ID": "id-76919"
@@ -6879,11 +6912,6 @@
               "ap2Name": "number or geometry",
               "ap1ID": "id-76694",
               "ap2ID": "id-76676"
-            },
-            {
-              "ap2Name": "retain",
-              "ap1ID": "id-76831",
-              "ap2ID": "id-76683"
             },
             {
               "ap2Name": "geometry1",
@@ -14922,7 +14950,20 @@
               "uniqueID": "id-103201",
               "name": "Face",
               "type": "faceselect",
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "27": [
+                  8
+                ],
+                "28": [
+                  8
+                ],
+                "29": [
+                  8
+                ],
+                "30": [
+                  8
+                ]
+              }
             },
             {
               "atomType": "Input",
@@ -16445,6 +16486,11 @@
       "ap2Name": "Input",
       "ap1ID": "id-76088",
       "ap2ID": "id-128087"
+    },
+    {
+      "ap2Name": "hullForm",
+      "ap1ID": "id-76088",
+      "ap2ID": "id-76328"
     },
     {
       "ap2Name": "x",
