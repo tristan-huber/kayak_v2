@@ -5048,10 +5048,10 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.7,
-          "y": 0.8,
+          "x": 0.6,
+          "y": 0.9,
           "uniqueID": "id-135949",
-          "name": "Molecule",
+          "name": "electronicsLayout",
           "topLevel": false,
           "allAtoms": [
             {
@@ -9574,7 +9574,7 @@
                 },
                 {
                   "name": "zDist",
-                  "ioValue": 0
+                  "ioValue": -0.5
                 }
               ]
             }
@@ -9624,6 +9624,823 @@
               "ap2Name": "Shape 3",
               "ap1ID": "id-136958",
               "ap2ID": "id-136615"
+            }
+          ],
+          "fileTypeVersion": 1
+        },
+        {
+          "atomType": "Molecule",
+          "x": 0.7,
+          "y": 0.8,
+          "uniqueID": "id-137048",
+          "name": "New Molecule",
+          "ioValues": [
+            {
+              "name": "onhatch",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "components",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-137050",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.2,
+              "y": 0.4,
+              "uniqueID": "id-137052",
+              "name": "phys.CenterMass",
+              "ioValues": [
+                {
+                  "name": "defaultDensity",
+                  "ioValue": 1
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-137053",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137054",
+                  "name": "assembly",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137055",
+                  "name": "defaultDensity",
+                  "options": []
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.4,
+                  "y": 0.6,
+                  "uniqueID": "id-137056",
+                  "ioValues": [
+                    {
+                      "name": "assembly",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "defaultDensity",
+                      "ioValue": 1
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "function run(assembly: Assembly, defaultDensity: number) {\n\n  // TODO: this needs to walk the tree so that we give higher metadata  higher priority\n  const getMass = (leaf: Assembly, defaultDensity: number) => {\n    const props = replicad.measureShapeVolumeProperties(leaf.geometry as replicad.Shape3D)\n    let mass = defaultDensity * props.volume;\n    if (leaf.metadata?.mass != undefined) {\n      mass = leaf.metadata.mass;\n    } else if (leaf.metadata?.density != undefined) {\n      mass = leaf.metadata.density * props.volume\n    }\n    return mass;\n  }\n\n  const points: MassPoint[] = []\n  const helper = (subassembly: Assembly, defaultDensity: number) => {\n    if (subassembly.isLeaf()) {\n      if (subassembly.isPoint()) {\n        points.push({ loc: (subassembly.geometry as replicad.Vertex).asTuple(), weight: getMass(subassembly, defaultDensity) })\n      } else {\n        const props = replicad.measureShapeVolumeProperties(subassembly.geometry as replicad.Shape3D)\n        points.push({ loc: props.centerOfMass, weight: getMass(subassembly, defaultDensity) })\n      }\n    } else { // is not leaf\n      if (subassembly.metadata?.mass) { // this branch has a mass value set\n        const subshapePoints: MassPoint[] = []\n        subassembly.onLeafs((leaf) => {\n          if (leaf.is3D()) {\n            const props = replicad.measureShapeVolumeProperties((leaf.geometry as replicad.Shape3D))\n            subshapePoints.push({ loc: props.centerOfMass, weight: props.volume })\n          }\n          return leaf;\n        })\n        const center = centerOfMass(subshapePoints)\n        points.push({ loc: center.loc, weight: subassembly.metadata.mass })\n      } else { // no mass value set on this branch. continue traversal\n        (subassembly.geometry as Assembly[]).forEach((a) => {\n          if (subassembly.metadata?.density) {\n            helper(a, subassembly.metadata.density)\n          } else {\n            helper(a, defaultDensity)\n          }\n        })\n      }\n    }\n  }\n\n  helper(assembly, defaultDensity)\n\n  const center = centerOfMass(points);\n  return new Assembly({\n    geometry: replicad.makeVertex(center.loc),\n    metadata: { mass: center.weight }\n  })\n}\n\ninterface MassPoint {\n  loc: [number, number, number],\n  weight: number\n}\n\n\nfunction centerOfMass(points: MassPoint[]): MassPoint {\n  let totalMass = 0;\n  let sx = 0, sy = 0, sz = 0;\n\n  for (const { loc, weight } of points) {\n    const [x, y, z] = loc;\n    const m = weight;\n    sx += x * m;\n    sy += y * m;\n    sz += z * m;\n    totalMass += m;\n  }\n\n  if (totalMass === 0) {\n    throw new Error(\"centerOfMass: total mass is zero.\");\n  }\n\n  return { loc: [sx / totalMass, sy / totalMass, sz / totalMass], weight: totalMass }\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(assembly, defaultDensity) {\n    // TODO: this needs to walk the tree so that we give higher metadata  higher priority\n    const getMass = (leaf, defaultDensity) => {\n        const props = replicad.measureShapeVolumeProperties(leaf.geometry);\n        let mass = defaultDensity * props.volume;\n        if (leaf.metadata?.mass != undefined) {\n            mass = leaf.metadata.mass;\n        }\n        else if (leaf.metadata?.density != undefined) {\n            mass = leaf.metadata.density * props.volume;\n        }\n        return mass;\n    };\n    const points = [];\n    const helper = (subassembly, defaultDensity) => {\n        if (subassembly.isLeaf()) {\n            if (subassembly.isPoint()) {\n                points.push({ loc: subassembly.geometry.asTuple(), weight: getMass(subassembly, defaultDensity) });\n            }\n            else {\n                const props = replicad.measureShapeVolumeProperties(subassembly.geometry);\n                points.push({ loc: props.centerOfMass, weight: getMass(subassembly, defaultDensity) });\n            }\n        }\n        else { // is not leaf\n            if (subassembly.metadata?.mass) { // this branch has a mass value set\n                const subshapePoints = [];\n                subassembly.onLeafs((leaf) => {\n                    if (leaf.is3D()) {\n                        const props = replicad.measureShapeVolumeProperties(leaf.geometry);\n                        subshapePoints.push({ loc: props.centerOfMass, weight: props.volume });\n                    }\n                    return leaf;\n                });\n                const center = centerOfMass(subshapePoints);\n                points.push({ loc: center.loc, weight: subassembly.metadata.mass });\n            }\n            else { // no mass value set on this branch. continue traversal\n                subassembly.geometry.forEach((a) => {\n                    if (subassembly.metadata?.density) {\n                        helper(a, subassembly.metadata.density);\n                    }\n                    else {\n                        helper(a, defaultDensity);\n                    }\n                });\n            }\n        }\n    };\n    helper(assembly, defaultDensity);\n    const center = centerOfMass(points);\n    return new Assembly({\n        geometry: replicad.makeVertex(center.loc),\n        metadata: { mass: center.weight }\n    });\n}\nfunction centerOfMass(points) {\n    let totalMass = 0;\n    let sx = 0, sy = 0, sz = 0;\n    for (const { loc, weight } of points) {\n        const [x, y, z] = loc;\n        const m = weight;\n        sx += x * m;\n        sy += y * m;\n        sz += z * m;\n        totalMass += m;\n    }\n    if (totalMass === 0) {\n        throw new Error(\"centerOfMass: total mass is zero.\");\n    }\n    return { loc: [sx / totalMass, sy / totalMass, sz / totalMass], weight: totalMass };\n}\n"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "assembly",
+                  "ap1ID": "id-137054",
+                  "ap2ID": "id-137056"
+                },
+                {
+                  "ap2Name": "defaultDensity",
+                  "ap1ID": "id-137055",
+                  "ap2ID": "id-137056"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-137056",
+                  "ap2ID": "id-137053"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "privateRepo": false,
+                "repoName": "phys.CenterMass",
+                "dateCreated": "2026-08-12T16:57:42Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/phys.CenterMass/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-53737",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/phys.CenterMass",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739840",
+                "ranking": 1.2,
+                "searchField": "phys.centermass tristan-huber return the center of mass of an assembly. uses the assigned metadata.mass values on subassemblies or falls back to default density. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "return the center of mass of an assembly. uses the assigned metadata.mass values on subassemblies or falls back to default density.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/phys.CenterMass/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/phys.CenterMass/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789511252670
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.3,
+              "y": 0.8,
+              "uniqueID": "id-137057",
+              "name": "moveToPoints",
+              "ioValues": [
+                {
+                  "name": "shapeToMove",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "toPoints",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "zDirOverride",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDirOverride",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-137058",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.4,
+                  "y": 0.6,
+                  "uniqueID": "id-137059",
+                  "ioValues": [
+                    {
+                      "name": "shape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "points",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "zDir",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDir",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "// moveToPoints\nfunction run(shape: Assembly, points: Assembly, zDir: Assembly, xDir: Assembly) {\n  const getLeafs = (a: Assembly) => {\n    const i: replicad.Vertex[] = [];\n    if (a == undefined) {\n      return i;\n    }\n    a.onLeafs((leaf) => {\n      if (leaf.isPoint()) {\n        i.push(leaf.geometry)\n      }\n      return leaf;\n    })\n    return i\n  }\n\n\n  const pointList = getLeafs(points)\n  const zDirList = getLeafs(zDir)\n  const xDirList = getLeafs(xDir)\n\n  if (!(zDirList.length == 1 || zDirList.length == pointList.length)) {\n    throw new Error(`Zdir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${zDirList.length}`)\n  }\n  if (!(xDirList.length == 1 || xDirList.length == pointList.length)) {\n    throw new Error(`xDir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${xDirList.length}`)\n  }\n\n  console.log(pointList)\n  console.log(xDirList)\n  console.log(zDirList)\n\n  const result: Assembly[] = []\n  pointList.forEach((point, index) => {\n    const xpos = xDirList.length == 1 ? xDirList[0] : xDirList[index]\n    const zpos = zDirList.length == 1 ? zDirList[0] : zDirList[index]\n    const targetPlane = new replicad.Plane(point.asTuple(), xpos.asTuple(), zpos.asTuple())\n    const ithRes = shape.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Drawing) {\n        return new Assembly({\n          ...leaf,\n          plane: targetPlane\n        })\n      } else {\n        // do an actual transpose based on the relative positions of planes\n        const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, targetPlane)\n\n        return new Assembly({\n          ...leaf,\n          geometry: moved,\n          plane: targetPlane\n        })\n      }\n    })\n    if (ithRes != null) {\n      result.push(ithRes)\n    }\n  })\n\n  return new Assembly({ geometry: result })\n}\n\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape: replicad.AnyShape, fromPlane: replicad.Plane, toPlane: replicad.Plane) {\n  const vec3 = (value: any): [number, number, number] =>\n    Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n      ? value as [number, number, number]\n      : [value.x, value.y, value.z];\n\n  const fromOrigin = vec3(fromPlane.origin);\n  const toOrigin = vec3(toPlane.origin);\n\n  const fromBasis = [\n    vec3(fromPlane.xDir),\n    vec3(fromPlane.yDir),\n    vec3(fromPlane.zDir),\n  ];\n\n  const toBasis = [\n    vec3(toPlane.xDir),\n    vec3(toPlane.yDir),\n    vec3(toPlane.zDir),\n  ];\n\n  // R = B_to * transpose(B_from)\n  const rotation = Array.from({ length: 3 }, (_, row) =>\n    Array.from({ length: 3 }, (_, column) =>\n      toBasis.reduce(\n        (sum, toAxis, axis) =>\n          sum + toAxis[row] * fromBasis[axis][column],\n        0,\n      ),\n    ),\n  );\n\n  const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));\n  const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n  const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n  const epsilon = 1e-8;\n\n  let result = shape;\n\n  if (angleRadians > epsilon) {\n    let axis: [number, number, number];\n\n    // The usual formula becomes unstable for rotations near 180 degrees.\n    if (Math.PI - angleRadians < epsilon) {\n      const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n      const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n      const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n\n      axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n\n      if (rotation[0][1] + rotation[1][0] < 0) axis[1] = -axis[1];\n      if (rotation[0][2] + rotation[2][0] < 0) axis[2] = -axis[2];\n    } else {\n      const denominator = 2 * Math.sin(angleRadians);\n      axis = [\n        (rotation[2][1] - rotation[1][2]) / denominator,\n        (rotation[0][2] - rotation[2][0]) / denominator,\n        (rotation[1][0] - rotation[0][1]) / denominator,\n      ];\n    }\n\n    const axisLength = Math.hypot(...axis);\n    axis = axis.map((component) => component / axisLength);\n\n    result = result.rotate(\n      angleRadians * (180 / Math.PI),\n      fromOrigin,\n      axis,\n    );\n  }\n\n  // Rotation was around fromOrigin, so only the origin delta is needed.\n  return result.translate(\n    toOrigin[0] - fromOrigin[0],\n    toOrigin[1] - fromOrigin[1],\n    toOrigin[2] - fromOrigin[2],\n  );\n}",
+                  "compiledCode": "\"use strict\";\n// moveToPoints\nfunction run(shape, points, zDir, xDir) {\n    const getLeafs = (a) => {\n        const i = [];\n        if (a == undefined) {\n            return i;\n        }\n        a.onLeafs((leaf) => {\n            if (leaf.isPoint()) {\n                i.push(leaf.geometry);\n            }\n            return leaf;\n        });\n        return i;\n    };\n    const pointList = getLeafs(points);\n    const zDirList = getLeafs(zDir);\n    const xDirList = getLeafs(xDir);\n    if (!(zDirList.length == 1 || zDirList.length == pointList.length)) {\n        throw new Error(`Zdir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${zDirList.length}`);\n    }\n    if (!(xDirList.length == 1 || xDirList.length == pointList.length)) {\n        throw new Error(`xDir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${xDirList.length}`);\n    }\n    console.log(pointList);\n    console.log(xDirList);\n    console.log(zDirList);\n    const result = [];\n    pointList.forEach((point, index) => {\n        const xpos = xDirList.length == 1 ? xDirList[0] : xDirList[index];\n        const zpos = zDirList.length == 1 ? zDirList[0] : zDirList[index];\n        const targetPlane = new replicad.Plane(point.asTuple(), xpos.asTuple(), zpos.asTuple());\n        const ithRes = shape.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Drawing) {\n                return new Assembly({\n                    ...leaf,\n                    plane: targetPlane\n                });\n            }\n            else {\n                // do an actual transpose based on the relative positions of planes\n                const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, targetPlane);\n                return new Assembly({\n                    ...leaf,\n                    geometry: moved,\n                    plane: targetPlane\n                });\n            }\n        });\n        if (ithRes != null) {\n            result.push(ithRes);\n        }\n    });\n    return new Assembly({ geometry: result });\n}\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape, fromPlane, toPlane) {\n    const vec3 = (value) => Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n        ? value\n        : [value.x, value.y, value.z];\n    const fromOrigin = vec3(fromPlane.origin);\n    const toOrigin = vec3(toPlane.origin);\n    const fromBasis = [\n        vec3(fromPlane.xDir),\n        vec3(fromPlane.yDir),\n        vec3(fromPlane.zDir),\n    ];\n    const toBasis = [\n        vec3(toPlane.xDir),\n        vec3(toPlane.yDir),\n        vec3(toPlane.zDir),\n    ];\n    // R = B_to * transpose(B_from)\n    const rotation = Array.from({ length: 3 }, (_, row) => Array.from({ length: 3 }, (_, column) => toBasis.reduce((sum, toAxis, axis) => sum + toAxis[row] * fromBasis[axis][column], 0)));\n    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));\n    const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n    const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n    const epsilon = 1e-8;\n    let result = shape;\n    if (angleRadians > epsilon) {\n        let axis;\n        // The usual formula becomes unstable for rotations near 180 degrees.\n        if (Math.PI - angleRadians < epsilon) {\n            const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n            const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n            const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n            axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n            if (rotation[0][1] + rotation[1][0] < 0)\n                axis[1] = -axis[1];\n            if (rotation[0][2] + rotation[2][0] < 0)\n                axis[2] = -axis[2];\n        }\n        else {\n            const denominator = 2 * Math.sin(angleRadians);\n            axis = [\n                (rotation[2][1] - rotation[1][2]) / denominator,\n                (rotation[0][2] - rotation[2][0]) / denominator,\n                (rotation[1][0] - rotation[0][1]) / denominator,\n            ];\n        }\n        const axisLength = Math.hypot(...axis);\n        axis = axis.map((component) => component / axisLength);\n        result = result.rotate(angleRadians * (180 / Math.PI), fromOrigin, axis);\n    }\n    // Rotation was around fromOrigin, so only the origin delta is needed.\n    return result.translate(toOrigin[0] - fromOrigin[0], toOrigin[1] - fromOrigin[1], toOrigin[2] - fromOrigin[2]);\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137060",
+                  "name": "shapeToMove",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137061",
+                  "name": "toPoints",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.3,
+                  "uniqueID": "id-137062",
+                  "name": "zDirOverride",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.4,
+                  "uniqueID": "id-137063",
+                  "name": "xDirOverride",
+                  "type": "geometry",
+                  "options": []
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-137059",
+                  "ap2ID": "id-137058"
+                },
+                {
+                  "ap2Name": "shape",
+                  "ap1ID": "id-137060",
+                  "ap2ID": "id-137059"
+                },
+                {
+                  "ap2Name": "points",
+                  "ap1ID": "id-137061",
+                  "ap2ID": "id-137059"
+                },
+                {
+                  "ap2Name": "zDir",
+                  "ap1ID": "id-137062",
+                  "ap2ID": "id-137059"
+                },
+                {
+                  "ap2Name": "xDir",
+                  "ap1ID": "id-137063",
+                  "ap2ID": "id-137059"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "privateRepo": false,
+                "repoName": "moveToPoints",
+                "dateCreated": "2026-08-20T17:14:26Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/moveToPoints/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-141",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/moveToPoints",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739862",
+                "ranking": 0.6,
+                "searchField": "movetopoints tristan-huber copy an assembly to all the targte points. optionally override the x and z directions to fix the orientation of the assembly at destination. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "copy an assembly to all the targte points. Optionally override the x and z directions to fix the orientation of the assembly at destination.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/moveToPoints/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/moveToPoints/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789511262541
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.1,
+              "y": 0.7,
+              "uniqueID": "id-137064",
+              "name": "crv.Point",
+              "ioValues": [
+                {
+                  "name": "X",
+                  "ioValue": 1
+                },
+                {
+                  "name": "Y",
+                  "ioValue": 0
+                },
+                {
+                  "name": "Z",
+                  "ioValue": 0
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-137065",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137066",
+                  "name": "X",
+                  "options": []
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.3,
+                  "y": 0.4,
+                  "uniqueID": "id-137067",
+                  "ioValues": [
+                    {
+                      "name": "x",
+                      "ioValue": 1
+                    },
+                    {
+                      "name": "y",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "z",
+                      "ioValue": 0
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "\nfunction run(x: number = 0, y: number = 0, z: number = 0) {\n  return replicad.makeVertex([x,y,z])\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(x = 0, y = 0, z = 0) {\n    return replicad.makeVertex([x, y, z]);\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137068",
+                  "name": "Y",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.3,
+                  "uniqueID": "id-137069",
+                  "name": "Z",
+                  "options": []
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "x",
+                  "ap1ID": "id-137066",
+                  "ap2ID": "id-137067"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-137067",
+                  "ap2ID": "id-137065"
+                },
+                {
+                  "ap2Name": "y",
+                  "ap1ID": "id-137068",
+                  "ap2ID": "id-137067"
+                },
+                {
+                  "ap2Name": "z",
+                  "ap1ID": "id-137069",
+                  "ap2ID": "id-137067"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "privateRepo": false,
+                "repoName": "crv.Point",
+                "dateCreated": "2026-05-08T22:20:14Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-1",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/crv.Point",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739847",
+                "ranking": 7.8,
+                "searchField": "crv.point tristan-huber simple 3d point defined by it's xyz position abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Simple 3d Point defined by it's xyz position",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789511292707
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.1,
+              "y": 0.9,
+              "uniqueID": "id-137070",
+              "name": "crv.Point",
+              "ioValues": [
+                {
+                  "name": "X",
+                  "ioValue": 0
+                },
+                {
+                  "name": "Y",
+                  "ioValue": -1
+                },
+                {
+                  "name": "Z",
+                  "ioValue": 0
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-137071",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137072",
+                  "name": "X",
+                  "options": []
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.3,
+                  "y": 0.4,
+                  "uniqueID": "id-137073",
+                  "ioValues": [
+                    {
+                      "name": "x",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "y",
+                      "ioValue": -1
+                    },
+                    {
+                      "name": "z",
+                      "ioValue": 0
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "\nfunction run(x: number = 0, y: number = 0, z: number = 0) {\n  return replicad.makeVertex([x,y,z])\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(x = 0, y = 0, z = 0) {\n    return replicad.makeVertex([x, y, z]);\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137074",
+                  "name": "Y",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.3,
+                  "uniqueID": "id-137075",
+                  "name": "Z",
+                  "options": []
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "x",
+                  "ap1ID": "id-137072",
+                  "ap2ID": "id-137073"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-137073",
+                  "ap2ID": "id-137071"
+                },
+                {
+                  "ap2Name": "y",
+                  "ap1ID": "id-137074",
+                  "ap2ID": "id-137073"
+                },
+                {
+                  "ap2Name": "z",
+                  "ap1ID": "id-137075",
+                  "ap2ID": "id-137073"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "privateRepo": false,
+                "repoName": "crv.Point",
+                "dateCreated": "2026-05-08T22:20:14Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-1",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/crv.Point",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739847",
+                "ranking": 7.8,
+                "searchField": "crv.point tristan-huber simple 3d point defined by it's xyz position abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Simple 3d Point defined by it's xyz position",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789511292707
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.3,
+              "uniqueID": "id-137136",
+              "name": "onhatch",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.5,
+              "uniqueID": "id-137139",
+              "name": "components",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Assembly",
+              "x": 0.6,
+              "y": 0.5,
+              "uniqueID": "id-137142",
+              "ioValues": [
+                {
+                  "name": "Shape 1",
+                  "ioValue": null
+                },
+                {
+                  "name": "Shape 2",
+                  "ioValue": null
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.4,
+              "y": 0.6,
+              "uniqueID": "id-137147",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0.12624849938675453
+                }
+              ]
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.1,
+              "y": 0.2,
+              "uniqueID": "id-137157",
+              "name": "Width",
+              "ioValues": [
+                {
+                  "name": "Shape",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-137154",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-137155",
+                  "name": "Shape",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.4,
+                  "y": 0.5,
+                  "uniqueID": "id-137156",
+                  "ioValues": [
+                    {
+                      "name": "A",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 0,
+                  "code": "/**\n Inputs for this Code Atom:\n - Takes a single geometry input \"A\" and returns its width (X size) as measured by the bounding box.\n*/\nInputs = [\n  { inputName: \"A\", type: \"geometry\", defaultValue: null }\n]\n\nif (!A) {\n  // No input provided — return null to indicate absence.\n  return null\n}\n\n// Get bounding box of A. boundsA.min and boundsA.max are arrays [x, y, z]\nlet boundsA = await GetBounds(A);\nlet min = boundsA.min;\nlet max = boundsA.max;\n\n// Compute width along X (maxX - minX)\nlet width = max[0] - min[0];\n\n// Ensure a non-negative numeric result\nwidth = typeof width === 'number' && isFinite(width) ? Math.max(0, width) : null;\n\nreturn width;"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "A",
+                  "ap1ID": "id-137155",
+                  "ap2ID": "id-137156"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-137156",
+                  "ap2ID": "id-137154"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "privateRepo": false,
+                "repoName": "Width",
+                "dateCreated": "2025-12-04T20:14:11Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/BarbourSmith/Width/master/README.md?sanitize=true",
+                "yyyy": 2025,
+                "topMoleculeID": "id-386",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/BarbourSmith/Width",
+                "topics": [],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739589",
+                "ranking": 9.3,
+                "searchField": "width barboursmith takes a shape and returns the width as measured by the shapes bounding box in the x direction ",
+                "owner": "BarbourSmith",
+                "description": "Takes a shape and returns the width as measured by the shapes bounding box in the X direction",
+                "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Width/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "MM",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789511482455
+            },
+            {
+              "atomType": "Equation",
+              "x": 0.3,
+              "y": 0.3,
+              "uniqueID": "id-137166",
+              "name": "x / 2",
+              "ioValues": [
+                {
+                  "name": "x",
+                  "ioValue": 0.25249699877350906
+                }
+              ],
+              "currentEquation": "x / 2"
+            },
+            {
+              "atomType": "ExtractTag",
+              "x": 0.7,
+              "y": 0.3,
+              "uniqueID": "id-137170",
+              "name": "Extract access_hatch",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "tagIndex": 0,
+              "selectedTags": [
+                "access_hatch"
+              ],
+              "includeUntagged": false,
+              "notKeepOut": false
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "toPoints",
+              "ap1ID": "id-137052",
+              "ap2ID": "id-137057"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-137057",
+              "ap2ID": "id-137142"
+            },
+            {
+              "ap2Name": "zDirOverride",
+              "ap1ID": "id-137064",
+              "ap2ID": "id-137057"
+            },
+            {
+              "ap2Name": "xDirOverride",
+              "ap1ID": "id-137070",
+              "ap2ID": "id-137057"
+            },
+            {
+              "ap2Name": "assembly",
+              "ap1ID": "id-137136",
+              "ap2ID": "id-137052"
+            },
+            {
+              "ap2Name": "Shape 1",
+              "ap1ID": "id-137136",
+              "ap2ID": "id-137142"
+            },
+            {
+              "ap2Name": "Shape",
+              "ap1ID": "id-137136",
+              "ap2ID": "id-137157"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-137139",
+              "ap2ID": "id-137147"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-137142",
+              "ap2ID": "id-137170"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-137142",
+              "ap2ID": "id-137050"
+            },
+            {
+              "ap2Name": "shapeToMove",
+              "ap1ID": "id-137147",
+              "ap2ID": "id-137057"
+            },
+            {
+              "ap2Name": "x",
+              "ap1ID": "id-137157",
+              "ap2ID": "id-137166"
+            },
+            {
+              "ap2Name": "zDist",
+              "ap1ID": "id-137166",
+              "ap2ID": "id-137147"
             }
           ],
           "fileTypeVersion": 1
@@ -9719,6 +10536,16 @@
           "ap2Name": "geometry",
           "ap1ID": "id-135649",
           "ap2ID": "id-135946"
+        },
+        {
+          "ap2Name": "onhatch",
+          "ap1ID": "id-135946",
+          "ap2ID": "id-137048"
+        },
+        {
+          "ap2Name": "components",
+          "ap1ID": "id-135949",
+          "ap2ID": "id-137048"
         }
       ],
       "fileTypeVersion": 1
