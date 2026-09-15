@@ -7473,32 +7473,32 @@
                   "type": "edgeselect",
                   "selectedEdgeData": {
                     "0": [
-                      7,
-                      9,
+                      8,
+                      10,
                       11,
-                      13
+                      14
                     ],
                     "1": [
-                      7,
-                      9,
+                      8,
+                      10,
                       11,
-                      13
+                      14
                     ],
                     "2": [
                       9,
-                      11,
+                      12,
                       13,
                       15
                     ],
                     "3": [
                       7,
-                      9,
+                      10,
                       11,
                       13
                     ],
                     "4": [
                       7,
-                      9,
+                      10,
                       11,
                       13
                     ]
@@ -8273,14 +8273,14 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.3,
+              "y": 0.2,
               "uniqueID": "id-105770",
               "name": "fastener"
             },
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.5,
+              "y": 0.3,
               "uniqueID": "id-105773",
               "name": "inset"
             },
@@ -9129,7 +9129,50 @@
                   "uniqueID": "id-131623",
                   "name": "Assembly",
                   "type": "faceselect",
-                  "selectedFaceData": {}
+                  "selectedFaceData": {
+                    "0": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                    ],
+                    "1": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                    ],
+                    "2": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8
+                    ],
+                    "3": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                    ],
+                    "4": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -13729,10 +13772,6 @@
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "xDist",
-              "ioValue": 7.25
-            },
-            {
               "name": "yDist",
               "ioValue": 0
             },
@@ -13749,10 +13788,6 @@
           "uniqueID": "id-93277",
           "name": "(x - y) / 2",
           "ioValues": [
-            {
-              "name": "x",
-              "ioValue": 144.5
-            },
             {
               "name": "y",
               "ioValue": 130
@@ -13917,8 +13952,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.6,
-      "y": 0.1,
+      "x": 0.7,
+      "y": 0.3,
       "uniqueID": "id-95407",
       "name": "tocut",
       "ioValues": [
@@ -14497,11 +14532,7 @@
               "uniqueID": "id-131586",
               "name": "Face",
               "type": "faceselect",
-              "selectedFaceData": {
-                "0": [
-                  53
-                ]
-              }
+              "selectedFaceData": {}
             },
             {
               "atomType": "Input",
@@ -14740,10 +14771,6 @@
             {
               "name": "geometry",
               "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 130.00000999999997
             },
             {
               "name": "yDist",
