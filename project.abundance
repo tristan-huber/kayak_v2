@@ -13277,11 +13277,12 @@
           "ioValues": [
             {
               "name": "NACA_number",
-              "ioValue": 920
+              "ioValue": 220
             },
             {
               "name": "Cord_length",
-              "ioValue": 10
+              "ioValue": 10,
+              "currentEquation": "10"
             },
             {
               "name": "number_of_points",
@@ -13318,7 +13319,7 @@
                 },
                 {
                   "name": "nacaNumber",
-                  "ioValue": 920
+                  "ioValue": 220
                 }
               ],
               "interpreterVersion": 1,
