@@ -6829,6 +6829,722 @@
               "unitsKey": "Inches",
               "fileTypeVersion": 1,
               "lastReloadedFromGithubAt": 1789510104167
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.1,
+              "y": 0.8,
+              "uniqueID": "id-136514",
+              "name": "Briidea_PWM",
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-136487",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Rectangle",
+                  "x": 0.2,
+                  "y": 0.4,
+                  "uniqueID": "id-136488",
+                  "ioValues": [
+                    {
+                      "name": "x length",
+                      "ioValue": 7.9
+                    },
+                    {
+                      "name": "y length",
+                      "ioValue": 6.4
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Add-BOM-Tag",
+                  "x": 0.7,
+                  "y": 0.5,
+                  "uniqueID": "id-136489",
+                  "name": "Add BOM Tag",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Item Name",
+                      "ioValue": "Bridea_PWM",
+                      "currentEquation": "Bridea_PWM"
+                    },
+                    {
+                      "name": "Number Needed",
+                      "ioValue": 1
+                    },
+                    {
+                      "name": "Cost (USD)",
+                      "ioValue": 70
+                    },
+                    {
+                      "name": "Source Link",
+                      "ioValue": "https://www.amazon.com/dp/B0DP1XZTR2?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_6&th=1",
+                      "currentEquation": "https://www.amazon.com/dp/B0DP1XZTR2?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_6&th=1"
+                    }
+                  ],
+                  "BOMitem": {
+                    "BOMitemName": "Bridea_PWM",
+                    "numberNeeded": 1,
+                    "costUSD": 70,
+                    "source": "https://www.amazon.com/dp/B0DP1XZTR2?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_6&th=1"
+                  }
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.3,
+                  "y": 0.6,
+                  "uniqueID": "id-136490",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 0.125
+                    }
+                  ]
+                },
+                {
+                  "atomType": "GitHubMolecule",
+                  "x": 0.8,
+                  "y": 0.7,
+                  "uniqueID": "id-136491",
+                  "name": "phys.SetMass",
+                  "ioValues": [
+                    {
+                      "name": "assembly",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "mass",
+                      "ioValue": 1
+                    }
+                  ],
+                  "topLevel": false,
+                  "allAtoms": [
+                    {
+                      "atomType": "Output",
+                      "x": 1,
+                      "y": 0.5,
+                      "uniqueID": "id-136492",
+                      "ioValues": [
+                        {
+                          "name": "number or geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-136493",
+                      "name": "assembly",
+                      "type": "geometry",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Code",
+                      "x": 0.4,
+                      "y": 0.7,
+                      "uniqueID": "id-136494",
+                      "ioValues": [
+                        {
+                          "name": "assembly",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        },
+                        {
+                          "name": "mass",
+                          "ioValue": 1
+                        }
+                      ],
+                      "interpreterVersion": 1,
+                      "code": "// Set mass\nfunction run(assembly: Assembly, mass: number) {\n  const initial = assembly.metadata ? assembly.metadata : {}\n  initial.mass = mass;\n  assembly.metadata = initial;\n  return assembly?.skipDisjointPostprocess();\n}",
+                      "compiledCode": "\"use strict\";\n// Set mass\nfunction run(assembly, mass) {\n    const initial = assembly.metadata ? assembly.metadata : {};\n    initial.mass = mass;\n    assembly.metadata = initial;\n    return assembly?.skipDisjointPostprocess();\n}\n"
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-136495",
+                      "name": "mass",
+                      "options": []
+                    }
+                  ],
+                  "allConnectors": [
+                    {
+                      "ap2Name": "assembly",
+                      "ap1ID": "id-136493",
+                      "ap2ID": "id-136494"
+                    },
+                    {
+                      "ap2Name": "number or geometry",
+                      "ap1ID": "id-136494",
+                      "ap2ID": "id-136492"
+                    },
+                    {
+                      "ap2Name": "mass",
+                      "ap1ID": "id-136495",
+                      "ap2ID": "id-136494"
+                    }
+                  ],
+                  "parentRepo": {
+                    "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                    "repoName": "phys.SetMass",
+                    "dateCreated": "2026-08-12T16:42:56Z",
+                    "likes": 0,
+                    "readMe": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/README.md?sanitize=true",
+                    "yyyy": 2026,
+                    "topMoleculeID": "id-43071",
+                    "githubMoleculesUsed": [],
+                    "html_url": "https://github.com/tristan-huber/phys.SetMass",
+                    "topics": [
+                      "abundance-tool"
+                    ],
+                    "pullRequests": [],
+                    "parentRepo": null,
+                    "forks": 0,
+                    "dateModified": "739840",
+                    "ranking": 0.6,
+                    "searchField": "phys.setmass tristan-huber adds a mass to the metadata of an assembly. in general this superseed masses of the leafs of an assembly. consumed by other physics methods in utils. arbitrary units.",
+                    "owner": "tristan-huber",
+                    "description": "Adds a mass to the metadata of an assembly. In general this superseed masses of the leafs of an assembly. Consumed by other physics methods in utils. Arbitrary units.",
+                    "contentURL": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/project.abundance?sanitize=true",
+                    "svgURL": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/project.svg?sanitize=true",
+                    "isLocal": false
+                  },
+                  "unitsKey": "Unitless",
+                  "fileTypeVersion": 1,
+                  "lastReloadedFromGithubAt": 1789510501728
+                },
+                {
+                  "atomType": "Circle",
+                  "x": 0.1,
+                  "y": 0.2,
+                  "uniqueID": "id-136496",
+                  "ioValues": [
+                    {
+                      "name": "diameter",
+                      "ioValue": 0.125
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Constant",
+                  "x": 0.1,
+                  "y": 0.5,
+                  "uniqueID": "id-136497",
+                  "name": "width",
+                  "value": 7.9
+                },
+                {
+                  "atomType": "Constant",
+                  "x": 0.1,
+                  "y": 0.7,
+                  "uniqueID": "id-136498",
+                  "name": "length",
+                  "value": 6.4
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.2,
+                  "y": 0.1,
+                  "uniqueID": "id-136499",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 3.8000000000000003,
+                      "currentEquation": "width / 2 - 0.15"
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 2.2,
+                      "currentEquation": "length / 2 - 1"
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.2,
+                  "y": 0.3,
+                  "uniqueID": "id-136500",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": -3.8000000000000003,
+                      "currentEquation": "-width / 2 + 0.15"
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 2.2,
+                      "currentEquation": "length / 2 - 1"
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.3,
+                  "y": 0.2,
+                  "uniqueID": "id-136501",
+                  "ioValues": [
+                    {
+                      "name": "Shape 1",
+                      "ioValue": null
+                    },
+                    {
+                      "name": "Shape 2",
+                      "ioValue": null
+                    }
+                  ]
+                },
+                {
+                  "atomType": "GitHubMolecule",
+                  "x": 0.4,
+                  "y": 0.2,
+                  "uniqueID": "id-136502",
+                  "name": "util.Mirror",
+                  "topLevel": false,
+                  "allAtoms": [
+                    {
+                      "atomType": "Output",
+                      "x": 1,
+                      "y": 0.5,
+                      "uniqueID": "id-136503",
+                      "ioValues": [
+                        {
+                          "name": "number or geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Code",
+                      "x": 0.4,
+                      "y": 0.2,
+                      "uniqueID": "id-136504",
+                      "ioValues": [
+                        {
+                          "name": "assembly",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ],
+                      "interpreterVersion": 1,
+                      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\")\n    } else {\n      leaf.geometry = leaf.geometry.mirror(\"XZ\")\n      if (leaf.geometry instanceof replicad.Face) {\n        leaf.geometry = leaf.geometry.flipOrientation()\n      }\n    }\n    return leaf\n  })\n}",
+                      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\");\n        }\n        else {\n            leaf.geometry = leaf.geometry.mirror(\"XZ\");\n            if (leaf.geometry instanceof replicad.Face) {\n                leaf.geometry = leaf.geometry.flipOrientation();\n            }\n        }\n        return leaf;\n    });\n}\n"
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-136505",
+                      "name": "assembly",
+                      "options": []
+                    }
+                  ],
+                  "allConnectors": [
+                    {
+                      "ap2Name": "number or geometry",
+                      "ap1ID": "id-136504",
+                      "ap2ID": "id-136503"
+                    },
+                    {
+                      "ap2Name": "assembly",
+                      "ap1ID": "id-136505",
+                      "ap2ID": "id-136504"
+                    }
+                  ],
+                  "parentRepo": {
+                    "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                    "privateRepo": false,
+                    "repoName": "util.Mirror",
+                    "dateCreated": "2026-07-09T18:32:34Z",
+                    "likes": 0,
+                    "readMe": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/README.md?sanitize=true",
+                    "yyyy": 2026,
+                    "topMoleculeID": "id-21902",
+                    "githubMoleculesUsed": [],
+                    "html_url": "https://github.com/tristan-huber/util.Mirror",
+                    "topics": [
+                      "abundance-tool"
+                    ],
+                    "pullRequests": [],
+                    "parentRepo": null,
+                    "forks": 0,
+                    "dateModified": "739814",
+                    "ranking": 8.4,
+                    "searchField": "util.mirror tristan-huber mirror an assembly across the xz plane. abundance-tool",
+                    "owner": "tristan-huber",
+                    "description": "Mirror an assembly across the XZ plane.",
+                    "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/project.abundance?sanitize=true",
+                    "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/project.svg?sanitize=true",
+                    "isLocal": false
+                  },
+                  "unitsKey": "Unitless",
+                  "fileTypeVersion": 1,
+                  "lastReloadedFromGithubAt": 1789510730408
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.5,
+                  "y": 0.2,
+                  "uniqueID": "id-136506",
+                  "ioValues": [
+                    {
+                      "name": "Shape 1",
+                      "ioValue": null
+                    },
+                    {
+                      "name": "Shape 2",
+                      "ioValue": null
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.6,
+                  "y": 0.3,
+                  "uniqueID": "id-136507",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": -0.5
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.6,
+                  "y": 0.3,
+                  "uniqueID": "id-136508",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 1
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Color",
+                  "x": 0.7,
+                  "y": 0.3,
+                  "uniqueID": "id-136509",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "selectedColor": "Keep Out"
+                },
+                {
+                  "atomType": "Rectangle",
+                  "x": 0.2,
+                  "y": 0.8,
+                  "uniqueID": "id-136510",
+                  "ioValues": [
+                    {
+                      "name": "x length",
+                      "ioValue": 6.9,
+                      "currentEquation": "width - 1"
+                    },
+                    {
+                      "name": "y length",
+                      "ioValue": 6.4
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.3,
+                  "y": 0.8,
+                  "uniqueID": "id-136511",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 4.2
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.7,
+                  "y": 0.8,
+                  "uniqueID": "id-136512",
+                  "ioValues": [
+                    {
+                      "name": "Shape 1",
+                      "ioValue": null
+                    },
+                    {
+                      "name": "Shape 2",
+                      "ioValue": null
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Fusion",
+                  "x": 0.5,
+                  "y": 0.8,
+                  "uniqueID": "id-136513",
+                  "ioValues": [
+                    {
+                      "name": "Shape 1",
+                      "ioValue": {
+                        "geometry": "extrude-rectangle-6.9-6.4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-4.2",
+                        "dimension": "3D",
+                        "plane": {
+                          "origin": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "xDir": [
+                            1,
+                            0,
+                            0
+                          ],
+                          "normal": [
+                            0,
+                            0,
+                            1
+                          ]
+                        },
+                        "color": "#aad7f2",
+                        "tags": [],
+                        "bom": []
+                      }
+                    },
+                    {
+                      "name": "Shape 2",
+                      "ioValue": {
+                        "geometry": "extrude-rectangle-7.9-6.4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-0.125",
+                        "dimension": "3D",
+                        "plane": {
+                          "origin": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "xDir": [
+                            1,
+                            0,
+                            0
+                          ],
+                          "normal": [
+                            0,
+                            0,
+                            1
+                          ]
+                        },
+                        "color": "#aad7f2",
+                        "tags": [],
+                        "bom": []
+                      }
+                    }
+                  ],
+                  "unionType": "Fusion"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136488",
+                  "ap2ID": "id-136490"
+                },
+                {
+                  "ap2Name": "assembly",
+                  "ap1ID": "id-136489",
+                  "ap2ID": "id-136491"
+                },
+                {
+                  "ap2Name": "Shape 2",
+                  "ap1ID": "id-136490",
+                  "ap2ID": "id-136513"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136496",
+                  "ap2ID": "id-136499"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136496",
+                  "ap2ID": "id-136500"
+                },
+                {
+                  "ap2Name": "x length",
+                  "ap1ID": "id-136497",
+                  "ap2ID": "id-136488"
+                },
+                {
+                  "ap2Name": "y length",
+                  "ap1ID": "id-136498",
+                  "ap2ID": "id-136488"
+                },
+                {
+                  "ap2Name": "y length",
+                  "ap1ID": "id-136498",
+                  "ap2ID": "id-136510"
+                },
+                {
+                  "ap2Name": "Shape 2",
+                  "ap1ID": "id-136499",
+                  "ap2ID": "id-136501"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-136500",
+                  "ap2ID": "id-136501"
+                },
+                {
+                  "ap2Name": "assembly",
+                  "ap1ID": "id-136501",
+                  "ap2ID": "id-136502"
+                },
+                {
+                  "ap2Name": "Shape 2",
+                  "ap1ID": "id-136501",
+                  "ap2ID": "id-136506"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136506",
+                  "ap2ID": "id-136507"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136507",
+                  "ap2ID": "id-136508"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136508",
+                  "ap2ID": "id-136509"
+                },
+                {
+                  "ap2Name": "Shape 2",
+                  "ap1ID": "id-136509",
+                  "ap2ID": "id-136512"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136510",
+                  "ap2ID": "id-136511"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-136511",
+                  "ap2ID": "id-136513"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-136512",
+                  "ap2ID": "id-136489"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-136513",
+                  "ap2ID": "id-136512"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-136491",
+                  "ap2ID": "id-136487"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-136502",
+                  "ap2ID": "id-136506"
+                }
+              ],
+              "parentRepo": {
+                "privateRepo": false,
+                "repoName": "Briidea_PWM",
+                "dateCreated": "2026-09-15T22:12:53Z",
+                "pngURL": "https://raw.githubusercontent.com/tristan-huber/Briidea_PWM/main/project.png",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/Briidea_PWM/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-135502",
+                "userSetAsThumbnail": false,
+                "githubMoleculesUsed": [
+                  {
+                    "owner": "tristan-huber",
+                    "repoName": "phys.SetMass"
+                  },
+                  {
+                    "owner": "tristan-huber",
+                    "repoName": "util.Mirror"
+                  }
+                ],
+                "html_url": "https://github.com/tristan-huber/Briidea_PWM",
+                "topics": [
+                  "hardware"
+                ],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739874",
+                "ranking": 0,
+                "searchField": "briidea_pwm tristan-huber briidea pwm motor controller. 12v  or 24v up to 35a hardware",
+                "owner": "tristan-huber",
+                "description": "Briidea PWM motor controller. 12V  or 24V up to 35A",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/Briidea_PWM/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/Briidea_PWM/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Inches",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789510965462
             }
           ],
           "allConnectors": [],
