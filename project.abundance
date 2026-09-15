@@ -5026,6 +5026,49 @@
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "ExtractTag",
+          "x": 0.6,
+          "y": 0.5,
+          "uniqueID": "id-135946",
+          "name": "Extract access_hatch",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tagIndex": 0,
+          "selectedTags": [
+            "access_hatch"
+          ],
+          "includeUntagged": false,
+          "notKeepOut": false
+        },
+        {
+          "atomType": "Molecule",
+          "x": 0.7,
+          "y": 0.8,
+          "uniqueID": "id-135949",
+          "name": "Molecule",
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-135951",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            }
+          ],
+          "allConnectors": [],
+          "fileTypeVersion": 1
         }
       ],
       "allConnectors": [
@@ -5113,6 +5156,11 @@
           "ap2Name": "Input",
           "ap1ID": "id-135427",
           "ap2ID": "id-135436"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-135649",
+          "ap2ID": "id-135946"
         }
       ],
       "fileTypeVersion": 1
