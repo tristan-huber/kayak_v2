@@ -3874,8 +3874,8 @@
             },
             {
               "atomType": "Equation",
-              "x": 0.4,
-              "y": 0.6,
+              "x": 0.3,
+              "y": 0.4,
               "uniqueID": "id-135660",
               "name": "(x + 1) / x",
               "ioValues": [
@@ -4221,7 +4221,11 @@
                   "name": "Assembly",
                   "type": "faceselect",
                   "options": [],
-                  "selectedFaceData": {}
+                  "selectedFaceData": {
+                    "2": [
+                      2
+                    ]
+                  }
                 },
                 {
                   "atomType": "Code",
@@ -4495,6 +4499,10 @@
                 {
                   "name": "Shape 1",
                   "ioValue": null
+                },
+                {
+                  "name": "Shape 2",
+                  "ioValue": null
                 }
               ]
             },
@@ -4510,16 +4518,16 @@
             {
               "atomType": "GitHubMolecule",
               "x": 0.4,
-              "y": 0.4,
-              "uniqueID": "id-135840",
-              "name": "ScaleCentered",
+              "y": 0.5,
+              "uniqueID": "id-135889",
+              "name": "Scale",
               "ioValues": [
                 {
-                  "name": "shape",
+                  "name": "Geometry",
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
-                  "name": "factor",
+                  "name": "Scale Factor",
                   "ioValue": 1.0884955752212389
                 }
               ],
@@ -4529,7 +4537,245 @@
                   "atomType": "Output",
                   "x": 1,
                   "y": 0.5,
-                  "uniqueID": "id-135835",
+                  "uniqueID": "id-135879",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-135880",
+                  "name": "Geometry",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-135881",
+                  "name": "Scale Factor",
+                  "type": "number",
+                  "options": []
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.5,
+                  "y": 0.7,
+                  "uniqueID": "id-135882",
+                  "ioValues": [
+                    {
+                      "name": "inputShape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "scaleFactor",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 0,
+                  "code": " \n      //Inputs:[inputShape, scaleFactor]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n      \n      //Takes the address and gets the shape from the library\n      let importedShape = library[inputShape]\n\n      let scaledShape = await Scale(inputShape, scaleFactor);\n      \n      \n      //Shapes stored in the library have tags, a color, a plane, and a bill of materials like this. We don't modify them here\n      let shape1 = {\n        geometry: [scaledShape],\n        tags: importedShape.tags,\n        color: importedShape.color,\n        plane: importedShape.plane,\n        bom: importedShape.bom\n      }\n      \n      return shape1\n      \n      \n      \n          /**\n          To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n          If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n          Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n          https://replicad.xyz/docs/introapp/UserGuide.html \n          Return a replicad object that includes geometry, color, tags and plane. \n      \n      \n          Example Code Atom:\n      \n            Inputs:[shape, x];\n      \n            let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n      \n            return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      \n            - See more examples at _______ \n      \n      \n          */\n      "
+                },
+                {
+                  "atomType": "Circle",
+                  "x": 0.3,
+                  "y": 0.3,
+                  "uniqueID": "id-135883",
+                  "ioValues": [
+                    {
+                      "name": "diameter",
+                      "ioValue": 10
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.4,
+                  "y": 0.3,
+                  "uniqueID": "id-135884",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 10
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.5,
+                  "y": 0.5,
+                  "uniqueID": "id-135885",
+                  "ioValues": [
+                    {
+                      "name": "inputShape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "scaleFactor",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 0,
+                  "code": " \n      //Inputs:[inputShape, scaleFactor]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n      \n      //Takes the address and gets the shape from the library\n      let importedShape = library[inputShape]\n\n      let scaledShape = await Scale(inputShape, scaleFactor);\n      \n      \n      //Shapes stored in the library have tags, a color, a plane, and a bill of materials like this. We don't modify them here\n      let shape1 = {\n        geometry: [scaledShape],\n        tags: importedShape.tags,\n        color: importedShape.color,\n        plane: importedShape.plane,\n        bom: importedShape.bom\n      }\n      \n      return shape1\n      \n      \n      \n          /**\n          To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n          If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n          Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n          https://replicad.xyz/docs/introapp/UserGuide.html \n          Return a replicad object that includes geometry, color, tags and plane. \n      \n      \n          Example Code Atom:\n      \n            Inputs:[shape, x];\n      \n            let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n      \n            return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      \n            - See more examples at _______ \n      \n      \n          */\n      "
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.7,
+                  "y": 0.4,
+                  "uniqueID": "id-135886",
+                  "ioValues": [
+                    {
+                      "name": "Shape 1",
+                      "ioValue": null
+                    },
+                    {
+                      "name": "Shape 2",
+                      "ioValue": null
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.6,
+                  "y": 0.3,
+                  "uniqueID": "id-135887",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 30
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Readme",
+                  "x": 0.8,
+                  "y": 0.3,
+                  "uniqueID": "id-135888",
+                  "name": "README",
+                  "ioValues": [
+                    {
+                      "name": "value",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "readMeText": "Readme text here",
+                  "global": true
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "inputShape",
+                  "ap1ID": "id-135880",
+                  "ap2ID": "id-135882"
+                },
+                {
+                  "ap2Name": "scaleFactor",
+                  "ap1ID": "id-135881",
+                  "ap2ID": "id-135882"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-135882",
+                  "ap2ID": "id-135879"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-135883",
+                  "ap2ID": "id-135884"
+                },
+                {
+                  "ap2Name": "inputShape",
+                  "ap1ID": "id-135884",
+                  "ap2ID": "id-135885"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-135884",
+                  "ap2ID": "id-135887"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-135885",
+                  "ap2ID": "id-135886"
+                },
+                {
+                  "ap2Name": "Shape 2",
+                  "ap1ID": "id-135887",
+                  "ap2ID": "id-135886"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "privateRepo": false,
+                "repoName": "Scale",
+                "dateCreated": "2025-06-26T17:06:11Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/README.md?sanitize=true",
+                "yyyy": 2025,
+                "topMoleculeID": "4b6bc40a-44a9-438a-9ed9-ba4910815d8d",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/BarbourSmith/Scale",
+                "topics": [],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 1,
+                "dateModified": "739428",
+                "ranking": 8,
+                "searchField": "scale barboursmith scales the input 2d or 3d geometry by the scale factor ",
+                "owner": "BarbourSmith",
+                "description": "Scales the input 2D or 3D geometry by the scale factor",
+                "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789508148054
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.4,
+              "y": 0.2,
+              "uniqueID": "id-135924",
+              "name": "To the Right",
+              "ioValues": [
+                {
+                  "name": "A",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "B",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-135920",
                   "ioValues": [
                     {
                       "name": "number or geometry",
@@ -4540,28 +4786,27 @@
                 {
                   "atomType": "Code",
                   "x": 0.6,
-                  "y": 0.6,
-                  "uniqueID": "id-135836",
+                  "y": 0.4,
+                  "uniqueID": "id-135921",
                   "ioValues": [
                     {
-                      "name": "shape",
+                      "name": "A",
                       "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
-                      "name": "factor",
-                      "ioValue": 1.0884955752212389
+                      "name": "B",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ],
-                  "interpreterVersion": 1,
-                  "code": "function run(shape: Assembly, factor: number, center: number[]) {\n  return shape.onLeafs((leaf) => {\n    let centerAsPoint: replicad.Point | undefined = undefined\n    if (leaf.is2D() && center.length == 2 || (!leaf.is2D() && center.length == 3)) {\n      centerAsPoint = center as replicad.Point;\n    } else {\n      centerAsPoint = leaf.geometry.boundingBox.center;\n    }\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.scale(factor, centerAsPoint as [number, number])\n    } else {\n      leaf.geometry = replicad.cast(replicad.scale(leaf.geometry.wrapped, centerAsPoint, factor))\n    }\n    return leaf;\n  })\n}",
-                  "compiledCode": "\"use strict\";\nfunction run(shape, factor, center) {\n    return shape.onLeafs((leaf) => {\n        let centerAsPoint = undefined;\n        if (leaf.is2D() && center.length == 2 || (!leaf.is2D() && center.length == 3)) {\n            centerAsPoint = center;\n        }\n        else {\n            centerAsPoint = leaf.geometry.boundingBox.center;\n        }\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.scale(factor, centerAsPoint);\n        }\n        else {\n            leaf.geometry = replicad.cast(replicad.scale(leaf.geometry.wrapped, centerAsPoint, factor));\n        }\n        return leaf;\n    });\n}\n"
+                  "interpreterVersion": 0,
+                  "code": "\n      Inputs = [\n       {inputName: \"A\", type: \"geometry\", defaultValue: null},\n        {inputName: \"B\", type: \"geometry\", defaultValue: null}\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Takes the address and gets the shape from the library\n      let importedShapeA = library[A]\n\n      let boundsA = await GetBounds(A);\n      let A_minX = boundsA.min[0];\n\n      let B_maxX = 0;\n      if(B){\n          let boundsB = await GetBounds(B);\n          console.log(\"Bounding Box B:  \");\n          console.log(boundsB);\n          B_maxX  = boundsB.max[0];\n      }\n\n     let translationX = B_maxX - A_minX;\n     \n      let movedOutput = await Move(A, translationX, 0, 0);\n\n      return movedOutput;\n\n      // //We can also create a new shape from scratch\n      // let createdRectangle = replicad.drawRectangle(5,7)\n      // //This is the plane we are going to put our new shape on\n      // const newPlane = new replicad.Plane().pivot(0, 'Y');\n      // //And we extrude the shape to make it 3D\n      // let createdShape = createdRectangle.sketchOnPlane(newPlane).extrude(height)\n\n      // //For our new geometry we need to define the tags, color, plane, etc\n      // let shape2 = {\n      //     geometry: [createdShape],\n      //     tags: [\"aTag\"],\n      //     color: '#A3CE5B',\n      //     plane: newPlane,\n      //     bom: []\n      // }\n\n      // //Then we can return our created shape in just the same way\n      // //return shape2\n\n      // //If we want to return both shapes at once, we can create an assembly with them\n      // let anAssembly = {\n      //   geometry: [shape1, shape2],\n      //   tags: [\"aNewTag\"],\n      //   color: '#A3CF5B',\n      //   plane: newPlane,\n      //   bom: []\n      // }\n\n      // //And we can return that in the same way\n      // return anAssembly\n\n      /**\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n      If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0]\n      Use any replicad available methods to modify your geometry. Learn more about all of the available methods at\n      https://replicad.xyz/docs/introapp/UserGuide.html\n      Return a replicad object that includes geometry, color, tags and plane.\n\n      Example Code Atom:\n        Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let finalShape = library[shape].geometry[0].clone().translate([x,0,0])\n        return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      */\n      "
                 },
                 {
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-135837",
-                  "name": "shape",
+                  "uniqueID": "id-135922",
+                  "name": "A",
                   "type": "geometry",
                   "options": []
                 },
@@ -4569,77 +4814,62 @@
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-135838",
-                  "name": "factor",
-                  "options": []
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0,
-                  "y": 0.3,
-                  "uniqueID": "id-135839",
-                  "name": "center",
-                  "type": "array",
+                  "uniqueID": "id-135923",
+                  "name": "B",
+                  "type": "geometry",
                   "options": []
                 }
               ],
               "allConnectors": [
                 {
                   "ap2Name": "number or geometry",
-                  "ap1ID": "id-135836",
-                  "ap2ID": "id-135835"
+                  "ap1ID": "id-135921",
+                  "ap2ID": "id-135920"
                 },
                 {
-                  "ap2Name": "shape",
-                  "ap1ID": "id-135837",
-                  "ap2ID": "id-135836"
+                  "ap2Name": "A",
+                  "ap1ID": "id-135922",
+                  "ap2ID": "id-135921"
                 },
                 {
-                  "ap2Name": "factor",
-                  "ap1ID": "id-135838",
-                  "ap2ID": "id-135836"
-                },
-                {
-                  "ap2Name": "center",
-                  "ap1ID": "id-135839",
-                  "ap2ID": "id-135836"
+                  "ap2Name": "B",
+                  "ap1ID": "id-135923",
+                  "ap2ID": "id-135921"
                 }
               ],
               "parentRepo": {
                 "lastFoundGit": "2026-09-15T18:23:38.997Z",
                 "privateRepo": false,
-                "repoName": "ScaleCentered",
-                "dateCreated": "2026-08-18T16:38:59Z",
+                "repoName": "To-the-Right",
+                "dateCreated": "2025-09-24T18:31:43Z",
                 "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/README.md?sanitize=true",
-                "yyyy": 2026,
-                "topMoleculeID": "id-1",
+                "readMe": "https://raw.githubusercontent.com/BarbourSmith/To-the-Right/master/README.md?sanitize=true",
+                "yyyy": 2025,
+                "topMoleculeID": "a0890f38-74c5-4820-9da4-f849226726ef",
                 "githubMoleculesUsed": [],
-                "html_url": "https://github.com/tristan-huber/ScaleCentered",
-                "topics": [
-                  "abundance-tool"
-                ],
+                "html_url": "https://github.com/BarbourSmith/To-the-Right",
+                "topics": [],
                 "pullRequests": [],
                 "parentRepo": null,
                 "forks": 0,
-                "dateModified": "739846",
-                "ranking": 0.6,
-                "searchField": "scalecentered tristan-huber scale a shape by the given factor. defaults to scale from center of the input shape. abundance-tool",
-                "owner": "tristan-huber",
-                "description": "Scale a shape by the given factor. Defaults to scale from center of the input shape.",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/ScaleCentered/master/project.svg?sanitize=true",
+                "dateModified": "739518",
+                "ranking": 0.9,
+                "searchField": "to-the-right barboursmith takes input a and moves it to the right of input b as defined by their bounding boxes ",
+                "owner": "BarbourSmith",
+                "description": "Takes input A and moves it to the right of input B as defined by their bounding boxes",
+                "contentURL": "https://raw.githubusercontent.com/BarbourSmith/To-the-Right/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/BarbourSmith/To-the-Right/master/project.svg?sanitize=true",
                 "isLocal": false
               },
-              "unitsKey": "Unitless",
+              "unitsKey": "MM",
               "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1789507992476
+              "lastReloadedFromGithubAt": 1789508174780
             },
             {
               "atomType": "Move",
-              "x": 0.3,
-              "y": 0.3,
-              "uniqueID": "id-135855",
+              "x": 0.7,
+              "y": 0.8,
+              "uniqueID": "id-135936",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -4647,7 +4877,8 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": 2
+                  "ioValue": -0.75,
+                  "currentEquation": "-bulkheadThickness - 0.25"
                 },
                 {
                   "name": "yDist",
@@ -4655,118 +4886,10 @@
                 },
                 {
                   "name": "zDist",
-                  "ioValue": 0
+                  "ioValue": 0.4,
+                  "currentEquation": "0.4"
                 }
               ]
-            },
-            {
-              "atomType": "GitHubMolecule",
-              "x": 0.3,
-              "y": 0.2,
-              "uniqueID": "id-135866",
-              "name": "phys.CenterMass",
-              "ioValues": [
-                {
-                  "name": "defaultDensity",
-                  "ioValue": 1
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 1,
-                  "y": 0.5,
-                  "uniqueID": "id-135862",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0,
-                  "y": 0.2,
-                  "uniqueID": "id-135863",
-                  "name": "assembly",
-                  "options": []
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0,
-                  "y": 0.2,
-                  "uniqueID": "id-135864",
-                  "name": "defaultDensity",
-                  "options": []
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.4,
-                  "y": 0.6,
-                  "uniqueID": "id-135865",
-                  "ioValues": [
-                    {
-                      "name": "assembly",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "defaultDensity",
-                      "ioValue": 1
-                    }
-                  ],
-                  "interpreterVersion": 1,
-                  "code": "function run(assembly: Assembly, defaultDensity: number) {\n\n  // TODO: this needs to walk the tree so that we give higher metadata  higher priority\n  const getMass = (leaf: Assembly, defaultDensity: number) => {\n    const props = replicad.measureShapeVolumeProperties(leaf.geometry as replicad.Shape3D)\n    let mass = defaultDensity * props.volume;\n    if (leaf.metadata?.mass != undefined) {\n      mass = leaf.metadata.mass;\n    } else if (leaf.metadata?.density != undefined) {\n      mass = leaf.metadata.density * props.volume\n    }\n    return mass;\n  }\n\n  const points: MassPoint[] = []\n  const helper = (subassembly: Assembly, defaultDensity: number) => {\n    if (subassembly.isLeaf()) {\n      if (subassembly.isPoint()) {\n        points.push({ loc: (subassembly.geometry as replicad.Vertex).asTuple(), weight: getMass(subassembly, defaultDensity) })\n      } else {\n        const props = replicad.measureShapeVolumeProperties(subassembly.geometry as replicad.Shape3D)\n        points.push({ loc: props.centerOfMass, weight: getMass(subassembly, defaultDensity) })\n      }\n    } else { // is not leaf\n      if (subassembly.metadata?.mass) { // this branch has a mass value set\n        const subshapePoints: MassPoint[] = []\n        subassembly.onLeafs((leaf) => {\n          if (leaf.is3D()) {\n            const props = replicad.measureShapeVolumeProperties((leaf.geometry as replicad.Shape3D))\n            subshapePoints.push({ loc: props.centerOfMass, weight: props.volume })\n          }\n          return leaf;\n        })\n        const center = centerOfMass(subshapePoints)\n        points.push({ loc: center.loc, weight: subassembly.metadata.mass })\n      } else { // no mass value set on this branch. continue traversal\n        (subassembly.geometry as Assembly[]).forEach((a) => {\n          if (subassembly.metadata?.density) {\n            helper(a, subassembly.metadata.density)\n          } else {\n            helper(a, defaultDensity)\n          }\n        })\n      }\n    }\n  }\n\n  helper(assembly, defaultDensity)\n\n  const center = centerOfMass(points);\n  return new Assembly({\n    geometry: replicad.makeVertex(center.loc),\n    metadata: { mass: center.weight }\n  })\n}\n\ninterface MassPoint {\n  loc: [number, number, number],\n  weight: number\n}\n\n\nfunction centerOfMass(points: MassPoint[]): MassPoint {\n  let totalMass = 0;\n  let sx = 0, sy = 0, sz = 0;\n\n  for (const { loc, weight } of points) {\n    const [x, y, z] = loc;\n    const m = weight;\n    sx += x * m;\n    sy += y * m;\n    sz += z * m;\n    totalMass += m;\n  }\n\n  if (totalMass === 0) {\n    throw new Error(\"centerOfMass: total mass is zero.\");\n  }\n\n  return { loc: [sx / totalMass, sy / totalMass, sz / totalMass], weight: totalMass }\n}",
-                  "compiledCode": "\"use strict\";\nfunction run(assembly, defaultDensity) {\n    // TODO: this needs to walk the tree so that we give higher metadata  higher priority\n    const getMass = (leaf, defaultDensity) => {\n        const props = replicad.measureShapeVolumeProperties(leaf.geometry);\n        let mass = defaultDensity * props.volume;\n        if (leaf.metadata?.mass != undefined) {\n            mass = leaf.metadata.mass;\n        }\n        else if (leaf.metadata?.density != undefined) {\n            mass = leaf.metadata.density * props.volume;\n        }\n        return mass;\n    };\n    const points = [];\n    const helper = (subassembly, defaultDensity) => {\n        if (subassembly.isLeaf()) {\n            if (subassembly.isPoint()) {\n                points.push({ loc: subassembly.geometry.asTuple(), weight: getMass(subassembly, defaultDensity) });\n            }\n            else {\n                const props = replicad.measureShapeVolumeProperties(subassembly.geometry);\n                points.push({ loc: props.centerOfMass, weight: getMass(subassembly, defaultDensity) });\n            }\n        }\n        else { // is not leaf\n            if (subassembly.metadata?.mass) { // this branch has a mass value set\n                const subshapePoints = [];\n                subassembly.onLeafs((leaf) => {\n                    if (leaf.is3D()) {\n                        const props = replicad.measureShapeVolumeProperties(leaf.geometry);\n                        subshapePoints.push({ loc: props.centerOfMass, weight: props.volume });\n                    }\n                    return leaf;\n                });\n                const center = centerOfMass(subshapePoints);\n                points.push({ loc: center.loc, weight: subassembly.metadata.mass });\n            }\n            else { // no mass value set on this branch. continue traversal\n                subassembly.geometry.forEach((a) => {\n                    if (subassembly.metadata?.density) {\n                        helper(a, subassembly.metadata.density);\n                    }\n                    else {\n                        helper(a, defaultDensity);\n                    }\n                });\n            }\n        }\n    };\n    helper(assembly, defaultDensity);\n    const center = centerOfMass(points);\n    return new Assembly({\n        geometry: replicad.makeVertex(center.loc),\n        metadata: { mass: center.weight }\n    });\n}\nfunction centerOfMass(points) {\n    let totalMass = 0;\n    let sx = 0, sy = 0, sz = 0;\n    for (const { loc, weight } of points) {\n        const [x, y, z] = loc;\n        const m = weight;\n        sx += x * m;\n        sy += y * m;\n        sz += z * m;\n        totalMass += m;\n    }\n    if (totalMass === 0) {\n        throw new Error(\"centerOfMass: total mass is zero.\");\n    }\n    return { loc: [sx / totalMass, sy / totalMass, sz / totalMass], weight: totalMass };\n}\n"
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "assembly",
-                  "ap1ID": "id-135863",
-                  "ap2ID": "id-135865"
-                },
-                {
-                  "ap2Name": "defaultDensity",
-                  "ap1ID": "id-135864",
-                  "ap2ID": "id-135865"
-                },
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-135865",
-                  "ap2ID": "id-135862"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-09-15T18:23:38.997Z",
-                "privateRepo": false,
-                "repoName": "phys.CenterMass",
-                "dateCreated": "2026-08-12T16:57:42Z",
-                "likes": 0,
-                "readMe": "https://raw.githubusercontent.com/tristan-huber/phys.CenterMass/master/README.md?sanitize=true",
-                "yyyy": 2026,
-                "topMoleculeID": "id-53737",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/tristan-huber/phys.CenterMass",
-                "topics": [
-                  "abundance-tool"
-                ],
-                "pullRequests": [],
-                "parentRepo": null,
-                "forks": 0,
-                "dateModified": "739840",
-                "ranking": 1.2,
-                "searchField": "phys.centermass tristan-huber return the center of mass of an assembly. uses the assigned metadata.mass values on subassemblies or falls back to default density. abundance-tool",
-                "owner": "tristan-huber",
-                "description": "return the center of mass of an assembly. uses the assigned metadata.mass values on subassemblies or falls back to default density.",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/phys.CenterMass/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/phys.CenterMass/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Unitless",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1789508106606
             }
           ],
           "allConnectors": [
@@ -4776,19 +4899,14 @@
               "ap2ID": "id-135665"
             },
             {
-              "ap2Name": "geometry",
+              "ap2Name": "Geometry",
               "ap1ID": "id-135653",
-              "ap2ID": "id-135855"
+              "ap2ID": "id-135889"
             },
             {
-              "ap2Name": "assembly",
-              "ap1ID": "id-135653",
-              "ap2ID": "id-135866"
-            },
-            {
-              "ap2Name": "factor",
+              "ap2Name": "Scale Factor",
               "ap1ID": "id-135660",
-              "ap2ID": "id-135840"
+              "ap2ID": "id-135889"
             },
             {
               "ap2Name": "Shape",
@@ -4796,9 +4914,9 @@
               "ap2ID": "id-135661"
             },
             {
-              "ap2Name": "geometry2",
+              "ap2Name": "geometry",
               "ap1ID": "id-135678",
-              "ap2ID": "id-135679"
+              "ap2ID": "id-135936"
             },
             {
               "ap2Name": "number or geometry",
@@ -4841,6 +4959,11 @@
               "ap2ID": "id-135785"
             },
             {
+              "ap2Name": "B",
+              "ap1ID": "id-135762",
+              "ap2ID": "id-135924"
+            },
+            {
               "ap2Name": "geometry",
               "ap1ID": "id-135756",
               "ap2ID": "id-135761"
@@ -4861,14 +4984,24 @@
               "ap2ID": "id-135762"
             },
             {
-              "ap2Name": "shape",
-              "ap1ID": "id-135855",
-              "ap2ID": "id-135840"
+              "ap2Name": "A",
+              "ap1ID": "id-135889",
+              "ap2ID": "id-135924"
             },
             {
-              "ap2Name": "center",
-              "ap1ID": "id-135866",
-              "ap2ID": "id-135840"
+              "ap2Name": "shape",
+              "ap1ID": "id-135924",
+              "ap2ID": "id-135666"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-135936",
+              "ap2ID": "id-135785"
+            },
+            {
+              "ap2Name": "geometry2",
+              "ap1ID": "id-135936",
+              "ap2ID": "id-135679"
             }
           ],
           "fileTypeVersion": 1
