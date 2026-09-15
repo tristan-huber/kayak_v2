@@ -1670,7 +1670,7 @@
     {
       "atomType": "GitHubMolecule",
       "x": 0.3,
-      "y": 0.5,
+      "y": 0.6,
       "uniqueID": "id-133245",
       "name": "G24_marine_battery",
       "topLevel": false,
@@ -2399,10 +2399,20 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.2,
+      "x": 0.3,
       "y": 0.4,
       "uniqueID": "id-133347",
       "name": "power_train",
+      "ioValues": [
+        {
+          "name": "bulkheads",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "body",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
       "topLevel": false,
       "allAtoms": [
         {
@@ -2416,27 +2426,834 @@
               "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.2,
+          "y": 0.4,
+          "uniqueID": "id-133383",
+          "name": "G24_marine_battery",
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-133362",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Rectangle",
+              "x": 0.3,
+              "y": 0.2,
+              "uniqueID": "id-133363",
+              "ioValues": [
+                {
+                  "name": "x length",
+                  "ioValue": 10.3
+                },
+                {
+                  "name": "y length",
+                  "ioValue": 6.8
+                }
+              ]
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.4,
+              "y": 0.4,
+              "uniqueID": "id-133364",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": 8.9
+                }
+              ]
+            },
+            {
+              "atomType": "Circle",
+              "x": 0.2,
+              "y": 0.6,
+              "uniqueID": "id-133365",
+              "ioValues": [
+                {
+                  "name": "diameter",
+                  "ioValue": 0.5
+                }
+              ]
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.2,
+              "y": 0.4,
+              "uniqueID": "id-133366",
+              "name": "Height",
+              "value": 8.9
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.2,
+              "y": 0.2,
+              "uniqueID": "id-133367",
+              "name": "width",
+              "value": 10.3
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.1,
+              "y": 0.5,
+              "uniqueID": "id-133368",
+              "name": "PinInset",
+              "value": 1
+            },
+            {
+              "atomType": "Color",
+              "x": 0.5,
+              "y": 0.6,
+              "uniqueID": "id-133369",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "selectedColor": "Black"
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.3,
+              "y": 0.8,
+              "uniqueID": "id-133370",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": 0.5
+                }
+              ]
+            },
+            {
+              "atomType": "Assembly",
+              "x": 0.7,
+              "y": 0.6,
+              "uniqueID": "id-133371",
+              "ioValues": [
+                {
+                  "name": "Shape 1",
+                  "ioValue": null
+                },
+                {
+                  "name": "Shape 2",
+                  "ioValue": null
+                },
+                {
+                  "name": "Shape 3",
+                  "ioValue": null
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.4,
+              "y": 0.8,
+              "uniqueID": "id-133372",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 1,
+                  "currentEquation": "PinInset"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 1,
+                  "currentEquation": "PinInset"
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 8.9,
+                  "currentEquation": "Height"
+                }
+              ]
+            },
+            {
+              "atomType": "Color",
+              "x": 0.5,
+              "y": 0.7,
+              "uniqueID": "id-133373",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "selectedColor": "Red"
+            },
+            {
+              "atomType": "Constant",
+              "x": 0.2,
+              "y": 0.3,
+              "uniqueID": "id-133374",
+              "name": "Depth",
+              "value": 6.8
+            },
+            {
+              "atomType": "Move",
+              "x": 0.4,
+              "y": 0.6,
+              "uniqueID": "id-133375",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 9.3,
+                  "currentEquation": "width - PinInset"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 1,
+                  "currentEquation": "PinInset"
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 8.9,
+                  "currentEquation": "Height"
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.6,
+              "y": 0.3,
+              "uniqueID": "id-133376",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 5.15,
+                  "currentEquation": "width / 2"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 3.4,
+                  "currentEquation": "Depth / 2"
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0
+                }
+              ]
+            },
+            {
+              "atomType": "Add-BOM-Tag",
+              "x": 0.8,
+              "y": 0.4,
+              "uniqueID": "id-133377",
+              "name": "Add BOM Tag",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Item Name",
+                  "ioValue": "12.8V 100Ah battery",
+                  "currentEquation": "12.8V 100Ah battery"
+                },
+                {
+                  "name": "Number Needed",
+                  "ioValue": 1
+                },
+                {
+                  "name": "Cost (USD)",
+                  "ioValue": 185
+                },
+                {
+                  "name": "Source Link",
+                  "ioValue": "https://www.amazon.com/dp/B0DZXDWJXR",
+                  "currentEquation": "https://www.amazon.com/dp/B0DZXDWJXR"
+                }
+              ],
+              "BOMitem": {
+                "BOMitemName": "12.8V 100Ah battery",
+                "numberNeeded": 1,
+                "costUSD": 185,
+                "source": "https://www.amazon.com/dp/B0DZXDWJXR"
+              }
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.8,
+              "y": 0.8,
+              "uniqueID": "id-133378",
+              "name": "phys.SetMass",
+              "ioValues": [
+                {
+                  "name": "assembly",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "mass",
+                  "ioValue": 21.9
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-133379",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.1,
+                  "uniqueID": "id-133380",
+                  "name": "assembly",
+                  "type": "geometry"
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.4,
+                  "y": 0.7,
+                  "uniqueID": "id-133381",
+                  "ioValues": [
+                    {
+                      "name": "assembly",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "mass",
+                      "ioValue": 21.9
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "// Set mass\nfunction run(assembly: Assembly, mass: number) {\n  const initial = assembly.metadata ? assembly.metadata : {}\n  initial.mass = mass;\n  assembly.metadata = initial;\n  return assembly\n}",
+                  "compiledCode": "\"use strict\";\n// Set mass\nfunction run(assembly, mass) {\n    const initial = assembly.metadata ? assembly.metadata : {};\n    initial.mass = mass;\n    assembly.metadata = initial;\n    return assembly;\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-133382",
+                  "name": "mass"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "assembly",
+                  "ap1ID": "id-133380",
+                  "ap2ID": "id-133381"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-133381",
+                  "ap2ID": "id-133379"
+                },
+                {
+                  "ap2Name": "mass",
+                  "ap1ID": "id-133382",
+                  "ap2ID": "id-133381"
+                }
+              ],
+              "parentRepo": {
+                "repoName": "phys.SetMass",
+                "dateCreated": "2026-08-12T16:42:56Z",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-43071",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/phys.SetMass",
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739840",
+                "ranking": 0,
+                "searchField": "phys.setmass tristan-huber adds a mass to the metadata of an assembly. in general this superseed masses of the leafs of an assembly. consumed by other physics methods in utils. arbitrary units.",
+                "owner": "tristan-huber",
+                "description": "Adds a mass to the metadata of an assembly. In general this superseed masses of the leafs of an assembly. Consumed by other physics methods in utils. Arbitrary units.",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/project.svg?sanitize=true",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/project.abundance?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1786556763102
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133363",
+              "ap2ID": "id-133364"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133364",
+              "ap2ID": "id-133376"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133365",
+              "ap2ID": "id-133370"
+            },
+            {
+              "ap2Name": "height",
+              "ap1ID": "id-133366",
+              "ap2ID": "id-133364"
+            },
+            {
+              "ap2Name": "x length",
+              "ap1ID": "id-133367",
+              "ap2ID": "id-133363"
+            },
+            {
+              "ap2Name": "Shape 1",
+              "ap1ID": "id-133369",
+              "ap2ID": "id-133371"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133370",
+              "ap2ID": "id-133372"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133370",
+              "ap2ID": "id-133375"
+            },
+            {
+              "ap2Name": "assembly",
+              "ap1ID": "id-133371",
+              "ap2ID": "id-133378"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133372",
+              "ap2ID": "id-133373"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-133373",
+              "ap2ID": "id-133371"
+            },
+            {
+              "ap2Name": "y length",
+              "ap1ID": "id-133374",
+              "ap2ID": "id-133363"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133375",
+              "ap2ID": "id-133369"
+            },
+            {
+              "ap2Name": "Shape 3",
+              "ap1ID": "id-133376",
+              "ap2ID": "id-133371"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-133377",
+              "ap2ID": "id-133362"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133378",
+              "ap2ID": "id-133377"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-15T18:23:38.997Z",
+            "privateRepo": false,
+            "repoName": "G24_marine_battery",
+            "dateCreated": "2026-07-08T23:43:50Z",
+            "likes": 0,
+            "pngURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/main/project.png",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-21801",
+            "userSetAsThumbnail": false,
+            "githubMoleculesUsed": [
+              {
+                "owner": "tristan-huber",
+                "repoName": "phys.SetMass"
+              }
+            ],
+            "html_url": "https://github.com/tristan-huber/G24_marine_battery",
+            "topics": [
+              "hardware",
+              "electronics"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739873",
+            "ranking": 0.3,
+            "searchField": "g24_marine_battery tristan-huber model for a group24 sized marine battery. bom links to a lithium ion version available on amazon. hardware electronics",
+            "owner": "tristan-huber",
+            "description": "Model for a Group24 sized marine battery. BOM links to a Lithium Ion version available on amazon.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/G24_marine_battery/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Inches",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789506095546
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.3,
+          "uniqueID": "id-133444",
+          "name": "bulkheads",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.6,
+          "uniqueID": "id-133464",
+          "name": "body",
+          "type": "geometry"
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.1,
+          "y": 0.2,
+          "uniqueID": "id-133473",
+          "name": "IthFromAssembly",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "i",
+              "ioValue": 2,
+              "currentEquation": "2"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-133469",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.5,
+              "y": 0.7,
+              "uniqueID": "id-133470",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "i",
+                  "ioValue": 2
+                }
+              ],
+              "interpreterVersion": 0,
+              "code": "\n      const Inputs = [\n       {inputName: \"geometry\", type: \"geometry\", defaultValue: null},\n      {inputName: \"i\", type: \"number\", defaultValue: 0},\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[geometry]\n      let j = 0;\n      console.log(\"foo\")\n      console.log(importedShape)\n      const leafList = await AssemblyAsIterable(importedShape)\n      console.log(leafList)\n      if (i >= leafList.length) {\n        throw new Error(`Assembly only has ${leafList.length} entries. Tried to find index: ${i}.`)\n      }\n      return leafList[i]\n\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.1,
+              "uniqueID": "id-133471",
+              "name": "geometry",
+              "type": "geometry"
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-133472",
+              "name": "i",
+              "type": "number"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-133470",
+              "ap2ID": "id-133469"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-133471",
+              "ap2ID": "id-133470"
+            },
+            {
+              "ap2Name": "i",
+              "ap1ID": "id-133472",
+              "ap2ID": "id-133470"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-15T18:23:38.997Z",
+            "privateRepo": false,
+            "repoName": "IthFromAssembly",
+            "dateCreated": "2025-11-03T02:49:44Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/README.md?sanitize=true",
+            "yyyy": 2025,
+            "topMoleculeID": "id-2718",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/IthFromAssembly",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 1,
+            "dateModified": "739558",
+            "ranking": 8.6,
+            "searchField": "ithfromassembly tristan-huber get the ith leaf from an assembly abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Get the ith leaf from an assembly",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789506173814
+        },
+        {
+          "atomType": "Rotate",
+          "x": 0.3,
+          "y": 0.6,
+          "uniqueID": "id-133485",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "x-axis degrees",
+              "ioValue": 0
+            },
+            {
+              "name": "y-axis degrees",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "z-axis degrees",
+              "ioValue": -90,
+              "currentEquation": "-90"
+            }
+          ]
         }
       ],
-      "allConnectors": [],
+      "allConnectors": [
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-133383",
+          "ap2ID": "id-133485"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-133444",
+          "ap2ID": "id-133473"
+        }
+      ],
       "fileTypeVersion": 1
     },
     {
       "atomType": "Rectangle",
-      "x": 0.8,
+      "x": 0.7,
       "y": 0.8,
       "uniqueID": "id-133351",
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 25
+          "ioValue": 25.5
         },
         {
           "name": "y length",
-          "ioValue": 21.5,
-          "currentEquation": "21.5"
+          "ioValue": 21.9,
+          "currentEquation": "21.9"
         }
       ]
+    },
+    {
+      "atomType": "Move",
+      "x": 0.8,
+      "y": 0.7,
+      "uniqueID": "id-133355",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "xDist",
+          "ioValue": 103,
+          "currentEquation": "103"
+        },
+        {
+          "name": "yDist",
+          "ioValue": 0
+        },
+        {
+          "name": "zDist",
+          "ioValue": 0
+        }
+      ]
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.4,
+      "y": 0.8,
+      "uniqueID": "id-133452",
+      "name": "IthFromAssembly",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "i",
+          "ioValue": 10
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 1,
+          "y": 0.5,
+          "uniqueID": "id-133448",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.5,
+          "y": 0.7,
+          "uniqueID": "id-133449",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "i",
+              "ioValue": 10
+            }
+          ],
+          "interpreterVersion": 0,
+          "code": "\n      const Inputs = [\n       {inputName: \"geometry\", type: \"geometry\", defaultValue: null},\n      {inputName: \"i\", type: \"number\", defaultValue: 0},\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[geometry]\n      let j = 0;\n      console.log(\"foo\")\n      console.log(importedShape)\n      const leafList = await AssemblyAsIterable(importedShape)\n      console.log(leafList)\n      if (i >= leafList.length) {\n        throw new Error(`Assembly only has ${leafList.length} entries. Tried to find index: ${i}.`)\n      }\n      return leafList[i]\n\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.1,
+          "uniqueID": "id-133450",
+          "name": "geometry",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.2,
+          "uniqueID": "id-133451",
+          "name": "i",
+          "type": "number"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-133449",
+          "ap2ID": "id-133448"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-133450",
+          "ap2ID": "id-133449"
+        },
+        {
+          "ap2Name": "i",
+          "ap1ID": "id-133451",
+          "ap2ID": "id-133449"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-09-15T18:23:38.997Z",
+        "privateRepo": false,
+        "repoName": "IthFromAssembly",
+        "dateCreated": "2025-11-03T02:49:44Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/README.md?sanitize=true",
+        "yyyy": 2025,
+        "topMoleculeID": "id-2718",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/IthFromAssembly",
+        "topics": [
+          "abundance-tool"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 1,
+        "dateModified": "739558",
+        "ranking": 8.6,
+        "searchField": "ithfromassembly tristan-huber get the ith leaf from an assembly abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Get the ith leaf from an assembly",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1789506135993
     },
     {
       "atomType": "Molecule",
@@ -15786,6 +16603,11 @@
       "ap2ID": "id-95407"
     },
     {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-76088",
+      "ap2ID": "id-130"
+    },
+    {
       "ap2Name": "x",
       "ap1ID": "id-76297",
       "ap2ID": "id-76300"
@@ -15816,6 +16638,11 @@
       "ap2ID": "id-95407"
     },
     {
+      "ap2Name": "bulkheads",
+      "ap1ID": "id-117163",
+      "ap2ID": "id-133347"
+    },
+    {
       "ap2Name": "superstructure",
       "ap1ID": "id-76328",
       "ap2ID": "id-95407"
@@ -15834,6 +16661,11 @@
       "ap2Name": "Shape",
       "ap1ID": "id-133245",
       "ap2ID": "id-133316"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-133351",
+      "ap2ID": "id-133355"
     }
   ],
   "unitsKey": "Inches",
