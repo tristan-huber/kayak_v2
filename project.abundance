@@ -1219,8 +1219,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.3,
-      "y": 0.3,
+      "x": 0.6,
+      "y": 0.1,
       "uniqueID": "id-128087",
       "name": "hull panels",
       "ioValues": [
@@ -10167,7 +10167,7 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.9,
+          "x": 0.8,
           "y": 0.8,
           "uniqueID": "id-139988",
           "name": "Molecule",
@@ -11474,6 +11474,129 @@
       "tags": [
         "thick_ply"
       ]
+    },
+    {
+      "atomType": "Molecule",
+      "x": 0.4,
+      "y": 0.4,
+      "uniqueID": "id-140163",
+      "name": "outboard",
+      "ioValues": [
+        {
+          "name": "behind_bulkhead",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "hullform",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 1,
+          "y": 0.5,
+          "uniqueID": "id-140165",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.3,
+          "uniqueID": "id-140167",
+          "name": "behind_bulkhead",
+          "type": "geometry",
+          "options": []
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.4,
+          "uniqueID": "id-140170",
+          "name": "hullform",
+          "type": "geometry",
+          "options": []
+        }
+      ],
+      "allConnectors": [],
+      "fileTypeVersion": 1
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.4,
+      "y": 0.5,
+      "uniqueID": "id-140173",
+      "name": "Extract electronics_aft_bulkhead",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tagIndex": 0,
+      "selectedTags": [
+        "electronics_aft_bulkhead"
+      ],
+      "includeUntagged": false,
+      "notKeepOut": false
+    },
+    {
+      "atomType": "Molecule",
+      "x": 0.5,
+      "y": 0.7,
+      "uniqueID": "id-140176",
+      "name": "bluerobotics",
+      "ioValues": [
+        {
+          "name": "behind_bulkhead",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "hullform",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 1,
+          "y": 0.5,
+          "uniqueID": "id-140177",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.2,
+          "uniqueID": "id-140178",
+          "name": "behind_bulkhead",
+          "type": "geometry",
+          "options": []
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.2,
+          "uniqueID": "id-140179",
+          "name": "hullform",
+          "type": "geometry",
+          "options": []
+        }
+      ],
+      "allConnectors": [],
+      "fileTypeVersion": 1
     },
     {
       "atomType": "Molecule",
@@ -24783,6 +24906,16 @@
       "ap2ID": "id-130"
     },
     {
+      "ap2Name": "hullform",
+      "ap1ID": "id-76088",
+      "ap2ID": "id-140163"
+    },
+    {
+      "ap2Name": "hullform",
+      "ap1ID": "id-76088",
+      "ap2ID": "id-140176"
+    },
+    {
       "ap2Name": "x",
       "ap1ID": "id-76297",
       "ap2ID": "id-76300"
@@ -24828,6 +24961,11 @@
       "ap2ID": "id-95407"
     },
     {
+      "ap2Name": "geometry",
+      "ap1ID": "id-133347",
+      "ap2ID": "id-140173"
+    },
+    {
       "ap2Name": "bulkheads",
       "ap1ID": "id-89799",
       "ap2ID": "id-93010"
@@ -24841,6 +24979,16 @@
       "ap2Name": "bulkheads",
       "ap1ID": "id-139912",
       "ap2ID": "id-133347"
+    },
+    {
+      "ap2Name": "behind_bulkhead",
+      "ap1ID": "id-140173",
+      "ap2ID": "id-140163"
+    },
+    {
+      "ap2Name": "behind_bulkhead",
+      "ap1ID": "id-140173",
+      "ap2ID": "id-140176"
     }
   ],
   "unitsKey": "Inches",
