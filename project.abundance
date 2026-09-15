@@ -11593,6 +11593,515 @@
           "name": "hullform",
           "type": "geometry",
           "options": []
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.5,
+          "y": 0.6,
+          "uniqueID": "id-140209",
+          "name": "Blue_Robotics_T200",
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-140189",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Import",
+              "x": 0.2,
+              "y": 0.4,
+              "uniqueID": "id-140190",
+              "fileName": "T200.STEP",
+              "name": "Import",
+              "type": "STEP",
+              "repoOwner": "tristan-huber",
+              "repoName": "Blue_Robotics_T200",
+              "SVGwidth": 10
+            },
+            {
+              "atomType": "Add-BOM-Tag",
+              "x": 0.5,
+              "y": 0.2,
+              "uniqueID": "id-140191",
+              "name": "Add BOM Tag",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Item Name",
+                  "ioValue": "T200",
+                  "currentEquation": "T200"
+                },
+                {
+                  "name": "Number Needed",
+                  "ioValue": 1
+                },
+                {
+                  "name": "Cost (USD)",
+                  "ioValue": 230
+                },
+                {
+                  "name": "Source Link",
+                  "ioValue": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/",
+                  "currentEquation": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/"
+                }
+              ],
+              "BOMitem": {
+                "BOMitemName": "T200",
+                "numberNeeded": 1,
+                "costUSD": 230,
+                "source": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/"
+              }
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.5,
+              "y": 0.6,
+              "uniqueID": "id-140192",
+              "name": "phys.SetMass",
+              "ioValues": [
+                {
+                  "name": "assembly",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "mass",
+                  "ioValue": 0.94
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-140193",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-140194",
+                  "name": "assembly",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.4,
+                  "y": 0.7,
+                  "uniqueID": "id-140195",
+                  "ioValues": [
+                    {
+                      "name": "assembly",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "mass",
+                      "ioValue": 0.94
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "// Set mass\nfunction run(assembly: Assembly, mass: number) {\n  const initial = assembly.metadata ? assembly.metadata : {}\n  initial.mass = mass;\n  assembly.metadata = initial;\n  return assembly?.skipDisjointPostprocess();\n}",
+                  "compiledCode": "\"use strict\";\n// Set mass\nfunction run(assembly, mass) {\n    const initial = assembly.metadata ? assembly.metadata : {};\n    initial.mass = mass;\n    assembly.metadata = initial;\n    return assembly?.skipDisjointPostprocess();\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-140196",
+                  "name": "mass",
+                  "options": []
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "assembly",
+                  "ap1ID": "id-140194",
+                  "ap2ID": "id-140195"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-140195",
+                  "ap2ID": "id-140193"
+                },
+                {
+                  "ap2Name": "mass",
+                  "ap1ID": "id-140196",
+                  "ap2ID": "id-140195"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "repoName": "phys.SetMass",
+                "dateCreated": "2026-08-12T16:42:56Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-43071",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/phys.SetMass",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739840",
+                "ranking": 0.6,
+                "searchField": "phys.setmass tristan-huber adds a mass to the metadata of an assembly. in general this superseed masses of the leafs of an assembly. consumed by other physics methods in utils. arbitrary units.",
+                "owner": "tristan-huber",
+                "description": "Adds a mass to the metadata of an assembly. In general this superseed masses of the leafs of an assembly. Consumed by other physics methods in utils. Arbitrary units.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/phys.SetMass/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789513930130
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.3,
+              "y": 0.3,
+              "uniqueID": "id-140197",
+              "name": "Scale",
+              "ioValues": [
+                {
+                  "name": "Geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Scale Factor",
+                  "ioValue": 0.03937007874015748,
+                  "currentEquation": "1 / 25.4"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-140198",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-140199",
+                  "name": "Geometry",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-140200",
+                  "name": "Scale Factor",
+                  "type": "number",
+                  "options": []
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.5,
+                  "y": 0.7,
+                  "uniqueID": "id-140201",
+                  "ioValues": [
+                    {
+                      "name": "inputShape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "scaleFactor",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 0,
+                  "code": " \n      //Inputs:[inputShape, scaleFactor]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n      \n      //Takes the address and gets the shape from the library\n      let importedShape = library[inputShape]\n\n      let scaledShape = await Scale(inputShape, scaleFactor);\n      \n      \n      //Shapes stored in the library have tags, a color, a plane, and a bill of materials like this. We don't modify them here\n      let shape1 = {\n        geometry: [scaledShape],\n        tags: importedShape.tags,\n        color: importedShape.color,\n        plane: importedShape.plane,\n        bom: importedShape.bom\n      }\n      \n      return shape1\n      \n      \n      \n          /**\n          To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n          If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n          Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n          https://replicad.xyz/docs/introapp/UserGuide.html \n          Return a replicad object that includes geometry, color, tags and plane. \n      \n      \n          Example Code Atom:\n      \n            Inputs:[shape, x];\n      \n            let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n      \n            return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      \n            - See more examples at _______ \n      \n      \n          */\n      "
+                },
+                {
+                  "atomType": "Circle",
+                  "x": 0.3,
+                  "y": 0.3,
+                  "uniqueID": "id-140202",
+                  "ioValues": [
+                    {
+                      "name": "diameter",
+                      "ioValue": 10
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.4,
+                  "y": 0.3,
+                  "uniqueID": "id-140203",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 10
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.5,
+                  "y": 0.5,
+                  "uniqueID": "id-140204",
+                  "ioValues": [
+                    {
+                      "name": "inputShape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "scaleFactor",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 0,
+                  "code": " \n      //Inputs:[inputShape, scaleFactor]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n      \n      //Takes the address and gets the shape from the library\n      let importedShape = library[inputShape]\n\n      let scaledShape = await Scale(inputShape, scaleFactor);\n      \n      \n      //Shapes stored in the library have tags, a color, a plane, and a bill of materials like this. We don't modify them here\n      let shape1 = {\n        geometry: [scaledShape],\n        tags: importedShape.tags,\n        color: importedShape.color,\n        plane: importedShape.plane,\n        bom: importedShape.bom\n      }\n      \n      return shape1\n      \n      \n      \n          /**\n          To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n          If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n          Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n          https://replicad.xyz/docs/introapp/UserGuide.html \n          Return a replicad object that includes geometry, color, tags and plane. \n      \n      \n          Example Code Atom:\n      \n            Inputs:[shape, x];\n      \n            let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n      \n            return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      \n            - See more examples at _______ \n      \n      \n          */\n      "
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.7,
+                  "y": 0.4,
+                  "uniqueID": "id-140205",
+                  "ioValues": [
+                    {
+                      "name": "Shape 1",
+                      "ioValue": null
+                    },
+                    {
+                      "name": "Shape 2",
+                      "ioValue": null
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.6,
+                  "y": 0.3,
+                  "uniqueID": "id-140206",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 30
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Readme",
+                  "x": 0.8,
+                  "y": 0.3,
+                  "uniqueID": "id-140207",
+                  "name": "README",
+                  "ioValues": [
+                    {
+                      "name": "value",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "readMeText": "Readme text here",
+                  "global": true
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "inputShape",
+                  "ap1ID": "id-140199",
+                  "ap2ID": "id-140201"
+                },
+                {
+                  "ap2Name": "scaleFactor",
+                  "ap1ID": "id-140200",
+                  "ap2ID": "id-140201"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-140201",
+                  "ap2ID": "id-140198"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-140202",
+                  "ap2ID": "id-140203"
+                },
+                {
+                  "ap2Name": "inputShape",
+                  "ap1ID": "id-140203",
+                  "ap2ID": "id-140204"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-140203",
+                  "ap2ID": "id-140206"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-140204",
+                  "ap2ID": "id-140205"
+                },
+                {
+                  "ap2Name": "Shape 2",
+                  "ap1ID": "id-140206",
+                  "ap2ID": "id-140205"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-15T18:23:38.997Z",
+                "privateRepo": false,
+                "repoName": "Scale",
+                "dateCreated": "2025-06-26T17:06:11Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/README.md?sanitize=true",
+                "yyyy": 2025,
+                "topMoleculeID": "4b6bc40a-44a9-438a-9ed9-ba4910815d8d",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/BarbourSmith/Scale",
+                "topics": [],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 1,
+                "dateModified": "739428",
+                "ranking": 8,
+                "searchField": "scale barboursmith scales the input 2d or 3d geometry by the scale factor ",
+                "owner": "BarbourSmith",
+                "description": "Scales the input 2D or 3D geometry by the scale factor",
+                "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Scale/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789513991882
+            },
+            {
+              "atomType": "Rotate",
+              "x": 0.4,
+              "y": 0.5,
+              "uniqueID": "id-140208",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "x-axis degrees",
+                  "ioValue": 180
+                },
+                {
+                  "name": "y-axis degrees",
+                  "ioValue": 0
+                },
+                {
+                  "name": "z-axis degrees",
+                  "ioValue": 0
+                }
+              ]
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "Geometry",
+              "ap1ID": "id-140190",
+              "ap2ID": "id-140197"
+            },
+            {
+              "ap2Name": "assembly",
+              "ap1ID": "id-140191",
+              "ap2ID": "id-140192"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-140208",
+              "ap2ID": "id-140191"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-140192",
+              "ap2ID": "id-140189"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-140197",
+              "ap2ID": "id-140208"
+            }
+          ],
+          "parentRepo": {
+            "privateRepo": false,
+            "repoName": "Blue_Robotics_T200",
+            "dateCreated": "2026-09-15T23:10:20Z",
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_T200/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-23018",
+            "githubMoleculesUsed": [
+              {
+                "owner": "tristan-huber",
+                "repoName": "phys.SetMass"
+              },
+              {
+                "owner": "BarbourSmith",
+                "repoName": "Scale"
+              }
+            ],
+            "html_url": "https://github.com/tristan-huber/Blue_Robotics_T200",
+            "topics": [
+              "hardware"
+            ],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739874",
+            "ranking": 0,
+            "searchField": "blue_robotics_t200 tristan-huber t200 thruster from blue robotics. course model, with exact screw pattern. hardware",
+            "owner": "tristan-huber",
+            "description": "T200 thruster from blue robotics. Course model, with exact screw pattern.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_T200/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_T200/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Inches",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789514216151
         }
       ],
       "allConnectors": [],
