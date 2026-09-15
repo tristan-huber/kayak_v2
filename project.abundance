@@ -1715,8 +1715,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0,
-          "y": 0.5,
+          "x": 0.1,
+          "y": 0.4,
           "uniqueID": "id-133383",
           "name": "G24_marine_battery",
           "topLevel": false,
@@ -2231,7 +2231,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.8,
           "uniqueID": "id-133464",
           "name": "body",
           "type": "geometry",
@@ -2240,7 +2240,7 @@
         {
           "atomType": "Rotate",
           "x": 0.1,
-          "y": 0.6,
+          "y": 0.4,
           "uniqueID": "id-133485",
           "ioValues": [
             {
@@ -2263,8 +2263,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.3,
-          "y": 0.6,
+          "x": 0.2,
+          "y": 0.4,
           "uniqueID": "id-135276",
           "name": "To the Right",
           "ioValues": [
@@ -2375,8 +2375,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.4,
-          "y": 0.7,
+          "x": 0.3,
+          "y": 0.3,
           "uniqueID": "id-135335",
           "ioValues": [
             {
@@ -2399,8 +2399,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.2,
-          "y": 0.9,
+          "x": 0.1,
+          "y": 0.6,
           "uniqueID": "id-135345",
           "name": "Width",
           "ioValues": [
@@ -2489,8 +2489,8 @@
         },
         {
           "atomType": "Equation",
-          "x": 0.3,
-          "y": 0.9,
+          "x": 0.2,
+          "y": 0.6,
           "uniqueID": "id-135354",
           "name": "x / 2",
           "ioValues": [
@@ -2504,7 +2504,7 @@
         {
           "atomType": "GitHubMolecule",
           "x": 0.1,
-          "y": 0.8,
+          "y": 0.5,
           "uniqueID": "id-135368",
           "name": "Label_Bounding_Box",
           "ioValues": [
@@ -2732,8 +2732,8 @@
         },
         {
           "atomType": "Difference",
-          "x": 0.5,
-          "y": 0.3,
+          "x": 0.4,
+          "y": 0.8,
           "uniqueID": "id-135399",
           "ioValues": [
             {
@@ -2748,341 +2748,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.2,
-          "y": 0.2,
-          "uniqueID": "id-135403",
-          "name": "access_bulkhead",
-          "ioValues": [
-            {
-              "name": "bulkheads",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 1,
-              "y": 0.5,
-              "uniqueID": "id-135405",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0,
-              "y": 0.2,
-              "uniqueID": "id-135407",
-              "name": "bulkheads",
-              "type": "partselect",
-              "options": [],
-              "selectedLeafIndexes": []
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-135407",
-              "ap2ID": "id-135405"
-            }
-          ],
-          "fileTypeVersion": 1
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.3,
-          "y": 0.3,
-          "uniqueID": "id-135414",
-          "name": "ExtractParts",
-          "ioValues": [
-            {
-              "name": "Input",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 1,
-              "y": 0.5,
-              "uniqueID": "id-135411",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0,
-              "y": 0.2,
-              "uniqueID": "id-135412",
-              "type": "partselect",
-              "options": [],
-              "selectedLeafIndexes": [
-                2
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4,
-              "y": 0.8,
-              "uniqueID": "id-135413",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.selection?.part && leaf.selection.part) {\n      return leaf;\n    } else {\n      return null;\n    }\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.selection?.part && leaf.selection.part) {\n            return leaf;\n        }\n        else {\n            return null;\n        }\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-135412",
-              "ap2ID": "id-135413"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-135413",
-              "ap2ID": "id-135411"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-09-15T18:23:38.997Z",
-            "privateRepo": false,
-            "repoName": "ExtractParts",
-            "dateCreated": "2026-07-24T20:42:33Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34890",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractParts",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 2.1,
-            "searchField": "extractparts tristan-huber select sub-component parts of an assembly by click and return a new assembly with just the selected parts abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Select sub-component parts of an assembly by click and return a new assembly with just the selected parts",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1789507113621
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.3,
-          "y": 0.1,
-          "uniqueID": "id-135427",
-          "name": "select.Invert",
-          "ioValues": [
-            {
-              "name": "selection",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Input",
-              "x": 0,
-              "y": 0.2,
-              "uniqueID": "id-135424",
-              "name": "selection",
-              "type": "geometry",
-              "options": []
-            },
-            {
-              "atomType": "Output",
-              "x": 1,
-              "y": 0.5,
-              "uniqueID": "id-135425",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4,
-              "y": 0.5,
-              "uniqueID": "id-135426",
-              "ioValues": [
-                {
-                  "name": "a1",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "// select.Not\nfunction run(a1: Assembly) {\n  return a1.onLeafs((leaf) => {\n    if (leaf.selection) {\n      leaf.selection.part = !leaf.selection?.part\n    }\n    if (!leaf.is3D()) {\n      return leaf;\n    }\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [], faces: [], part: true }\n    }\n    const initialEdges = leaf.selection.edges ?? []\n    const initialFaces = leaf.selection.faces ?? []\n\n    leaf.selection.edges = [...new Array(leaf.geometry.edges.length).keys()].filter((i) => !initialEdges.includes(i))\n    leaf.selection.faces = [...new Array(leaf.geometry.faces.length).keys()].filter((i) => !initialFaces.includes(i))\n    return leaf;\n  })?.skipDisjointPostprocess()\n}",
-              "compiledCode": "\"use strict\";\n// select.Not\nfunction run(a1) {\n    return a1.onLeafs((leaf) => {\n        if (leaf.selection) {\n            leaf.selection.part = !leaf.selection?.part;\n        }\n        if (!leaf.is3D()) {\n            return leaf;\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [], faces: [], part: true };\n        }\n        const initialEdges = leaf.selection.edges ?? [];\n        const initialFaces = leaf.selection.faces ?? [];\n        leaf.selection.edges = [...new Array(leaf.geometry.edges.length).keys()].filter((i) => !initialEdges.includes(i));\n        leaf.selection.faces = [...new Array(leaf.geometry.faces.length).keys()].filter((i) => !initialFaces.includes(i));\n        return leaf;\n    })?.skipDisjointPostprocess();\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "a1",
-              "ap1ID": "id-135424",
-              "ap2ID": "id-135426"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-135426",
-              "ap2ID": "id-135425"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-09-15T18:23:38.997Z",
-            "privateRepo": false,
-            "repoName": "select.Invert",
-            "dateCreated": "2026-08-19T21:57:12Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/select.Invert/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-90",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/select.Invert",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739862",
-            "ranking": 1.2,
-            "searchField": "select.invert tristan-huber invert the selection on the input assembly. unselected parts become selected, selected parts become unselected. same for edges and faces. a logical not. also works like select all if given an assembly with no selections abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Invert the selection on the input assembly. Unselected parts become selected, selected parts become unselected. Same for edges and faces. A logical Not. Also works like select all if given an assembly with no selections",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.Invert/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.Invert/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1789507123236
-        },
-        {
-          "atomType": "GitHubMolecule",
           "x": 0.5,
-          "y": 0.1,
-          "uniqueID": "id-135436",
-          "name": "ExtractParts",
-          "ioValues": [
-            {
-              "name": "Input",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 1,
-              "y": 0.5,
-              "uniqueID": "id-135437",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0,
-              "y": 0.2,
-              "uniqueID": "id-135438",
-              "type": "partselect",
-              "options": [],
-              "selectedLeafIndexes": [
-                0,
-                1,
-                2,
-                3,
-                4
-              ]
-            },
-            {
-              "atomType": "Code",
-              "x": 0.4,
-              "y": 0.8,
-              "uniqueID": "id-135439",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.selection?.part && leaf.selection.part) {\n      return leaf;\n    } else {\n      return null;\n    }\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.selection?.part && leaf.selection.part) {\n            return leaf;\n        }\n        else {\n            return null;\n        }\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-135438",
-              "ap2ID": "id-135439"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-135439",
-              "ap2ID": "id-135437"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-09-15T18:23:38.997Z",
-            "privateRepo": false,
-            "repoName": "ExtractParts",
-            "dateCreated": "2026-07-24T20:42:33Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "id-34890",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractParts",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739821",
-            "ranking": 2.1,
-            "searchField": "extractparts tristan-huber select sub-component parts of an assembly by click and return a new assembly with just the selected parts abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Select sub-component parts of an assembly by click and return a new assembly with just the selected parts",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractParts/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1789507113621
-        },
-        {
-          "atomType": "Molecule",
-          "x": 0.5,
-          "y": 0.5,
+          "y": 0.6,
           "uniqueID": "id-135649",
           "name": "hatch",
           "ioValues": [
@@ -9726,6 +9393,10 @@
             {
               "name": "Shape 5",
               "ioValue": null
+            },
+            {
+              "name": "Shape 6",
+              "ioValue": null
             }
           ]
         },
@@ -10217,13 +9888,283 @@
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.2,
+          "y": 0.2,
+          "uniqueID": "id-139944",
+          "name": "IthFromAssembly",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "i",
+              "ioValue": 2
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-139940",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.5,
+              "y": 0.7,
+              "uniqueID": "id-139941",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "i",
+                  "ioValue": 2
+                }
+              ],
+              "interpreterVersion": 0,
+              "code": "\n      const Inputs = [\n       {inputName: \"geometry\", type: \"geometry\", defaultValue: null},\n      {inputName: \"i\", type: \"number\", defaultValue: 0},\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[geometry]\n      let j = 0;\n      console.log(\"foo\")\n      console.log(importedShape)\n      const leafList = await AssemblyAsIterable(importedShape)\n      console.log(leafList)\n      if (i >= leafList.length) {\n        throw new Error(`Assembly only has ${leafList.length} entries. Tried to find index: ${i}.`)\n      }\n      return leafList[i]\n\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-139942",
+              "name": "geometry",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-139943",
+              "name": "i",
+              "type": "number",
+              "options": []
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-139941",
+              "ap2ID": "id-139940"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-139942",
+              "ap2ID": "id-139941"
+            },
+            {
+              "ap2Name": "i",
+              "ap1ID": "id-139943",
+              "ap2ID": "id-139941"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-15T18:23:38.997Z",
+            "privateRepo": false,
+            "repoName": "IthFromAssembly",
+            "dateCreated": "2025-11-03T02:49:44Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/README.md?sanitize=true",
+            "yyyy": 2025,
+            "topMoleculeID": "id-2718",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/IthFromAssembly",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 1,
+            "dateModified": "739558",
+            "ranking": 8.6,
+            "searchField": "ithfromassembly tristan-huber get the ith leaf from an assembly abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Get the ith leaf from an assembly",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789512963611
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.5,
+          "y": 0.2,
+          "uniqueID": "id-139956",
+          "name": "IthFromAssembly",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "i",
+              "ioValue": 3
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-139957",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.5,
+              "y": 0.7,
+              "uniqueID": "id-139958",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "i",
+                  "ioValue": 3
+                }
+              ],
+              "interpreterVersion": 0,
+              "code": "\n      const Inputs = [\n       {inputName: \"geometry\", type: \"geometry\", defaultValue: null},\n      {inputName: \"i\", type: \"number\", defaultValue: 0},\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[geometry]\n      let j = 0;\n      console.log(\"foo\")\n      console.log(importedShape)\n      const leafList = await AssemblyAsIterable(importedShape)\n      console.log(leafList)\n      if (i >= leafList.length) {\n        throw new Error(`Assembly only has ${leafList.length} entries. Tried to find index: ${i}.`)\n      }\n      return leafList[i]\n\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-139959",
+              "name": "geometry",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-139960",
+              "name": "i",
+              "type": "number",
+              "options": []
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-139958",
+              "ap2ID": "id-139957"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-139959",
+              "ap2ID": "id-139958"
+            },
+            {
+              "ap2Name": "i",
+              "ap1ID": "id-139960",
+              "ap2ID": "id-139958"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-15T18:23:38.997Z",
+            "privateRepo": false,
+            "repoName": "IthFromAssembly",
+            "dateCreated": "2025-11-03T02:49:44Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/README.md?sanitize=true",
+            "yyyy": 2025,
+            "topMoleculeID": "id-2718",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/IthFromAssembly",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 1,
+            "dateModified": "739558",
+            "ranking": 8.6,
+            "searchField": "ithfromassembly tristan-huber get the ith leaf from an assembly abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Get the ith leaf from an assembly",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/IthFromAssembly/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789512963611
+        },
+        {
+          "atomType": "Difference",
+          "x": 0.7,
+          "y": 0.1,
+          "uniqueID": "id-139972",
+          "ioValues": [
+            {
+              "name": "retain",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "remove",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Difference",
+          "x": 0.8,
+          "y": 0.1,
+          "uniqueID": "id-139976",
+          "ioValues": [
+            {
+              "name": "retain",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "remove",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
         }
       ],
       "allConnectors": [
         {
-          "ap2Name": "bulkheads",
+          "ap2Name": "geometry",
           "ap1ID": "id-133444",
-          "ap2ID": "id-135403"
+          "ap2ID": "id-139944"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-133444",
+          "ap2ID": "id-139956"
+        },
+        {
+          "ap2Name": "retain",
+          "ap1ID": "id-133444",
+          "ap2ID": "id-139972"
         },
         {
           "ap2Name": "remove",
@@ -10296,36 +10237,6 @@
           "ap2ID": "id-135354"
         },
         {
-          "ap2Name": "Input",
-          "ap1ID": "id-135403",
-          "ap2ID": "id-135414"
-        },
-        {
-          "ap2Name": "selection",
-          "ap1ID": "id-135403",
-          "ap2ID": "id-135427"
-        },
-        {
-          "ap2Name": "B",
-          "ap1ID": "id-135414",
-          "ap2ID": "id-135276"
-        },
-        {
-          "ap2Name": "access_bulkhead",
-          "ap1ID": "id-135414",
-          "ap2ID": "id-135649"
-        },
-        {
-          "ap2Name": "Input",
-          "ap1ID": "id-135427",
-          "ap2ID": "id-135436"
-        },
-        {
-          "ap2Name": "Shape 5",
-          "ap1ID": "id-135436",
-          "ap2ID": "id-137173"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-133383",
           "ap2ID": "id-133485"
@@ -10364,6 +10275,41 @@
           "ap2Name": "components",
           "ap1ID": "id-135949",
           "ap2ID": "id-137048"
+        },
+        {
+          "ap2Name": "remove",
+          "ap1ID": "id-139944",
+          "ap2ID": "id-139972"
+        },
+        {
+          "ap2Name": "B",
+          "ap1ID": "id-139944",
+          "ap2ID": "id-135276"
+        },
+        {
+          "ap2Name": "access_bulkhead",
+          "ap1ID": "id-139944",
+          "ap2ID": "id-135649"
+        },
+        {
+          "ap2Name": "remove",
+          "ap1ID": "id-139956",
+          "ap2ID": "id-139976"
+        },
+        {
+          "ap2Name": "Shape 6",
+          "ap1ID": "id-139956",
+          "ap2ID": "id-137173"
+        },
+        {
+          "ap2Name": "retain",
+          "ap1ID": "id-139972",
+          "ap2ID": "id-139976"
+        },
+        {
+          "ap2Name": "Shape 5",
+          "ap1ID": "id-139976",
+          "ap2ID": "id-137173"
         }
       ],
       "fileTypeVersion": 1
