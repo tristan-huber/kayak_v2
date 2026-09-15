@@ -3014,7 +3014,7 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.4,
+          "x": 0.3,
           "y": 0.6,
           "uniqueID": "id-135276",
           "name": "To the Right",
@@ -3828,10 +3828,10 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.6,
-          "y": 0.8,
+          "x": 0.5,
+          "y": 0.4,
           "uniqueID": "id-135649",
-          "name": "New Molecule",
+          "name": "hatch",
           "ioValues": [
             {
               "name": "boat_interior",
