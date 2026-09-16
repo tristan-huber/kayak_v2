@@ -16009,6 +16009,14 @@
                 {
                   "name": "Shape 2",
                   "ioValue": null
+                },
+                {
+                  "name": "Shape 3",
+                  "ioValue": null
+                },
+                {
+                  "name": "Shape 4",
+                  "ioValue": null
                 }
               ]
             },
@@ -16470,8 +16478,7 @@
                   "ioValues": [
                     {
                       "name": "diameter",
-                      "ioValue": 18,
-                      "currentEquation": "18"
+                      "ioValue": 16
                     }
                   ]
                 },
@@ -16487,11 +16494,13 @@
                     },
                     {
                       "name": "xDist",
-                      "ioValue": 0
+                      "ioValue": 4,
+                      "currentEquation": "4"
                     },
                     {
                       "name": "yDist",
-                      "ioValue": 0
+                      "ioValue": -2,
+                      "currentEquation": "-2"
                     },
                     {
                       "name": "zDist",
@@ -16535,7 +16544,7 @@
                     {
                       "name": "Shape 2",
                       "ioValue": {
-                        "geometry": "move-rectangle-100-10--5-0-0",
+                        "geometry": "move-rectangle-100-20-0--10-0",
                         "dimension": "2D",
                         "plane": {
                           "origin": [
@@ -16564,8 +16573,8 @@
                 },
                 {
                   "atomType": "Difference",
-                  "x": 0.6,
-                  "y": 0.6,
+                  "x": 0.5,
+                  "y": 0.7,
                   "uniqueID": "id-147542",
                   "ioValues": [
                     {
@@ -16590,8 +16599,8 @@
                     },
                     {
                       "name": "y length",
-                      "ioValue": 10,
-                      "currentEquation": "10"
+                      "ioValue": 20,
+                      "currentEquation": "20"
                     }
                   ]
                 },
@@ -16607,8 +16616,32 @@
                     },
                     {
                       "name": "xDist",
-                      "ioValue": -5,
-                      "currentEquation": "-5"
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": -10,
+                      "currentEquation": "-10"
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.4,
+                  "y": 0.3,
+                  "uniqueID": "id-147563",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
                     },
                     {
                       "name": "yDist",
@@ -16619,9 +16652,218 @@
                       "ioValue": 0
                     }
                   ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.6,
+                  "y": 0.8,
+                  "uniqueID": "id-147569",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 0.25,
+                      "currentEquation": "0.25"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "GitHubMolecule",
+                  "x": 0.7,
+                  "y": 0.8,
+                  "uniqueID": "id-147578",
+                  "name": "selected.Fillet",
+                  "ioValues": [
+                    {
+                      "name": "shape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "radius",
+                      "ioValue": 1
+                    }
+                  ],
+                  "topLevel": false,
+                  "allAtoms": [
+                    {
+                      "atomType": "Output",
+                      "x": 1,
+                      "y": 0.5,
+                      "uniqueID": "id-147574",
+                      "ioValues": [
+                        {
+                          "name": "number or geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Code",
+                      "x": 0.4,
+                      "y": 0.7,
+                      "uniqueID": "id-147575",
+                      "ioValues": [
+                        {
+                          "name": "toFillet",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        },
+                        {
+                          "name": "radius",
+                          "ioValue": 1
+                        }
+                      ],
+                      "interpreterVersion": 1,
+                      "code": "function run(toFillet: Assembly, radius: number) {\n  return toFillet.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing || !replicad.isShape3D(leaf.geometry)) {\n      return leaf;\n    }\n    if (leaf.selection?.part) {\n      leaf.geometry = leaf.geometry.fillet(radius)\n      return leaf;\n    }\n    // else apply only to filtered faces and edges\n    let edgesToFillet: replicad.Edge[] = []\n    if (leaf.selection?.faces) {\n      leaf.selection.faces.forEach((faceIndex) => {\n        edgesToFillet.push(...leaf.geometry.faces[faceIndex].edges)\n      });\n    }\n    console.log(edgesToFillet)\n    console.log(\"intermediate\")\n    console.log(leaf.selection)\n    if (leaf.selection?.edges) {\n      edgesToFillet.push(...leaf.selection.edges.map((index) => leaf.geometry.edges[index]))\n    }\n    if (edgesToFillet.length == 0) {\n      return leaf;\n    }\n    edgesToFillet = edgesToFillet.filter((e) => e != null)\n    if (edgesToFillet.length == 0) {\n      return leaf.geometry\n    }\n    console.log(edgesToFillet)\n    leaf.geometry = leaf.geometry.fillet(radius, (e) => { return e.inList(edgesToFillet.map((e) => e.clone())) })\n    return leaf;\n  })\n}",
+                      "compiledCode": "\"use strict\";\nfunction run(toFillet, radius) {\n    return toFillet.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing || !replicad.isShape3D(leaf.geometry)) {\n            return leaf;\n        }\n        if (leaf.selection?.part) {\n            leaf.geometry = leaf.geometry.fillet(radius);\n            return leaf;\n        }\n        // else apply only to filtered faces and edges\n        let edgesToFillet = [];\n        if (leaf.selection?.faces) {\n            leaf.selection.faces.forEach((faceIndex) => {\n                edgesToFillet.push(...leaf.geometry.faces[faceIndex].edges);\n            });\n        }\n        console.log(edgesToFillet);\n        console.log(\"intermediate\");\n        console.log(leaf.selection);\n        if (leaf.selection?.edges) {\n            edgesToFillet.push(...leaf.selection.edges.map((index) => leaf.geometry.edges[index]));\n        }\n        if (edgesToFillet.length == 0) {\n            return leaf;\n        }\n        edgesToFillet = edgesToFillet.filter((e) => e != null);\n        if (edgesToFillet.length == 0) {\n            return leaf.geometry;\n        }\n        console.log(edgesToFillet);\n        leaf.geometry = leaf.geometry.fillet(radius, (e) => { return e.inList(edgesToFillet.map((e) => e.clone())); });\n        return leaf;\n    });\n}\n"
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-147576",
+                      "name": "shape",
+                      "type": "edgeselect",
+                      "options": [],
+                      "selectedEdgeData": {
+                        "0": [
+                          0
+                        ]
+                      }
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-147577",
+                      "name": "radius",
+                      "options": []
+                    }
+                  ],
+                  "allConnectors": [
+                    {
+                      "ap2Name": "number or geometry",
+                      "ap1ID": "id-147575",
+                      "ap2ID": "id-147574"
+                    },
+                    {
+                      "ap2Name": "toFillet",
+                      "ap1ID": "id-147576",
+                      "ap2ID": "id-147575"
+                    },
+                    {
+                      "ap2Name": "radius",
+                      "ap1ID": "id-147577",
+                      "ap2ID": "id-147575"
+                    }
+                  ],
+                  "parentRepo": {
+                    "privateRepo": false,
+                    "repoName": "selected.Fillet",
+                    "dateCreated": "2026-07-21T21:29:20Z",
+                    "likes": 0,
+                    "pngURL": "https://raw.githubusercontent.com/tristan-huber/selected.Fillet/master/project.png?sanitize=true",
+                    "readme": "https://raw.githubusercontent.com/tristan-huber/selected.Fillet/master/README.md?sanitize=true",
+                    "topMoleculeID": "",
+                    "userRanking": 0,
+                    "userSetAsThumbnail": false,
+                    "githubMoleculesUsed": [],
+                    "html_url": "https://github.com/tristan-huber/selected.Fillet",
+                    "topics": [
+                      "abundance-tool"
+                    ],
+                    "pullRequests": [],
+                    "forks": 0,
+                    "dateModified": "2026-09-16T20:43:52.306Z",
+                    "ranking": 1.5,
+                    "searchField": "selected.fillet tristan-huber fillet the only the selected edges of an assembly. you can also input face or sub-assembly selections, edges will be filleted if they meet any of the selection criteria, eg on a selected subassembly, on a selected face. default fillets all edges. abundance-tool",
+                    "owner": "tristan-huber",
+                    "description": "Fillet the only the selected edges of an assembly. You can also input face or sub-assembly selections, edges will be filleted if they meet any of the selection criteria, eg on a selected subassembly, on a selected face. Default fillets all edges.",
+                    "contentURL": "https://raw.githubusercontent.com/tristan-huber/selected.Fillet/master/project.abundance?sanitize=true",
+                    "svgURL": "https://raw.githubusercontent.com/tristan-huber/selected.Fillet/master/project.svg?sanitize=true",
+                    "isLocal": false
+                  },
+                  "unitsKey": "Unitless",
+                  "fileTypeVersion": 1,
+                  "lastReloadedFromGithubAt": 1789592822435
+                },
+                {
+                  "atomType": "Rotate",
+                  "x": 0.7,
+                  "y": 0.4,
+                  "uniqueID": "id-147590",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "x-axis degrees",
+                      "ioValue": 90,
+                      "currentEquation": "90"
+                    },
+                    {
+                      "name": "y-axis degrees",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "z-axis degrees",
+                      "ioValue": 0
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.8,
+                  "y": 0.3,
+                  "uniqueID": "id-147596",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0,
+                      "currentEquation": "0"
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 0.125,
+                      "currentEquation": "0.125"
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": -0.75,
+                      "currentEquation": "-0.75"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Tag",
+                  "x": 0.9,
+                  "y": 0.4,
+                  "uniqueID": "id-147602",
+                  "name": "thin_ply",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "tags": [
+                    "thin_ply"
+                  ]
                 }
               ],
               "allConnectors": [
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-147518",
+                  "ap2ID": "id-147563"
+                },
                 {
                   "ap2Name": "geometry",
                   "ap1ID": "id-147521",
@@ -16648,9 +16890,9 @@
                   "ap2ID": "id-147542"
                 },
                 {
-                  "ap2Name": "number or geometry",
+                  "ap2Name": "geometry",
                   "ap1ID": "id-147542",
-                  "ap2ID": "id-147516"
+                  "ap2ID": "id-147569"
                 },
                 {
                   "ap2Name": "geometry",
@@ -16661,9 +16903,59 @@
                   "ap2Name": "Shape 2",
                   "ap1ID": "id-147550",
                   "ap2ID": "id-147539"
+                },
+                {
+                  "ap2Name": "shape",
+                  "ap1ID": "id-147569",
+                  "ap2ID": "id-147578"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-147578",
+                  "ap2ID": "id-147590"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-147590",
+                  "ap2ID": "id-147596"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-147596",
+                  "ap2ID": "id-147602"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-147602",
+                  "ap2ID": "id-147516"
                 }
               ],
               "fileTypeVersion": 1
+            },
+            {
+              "atomType": "Move",
+              "x": 0.7,
+              "y": 0.5,
+              "uniqueID": "id-147605",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": -1,
+                  "currentEquation": "-1"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0
+                }
+              ]
             }
           ],
           "allConnectors": [
@@ -16716,6 +17008,21 @@
               "ap2Name": "geometry",
               "ap1ID": "id-147461",
               "ap2ID": "id-147508"
+            },
+            {
+              "ap2Name": "Shape 4",
+              "ap1ID": "id-147508",
+              "ap2ID": "id-147441"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-147514",
+              "ap2ID": "id-147605"
+            },
+            {
+              "ap2Name": "Shape 3",
+              "ap1ID": "id-147605",
+              "ap2ID": "id-147441"
             }
           ],
           "fileTypeVersion": 1
