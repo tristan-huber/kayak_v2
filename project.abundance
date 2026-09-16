@@ -11596,8 +11596,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.4,
-          "y": 0.5,
+          "x": 0.3,
+          "y": 0.2,
           "uniqueID": "id-140330",
           "name": "Blue_Robotics_T200",
           "topLevel": false,
@@ -13270,19 +13270,20 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.5,
-          "y": 0.6,
+          "x": 0.2,
+          "y": 0.5,
           "uniqueID": "id-140515",
           "name": "naca_profile",
           "ioValues": [
             {
               "name": "NACA_number",
-              "ioValue": 220
+              "ioValue": 25,
+              "currentEquation": "25"
             },
             {
               "name": "Cord_length",
-              "ioValue": 10,
-              "currentEquation": "10"
+              "ioValue": 6,
+              "currentEquation": "6"
             },
             {
               "name": "number_of_points",
@@ -13311,7 +13312,7 @@
               "ioValues": [
                 {
                   "name": "chord",
-                  "ioValue": 10
+                  "ioValue": 6
                 },
                 {
                   "name": "numPoints",
@@ -13319,7 +13320,7 @@
                 },
                 {
                   "name": "nacaNumber",
-                  "ioValue": 220
+                  "ioValue": 25
                 }
               ],
               "interpreterVersion": 1,
@@ -13403,9 +13404,79 @@
           "unitsKey": "MM",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1789515926329
+        },
+        {
+          "atomType": "Circle",
+          "x": 0.3,
+          "y": 0.7,
+          "uniqueID": "id-140530",
+          "ioValues": [
+            {
+              "name": "diameter",
+              "ioValue": 1.25,
+              "currentEquation": "1.25"
+            }
+          ]
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.4,
+          "y": 0.7,
+          "uniqueID": "id-140533",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 1,
+              "currentEquation": "1"
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.4,
+          "y": 0.5,
+          "uniqueID": "id-140537",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 2
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0
+            }
+          ]
         }
       ],
-      "allConnectors": [],
+      "allConnectors": [
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-140515",
+          "ap2ID": "id-140537"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-140530",
+          "ap2ID": "id-140533"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-140533",
+          "ap2ID": "id-140177"
+        }
+      ],
       "fileTypeVersion": 1
     },
     {
