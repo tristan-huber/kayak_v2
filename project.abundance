@@ -13277,13 +13277,12 @@
           "ioValues": [
             {
               "name": "NACA_number",
-              "ioValue": 25,
-              "currentEquation": "25"
+              "ioValue": 18,
+              "currentEquation": "18"
             },
             {
               "name": "Cord_length",
-              "ioValue": 6,
-              "currentEquation": "6"
+              "ioValue": 8
             },
             {
               "name": "number_of_points",
@@ -13312,7 +13311,7 @@
               "ioValues": [
                 {
                   "name": "chord",
-                  "ioValue": 6
+                  "ioValue": 8
                 },
                 {
                   "name": "numPoints",
@@ -13320,7 +13319,7 @@
                 },
                 {
                   "name": "nacaNumber",
-                  "ioValue": 25
+                  "ioValue": 18
                 }
               ],
               "interpreterVersion": 1,
@@ -13420,7 +13419,7 @@
         },
         {
           "atomType": "Extrude",
-          "x": 0.4,
+          "x": 0.5,
           "y": 0.7,
           "uniqueID": "id-140533",
           "ioValues": [
@@ -13437,8 +13436,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.4,
-          "y": 0.5,
+          "x": 0.3,
+          "y": 0.4,
           "uniqueID": "id-140537",
           "ioValues": [
             {
@@ -13447,7 +13446,8 @@
             },
             {
               "name": "xDist",
-              "ioValue": 2
+              "ioValue": 1.75,
+              "currentEquation": "1.75"
             },
             {
               "name": "yDist",
@@ -13458,6 +13458,48 @@
               "ioValue": 0
             }
           ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.5,
+          "y": 0.4,
+          "uniqueID": "id-140543",
+          "ioValues": [
+            {
+              "name": "Shape 2",
+              "ioValue": null
+            }
+          ]
+        },
+        {
+          "atomType": "Export",
+          "x": 0.7,
+          "y": 0.4,
+          "uniqueID": "id-140550",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "File Type",
+              "ioValue": "STL",
+              "currentEquation": "STL"
+            },
+            {
+              "name": "Resolution (dpi)",
+              "ioValue": 96
+            },
+            {
+              "name": "Part Name",
+              "ioValue": "bare_cylinder",
+              "currentEquation": "bare_cylinder"
+            }
+          ],
+          "type": "STL",
+          "resolution": 96,
+          "importIndex": 0,
+          "partName": "bare_cylinder"
         }
       ],
       "allConnectors": [
@@ -13467,14 +13509,24 @@
           "ap2ID": "id-140537"
         },
         {
-          "ap2Name": "geometry",
+          "ap2Name": "Shape 2",
           "ap1ID": "id-140530",
-          "ap2ID": "id-140533"
+          "ap2ID": "id-140543"
         },
         {
           "ap2Name": "number or geometry",
           "ap1ID": "id-140533",
           "ap2ID": "id-140177"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-140533",
+          "ap2ID": "id-140550"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-140543",
+          "ap2ID": "id-140533"
         }
       ],
       "fileTypeVersion": 1
