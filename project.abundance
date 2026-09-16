@@ -12361,7 +12361,8 @@
             },
             {
               "name": "inset",
-              "ioValue": 3
+              "ioValue": 2,
+              "currentEquation": "2"
             }
           ],
           "topLevel": false,
@@ -13075,15 +13076,15 @@
                 },
                 {
                   "name": "inset",
-                  "ioValue": 3
+                  "ioValue": 2
                 },
                 {
                   "name": "start",
-                  "ioValue": true
+                  "ioValue": false
                 },
                 {
                   "name": "end",
-                  "ioValue": false
+                  "ioValue": true
                 }
               ],
               "topLevel": false,
@@ -13112,15 +13113,15 @@
                     },
                     {
                       "name": "inset",
-                      "ioValue": 3
+                      "ioValue": 2
                     },
                     {
                       "name": "start",
-                      "ioValue": true
+                      "ioValue": false
                     },
                     {
                       "name": "end",
-                      "ioValue": false
+                      "ioValue": true
                     }
                   ],
                   "interpreterVersion": 1,
@@ -13618,8 +13619,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.3,
-          "y": 0.5,
+          "x": 0.2,
+          "y": 0.3,
           "uniqueID": "id-143900",
           "ioValues": [
             {
@@ -17014,8 +17015,8 @@
         {
           "atomType": "Rotate",
           "x": 0.5,
-          "y": 0.2,
-          "uniqueID": "id-147613",
+          "y": 0.3,
+          "uniqueID": "id-147619",
           "ioValues": [
             {
               "name": "geometry",
@@ -17031,8 +17032,7 @@
             },
             {
               "name": "z-axis degrees",
-              "ioValue": 180,
-              "currentEquation": "180"
+              "ioValue": 180
             }
           ]
         }
@@ -17119,14 +17119,14 @@
           "ap2ID": "id-140177"
         },
         {
-          "ap2Name": "shapeToMove",
-          "ap1ID": "id-147097",
-          "ap2ID": "id-147079"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-147097",
-          "ap2ID": "id-147613"
+          "ap2ID": "id-147619"
+        },
+        {
+          "ap2Name": "shapeToMove",
+          "ap1ID": "id-147619",
+          "ap2ID": "id-147079"
         }
       ],
       "fileTypeVersion": 1
