@@ -13641,22 +13641,6 @@
           ]
         },
         {
-          "atomType": "Assembly",
-          "x": 0.8,
-          "y": 0.7,
-          "uniqueID": "id-143918",
-          "ioValues": [
-            {
-              "name": "Shape 1",
-              "ioValue": null
-            },
-            {
-              "name": "Shape 2",
-              "ioValue": null
-            }
-          ]
-        },
-        {
           "atomType": "Code",
           "x": 0.7,
           "y": 0.1,
@@ -17026,6 +17010,31 @@
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "Rotate",
+          "x": 0.5,
+          "y": 0.2,
+          "uniqueID": "id-147613",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "x-axis degrees",
+              "ioValue": 0
+            },
+            {
+              "name": "y-axis degrees",
+              "ioValue": 0
+            },
+            {
+              "name": "z-axis degrees",
+              "ioValue": 180,
+              "currentEquation": "180"
+            }
+          ]
         }
       ],
       "allConnectors": [
@@ -17038,11 +17047,6 @@
           "ap2Name": "Input",
           "ap1ID": "id-140179",
           "ap2ID": "id-143462"
-        },
-        {
-          "ap2Name": "Shape 2",
-          "ap1ID": "id-140179",
-          "ap2ID": "id-143918"
         },
         {
           "ap2Name": "points",
@@ -17115,9 +17119,14 @@
           "ap2ID": "id-140177"
         },
         {
-          "ap2Name": "Shape 1",
-          "ap1ID": "id-147079",
-          "ap2ID": "id-143918"
+          "ap2Name": "shapeToMove",
+          "ap1ID": "id-147097",
+          "ap2ID": "id-147079"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-147097",
+          "ap2ID": "id-147613"
         }
       ],
       "fileTypeVersion": 1
