@@ -11548,8 +11548,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.5,
-      "y": 0.7,
+      "x": 0.4,
+      "y": 0.8,
       "uniqueID": "id-140176",
       "name": "bluerobotics",
       "ioValues": [
