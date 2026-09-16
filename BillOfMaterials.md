@@ -2,4 +2,7 @@
 # Bill Of Materials 
  |Part|Number Needed|Price|Source| 
  |----|----------|-----|-----|
-|Total: |0|$0.00| |
+|Wetlink penetrator M10 4.5|2|$26.00|https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/|
+|Blue Robotics thruster mount|2|$16.00|https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/|
+|T200|2|$460.00|https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/|
+|Total: |6|$502.00| |
