@@ -11581,7 +11581,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.4,
           "uniqueID": "id-140179",
           "name": "hullform",
           "type": "geometry",
@@ -13263,8 +13263,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.2,
-          "y": 0.5,
+          "x": 0.4,
+          "y": 0.2,
           "uniqueID": "id-140515",
           "name": "naca_profile",
           "ioValues": [
@@ -13397,37 +13397,9 @@
           "lastReloadedFromGithubAt": 1789515926329
         },
         {
-          "atomType": "Circle",
-          "x": 0.3,
-          "y": 0.7,
-          "uniqueID": "id-140530",
-          "ioValues": [
-            {
-              "name": "diameter",
-              "ioValue": 1.25
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.5,
-          "y": 0.7,
-          "uniqueID": "id-140533",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 1
-            }
-          ]
-        },
-        {
           "atomType": "Move",
-          "x": 0.3,
-          "y": 0.4,
+          "x": 0.5,
+          "y": 0.2,
           "uniqueID": "id-140537",
           "ioValues": [
             {
@@ -13449,73 +13421,814 @@
           ]
         },
         {
-          "atomType": "Assembly",
-          "x": 0.5,
-          "y": 0.4,
-          "uniqueID": "id-140543",
+          "atomType": "Molecule",
+          "x": 0.1,
+          "y": 0.7,
+          "uniqueID": "id-143462",
+          "name": "underside_faces",
           "ioValues": [
             {
-              "name": "Shape 2",
-              "ioValue": null
+              "name": "Input",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
-          ]
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-143464",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-143466",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.3,
+              "y": 0.6,
+              "uniqueID": "id-143477",
+              "name": "select.FacesByNormal",
+              "ioValues": [
+                {
+                  "name": "shape",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "normal",
+                  "ioValue": [
+                    0,
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "name": "toleranceDeg",
+                  "ioValue": 30,
+                  "currentEquation": "30"
+                },
+                {
+                  "name": "u",
+                  "ioValue": 0.5
+                },
+                {
+                  "name": "v",
+                  "ioValue": 0.5
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-143470",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.5,
+                  "y": 0.3,
+                  "uniqueID": "id-143471",
+                  "ioValues": [
+                    {
+                      "name": "facesOf",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "normal",
+                      "ioValue": [
+                        0,
+                        0,
+                        -1
+                      ]
+                    },
+                    {
+                      "name": "toleranceDeg",
+                      "ioValue": 30
+                    },
+                    {
+                      "name": "u",
+                      "ioValue": 0.5
+                    },
+                    {
+                      "name": "v",
+                      "ioValue": 0.5
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0, u: number = 0.5, v: number = 0.5) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n  const tol = toleranceDeg * replicad.DEG2RAD\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u,v])\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= tol;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })?.skipDisjointPostprocess()\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(facesOf, normal, toleranceDeg = 0, u = 0.5, v = 0.5) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    const tol = toleranceDeg * replicad.DEG2RAD;\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u, v]);\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= tol;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    })?.skipDisjointPostprocess();\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-143472",
+                  "name": "shape",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-143473",
+                  "name": "normal",
+                  "type": "point3d",
+                  "options": [],
+                  "pointValue": null
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.3,
+                  "uniqueID": "id-143474",
+                  "name": "toleranceDeg",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.4,
+                  "uniqueID": "id-143475",
+                  "name": "u",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.5,
+                  "uniqueID": "id-143476",
+                  "name": "v",
+                  "options": []
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-143471",
+                  "ap2ID": "id-143470"
+                },
+                {
+                  "ap2Name": "facesOf",
+                  "ap1ID": "id-143472",
+                  "ap2ID": "id-143471"
+                },
+                {
+                  "ap2Name": "normal",
+                  "ap1ID": "id-143473",
+                  "ap2ID": "id-143471"
+                },
+                {
+                  "ap2Name": "toleranceDeg",
+                  "ap1ID": "id-143474",
+                  "ap2ID": "id-143471"
+                },
+                {
+                  "ap2Name": "u",
+                  "ap1ID": "id-143475",
+                  "ap2ID": "id-143471"
+                },
+                {
+                  "ap2Name": "v",
+                  "ap1ID": "id-143476",
+                  "ap2ID": "id-143471"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-16T10:23:39.031Z",
+                "privateRepo": false,
+                "repoName": "select.FacesByNormal",
+                "dateCreated": "2026-08-19T19:30:15Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-54",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/select.FacesByNormal",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739862",
+                "ranking": 2.4,
+                "searchField": "select.facesbynormal tristan-huber select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5) abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. Note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5)",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789579692094
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.5,
+              "y": 0.6,
+              "uniqueID": "id-143502",
+              "name": "ExtractFaces",
+              "ioValues": [
+                {
+                  "name": "Assembly",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-143499",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-143500",
+                  "name": "Assembly",
+                  "type": "faceselect",
+                  "options": [],
+                  "selectedFaceData": {
+                    "0": [
+                      10,
+                      12
+                    ]
+                  }
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.3,
+                  "y": 0.8,
+                  "uniqueID": "id-143501",
+                  "ioValues": [
+                    {
+                      "name": "input",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
+                  "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "input",
+                  "ap1ID": "id-143500",
+                  "ap2ID": "id-143501"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-143501",
+                  "ap2ID": "id-143499"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-09-16T10:23:39.031Z",
+                "privateRepo": false,
+                "repoName": "ExtractFaces",
+                "dateCreated": "2026-07-24T19:57:30Z",
+                "likes": 0,
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-34810",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/ExtractFaces",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739821",
+                "ranking": 5.7,
+                "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1789579708788
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "shape",
+              "ap1ID": "id-143466",
+              "ap2ID": "id-143477"
+            },
+            {
+              "ap2Name": "Assembly",
+              "ap1ID": "id-143477",
+              "ap2ID": "id-143502"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-143502",
+              "ap2ID": "id-143464"
+            }
+          ],
+          "fileTypeVersion": 1
         },
         {
-          "atomType": "Export",
-          "x": 0.7,
-          "y": 0.4,
-          "uniqueID": "id-140550",
+          "atomType": "GitHubMolecule",
+          "x": 0.6,
+          "y": 0.6,
+          "uniqueID": "id-143518",
+          "name": "moveToPoints",
           "ioValues": [
             {
-              "name": "geometry",
+              "name": "shapeToMove",
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "File Type",
-              "ioValue": "STL",
-              "currentEquation": "STL"
+              "name": "toPoints",
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "Resolution (dpi)",
-              "ioValue": 96
+              "name": "zDirOverride",
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "Part Name",
-              "ioValue": "bare_cylinder",
-              "currentEquation": "bare_cylinder"
+              "name": "xDirOverride",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ],
-          "type": "STL",
-          "resolution": 96,
-          "importIndex": 0,
-          "partName": "bare_cylinder"
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-143512",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.4,
+              "y": 0.6,
+              "uniqueID": "id-143513",
+              "ioValues": [
+                {
+                  "name": "shape",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "points",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "zDir",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDir",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "// moveToPoints\nfunction run(shape: Assembly, points: Assembly, zDir: Assembly, xDir: Assembly) {\n  const getLeafs = (a: Assembly) => {\n    const i: replicad.Vertex[] = [];\n    if (a == undefined) {\n      return i;\n    }\n    a.onLeafs((leaf) => {\n      if (leaf.isPoint()) {\n        i.push(leaf.geometry)\n      }\n      return leaf;\n    })\n    return i\n  }\n\n\n  const pointList = getLeafs(points)\n  const zDirList = getLeafs(zDir)\n  const xDirList = getLeafs(xDir)\n\n  if (!(zDirList.length == 1 || zDirList.length == pointList.length)) {\n    throw new Error(`Zdir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${zDirList.length}`)\n  }\n  if (!(xDirList.length == 1 || xDirList.length == pointList.length)) {\n    throw new Error(`xDir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${xDirList.length}`)\n  }\n\n  console.log(pointList)\n  console.log(xDirList)\n  console.log(zDirList)\n\n  const result: Assembly[] = []\n  pointList.forEach((point, index) => {\n    const xpos = xDirList.length == 1 ? xDirList[0] : xDirList[index]\n    const zpos = zDirList.length == 1 ? zDirList[0] : zDirList[index]\n    const targetPlane = new replicad.Plane(point.asTuple(), xpos.asTuple(), zpos.asTuple())\n    const ithRes = shape.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Drawing) {\n        return new Assembly({\n          ...leaf,\n          plane: targetPlane\n        })\n      } else {\n        // do an actual transpose based on the relative positions of planes\n        const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, targetPlane)\n\n        return new Assembly({\n          ...leaf,\n          geometry: moved,\n          plane: targetPlane\n        })\n      }\n    })\n    if (ithRes != null) {\n      result.push(ithRes)\n    }\n  })\n\n  return new Assembly({ geometry: result })\n}\n\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape: replicad.AnyShape, fromPlane: replicad.Plane, toPlane: replicad.Plane) {\n  const vec3 = (value: any): [number, number, number] =>\n    Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n      ? value as [number, number, number]\n      : [value.x, value.y, value.z];\n\n  const fromOrigin = vec3(fromPlane.origin);\n  const toOrigin = vec3(toPlane.origin);\n\n  const fromBasis = [\n    vec3(fromPlane.xDir),\n    vec3(fromPlane.yDir),\n    vec3(fromPlane.zDir),\n  ];\n\n  const toBasis = [\n    vec3(toPlane.xDir),\n    vec3(toPlane.yDir),\n    vec3(toPlane.zDir),\n  ];\n\n  // R = B_to * transpose(B_from)\n  const rotation = Array.from({ length: 3 }, (_, row) =>\n    Array.from({ length: 3 }, (_, column) =>\n      toBasis.reduce(\n        (sum, toAxis, axis) =>\n          sum + toAxis[row] * fromBasis[axis][column],\n        0,\n      ),\n    ),\n  );\n\n  const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));\n  const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n  const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n  const epsilon = 1e-8;\n\n  let result = shape;\n\n  if (angleRadians > epsilon) {\n    let axis: [number, number, number];\n\n    // The usual formula becomes unstable for rotations near 180 degrees.\n    if (Math.PI - angleRadians < epsilon) {\n      const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n      const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n      const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n\n      axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n\n      if (rotation[0][1] + rotation[1][0] < 0) axis[1] = -axis[1];\n      if (rotation[0][2] + rotation[2][0] < 0) axis[2] = -axis[2];\n    } else {\n      const denominator = 2 * Math.sin(angleRadians);\n      axis = [\n        (rotation[2][1] - rotation[1][2]) / denominator,\n        (rotation[0][2] - rotation[2][0]) / denominator,\n        (rotation[1][0] - rotation[0][1]) / denominator,\n      ];\n    }\n\n    const axisLength = Math.hypot(...axis);\n    axis = axis.map((component) => component / axisLength);\n\n    result = result.rotate(\n      angleRadians * (180 / Math.PI),\n      fromOrigin,\n      axis,\n    );\n  }\n\n  // Rotation was around fromOrigin, so only the origin delta is needed.\n  return result.translate(\n    toOrigin[0] - fromOrigin[0],\n    toOrigin[1] - fromOrigin[1],\n    toOrigin[2] - fromOrigin[2],\n  );\n}",
+              "compiledCode": "\"use strict\";\n// moveToPoints\nfunction run(shape, points, zDir, xDir) {\n    const getLeafs = (a) => {\n        const i = [];\n        if (a == undefined) {\n            return i;\n        }\n        a.onLeafs((leaf) => {\n            if (leaf.isPoint()) {\n                i.push(leaf.geometry);\n            }\n            return leaf;\n        });\n        return i;\n    };\n    const pointList = getLeafs(points);\n    const zDirList = getLeafs(zDir);\n    const xDirList = getLeafs(xDir);\n    if (!(zDirList.length == 1 || zDirList.length == pointList.length)) {\n        throw new Error(`Zdir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${zDirList.length}`);\n    }\n    if (!(xDirList.length == 1 || xDirList.length == pointList.length)) {\n        throw new Error(`xDir must be either a single point or an assembly same size as points (${pointList.length}). Was: ${xDirList.length}`);\n    }\n    console.log(pointList);\n    console.log(xDirList);\n    console.log(zDirList);\n    const result = [];\n    pointList.forEach((point, index) => {\n        const xpos = xDirList.length == 1 ? xDirList[0] : xDirList[index];\n        const zpos = zDirList.length == 1 ? zDirList[0] : zDirList[index];\n        const targetPlane = new replicad.Plane(point.asTuple(), xpos.asTuple(), zpos.asTuple());\n        const ithRes = shape.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Drawing) {\n                return new Assembly({\n                    ...leaf,\n                    plane: targetPlane\n                });\n            }\n            else {\n                // do an actual transpose based on the relative positions of planes\n                const moved = moveShapeBetweenPlanes(leaf.geometry.clone(), leaf.plane, targetPlane);\n                return new Assembly({\n                    ...leaf,\n                    geometry: moved,\n                    plane: targetPlane\n                });\n            }\n        });\n        if (ithRes != null) {\n            result.push(ithRes);\n        }\n    });\n    return new Assembly({ geometry: result });\n}\n/**\n * Move a shape from one Replicad Plane coordinate frame to another.\n *\n * A point having local coordinates (x, y, z) relative to `fromPlane`\n * will have the same local coordinates relative to `toPlane`.\n */\nfunction moveShapeBetweenPlanes(shape, fromPlane, toPlane) {\n    const vec3 = (value) => Array.isArray(value) && value.length == 3 && value.every((i) => typeof i == \"number\")\n        ? value\n        : [value.x, value.y, value.z];\n    const fromOrigin = vec3(fromPlane.origin);\n    const toOrigin = vec3(toPlane.origin);\n    const fromBasis = [\n        vec3(fromPlane.xDir),\n        vec3(fromPlane.yDir),\n        vec3(fromPlane.zDir),\n    ];\n    const toBasis = [\n        vec3(toPlane.xDir),\n        vec3(toPlane.yDir),\n        vec3(toPlane.zDir),\n    ];\n    // R = B_to * transpose(B_from)\n    const rotation = Array.from({ length: 3 }, (_, row) => Array.from({ length: 3 }, (_, column) => toBasis.reduce((sum, toAxis, axis) => sum + toAxis[row] * fromBasis[axis][column], 0)));\n    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));\n    const trace = rotation[0][0] + rotation[1][1] + rotation[2][2];\n    const angleRadians = Math.acos(clamp((trace - 1) / 2, -1, 1));\n    const epsilon = 1e-8;\n    let result = shape;\n    if (angleRadians > epsilon) {\n        let axis;\n        // The usual formula becomes unstable for rotations near 180 degrees.\n        if (Math.PI - angleRadians < epsilon) {\n            const xx = Math.max(0, (rotation[0][0] + 1) / 2);\n            const yy = Math.max(0, (rotation[1][1] + 1) / 2);\n            const zz = Math.max(0, (rotation[2][2] + 1) / 2);\n            axis = [Math.sqrt(xx), Math.sqrt(yy), Math.sqrt(zz)];\n            if (rotation[0][1] + rotation[1][0] < 0)\n                axis[1] = -axis[1];\n            if (rotation[0][2] + rotation[2][0] < 0)\n                axis[2] = -axis[2];\n        }\n        else {\n            const denominator = 2 * Math.sin(angleRadians);\n            axis = [\n                (rotation[2][1] - rotation[1][2]) / denominator,\n                (rotation[0][2] - rotation[2][0]) / denominator,\n                (rotation[1][0] - rotation[0][1]) / denominator,\n            ];\n        }\n        const axisLength = Math.hypot(...axis);\n        axis = axis.map((component) => component / axisLength);\n        result = result.rotate(angleRadians * (180 / Math.PI), fromOrigin, axis);\n    }\n    // Rotation was around fromOrigin, so only the origin delta is needed.\n    return result.translate(toOrigin[0] - fromOrigin[0], toOrigin[1] - fromOrigin[1], toOrigin[2] - fromOrigin[2]);\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-143514",
+              "name": "shapeToMove",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-143515",
+              "name": "toPoints",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.3,
+              "uniqueID": "id-143516",
+              "name": "zDirOverride",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.4,
+              "uniqueID": "id-143517",
+              "name": "xDirOverride",
+              "type": "geometry",
+              "options": []
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-143513",
+              "ap2ID": "id-143512"
+            },
+            {
+              "ap2Name": "shape",
+              "ap1ID": "id-143514",
+              "ap2ID": "id-143513"
+            },
+            {
+              "ap2Name": "points",
+              "ap1ID": "id-143515",
+              "ap2ID": "id-143513"
+            },
+            {
+              "ap2Name": "zDir",
+              "ap1ID": "id-143516",
+              "ap2ID": "id-143513"
+            },
+            {
+              "ap2Name": "xDir",
+              "ap1ID": "id-143517",
+              "ap2ID": "id-143513"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-16T10:23:39.031Z",
+            "privateRepo": false,
+            "repoName": "moveToPoints",
+            "dateCreated": "2026-08-20T17:14:26Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/moveToPoints/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-141",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/moveToPoints",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739862",
+            "ranking": 0.6,
+            "searchField": "movetopoints tristan-huber copy an assembly to all the targte points. optionally override the x and z directions to fix the orientation of the assembly at destination. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "copy an assembly to all the targte points. Optionally override the x and z directions to fix the orientation of the assembly at destination.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/moveToPoints/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/moveToPoints/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789579724957
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.3,
+          "y": 0.8,
+          "uniqueID": "id-143541",
+          "name": "face.normalsAt",
+          "ioValues": [
+            {
+              "name": "faces",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "points",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-143537",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.4,
+              "y": 0.6,
+              "uniqueID": "id-143538",
+              "ioValues": [
+                {
+                  "name": "basis",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "points",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "// face.normalsFrom\nfunction run(basis: Assembly, points: Assembly) {\n  let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n  console.log(selectedFaces.length)\n  if (!selectedFaces || selectedFaces.length == 0) {\n    // get faces directly\n    basis.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        selectedFaces.push(leaf.geometry)\n      } else if (leaf.is3D()) {\n        selectedFaces.push(...leaf.geometry.faces)\n      }\n      return leaf;\n    })\n  }\n  console.log(selectedFaces.length)\n  let res = undefined;\n  const result = points.onLeafs((point) => {\n    if (point.isPoint()) {\n      const dists = selectedFaces.map((face) => {\n        return projectVertexOntoFace(face, point.geometry)\n      })\n      dists.sort((a, b) => a[0] - b[0])\n      console.log(`selected face index: ${selectedFaces.findIndex((f) => f.isSame(dists[0][2]))} at dist ${dists[0][0]}. uv: ${dists[0][1]}`)\n      point.geometry = replicad.makeVertex(dists[0][2].normalAt(point.geometry.asTuple()).normalize())\n    }\n    return point;\n  })\n  return result;\n\n}\n\nfunction projectVertexOntoFace(\n  face: replicad.Face,\n  vertex: replicad.Vertex,\n): [number, [number, number], replicad.Face] {\n  const asVec = new replicad.Vector(vertex.asTuple())\n  const uv = face.uvCoordinates(asVec)\n  const res = face.pointOnSurface(uv[0], uv[1]);\n  return [res.add(asVec.multiply(-1)).Length, uv, face]\n}",
+              "compiledCode": "\"use strict\";\n// face.normalsFrom\nfunction run(basis, points) {\n    let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n    console.log(selectedFaces.length);\n    if (!selectedFaces || selectedFaces.length == 0) {\n        // get faces directly\n        basis.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                selectedFaces.push(leaf.geometry);\n            }\n            else if (leaf.is3D()) {\n                selectedFaces.push(...leaf.geometry.faces);\n            }\n            return leaf;\n        });\n    }\n    console.log(selectedFaces.length);\n    let res = undefined;\n    const result = points.onLeafs((point) => {\n        if (point.isPoint()) {\n            const dists = selectedFaces.map((face) => {\n                return projectVertexOntoFace(face, point.geometry);\n            });\n            dists.sort((a, b) => a[0] - b[0]);\n            console.log(`selected face index: ${selectedFaces.findIndex((f) => f.isSame(dists[0][2]))} at dist ${dists[0][0]}. uv: ${dists[0][1]}`);\n            point.geometry = replicad.makeVertex(dists[0][2].normalAt(point.geometry.asTuple()).normalize());\n        }\n        return point;\n    });\n    return result;\n}\nfunction projectVertexOntoFace(face, vertex) {\n    const asVec = new replicad.Vector(vertex.asTuple());\n    const uv = face.uvCoordinates(asVec);\n    const res = face.pointOnSurface(uv[0], uv[1]);\n    return [res.add(asVec.multiply(-1)).Length, uv, face];\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-143539",
+              "name": "faces",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-143540",
+              "name": "points",
+              "type": "geometry",
+              "options": []
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-143538",
+              "ap2ID": "id-143537"
+            },
+            {
+              "ap2Name": "basis",
+              "ap1ID": "id-143539",
+              "ap2ID": "id-143538"
+            },
+            {
+              "ap2Name": "points",
+              "ap1ID": "id-143540",
+              "ap2ID": "id-143538"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-16T10:23:39.031Z",
+            "privateRepo": false,
+            "repoName": "face.normalsAt",
+            "dateCreated": "2026-08-20T17:11:21Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-121",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/face.normalsAt",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739848",
+            "ranking": 0.6,
+            "searchField": "face.normalsat tristan-huber get normal vectors at multiple points from possibly multiple faces. takes an assembly of basis faces and points, returns an assembly of the normal at each point of the nearest face. abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Get normal vectors at multiple points from possibly multiple faces. Takes an assembly of basis faces and points, returns an assembly of the normal at each point of the nearest face.",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789579757427
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.2,
+          "y": 0.4,
+          "uniqueID": "id-143559",
+          "name": "crv.Point",
+          "ioValues": [
+            {
+              "name": "X",
+              "ioValue": 0
+            },
+            {
+              "name": "Y",
+              "ioValue": 0
+            },
+            {
+              "name": "Z",
+              "ioValue": 0
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-143554",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-143555",
+              "name": "X",
+              "options": []
+            },
+            {
+              "atomType": "Code",
+              "x": 0.3,
+              "y": 0.4,
+              "uniqueID": "id-143556",
+              "ioValues": [
+                {
+                  "name": "x",
+                  "ioValue": 0
+                },
+                {
+                  "name": "y",
+                  "ioValue": 0
+                },
+                {
+                  "name": "z",
+                  "ioValue": 0
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "\nfunction run(x: number = 0, y: number = 0, z: number = 0) {\n  return replicad.makeVertex([x,y,z])\n}",
+              "compiledCode": "\"use strict\";\nfunction run(x = 0, y = 0, z = 0) {\n    return replicad.makeVertex([x, y, z]);\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-143557",
+              "name": "Y",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.3,
+              "uniqueID": "id-143558",
+              "name": "Z",
+              "options": []
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "x",
+              "ap1ID": "id-143555",
+              "ap2ID": "id-143556"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-143556",
+              "ap2ID": "id-143554"
+            },
+            {
+              "ap2Name": "y",
+              "ap1ID": "id-143557",
+              "ap2ID": "id-143556"
+            },
+            {
+              "ap2Name": "z",
+              "ap1ID": "id-143558",
+              "ap2ID": "id-143556"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-16T10:23:39.031Z",
+            "privateRepo": false,
+            "repoName": "crv.Point",
+            "dateCreated": "2026-05-08T22:20:14Z",
+            "likes": 0,
+            "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "id-1",
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/crv.Point",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "parentRepo": null,
+            "forks": 0,
+            "dateModified": "739847",
+            "ranking": 7.8,
+            "searchField": "crv.point tristan-huber simple 3d point defined by it's xyz position abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Simple 3d Point defined by it's xyz position",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.Point/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1789579769471
+        },
+        {
+          "atomType": "Code",
+          "x": 0.4,
+          "y": 0.6,
+          "uniqueID": "id-143574",
+          "ioValues": [
+            {
+              "name": "width",
+              "ioValue": 40
+            },
+            {
+              "name": "depth",
+              "ioValue": 30
+            },
+            {
+              "name": "thickness",
+              "ioValue": 5
+            },
+            {
+              "name": "holeRadius",
+              "ioValue": 6
+            },
+            {
+              "name": "color",
+              "ioValue": "#5B9BD5",
+              "currentEquation": "#5B9BD5"
+            },
+            {
+              "name": "addFillet",
+              "ioValue": true
+            },
+            {
+              "name": "extra",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "\n/**\n * =========================================================================\n *  ABUNDANCE CODE ATOM — Quick Reference\n * =========================================================================\n *\n *  HOW INPUTS WORK\n *  ---------------\n *  Every parameter of run() becomes an input port on this atom.\n *  Four types are supported:\n *\n *    number   -> numeric input / slider\n *    string   -> text input  (great for hex color codes, labels, etc.)\n *    boolean  -> true/false toggle\n *    Assembly -> geometry -- wire this to the output of another atom\n *\n *  Give a parameter a default value ( = x ) to make it optional.\n *  Mark it with ? (name?: Assembly) to make it optional with no default.\n *  Parameters without a default must be connected before the atom runs.\n *\n *  RETURN VALUE\n *  ------------\n *  Return an Assembly, an Assembly[], or a primitive (number/string/boolean).\n *  Returning an Assembly[] lets downstream atoms (BOM, cut layout...)\n *  see each piece independently.\n *\n *  GEOMETRY API  (replicad is available as a global)\n *  -------------------------------------------------\n *  Create 2-D sketches\n *    replicad.drawCircle(radius)\n *    replicad.drawRectangle(width, height)\n *    replicad.drawRoundedRectangle(width, height, cornerRadius)\n *\n *  Turn a 2-D sketch into a 3-D solid\n *    sketch.sketchOnPlane().extrude(distance)\n *    sketch.sketchOnPlane().revolve()          // rotate 360 deg around Z\n *\n *  Create 3-D primitives directly\n *    replicad.makeBaseBox(width, depth, height)\n *    replicad.makeSphere(radius)\n *    replicad.makeCylinder(radius, height)\n *\n *  Boolean operations\n *    solidA.fuse(solidB)                       // union\n *    solidA.cut(solidB)                        // difference (cut a hole)\n *    solidA.intersect(solidB)                  // intersection\n *\n *  Post-processing\n *    solid.fillet(radius)                      // round ALL edges\n *    solid.fillet(r, e => e.inPlane(\"XY\", z))  // round only top-face edges\n *    solid.chamfer(distance)                   // bevel ALL edges\n *    solid.translate(x, y, z)                  // move the solid\n *    solid.rotate(angle, [0, 0, 1])            // rotate around Z axis\n *\n *  ASSEMBLY CLASS\n *  --------------\n *  Wrap any replicad solid in an Assembly to attach display metadata:\n *    new Assembly({ geometry, color, tags, bom })\n *      geometry -> replicad solid / drawing returned by the API above\n *      color    -> hex string shown in the 3-D viewport  (\"#A3CE5B\")\n *      tags     -> string[] used for filtering in cut layout / BOM\n *      bom      -> string[] lines added to the Bill of Materials panel\n *\n *  AI PROMPT TIP\n *  -------------\n *  Copy the code in this editor into ChatGPT / Claude and say something like:\n *    \"Modify this Abundance Code Atom to create a gear with 12 teeth\"\n *    \"Change this to make a hexagonal nut instead of a round plate\"\n *  The comments above give the AI all the context it needs to produce\n *  valid, working Abundance TypeScript code.\n * =========================================================================\n */\n\n/**\n * A rectangular mounting plate with a circular hole in the centre.\n * All parameters have defaults so the atom produces geometry immediately\n * after creation — no connections required to get started.\n */\nfunction run(\n  width: number = 40,        \n  depth: number = 30,       \n  thickness: number = 5,    \n  holeRadius: number = 6,   \n  color: string = \"#5B9BD5\", \n  addFillet: boolean = true, \n  extra?: Assembly           \n) {\n  // ── Step 1: Create the base solid ────────────────────────────────────────\n  // makeBaseBox(width, depth, height) places a box with one corner at the\n  // origin.  Translate it so the hole will be centred at (0, 0).\n  let plate = replicad\n    .makeBaseBox(width, depth, thickness)\n    .translate(-width / 2, -depth / 2, 0);\n\n  // ── Step 2: Cut a through-hole in the centre ──────────────────────────────\n  // Extrude a circle slightly taller than the plate so the cut goes all the\n  // way through.  Start 1 mm below the bottom face to avoid coplanar issues.\n  const holeCutter = replicad\n    .drawCircle(holeRadius)\n    .sketchOnPlane()\n    .extrude(thickness + 2)\n    .translate(0, 0, -1);\n\n  plate = plate.cut(holeCutter);\n\n  // ── Step 3: Optional fillet on the top-face edges ────────────────────────\n  // inPlane(\"XY\", thickness) selects only the edges that lie in the\n  // horizontal plane at z = thickness (i.e. the top face of the plate).\n  if (addFillet) {\n    plate = plate.fillet(1.5, (e) => e.inPlane(\"XY\", thickness));\n  }\n\n  // ── Step 4: Wrap in an Assembly to set display properties ─────────────────\n  const plateAssembly = new Assembly({\n    geometry: plate,\n    color: color,\n    tags: [\"plate\", \"mounting-plate\"],\n    bom: [`Mounting plate ${width}×${depth}×${thickness} mm`],\n  });\n\n  // ── Step 5: Combine with any upstream geometry ────────────────────────────\n  // Returning an array lets each piece stay independent for the BOM and\n  // cut-layout atoms.  If nothing is connected, `extra` is undefined.\n  const results: Assembly[] = [plateAssembly];\n  if (extra) results.push(extra);\n  return results;\n}\n"
         }
       ],
       "allConnectors": [
         {
-          "ap2Name": "Shape 2",
-          "ap1ID": "id-140530",
-          "ap2ID": "id-140543"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-140533",
-          "ap2ID": "id-140177"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-140533",
-          "ap2ID": "id-140550"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-140543",
-          "ap2ID": "id-140533"
+          "ap2Name": "Input",
+          "ap1ID": "id-140179",
+          "ap2ID": "id-143462"
         },
         {
           "ap2Name": "geometry",
           "ap1ID": "id-140515",
           "ap2ID": "id-140537"
+        },
+        {
+          "ap2Name": "shapeToMove",
+          "ap1ID": "id-140330",
+          "ap2ID": "id-143518"
+        },
+        {
+          "ap2Name": "faces",
+          "ap1ID": "id-143462",
+          "ap2ID": "id-143541"
         }
       ],
       "fileTypeVersion": 1
