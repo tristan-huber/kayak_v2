@@ -11413,49 +11413,9 @@
       "fileTypeVersion": 1
     },
     {
-      "atomType": "Rectangle",
-      "x": 0.7,
-      "y": 0.8,
-      "uniqueID": "id-133351",
-      "ioValues": [
-        {
-          "name": "x length",
-          "ioValue": 25.5
-        },
-        {
-          "name": "y length",
-          "ioValue": 21.9
-        }
-      ]
-    },
-    {
-      "atomType": "Move",
-      "x": 0.8,
-      "y": 0.7,
-      "uniqueID": "id-133355",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "xDist",
-          "ioValue": 103
-        },
-        {
-          "name": "yDist",
-          "ioValue": 0
-        },
-        {
-          "name": "zDist",
-          "ioValue": 0
-        }
-      ]
-    },
-    {
       "atomType": "Tag",
       "x": 0.3,
-      "y": 0.4,
+      "y": 0.5,
       "uniqueID": "id-139912",
       "name": "thick_ply",
       "ioValues": [
@@ -11523,7 +11483,7 @@
     {
       "atomType": "ExtractTag",
       "x": 0.4,
-      "y": 0.5,
+      "y": 0.3,
       "uniqueID": "id-140173",
       "name": "Extract electronics_aft_bulkhead",
       "ioValues": [
@@ -11541,8 +11501,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4,
-      "y": 0.8,
+      "x": 0.5,
+      "y": 0.7,
       "uniqueID": "id-140176",
       "name": "bluerobotics",
       "ioValues": [
@@ -15928,8 +15888,8 @@
             },
             {
               "atomType": "Molecule",
-              "x": 0.6,
-              "y": 0.5,
+              "x": 0.4,
+              "y": 0.9,
               "uniqueID": "id-147514",
               "name": "fin",
               "topLevel": false,
@@ -16246,7 +16206,11 @@
                       "name": "shape",
                       "type": "edgeselect",
                       "options": [],
-                      "selectedEdgeData": {}
+                      "selectedEdgeData": {
+                        "0": [
+                          0
+                        ]
+                      }
                     },
                     {
                       "atomType": "Input",
@@ -16445,8 +16409,8 @@
             },
             {
               "atomType": "Move",
-              "x": 0.7,
-              "y": 0.5,
+              "x": 0.5,
+              "y": 0.9,
               "uniqueID": "id-147605",
               "ioValues": [
                 {
@@ -22415,8 +22379,7 @@
                 },
                 {
                   "name": "height",
-                  "ioValue": -0.25,
-                  "currentEquation": "-0.25"
+                  "ioValue": -0.25
                 }
               ]
             },
@@ -22709,7 +22672,7 @@
     {
       "atomType": "Molecule",
       "x": 0.6,
-      "y": 0.4,
+      "y": 0.3,
       "uniqueID": "id-89799",
       "name": "fasteners",
       "ioValues": [
@@ -30585,11 +30548,6 @@
   ],
   "allConnectors": [
     {
-      "ap2Name": "geometry",
-      "ap1ID": "id-133351",
-      "ap2ID": "id-133355"
-    },
-    {
       "ap2Name": "bulkheads",
       "ap1ID": "id-139912",
       "ap2ID": "id-133347"
@@ -30603,6 +30561,11 @@
       "ap2Name": "behind_bulkhead",
       "ap1ID": "id-140173",
       "ap2ID": "id-140176"
+    },
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-151102",
+      "ap2ID": "id-130"
     },
     {
       "ap2Name": "Shape",
@@ -30678,11 +30641,6 @@
       "ap2Name": "Shape 2",
       "ap1ID": "id-140176",
       "ap2ID": "id-151102"
-    },
-    {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-151102",
-      "ap2ID": "id-130"
     }
   ],
   "unitsKey": "Inches",
