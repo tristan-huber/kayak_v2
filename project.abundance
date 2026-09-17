@@ -13588,7 +13588,8 @@
             },
             {
               "name": "xDist",
-              "ioValue": 3
+              "ioValue": 0,
+              "currentEquation": "0"
             },
             {
               "name": "yDist",
@@ -15322,7 +15323,7 @@
             {
               "atomType": "ExtractTag",
               "x": 0.2,
-              "y": 0.2,
+              "y": 0.4,
               "uniqueID": "id-147408",
               "name": "Extract Untagged",
               "ioValues": [
@@ -16436,8 +16437,8 @@
             },
             {
               "atomType": "Molecule",
-              "x": 0.2,
-              "y": 0.8,
+              "x": 0.1,
+              "y": 0.7,
               "uniqueID": "id-147699",
               "name": "mounting bracket",
               "topLevel": false,
@@ -16889,6 +16890,31 @@
                 }
               ],
               "fileTypeVersion": 1
+            },
+            {
+              "atomType": "Move",
+              "x": 0.8,
+              "y": 0.5,
+              "uniqueID": "id-154435",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": -4,
+                  "currentEquation": "-4"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0
+                }
+              ]
             }
           ],
           "allConnectors": [
@@ -16903,9 +16929,9 @@
               "ap2ID": "id-147101"
             },
             {
-              "ap2Name": "number or geometry",
+              "ap2Name": "geometry",
               "ap1ID": "id-147441",
-              "ap2ID": "id-147099"
+              "ap2ID": "id-154435"
             },
             {
               "ap2Name": "Shape 4",
@@ -16946,6 +16972,11 @@
               "ap2Name": "Shape 2",
               "ap1ID": "id-147699",
               "ap2ID": "id-147441"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-154435",
+              "ap2ID": "id-147099"
             }
           ],
           "fileTypeVersion": 1
