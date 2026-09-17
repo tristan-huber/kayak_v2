@@ -17247,6 +17247,22 @@
       "fileTypeVersion": 1
     },
     {
+      "atomType": "Assembly",
+      "x": 0.6,
+      "y": 0.9,
+      "uniqueID": "id-151102",
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        }
+      ]
+    },
+    {
       "atomType": "Molecule",
       "x": 0.8,
       "y": 0.3,
@@ -19797,7 +19813,19 @@
               "name": "Assembly",
               "type": "faceselect",
               "options": [],
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -20111,6 +20139,10 @@
               "name": "(width + 2 * t) / width",
               "ioValues": [
                 {
+                  "name": "width",
+                  "ioValue": 27.55163241085512
+                },
+                {
                   "name": "t",
                   "ioValue": 0.5
                 }
@@ -20164,6 +20196,10 @@
               "uniqueID": "id-76339",
               "name": "(width + 2 * t + 1.5) / width",
               "ioValues": [
+                {
+                  "name": "width",
+                  "ioValue": 27.55163241085512
+                },
                 {
                   "name": "t",
                   "ioValue": 0.5
@@ -21058,6 +21094,10 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
+                  "name": "factor",
+                  "ioValue": 1.0362954900489312
+                },
+                {
                   "name": "center",
                   "ioValue": 10
                 }
@@ -21085,6 +21125,10 @@
                     {
                       "name": "shape",
                       "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "factor",
+                      "ioValue": 1.0362954900489312
                     },
                     {
                       "name": "center",
@@ -21184,6 +21228,10 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
+                  "name": "factor",
+                  "ioValue": 1.0907387251223277
+                },
+                {
                   "name": "center",
                   "ioValue": 10
                 }
@@ -21211,6 +21259,10 @@
                     {
                       "name": "shape",
                       "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "factor",
+                      "ioValue": 1.0907387251223277
                     },
                     {
                       "name": "center",
@@ -21656,7 +21708,11 @@
               "name": "Assembly",
               "type": "faceselect",
               "options": [],
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  8
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -30559,11 +30615,6 @@
       "ap2ID": "id-92619"
     },
     {
-      "ap2Name": "bodyPanels",
-      "ap1ID": "id-76088",
-      "ap2ID": "id-95407"
-    },
-    {
       "ap2Name": "hullform",
       "ap1ID": "id-76088",
       "ap2ID": "id-140163"
@@ -30604,9 +30655,9 @@
       "ap2ID": "id-133347"
     },
     {
-      "ap2Name": "falsework",
-      "ap1ID": "id-93010",
-      "ap2ID": "id-95407"
+      "ap2Name": "hullForm",
+      "ap1ID": "id-92619",
+      "ap2ID": "id-76328"
     },
     {
       "ap2Name": "geometry",
@@ -30614,19 +30665,19 @@
       "ap2ID": "id-139912"
     },
     {
-      "ap2Name": "superstructure",
-      "ap1ID": "id-76328",
-      "ap2ID": "id-95407"
-    },
-    {
       "ap2Name": "geometry",
       "ap1ID": "id-133347",
       "ap2ID": "id-140173"
     },
     {
-      "ap2Name": "number or geometry",
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-133347",
+      "ap2ID": "id-151102"
+    },
+    {
+      "ap2Name": "Shape 2",
       "ap1ID": "id-140176",
-      "ap2ID": "id-130"
+      "ap2ID": "id-151102"
     },
     {
       "ap2Name": "bulkheads",
@@ -30634,9 +30685,9 @@
       "ap2ID": "id-93010"
     },
     {
-      "ap2Name": "Input",
-      "ap1ID": "id-89799",
-      "ap2ID": "id-95407"
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-151102",
+      "ap2ID": "id-130"
     }
   ],
   "unitsKey": "Inches",
