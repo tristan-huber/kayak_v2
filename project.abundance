@@ -11541,7 +11541,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.5,
           "uniqueID": "id-140179",
           "name": "hullform",
           "type": "geometry",
@@ -13578,8 +13578,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.2,
-          "y": 0.3,
+          "x": 0.3,
+          "y": 0.2,
           "uniqueID": "id-143900",
           "ioValues": [
             {
@@ -15875,7 +15875,8 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": -4
+                  "ioValue": 3.25,
+                  "currentEquation": "3.25"
                 },
                 {
                   "name": "yDist",
@@ -16420,7 +16421,8 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": -1
+                  "ioValue": -1,
+                  "currentEquation": "-1"
                 },
                 {
                   "name": "yDist",
