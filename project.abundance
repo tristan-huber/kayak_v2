@@ -11471,7 +11471,7 @@
     {
       "atomType": "Molecule",
       "x": 0.5,
-      "y": 0.3,
+      "y": 0.2,
       "uniqueID": "id-140163",
       "name": "outboard",
       "ioValues": [
@@ -22406,7 +22406,7 @@
             {
               "atomType": "Extrude",
               "x": 0.2,
-              "y": 0.2,
+              "y": 0.3,
               "uniqueID": "id-76831",
               "ioValues": [
                 {
@@ -22416,7 +22416,7 @@
                 {
                   "name": "height",
                   "ioValue": -0.25,
-                  "currentEquation": "-1 * hullThickness"
+                  "currentEquation": "-0.25"
                 }
               ]
             },
@@ -22708,7 +22708,7 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.5,
+      "x": 0.6,
       "y": 0.4,
       "uniqueID": "id-89799",
       "name": "fasteners",
@@ -28581,7 +28581,7 @@
     {
       "atomType": "Molecule",
       "x": 0.6,
-      "y": 0.6,
+      "y": 0.4,
       "uniqueID": "id-93010",
       "name": "falsework",
       "ioValues": [
@@ -30678,11 +30678,6 @@
       "ap2Name": "Shape 2",
       "ap1ID": "id-140176",
       "ap2ID": "id-151102"
-    },
-    {
-      "ap2Name": "bulkheads",
-      "ap1ID": "id-89799",
-      "ap2ID": "id-93010"
     },
     {
       "ap2Name": "number or geometry",

@@ -2,7 +2,10 @@
 # Bill Of Materials 
  |Part|Number Needed|Price|Source| 
  |----|----------|-----|-----|
-|Wetlink penetrator M10 4.5|2|$26.00|https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/|
+|Wetlink penetrator M10 4.5|5|$65.00|https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/|
 |Blue Robotics thruster mount|2|$16.00|https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/|
 |T200|2|$460.00|https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/|
-|Total: |6|$502.00| |
+|VictronMPPT|1|$47.00|[Amazon](https://www.amazon.com/Victron-BlueSolar-MPPT-Charge-Controller/dp/B018M88G5C/ref=sr_1_5_sspa?th=1?tag=maslowcnc01-20)|
+|Bridea_PWM|1|$70.00|[Amazon](https://www.amazon.com/dp/B0DP1XZTR2?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_6&th=1?tag=maslowcnc01-20)|
+|12.8V 100Ah battery|1|$185.00|[Amazon](https://www.amazon.com/dp/B0DZXDWJXR?tag=maslowcnc01-20)|
+|Total: |12|$843.00| |
