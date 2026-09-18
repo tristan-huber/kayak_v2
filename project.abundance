@@ -109,7 +109,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-117122",
               "name": "kayakbody",
               "type": "geometry",
@@ -132,7 +132,7 @@
               "ioValues": [
                 {
                   "name": "x length",
-                  "ioValue": 10.914537171680637
+                  "ioValue": 10.914537131440813
                 },
                 {
                   "name": "y length",
@@ -249,7 +249,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117131",
                   "name": "Shape",
                   "type": "geometry",
@@ -363,7 +363,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117136",
                   "name": "Shape",
                   "type": "geometry",
@@ -480,7 +480,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117142",
                   "name": "B",
                   "type": "geometry",
@@ -647,7 +647,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117150",
                   "name": "A",
                   "type": "geometry",
@@ -787,7 +787,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117156",
                   "name": "toMove",
                   "type": "geometry",
@@ -1006,7 +1006,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-117160",
           "name": "profileShape",
           "type": "geometry",
@@ -1155,7 +1155,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-126036",
           "name": "Shape",
           "type": "geometry",
@@ -1246,7 +1246,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-128091",
           "type": "number",
           "options": []
@@ -1335,7 +1335,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-128097",
               "name": "shape",
               "type": "geometry",
@@ -1467,7 +1467,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-128125",
               "name": "Assembly",
               "type": "faceselect",
@@ -1549,7 +1549,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-128137",
               "name": "selection",
               "type": "geometry",
@@ -2021,7 +2021,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-133380",
                   "name": "assembly",
                   "type": "geometry",
@@ -2222,7 +2222,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-133444",
           "name": "bulkheads",
           "type": "geometry",
@@ -2312,7 +2312,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-135274",
               "name": "A",
               "type": "geometry",
@@ -2426,7 +2426,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-135343",
               "name": "Shape",
               "type": "geometry",
@@ -2642,7 +2642,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-135365",
               "name": "Shape",
               "type": "geometry",
@@ -2835,7 +2835,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-135663",
                   "name": "Shape",
                   "type": "geometry",
@@ -3004,7 +3004,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-135669",
                   "name": "shape",
                   "type": "geometry",
@@ -3136,7 +3136,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-135676",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -3240,7 +3240,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-135753",
               "name": "boat_interior",
               "type": "geometry",
@@ -3298,7 +3298,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-135759",
                   "name": "Shape",
                   "type": "geometry",
@@ -3468,7 +3468,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-135880",
                   "name": "Geometry",
                   "type": "geometry",
@@ -3724,7 +3724,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-135922",
                   "name": "A",
                   "type": "geometry",
@@ -4116,7 +4116,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-135959",
                       "name": "Width",
                       "type": "number",
@@ -4798,7 +4798,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-135984",
                       "name": "assembly",
                       "options": []
@@ -4924,7 +4924,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-135990",
                       "name": "assembly",
                       "options": []
@@ -5491,7 +5491,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136002",
                       "name": "assembly",
                       "type": "geometry",
@@ -5892,7 +5892,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136493",
                       "name": "assembly",
                       "type": "geometry",
@@ -6106,7 +6106,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136505",
                       "name": "assembly",
                       "options": []
@@ -6607,7 +6607,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-136622",
                   "name": "BulkheadThickness",
                   "options": []
@@ -6981,7 +6981,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136642",
                       "name": "subparts",
                       "type": "partselect",
@@ -7161,7 +7161,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136653",
                       "name": "faces",
                       "type": "faceselect",
@@ -7297,7 +7297,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136661",
                       "name": "shape",
                       "type": "edgeselect",
@@ -7607,7 +7607,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-136795",
                   "name": "BulkheadThickness",
                   "options": []
@@ -7882,7 +7882,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136811",
                       "name": "subparts",
                       "type": "partselect",
@@ -8078,7 +8078,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136823",
                       "name": "faces",
                       "type": "faceselect",
@@ -8260,7 +8260,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-136833",
                       "name": "shape",
                       "type": "edgeselect",
@@ -8610,7 +8610,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-137054",
                   "name": "assembly",
                   "options": []
@@ -8758,7 +8758,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-137060",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -8886,7 +8886,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-137066",
                   "name": "X",
                   "options": []
@@ -9020,7 +9020,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-137072",
                   "name": "X",
                   "options": []
@@ -9120,7 +9120,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-137136",
               "name": "onhatch",
               "type": "geometry",
@@ -9204,7 +9204,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-137155",
                   "name": "Shape",
                   "type": "geometry",
@@ -9466,7 +9466,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-137190",
               "name": "boat_interior",
               "type": "geometry",
@@ -9548,7 +9548,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-137203",
                   "name": "A",
                   "type": "geometry",
@@ -9638,7 +9638,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-137220",
                   "name": "Shape",
                   "type": "geometry",
@@ -9940,7 +9940,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-139942",
               "name": "geometry",
               "type": "geometry",
@@ -10054,7 +10054,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-139959",
               "name": "geometry",
               "type": "geometry",
@@ -10194,7 +10194,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-139992",
               "name": "aft_bulkhead",
               "type": "geometry",
@@ -10266,7 +10266,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-139999",
                   "name": "BulkheadThickness",
                   "options": []
@@ -10624,7 +10624,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-140061",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -10752,7 +10752,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-140085",
                   "name": "X",
                   "options": []
@@ -10910,7 +10910,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-140112",
                   "name": "X",
                   "options": []
@@ -11036,7 +11036,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-140132",
                   "name": "assembly",
                   "options": []
@@ -11461,7 +11461,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-140167",
           "name": "behind_bulkhead",
           "type": "geometry",
@@ -11532,7 +11532,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-140178",
           "name": "behind_bulkhead",
           "type": "geometry",
@@ -11541,7 +11541,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.5,
+          "y": 0.2,
           "uniqueID": "id-140179",
           "name": "hullform",
           "type": "geometry",
@@ -11576,7 +11576,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-143466",
               "type": "geometry",
               "options": []
@@ -11665,7 +11665,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143472",
                   "name": "shape",
                   "type": "geometry",
@@ -11797,7 +11797,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143500",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -11939,7 +11939,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-143539",
               "name": "faces",
               "type": "geometry",
@@ -12039,7 +12039,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-143555",
               "name": "X",
               "options": []
@@ -12192,7 +12192,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-143587",
               "name": "X",
               "options": []
@@ -12422,7 +12422,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143726",
                   "name": "shape",
                   "type": "geometry",
@@ -12609,7 +12609,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143734",
                   "name": "shape",
                   "type": "geometry",
@@ -12715,7 +12715,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-143779",
               "name": "reference_bulkhead",
               "type": "geometry",
@@ -12773,7 +12773,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143785",
                   "name": "selectionOne",
                   "type": "geometry",
@@ -12880,7 +12880,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143802",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -12973,7 +12973,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143815",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -13090,7 +13090,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143827",
                   "type": "geometry",
                   "options": []
@@ -13208,14 +13208,15 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143851",
                   "type": "edgeselect",
                   "options": [],
                   "selectedEdgeData": {
                     "0": [
-                      10,
-                      15
+                      5,
+                      2,
+                      19
                     ]
                   }
                 },
@@ -13328,7 +13329,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143865",
                   "name": "geometry",
                   "type": "geometry",
@@ -13429,7 +13430,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-143882",
                   "name": "assembly",
                   "options": []
@@ -13588,8 +13589,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 0,
-              "currentEquation": "0"
+              "ioValue": 0
             },
             {
               "name": "yDist",
@@ -13637,8 +13637,7 @@
                 },
                 {
                   "name": "y-axis degrees",
-                  "ioValue": 180,
-                  "currentEquation": "180"
+                  "ioValue": 180
                 },
                 {
                   "name": "z-axis degrees",
@@ -13736,7 +13735,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147108",
                       "name": "assembly",
                       "type": "geometry",
@@ -14012,7 +14011,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147122",
                       "name": "faceSelection",
                       "type": "geometry",
@@ -14145,7 +14144,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147126",
                       "name": "shape",
                       "type": "geometry",
@@ -14332,7 +14331,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147134",
                       "name": "shape",
                       "type": "geometry",
@@ -14487,7 +14486,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147142",
                       "name": "selectionOne",
                       "type": "geometry",
@@ -14601,7 +14600,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147147",
                       "name": "shape",
                       "type": "edgeselect",
@@ -14810,7 +14809,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147153",
                       "name": "Shape",
                       "type": "geometry",
@@ -15370,7 +15369,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-147418",
                   "name": "B",
                   "type": "geometry",
@@ -15576,7 +15575,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-147449",
                   "name": "BulkheadThickness",
                   "options": []
@@ -15876,8 +15875,7 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": 3.25,
-                  "currentEquation": "3.25"
+                  "ioValue": 3.25
                 },
                 {
                   "name": "yDist",
@@ -16204,16 +16202,12 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147576",
                       "name": "shape",
                       "type": "edgeselect",
                       "options": [],
-                      "selectedEdgeData": {
-                        "0": [
-                          0
-                        ]
-                      }
+                      "selectedEdgeData": {}
                     },
                     {
                       "atomType": "Input",
@@ -16422,8 +16416,7 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": -1,
-                  "currentEquation": "-1"
+                  "ioValue": -1
                 },
                 {
                   "name": "yDist",
@@ -16508,7 +16501,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-147706",
                       "name": "X_Length",
                       "options": []
@@ -16903,8 +16896,7 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": -4,
-                  "currentEquation": "-4"
+                  "ioValue": -4
                 },
                 {
                   "name": "yDist",
@@ -16944,6 +16936,11 @@
               "ap2ID": "id-147441"
             },
             {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-154435",
+              "ap2ID": "id-147099"
+            },
+            {
               "ap2Name": "Shape 1",
               "ap1ID": "id-147423",
               "ap2ID": "id-147441"
@@ -16972,11 +16969,6 @@
               "ap2Name": "Shape 2",
               "ap1ID": "id-147699",
               "ap2ID": "id-147441"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-154435",
-              "ap2ID": "id-147099"
             }
           ],
           "fileTypeVersion": 1
@@ -17073,7 +17065,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-147628",
               "name": "shapeToMove",
               "type": "geometry",
@@ -17362,7 +17354,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-43731",
               "name": "primaryEdge",
               "type": "edgeselect",
@@ -17467,7 +17459,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-43739",
                   "name": "wires",
                   "type": "geometry",
@@ -17560,7 +17552,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-43743",
                   "name": "wires",
                   "type": "geometry",
@@ -17693,7 +17685,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-43798",
           "name": "kayak",
           "type": "geometry",
@@ -17801,7 +17793,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-69954",
               "name": "Face",
               "type": "faceselect",
@@ -17906,7 +17898,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-69975",
               "name": "Assembly",
               "type": "faceselect",
@@ -18000,7 +17992,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-69988",
               "name": "Assembly",
               "type": "faceselect",
@@ -18161,7 +18153,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-71985",
               "name": "primaryEdge",
               "type": "edgeselect",
@@ -18266,7 +18258,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-71993",
                   "name": "wires",
                   "type": "geometry",
@@ -18359,7 +18351,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-71997",
                   "name": "wires",
                   "type": "geometry",
@@ -18483,7 +18475,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-72117",
                   "name": "wires",
                   "type": "geometry",
@@ -18621,7 +18613,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-72046",
               "type": "edgeselect",
               "options": [],
@@ -18786,7 +18778,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-74023",
               "type": "partselect",
               "options": [],
@@ -18903,7 +18895,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-74042",
               "type": "partselect",
               "options": [],
@@ -19198,7 +19190,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-74121",
               "type": "partselect",
               "options": [],
@@ -19540,7 +19532,7 @@
     {
       "atomType": "Input",
       "x": 0,
-      "y": 0.2,
+      "y": 0.1,
       "uniqueID": "id-76297",
       "name": "hullThickness",
       "options": []
@@ -19674,7 +19666,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-120067",
               "name": "shape",
               "type": "geometry",
@@ -19806,7 +19798,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-120109",
               "name": "Assembly",
               "type": "faceselect",
@@ -19967,7 +19959,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-120114",
               "name": "shape",
               "type": "geometry",
@@ -20115,7 +20107,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-76334",
               "name": "cockpitShape",
               "type": "geometry",
@@ -20323,7 +20315,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76352",
                   "name": "Shape",
                   "type": "geometry",
@@ -20444,7 +20436,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76375",
                   "name": "face",
                   "type": "geometry",
@@ -20565,7 +20557,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76380",
                   "name": "face",
                   "type": "geometry",
@@ -20688,7 +20680,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76385",
                   "name": "Number",
                   "type": "number",
@@ -21019,7 +21011,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76405",
                   "name": "face",
                   "type": "geometry",
@@ -21140,7 +21132,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76878",
                   "name": "shape",
                   "type": "geometry",
@@ -21274,7 +21266,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76899",
                   "name": "shape",
                   "type": "geometry",
@@ -21386,7 +21378,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-95373",
                   "name": "vector",
                   "type": "point3d",
@@ -21701,7 +21693,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-76425",
               "name": "Assembly",
               "type": "faceselect",
@@ -21773,7 +21765,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-76671",
           "name": "hullForm",
           "type": "geometry",
@@ -21853,7 +21845,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-120150",
                   "name": "Shape",
                   "type": "geometry",
@@ -21967,7 +21959,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-120167",
                   "name": "Shape",
                   "type": "geometry",
@@ -22044,7 +22036,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-76677",
               "name": "inFace",
               "options": []
@@ -22309,7 +22301,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-76702",
                   "name": "width",
                   "type": "number",
@@ -22821,7 +22813,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105499",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -22970,7 +22962,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105508",
                   "name": "shape",
                   "type": "geometry",
@@ -23101,7 +23093,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105528",
                   "type": "edgeselect",
                   "options": [],
@@ -23233,7 +23225,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105533",
                   "type": "geometry",
                   "options": []
@@ -23373,7 +23365,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105540",
                   "name": "faces",
                   "type": "geometry",
@@ -23472,7 +23464,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105551",
                   "name": "X",
                   "options": []
@@ -23602,7 +23594,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105557",
                   "name": "selection",
                   "type": "geometry",
@@ -23661,7 +23653,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-105562",
                       "name": "selection",
                       "type": "geometry",
@@ -23759,7 +23751,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-105566",
                       "name": "selectionOne",
                       "type": "geometry",
@@ -23883,7 +23875,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-105767",
               "name": "bulkheads",
               "options": []
@@ -23948,7 +23940,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117293",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -24040,7 +24032,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117307",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -24105,7 +24097,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117318",
                   "name": "assembly",
                   "type": "geometry",
@@ -24264,7 +24256,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117333",
                   "name": "shape",
                   "type": "geometry",
@@ -24418,7 +24410,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117362",
                   "name": "selectionOne",
                   "type": "geometry",
@@ -24548,7 +24540,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-126120",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -24667,7 +24659,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-131611",
                   "type": "edgeselect",
                   "options": [],
@@ -24760,7 +24752,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-131623",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -25045,7 +25037,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105791",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -25178,7 +25170,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105825",
                   "type": "geometry",
                   "options": []
@@ -25318,7 +25310,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105832",
                   "name": "faces",
                   "type": "geometry",
@@ -25448,7 +25440,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105837",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -25575,7 +25567,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-105843",
                   "name": "X",
                   "options": []
@@ -25675,7 +25667,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-105860",
               "name": "bulkheads",
               "options": []
@@ -25725,7 +25717,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-106059",
                   "type": "edgeselect",
                   "options": [],
@@ -25818,7 +25810,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-106071",
                   "type": "edgeselect",
                   "options": [],
@@ -25923,7 +25915,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-106084",
                   "name": "Geometry",
                   "type": "number",
@@ -26180,7 +26172,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-106131",
                   "name": "assembly",
                   "options": []
@@ -26296,7 +26288,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117409",
                   "name": "selectionOne",
                   "type": "geometry",
@@ -26391,7 +26383,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117425",
                   "name": "selection",
                   "type": "geometry",
@@ -26450,7 +26442,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-117430",
                       "name": "selection",
                       "type": "geometry",
@@ -26548,7 +26540,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.2,
+                      "y": 0.1,
                       "uniqueID": "id-117434",
                       "name": "selectionOne",
                       "type": "geometry",
@@ -26713,7 +26705,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117467",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -26778,7 +26770,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117478",
                   "name": "assembly",
                   "type": "geometry",
@@ -26897,7 +26889,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117493",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -27029,7 +27021,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117508",
                   "name": "shape",
                   "type": "geometry",
@@ -27215,7 +27207,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.2,
+                  "y": 0.1,
                   "uniqueID": "id-117537",
                   "name": "shape",
                   "type": "geometry",
@@ -27488,7 +27480,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-89803",
           "name": "bulkheads",
           "type": "geometry",
@@ -27737,7 +27729,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-90174",
               "name": "Length",
               "options": []
@@ -27859,7 +27851,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-90275",
               "name": "X",
               "options": []
@@ -28487,7 +28479,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-92616",
           "name": "Shape",
           "type": "geometry",
@@ -28616,7 +28608,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-93012",
           "name": "bulkheads",
           "type": "geometry",
@@ -28784,7 +28776,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-93040",
               "name": "Shape",
               "type": "geometry",
@@ -28942,7 +28934,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-93185",
               "name": "height",
               "options": []
@@ -29035,7 +29027,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-93193",
               "name": "height",
               "options": []
@@ -29953,7 +29945,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-109285",
               "name": "Shape",
               "type": "geometry",
@@ -30044,7 +30036,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.1,
           "uniqueID": "id-109319",
           "type": "geometry",
           "options": []
@@ -30113,7 +30105,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-131586",
               "name": "Face",
               "type": "faceselect",
@@ -30402,7 +30394,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.2,
+              "y": 0.1,
               "uniqueID": "id-98401",
               "name": "Shape",
               "type": "geometry",
