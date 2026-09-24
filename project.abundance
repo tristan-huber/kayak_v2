@@ -19321,6 +19321,10 @@
               "ioValue": 180
             },
             {
+              "name": "STL Tolerance",
+              "ioValue": 0.002
+            },
+            {
               "name": "Part Name",
               "ioValue": "forCNC",
               "currentEquation": "forCNC"
@@ -29603,6 +29607,10 @@
               "ioValue": 96
             },
             {
+              "name": "STL Tolerance",
+              "ioValue": 0.002
+            },
+            {
               "name": "Part Name",
               "ioValue": "halfScaleHalfPly",
               "currentEquation": "halfScaleHalfPly"
@@ -29732,6 +29740,10 @@
             {
               "name": "Resolution (dpi)",
               "ioValue": 96
+            },
+            {
+              "name": "STL Tolerance",
+              "ioValue": 0.002
             },
             {
               "name": "Part Name",
