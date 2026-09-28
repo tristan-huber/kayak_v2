@@ -10027,7 +10027,7 @@
         {
           "atomType": "Assembly",
           "x": 0.9,
-          "y": 0.4,
+          "y": 0.6,
           "uniqueID": "id-137173",
           "ioValues": [
             {
@@ -10677,7 +10677,7 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.4,
+          "x": 0.3,
           "y": 0.2,
           "uniqueID": "id-139956",
           "name": "IthFromAssembly",
@@ -11944,9 +11944,9 @@
         {
           "atomType": "Tag",
           "x": 0.6,
-          "y": 0.4,
+          "y": 0.5,
           "uniqueID": "id-180214",
-          "name": "",
+          "name": "thickply",
           "ioValues": [
             {
               "name": "geometry",
@@ -11954,7 +11954,23 @@
             }
           ],
           "tags": [
-            ""
+            "thickply"
+          ]
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.5,
+          "y": 0.3,
+          "uniqueID": "id-180217",
+          "name": "thickply",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "thickply"
           ]
         }
       ],
@@ -12020,9 +12036,9 @@
           "ap2ID": "id-133349"
         },
         {
-          "ap2Name": "Shape 3",
+          "ap2Name": "geometry",
           "ap1ID": "id-137178",
-          "ap2ID": "id-137173"
+          "ap2ID": "id-180214"
         },
         {
           "ap2Name": "retain",
@@ -12072,7 +12088,7 @@
         {
           "ap2Name": "geometry",
           "ap1ID": "id-139956",
-          "ap2ID": "id-139981"
+          "ap2ID": "id-180217"
         },
         {
           "ap2Name": "geometry",
@@ -12100,11 +12116,6 @@
           "ap2ID": "id-137178"
         },
         {
-          "ap2Name": "geometry",
-          "ap1ID": "id-135649",
-          "ap2ID": "id-180214"
-        },
-        {
           "ap2Name": "Shape 1",
           "ap1ID": "id-137048",
           "ap2ID": "id-137173"
@@ -12123,6 +12134,16 @@
           "ap2Name": "components",
           "ap1ID": "id-135949",
           "ap2ID": "id-137048"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-180214",
+          "ap2ID": "id-137173"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-180217",
+          "ap2ID": "id-139981"
         }
       ],
       "fileTypeVersion": 1
@@ -34620,30 +34641,6 @@
           ]
         },
         {
-          "atomType": "Move",
-          "x": 0.7,
-          "y": 0.5,
-          "uniqueID": "id-93029",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 0.75
-            },
-            {
-              "name": "yDist",
-              "ioValue": 0
-            },
-            {
-              "name": "zDist",
-              "ioValue": 0
-            }
-          ]
-        },
-        {
           "atomType": "Assembly",
           "x": 0.9,
           "y": 0.6,
@@ -34656,21 +34653,13 @@
             {
               "name": "Shape 1",
               "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "Shape 3",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "Shape4",
-              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
         {
           "atomType": "Tag",
           "x": 0.7,
-          "y": 0.8,
+          "y": 0.6,
           "uniqueID": "id-93034",
           "name": "strongback",
           "ioValues": [
@@ -34685,8 +34674,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.7,
-          "y": 0.3,
+          "x": 0.8,
+          "y": 0.4,
           "uniqueID": "id-93035",
           "ioValues": [
             {
@@ -34703,7 +34692,8 @@
             },
             {
               "name": "zDist",
-              "ioValue": 1
+              "ioValue": 0.25,
+              "currentEquation": "0.25"
             }
           ]
         },
@@ -35202,7 +35192,7 @@
         },
         {
           "atomType": "Rotate",
-          "x": 0.6,
+          "x": 0.5,
           "y": 0.7,
           "uniqueID": "id-93263",
           "ioValues": [
@@ -35281,11 +35271,6 @@
           "ap2ID": "id-175977"
         },
         {
-          "ap2Name": "retain",
-          "ap1ID": "id-175970",
-          "ap2ID": "id-180190"
-        },
-        {
           "ap2Name": "geometry",
           "ap1ID": "id-93012",
           "ap2ID": "id-175970"
@@ -35294,16 +35279,6 @@
           "ap2Name": "geometry",
           "ap1ID": "id-93014",
           "ap2ID": "id-93240"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-93029",
-          "ap2ID": "id-93034"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-93029",
-          "ap2ID": "id-93035"
         },
         {
           "ap2Name": "geometry",
@@ -35316,12 +35291,12 @@
           "ap2ID": "id-93011"
         },
         {
-          "ap2Name": "Shape 1",
+          "ap2Name": "geometry",
           "ap1ID": "id-93034",
-          "ap2ID": "id-93033"
+          "ap2ID": "id-93035"
         },
         {
-          "ap2Name": "remove",
+          "ap2Name": "retain",
           "ap1ID": "id-93035",
           "ap2ID": "id-180190"
         },
@@ -35403,7 +35378,7 @@
         {
           "ap2Name": "geometry",
           "ap1ID": "id-93271",
-          "ap2ID": "id-93029"
+          "ap2ID": "id-93034"
         },
         {
           "ap2Name": "xDist",
@@ -35424,11 +35399,6 @@
           "ap2Name": "geometry",
           "ap1ID": "id-93188",
           "ap2ID": "id-93213"
-        },
-        {
-          "ap2Name": "Shape 3",
-          "ap1ID": "id-180190",
-          "ap2ID": "id-93033"
         }
       ],
       "fileTypeVersion": 1
