@@ -144,7 +144,7 @@
     {
       "atomType": "Molecule",
       "x": 0.4,
-      "y": 0.1,
+      "y": 0.2,
       "uniqueID": "id-128087",
       "name": "hull panels",
       "topLevel": false,
@@ -19408,8 +19408,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.7,
-      "y": 0.9,
+      "x": 0.6,
+      "y": 0.8,
       "uniqueID": "id-175470",
       "name": "Extract keepout",
       "ioValues": [
@@ -19427,8 +19427,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.5,
-      "y": 0.2,
+      "x": 0.6,
+      "y": 0.3,
       "uniqueID": "id-175473",
       "ioValues": [
         {
@@ -19446,8 +19446,31 @@
         {
           "name": "Shape3",
           "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape4",
+          "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.5,
+      "y": 0.1,
+      "uniqueID": "id-175515",
+      "name": "Extract hatch panel",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tagIndex": 0,
+      "selectedTags": [
+        "hatch panel"
+      ],
+      "includeUntagged": false,
+      "notKeepOut": false
     },
     {
       "atomType": "Molecule",
@@ -33954,6 +33977,11 @@
     },
     {
       "ap2Name": "geometry",
+      "ap1ID": "id-76328",
+      "ap2ID": "id-175515"
+    },
+    {
+      "ap2Name": "geometry",
       "ap1ID": "id-133347",
       "ap2ID": "id-140173"
     },
@@ -33975,6 +34003,11 @@
     {
       "ap2Name": "Shape2",
       "ap1ID": "id-175470",
+      "ap2ID": "id-175473"
+    },
+    {
+      "ap2Name": "Shape3",
+      "ap1ID": "id-175515",
       "ap2ID": "id-175473"
     }
   ],
