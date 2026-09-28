@@ -143,16 +143,10 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.7,
+      "x": 0.4,
       "y": 0.2,
       "uniqueID": "id-128087",
       "name": "hull panels",
-      "ioValues": [
-        {
-          "name": "Input",
-          "ioValue": 10
-        }
-      ],
       "topLevel": false,
       "allAtoms": [
         {
@@ -396,7 +390,22 @@
               "name": "Assembly",
               "type": "faceselect",
               "options": [],
-              "selectedFaceData": {}
+              "selectedFaceData": {
+                "0": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  9,
+                  10,
+                  11,
+                  12
+                ]
+              }
             },
             {
               "atomType": "Code",
@@ -564,6 +573,22 @@
               "ioValue": -0.25
             }
           ]
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.6,
+          "y": 0.6,
+          "uniqueID": "id-175439",
+          "name": "thinply",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            "thinply"
+          ]
         }
       ],
       "allConnectors": [
@@ -573,9 +598,9 @@
           "ap2ID": "id-128102"
         },
         {
-          "ap2Name": "number or geometry",
+          "ap2Name": "geometry",
           "ap1ID": "id-128149",
-          "ap2ID": "id-128089"
+          "ap2ID": "id-175439"
         },
         {
           "ap2Name": "selection",
@@ -591,6 +616,11 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-128140",
           "ap2ID": "id-128127"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-175439",
+          "ap2ID": "id-128089"
         }
       ],
       "fileTypeVersion": 1
@@ -9005,13 +9035,11 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": 0,
-                  "currentEquation": "0"
+                  "ioValue": 0
                 },
                 {
                   "name": "yDist",
-                  "ioValue": -1,
-                  "currentEquation": "-1"
+                  "ioValue": -1
                 },
                 {
                   "name": "zDist",
@@ -9035,8 +9063,7 @@
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 3,
-                  "currentEquation": "3"
+                  "ioValue": 3
                 },
                 {
                   "name": "zDist",
@@ -9056,13 +9083,11 @@
                 },
                 {
                   "name": "xDist",
-                  "ioValue": 2,
-                  "currentEquation": "2"
+                  "ioValue": 2
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 1,
-                  "currentEquation": "1"
+                  "ioValue": 1
                 },
                 {
                   "name": "zDist",
@@ -9090,8 +9115,7 @@
                 },
                 {
                   "name": "z-axis degrees",
-                  "ioValue": 180,
-                  "currentEquation": "180"
+                  "ioValue": 180
                 }
               ]
             }
@@ -9116,6 +9140,26 @@
               "ap2Name": "Shape 3",
               "ap1ID": "id-136958",
               "ap2ID": "id-136615"
+            },
+            {
+              "ap2Name": "Shape4",
+              "ap1ID": "id-171691",
+              "ap2ID": "id-136615"
+            },
+            {
+              "ap2Name": "Shape5",
+              "ap1ID": "id-171697",
+              "ap2ID": "id-136615"
+            },
+            {
+              "ap2Name": "Shape 2",
+              "ap1ID": "id-171703",
+              "ap2ID": "id-136615"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-171712",
+              "ap2ID": "id-171703"
             },
             {
               "ap2Name": "geometry",
@@ -9151,26 +9195,6 @@
               "ap2Name": "geometry",
               "ap1ID": "id-171649",
               "ap2ID": "id-171712"
-            },
-            {
-              "ap2Name": "Shape4",
-              "ap1ID": "id-171691",
-              "ap2ID": "id-136615"
-            },
-            {
-              "ap2Name": "Shape5",
-              "ap1ID": "id-171697",
-              "ap2ID": "id-136615"
-            },
-            {
-              "ap2Name": "Shape 2",
-              "ap1ID": "id-171703",
-              "ap2ID": "id-136615"
-            },
-            {
-              "ap2Name": "geometry",
-              "ap1ID": "id-171712",
-              "ap2ID": "id-171703"
             }
           ],
           "fileTypeVersion": 1
@@ -12120,7 +12144,7 @@
     {
       "atomType": "Molecule",
       "x": 0.5,
-      "y": 0.5,
+      "y": 0.7,
       "uniqueID": "id-140176",
       "name": "bluerobotics",
       "ioValues": [
@@ -16152,7 +16176,7 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.5,
+              "x": 0.4,
               "y": 0.2,
               "uniqueID": "id-147461",
               "name": "WetLink",
@@ -16608,8 +16632,7 @@
                   "ioValues": [
                     {
                       "name": "diameter",
-                      "ioValue": 14,
-                      "currentEquation": "14"
+                      "ioValue": 14
                     }
                   ]
                 },
@@ -16935,8 +16958,7 @@
                     },
                     {
                       "name": "zDist",
-                      "ioValue": 0,
-                      "currentEquation": "0"
+                      "ioValue": 0
                     }
                   ]
                 },
@@ -17271,14 +17293,14 @@
                   "ap2ID": "id-171735"
                 },
                 {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147578",
-                  "ap2ID": "id-147590"
-                },
-                {
                   "ap2Name": "number or geometry",
                   "ap1ID": "id-171718",
                   "ap2ID": "id-147516"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-147578",
+                  "ap2ID": "id-147590"
                 }
               ],
               "fileTypeVersion": 1
@@ -17710,6 +17732,44 @@
                     "costUSD": 8,
                     "source": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/"
                   }
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.5,
+                  "y": 0.7,
+                  "uniqueID": "id-175451",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": -0.1,
+                      "currentEquation": "-0.1"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Color",
+                  "x": 0.6,
+                  "y": 0.8,
+                  "uniqueID": "id-175457",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "selectedColor": "Keep Out"
                 }
               ],
               "allConnectors": [
@@ -17759,6 +17819,11 @@
                   "ap2ID": "id-147758"
                 },
                 {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-147762",
+                  "ap2ID": "id-175451"
+                },
+                {
                   "ap2Name": "number or geometry",
                   "ap1ID": "id-147767",
                   "ap2ID": "id-147701"
@@ -17767,6 +17832,11 @@
                   "ap2Name": "Shape 2",
                   "ap1ID": "id-147704",
                   "ap2ID": "id-147710"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-175451",
+                  "ap2ID": "id-175457"
                 }
               ],
               "fileTypeVersion": 1
@@ -17793,6 +17863,22 @@
                   "name": "zDist",
                   "ioValue": 0
                 }
+              ]
+            },
+            {
+              "atomType": "Tag",
+              "x": 0.6,
+              "y": 0.2,
+              "uniqueID": "id-175448",
+              "name": "throughhull",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "tags": [
+                "throughhull"
               ]
             }
           ],
@@ -17835,7 +17921,7 @@
             {
               "ap2Name": "geometry",
               "ap1ID": "id-147461",
-              "ap2ID": "id-147508"
+              "ap2ID": "id-175448"
             },
             {
               "ap2Name": "geometry",
@@ -17856,6 +17942,11 @@
               "ap2Name": "Shape 2",
               "ap1ID": "id-147699",
               "ap2ID": "id-147441"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-175448",
+              "ap2ID": "id-147508"
             }
           ],
           "fileTypeVersion": 1
@@ -18042,6 +18133,32 @@
           "unitsKey": "Unitless",
           "fileTypeVersion": 1,
           "lastReloadedFromGithubAt": 1789593350461
+        },
+        {
+          "atomType": "Move",
+          "x": 0.5,
+          "y": 0.1,
+          "uniqueID": "id-175442",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0.2,
+              "currentEquation": "0.2"
+            }
+          ]
         }
       ],
       "allConnectors": [
@@ -18118,6 +18235,11 @@
         {
           "ap2Name": "geometry",
           "ap1ID": "id-147097",
+          "ap2ID": "id-175442"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-175442",
           "ap2ID": "id-147619"
         }
       ],
@@ -33375,6 +33497,11 @@
       "ap2Name": "Shape2",
       "ap1ID": "id-76088",
       "ap2ID": "id-171766"
+    },
+    {
+      "ap2Name": "Input",
+      "ap1ID": "id-76088",
+      "ap2ID": "id-128087"
     },
     {
       "ap2Name": "sliceThickness",
