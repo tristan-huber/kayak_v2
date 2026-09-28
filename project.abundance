@@ -20262,7 +20262,7 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.3,
+          "x": 0.4,
           "y": 0.9,
           "uniqueID": "id-167977",
           "name": "hatch",
@@ -20273,8 +20273,7 @@
             },
             {
               "name": "width",
-              "ioValue": 8,
-              "currentEquation": "8"
+              "ioValue": 10
             },
             {
               "name": "length",
@@ -20954,7 +20953,7 @@
                 },
                 {
                   "name": "length",
-                  "ioValue": 8
+                  "ioValue": 10
                 },
                 {
                   "name": "radius",
@@ -20991,7 +20990,7 @@
                     },
                     {
                       "name": "length",
-                      "ioValue": 8
+                      "ioValue": 10
                     },
                     {
                       "name": "rad",
@@ -31543,11 +31542,6 @@
       "ap2ID": "id-140176"
     },
     {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-151102",
-      "ap2ID": "id-130"
-    },
-    {
       "ap2Name": "Shape",
       "ap1ID": "id-76088",
       "ap2ID": "id-126038"
@@ -31561,6 +31555,11 @@
       "ap2Name": "hullForm",
       "ap1ID": "id-76088",
       "ap2ID": "id-76328"
+    },
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-76088",
+      "ap2ID": "id-130"
     },
     {
       "ap2Name": "sliceThickness",
