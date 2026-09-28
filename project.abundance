@@ -143,7 +143,7 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4,
+      "x": 0.5,
       "y": 0.2,
       "uniqueID": "id-128087",
       "name": "hull panels",
@@ -19473,6 +19473,53 @@
       "notKeepOut": false
     },
     {
+      "atomType": "Assembly",
+      "x": 0.7,
+      "y": 0.3,
+      "uniqueID": "id-175519",
+      "ioValues": [
+        {
+          "name": "makeDisjoint",
+          "ioValue": false
+        },
+        {
+          "name": "Shape 1",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape2",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape3",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape4",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.5,
+      "y": 0.4,
+      "uniqueID": "id-175525",
+      "name": "Extract hatch support, Untagged",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tagIndex": 0,
+      "selectedTags": [
+        "hatch support"
+      ],
+      "includeUntagged": true,
+      "notKeepOut": false
+    },
+    {
       "atomType": "Molecule",
       "x": 0.9,
       "y": 0.3,
@@ -32840,7 +32887,7 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.7,
+      "x": 0.8,
       "y": 0.2,
       "uniqueID": "id-95407",
       "name": "tocut",
@@ -33921,6 +33968,11 @@
       "ap2ID": "id-175470"
     },
     {
+      "ap2Name": "Shape2",
+      "ap1ID": "id-151102",
+      "ap2ID": "id-175519"
+    },
+    {
       "ap2Name": "Shape",
       "ap1ID": "id-76088",
       "ap2ID": "id-126038"
@@ -33982,6 +34034,11 @@
     },
     {
       "ap2Name": "geometry",
+      "ap1ID": "id-76328",
+      "ap2ID": "id-175525"
+    },
+    {
+      "ap2Name": "geometry",
       "ap1ID": "id-133347",
       "ap2ID": "id-140173"
     },
@@ -34006,9 +34063,19 @@
       "ap2ID": "id-175473"
     },
     {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-175473",
+      "ap2ID": "id-175519"
+    },
+    {
       "ap2Name": "Shape3",
       "ap1ID": "id-175515",
       "ap2ID": "id-175473"
+    },
+    {
+      "ap2Name": "Shape3",
+      "ap1ID": "id-175525",
+      "ap2ID": "id-175519"
     }
   ],
   "unitsKey": "Inches",
