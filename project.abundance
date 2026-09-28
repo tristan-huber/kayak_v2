@@ -609,8 +609,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.3,
-      "y": 0.6,
+      "x": 0.4,
+      "y": 0.8,
       "uniqueID": "id-133347",
       "name": " interior",
       "ioValues": [
@@ -1722,6 +1722,12 @@
               "y": 0.4,
               "uniqueID": "id-135660",
               "name": "(x + 1) / x",
+              "ioValues": [
+                {
+                  "name": "x",
+                  "ioValue": 11.300000000000002
+                }
+              ],
               "currentEquation": "(x + 1) / x"
             },
             {
@@ -2363,6 +2369,10 @@
                 {
                   "name": "Geometry",
                   "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Scale Factor",
+                  "ioValue": 1.0884955752212389
                 }
               ],
               "topLevel": false,
@@ -8082,6 +8092,10 @@
                 {
                   "name": "yDist",
                   "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0.12624849938676164
                 }
               ]
             },
@@ -8181,6 +8195,12 @@
               "y": 0.3,
               "uniqueID": "id-137166",
               "name": "x / 2",
+              "ioValues": [
+                {
+                  "name": "x",
+                  "ioValue": 0.2524969987735233
+                }
+              ],
               "currentEquation": "x / 2"
             },
             {
@@ -8638,6 +8658,10 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
+                  "name": "xDist",
+                  "ioValue": -5.400000000000006
+                },
+                {
                   "name": "yDist",
                   "ioValue": 0
                 },
@@ -8653,6 +8677,12 @@
               "y": 0.4,
               "uniqueID": "id-137243",
               "name": "-w + 4",
+              "ioValues": [
+                {
+                  "name": "w",
+                  "ioValue": 9.400000000000006
+                }
+              ],
               "currentEquation": "-w + 4"
             },
             {
@@ -12056,8 +12086,8 @@
                   "options": [],
                   "selectedEdgeData": {
                     "0": [
-                      12,
-                      13
+                      14,
+                      15
                     ]
                   }
                 },
@@ -16195,7 +16225,17 @@
               "atomType": "Rectangle",
               "x": 0.2,
               "y": 0.7,
-              "uniqueID": "id-157758"
+              "uniqueID": "id-157758",
+              "ioValues": [
+                {
+                  "name": "x length",
+                  "ioValue": 10.914537171680648
+                },
+                {
+                  "name": "y length",
+                  "ioValue": 25.527857655652788
+                }
+              ]
             },
             {
               "atomType": "Extrude",
@@ -17159,6 +17199,13 @@
       "unitsKey": "MM",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1790372613356
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.6,
+      "y": 0.2,
+      "uniqueID": "id-164317",
+      "ioValues": []
     },
     {
       "atomType": "Molecule",
@@ -19431,7 +19478,7 @@
     },
     {
       "atomType": "Import",
-      "x": 0.1,
+      "x": 0.2,
       "y": 0.2,
       "uniqueID": "id-76088",
       "fileName": "kayakhull_copy1.step",
@@ -19444,24 +19491,10 @@
     {
       "atomType": "Input",
       "x": 0,
-      "y": 0.1,
+      "y": 0.2,
       "uniqueID": "id-76297",
       "name": "hullThickness",
       "options": []
-    },
-    {
-      "atomType": "Equation",
-      "x": 0.1,
-      "y": 0.4,
-      "uniqueID": "id-76300",
-      "name": "-1 * x",
-      "ioValues": [
-        {
-          "name": "x",
-          "ioValue": 0.25
-        }
-      ],
-      "currentEquation": "-1 * x"
     },
     {
       "atomType": "Input",
@@ -19474,7 +19507,7 @@
     {
       "atomType": "Input",
       "x": 0,
-      "y": 0.7,
+      "y": 0.8,
       "uniqueID": "id-76307",
       "name": "bulkheadPlacements",
       "type": "array",
@@ -19482,8 +19515,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.2,
-      "y": 0.1,
+      "x": 0.3,
+      "y": 0.2,
       "uniqueID": "id-76328",
       "name": "topdeckAddOns",
       "ioValues": [
@@ -29975,11 +30008,6 @@
       "ap2Name": "hullForm",
       "ap1ID": "id-76088",
       "ap2ID": "id-76328"
-    },
-    {
-      "ap2Name": "x",
-      "ap1ID": "id-76297",
-      "ap2ID": "id-76300"
     },
     {
       "ap2Name": "sliceThickness",
