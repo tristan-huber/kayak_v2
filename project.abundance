@@ -34331,7 +34331,8 @@
         },
         {
           "name": "foreHeight",
-          "ioValue": 3
+          "ioValue": 3.5,
+          "currentEquation": "3.5"
         },
         {
           "name": "breadth",
@@ -34535,8 +34536,8 @@
         },
         {
           "atomType": "Assembly",
-          "x": 0.8,
-          "y": 0.7,
+          "x": 0.9,
+          "y": 0.6,
           "uniqueID": "id-93033",
           "ioValues": [
             {
@@ -34549,6 +34550,10 @@
             },
             {
               "name": "Shape 3",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape4",
               "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
@@ -34645,7 +34650,7 @@
           "ioValues": [
             {
               "name": "height",
-              "ioValue": 3,
+              "ioValue": 3.5,
               "currentEquation": "foreHeight"
             }
           ],
@@ -34676,7 +34681,7 @@
                 },
                 {
                   "name": "y length",
-                  "ioValue": 6,
+                  "ioValue": 6.5,
                   "currentEquation": "height + 3"
                 }
               ]
@@ -34697,7 +34702,7 @@
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 0,
+                  "ioValue": 0.25,
                   "currentEquation": "height / 2 - 1.5"
                 },
                 {
@@ -34881,7 +34886,7 @@
             {
               "name": "Shape 1",
               "ioValue": {
-                "geometry": "move-rectangle-0.5-6-0-0-0",
+                "geometry": "move-rectangle-0.5-6.5-0-0.25-0",
                 "dimension": "2D",
                 "plane": {
                   "origin": [
@@ -35129,7 +35134,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": -7.749999899999963
+              "ioValue": 7.749999899999963
             },
             {
               "name": "yDist",
@@ -35144,9 +35149,9 @@
         {
           "atomType": "Equation",
           "x": 0.5,
-          "y": 0.5,
+          "y": 0.4,
           "uniqueID": "id-93277",
-          "name": "(x - y) / 2",
+          "name": "(y - x) / 2",
           "ioValues": [
             {
               "name": "x",
@@ -35157,7 +35162,7 @@
               "ioValue": 130
             }
           ],
-          "currentEquation": "(x - y) / 2"
+          "currentEquation": "(y - x) / 2"
         }
       ],
       "allConnectors": [
@@ -35197,11 +35202,6 @@
           "ap2ID": "id-93037"
         },
         {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-93033",
-          "ap2ID": "id-93011"
-        },
-        {
           "ap2Name": "Shape 1",
           "ap1ID": "id-93034",
           "ap2ID": "id-93033"
@@ -35210,6 +35210,11 @@
           "ap2Name": "remove",
           "ap1ID": "id-93035",
           "ap2ID": "id-180190"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-93037",
+          "ap2ID": "id-93011"
         },
         {
           "ap2Name": "Shape 2",
@@ -35310,6 +35315,11 @@
           "ap2Name": "geometry",
           "ap1ID": "id-93188",
           "ap2ID": "id-93213"
+        },
+        {
+          "ap2Name": "Shape 3",
+          "ap1ID": "id-180190",
+          "ap2ID": "id-93033"
         }
       ],
       "fileTypeVersion": 1
