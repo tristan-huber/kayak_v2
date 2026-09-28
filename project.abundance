@@ -34841,8 +34841,8 @@
         },
         {
           "atomType": "Tag",
-          "x": 0.3,
-          "y": 0.8,
+          "x": 0.2,
+          "y": 0.5,
           "uniqueID": "id-129937",
           "name": "fastener",
           "ioValues": [
