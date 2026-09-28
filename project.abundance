@@ -12952,8 +12952,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.1,
-          "y": 0.3,
+          "x": 0.2,
+          "y": 0.2,
           "uniqueID": "id-143719",
           "name": "motorPoints",
           "ioValues": [
@@ -12963,7 +12963,7 @@
             },
             {
               "name": "inset",
-              "ioValue": 2
+              "ioValue": 3
             }
           ],
           "topLevel": false,
@@ -13677,7 +13677,7 @@
                 },
                 {
                   "name": "inset",
-                  "ioValue": 2
+                  "ioValue": 3
                 },
                 {
                   "name": "start",
@@ -13714,7 +13714,7 @@
                     },
                     {
                       "name": "inset",
-                      "ioValue": 2
+                      "ioValue": 3
                     },
                     {
                       "name": "start",
@@ -18309,7 +18309,7 @@
       "ioValues": [
         {
           "name": "makeDisjoint",
-          "ioValue": true
+          "ioValue": false
         },
         {
           "name": "Shape 1",
@@ -18321,6 +18321,10 @@
         },
         {
           "name": "Shape3",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape4",
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
@@ -19403,46 +19407,6 @@
       "lastReloadedFromGithubAt": 1790372613356
     },
     {
-      "atomType": "Assembly",
-      "x": 0.6,
-      "y": 0.2,
-      "uniqueID": "id-164317",
-      "ioValues": [
-        {
-          "name": "makeDisjoint",
-          "ioValue": true
-        },
-        {
-          "name": "Shape 1",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ]
-    },
-    {
-      "atomType": "Assembly",
-      "x": 0.9,
-      "y": 0.7,
-      "uniqueID": "id-171766",
-      "ioValues": [
-        {
-          "name": "makeDisjoint",
-          "ioValue": false
-        },
-        {
-          "name": "Shape 1",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Shape2",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Shape3",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ]
-    },
-    {
       "atomType": "ExtractTag",
       "x": 0.7,
       "y": 0.9,
@@ -19477,6 +19441,10 @@
         },
         {
           "name": "Shape2",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape3",
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
@@ -33950,11 +33918,6 @@
       "ap2ID": "id-130"
     },
     {
-      "ap2Name": "Shape2",
-      "ap1ID": "id-76088",
-      "ap2ID": "id-171766"
-    },
-    {
       "ap2Name": "Input",
       "ap1ID": "id-76088",
       "ap2ID": "id-128087"
@@ -34005,9 +33968,14 @@
       "ap2ID": "id-151102"
     },
     {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-140176",
-      "ap2ID": "id-171766"
+      "ap2Name": "Shape3",
+      "ap1ID": "id-89799",
+      "ap2ID": "id-151102"
+    },
+    {
+      "ap2Name": "Shape2",
+      "ap1ID": "id-175470",
+      "ap2ID": "id-175473"
     }
   ],
   "unitsKey": "Inches",
