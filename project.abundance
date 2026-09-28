@@ -29947,7 +29947,7 @@
         },
         {
           "name": "edgeInset",
-          "ioValue": 1
+          "ioValue": 0.75
         }
       ],
       "topLevel": false,
@@ -29961,7 +29961,7 @@
           "ioValues": [
             {
               "name": "inset",
-              "ioValue": 1
+              "ioValue": 0.75
             }
           ],
           "topLevel": false,
@@ -30022,7 +30022,7 @@
             {
               "atomType": "GitHubMolecule",
               "x": 0.4,
-              "y": 0.6,
+              "y": 0.5,
               "uniqueID": "id-105497",
               "name": "ExtractFaces",
               "ioValues": [
@@ -30479,7 +30479,7 @@
                 },
                 {
                   "name": "inset",
-                  "ioValue": 1
+                  "ioValue": 0.75
                 },
                 {
                   "name": "start",
@@ -30516,7 +30516,7 @@
                     },
                     {
                       "name": "inset",
-                      "ioValue": 1
+                      "ioValue": 0.75
                     },
                     {
                       "name": "start",
@@ -30621,120 +30621,6 @@
               "unitsKey": "Unitless",
               "fileTypeVersion": 1,
               "lastReloadedFromGithubAt": 1787250926204
-            },
-            {
-              "atomType": "GitHubMolecule",
-              "x": 0.6,
-              "y": 0.7,
-              "uniqueID": "id-105537",
-              "name": "face.normalsAt",
-              "ioValues": [
-                {
-                  "name": "faces",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "points",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 1,
-                  "y": 0.5,
-                  "uniqueID": "id-105538",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Code",
-                  "x": 0.4,
-                  "y": 0.6,
-                  "uniqueID": "id-105539",
-                  "ioValues": [
-                    {
-                      "name": "basis",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "points",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "interpreterVersion": 1,
-                  "code": "// face.normalsFrom\nfunction run(basis: Assembly, points: Assembly) {\n  let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n  console.log(selectedFaces.length)\n  if (!selectedFaces || selectedFaces.length == 0) {\n    // get faces directly\n    basis.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        selectedFaces.push(leaf.geometry)\n      } else if (leaf.is3D()) {\n        selectedFaces.push(...leaf.geometry.faces)\n      }\n      return leaf;\n    })\n  }\n  console.log(selectedFaces.length)\n  let res = undefined;\n  const result = points.onLeafs((point) => {\n    if (point.isPoint()) {\n      const dists = selectedFaces.map((face) => {\n        return projectVertexOntoFace(face, point.geometry)\n      })\n      dists.sort((a, b) => a[0] - b[0])\n      console.log(`selected face index: ${selectedFaces.findIndex((f) => f.isSame(dists[0][2]))} at dist ${dists[0][0]}. uv: ${dists[0][1]}`)\n      point.geometry = replicad.makeVertex(dists[0][2].normalAt(point.geometry.asTuple()).normalize())\n    }\n    return point;\n  })\n  return result;\n\n}\n\nfunction projectVertexOntoFace(\n  face: replicad.Face,\n  vertex: replicad.Vertex,\n): [number, [number, number], replicad.Face] {\n  const asVec = new replicad.Vector(vertex.asTuple())\n  const uv = face.uvCoordinates(asVec)\n  const res = face.pointOnSurface(uv[0], uv[1]);\n  return [res.add(asVec.multiply(-1)).Length, uv, face]\n}",
-                  "compiledCode": "\"use strict\";\n// face.normalsFrom\nfunction run(basis, points) {\n    let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n    console.log(selectedFaces.length);\n    if (!selectedFaces || selectedFaces.length == 0) {\n        // get faces directly\n        basis.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                selectedFaces.push(leaf.geometry);\n            }\n            else if (leaf.is3D()) {\n                selectedFaces.push(...leaf.geometry.faces);\n            }\n            return leaf;\n        });\n    }\n    console.log(selectedFaces.length);\n    let res = undefined;\n    const result = points.onLeafs((point) => {\n        if (point.isPoint()) {\n            const dists = selectedFaces.map((face) => {\n                return projectVertexOntoFace(face, point.geometry);\n            });\n            dists.sort((a, b) => a[0] - b[0]);\n            console.log(`selected face index: ${selectedFaces.findIndex((f) => f.isSame(dists[0][2]))} at dist ${dists[0][0]}. uv: ${dists[0][1]}`);\n            point.geometry = replicad.makeVertex(dists[0][2].normalAt(point.geometry.asTuple()).normalize());\n        }\n        return point;\n    });\n    return result;\n}\nfunction projectVertexOntoFace(face, vertex) {\n    const asVec = new replicad.Vector(vertex.asTuple());\n    const uv = face.uvCoordinates(asVec);\n    const res = face.pointOnSurface(uv[0], uv[1]);\n    return [res.add(asVec.multiply(-1)).Length, uv, face];\n}\n"
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0,
-                  "y": 0.1,
-                  "uniqueID": "id-105540",
-                  "name": "faces",
-                  "type": "geometry",
-                  "options": []
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0,
-                  "y": 0.2,
-                  "uniqueID": "id-105541",
-                  "name": "points",
-                  "type": "geometry",
-                  "options": []
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-105539",
-                  "ap2ID": "id-105538"
-                },
-                {
-                  "ap2Name": "basis",
-                  "ap1ID": "id-105540",
-                  "ap2ID": "id-105539"
-                },
-                {
-                  "ap2Name": "points",
-                  "ap1ID": "id-105541",
-                  "ap2ID": "id-105539"
-                }
-              ],
-              "parentRepo": {
-                "lastFoundGit": "2026-08-20T18:23:39.118Z",
-                "privateRepo": false,
-                "repoName": "face.normalsAt",
-                "dateCreated": "2026-08-20T17:11:21Z",
-                "readMe": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/README.md?sanitize=true",
-                "yyyy": 2026,
-                "topMoleculeID": "id-121",
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/tristan-huber/face.normalsAt",
-                "topics": [
-                  "abundance-tool"
-                ],
-                "pullRequests": [],
-                "parentRepo": null,
-                "forks": 0,
-                "dateModified": "739848",
-                "ranking": 0,
-                "searchField": "face.normalsat tristan-huber get normal vectors at multiple points from possibly multiple faces. takes an assembly of basis faces and points, returns an assembly of the normal at each point of the nearest face. abundance-tool",
-                "owner": "tristan-huber",
-                "description": "Get normal vectors at multiple points from possibly multiple faces. Takes an assembly of basis faces and points, returns an assembly of the normal at each point of the nearest face.",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Unitless",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1787251062253
             },
             {
               "atomType": "GitHubMolecule",
@@ -32066,50 +31952,7 @@
                   "name": "Assembly",
                   "type": "faceselect",
                   "options": [],
-                  "selectedFaceData": {
-                    "0": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6
-                    ],
-                    "1": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6
-                    ],
-                    "2": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6,
-                      7,
-                      8
-                    ],
-                    "3": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6
-                    ],
-                    "4": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6
-                    ]
-                  }
+                  "selectedFaceData": {}
                 },
                 {
                   "atomType": "Code",
@@ -32168,6 +32011,120 @@
               "unitsKey": "Unitless",
               "fileTypeVersion": 1,
               "lastReloadedFromGithubAt": 1787250562351
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.6,
+              "y": 0.7,
+              "uniqueID": "id-193390",
+              "name": "face.normalsAt",
+              "ioValues": [
+                {
+                  "name": "faces",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "points",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-193386",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Code",
+                  "x": 0.4,
+                  "y": 0.6,
+                  "uniqueID": "id-193387",
+                  "ioValues": [
+                    {
+                      "name": "basis",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "points",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "interpreterVersion": 1,
+                  "code": "// face.normalsFrom\nfunction run(basis: Assembly, points: Assembly) {\n  let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n  console.log(selectedFaces.length)\n  if (!selectedFaces || selectedFaces.length == 0) {\n    // get faces directly\n    basis.onLeafs((leaf) => {\n      if (leaf.geometry instanceof replicad.Face) {\n        selectedFaces.push(leaf.geometry)\n      } else if (leaf.is3D()) {\n        selectedFaces.push(...leaf.geometry.faces)\n      }\n      return leaf;\n    })\n  }\n  console.log(selectedFaces.length)\n  let res = undefined;\n  const result = points.onLeafs((point) => {\n    if (point.isPoint()) {\n      const dists = selectedFaces.map((face) => {\n        return projectVertexOntoFace(face, point.geometry)\n      })\n      dists.sort((a, b) => a[0] - b[0])\n      console.log(`selected face index: ${selectedFaces.findIndex((f) => f.isSame(dists[0][2]))} at dist ${dists[0][0]}. uv: ${dists[0][1]}`)\n      point.geometry = replicad.makeVertex(dists[0][2].normalAt(point.geometry.asTuple()).normalize())\n    }\n    return point;\n  })\n  return result;\n\n}\n\nfunction projectVertexOntoFace(\n  face: replicad.Face,\n  vertex: replicad.Vertex,\n): [number, [number, number], replicad.Face] {\n  const asVec = new replicad.Vector(vertex.asTuple())\n  const uv = face.uvCoordinates(asVec)\n  const res = face.pointOnSurface(uv[0], uv[1]);\n  return [res.add(asVec.multiply(-1)).Length, uv, face]\n}",
+                  "compiledCode": "\"use strict\";\n// face.normalsFrom\nfunction run(basis, points) {\n    let selectedFaces = basis.getSelectedFaces().filter((f) => f != null);\n    console.log(selectedFaces.length);\n    if (!selectedFaces || selectedFaces.length == 0) {\n        // get faces directly\n        basis.onLeafs((leaf) => {\n            if (leaf.geometry instanceof replicad.Face) {\n                selectedFaces.push(leaf.geometry);\n            }\n            else if (leaf.is3D()) {\n                selectedFaces.push(...leaf.geometry.faces);\n            }\n            return leaf;\n        });\n    }\n    console.log(selectedFaces.length);\n    let res = undefined;\n    const result = points.onLeafs((point) => {\n        if (point.isPoint()) {\n            const dists = selectedFaces.map((face) => {\n                return projectVertexOntoFace(face, point.geometry);\n            });\n            dists.sort((a, b) => a[0] - b[0]);\n            console.log(`selected face index: ${selectedFaces.findIndex((f) => f.isSame(dists[0][2]))} at dist ${dists[0][0]}. uv: ${dists[0][1]}`);\n            point.geometry = replicad.makeVertex(dists[0][2].normalAt(point.geometry.asTuple()).normalize());\n        }\n        return point;\n    });\n    return result;\n}\nfunction projectVertexOntoFace(face, vertex) {\n    const asVec = new replicad.Vector(vertex.asTuple());\n    const uv = face.uvCoordinates(asVec);\n    const res = face.pointOnSurface(uv[0], uv[1]);\n    return [res.add(asVec.multiply(-1)).Length, uv, face];\n}\n"
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.1,
+                  "uniqueID": "id-193388",
+                  "name": "faces",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.2,
+                  "uniqueID": "id-193389",
+                  "name": "points",
+                  "type": "geometry",
+                  "options": []
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-193387",
+                  "ap2ID": "id-193386"
+                },
+                {
+                  "ap2Name": "basis",
+                  "ap1ID": "id-193388",
+                  "ap2ID": "id-193387"
+                },
+                {
+                  "ap2Name": "points",
+                  "ap1ID": "id-193389",
+                  "ap2ID": "id-193387"
+                }
+              ],
+              "parentRepo": {
+                "lastFoundGit": "2026-08-20T18:23:39.118Z",
+                "privateRepo": false,
+                "repoName": "face.normalsAt",
+                "dateCreated": "2026-08-20T17:11:21Z",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-121",
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/face.normalsAt",
+                "topics": [
+                  "abundance-tool"
+                ],
+                "pullRequests": [],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739848",
+                "ranking": 0,
+                "searchField": "face.normalsat tristan-huber get normal vectors at multiple points from possibly multiple faces. takes an assembly of basis faces and points, returns an assembly of the normal at each point of the nearest face. abundance-tool",
+                "owner": "tristan-huber",
+                "description": "Get normal vectors at multiple points from possibly multiple faces. Takes an assembly of basis faces and points, returns an assembly of the normal at each point of the nearest face.",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/face.normalsAt/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Unitless",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1790636639997
             }
           ],
           "allConnectors": [
@@ -32202,11 +32159,6 @@
               "ap2ID": "id-105530"
             },
             {
-              "ap2Name": "faces",
-              "ap1ID": "id-105497",
-              "ap2ID": "id-105537"
-            },
-            {
               "ap2Name": "exclude",
               "ap1ID": "id-105505",
               "ap2ID": "id-105555"
@@ -32217,19 +32169,14 @@
               "ap2ID": "id-105487"
             },
             {
-              "ap2Name": "points",
-              "ap1ID": "id-105530",
-              "ap2ID": "id-105537"
-            },
-            {
               "ap2Name": "toPoints",
               "ap1ID": "id-105530",
               "ap2ID": "id-126124"
             },
             {
-              "ap2Name": "zDirOverride",
-              "ap1ID": "id-105537",
-              "ap2ID": "id-126124"
+              "ap2Name": "points",
+              "ap1ID": "id-105530",
+              "ap2ID": "id-193390"
             },
             {
               "ap2Name": "xDirOverride",
@@ -32257,11 +32204,6 @@
               "ap2ID": "id-105497"
             },
             {
-              "ap2Name": "Assembly",
-              "ap1ID": "id-117321",
-              "ap2ID": "id-131621"
-            },
-            {
               "ap2Name": "faceSelection",
               "ap1ID": "id-117338",
               "ap2ID": "id-117308"
@@ -32282,9 +32224,24 @@
               "ap2ID": "id-105488"
             },
             {
+              "ap2Name": "faces",
+              "ap1ID": "id-131621",
+              "ap2ID": "id-193390"
+            },
+            {
               "ap2Name": "faceSelection",
               "ap1ID": "id-105555",
               "ap2ID": "id-117294"
+            },
+            {
+              "ap2Name": "Assembly",
+              "ap1ID": "id-105555",
+              "ap2ID": "id-131621"
+            },
+            {
+              "ap2Name": "zDirOverride",
+              "ap1ID": "id-193390",
+              "ap2ID": "id-126124"
             }
           ],
           "fileTypeVersion": 1
@@ -34989,11 +34946,11 @@
                 },
                 {
                   "name": "Number Needed",
-                  "ioValue": 0.004
+                  "ioValue": 1
                 },
                 {
                   "name": "Cost (USD)",
-                  "ioValue": 0.012
+                  "ioValue": 0.1
                 },
                 {
                   "name": "Source Link",
@@ -35003,8 +34960,8 @@
               ],
               "BOMitem": {
                 "BOMitemName": "wood nail",
-                "numberNeeded": 0.004,
-                "costUSD": 0.012,
+                "numberNeeded": 1,
+                "costUSD": 0.1,
                 "source": "https://taytools.com/kakuri-wooden-tapered-nails-traditional-japanese-joinery-fasteners?&a_=v_&a_=v_&a_=v_&a_=v_&gmc_extid=NjM5NDE5&gad_source=1&gad_campaignid=23724046253&gclid=CjwKCAjwoOjVBhArEiwAUwDak82tPFo93vm-nsdtl7YNCsDYwz05FlBHhEQkpFW3gKz4QH9WY3qGLxoChcwQAvD_BwE"
               }
             },
