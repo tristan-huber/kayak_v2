@@ -13657,11 +13657,11 @@
                 },
                 {
                   "name": "start",
-                  "ioValue": false
+                  "ioValue": true
                 },
                 {
                   "name": "end",
-                  "ioValue": true
+                  "ioValue": false
                 }
               ],
               "topLevel": false,
@@ -13694,11 +13694,11 @@
                     },
                     {
                       "name": "start",
-                      "ioValue": false
+                      "ioValue": true
                     },
                     {
                       "name": "end",
-                      "ioValue": true
+                      "ioValue": false
                     }
                   ],
                   "interpreterVersion": 1,
@@ -16567,18 +16567,6 @@
                 {
                   "atomType": "Circle",
                   "x": 0.2,
-                  "y": 0.3,
-                  "uniqueID": "id-147518",
-                  "ioValues": [
-                    {
-                      "name": "diameter",
-                      "ioValue": 1
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Circle",
-                  "x": 0.2,
                   "y": 0.7,
                   "uniqueID": "id-147521",
                   "ioValues": [
@@ -16768,30 +16756,6 @@
                   ]
                 },
                 {
-                  "atomType": "Move",
-                  "x": 0.4,
-                  "y": 0.3,
-                  "uniqueID": "id-147563",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "xDist",
-                      "ioValue": 0
-                    },
-                    {
-                      "name": "yDist",
-                      "ioValue": 0
-                    },
-                    {
-                      "name": "zDist",
-                      "ioValue": 0
-                    }
-                  ]
-                },
-                {
                   "atomType": "Extrude",
                   "x": 0.6,
                   "y": 0.8,
@@ -16864,7 +16828,11 @@
                       "name": "shape",
                       "type": "edgeselect",
                       "options": [],
-                      "selectedEdgeData": {}
+                      "selectedEdgeData": {
+                        "0": [
+                          0
+                        ]
+                      }
                     },
                     {
                       "atomType": "Input",
@@ -16966,33 +16934,49 @@
                     },
                     {
                       "name": "zDist",
-                      "ioValue": -0.75
+                      "ioValue": 0,
+                      "currentEquation": "0"
                     }
                   ]
                 },
                 {
-                  "atomType": "Tag",
+                  "atomType": "Add-BOM-Tag",
                   "x": 0.9,
-                  "y": 0.4,
-                  "uniqueID": "id-147602",
-                  "name": "thin_ply",
+                  "y": 0.7,
+                  "uniqueID": "id-171718",
+                  "name": "Add BOM Tag",
                   "ioValues": [
                     {
                       "name": "geometry",
                       "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Item Name",
+                      "ioValue": "New Item",
+                      "currentEquation": "New Item"
+                    },
+                    {
+                      "name": "Number Needed",
+                      "ioValue": 1
+                    },
+                    {
+                      "name": "Cost (USD)",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "Source Link",
+                      "ioValue": ""
                     }
                   ],
-                  "tags": [
-                    "thin_ply"
-                  ]
+                  "BOMitem": {
+                    "BOMitemName": "New Item",
+                    "numberNeeded": 1,
+                    "costUSD": 0,
+                    "source": ""
+                  }
                 }
               ],
               "allConnectors": [
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147518",
-                  "ap2ID": "id-147563"
-                },
                 {
                   "ap2Name": "geometry",
                   "ap1ID": "id-147521",
@@ -17046,12 +17030,7 @@
                 {
                   "ap2Name": "geometry",
                   "ap1ID": "id-147596",
-                  "ap2ID": "id-147602"
-                },
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-147602",
-                  "ap2ID": "id-147516"
+                  "ap2ID": "id-171718"
                 },
                 {
                   "ap2Name": "geometry",
