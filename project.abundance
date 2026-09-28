@@ -19330,10 +19330,6 @@
         {
           "name": "Shape3",
           "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Shape4",
-          "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
     },
@@ -22779,115 +22775,6 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.6,
-          "y": 0.5,
-          "uniqueID": "id-184542",
-          "name": "ExtractFaces",
-          "ioValues": [
-            {
-              "name": "Assembly",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 1,
-              "y": 0.5,
-              "uniqueID": "id-184543",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0,
-              "y": 0.2,
-              "uniqueID": "id-184544",
-              "name": "Assembly",
-              "type": "faceselect",
-              "options": [],
-              "selectedFaceData": {
-                "0": [
-                  3
-                ],
-                "1": [
-                  4
-                ],
-                "6": [
-                  4
-                ],
-                "7": [
-                  3
-                ]
-              }
-            },
-            {
-              "atomType": "Code",
-              "x": 0.3,
-              "y": 0.8,
-              "uniqueID": "id-184545",
-              "ioValues": [
-                {
-                  "name": "input",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "interpreterVersion": 1,
-              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
-              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "input",
-              "ap1ID": "id-184544",
-              "ap2ID": "id-184545"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-184545",
-              "ap2ID": "id-184543"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-09-20T02:23:39.099Z",
-            "privateRepo": false,
-            "repoName": "ExtractFaces",
-            "dateCreated": "2026-07-24T19:57:30Z",
-            "likes": 0,
-            "pngURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.png?sanitize=true",
-            "readme": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
-            "yyyy": 2026,
-            "topMoleculeID": "",
-            "userRanking": 0,
-            "userSetAsThumbnail": false,
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/tristan-huber/ExtractFaces",
-            "topics": [
-              "abundance-tool"
-            ],
-            "pullRequests": [],
-            "forks": 0,
-            "dateModified": "2026-07-24T20:38:04Z",
-            "ranking": 3,
-            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
-            "owner": "tristan-huber",
-            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
-            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1790632694790
-        },
-        {
-          "atomType": "GitHubMolecule",
           "x": 0.7,
           "y": 0.7,
           "uniqueID": "id-184563",
@@ -22967,20 +22854,7 @@
               "name": "toUnroll",
               "type": "faceselect",
               "options": [],
-              "selectedFaceData": {
-                "0": [
-                  3
-                ],
-                "1": [
-                  4
-                ],
-                "2": [
-                  4
-                ],
-                "3": [
-                  3
-                ]
-              }
+              "selectedFaceData": {}
             },
             {
               "atomType": "Input",
@@ -23161,20 +23035,7 @@
               "uniqueID": "id-184603",
               "type": "faceselect",
               "options": [],
-              "selectedFaceData": {
-                "0": [
-                  3
-                ],
-                "1": [
-                  4
-                ],
-                "2": [
-                  4
-                ],
-                "3": [
-                  3
-                ]
-              }
+              "selectedFaceData": {}
             }
           ],
           "allConnectors": [
@@ -23185,6 +23046,109 @@
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.6,
+          "y": 0.6,
+          "uniqueID": "id-188901",
+          "name": "ExtractFaces",
+          "ioValues": [
+            {
+              "name": "Assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-188898",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-188899",
+              "name": "Assembly",
+              "type": "faceselect",
+              "options": [],
+              "selectedFaceData": {
+                "0": [],
+                "1": [
+                  4
+                ],
+                "6": [],
+                "7": []
+              }
+            },
+            {
+              "atomType": "Code",
+              "x": 0.3,
+              "y": 0.8,
+              "uniqueID": "id-188900",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-188899",
+              "ap2ID": "id-188900"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-188900",
+              "ap2ID": "id-188898"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-20T02:23:39.099Z",
+            "privateRepo": false,
+            "repoName": "ExtractFaces",
+            "dateCreated": "2026-07-24T19:57:30Z",
+            "likes": 0,
+            "pngURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.png?sanitize=true",
+            "readme": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "",
+            "userRanking": 0,
+            "userSetAsThumbnail": false,
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ExtractFaces",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "forks": 0,
+            "dateModified": "2026-07-24T20:38:04Z",
+            "ranking": 3,
+            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1790633698465
         }
       ],
       "allConnectors": [
@@ -23221,25 +23185,41 @@
         {
           "ap2Name": "Assembly",
           "ap1ID": "id-184493",
-          "ap2ID": "id-184542"
-        },
-        {
-          "ap2Name": "toUnroll",
-          "ap1ID": "id-184542",
-          "ap2ID": "id-184563"
-        },
-        {
-          "ap2Name": "Input",
-          "ap1ID": "id-184542",
-          "ap2ID": "id-184599"
+          "ap2ID": "id-188901"
         },
         {
           "ap2Name": "surface",
           "ap1ID": "id-184599",
           "ap2ID": "id-184585"
+        },
+        {
+          "ap2Name": "Input",
+          "ap1ID": "id-188901",
+          "ap2ID": "id-184599"
+        },
+        {
+          "ap2Name": "toUnroll",
+          "ap1ID": "id-188901",
+          "ap2ID": "id-184563"
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "Difference",
+      "x": 0.5,
+      "y": 0.2,
+      "uniqueID": "id-188892",
+      "ioValues": [
+        {
+          "name": "retain",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "remove",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
     },
     {
       "atomType": "Molecule",
@@ -37676,9 +37656,9 @@
       "ap2ID": "id-175519"
     },
     {
-      "ap2Name": "Shape3",
+      "ap2Name": "remove",
       "ap1ID": "id-175515",
-      "ap2ID": "id-175473"
+      "ap2ID": "id-188892"
     },
     {
       "ap2Name": "number or geometry",
@@ -37746,9 +37726,9 @@
       "ap2ID": "id-175529"
     },
     {
-      "ap2Name": "Shape 1",
+      "ap2Name": "retain",
       "ap1ID": "id-128087",
-      "ap2ID": "id-175473"
+      "ap2ID": "id-188892"
     },
     {
       "ap2Name": "falsework",
@@ -37794,6 +37774,11 @@
       "ap2Name": "Shape3",
       "ap1ID": "id-89799",
       "ap2ID": "id-151102"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-188892",
+      "ap2ID": "id-175473"
     }
   ],
   "unitsKey": "Inches",
