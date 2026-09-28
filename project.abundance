@@ -10839,7 +10839,7 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.7,
+          "x": 0.6,
           "y": 0.3,
           "uniqueID": "id-139988",
           "name": "Molecule",
@@ -11940,6 +11940,22 @@
             }
           ],
           "fileTypeVersion": 1
+        },
+        {
+          "atomType": "Tag",
+          "x": 0.6,
+          "y": 0.4,
+          "uniqueID": "id-180214",
+          "name": "",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tags": [
+            ""
+          ]
         }
       ],
       "allConnectors": [
@@ -12084,6 +12100,11 @@
           "ap2ID": "id-137178"
         },
         {
+          "ap2Name": "geometry",
+          "ap1ID": "id-135649",
+          "ap2ID": "id-180214"
+        },
+        {
           "ap2Name": "Shape 1",
           "ap1ID": "id-137048",
           "ap2ID": "id-137173"
@@ -12124,8 +12145,8 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.4,
-      "y": 0.6,
+      "x": 0.3,
+      "y": 0.5,
       "uniqueID": "id-140173",
       "name": "Extract electronics_aft_bulkhead",
       "ioValues": [
@@ -21927,7 +21948,104 @@
     {
       "atomType": "Molecule",
       "x": 0.9,
-      "y": 0.2,
+      "y": 0.3,
+      "uniqueID": "id-180195",
+      "name": "Molecule",
+      "ioValues": [
+        {
+          "name": "kayak",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "falsework",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 1,
+          "y": 0.5,
+          "uniqueID": "id-180197",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.3,
+          "uniqueID": "id-180199",
+          "name": "kayak",
+          "type": "geometry",
+          "options": []
+        },
+        {
+          "atomType": "Input",
+          "x": 0,
+          "y": 0.6,
+          "uniqueID": "id-180202",
+          "name": "falsework",
+          "type": "geometry",
+          "options": []
+        },
+        {
+          "atomType": "CutOrient",
+          "x": 0.2,
+          "y": 0.8,
+          "uniqueID": "id-180208",
+          "name": "Cut Orient",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "orientations": [],
+          "orientationsForHashed": null
+        },
+        {
+          "atomType": "ExtractTag",
+          "x": 0.2,
+          "y": 0.3,
+          "uniqueID": "id-180211",
+          "name": "Extract thinply",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "tagIndex": 0,
+          "selectedTags": [
+            "thinply"
+          ],
+          "includeUntagged": false,
+          "notKeepOut": false
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-180199",
+          "ap2ID": "id-180211"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-180202",
+          "ap2ID": "id-180208"
+        }
+      ],
+      "fileTypeVersion": 1
+    },
+    {
+      "atomType": "Molecule",
+      "x": 0.9,
+      "y": 0.8,
       "uniqueID": "id-43724",
       "name": "forCNC",
       "ioValues": [
@@ -33947,8 +34065,8 @@
         },
         {
           "atomType": "Assembly",
-          "x": 0.8,
-          "y": 0.3,
+          "x": 0.7,
+          "y": 0.2,
           "uniqueID": "id-90312",
           "ioValues": [
             {
@@ -33965,10 +34083,6 @@
             },
             {
               "name": "Shape 7",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "Shape8",
               "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
@@ -34271,11 +34385,6 @@
           "ap2ID": "id-105777"
         },
         {
-          "ap2Name": "Shape 7",
-          "ap1ID": "id-89803",
-          "ap2ID": "id-90312"
-        },
-        {
           "ap2Name": "fastener",
           "ap1ID": "id-90306",
           "ap2ID": "id-105483"
@@ -34320,7 +34429,7 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.8,
+      "x": 0.7,
       "y": 0.2,
       "uniqueID": "id-93010",
       "name": "falsework",
@@ -35202,6 +35311,11 @@
           "ap2ID": "id-93037"
         },
         {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-93033",
+          "ap2ID": "id-93011"
+        },
+        {
           "ap2Name": "Shape 1",
           "ap1ID": "id-93034",
           "ap2ID": "id-93033"
@@ -35210,11 +35324,6 @@
           "ap2Name": "remove",
           "ap1ID": "id-93035",
           "ap2ID": "id-180190"
-        },
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-93037",
-          "ap2ID": "id-93011"
         },
         {
           "ap2Name": "Shape 2",
@@ -35327,7 +35436,7 @@
     {
       "atomType": "Molecule",
       "x": 0.9,
-      "y": 0.3,
+      "y": 0.5,
       "uniqueID": "id-95407",
       "name": "tocut",
       "ioValues": [
@@ -36437,6 +36546,11 @@
       "ap2ID": "id-93010"
     },
     {
+      "ap2Name": "kayak",
+      "ap1ID": "id-175519",
+      "ap2ID": "id-180195"
+    },
+    {
       "ap2Name": "Shape3",
       "ap1ID": "id-175525",
       "ap2ID": "id-175519"
@@ -36490,6 +36604,11 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-128087",
       "ap2ID": "id-175473"
+    },
+    {
+      "ap2Name": "falsework",
+      "ap1ID": "id-93010",
+      "ap2ID": "id-180195"
     },
     {
       "ap2Name": "geometry",
