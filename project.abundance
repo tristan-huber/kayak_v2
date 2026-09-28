@@ -16074,376 +16074,6 @@
               ]
             },
             {
-              "atomType": "GitHubMolecule",
-              "x": 0.4,
-              "y": 0.2,
-              "uniqueID": "id-147461",
-              "name": "WetLink",
-              "ioValues": [
-                {
-                  "name": "BulkheadThickness",
-                  "ioValue": 0.5
-                }
-              ],
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Output",
-                  "x": 1,
-                  "y": 0.5,
-                  "uniqueID": "id-147447",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Add-BOM-Tag",
-                  "x": 0.7,
-                  "y": 0.4,
-                  "uniqueID": "id-147448",
-                  "name": "Add BOM Tag",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Item Name",
-                      "ioValue": "Wetlink penetrator M10 4.5",
-                      "currentEquation": "Wetlink penetrator M10 4.5"
-                    },
-                    {
-                      "name": "Number Needed",
-                      "ioValue": 1
-                    },
-                    {
-                      "name": "Cost (USD)",
-                      "ioValue": 13
-                    },
-                    {
-                      "name": "Source Link",
-                      "ioValue": "https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/",
-                      "currentEquation": "https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/"
-                    }
-                  ],
-                  "BOMitem": {
-                    "BOMitemName": "Wetlink penetrator M10 4.5",
-                    "numberNeeded": 1,
-                    "costUSD": 13,
-                    "source": "https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/"
-                  }
-                },
-                {
-                  "atomType": "Input",
-                  "x": 0,
-                  "y": 0.1,
-                  "uniqueID": "id-147449",
-                  "name": "BulkheadThickness",
-                  "options": []
-                },
-                {
-                  "atomType": "Circle",
-                  "x": 0.1,
-                  "y": 0.4,
-                  "uniqueID": "id-147450",
-                  "ioValues": [
-                    {
-                      "name": "diameter",
-                      "ioValue": 0.35433070866141736,
-                      "currentEquation": "9 / 25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Circle",
-                  "x": 0.1,
-                  "y": 0.6,
-                  "uniqueID": "id-147451",
-                  "ioValues": [
-                    {
-                      "name": "diameter",
-                      "ioValue": 0.39763779527559057,
-                      "currentEquation": "10.1 / 25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Extrude",
-                  "x": 0.3,
-                  "y": 0.3,
-                  "uniqueID": "id-147452",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "height",
-                      "ioValue": 0.7874015748031497,
-                      "currentEquation": "20/25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Assembly",
-                  "x": 0.2,
-                  "y": 0.2,
-                  "uniqueID": "id-147453",
-                  "ioValues": [
-                    {
-                      "name": "makeDisjoint",
-                      "ioValue": true
-                    },
-                    {
-                      "name": "Shape 1",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape 2",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape3",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Color",
-                  "x": 0.2,
-                  "y": 0.5,
-                  "uniqueID": "id-147454",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "selectedColor": "Keep Out"
-                },
-                {
-                  "atomType": "Circle",
-                  "x": 0.1,
-                  "y": 0.7,
-                  "uniqueID": "id-147455",
-                  "ioValues": [
-                    {
-                      "name": "diameter",
-                      "ioValue": 0.7086614173228347,
-                      "currentEquation": "18/25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Assembly",
-                  "x": 0.5,
-                  "y": 0.4,
-                  "uniqueID": "id-147456",
-                  "ioValues": [
-                    {
-                      "name": "makeDisjoint",
-                      "ioValue": true
-                    },
-                    {
-                      "name": "Shape 3",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape 4",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape 5",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape6",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Extrude",
-                  "x": 0.3,
-                  "y": 0.7,
-                  "uniqueID": "id-147457",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "height",
-                      "ioValue": -0.7086614173228347,
-                      "currentEquation": "-18 / 25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Extrude",
-                  "x": 0.2,
-                  "y": 0.9,
-                  "uniqueID": "id-147458",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "height",
-                      "ioValue": 0.31496062992125984,
-                      "currentEquation": "8 / 25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Move",
-                  "x": 0.5,
-                  "y": 0.9,
-                  "uniqueID": "id-147459",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "xDist",
-                      "ioValue": 0
-                    },
-                    {
-                      "name": "yDist",
-                      "ioValue": 0
-                    },
-                    {
-                      "name": "zDist",
-                      "ioValue": 0.5,
-                      "currentEquation": "BulkheadThickness"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Difference",
-                  "x": 0.4,
-                  "y": 0.8,
-                  "uniqueID": "id-147460",
-                  "ioValues": [
-                    {
-                      "name": "retain",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "remove",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-147448",
-                  "ap2ID": "id-147447"
-                },
-                {
-                  "ap2Name": "Shape 2",
-                  "ap1ID": "id-147450",
-                  "ap2ID": "id-147453"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147451",
-                  "ap2ID": "id-147454"
-                },
-                {
-                  "ap2Name": "Shape 5",
-                  "ap1ID": "id-147452",
-                  "ap2ID": "id-147456"
-                },
-                {
-                  "ap2Name": "remove",
-                  "ap1ID": "id-147452",
-                  "ap2ID": "id-147460"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147453",
-                  "ap2ID": "id-147452"
-                },
-                {
-                  "ap2Name": "Shape 1",
-                  "ap1ID": "id-147454",
-                  "ap2ID": "id-147453"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147455",
-                  "ap2ID": "id-147457"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147455",
-                  "ap2ID": "id-147458"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147456",
-                  "ap2ID": "id-147448"
-                },
-                {
-                  "ap2Name": "Shape 3",
-                  "ap1ID": "id-147457",
-                  "ap2ID": "id-147456"
-                },
-                {
-                  "ap2Name": "retain",
-                  "ap1ID": "id-147458",
-                  "ap2ID": "id-147460"
-                },
-                {
-                  "ap2Name": "Shape 4",
-                  "ap1ID": "id-147459",
-                  "ap2ID": "id-147456"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-147460",
-                  "ap2ID": "id-147459"
-                }
-              ],
-              "parentRepo": {
-                "privateRepo": false,
-                "repoName": "WetLink",
-                "dateCreated": "2026-07-09T00:39:07Z",
-                "likes": 0,
-                "readme": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/README.md?sanitize=true",
-                "pngURL": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/project.png?sanitize=true",
-                "topMoleculeID": "",
-                "userRanking": 0,
-                "userSetAsThumbnail": false,
-                "topics": [
-                  "hardware"
-                ],
-                "githubMoleculesUsed": [],
-                "html_url": "https://github.com/tristan-huber/WetLink",
-                "pullRequests": [],
-                "forks": 0,
-                "ranking": 0.9,
-                "dateModified": "2026-09-16T20:43:40.418Z",
-                "searchField": "wetlink tristan-huber model of wetlink penetrator from blue robotics. link in bom. size 10m hardware",
-                "owner": "tristan-huber",
-                "description": "Model of wetlink penetrator from blue robotics. Link in BOM. Size 10M",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/project.svg?sanitize=true",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/project.abundance?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Inches",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1789592360206
-            },
-            {
               "atomType": "Move",
               "x": 0.6,
               "y": 0.2,
@@ -17596,43 +17226,6 @@
                   ]
                 },
                 {
-                  "atomType": "Add-BOM-Tag",
-                  "x": 0.7,
-                  "y": 0.3,
-                  "uniqueID": "id-147767",
-                  "name": "Add BOM Tag",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Item Name",
-                      "ioValue": "Blue Robotics thruster mount",
-                      "currentEquation": "Blue Robotics thruster mount"
-                    },
-                    {
-                      "name": "Number Needed",
-                      "ioValue": 1
-                    },
-                    {
-                      "name": "Cost (USD)",
-                      "ioValue": 8
-                    },
-                    {
-                      "name": "Source Link",
-                      "ioValue": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/",
-                      "currentEquation": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/"
-                    }
-                  ],
-                  "BOMitem": {
-                    "BOMitemName": "Blue Robotics thruster mount",
-                    "numberNeeded": 1,
-                    "costUSD": 8,
-                    "source": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/"
-                  }
-                },
-                {
                   "atomType": "Move",
                   "x": 0.5,
                   "y": 0.7,
@@ -17708,6 +17301,43 @@
                       "ioValue": -0.1
                     }
                   ]
+                },
+                {
+                  "atomType": "Add-BOM-Tag",
+                  "x": 0.8,
+                  "y": 0.4,
+                  "uniqueID": "id-193374",
+                  "name": "Add BOM Tag",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Item Name",
+                      "ioValue": "Blue Robotics thruster mount",
+                      "currentEquation": "Blue Robotics thruster mount"
+                    },
+                    {
+                      "name": "Number Needed",
+                      "ioValue": 1
+                    },
+                    {
+                      "name": "Cost (USD)",
+                      "ioValue": 8
+                    },
+                    {
+                      "name": "Source Link",
+                      "ioValue": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/",
+                      "currentEquation": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/"
+                    }
+                  ],
+                  "BOMitem": {
+                    "BOMitemName": "Blue Robotics thruster mount",
+                    "numberNeeded": 1,
+                    "costUSD": 8,
+                    "source": "https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/"
+                  }
                 }
               ],
               "allConnectors": [
@@ -17762,11 +17392,6 @@
                   "ap2ID": "id-175451"
                 },
                 {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-147767",
-                  "ap2ID": "id-147701"
-                },
-                {
                   "ap2Name": "geometry",
                   "ap1ID": "id-175451",
                   "ap2ID": "id-175464"
@@ -17779,7 +17404,7 @@
                 {
                   "ap2Name": "geometry",
                   "ap1ID": "id-175460",
-                  "ap2ID": "id-147767"
+                  "ap2ID": "id-193374"
                 },
                 {
                   "ap2Name": "geometry",
@@ -17790,6 +17415,11 @@
                   "ap2Name": "Shape 2",
                   "ap1ID": "id-147704",
                   "ap2ID": "id-147710"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-193374",
+                  "ap2ID": "id-147701"
                 }
               ],
               "fileTypeVersion": 1
@@ -17833,6 +17463,376 @@
               "tags": [
                 "throughhull"
               ]
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.4,
+              "y": 0.2,
+              "uniqueID": "id-193325",
+              "name": "WetLink",
+              "ioValues": [
+                {
+                  "name": "BulkheadThickness",
+                  "ioValue": 0.5
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-193311",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Add-BOM-Tag",
+                  "x": 0.7,
+                  "y": 0.4,
+                  "uniqueID": "id-193312",
+                  "name": "Add BOM Tag",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Item Name",
+                      "ioValue": "Wetlink penetrator M10 4.5",
+                      "currentEquation": "Wetlink penetrator M10 4.5"
+                    },
+                    {
+                      "name": "Number Needed",
+                      "ioValue": 1
+                    },
+                    {
+                      "name": "Cost (USD)",
+                      "ioValue": 13
+                    },
+                    {
+                      "name": "Source Link",
+                      "ioValue": "https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/",
+                      "currentEquation": "https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/"
+                    }
+                  ],
+                  "BOMitem": {
+                    "BOMitemName": "Wetlink penetrator M10 4.5",
+                    "numberNeeded": 1,
+                    "costUSD": 13,
+                    "source": "https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/"
+                  }
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.1,
+                  "uniqueID": "id-193313",
+                  "name": "BulkheadThickness",
+                  "options": []
+                },
+                {
+                  "atomType": "Circle",
+                  "x": 0.1,
+                  "y": 0.4,
+                  "uniqueID": "id-193314",
+                  "ioValues": [
+                    {
+                      "name": "diameter",
+                      "ioValue": 0.35433070866141736,
+                      "currentEquation": "9 / 25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Circle",
+                  "x": 0.1,
+                  "y": 0.6,
+                  "uniqueID": "id-193315",
+                  "ioValues": [
+                    {
+                      "name": "diameter",
+                      "ioValue": 0.39763779527559057,
+                      "currentEquation": "10.1 / 25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.3,
+                  "y": 0.3,
+                  "uniqueID": "id-193316",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 0.7874015748031497,
+                      "currentEquation": "20/25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.2,
+                  "y": 0.2,
+                  "uniqueID": "id-193317",
+                  "ioValues": [
+                    {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
+                      "name": "Shape 1",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape 2",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Color",
+                  "x": 0.2,
+                  "y": 0.5,
+                  "uniqueID": "id-193318",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "selectedColor": "Keep Out"
+                },
+                {
+                  "atomType": "Circle",
+                  "x": 0.1,
+                  "y": 0.7,
+                  "uniqueID": "id-193319",
+                  "ioValues": [
+                    {
+                      "name": "diameter",
+                      "ioValue": 0.7086614173228347,
+                      "currentEquation": "18/25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.5,
+                  "y": 0.4,
+                  "uniqueID": "id-193320",
+                  "ioValues": [
+                    {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
+                      "name": "Shape 3",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape 4",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape 5",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape6",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.3,
+                  "y": 0.7,
+                  "uniqueID": "id-193321",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": -0.7086614173228347,
+                      "currentEquation": "-18 / 25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.2,
+                  "y": 0.9,
+                  "uniqueID": "id-193322",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 0.31496062992125984,
+                      "currentEquation": "8 / 25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.5,
+                  "y": 0.9,
+                  "uniqueID": "id-193323",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0.5,
+                      "currentEquation": "BulkheadThickness"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Difference",
+                  "x": 0.4,
+                  "y": 0.8,
+                  "uniqueID": "id-193324",
+                  "ioValues": [
+                    {
+                      "name": "retain",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "remove",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-193312",
+                  "ap2ID": "id-193311"
+                },
+                {
+                  "ap2Name": "Shape 2",
+                  "ap1ID": "id-193314",
+                  "ap2ID": "id-193317"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-193315",
+                  "ap2ID": "id-193318"
+                },
+                {
+                  "ap2Name": "Shape 5",
+                  "ap1ID": "id-193316",
+                  "ap2ID": "id-193320"
+                },
+                {
+                  "ap2Name": "remove",
+                  "ap1ID": "id-193316",
+                  "ap2ID": "id-193324"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-193317",
+                  "ap2ID": "id-193316"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-193318",
+                  "ap2ID": "id-193317"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-193319",
+                  "ap2ID": "id-193321"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-193319",
+                  "ap2ID": "id-193322"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-193320",
+                  "ap2ID": "id-193312"
+                },
+                {
+                  "ap2Name": "Shape 3",
+                  "ap1ID": "id-193321",
+                  "ap2ID": "id-193320"
+                },
+                {
+                  "ap2Name": "retain",
+                  "ap1ID": "id-193322",
+                  "ap2ID": "id-193324"
+                },
+                {
+                  "ap2Name": "Shape 4",
+                  "ap1ID": "id-193323",
+                  "ap2ID": "id-193320"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-193324",
+                  "ap2ID": "id-193323"
+                }
+              ],
+              "parentRepo": {
+                "privateRepo": false,
+                "repoName": "WetLink",
+                "dateCreated": "2026-07-09T00:39:07Z",
+                "likes": 0,
+                "readme": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/README.md?sanitize=true",
+                "pngURL": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/project.png?sanitize=true",
+                "topMoleculeID": "",
+                "userRanking": 0,
+                "userSetAsThumbnail": false,
+                "topics": [
+                  "hardware"
+                ],
+                "githubMoleculesUsed": [],
+                "html_url": "https://github.com/tristan-huber/WetLink",
+                "pullRequests": [],
+                "forks": 0,
+                "ranking": 0.9,
+                "dateModified": "2026-09-16T20:43:40.418Z",
+                "searchField": "wetlink tristan-huber model of wetlink penetrator from blue robotics. link in bom. size 10m hardware",
+                "owner": "tristan-huber",
+                "description": "Model of wetlink penetrator from blue robotics. Link in BOM. Size 10M",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/project.svg?sanitize=true",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/WetLink/master/project.abundance?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Inches",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1790636132436
             }
           ],
           "allConnectors": [
@@ -17878,11 +17878,6 @@
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-147461",
-              "ap2ID": "id-175448"
-            },
-            {
-              "ap2Name": "geometry",
               "ap1ID": "id-147103",
               "ap2ID": "id-147408"
             },
@@ -17900,6 +17895,11 @@
               "ap2Name": "Shape 2",
               "ap1ID": "id-147699",
               "ap2ID": "id-147441"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-193325",
+              "ap2ID": "id-175448"
             }
           ],
           "fileTypeVersion": 1
@@ -19326,7 +19326,7 @@
     },
     {
       "atomType": "ExtractTag",
-      "x": 0.5,
+      "x": 0.4,
       "y": 0.1,
       "uniqueID": "id-175515",
       "name": "Extract hatch panel",
@@ -27245,7 +27245,7 @@
                 },
                 {
                   "name": "Cost (USD)",
-                  "ioValue": 5
+                  "ioValue": 2.5
                 },
                 {
                   "name": "Source Link",
@@ -27256,7 +27256,7 @@
               "BOMitem": {
                 "BOMitemName": "HatchTape",
                 "numberNeeded": 0.5,
-                "costUSD": 5,
+                "costUSD": 2.5,
                 "source": "https://clcboats.com/products/foam-hatch-tape"
               }
             }
@@ -29701,7 +29701,7 @@
                 },
                 {
                   "name": "Cost (USD)",
-                  "ioValue": 5
+                  "ioValue": 2.5
                 },
                 {
                   "name": "Source Link",
@@ -29712,7 +29712,7 @@
               "BOMitem": {
                 "BOMitemName": "HatchTape",
                 "numberNeeded": 0.5,
-                "costUSD": 5,
+                "costUSD": 2.5,
                 "source": "https://clcboats.com/products/foam-hatch-tape"
               }
             }
@@ -36710,6 +36710,10 @@
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
+              "name": "xDist",
+              "ioValue": 7.749999899999963
+            },
+            {
               "name": "yDist",
               "ioValue": 0
             },
@@ -36729,6 +36733,10 @@
             {
               "name": "y",
               "ioValue": 130
+            },
+            {
+              "name": "x",
+              "ioValue": 114.50000020000007
             }
           ],
           "currentEquation": "(y - x) / 2"
