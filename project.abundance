@@ -16504,8 +16504,8 @@
                     },
                     {
                       "name": "Item Name",
-                      "ioValue": "New Item",
-                      "currentEquation": "New Item"
+                      "ioValue": "Fin and mount",
+                      "currentEquation": "Fin and mount"
                     },
                     {
                       "name": "Number Needed",
@@ -16513,7 +16513,7 @@
                     },
                     {
                       "name": "Cost (USD)",
-                      "ioValue": 20
+                      "ioValue": 10
                     },
                     {
                       "name": "Source Link",
@@ -16522,9 +16522,9 @@
                     }
                   ],
                   "BOMitem": {
-                    "BOMitemName": "New Item",
+                    "BOMitemName": "Fin and mount",
                     "numberNeeded": 0.5,
-                    "costUSD": 20,
+                    "costUSD": 10,
                     "source": "https://www.amazon.com/LOOEEL-Surfing-Inflatable-Detachable-Surfboard/dp/B0D3C72BYW/ref=sr_1_5?crid=1ZQWQ23XKOE0H&dib=eyJ2IjoiMSJ9.Is6nv6SEuxT4gGgadEkbsxy02KXxG-8Zadqiqm7v8rqYjJM3VHQxHHx5tQPtuJjdEa3Gfs5lRyVyCiMRZly_95cJZWKHe6UVuXna1bKdfzdtegfO3tO3D2EbJnGW0x_ttb0PWm082y1KHLPLuUYB-Ane44hgNJJbtXSN38K4MFQm2O66L3MPYjIphbtRInvVylrYZibfugvoBLvNXPeb6LcBev6IlgR1mRzJljAbldnun9J03qRBr2-dh6zScpRW9yhLsx_VZWOhZ6IZlcT6n_iFxXqnllkhoWDyoBpGidI.t0zf6sbKgf-nHcoqGjJ_1OKpQ1dLirNfd6cIUwh9-7w&dib_tag=se&keywords=SUP+fin+base&qid=1790624585&s=sporting-goods&sprefix=sup+fin+ba%2Csporting%2C750&sr=1-5"
                   }
                 },
