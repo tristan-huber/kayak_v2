@@ -143,8 +143,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.5,
-      "y": 0.2,
+      "x": 0.4,
+      "y": 0.1,
       "uniqueID": "id-128087",
       "name": "hull panels",
       "topLevel": false,
@@ -12109,7 +12109,7 @@
     {
       "atomType": "Tag",
       "x": 0.2,
-      "y": 0.9,
+      "y": 0.7,
       "uniqueID": "id-139912",
       "name": "thickply",
       "ioValues": [
@@ -12144,7 +12144,7 @@
     {
       "atomType": "Molecule",
       "x": 0.5,
-      "y": 0.7,
+      "y": 0.6,
       "uniqueID": "id-140176",
       "name": "bluerobotics",
       "ioValues": [
@@ -18303,7 +18303,7 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.6,
+      "x": 0.5,
       "y": 0.9,
       "uniqueID": "id-151102",
       "ioValues": [
@@ -25884,7 +25884,8 @@
         },
         {
           "name": "edgeInset",
-          "ioValue": 0.51
+          "ioValue": 1,
+          "currentEquation": "1"
         }
       ],
       "topLevel": false,
@@ -25898,7 +25899,7 @@
           "ioValues": [
             {
               "name": "inset",
-              "ioValue": 0.51
+              "ioValue": 1
             }
           ],
           "topLevel": false,
@@ -26416,7 +26417,7 @@
                 },
                 {
                   "name": "inset",
-                  "ioValue": 0.51
+                  "ioValue": 1
                 },
                 {
                   "name": "start",
@@ -26453,7 +26454,7 @@
                     },
                     {
                       "name": "inset",
-                      "ioValue": 0.51
+                      "ioValue": 1
                     },
                     {
                       "name": "start",
@@ -30837,7 +30838,7 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.2,
+          "x": 0.1,
           "y": 0.4,
           "uniqueID": "id-175486",
           "name": "dowel",
@@ -30854,9 +30855,141 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
+            },
+            {
+              "atomType": "Circle",
+              "x": 0.2,
+              "y": 0.5,
+              "uniqueID": "id-175490",
+              "ioValues": [
+                {
+                  "name": "diameter",
+                  "ioValue": 0.18503937007874016,
+                  "currentEquation": "4.7 / 25.4"
+                }
+              ]
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.3,
+              "y": 0.5,
+              "uniqueID": "id-175493",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": -1.5,
+                  "currentEquation": "-1.5"
+                }
+              ]
+            },
+            {
+              "atomType": "Move",
+              "x": 0.4,
+              "y": 0.6,
+              "uniqueID": "id-175497",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 0,
+                  "currentEquation": "0"
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0.75,
+                  "currentEquation": "0.75"
+                }
+              ]
+            },
+            {
+              "atomType": "Add-BOM-Tag",
+              "x": 0.5,
+              "y": 0.7,
+              "uniqueID": "id-175503",
+              "name": "Add BOM Tag",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Item Name",
+                  "ioValue": "wood nail",
+                  "currentEquation": "wood nail"
+                },
+                {
+                  "name": "Number Needed",
+                  "ioValue": 0.005
+                },
+                {
+                  "name": "Cost (USD)",
+                  "ioValue": 30
+                },
+                {
+                  "name": "Source Link",
+                  "ioValue": "https://taytools.com/kakuri-wooden-tapered-nails-traditional-japanese-joinery-fasteners?&a_=v_&a_=v_&a_=v_&a_=v_&gmc_extid=NjM5NDE5&gad_source=1&gad_campaignid=23724046253&gclid=CjwKCAjwoOjVBhArEiwAUwDak82tPFo93vm-nsdtl7YNCsDYwz05FlBHhEQkpFW3gKz4QH9WY3qGLxoChcwQAvD_BwE",
+                  "currentEquation": "https://taytools.com/kakuri-wooden-tapered-nails-traditional-japanese-joinery-fasteners?&a_=v_&a_=v_&a_=v_&a_=v_&gmc_extid=NjM5NDE5&gad_source=1&gad_campaignid=23724046253&gclid=CjwKCAjwoOjVBhArEiwAUwDak82tPFo93vm-nsdtl7YNCsDYwz05FlBHhEQkpFW3gKz4QH9WY3qGLxoChcwQAvD_BwE"
+                }
+              ],
+              "BOMitem": {
+                "BOMitemName": "wood nail",
+                "numberNeeded": 0.005,
+                "costUSD": 30,
+                "source": "https://taytools.com/kakuri-wooden-tapered-nails-traditional-japanese-joinery-fasteners?&a_=v_&a_=v_&a_=v_&a_=v_&gmc_extid=NjM5NDE5&gad_source=1&gad_campaignid=23724046253&gclid=CjwKCAjwoOjVBhArEiwAUwDak82tPFo93vm-nsdtl7YNCsDYwz05FlBHhEQkpFW3gKz4QH9WY3qGLxoChcwQAvD_BwE"
+              }
+            },
+            {
+              "atomType": "Color",
+              "x": 0.8,
+              "y": 0.4,
+              "uniqueID": "id-175510",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "selectedColor": "Keep Out"
             }
           ],
-          "allConnectors": [],
+          "allConnectors": [
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-175490",
+              "ap2ID": "id-175493"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-175493",
+              "ap2ID": "id-175497"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-175497",
+              "ap2ID": "id-175503"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-175503",
+              "ap2ID": "id-175510"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-175510",
+              "ap2ID": "id-175488"
+            }
+          ],
           "fileTypeVersion": 1
         },
         {
@@ -31381,7 +31514,7 @@
           "ioValues": [
             {
               "name": "makeDisjoint",
-              "ioValue": true
+              "ioValue": false
             },
             {
               "name": "Shape 5",
@@ -31719,11 +31852,6 @@
           "ap2ID": "id-89801"
         },
         {
-          "ap2Name": "geometry",
-          "ap1ID": "id-90322",
-          "ap2ID": "id-129937"
-        },
-        {
           "ap2Name": "inset",
           "ap1ID": "id-92994",
           "ap2ID": "id-105483"
@@ -31742,6 +31870,11 @@
           "ap2Name": "Shape 6",
           "ap1ID": "id-105777",
           "ap2ID": "id-90312"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-175486",
+          "ap2ID": "id-129937"
         }
       ],
       "fileTypeVersion": 1
