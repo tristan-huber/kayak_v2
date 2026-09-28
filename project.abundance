@@ -19343,6 +19343,10 @@
         {
           "name": "Shape4",
           "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape5",
+          "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
     },
@@ -19378,8 +19382,8 @@
         },
         {
           "name": "xposition",
-          "ioValue": 80,
-          "currentEquation": "80"
+          "ioValue": 81.5,
+          "currentEquation": "81.5"
         }
       ],
       "topLevel": false,
@@ -21127,8 +21131,8 @@
         },
         {
           "atomType": "Rotate",
-          "x": 0.4,
-          "y": 0.9,
+          "x": 0.3,
+          "y": 0.8,
           "uniqueID": "id-175803",
           "ioValues": [
             {
@@ -21168,8 +21172,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.5,
-          "y": 0.8,
+          "x": 0.4,
+          "y": 0.7,
           "uniqueID": "id-175819",
           "ioValues": [
             {
@@ -21193,8 +21197,8 @@
         },
         {
           "atomType": "Intersection",
-          "x": 0.5,
-          "y": 0.6,
+          "x": 0.4,
+          "y": 0.5,
           "uniqueID": "id-175825",
           "ioValues": [
             {
@@ -21209,8 +21213,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.7,
-          "y": 0.6,
+          "x": 0.8,
+          "y": 0.4,
           "uniqueID": "id-175829",
           "ioValues": [
             {
@@ -21219,7 +21223,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 80,
+              "ioValue": 81.5,
               "currentEquation": "xposition"
             },
             {
@@ -21350,22 +21354,6 @@
           ]
         },
         {
-          "atomType": "Difference",
-          "x": 0.6,
-          "y": 0.3,
-          "uniqueID": "id-175863",
-          "ioValues": [
-            {
-              "name": "retain",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "remove",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
           "atomType": "Rotate",
           "x": 0.4,
           "y": 0.1,
@@ -21436,8 +21424,8 @@
         },
         {
           "atomType": "Assembly",
-          "x": 0.7,
-          "y": 0.7,
+          "x": 0.9,
+          "y": 0.8,
           "uniqueID": "id-175883",
           "ioValues": [
             {
@@ -21451,13 +21439,17 @@
             {
               "name": "Shape2",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape3",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
         {
           "atomType": "Tag",
-          "x": 0.7,
-          "y": 0.2,
+          "x": 0.6,
+          "y": 0.3,
           "uniqueID": "id-175888",
           "name": "thickply",
           "ioValues": [
@@ -21472,8 +21464,8 @@
         },
         {
           "atomType": "Tag",
-          "x": 0.6,
-          "y": 0.8,
+          "x": 0.7,
+          "y": 0.7,
           "uniqueID": "id-175891",
           "name": "thinply",
           "ioValues": [
@@ -21485,13 +21477,372 @@
           "tags": [
             "thinply"
           ]
+        },
+        {
+          "atomType": "Intersection",
+          "x": 0.8,
+          "y": 0.3,
+          "uniqueID": "id-175895",
+          "ioValues": [
+            {
+              "name": "geometry1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "geometry2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.4,
+          "y": 0.9,
+          "uniqueID": "id-175908",
+          "name": "select.FacesByNormal",
+          "ioValues": [
+            {
+              "name": "shape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "normal",
+              "ioValue": [
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "name": "toleranceDeg",
+              "ioValue": 5
+            },
+            {
+              "name": "u",
+              "ioValue": 0.5,
+              "currentEquation": "0.5"
+            },
+            {
+              "name": "v",
+              "ioValue": 0.5
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-175901",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Code",
+              "x": 0.5,
+              "y": 0.3,
+              "uniqueID": "id-175902",
+              "ioValues": [
+                {
+                  "name": "facesOf",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "normal",
+                  "ioValue": [
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "name": "toleranceDeg",
+                  "ioValue": 5
+                },
+                {
+                  "name": "u",
+                  "ioValue": 0.5
+                },
+                {
+                  "name": "v",
+                  "ioValue": 0.5
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0, u: number = 0.5, v: number = 0.5) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n  const tol = toleranceDeg * replicad.DEG2RAD\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u,v])\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= tol;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })?.skipDisjointPostprocess()\n}",
+              "compiledCode": "\"use strict\";\nfunction run(facesOf, normal, toleranceDeg = 0, u = 0.5, v = 0.5) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    const tol = toleranceDeg * replicad.DEG2RAD;\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u, v]);\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= tol;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    })?.skipDisjointPostprocess();\n}\n"
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.1,
+              "uniqueID": "id-175903",
+              "name": "shape",
+              "type": "geometry",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.2,
+              "uniqueID": "id-175904",
+              "name": "normal",
+              "type": "point3d",
+              "options": [],
+              "pointValue": null
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.3,
+              "uniqueID": "id-175905",
+              "name": "toleranceDeg",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.4,
+              "uniqueID": "id-175906",
+              "name": "u",
+              "options": []
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.5,
+              "uniqueID": "id-175907",
+              "name": "v",
+              "options": []
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-175902",
+              "ap2ID": "id-175901"
+            },
+            {
+              "ap2Name": "facesOf",
+              "ap1ID": "id-175903",
+              "ap2ID": "id-175902"
+            },
+            {
+              "ap2Name": "normal",
+              "ap1ID": "id-175904",
+              "ap2ID": "id-175902"
+            },
+            {
+              "ap2Name": "toleranceDeg",
+              "ap1ID": "id-175905",
+              "ap2ID": "id-175902"
+            },
+            {
+              "ap2Name": "u",
+              "ap1ID": "id-175906",
+              "ap2ID": "id-175902"
+            },
+            {
+              "ap2Name": "v",
+              "ap1ID": "id-175907",
+              "ap2ID": "id-175902"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-20T02:23:39.099Z",
+            "privateRepo": false,
+            "repoName": "select.FacesByNormal",
+            "dateCreated": "2026-08-19T19:30:15Z",
+            "likes": 0,
+            "pngURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.png?sanitize=true",
+            "readme": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "",
+            "userRanking": 0,
+            "userSetAsThumbnail": false,
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/select.FacesByNormal",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "forks": 0,
+            "dateModified": "2026-09-03T20:47:11Z",
+            "ranking": 3,
+            "searchField": "select.facesbynormal tristan-huber select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5) abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. Note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5)",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1790628178488
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.5,
+          "y": 0.9,
+          "uniqueID": "id-175934",
+          "name": "ExtractFaces",
+          "ioValues": [
+            {
+              "name": "Assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-175931",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
+            {
+              "atomType": "Input",
+              "x": 0,
+              "y": 0.1,
+              "uniqueID": "id-175932",
+              "name": "Assembly",
+              "type": "faceselect",
+              "options": [],
+              "selectedFaceData": {
+                "0": [
+                  0
+                ]
+              }
+            },
+            {
+              "atomType": "Code",
+              "x": 0.3,
+              "y": 0.8,
+              "uniqueID": "id-175933",
+              "ioValues": [
+                {
+                  "name": "input",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "interpreterVersion": 1,
+              "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
+              "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
+            }
+          ],
+          "allConnectors": [
+            {
+              "ap2Name": "input",
+              "ap1ID": "id-175932",
+              "ap2ID": "id-175933"
+            },
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-175933",
+              "ap2ID": "id-175931"
+            }
+          ],
+          "parentRepo": {
+            "lastFoundGit": "2026-09-20T02:23:39.099Z",
+            "privateRepo": false,
+            "repoName": "ExtractFaces",
+            "dateCreated": "2026-07-24T19:57:30Z",
+            "likes": 0,
+            "pngURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.png?sanitize=true",
+            "readme": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
+            "yyyy": 2026,
+            "topMoleculeID": "",
+            "userRanking": 0,
+            "userSetAsThumbnail": false,
+            "githubMoleculesUsed": [],
+            "html_url": "https://github.com/tristan-huber/ExtractFaces",
+            "topics": [
+              "abundance-tool"
+            ],
+            "pullRequests": [],
+            "forks": 0,
+            "dateModified": "2026-07-24T20:38:04Z",
+            "ranking": 3,
+            "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
+            "owner": "tristan-huber",
+            "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
+            "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
+            "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
+            "isLocal": false
+          },
+          "unitsKey": "Unitless",
+          "fileTypeVersion": 1,
+          "lastReloadedFromGithubAt": 1790628205914
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.6,
+          "y": 0.9,
+          "uniqueID": "id-175943",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 10
+            }
+          ]
+        },
+        {
+          "atomType": "Color",
+          "x": 0.6,
+          "y": 0.9,
+          "uniqueID": "id-175950",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "selectedColor": "Keep Out"
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.6,
+          "y": 0.6,
+          "uniqueID": "id-175953",
+          "ioValues": [
+            {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
+              "name": "Shape 1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape3",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
         }
       ],
       "allConnectors": [
         {
-          "ap2Name": "number or geometry",
+          "ap2Name": "geometry2",
           "ap1ID": "id-175533",
-          "ap2ID": "id-175531"
+          "ap2ID": "id-175895"
         },
         {
           "ap2Name": "geometry",
@@ -21539,14 +21890,19 @@
           "ap2ID": "id-175825"
         },
         {
-          "ap2Name": "geometry",
+          "ap2Name": "shape",
           "ap1ID": "id-175825",
-          "ap2ID": "id-175829"
+          "ap2ID": "id-175908"
         },
         {
-          "ap2Name": "geometry",
+          "ap2Name": "Shape2",
           "ap1ID": "id-175825",
-          "ap2ID": "id-175891"
+          "ap2ID": "id-175953"
+        },
+        {
+          "ap2Name": "geometry1",
+          "ap1ID": "id-175829",
+          "ap2ID": "id-175895"
         },
         {
           "ap2Name": "Shape 1",
@@ -21569,13 +21925,8 @@
           "ap2ID": "id-175857"
         },
         {
-          "ap2Name": "retain",
-          "ap1ID": "id-175857",
-          "ap2ID": "id-175863"
-        },
-        {
           "ap2Name": "geometry",
-          "ap1ID": "id-175863",
+          "ap1ID": "id-175857",
           "ap2ID": "id-175888"
         },
         {
@@ -21589,14 +21940,49 @@
           "ap2ID": "id-175877"
         },
         {
-          "ap2Name": "remove",
-          "ap1ID": "id-175877",
-          "ap2ID": "id-175863"
+          "ap2Name": "geometry",
+          "ap1ID": "id-175883",
+          "ap2ID": "id-175829"
         },
         {
           "ap2Name": "Shape 1",
+          "ap1ID": "id-175888",
+          "ap2ID": "id-175883"
+        },
+        {
+          "ap2Name": "Shape2",
           "ap1ID": "id-175891",
           "ap2ID": "id-175883"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-175895",
+          "ap2ID": "id-175531"
+        },
+        {
+          "ap2Name": "Assembly",
+          "ap1ID": "id-175908",
+          "ap2ID": "id-175934"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-175934",
+          "ap2ID": "id-175943"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-175943",
+          "ap2ID": "id-175950"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-175950",
+          "ap2ID": "id-175953"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-175953",
+          "ap2ID": "id-175891"
         }
       ],
       "fileTypeVersion": 1
@@ -25679,7 +26065,8 @@
                 },
                 {
                   "name": "zDist",
-                  "ioValue": 0.25
+                  "ioValue": 0,
+                  "currentEquation": "0"
                 }
               ]
             },
@@ -36162,6 +36549,11 @@
     {
       "ap2Name": "Shape3",
       "ap1ID": "id-175525",
+      "ap2ID": "id-175519"
+    },
+    {
+      "ap2Name": "Shape4",
+      "ap1ID": "id-175529",
       "ap2ID": "id-175519"
     }
   ],
