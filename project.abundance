@@ -639,8 +639,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.1,
-          "y": 0.4,
+          "x": 0,
+          "y": 0.7,
           "uniqueID": "id-133383",
           "name": "G24_marine_battery",
           "topLevel": false,
@@ -1163,7 +1163,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.4,
           "uniqueID": "id-133464",
           "name": "body",
           "type": "geometry",
@@ -1172,7 +1172,7 @@
         {
           "atomType": "Rotate",
           "x": 0.1,
-          "y": 0.4,
+          "y": 0.5,
           "uniqueID": "id-133485",
           "ioValues": [
             {
@@ -1308,7 +1308,7 @@
         {
           "atomType": "Move",
           "x": 0.3,
-          "y": 0.3,
+          "y": 0.5,
           "uniqueID": "id-135335",
           "ioValues": [
             {
@@ -1331,8 +1331,8 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.1,
-          "y": 0.6,
+          "x": 0.2,
+          "y": 0.9,
           "uniqueID": "id-135345",
           "name": "Width",
           "ioValues": [
@@ -1436,7 +1436,7 @@
         {
           "atomType": "GitHubMolecule",
           "x": 0.1,
-          "y": 0.5,
+          "y": 0.9,
           "uniqueID": "id-135368",
           "name": "Label_Bounding_Box",
           "ioValues": [
@@ -1663,25 +1663,9 @@
           "lastReloadedFromGithubAt": 1789506887535
         },
         {
-          "atomType": "Difference",
-          "x": 0.4,
-          "y": 0.8,
-          "uniqueID": "id-135399",
-          "ioValues": [
-            {
-              "name": "retain",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "remove",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
           "atomType": "Molecule",
-          "x": 0.5,
-          "y": 0.6,
+          "x": 0.4,
+          "y": 0.4,
           "uniqueID": "id-135649",
           "name": "hatch",
           "ioValues": [
@@ -8466,7 +8450,7 @@
         },
         {
           "atomType": "ExtractTag",
-          "x": 0.6,
+          "x": 0.5,
           "y": 0.4,
           "uniqueID": "id-137178",
           "name": "Extract Untagged",
@@ -9077,7 +9061,7 @@
         },
         {
           "atomType": "GitHubMolecule",
-          "x": 0.5,
+          "x": 0.4,
           "y": 0.2,
           "uniqueID": "id-139956",
           "name": "IthFromAssembly",
@@ -9191,7 +9175,7 @@
         },
         {
           "atomType": "Difference",
-          "x": 0.7,
+          "x": 0.3,
           "y": 0.1,
           "uniqueID": "id-139972",
           "ioValues": [
@@ -9207,7 +9191,7 @@
         },
         {
           "atomType": "Difference",
-          "x": 0.8,
+          "x": 0.7,
           "y": 0.1,
           "uniqueID": "id-139976",
           "ioValues": [
@@ -9224,7 +9208,7 @@
         {
           "atomType": "Tag",
           "x": 0.6,
-          "y": 0.3,
+          "y": 0.2,
           "uniqueID": "id-139981",
           "name": "electronics_aft_bulkhead",
           "ioValues": [
@@ -9239,8 +9223,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.8,
-          "y": 0.8,
+          "x": 0.7,
+          "y": 0.3,
           "uniqueID": "id-139988",
           "name": "Molecule",
           "ioValues": [
@@ -10359,11 +10343,6 @@
           "ap2ID": "id-139972"
         },
         {
-          "ap2Name": "remove",
-          "ap1ID": "id-133464",
-          "ap2ID": "id-135399"
-        },
-        {
           "ap2Name": "boat_interior",
           "ap1ID": "id-133464",
           "ap2ID": "id-135649"
@@ -10377,11 +10356,6 @@
           "ap2Name": "A",
           "ap1ID": "id-133485",
           "ap2ID": "id-135276"
-        },
-        {
-          "ap2Name": "retain",
-          "ap1ID": "id-135335",
-          "ap2ID": "id-135399"
         },
         {
           "ap2Name": "battery",
