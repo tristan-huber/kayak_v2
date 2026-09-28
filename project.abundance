@@ -34335,11 +34335,12 @@
         },
         {
           "name": "breadth",
-          "ioValue": 2
+          "ioValue": 4
         },
         {
           "name": "aftHeight",
-          "ioValue": 4.5
+          "ioValue": 4.5,
+          "currentEquation": "4.5"
         }
       ],
       "topLevel": false,
@@ -34457,7 +34458,7 @@
           "atomType": "Difference",
           "x": 0.8,
           "y": 0.2,
-          "uniqueID": "id-180186",
+          "uniqueID": "id-180190",
           "ioValues": [
             {
               "name": "retain",
@@ -34498,7 +34499,7 @@
           "ioValues": [
             {
               "name": "x length",
-              "ioValue": 2,
+              "ioValue": 4,
               "currentEquation": "breadth"
             },
             {
@@ -34848,7 +34849,7 @@
         {
           "atomType": "Equation",
           "x": 0.1,
-          "y": 0.6,
+          "y": 0.5,
           "uniqueID": "id-93219",
           "name": "-1 * x",
           "ioValues": [
@@ -34950,7 +34951,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": -1,
+              "ioValue": -2,
               "currentEquation": "- breadth / 2"
             },
             {
@@ -34975,7 +34976,7 @@
             },
             {
               "name": "xDist",
-              "ioValue": 1,
+              "ioValue": 2,
               "currentEquation": "breadth / 2"
             },
             {
@@ -35166,6 +35167,11 @@
           "ap2ID": "id-175977"
         },
         {
+          "ap2Name": "retain",
+          "ap1ID": "id-175970",
+          "ap2ID": "id-180190"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-93012",
           "ap2ID": "id-175970"
@@ -35201,9 +35207,9 @@
           "ap2ID": "id-93033"
         },
         {
-          "ap2Name": "retain",
+          "ap2Name": "remove",
           "ap1ID": "id-93035",
-          "ap2ID": "id-180186"
+          "ap2ID": "id-180190"
         },
         {
           "ap2Name": "Shape 2",
@@ -35304,8 +35310,7 @@
           "ap2Name": "geometry",
           "ap1ID": "id-93188",
           "ap2ID": "id-93213"
-        },
-        null
+        }
       ],
       "fileTypeVersion": 1
     },
