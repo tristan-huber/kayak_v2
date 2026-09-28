@@ -761,16 +761,24 @@
               "uniqueID": "id-133371",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 3",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape4",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -2341,12 +2349,20 @@
               "uniqueID": "id-135785",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -2478,12 +2494,16 @@
                   "uniqueID": "id-135886",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -3777,12 +3797,20 @@
                   "uniqueID": "id-135985",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -3903,12 +3931,20 @@
                   "uniqueID": "id-135991",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -3972,12 +4008,20 @@
                   "uniqueID": "id-135995",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 3",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 4",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape5",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -4983,12 +5027,20 @@
                   "uniqueID": "id-136501",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -5085,12 +5137,20 @@
                   "uniqueID": "id-136506",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -5187,12 +5247,20 @@
                   "uniqueID": "id-136512",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -5489,16 +5557,24 @@
               "uniqueID": "id-136615",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 3",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape4",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -5586,12 +5662,20 @@
                   "uniqueID": "id-136626",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -5652,16 +5736,24 @@
                   "uniqueID": "id-136630",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 3",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 4",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 5",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape6",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -5809,12 +5901,20 @@
                   "uniqueID": "id-136637",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -6586,12 +6686,20 @@
                   "uniqueID": "id-136799",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -6652,16 +6760,24 @@
                   "uniqueID": "id-136803",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 3",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 4",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 5",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape6",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -6964,12 +7080,20 @@
                   "uniqueID": "id-136820",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -8066,12 +8190,20 @@
               "uniqueID": "id-137142",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -8299,28 +8431,36 @@
           "uniqueID": "id-137173",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 3",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 4",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 5",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 6",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape7",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -8692,12 +8832,20 @@
               "uniqueID": "id-137248",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -9245,12 +9393,20 @@
                   "uniqueID": "id-140003",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -9287,16 +9443,24 @@
                   "uniqueID": "id-140006",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 3",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 4",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 5",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape6",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -10047,12 +10211,20 @@
               "uniqueID": "id-140147",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -10087,12 +10259,20 @@
               "uniqueID": "id-140158",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             }
@@ -12356,12 +12536,20 @@
               "uniqueID": "id-143892",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -13786,16 +13974,24 @@
                   "uniqueID": "id-147157",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 3",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape4",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -14363,20 +14559,28 @@
               "uniqueID": "id-147441",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 3",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 4",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape5",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -14501,12 +14705,20 @@
                   "uniqueID": "id-147453",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -14543,16 +14755,24 @@
                   "uniqueID": "id-147456",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 3",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 4",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 5",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape6",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -15649,12 +15869,20 @@
                   "uniqueID": "id-147762",
                   "ioValues": [
                     {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
                       "name": "Shape 1",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
                       "name": "Shape 2",
-                      "ioValue": null
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
                     }
                   ]
                 },
@@ -16114,12 +16342,20 @@
       "uniqueID": "id-151102",
       "ioValues": [
         {
+          "name": "makeDisjoint",
+          "ioValue": true
+        },
+        {
           "name": "Shape 1",
-          "ioValue": null
+          "ioValue": "__GEOMETRY_INPUT__"
         },
         {
           "name": "Shape 2",
-          "ioValue": null
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Shape3",
+          "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
     },
@@ -17205,7 +17441,16 @@
       "x": 0.6,
       "y": 0.2,
       "uniqueID": "id-164317",
-      "ioValues": []
+      "ioValues": [
+        {
+          "name": "makeDisjoint",
+          "ioValue": true
+        },
+        {
+          "name": "Shape 1",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
     },
     {
       "atomType": "Molecule",
@@ -18663,20 +18908,24 @@
           "uniqueID": "id-72145",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 3",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 4",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -19084,16 +19333,20 @@
           "uniqueID": "id-74111",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 3",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -19478,7 +19731,7 @@
     },
     {
       "atomType": "Import",
-      "x": 0.2,
+      "x": 0.1,
       "y": 0.2,
       "uniqueID": "id-76088",
       "fileName": "kayakhull_copy1.step",
@@ -19491,7 +19744,7 @@
     {
       "atomType": "Input",
       "x": 0,
-      "y": 0.2,
+      "y": 0.1,
       "uniqueID": "id-76297",
       "name": "hullThickness",
       "options": []
@@ -19499,7 +19752,7 @@
     {
       "atomType": "Input",
       "x": 0,
-      "y": 0.5,
+      "y": 0.2,
       "uniqueID": "id-76304",
       "name": "bulkheadThickness",
       "options": []
@@ -19507,7 +19760,7 @@
     {
       "atomType": "Input",
       "x": 0,
-      "y": 0.8,
+      "y": 0.3,
       "uniqueID": "id-76307",
       "name": "bulkheadPlacements",
       "type": "array",
@@ -20040,7 +20293,7 @@
             {
               "atomType": "Move",
               "x": 0.6,
-              "y": 0.5,
+              "y": 0.2,
               "uniqueID": "id-161073",
               "ioValues": [
                 {
@@ -20190,8 +20443,24 @@
               "uniqueID": "id-76341",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": false
+                },
+                {
                   "name": "Shape 3",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape4",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape5",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape6",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -20344,7 +20613,7 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.4,
+              "x": 0.3,
               "y": 0.1,
               "uniqueID": "id-76372",
               "name": "extrudeFaceDirected",
@@ -21165,6 +21434,11 @@
           ],
           "allConnectors": [
             {
+              "ap2Name": "Shape5",
+              "ap1ID": "id-161073",
+              "ap2ID": "id-76341"
+            },
+            {
               "ap2Name": "Shape",
               "ap1ID": "id-76334",
               "ap2ID": "id-76350"
@@ -21203,6 +21477,11 @@
               "ap2Name": "geometry",
               "ap1ID": "id-76337",
               "ap2ID": "id-161073"
+            },
+            {
+              "ap2Name": "Shape4",
+              "ap1ID": "id-76337",
+              "ap2ID": "id-76341"
             },
             {
               "ap2Name": "remove",
@@ -21402,14 +21681,10 @@
         {
           "atomType": "Molecule",
           "x": 0.4,
-          "y": 0.7,
+          "y": 0.5,
           "uniqueID": "id-76675",
           "name": "hatch",
           "ioValues": [
-            {
-              "name": "inFace",
-              "ioValue": 10
-            },
             {
               "name": "distFromBow",
               "ioValue": 95
@@ -21809,12 +22084,20 @@
               "uniqueID": "id-76690",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": false
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -21857,12 +22140,20 @@
               "uniqueID": "id-76694",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": false
+                },
+                {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 3",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape4",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -22257,7 +22548,8 @@
               "ap2Name": "geometry",
               "ap1ID": "id-76699",
               "ap2ID": "id-76681"
-            }
+            },
+            null
           ],
           "fileTypeVersion": 1
         },
@@ -22268,12 +22560,20 @@
           "uniqueID": "id-80958",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": false
+            },
+            {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape3",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         }
@@ -22298,6 +22598,11 @@
           "ap2Name": "Assembly",
           "ap1ID": "id-120072",
           "ap2ID": "id-76423"
+        },
+        {
+          "ap2Name": "inFace",
+          "ap1ID": "id-120107",
+          "ap2ID": "id-76675"
         },
         {
           "ap2Name": "Assembly",
@@ -25854,12 +26159,16 @@
               "uniqueID": "id-106141",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -27293,16 +27602,22 @@
               "name": "Fusion",
               "ioValues": [
                 {
+                  "name": "makeDisjoint",
+                  "ioValue": true
+                },
+                {
                   "name": "Shape 1",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
                 },
                 {
                   "name": "Shape 2",
-                  "ioValue": null
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape3",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
-              ],
-              "unionType": "Assembly",
-              "unionIndex": 1
+              ]
             },
             {
               "atomType": "Add-BOM-Tag",
@@ -27607,16 +27922,20 @@
           "uniqueID": "id-90312",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
               "name": "Shape 5",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 6",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 7",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -28077,12 +28396,16 @@
           "uniqueID": "id-93033",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 3",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -28660,20 +28983,28 @@
           "uniqueID": "id-93250",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 2",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 3",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "Shape 4",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape5",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -29047,8 +29378,12 @@
           "uniqueID": "id-100920",
           "ioValues": [
             {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
               "name": "Shape 1",
-              "ioValue": null
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
