@@ -2916,7 +2916,7 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.6,
+          "x": 0.5,
           "y": 0.9,
           "uniqueID": "id-135949",
           "name": "electronicsLayout",
@@ -8468,7 +8468,7 @@
         {
           "atomType": "Molecule",
           "x": 0.4,
-          "y": 0.9,
+          "y": 0.8,
           "uniqueID": "id-137182",
           "name": "battery_support",
           "ioValues": [
