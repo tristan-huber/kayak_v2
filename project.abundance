@@ -609,7 +609,7 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4,
+      "x": 0.3,
       "y": 0.8,
       "uniqueID": "id-133347",
       "name": " interior",
@@ -10535,7 +10535,7 @@
     {
       "atomType": "ExtractTag",
       "x": 0.4,
-      "y": 0.4,
+      "y": 0.7,
       "uniqueID": "id-140173",
       "name": "Extract electronics_aft_bulkhead",
       "ioValues": [
