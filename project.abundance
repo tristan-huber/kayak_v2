@@ -23178,8 +23178,8 @@
         },
         {
           "atomType": "Extrude",
-          "x": 0.5,
-          "y": 0.5,
+          "x": 0.8,
+          "y": 0.2,
           "uniqueID": "id-188922",
           "ioValues": [
             {
@@ -23188,9 +23188,250 @@
             },
             {
               "name": "height",
-              "ioValue": 10
+              "ioValue": 0.25,
+              "currentEquation": "0.25"
             }
           ]
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.8,
+          "y": 0.6,
+          "uniqueID": "id-188926",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 0.25
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.9,
+          "y": 0.8,
+          "uniqueID": "id-188930",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 30,
+              "currentEquation": "30"
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.9,
+          "y": 0.3,
+          "uniqueID": "id-188942",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 10,
+              "currentEquation": "10"
+            },
+            {
+              "name": "yDist",
+              "ioValue": 10,
+              "currentEquation": "10"
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0,
+              "currentEquation": "0"
+            }
+          ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.9,
+          "y": 0.7,
+          "uniqueID": "id-188948",
+          "ioValues": [
+            {
+              "name": "makeDisjoint",
+              "ioValue": true
+            },
+            {
+              "name": "Shape 1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape3",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Rotate",
+          "x": 0.4,
+          "y": 0.3,
+          "uniqueID": "id-188954",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "x-axis degrees",
+              "ioValue": 0
+            },
+            {
+              "name": "y-axis degrees",
+              "ioValue": 0
+            },
+            {
+              "name": "z-axis degrees",
+              "ioValue": -9,
+              "currentEquation": "-9"
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.3,
+          "y": 0.5,
+          "uniqueID": "id-188960",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0
+            },
+            {
+              "name": "yDist",
+              "ioValue": 2,
+              "currentEquation": "2"
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0
+            }
+          ]
+        },
+        {
+          "atomType": "GitHubMolecule",
+          "x": 0.5,
+          "y": 0.9,
+          "uniqueID": "id-188966",
+          "name": "Github Molecule",
+          "topLevel": false,
+          "allAtoms": [
+            {
+              "atomType": "Output",
+              "x": 1,
+              "y": 0.5,
+              "uniqueID": "id-188968",
+              "ioValues": [
+                {
+                  "name": "number or geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            }
+          ],
+          "allConnectors": [],
+          "fileTypeVersion": 1
+        },
+        {
+          "atomType": "Export",
+          "x": 0.3,
+          "y": 0.7,
+          "uniqueID": "id-188970",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "File Type",
+              "ioValue": "STEP",
+              "currentEquation": "STEP"
+            },
+            {
+              "name": "Resolution (dpi)",
+              "ioValue": 96
+            },
+            {
+              "name": "STL Tolerance",
+              "ioValue": 0.002
+            },
+            {
+              "name": "Part Name",
+              "ioValue": "topdeck",
+              "currentEquation": "topdeck"
+            }
+          ],
+          "type": null,
+          "resolution": 96,
+          "importIndex": 0,
+          "partName": "topdeck"
+        },
+        {
+          "atomType": "Gcode",
+          "x": 0.4,
+          "y": 0.7,
+          "uniqueID": "id-188976",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Tool Size",
+              "ioValue": 0.125,
+              "currentEquation": "0.125"
+            },
+            {
+              "name": "Passes",
+              "ioValue": 1,
+              "currentEquation": "1"
+            },
+            {
+              "name": "Speed",
+              "ioValue": 1500,
+              "currentEquation": "1500"
+            },
+            {
+              "name": "Cut Through",
+              "ioValue": 0,
+              "currentEquation": "0"
+            },
+            {
+              "name": "Part Name",
+              "ioValue": "topdecks",
+              "currentEquation": "topdecks"
+            }
+          ],
+          "partName": "Molecule",
+          "sortDirection": "Left"
         }
       ],
       "allConnectors": [
@@ -23230,6 +23471,11 @@
           "ap2ID": "id-188922"
         },
         {
+          "ap2Name": "geometry",
+          "ap1ID": "id-184563",
+          "ap2ID": "id-188926"
+        },
+        {
           "ap2Name": "surface",
           "ap1ID": "id-184599",
           "ap2ID": "id-184585"
@@ -23248,6 +23494,51 @@
           "ap2Name": "toUnroll",
           "ap1ID": "id-188910",
           "ap2ID": "id-184520"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-188922",
+          "ap2ID": "id-188942"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-188926",
+          "ap2ID": "id-188930"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-188926",
+          "ap2ID": "id-180197"
+        },
+        {
+          "ap2Name": "Shape2",
+          "ap1ID": "id-188926",
+          "ap2ID": "id-188948"
+        },
+        {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-188942",
+          "ap2ID": "id-188948"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-188948",
+          "ap2ID": "id-188954"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-188954",
+          "ap2ID": "id-188960"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-188960",
+          "ap2ID": "id-188970"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-188960",
+          "ap2ID": "id-188976"
         }
       ],
       "fileTypeVersion": 1
