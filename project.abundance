@@ -22065,7 +22065,7 @@
           "x": 0.4,
           "y": 0.4,
           "uniqueID": "id-206035",
-          "name": "Extract access_hatch, Untagged",
+          "name": "Extract access_hatch",
           "ioValues": [
             {
               "name": "geometry",
@@ -22076,7 +22076,7 @@
           "selectedTags": [
             "access_hatch"
           ],
-          "includeUntagged": true,
+          "includeUntagged": false,
           "notKeepOut": false
         }
       ],
