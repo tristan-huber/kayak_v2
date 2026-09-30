@@ -9074,7 +9074,7 @@
         {
           "atomType": "Assembly",
           "x": 0.9,
-          "y": 0.6,
+          "y": 0.4,
           "uniqueID": "id-137173",
           "ioValues": [
             {
@@ -9087,10 +9087,6 @@
             },
             {
               "name": "Shape 2",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "Shape 3",
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
@@ -9116,7 +9112,7 @@
           "x": 0.5,
           "y": 0.4,
           "uniqueID": "id-137178",
-          "name": "Extract Untagged",
+          "name": "Extract bulkhead_clearance, Untagged",
           "ioValues": [
             {
               "name": "geometry",
@@ -9124,7 +9120,9 @@
             }
           ],
           "tagIndex": 0,
-          "selectedTags": [],
+          "selectedTags": [
+            "bulkhead_clearance"
+          ],
           "includeUntagged": true,
           "notKeepOut": false
         },
@@ -11019,6 +11017,30 @@
           "tags": [
             "thickply"
           ]
+        },
+        {
+          "atomType": "Assembly",
+          "x": 0.9,
+          "y": 0.7,
+          "uniqueID": "id-201692",
+          "ioValues": [
+            {
+              "name": "makeDisjoint",
+              "ioValue": false
+            },
+            {
+              "name": "Shape 1",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape3",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
         }
       ],
       "allConnectors": [
@@ -11103,9 +11125,9 @@
           "ap2ID": "id-139988"
         },
         {
-          "ap2Name": "Shape 3",
+          "ap2Name": "Shape2",
           "ap1ID": "id-180214",
-          "ap2ID": "id-137173"
+          "ap2ID": "id-201692"
         },
         {
           "ap2Name": "geometry",
@@ -11175,7 +11197,7 @@
         {
           "ap2Name": "Shape 1",
           "ap1ID": "id-137048",
-          "ap2ID": "id-137173"
+          "ap2ID": "id-201692"
         },
         {
           "ap2Name": "Shape 4",
@@ -11183,7 +11205,7 @@
           "ap2ID": "id-137173"
         },
         {
-          "ap2Name": "Shape 6",
+          "ap2Name": "Shape 1",
           "ap1ID": "id-139988",
           "ap2ID": "id-137173"
         },
@@ -11191,6 +11213,11 @@
           "ap2Name": "components",
           "ap1ID": "id-135949",
           "ap2ID": "id-137048"
+        },
+        {
+          "ap2Name": "Shape 6",
+          "ap1ID": "id-201692",
+          "ap2ID": "id-137173"
         }
       ],
       "fileTypeVersion": 1
@@ -21012,7 +21039,7 @@
     {
       "atomType": "Molecule",
       "x": 0.9,
-      "y": 0.3,
+      "y": 0.2,
       "uniqueID": "id-180195",
       "name": "Molecule",
       "ioValues": [
@@ -21051,7 +21078,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.2,
+          "y": 0.5,
           "uniqueID": "id-180202",
           "name": "falsework",
           "type": "geometry",
@@ -35144,7 +35171,8 @@
             },
             {
               "name": "zDist",
-              "ioValue": 0
+              "ioValue": -0.25,
+              "currentEquation": "-0.25"
             }
           ]
         },
@@ -35200,6 +35228,14 @@
             {
               "name": "Shape 1",
               "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape2",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "Shape3",
+              "ioValue": "__GEOMETRY_INPUT__"
             }
           ]
         },
@@ -35248,7 +35284,7 @@
           "x": 0.9,
           "y": 0.8,
           "uniqueID": "id-93037",
-          "name": "Extract strongback",
+          "name": "Extract thickply",
           "ioValues": [
             {
               "name": "geometry",
@@ -35257,7 +35293,7 @@
           ],
           "tagIndex": 0,
           "selectedTags": [
-            "strongback"
+            "thickply"
           ],
           "includeUntagged": false,
           "notKeepOut": false
@@ -35822,6 +35858,11 @@
           "ap2ID": "id-180190"
         },
         {
+          "ap2Name": "Shape 1",
+          "ap1ID": "id-175970",
+          "ap2ID": "id-93033"
+        },
+        {
           "ap2Name": "geometry",
           "ap1ID": "id-180190",
           "ap2ID": "id-201679"
@@ -35955,6 +35996,11 @@
           "ap2Name": "geometry",
           "ap1ID": "id-93188",
           "ap2ID": "id-93213"
+        },
+        {
+          "ap2Name": "Shape2",
+          "ap1ID": "id-201679",
+          "ap2ID": "id-93033"
         }
       ],
       "fileTypeVersion": 1
