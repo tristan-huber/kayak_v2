@@ -21098,10 +21098,10 @@
           ],
           "orientations": [
             {
-              "downwardFaceIndex": 0
+              "downwardFaceIndex": 1
             },
             {
-              "downwardFaceIndex": 0
+              "downwardFaceIndex": 32
             },
             {
               "downwardFaceIndex": 0
@@ -35241,8 +35241,8 @@
           "ioValues": [
             {
               "name": "x length",
-              "ioValue": 4,
-              "currentEquation": "breadth"
+              "ioValue": 3.625,
+              "currentEquation": "breadth - bulkheadThickness + 0.125"
             },
             {
               "name": "y length",
