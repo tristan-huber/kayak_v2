@@ -1868,8 +1868,8 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.6,
-              "y": 0.2,
+              "x": 0.5,
+              "y": 0.3,
               "uniqueID": "id-135666",
               "name": "select.FacesByNormal",
               "ioValues": [
@@ -2377,6 +2377,10 @@
                 {
                   "name": "Shape3",
                   "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape4",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -2634,7 +2638,7 @@
             {
               "atomType": "GitHubMolecule",
               "x": 0.4,
-              "y": 0.2,
+              "y": 0.3,
               "uniqueID": "id-135924",
               "name": "To the Right",
               "ioValues": [
@@ -2799,6 +2803,35 @@
               "tags": [
                 "thinply"
               ]
+            },
+            {
+              "atomType": "Color",
+              "x": 0.6,
+              "y": 0.9,
+              "uniqueID": "id-201685",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "selectedColor": "Keep Out"
+            },
+            {
+              "atomType": "Tag",
+              "x": 0.7,
+              "y": 0.9,
+              "uniqueID": "id-201688",
+              "name": "bulkhead_clearance",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "tags": [
+                "bulkhead_clearance"
+              ]
             }
           ],
           "allConnectors": [
@@ -2811,6 +2844,11 @@
               "ap2Name": "Geometry",
               "ap1ID": "id-135653",
               "ap2ID": "id-135889"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-135653",
+              "ap2ID": "id-201685"
             },
             {
               "ap2Name": "Scale Factor",
@@ -2921,6 +2959,16 @@
               "ap2Name": "shape",
               "ap1ID": "id-135924",
               "ap2ID": "id-135666"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-201685",
+              "ap2ID": "id-201688"
+            },
+            {
+              "ap2Name": "Shape3",
+              "ap1ID": "id-201688",
+              "ap2ID": "id-135785"
             }
           ],
           "fileTypeVersion": 1
@@ -35077,6 +35125,30 @@
           ]
         },
         {
+          "atomType": "Move",
+          "x": 0.9,
+          "y": 0.3,
+          "uniqueID": "id-201679",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 0
+            }
+          ]
+        },
+        {
           "atomType": "Output",
           "x": 1,
           "y": 0.5,
@@ -35149,7 +35221,7 @@
         },
         {
           "atomType": "Move",
-          "x": 0.8,
+          "x": 0.7,
           "y": 0.4,
           "uniqueID": "id-93035",
           "ioValues": [
@@ -35748,6 +35820,11 @@
           "ap2Name": "remove",
           "ap1ID": "id-175970",
           "ap2ID": "id-180190"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-180190",
+          "ap2ID": "id-201679"
         },
         {
           "ap2Name": "geometry",
