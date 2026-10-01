@@ -661,7 +661,7 @@
     {
       "atomType": "Molecule",
       "x": 0.3,
-      "y": 0.6,
+      "y": 0.7,
       "uniqueID": "id-133347",
       "name": " interior",
       "ioValues": [
@@ -11304,7 +11304,7 @@
     {
       "atomType": "Molecule",
       "x": 0.5,
-      "y": 0.6,
+      "y": 0.7,
       "uniqueID": "id-140176",
       "name": "bluerobotics",
       "ioValues": [
@@ -18455,7 +18455,7 @@
     {
       "atomType": "ExtractTag",
       "x": 0.4,
-      "y": 0.1,
+      "y": 0.2,
       "uniqueID": "id-175515",
       "name": "Extract hatch panel",
       "ioValues": [
@@ -27382,6 +27382,10 @@
                       "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
+                      "name": "xDist",
+                      "ioValue": 53.872398702909095
+                    },
+                    {
                       "name": "yDist",
                       "ioValue": 20.2
                     },
@@ -27397,6 +27401,12 @@
                   "y": 0.3,
                   "uniqueID": "id-219792",
                   "name": "x - 90",
+                  "ioValues": [
+                    {
+                      "name": "x",
+                      "ioValue": 143.8723987029091
+                    }
+                  ],
                   "currentEquation": "x - 90"
                 },
                 {
