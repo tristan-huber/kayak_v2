@@ -7600,8 +7600,7 @@
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 1,
-                  "currentEquation": "1"
+                  "ioValue": 1
                 },
                 {
                   "name": "zDist",
@@ -7625,8 +7624,7 @@
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 0,
-                  "currentEquation": "0"
+                  "ioValue": 0
                 },
                 {
                   "name": "zDist",
@@ -19890,7 +19888,7 @@
           "atomType": "GitHubMolecule",
           "x": 0.2,
           "y": 0.8,
-          "uniqueID": "id-233757",
+          "uniqueID": "id-238498",
           "name": "Round_End_Arc",
           "ioValues": [
             {
@@ -19918,7 +19916,7 @@
               "atomType": "Output",
               "x": 1,
               "y": 0.5,
-              "uniqueID": "id-233717",
+              "uniqueID": "id-238458",
               "ioValues": [
                 {
                   "name": "number or geometry",
@@ -19930,7 +19928,7 @@
               "atomType": "Input",
               "x": 0,
               "y": 0.2,
-              "uniqueID": "id-233718",
+              "uniqueID": "id-238459",
               "name": "Angle",
               "options": []
             },
@@ -19938,7 +19936,7 @@
               "atomType": "Input",
               "x": 0,
               "y": 0.2,
-              "uniqueID": "id-233719",
+              "uniqueID": "id-238460",
               "name": "ID",
               "options": []
             },
@@ -19946,7 +19944,7 @@
               "atomType": "Input",
               "x": 0,
               "y": 0.3,
-              "uniqueID": "id-233720",
+              "uniqueID": "id-238461",
               "name": "OD",
               "options": []
             },
@@ -19954,7 +19952,7 @@
               "atomType": "Equation",
               "x": 0.2,
               "y": 0.3,
-              "uniqueID": "id-233721",
+              "uniqueID": "id-238462",
               "name": "(O-I)/2",
               "ioValues": [
                 {
@@ -19972,7 +19970,7 @@
               "atomType": "Circle",
               "x": 0.3,
               "y": 0.4,
-              "uniqueID": "id-233722",
+              "uniqueID": "id-238463",
               "ioValues": [
                 {
                   "name": "diameter",
@@ -19984,7 +19982,7 @@
               "atomType": "Move",
               "x": 0.4,
               "y": 0.5,
-              "uniqueID": "id-233723",
+              "uniqueID": "id-238464",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -20008,7 +20006,7 @@
               "atomType": "Equation",
               "x": 0.2,
               "y": 0.6,
-              "uniqueID": "id-233724",
+              "uniqueID": "id-238465",
               "name": "I/2+D/2",
               "ioValues": [
                 {
@@ -20026,7 +20024,7 @@
               "atomType": "Rotate",
               "x": 0.6,
               "y": 0.3,
-              "uniqueID": "id-233725",
+              "uniqueID": "id-238466",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -20050,7 +20048,7 @@
               "atomType": "Equation",
               "x": 0.4,
               "y": 0.1,
-              "uniqueID": "id-233726",
+              "uniqueID": "id-238467",
               "name": "A/2",
               "ioValues": [
                 {
@@ -20064,7 +20062,7 @@
               "atomType": "Rotate",
               "x": 0.7,
               "y": 0.5,
-              "uniqueID": "id-233727",
+              "uniqueID": "id-238468",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -20088,7 +20086,7 @@
               "atomType": "Equation",
               "x": 0.5,
               "y": 0.4,
-              "uniqueID": "id-233728",
+              "uniqueID": "id-238469",
               "name": "-1*X",
               "ioValues": [
                 {
@@ -20102,7 +20100,7 @@
               "atomType": "Rotate",
               "x": 0.4,
               "y": 0.9,
-              "uniqueID": "id-233729",
+              "uniqueID": "id-238470",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -20126,7 +20124,7 @@
               "atomType": "Equation",
               "x": 0.1,
               "y": 0.9,
-              "uniqueID": "id-233730",
+              "uniqueID": "id-238471",
               "name": "A/-2-90",
               "ioValues": [
                 {
@@ -20140,7 +20138,7 @@
               "atomType": "Intersection",
               "x": 0.5,
               "y": 0.8,
-              "uniqueID": "id-233731",
+              "uniqueID": "id-238472",
               "ioValues": [
                 {
                   "name": "geometry1",
@@ -20156,7 +20154,7 @@
               "atomType": "Extrude",
               "x": 0.6,
               "y": 0.9,
-              "uniqueID": "id-233732",
+              "uniqueID": "id-238473",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -20172,7 +20170,7 @@
               "atomType": "Extrude",
               "x": 0.8,
               "y": 0.5,
-              "uniqueID": "id-233733",
+              "uniqueID": "id-238474",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -20188,7 +20186,7 @@
               "atomType": "Extrude",
               "x": 0.7,
               "y": 0.3,
-              "uniqueID": "id-233734",
+              "uniqueID": "id-238475",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -20204,7 +20202,7 @@
               "atomType": "Fusion",
               "x": 0.8,
               "y": 0.7,
-              "uniqueID": "id-233735",
+              "uniqueID": "id-238476",
               "ioValues": [
                 {
                   "name": "Shape 1",
@@ -20294,7 +20292,7 @@
               "atomType": "Input",
               "x": 0,
               "y": 0.4,
-              "uniqueID": "id-233736",
+              "uniqueID": "id-238477",
               "name": "Thickness",
               "options": []
             },
@@ -20302,7 +20300,7 @@
               "atomType": "GitHubMolecule",
               "x": 0.2,
               "y": 0.7,
-              "uniqueID": "id-233737",
+              "uniqueID": "id-238478",
               "name": "Concentric_Circles",
               "ioValues": [
                 {
@@ -20320,7 +20318,7 @@
                   "atomType": "Output",
                   "x": 1,
                   "y": 0.5,
-                  "uniqueID": "id-233738",
+                  "uniqueID": "id-238479",
                   "ioValues": [
                     {
                       "name": "number or geometry",
@@ -20332,7 +20330,7 @@
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-233739",
+                  "uniqueID": "id-238480",
                   "name": "OD",
                   "type": "number",
                   "options": []
@@ -20341,7 +20339,7 @@
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-233740",
+                  "uniqueID": "id-238481",
                   "name": "ID",
                   "type": "number",
                   "options": []
@@ -20350,7 +20348,7 @@
                   "atomType": "Circle",
                   "x": 0.5,
                   "y": 0.4,
-                  "uniqueID": "id-233741",
+                  "uniqueID": "id-238482",
                   "ioValues": [
                     {
                       "name": "diameter",
@@ -20362,7 +20360,7 @@
                   "atomType": "Circle",
                   "x": 0.4,
                   "y": 0.7,
-                  "uniqueID": "id-233742",
+                  "uniqueID": "id-238483",
                   "ioValues": [
                     {
                       "name": "diameter",
@@ -20374,7 +20372,7 @@
                   "atomType": "Difference",
                   "x": 0.7,
                   "y": 0.6,
-                  "uniqueID": "id-233743",
+                  "uniqueID": "id-238484",
                   "ioValues": [
                     {
                       "name": "retain",
@@ -20390,28 +20388,28 @@
               "allConnectors": [
                 {
                   "ap2Name": "diameter",
-                  "ap1ID": "id-233739",
-                  "ap2ID": "id-233741"
+                  "ap1ID": "id-238480",
+                  "ap2ID": "id-238482"
                 },
                 {
                   "ap2Name": "diameter",
-                  "ap1ID": "id-233740",
-                  "ap2ID": "id-233742"
+                  "ap1ID": "id-238481",
+                  "ap2ID": "id-238483"
                 },
                 {
                   "ap2Name": "retain",
-                  "ap1ID": "id-233741",
-                  "ap2ID": "id-233743"
+                  "ap1ID": "id-238482",
+                  "ap2ID": "id-238484"
                 },
                 {
                   "ap2Name": "remove",
-                  "ap1ID": "id-233742",
-                  "ap2ID": "id-233743"
+                  "ap1ID": "id-238483",
+                  "ap2ID": "id-238484"
                 },
                 {
                   "ap2Name": "number or geometry",
-                  "ap1ID": "id-233743",
-                  "ap2ID": "id-233738"
+                  "ap1ID": "id-238484",
+                  "ap2ID": "id-238479"
                 }
               ],
               "parentRepo": {
@@ -20444,7 +20442,7 @@
               "atomType": "GitHubMolecule",
               "x": 0.2,
               "y": 0.9,
-              "uniqueID": "id-233744",
+              "uniqueID": "id-238485",
               "name": "SimpleArc",
               "ioValues": [
                 {
@@ -20462,7 +20460,7 @@
                   "atomType": "Output",
                   "x": 1,
                   "y": 0.5,
-                  "uniqueID": "id-233745",
+                  "uniqueID": "id-238486",
                   "ioValues": [
                     {
                       "name": "number or geometry",
@@ -20474,7 +20472,7 @@
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-233746",
+                  "uniqueID": "id-238487",
                   "name": "diameter",
                   "type": "number",
                   "options": []
@@ -20483,7 +20481,7 @@
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-233747",
+                  "uniqueID": "id-238488",
                   "name": "degrees",
                   "type": "number",
                   "options": []
@@ -20492,7 +20490,7 @@
                   "atomType": "Circle",
                   "x": 0.2,
                   "y": 0.2,
-                  "uniqueID": "id-233748",
+                  "uniqueID": "id-238489",
                   "ioValues": [
                     {
                       "name": "diameter",
@@ -20504,7 +20502,7 @@
                   "atomType": "Rectangle",
                   "x": 0.3,
                   "y": 0.5,
-                  "uniqueID": "id-233749",
+                  "uniqueID": "id-238490",
                   "ioValues": [
                     {
                       "name": "x length",
@@ -20520,7 +20518,7 @@
                   "atomType": "Equation",
                   "x": 0.3,
                   "y": 0.6,
-                  "uniqueID": "id-233750",
+                  "uniqueID": "id-238491",
                   "name": "x / 2",
                   "ioValues": [
                     {
@@ -20534,7 +20532,7 @@
                   "atomType": "Move",
                   "x": 0.4,
                   "y": 0.5,
-                  "uniqueID": "id-233751",
+                  "uniqueID": "id-238492",
                   "ioValues": [
                     {
                       "name": "geometry",
@@ -20558,7 +20556,7 @@
                   "atomType": "Move",
                   "x": 0.5,
                   "y": 0.7,
-                  "uniqueID": "id-233752",
+                  "uniqueID": "id-238493",
                   "ioValues": [
                     {
                       "name": "geometry",
@@ -20582,7 +20580,7 @@
                   "atomType": "Equation",
                   "x": 0.4,
                   "y": 0.7,
-                  "uniqueID": "id-233753",
+                  "uniqueID": "id-238494",
                   "name": "-1 * x",
                   "ioValues": [
                     {
@@ -20596,7 +20594,7 @@
                   "atomType": "Rotate",
                   "x": 0.6,
                   "y": 0.5,
-                  "uniqueID": "id-233754",
+                  "uniqueID": "id-238495",
                   "ioValues": [
                     {
                       "name": "geometry",
@@ -20620,7 +20618,7 @@
                   "atomType": "Difference",
                   "x": 0.7,
                   "y": 0.3,
-                  "uniqueID": "id-233755",
+                  "uniqueID": "id-238496",
                   "ioValues": [
                     {
                       "name": "retain",
@@ -20636,7 +20634,7 @@
                   "atomType": "Difference",
                   "x": 0.8,
                   "y": 0.6,
-                  "uniqueID": "id-233756",
+                  "uniqueID": "id-238497",
                   "ioValues": [
                     {
                       "name": "retain",
@@ -20652,83 +20650,83 @@
               "allConnectors": [
                 {
                   "ap2Name": "diameter",
-                  "ap1ID": "id-233746",
-                  "ap2ID": "id-233748"
+                  "ap1ID": "id-238487",
+                  "ap2ID": "id-238489"
                 },
                 {
                   "ap2Name": "x length",
-                  "ap1ID": "id-233746",
-                  "ap2ID": "id-233749"
+                  "ap1ID": "id-238487",
+                  "ap2ID": "id-238490"
                 },
                 {
                   "ap2Name": "x",
-                  "ap1ID": "id-233746",
-                  "ap2ID": "id-233750"
+                  "ap1ID": "id-238487",
+                  "ap2ID": "id-238491"
                 },
                 {
                   "ap2Name": "y length",
-                  "ap1ID": "id-233746",
-                  "ap2ID": "id-233749"
+                  "ap1ID": "id-238487",
+                  "ap2ID": "id-238490"
                 },
                 {
                   "ap2Name": "z-axis degrees",
-                  "ap1ID": "id-233747",
-                  "ap2ID": "id-233754"
+                  "ap1ID": "id-238488",
+                  "ap2ID": "id-238495"
                 },
                 {
                   "ap2Name": "retain",
-                  "ap1ID": "id-233748",
-                  "ap2ID": "id-233755"
+                  "ap1ID": "id-238489",
+                  "ap2ID": "id-238496"
                 },
                 {
                   "ap2Name": "geometry",
-                  "ap1ID": "id-233749",
-                  "ap2ID": "id-233751"
+                  "ap1ID": "id-238490",
+                  "ap2ID": "id-238492"
                 },
                 {
                   "ap2Name": "geometry",
-                  "ap1ID": "id-233749",
-                  "ap2ID": "id-233752"
+                  "ap1ID": "id-238490",
+                  "ap2ID": "id-238493"
                 },
                 {
                   "ap2Name": "xDist",
-                  "ap1ID": "id-233750",
-                  "ap2ID": "id-233751"
+                  "ap1ID": "id-238491",
+                  "ap2ID": "id-238492"
                 },
                 {
                   "ap2Name": "x",
-                  "ap1ID": "id-233750",
-                  "ap2ID": "id-233753"
+                  "ap1ID": "id-238491",
+                  "ap2ID": "id-238494"
                 },
                 {
                   "ap2Name": "remove",
-                  "ap1ID": "id-233751",
-                  "ap2ID": "id-233755"
+                  "ap1ID": "id-238492",
+                  "ap2ID": "id-238496"
                 },
                 {
                   "ap2Name": "geometry",
-                  "ap1ID": "id-233752",
-                  "ap2ID": "id-233754"
+                  "ap1ID": "id-238493",
+                  "ap2ID": "id-238495"
                 },
                 {
                   "ap2Name": "xDist",
-                  "ap1ID": "id-233753",
-                  "ap2ID": "id-233752"
+                  "ap1ID": "id-238494",
+                  "ap2ID": "id-238493"
                 },
                 {
                   "ap2Name": "remove",
-                  "ap1ID": "id-233754",
-                  "ap2ID": "id-233756"
+                  "ap1ID": "id-238495",
+                  "ap2ID": "id-238497"
                 },
                 {
                   "ap2Name": "retain",
-                  "ap1ID": "id-233755",
-                  "ap2ID": "id-233756"
+                  "ap1ID": "id-238496",
+                  "ap2ID": "id-238497"
                 },
                 {
                   "ap2Name": "number or geometry",
-                  "ap1ID": "id-233756",
-                  "ap2ID": "id-233745"
+                  "ap1ID": "id-238497",
+                  "ap2ID": "id-238486"
                 }
               ],
               "parentRepo": {
@@ -20763,163 +20761,163 @@
           "allConnectors": [
             {
               "ap2Name": "A",
-              "ap1ID": "id-233718",
-              "ap2ID": "id-233726"
+              "ap1ID": "id-238459",
+              "ap2ID": "id-238467"
             },
             {
               "ap2Name": "degrees",
-              "ap1ID": "id-233718",
-              "ap2ID": "id-233744"
+              "ap1ID": "id-238459",
+              "ap2ID": "id-238485"
             },
             {
               "ap2Name": "A",
-              "ap1ID": "id-233718",
-              "ap2ID": "id-233730"
+              "ap1ID": "id-238459",
+              "ap2ID": "id-238471"
             },
             {
               "ap2Name": "ID",
-              "ap1ID": "id-233719",
-              "ap2ID": "id-233737"
+              "ap1ID": "id-238460",
+              "ap2ID": "id-238478"
             },
             {
               "ap2Name": "I",
-              "ap1ID": "id-233719",
-              "ap2ID": "id-233721"
+              "ap1ID": "id-238460",
+              "ap2ID": "id-238462"
             },
             {
               "ap2Name": "I",
-              "ap1ID": "id-233719",
-              "ap2ID": "id-233724"
+              "ap1ID": "id-238460",
+              "ap2ID": "id-238465"
             },
             {
               "ap2Name": "OD",
-              "ap1ID": "id-233720",
-              "ap2ID": "id-233737"
+              "ap1ID": "id-238461",
+              "ap2ID": "id-238478"
             },
             {
               "ap2Name": "O",
-              "ap1ID": "id-233720",
-              "ap2ID": "id-233721"
+              "ap1ID": "id-238461",
+              "ap2ID": "id-238462"
             },
             {
               "ap2Name": "diameter",
-              "ap1ID": "id-233720",
-              "ap2ID": "id-233744"
+              "ap1ID": "id-238461",
+              "ap2ID": "id-238485"
             },
             {
               "ap2Name": "diameter",
-              "ap1ID": "id-233721",
-              "ap2ID": "id-233722"
+              "ap1ID": "id-238462",
+              "ap2ID": "id-238463"
             },
             {
               "ap2Name": "D",
-              "ap1ID": "id-233721",
-              "ap2ID": "id-233724"
+              "ap1ID": "id-238462",
+              "ap2ID": "id-238465"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-233722",
-              "ap2ID": "id-233723"
+              "ap1ID": "id-238463",
+              "ap2ID": "id-238464"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-233723",
-              "ap2ID": "id-233725"
+              "ap1ID": "id-238464",
+              "ap2ID": "id-238466"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-233723",
-              "ap2ID": "id-233727"
+              "ap1ID": "id-238464",
+              "ap2ID": "id-238468"
             },
             {
               "ap2Name": "xDist",
-              "ap1ID": "id-233724",
-              "ap2ID": "id-233723"
+              "ap1ID": "id-238465",
+              "ap2ID": "id-238464"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-233725",
-              "ap2ID": "id-233734"
+              "ap1ID": "id-238466",
+              "ap2ID": "id-238475"
             },
             {
               "ap2Name": "z-axis degrees",
-              "ap1ID": "id-233726",
-              "ap2ID": "id-233725"
+              "ap1ID": "id-238467",
+              "ap2ID": "id-238466"
             },
             {
               "ap2Name": "X",
-              "ap1ID": "id-233726",
-              "ap2ID": "id-233728"
+              "ap1ID": "id-238467",
+              "ap2ID": "id-238469"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-233727",
-              "ap2ID": "id-233733"
+              "ap1ID": "id-238468",
+              "ap2ID": "id-238474"
             },
             {
               "ap2Name": "z-axis degrees",
-              "ap1ID": "id-233728",
-              "ap2ID": "id-233727"
+              "ap1ID": "id-238469",
+              "ap2ID": "id-238468"
             },
             {
               "ap2Name": "geometry2",
-              "ap1ID": "id-233729",
-              "ap2ID": "id-233731"
+              "ap1ID": "id-238470",
+              "ap2ID": "id-238472"
             },
             {
               "ap2Name": "z-axis degrees",
-              "ap1ID": "id-233730",
-              "ap2ID": "id-233729"
+              "ap1ID": "id-238471",
+              "ap2ID": "id-238470"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-233731",
-              "ap2ID": "id-233732"
+              "ap1ID": "id-238472",
+              "ap2ID": "id-238473"
             },
             {
               "ap2Name": "Shape 1",
-              "ap1ID": "id-233732",
-              "ap2ID": "id-233735"
+              "ap1ID": "id-238473",
+              "ap2ID": "id-238476"
             },
             {
               "ap2Name": "Shape 2",
-              "ap1ID": "id-233733",
-              "ap2ID": "id-233735"
+              "ap1ID": "id-238474",
+              "ap2ID": "id-238476"
             },
             {
               "ap2Name": "Shape 3",
-              "ap1ID": "id-233734",
-              "ap2ID": "id-233735"
+              "ap1ID": "id-238475",
+              "ap2ID": "id-238476"
             },
             {
               "ap2Name": "number or geometry",
-              "ap1ID": "id-233735",
-              "ap2ID": "id-233717"
+              "ap1ID": "id-238476",
+              "ap2ID": "id-238458"
             },
             {
               "ap2Name": "height",
-              "ap1ID": "id-233736",
-              "ap2ID": "id-233732"
+              "ap1ID": "id-238477",
+              "ap2ID": "id-238473"
             },
             {
               "ap2Name": "height",
-              "ap1ID": "id-233736",
-              "ap2ID": "id-233733"
+              "ap1ID": "id-238477",
+              "ap2ID": "id-238474"
             },
             {
               "ap2Name": "height",
-              "ap1ID": "id-233736",
-              "ap2ID": "id-233734"
+              "ap1ID": "id-238477",
+              "ap2ID": "id-238475"
             },
             {
               "ap2Name": "geometry1",
-              "ap1ID": "id-233737",
-              "ap2ID": "id-233731"
+              "ap1ID": "id-238478",
+              "ap2ID": "id-238472"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-233744",
-              "ap2ID": "id-233729"
+              "ap1ID": "id-238485",
+              "ap2ID": "id-238470"
             }
           ],
           "parentRepo": {
@@ -20950,7 +20948,7 @@
           },
           "unitsKey": "MM",
           "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1790892399204
+          "lastReloadedFromGithubAt": 1790893320313
         }
       ],
       "allConnectors": [
@@ -21096,7 +21094,7 @@
         },
         {
           "ap2Name": "geometry",
-          "ap1ID": "id-233757",
+          "ap1ID": "id-238498",
           "ap2ID": "id-175795"
         }
       ],
@@ -27382,10 +27380,6 @@
                       "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
-                      "name": "xDist",
-                      "ioValue": 53.872398702909095
-                    },
-                    {
                       "name": "yDist",
                       "ioValue": 20.2
                     },
@@ -27401,12 +27395,6 @@
                   "y": 0.3,
                   "uniqueID": "id-219792",
                   "name": "x - 90",
-                  "ioValues": [
-                    {
-                      "name": "x",
-                      "ioValue": 143.8723987029091
-                    }
-                  ],
                   "currentEquation": "x - 90"
                 },
                 {
