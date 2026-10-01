@@ -16370,7 +16370,8 @@
                     },
                     {
                       "name": "zDist",
-                      "ioValue": -0.1
+                      "ioValue": 0,
+                      "currentEquation": "0"
                     }
                   ]
                 },
@@ -17214,8 +17215,8 @@
         },
         {
           "atomType": "Move",
-          "x": 0.5,
-          "y": 0.1,
+          "x": 0.4,
+          "y": 0.4,
           "uniqueID": "id-175442",
           "ioValues": [
             {
