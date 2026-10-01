@@ -4824,7 +4824,7 @@
             {
               "atomType": "GitHubMolecule",
               "x": 0.1,
-              "y": 0.5,
+              "y": 0.7,
               "uniqueID": "id-136514",
               "name": "Briidea_PWM",
               "topLevel": false,
@@ -7192,547 +7192,6 @@
             },
             {
               "atomType": "GitHubMolecule",
-              "x": 0.4,
-              "y": 0.7,
-              "uniqueID": "id-171545",
-              "name": "Blue_Robotics_Basic_ESC",
-              "topLevel": false,
-              "allAtoms": [
-                {
-                  "atomType": "Move",
-                  "x": 0.6,
-                  "y": 0.9,
-                  "uniqueID": "id-171546",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "xDist",
-                      "ioValue": 0
-                    },
-                    {
-                      "name": "yDist",
-                      "ioValue": -0.3937007874015748
-                    },
-                    {
-                      "name": "zDist",
-                      "ioValue": 0
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Add-BOM-Tag",
-                  "x": 0.5,
-                  "y": 0.4,
-                  "uniqueID": "id-171547",
-                  "name": "Add BOM Tag",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Item Name",
-                      "ioValue": "ESC board",
-                      "currentEquation": "ESC board"
-                    },
-                    {
-                      "name": "Number Needed",
-                      "ioValue": 1
-                    },
-                    {
-                      "name": "Cost (USD)",
-                      "ioValue": 30
-                    },
-                    {
-                      "name": "Source Link",
-                      "ioValue": "https://bluerobotics.com/store/thrusters/speed-controllers/besc30-r3/",
-                      "currentEquation": "https://bluerobotics.com/store/thrusters/speed-controllers/besc30-r3/"
-                    }
-                  ],
-                  "BOMitem": {
-                    "BOMitemName": "ESC board",
-                    "numberNeeded": 1,
-                    "costUSD": 30,
-                    "source": "https://bluerobotics.com/store/thrusters/speed-controllers/besc30-r3/"
-                  }
-                },
-                {
-                  "atomType": "Assembly",
-                  "x": 0.7,
-                  "y": 0.9,
-                  "uniqueID": "id-171548",
-                  "ioValues": [
-                    {
-                      "name": "makeDisjoint",
-                      "ioValue": true
-                    },
-                    {
-                      "name": "Shape 1",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape2",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape3",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "GitHubMolecule",
-                  "x": 0.7,
-                  "y": 0.6,
-                  "uniqueID": "id-171549",
-                  "name": "Above",
-                  "ioValues": [
-                    {
-                      "name": "B",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "A",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "topLevel": false,
-                  "allAtoms": [
-                    {
-                      "atomType": "Output",
-                      "x": 1,
-                      "y": 0.5,
-                      "uniqueID": "id-171550",
-                      "ioValues": [
-                        {
-                          "name": "number or geometry",
-                          "ioValue": "__GEOMETRY_INPUT__"
-                        }
-                      ]
-                    },
-                    {
-                      "atomType": "Input",
-                      "x": 0,
-                      "y": 0.2,
-                      "uniqueID": "id-171551",
-                      "name": "B",
-                      "type": "geometry",
-                      "options": []
-                    },
-                    {
-                      "atomType": "Input",
-                      "x": 0,
-                      "y": 0.2,
-                      "uniqueID": "id-171552",
-                      "name": "A",
-                      "type": "geometry",
-                      "options": []
-                    },
-                    {
-                      "atomType": "Code",
-                      "x": 0.4,
-                      "y": 0.5,
-                      "uniqueID": "id-171553",
-                      "ioValues": [
-                        {
-                          "name": "A",
-                          "ioValue": "__GEOMETRY_INPUT__"
-                        },
-                        {
-                          "name": "B",
-                          "ioValue": "__GEOMETRY_INPUT__"
-                        }
-                      ],
-                      "interpreterVersion": 0,
-                      "code": "\n      Inputs = [\n       {inputName: \"A\", type: \"geometry\", defaultValue: null},\n        {inputName: \"B\", type: \"geometry\", defaultValue: null}\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      let boundsA = await GetBounds(A);\n      let A_minZ = boundsA.min[2];\n\n      let B_maxZ = 0;\n      if(B){\n          let boundsB = await GetBounds(B);\n          console.log(\"Bounding Box B:  \");\n          console.log(boundsB);\n          B_maxZ  = boundsB.max[2];\n      }\n\n     let translationZ = B_maxZ - A_minZ;\n     \n      let movedOutput = await Move(A, 0, 0, translationZ);\n\n      return movedOutput;\n\n      // //We can also create a new shape from scratch\n      // let createdRectangle = replicad.drawRectangle(5,7)\n      // //This is the plane we are going to put our new shape on\n      // const newPlane = new replicad.Plane().pivot(0, 'Y');\n      // //And we extrude the shape to make it 3D\n      // let createdShape = createdRectangle.sketchOnPlane(newPlane).extrude(height)\n\n      // //For our new geometry we need to define the tags, color, plane, etc\n      // let shape2 = {\n      //     geometry: [createdShape],\n      //     tags: [\"aTag\"],\n      //     color: '#A3CE5B',\n      //     plane: newPlane,\n      //     bom: []\n      // }\n\n      // //Then we can return our created shape in just the same way\n      // //return shape2\n\n      // //If we want to return both shapes at once, we can create an assembly with them\n      // let anAssembly = {\n      //   geometry: [shape1, shape2],\n      //   tags: [\"aNewTag\"],\n      //   color: '#A3CF5B',\n      //   plane: newPlane,\n      //   bom: []\n      // }\n\n      // //And we can return that in the same way\n      // return anAssembly\n\n      /**\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n      If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0]\n      Use any replicad available methods to modify your geometry. Learn more about all of the available methods at\n      https://replicad.xyz/docs/introapp/UserGuide.html\n      Return a replicad object that includes geometry, color, tags and plane.\n\n      Example Code Atom:\n        Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let finalShape = library[shape].geometry[0].clone().translate([x,0,0])\n        return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      */\n      "
-                    },
-                    {
-                      "atomType": "Rectangle",
-                      "x": 0.2,
-                      "y": 0.8,
-                      "uniqueID": "id-171554",
-                      "ioValues": [
-                        {
-                          "name": "x length",
-                          "ioValue": 10
-                        },
-                        {
-                          "name": "y length",
-                          "ioValue": 10
-                        }
-                      ]
-                    },
-                    {
-                      "atomType": "Extrude",
-                      "x": 0.3,
-                      "y": 0.8,
-                      "uniqueID": "id-171555",
-                      "ioValues": [
-                        {
-                          "name": "geometry",
-                          "ioValue": "__GEOMETRY_INPUT__"
-                        },
-                        {
-                          "name": "height",
-                          "ioValue": 9
-                        }
-                      ]
-                    }
-                  ],
-                  "allConnectors": [
-                    {
-                      "ap2Name": "B",
-                      "ap1ID": "id-171551",
-                      "ap2ID": "id-171553"
-                    },
-                    {
-                      "ap2Name": "A",
-                      "ap1ID": "id-171552",
-                      "ap2ID": "id-171553"
-                    },
-                    {
-                      "ap2Name": "number or geometry",
-                      "ap1ID": "id-171553",
-                      "ap2ID": "id-171550"
-                    },
-                    {
-                      "ap2Name": "geometry",
-                      "ap1ID": "id-171554",
-                      "ap2ID": "id-171555"
-                    }
-                  ],
-                  "parentRepo": {
-                    "lastFoundGit": "2026-09-20T02:23:39.099Z",
-                    "privateRepo": false,
-                    "repoName": "Above",
-                    "dateCreated": "2025-09-22T22:39:35Z",
-                    "likes": 0,
-                    "pngURL": "https://raw.githubusercontent.com/BarbourSmith/Above/master/project.png?sanitize=true",
-                    "readme": "https://raw.githubusercontent.com/BarbourSmith/Above/master/README.md?sanitize=true",
-                    "yyyy": 2025,
-                    "topMoleculeID": "",
-                    "userRanking": 0,
-                    "userSetAsThumbnail": false,
-                    "githubMoleculesUsed": [],
-                    "html_url": "https://github.com/BarbourSmith/Above",
-                    "topics": [],
-                    "pullRequests": [],
-                    "forks": 0,
-                    "dateModified": "2025-12-19T18:51:02Z",
-                    "ranking": 2,
-                    "searchField": "above barboursmith takes two inputs and moves input a in the z-axis direction so that it ends up above b as defined by their bounding boxes ",
-                    "owner": "BarbourSmith",
-                    "description": "Takes two inputs and moves input A in the Z-axis direction so that it ends up Above B as defined by their bounding boxes",
-                    "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Above/master/project.abundance?sanitize=true",
-                    "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Above/master/project.svg?sanitize=true",
-                    "isLocal": false
-                  },
-                  "unitsKey": "MM",
-                  "fileTypeVersion": 1,
-                  "lastReloadedFromGithubAt": 1790622145427
-                },
-                {
-                  "atomType": "Assembly",
-                  "x": 0.7,
-                  "y": 0.3,
-                  "uniqueID": "id-171556",
-                  "ioValues": [
-                    {
-                      "name": "makeDisjoint",
-                      "ioValue": true
-                    },
-                    {
-                      "name": "Shape 1",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape2",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Shape3",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Constant",
-                  "x": 0.1,
-                  "y": 0.6,
-                  "uniqueID": "id-171557",
-                  "name": "length",
-                  "value": 1.3779527559055118
-                },
-                {
-                  "atomType": "Output",
-                  "x": 1,
-                  "y": 0.5,
-                  "uniqueID": "id-171558",
-                  "ioValues": [
-                    {
-                      "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Rectangle",
-                  "x": 0.2,
-                  "y": 0.6,
-                  "uniqueID": "id-171559",
-                  "ioValues": [
-                    {
-                      "name": "x length",
-                      "ioValue": 0.6692913385826772
-                    },
-                    {
-                      "name": "y length",
-                      "ioValue": 1.3779527559055118,
-                      "currentEquation": "35 / 25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Extrude",
-                  "x": 0.3,
-                  "y": 0.3,
-                  "uniqueID": "id-171560",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "height",
-                      "ioValue": 0.13
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Rectangle",
-                  "x": 0.2,
-                  "y": 0.8,
-                  "uniqueID": "id-171561",
-                  "ioValues": [
-                    {
-                      "name": "x length",
-                      "ioValue": 0.7874015748031497
-                    },
-                    {
-                      "name": "y length",
-                      "ioValue": 0.7874015748031497,
-                      "currentEquation": "20 / 25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Extrude",
-                  "x": 0.3,
-                  "y": 0.6,
-                  "uniqueID": "id-171562",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "height",
-                      "ioValue": 0.3937007874015748,
-                      "currentEquation": "10 / 25.4"
-                    }
-                  ]
-                },
-                {
-                  "atomType": "Color",
-                  "x": 0.4,
-                  "y": 0.7,
-                  "uniqueID": "id-171563",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    }
-                  ],
-                  "selectedColor": "Yellow"
-                },
-                {
-                  "atomType": "Add-BOM-Tag",
-                  "x": 0.5,
-                  "y": 0.8,
-                  "uniqueID": "id-171564",
-                  "name": "Add BOM Tag",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "Item Name",
-                      "ioValue": "heat sink",
-                      "currentEquation": "heat sink"
-                    },
-                    {
-                      "name": "Number Needed",
-                      "ioValue": 0.1
-                    },
-                    {
-                      "name": "Cost (USD)",
-                      "ioValue": 7
-                    },
-                    {
-                      "name": "Source Link",
-                      "ioValue": "https://www.amazon.com/Easycargo-Heatsink-20x20x10mm-Conductive-20mmx20mmx10mm/dp/B07BDKN3XV/ref=sr_1_7?crid=2Q1AI4UJCZDPR&dib=eyJ2IjoiMSJ9.a0g2ljn7zXQTqddg66cfbq_-Gpp8U5n2xhd3zR5M0g8uCA9JfqTXnxQQSejrjNF4RYjffNxNsRQ9cqQvTgPtHFtsGKFFC8I1C2HnHcp7fR8_DQVW_hbhDGTSeRcBhDfm9rkS5D_Xapz8PvhGTm37Tso_oqetkEyHunHAyFBIIE8RNuwwxh1CzUOSeUq9A9VVhKf5GkQIIg5LEaxLgfwpFJNIusZ-YUjMDEo2wQPQgGM.VPmk7NnYAS02nX9wK3fSJcFwJ956Z6B49qmEUIN9bcE&dib_tag=se&keywords=heat+sink+20mm+square&qid=1790621873&sprefix=heat+sink+20mm+square%2Caps%2C262&sr=8-7",
-                      "currentEquation": "https://www.amazon.com/Easycargo-Heatsink-20x20x10mm-Conductive-20mmx20mmx10mm/dp/B07BDKN3XV/ref=sr_1_7?crid=2Q1AI4UJCZDPR&dib=eyJ2IjoiMSJ9.a0g2ljn7zXQTqddg66cfbq_-Gpp8U5n2xhd3zR5M0g8uCA9JfqTXnxQQSejrjNF4RYjffNxNsRQ9cqQvTgPtHFtsGKFFC8I1C2HnHcp7fR8_DQVW_hbhDGTSeRcBhDfm9rkS5D_Xapz8PvhGTm37Tso_oqetkEyHunHAyFBIIE8RNuwwxh1CzUOSeUq9A9VVhKf5GkQIIg5LEaxLgfwpFJNIusZ-YUjMDEo2wQPQgGM.VPmk7NnYAS02nX9wK3fSJcFwJ956Z6B49qmEUIN9bcE&dib_tag=se&keywords=heat+sink+20mm+square&qid=1790621873&sprefix=heat+sink+20mm+square%2Caps%2C262&sr=8-7"
-                    }
-                  ],
-                  "BOMitem": {
-                    "BOMitemName": "heat sink",
-                    "numberNeeded": 0.1,
-                    "costUSD": 7,
-                    "source": "https://www.amazon.com/Easycargo-Heatsink-20x20x10mm-Conductive-20mmx20mmx10mm/dp/B07BDKN3XV/ref=sr_1_7?crid=2Q1AI4UJCZDPR&dib=eyJ2IjoiMSJ9.a0g2ljn7zXQTqddg66cfbq_-Gpp8U5n2xhd3zR5M0g8uCA9JfqTXnxQQSejrjNF4RYjffNxNsRQ9cqQvTgPtHFtsGKFFC8I1C2HnHcp7fR8_DQVW_hbhDGTSeRcBhDfm9rkS5D_Xapz8PvhGTm37Tso_oqetkEyHunHAyFBIIE8RNuwwxh1CzUOSeUq9A9VVhKf5GkQIIg5LEaxLgfwpFJNIusZ-YUjMDEo2wQPQgGM.VPmk7NnYAS02nX9wK3fSJcFwJ956Z6B49qmEUIN9bcE&dib_tag=se&keywords=heat+sink+20mm+square&qid=1790621873&sprefix=heat+sink+20mm+square%2Caps%2C262&sr=8-7"
-                  }
-                },
-                {
-                  "atomType": "Move",
-                  "x": 0.6,
-                  "y": 0.7,
-                  "uniqueID": "id-171565",
-                  "ioValues": [
-                    {
-                      "name": "geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "xDist",
-                      "ioValue": 0
-                    },
-                    {
-                      "name": "yDist",
-                      "ioValue": 0.3937007874015748
-                    },
-                    {
-                      "name": "zDist",
-                      "ioValue": 0
-                    }
-                  ]
-                }
-              ],
-              "allConnectors": [
-                {
-                  "ap2Name": "Shape2",
-                  "ap1ID": "id-171546",
-                  "ap2ID": "id-171548"
-                },
-                {
-                  "ap2Name": "B",
-                  "ap1ID": "id-171547",
-                  "ap2ID": "id-171549"
-                },
-                {
-                  "ap2Name": "Shape2",
-                  "ap1ID": "id-171547",
-                  "ap2ID": "id-171556"
-                },
-                {
-                  "ap2Name": "A",
-                  "ap1ID": "id-171548",
-                  "ap2ID": "id-171549"
-                },
-                {
-                  "ap2Name": "number or geometry",
-                  "ap1ID": "id-171556",
-                  "ap2ID": "id-171558"
-                },
-                {
-                  "ap2Name": "y length",
-                  "ap1ID": "id-171557",
-                  "ap2ID": "id-171559"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-171559",
-                  "ap2ID": "id-171560"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-171560",
-                  "ap2ID": "id-171547"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-171561",
-                  "ap2ID": "id-171562"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-171562",
-                  "ap2ID": "id-171563"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-171563",
-                  "ap2ID": "id-171564"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-171564",
-                  "ap2ID": "id-171565"
-                },
-                {
-                  "ap2Name": "geometry",
-                  "ap1ID": "id-171564",
-                  "ap2ID": "id-171546"
-                },
-                {
-                  "ap2Name": "Shape 1",
-                  "ap1ID": "id-171565",
-                  "ap2ID": "id-171548"
-                },
-                {
-                  "ap2Name": "Shape 1",
-                  "ap1ID": "id-171549",
-                  "ap2ID": "id-171556"
-                }
-              ],
-              "parentRepo": {
-                "privateRepo": false,
-                "repoName": "Blue_Robotics_Basic_ESC",
-                "dateCreated": "2026-09-28T18:55:36Z",
-                "pngURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/main/project.png",
-                "readMe": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/master/README.md?sanitize=true",
-                "yyyy": 2026,
-                "topMoleculeID": "id-68",
-                "userSetAsThumbnail": false,
-                "githubMoleculesUsed": [
-                  {
-                    "owner": "BarbourSmith",
-                    "repoName": "Above"
-                  }
-                ],
-                "html_url": "https://github.com/tristan-huber/Blue_Robotics_Basic_ESC",
-                "topics": [
-                  "hardware"
-                ],
-                "parentRepo": null,
-                "forks": 0,
-                "dateModified": "739887",
-                "ranking": 0,
-                "searchField": "blue_robotics_basic_esc tristan-huber blue robotic esc. speed controller for blue robotics thrusters hardware",
-                "owner": "tristan-huber",
-                "description": "Blue robotic ESC. Speed controller for blue robotics thrusters",
-                "contentURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/master/project.abundance?sanitize=true",
-                "svgURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/master/project.svg?sanitize=true",
-                "isLocal": false
-              },
-              "unitsKey": "Inches",
-              "fileTypeVersion": 1,
-              "lastReloadedFromGithubAt": 1790622886761
-            },
-            {
-              "atomType": "GitHubMolecule",
               "x": 0.1,
               "y": 0.9,
               "uniqueID": "id-171649",
@@ -8141,7 +7600,8 @@
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 3
+                  "ioValue": 1,
+                  "currentEquation": "1"
                 },
                 {
                   "name": "zDist",
@@ -8165,7 +7625,8 @@
                 },
                 {
                   "name": "yDist",
-                  "ioValue": 1
+                  "ioValue": 0,
+                  "currentEquation": "0"
                 },
                 {
                   "name": "zDist",
@@ -8196,6 +7657,547 @@
                   "ioValue": 180
                 }
               ]
+            },
+            {
+              "atomType": "GitHubMolecule",
+              "x": 0.4,
+              "y": 0.7,
+              "uniqueID": "id-233895",
+              "name": "Blue_Robotics_Basic_ESC",
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Move",
+                  "x": 0.6,
+                  "y": 0.9,
+                  "uniqueID": "id-233875",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": -0.3937007874015748
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Add-BOM-Tag",
+                  "x": 0.5,
+                  "y": 0.4,
+                  "uniqueID": "id-233876",
+                  "name": "Add BOM Tag",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Item Name",
+                      "ioValue": "ESC board",
+                      "currentEquation": "ESC board"
+                    },
+                    {
+                      "name": "Number Needed",
+                      "ioValue": 1
+                    },
+                    {
+                      "name": "Cost (USD)",
+                      "ioValue": 30
+                    },
+                    {
+                      "name": "Source Link",
+                      "ioValue": "https://bluerobotics.com/store/thrusters/speed-controllers/besc30-r3/",
+                      "currentEquation": "https://bluerobotics.com/store/thrusters/speed-controllers/besc30-r3/"
+                    }
+                  ],
+                  "BOMitem": {
+                    "BOMitemName": "ESC board",
+                    "numberNeeded": 1,
+                    "costUSD": 30,
+                    "source": "https://bluerobotics.com/store/thrusters/speed-controllers/besc30-r3/"
+                  }
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.7,
+                  "y": 0.9,
+                  "uniqueID": "id-233877",
+                  "ioValues": [
+                    {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
+                      "name": "Shape 1",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape2",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "GitHubMolecule",
+                  "x": 0.7,
+                  "y": 0.6,
+                  "uniqueID": "id-233878",
+                  "name": "Above",
+                  "ioValues": [
+                    {
+                      "name": "B",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "A",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "topLevel": false,
+                  "allAtoms": [
+                    {
+                      "atomType": "Output",
+                      "x": 1,
+                      "y": 0.5,
+                      "uniqueID": "id-233879",
+                      "ioValues": [
+                        {
+                          "name": "number or geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-233880",
+                      "name": "B",
+                      "type": "geometry",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-233881",
+                      "name": "A",
+                      "type": "geometry",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Code",
+                      "x": 0.4,
+                      "y": 0.5,
+                      "uniqueID": "id-233882",
+                      "ioValues": [
+                        {
+                          "name": "A",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        },
+                        {
+                          "name": "B",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ],
+                      "interpreterVersion": 0,
+                      "code": "\n      Inputs = [\n       {inputName: \"A\", type: \"geometry\", defaultValue: null},\n        {inputName: \"B\", type: \"geometry\", defaultValue: null}\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      let boundsA = await GetBounds(A);\n      let A_minZ = boundsA.min[2];\n\n      let B_maxZ = 0;\n      if(B){\n          let boundsB = await GetBounds(B);\n          console.log(\"Bounding Box B:  \");\n          console.log(boundsB);\n          B_maxZ  = boundsB.max[2];\n      }\n\n     let translationZ = B_maxZ - A_minZ;\n     \n      let movedOutput = await Move(A, 0, 0, translationZ);\n\n      return movedOutput;\n\n      // //We can also create a new shape from scratch\n      // let createdRectangle = replicad.drawRectangle(5,7)\n      // //This is the plane we are going to put our new shape on\n      // const newPlane = new replicad.Plane().pivot(0, 'Y');\n      // //And we extrude the shape to make it 3D\n      // let createdShape = createdRectangle.sketchOnPlane(newPlane).extrude(height)\n\n      // //For our new geometry we need to define the tags, color, plane, etc\n      // let shape2 = {\n      //     geometry: [createdShape],\n      //     tags: [\"aTag\"],\n      //     color: '#A3CE5B',\n      //     plane: newPlane,\n      //     bom: []\n      // }\n\n      // //Then we can return our created shape in just the same way\n      // //return shape2\n\n      // //If we want to return both shapes at once, we can create an assembly with them\n      // let anAssembly = {\n      //   geometry: [shape1, shape2],\n      //   tags: [\"aNewTag\"],\n      //   color: '#A3CF5B',\n      //   plane: newPlane,\n      //   bom: []\n      // }\n\n      // //And we can return that in the same way\n      // return anAssembly\n\n      /**\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n      If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0]\n      Use any replicad available methods to modify your geometry. Learn more about all of the available methods at\n      https://replicad.xyz/docs/introapp/UserGuide.html\n      Return a replicad object that includes geometry, color, tags and plane.\n\n      Example Code Atom:\n        Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let finalShape = library[shape].geometry[0].clone().translate([x,0,0])\n        return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n      */\n      "
+                    },
+                    {
+                      "atomType": "Rectangle",
+                      "x": 0.2,
+                      "y": 0.8,
+                      "uniqueID": "id-233883",
+                      "ioValues": [
+                        {
+                          "name": "x length",
+                          "ioValue": 10
+                        },
+                        {
+                          "name": "y length",
+                          "ioValue": 10
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Extrude",
+                      "x": 0.3,
+                      "y": 0.8,
+                      "uniqueID": "id-233884",
+                      "ioValues": [
+                        {
+                          "name": "geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        },
+                        {
+                          "name": "height",
+                          "ioValue": 9
+                        }
+                      ]
+                    }
+                  ],
+                  "allConnectors": [
+                    {
+                      "ap2Name": "B",
+                      "ap1ID": "id-233880",
+                      "ap2ID": "id-233882"
+                    },
+                    {
+                      "ap2Name": "A",
+                      "ap1ID": "id-233881",
+                      "ap2ID": "id-233882"
+                    },
+                    {
+                      "ap2Name": "number or geometry",
+                      "ap1ID": "id-233882",
+                      "ap2ID": "id-233879"
+                    },
+                    {
+                      "ap2Name": "geometry",
+                      "ap1ID": "id-233883",
+                      "ap2ID": "id-233884"
+                    }
+                  ],
+                  "parentRepo": {
+                    "lastFoundGit": "2026-09-20T02:23:39.099Z",
+                    "privateRepo": false,
+                    "repoName": "Above",
+                    "dateCreated": "2025-09-22T22:39:35Z",
+                    "likes": 0,
+                    "pngURL": "https://raw.githubusercontent.com/BarbourSmith/Above/master/project.png?sanitize=true",
+                    "readme": "https://raw.githubusercontent.com/BarbourSmith/Above/master/README.md?sanitize=true",
+                    "yyyy": 2025,
+                    "topMoleculeID": "",
+                    "userRanking": 0,
+                    "userSetAsThumbnail": false,
+                    "githubMoleculesUsed": [],
+                    "html_url": "https://github.com/BarbourSmith/Above",
+                    "topics": [],
+                    "pullRequests": [],
+                    "forks": 0,
+                    "dateModified": "2025-12-19T18:51:02Z",
+                    "ranking": 2,
+                    "searchField": "above barboursmith takes two inputs and moves input a in the z-axis direction so that it ends up above b as defined by their bounding boxes ",
+                    "owner": "BarbourSmith",
+                    "description": "Takes two inputs and moves input A in the Z-axis direction so that it ends up Above B as defined by their bounding boxes",
+                    "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Above/master/project.abundance?sanitize=true",
+                    "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Above/master/project.svg?sanitize=true",
+                    "isLocal": false
+                  },
+                  "unitsKey": "MM",
+                  "fileTypeVersion": 1,
+                  "lastReloadedFromGithubAt": 1790622145427
+                },
+                {
+                  "atomType": "Assembly",
+                  "x": 0.7,
+                  "y": 0.3,
+                  "uniqueID": "id-233885",
+                  "ioValues": [
+                    {
+                      "name": "makeDisjoint",
+                      "ioValue": true
+                    },
+                    {
+                      "name": "Shape 1",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape2",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Shape3",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Constant",
+                  "x": 0.1,
+                  "y": 0.6,
+                  "uniqueID": "id-233886",
+                  "name": "length",
+                  "value": 1.3779527559055118
+                },
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-233887",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Rectangle",
+                  "x": 0.2,
+                  "y": 0.6,
+                  "uniqueID": "id-233888",
+                  "ioValues": [
+                    {
+                      "name": "x length",
+                      "ioValue": 0.6692913385826772
+                    },
+                    {
+                      "name": "y length",
+                      "ioValue": 1.3779527559055118,
+                      "currentEquation": "35 / 25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.3,
+                  "y": 0.3,
+                  "uniqueID": "id-233889",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 0.13
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Rectangle",
+                  "x": 0.2,
+                  "y": 0.8,
+                  "uniqueID": "id-233890",
+                  "ioValues": [
+                    {
+                      "name": "x length",
+                      "ioValue": 0.7874015748031497
+                    },
+                    {
+                      "name": "y length",
+                      "ioValue": 0.7874015748031497,
+                      "currentEquation": "20 / 25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.3,
+                  "y": 0.6,
+                  "uniqueID": "id-233891",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 0.3937007874015748,
+                      "currentEquation": "10 / 25.4"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Color",
+                  "x": 0.4,
+                  "y": 0.7,
+                  "uniqueID": "id-233892",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "selectedColor": "Yellow"
+                },
+                {
+                  "atomType": "Add-BOM-Tag",
+                  "x": 0.5,
+                  "y": 0.8,
+                  "uniqueID": "id-233893",
+                  "name": "Add BOM Tag",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "Item Name",
+                      "ioValue": "heat sink",
+                      "currentEquation": "heat sink"
+                    },
+                    {
+                      "name": "Number Needed",
+                      "ioValue": 1
+                    },
+                    {
+                      "name": "Cost (USD)",
+                      "ioValue": 0.7
+                    },
+                    {
+                      "name": "Source Link",
+                      "ioValue": "https://www.amazon.com/Easycargo-Heatsink-20x20x10mm-Conductive-20mmx20mmx10mm/dp/B07BDKN3XV/ref=sr_1_7?crid=2Q1AI4UJCZDPR&dib=eyJ2IjoiMSJ9.a0g2ljn7zXQTqddg66cfbq_-Gpp8U5n2xhd3zR5M0g8uCA9JfqTXnxQQSejrjNF4RYjffNxNsRQ9cqQvTgPtHFtsGKFFC8I1C2HnHcp7fR8_DQVW_hbhDGTSeRcBhDfm9rkS5D_Xapz8PvhGTm37Tso_oqetkEyHunHAyFBIIE8RNuwwxh1CzUOSeUq9A9VVhKf5GkQIIg5LEaxLgfwpFJNIusZ-YUjMDEo2wQPQgGM.VPmk7NnYAS02nX9wK3fSJcFwJ956Z6B49qmEUIN9bcE&dib_tag=se&keywords=heat+sink+20mm+square&qid=1790621873&sprefix=heat+sink+20mm+square%2Caps%2C262&sr=8-7",
+                      "currentEquation": "https://www.amazon.com/Easycargo-Heatsink-20x20x10mm-Conductive-20mmx20mmx10mm/dp/B07BDKN3XV/ref=sr_1_7?crid=2Q1AI4UJCZDPR&dib=eyJ2IjoiMSJ9.a0g2ljn7zXQTqddg66cfbq_-Gpp8U5n2xhd3zR5M0g8uCA9JfqTXnxQQSejrjNF4RYjffNxNsRQ9cqQvTgPtHFtsGKFFC8I1C2HnHcp7fR8_DQVW_hbhDGTSeRcBhDfm9rkS5D_Xapz8PvhGTm37Tso_oqetkEyHunHAyFBIIE8RNuwwxh1CzUOSeUq9A9VVhKf5GkQIIg5LEaxLgfwpFJNIusZ-YUjMDEo2wQPQgGM.VPmk7NnYAS02nX9wK3fSJcFwJ956Z6B49qmEUIN9bcE&dib_tag=se&keywords=heat+sink+20mm+square&qid=1790621873&sprefix=heat+sink+20mm+square%2Caps%2C262&sr=8-7"
+                    }
+                  ],
+                  "BOMitem": {
+                    "BOMitemName": "heat sink",
+                    "numberNeeded": 1,
+                    "costUSD": 0.7,
+                    "source": "https://www.amazon.com/Easycargo-Heatsink-20x20x10mm-Conductive-20mmx20mmx10mm/dp/B07BDKN3XV/ref=sr_1_7?crid=2Q1AI4UJCZDPR&dib=eyJ2IjoiMSJ9.a0g2ljn7zXQTqddg66cfbq_-Gpp8U5n2xhd3zR5M0g8uCA9JfqTXnxQQSejrjNF4RYjffNxNsRQ9cqQvTgPtHFtsGKFFC8I1C2HnHcp7fR8_DQVW_hbhDGTSeRcBhDfm9rkS5D_Xapz8PvhGTm37Tso_oqetkEyHunHAyFBIIE8RNuwwxh1CzUOSeUq9A9VVhKf5GkQIIg5LEaxLgfwpFJNIusZ-YUjMDEo2wQPQgGM.VPmk7NnYAS02nX9wK3fSJcFwJ956Z6B49qmEUIN9bcE&dib_tag=se&keywords=heat+sink+20mm+square&qid=1790621873&sprefix=heat+sink+20mm+square%2Caps%2C262&sr=8-7"
+                  }
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.6,
+                  "y": 0.7,
+                  "uniqueID": "id-233894",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 0.3937007874015748
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": 0
+                    }
+                  ]
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "Shape2",
+                  "ap1ID": "id-233875",
+                  "ap2ID": "id-233877"
+                },
+                {
+                  "ap2Name": "B",
+                  "ap1ID": "id-233876",
+                  "ap2ID": "id-233878"
+                },
+                {
+                  "ap2Name": "Shape2",
+                  "ap1ID": "id-233876",
+                  "ap2ID": "id-233885"
+                },
+                {
+                  "ap2Name": "A",
+                  "ap1ID": "id-233877",
+                  "ap2ID": "id-233878"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-233885",
+                  "ap2ID": "id-233887"
+                },
+                {
+                  "ap2Name": "y length",
+                  "ap1ID": "id-233886",
+                  "ap2ID": "id-233888"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-233888",
+                  "ap2ID": "id-233889"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-233889",
+                  "ap2ID": "id-233876"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-233890",
+                  "ap2ID": "id-233891"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-233891",
+                  "ap2ID": "id-233892"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-233892",
+                  "ap2ID": "id-233893"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-233893",
+                  "ap2ID": "id-233894"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-233893",
+                  "ap2ID": "id-233875"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-233894",
+                  "ap2ID": "id-233877"
+                },
+                {
+                  "ap2Name": "Shape 1",
+                  "ap1ID": "id-233878",
+                  "ap2ID": "id-233885"
+                }
+              ],
+              "parentRepo": {
+                "privateRepo": false,
+                "repoName": "Blue_Robotics_Basic_ESC",
+                "dateCreated": "2026-09-28T18:55:36Z",
+                "pngURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/main/project.png",
+                "readMe": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/master/README.md?sanitize=true",
+                "yyyy": 2026,
+                "topMoleculeID": "id-68",
+                "userSetAsThumbnail": false,
+                "githubMoleculesUsed": [
+                  {
+                    "owner": "BarbourSmith",
+                    "repoName": "Above"
+                  }
+                ],
+                "html_url": "https://github.com/tristan-huber/Blue_Robotics_Basic_ESC",
+                "topics": [
+                  "hardware"
+                ],
+                "parentRepo": null,
+                "forks": 0,
+                "dateModified": "739887",
+                "ranking": 0,
+                "searchField": "blue_robotics_basic_esc tristan-huber blue robotic esc. speed controller for blue robotics thrusters hardware",
+                "owner": "tristan-huber",
+                "description": "Blue robotic ESC. Speed controller for blue robotics thrusters",
+                "contentURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/master/project.abundance?sanitize=true",
+                "svgURL": "https://raw.githubusercontent.com/tristan-huber/Blue_Robotics_Basic_ESC/master/project.svg?sanitize=true",
+                "isLocal": false
+              },
+              "unitsKey": "Inches",
+              "fileTypeVersion": 1,
+              "lastReloadedFromGithubAt": 1790892779005
             }
           ],
           "allConnectors": [
@@ -8256,13 +8258,13 @@
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-171545",
-              "ap2ID": "id-171691"
+              "ap1ID": "id-171649",
+              "ap2ID": "id-171712"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-171649",
-              "ap2ID": "id-171712"
+              "ap1ID": "id-233895",
+              "ap2ID": "id-171691"
             }
           ],
           "fileTypeVersion": 1
