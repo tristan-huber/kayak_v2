@@ -661,7 +661,7 @@
     {
       "atomType": "Molecule",
       "x": 0.3,
-      "y": 0.7,
+      "y": 0.6,
       "uniqueID": "id-133347",
       "name": " interior",
       "ioValues": [
@@ -17056,7 +17056,7 @@
         {
           "atomType": "GitHubMolecule",
           "x": 0.7,
-          "y": 0.8,
+          "y": 0.6,
           "uniqueID": "id-147632",
           "name": "moveToPoints",
           "ioValues": [
