@@ -18427,30 +18427,6 @@
       "notKeepOut": false
     },
     {
-      "atomType": "Assembly",
-      "x": 0.6,
-      "y": 0.3,
-      "uniqueID": "id-175473",
-      "ioValues": [
-        {
-          "name": "makeDisjoint",
-          "ioValue": true
-        },
-        {
-          "name": "Shape 1",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Shape2",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Shape3",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ]
-    },
-    {
       "atomType": "ExtractTag",
       "x": 0.4,
       "y": 0.2,
@@ -27965,6 +27941,22 @@
       "x": 0.5,
       "y": 0.2,
       "uniqueID": "id-188892",
+      "ioValues": [
+        {
+          "name": "retain",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "remove",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
+    },
+    {
+      "atomType": "Difference",
+      "x": 0.6,
+      "y": 0.4,
+      "uniqueID": "id-238615",
       "ioValues": [
         {
           "name": "retain",
@@ -42483,14 +42475,9 @@
       "ap2ID": "id-175519"
     },
     {
-      "ap2Name": "Shape2",
+      "ap2Name": "remove",
       "ap1ID": "id-175470",
-      "ap2ID": "id-175473"
-    },
-    {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-175473",
-      "ap2ID": "id-175519"
+      "ap2ID": "id-238615"
     },
     {
       "ap2Name": "remove",
@@ -42518,9 +42505,9 @@
       "ap2ID": "id-175519"
     },
     {
-      "ap2Name": "Shape 1",
+      "ap2Name": "retain",
       "ap1ID": "id-188892",
-      "ap2ID": "id-175473"
+      "ap2ID": "id-238615"
     },
     {
       "ap2Name": "Shape",
@@ -42616,6 +42603,11 @@
       "ap2Name": "Shape3",
       "ap1ID": "id-89799",
       "ap2ID": "id-151102"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-238615",
+      "ap2ID": "id-175519"
     }
   ],
   "unitsKey": "Inches",
