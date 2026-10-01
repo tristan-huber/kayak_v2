@@ -21085,34 +21085,6 @@
           "options": []
         },
         {
-          "atomType": "CutOrient",
-          "x": 0.2,
-          "y": 0.8,
-          "uniqueID": "id-180208",
-          "name": "Cut Orient",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "orientations": [
-            {
-              "downwardFaceIndex": 1
-            },
-            {
-              "downwardFaceIndex": 32
-            },
-            {
-              "downwardFaceIndex": 0
-            },
-            {
-              "downwardFaceIndex": 2
-            }
-          ],
-          "orientationsForHashed": 4
-        },
-        {
           "atomType": "ExtractTag",
           "x": 0.2,
           "y": 0.2,
@@ -21726,7 +21698,7 @@
           "x": 0.1,
           "y": 0.7,
           "uniqueID": "id-205914",
-          "name": "Extract strongback, Not Keep Out",
+          "name": "Extract thickply, Not Keep Out",
           "ioValues": [
             {
               "name": "geometry",
@@ -21735,7 +21707,7 @@
           ],
           "tagIndex": 0,
           "selectedTags": [
-            "strongback"
+            "thickply"
           ],
           "includeUntagged": false,
           "notKeepOut": true
@@ -22078,6 +22050,21 @@
           ],
           "includeUntagged": false,
           "notKeepOut": false
+        },
+        {
+          "atomType": "CutOrient",
+          "x": 0.2,
+          "y": 0.5,
+          "uniqueID": "id-206038",
+          "name": "Cut Orient",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "orientations": [],
+          "orientationsForHashed": null
         }
       ],
       "allConnectors": [
@@ -22130,6 +22117,11 @@
           "ap2Name": "toUnroll",
           "ap1ID": "id-188901",
           "ap2ID": "id-206013"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-205914",
+          "ap2ID": "id-206038"
         },
         {
           "ap2Name": "toUnroll",
