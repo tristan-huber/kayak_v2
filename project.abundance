@@ -16424,7 +16424,8 @@
                     },
                     {
                       "name": "height",
-                      "ioValue": -0.1
+                      "ioValue": -0.125,
+                      "currentEquation": "-0.125"
                     }
                   ]
                 },
