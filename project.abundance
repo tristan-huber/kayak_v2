@@ -21978,21 +21978,6 @@
           ]
         },
         {
-          "atomType": "CutOrient",
-          "x": 0.2,
-          "y": 0.8,
-          "uniqueID": "id-214424",
-          "name": "Cut Orient",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ],
-          "orientations": [],
-          "orientationsForHashed": null
-        },
-        {
           "atomType": "GitHubMolecule",
           "x": 0.7,
           "y": 0.5,
@@ -22214,11 +22199,6 @@
         },
         {
           "ap2Name": "geometry",
-          "ap1ID": "id-205914",
-          "ap2ID": "id-214424"
-        },
-        {
-          "ap2Name": "geometry",
           "ap1ID": "id-206041",
           "ap2ID": "id-206062"
         },
@@ -22241,11 +22221,6 @@
           "ap2Name": "geometry",
           "ap1ID": "id-184493",
           "ap2ID": "id-206035"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-184520",
-          "ap2ID": "id-188922"
         },
         {
           "ap2Name": "Input",
@@ -22271,6 +22246,11 @@
           "ap2Name": "surface",
           "ap1ID": "id-205960",
           "ap2ID": "id-206055"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-214436",
+          "ap2ID": "id-188922"
         }
       ],
       "fileTypeVersion": 1
