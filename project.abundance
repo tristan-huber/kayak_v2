@@ -1746,7 +1746,7 @@
             {
               "atomType": "Intersection",
               "x": 0.2,
-              "y": 0.5,
+              "y": 0.3,
               "uniqueID": "id-135653",
               "ioValues": [
                 {
@@ -2997,7 +2997,7 @@
         {
           "atomType": "ExtractTag",
           "x": 0.6,
-          "y": 0.6,
+          "y": 0.7,
           "uniqueID": "id-135946",
           "name": "Extract access_hatch",
           "ioValues": [
@@ -11283,7 +11283,7 @@
     {
       "atomType": "ExtractTag",
       "x": 0.4,
-      "y": 0.7,
+      "y": 0.6,
       "uniqueID": "id-140173",
       "name": "Extract electronics_aft_bulkhead",
       "ioValues": [
