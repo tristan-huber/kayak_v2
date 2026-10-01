@@ -18411,7 +18411,7 @@
       "x": 0.6,
       "y": 0.7,
       "uniqueID": "id-175470",
-      "name": "Extract keepout",
+      "name": "Extract keepout, fastener",
       "ioValues": [
         {
           "name": "geometry",
@@ -18420,7 +18420,8 @@
       ],
       "tagIndex": 0,
       "selectedTags": [
-        "keepout"
+        "keepout",
+        "fastener"
       ],
       "includeUntagged": false,
       "notKeepOut": false
@@ -27379,10 +27380,6 @@
                       "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
-                      "name": "xDist",
-                      "ioValue": 53.872398702909095
-                    },
-                    {
                       "name": "yDist",
                       "ioValue": 20.2
                     },
@@ -27398,12 +27395,6 @@
                   "y": 0.3,
                   "uniqueID": "id-219792",
                   "name": "x - 90",
-                  "ioValues": [
-                    {
-                      "name": "x",
-                      "ioValue": 143.8723987029091
-                    }
-                  ],
                   "currentEquation": "x - 90"
                 },
                 {
@@ -27807,6 +27798,11 @@
               "ap2ID": "id-218913"
             },
             {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-218902",
+              "ap2ID": "id-218647"
+            },
+            {
               "ap2Name": "Shape2",
               "ap1ID": "id-218907",
               "ap2ID": "id-218902"
@@ -27880,6 +27876,11 @@
           "ap2Name": "geometry",
           "ap1ID": "id-188922",
           "ap2ID": "id-188942"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-188942",
+          "ap2ID": "id-180197"
         },
         {
           "ap2Name": "geometry",
@@ -39470,7 +39471,7 @@
                   "ioValue": "__GEOMETRY_INPUT__"
                 }
               ],
-              "selectedColor": "Keep Out"
+              "selectedColor": "Tan"
             }
           ],
           "allConnectors": [
@@ -40383,7 +40384,7 @@
     {
       "atomType": "Molecule",
       "x": 0.7,
-      "y": 0.2,
+      "y": 0.3,
       "uniqueID": "id-93010",
       "name": "falsework",
       "ioValues": [
