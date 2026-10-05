@@ -25802,6 +25802,10 @@
                       "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
+                      "name": "xDist",
+                      "ioValue": 53.87239871273056
+                    },
+                    {
                       "name": "yDist",
                       "ioValue": 20.2
                     },
@@ -25817,6 +25821,12 @@
                   "y": 0.3,
                   "uniqueID": "id-219792",
                   "name": "x - 90",
+                  "ioValues": [
+                    {
+                      "name": "x",
+                      "ioValue": 143.87239871273056
+                    }
+                  ],
                   "currentEquation": "x - 90"
                 },
                 {
@@ -39494,6 +39504,10 @@
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
+              "name": "xDist",
+              "ioValue": 7.749999899999963
+            },
+            {
               "name": "yDist",
               "ioValue": 0
             },
@@ -39513,6 +39527,10 @@
             {
               "name": "y",
               "ioValue": 130
+            },
+            {
+              "name": "x",
+              "ioValue": 114.50000020000007
             }
           ],
           "currentEquation": "(y - x) / 2"

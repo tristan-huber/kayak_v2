@@ -2,4 +2,14 @@
 # Bill Of Materials 
  |Part|Number Needed|Price|Source| 
  |----|----------|-----|-----|
-|Total: |0|$0.00| |
+|Wetlink penetrator M10 4.5|5|$65.00|https://bluerobotics.com/store/cables-connectors/penetrators/wlp-vp/|
+|Thrust Commander|1|$68.00|https://bluerobotics.com/store/comm-control-power/control/cmdr-r1-rp/|
+|ESC board|2|$60.00|https://bluerobotics.com/store/thrusters/speed-controllers/besc30-r3/|
+|Blue Robotics thruster mount|2|$16.00|https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t100-p-bracket-r1/|
+|T200|2|$460.00|https://bluerobotics.com/store/thrusters/t100-t200-thrusters/t200-thruster-r2-rp/|
+|HatchTape|1|$5.00|https://clcboats.com/products/foam-hatch-tape|
+|wood nail|64|$6.40|https://taytools.com/kakuri-wooden-tapered-nails-traditional-japanese-joinery-fasteners?&a_=v_&a_=v_&a_=v_&a_=v_&gmc_extid=NjM5NDE5&gad_source=1&gad_campaignid=23724046253&gclid=CjwKCAjwoOjVBhArEiwAUwDak82tPFo93vm-nsdtl7YNCsDYwz05FlBHhEQkpFW3gKz4QH9WY3qGLxoChcwQAvD_BwE|
+|heat sink|4|$2.80|[Amazon](https://www.amazon.com/Easycargo-Heatsink-20x20x10mm-Conductive-20mmx20mmx10mm/dp/B07BDKN3XV/ref=sr_1_7?crid=2Q1AI4UJCZDPR&dib=eyJ2IjoiMSJ9.a0g2ljn7zXQTqddg66cfbq_-Gpp8U5n2xhd3zR5M0g8uCA9JfqTXnxQQSejrjNF4RYjffNxNsRQ9cqQvTgPtHFtsGKFFC8I1C2HnHcp7fR8_DQVW_hbhDGTSeRcBhDfm9rkS5D_Xapz8PvhGTm37Tso_oqetkEyHunHAyFBIIE8RNuwwxh1CzUOSeUq9A9VVhKf5GkQIIg5LEaxLgfwpFJNIusZ-YUjMDEo2wQPQgGM.VPmk7NnYAS02nX9wK3fSJcFwJ956Z6B49qmEUIN9bcE&dib_tag=se&keywords=heat+sink+20mm+square&qid=1790621873&sprefix=heat+sink+20mm+square%2Caps%2C262&sr=8-7?tag=maslowcnc01-20)|
+|Fin and mount|1|$20.00|[Amazon](https://www.amazon.com/LOOEEL-Surfing-Inflatable-Detachable-Surfboard/dp/B0D3C72BYW/ref=sr_1_5?crid=1ZQWQ23XKOE0H&dib=eyJ2IjoiMSJ9.Is6nv6SEuxT4gGgadEkbsxy02KXxG-8Zadqiqm7v8rqYjJM3VHQxHHx5tQPtuJjdEa3Gfs5lRyVyCiMRZly_95cJZWKHe6UVuXna1bKdfzdtegfO3tO3D2EbJnGW0x_ttb0PWm082y1KHLPLuUYB-Ane44hgNJJbtXSN38K4MFQm2O66L3MPYjIphbtRInvVylrYZibfugvoBLvNXPeb6LcBev6IlgR1mRzJljAbldnun9J03qRBr2-dh6zScpRW9yhLsx_VZWOhZ6IZlcT6n_iFxXqnllkhoWDyoBpGidI.t0zf6sbKgf-nHcoqGjJ_1OKpQ1dLirNfd6cIUwh9-7w&dib_tag=se&keywords=SUP+fin+base&qid=1790624585&s=sporting-goods&sprefix=sup+fin+ba%2Csporting%2C750&sr=1-5?tag=maslowcnc01-20)|
+|12.8V 100Ah battery|2|$370.00|[Amazon](https://www.amazon.com/dp/B0DZXDWJXR?tag=maslowcnc01-20)|
+|Total: |84|$1073.20| |
