@@ -8408,6 +8408,10 @@
                 {
                   "name": "yDist",
                   "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0.12624849938676164
                 }
               ]
             },
@@ -8507,6 +8511,12 @@
               "y": 0.3,
               "uniqueID": "id-137166",
               "name": "x / 2",
+              "ioValues": [
+                {
+                  "name": "x",
+                  "ioValue": 0.2524969987735233
+                }
+              ],
               "currentEquation": "x / 2"
             },
             {
@@ -12386,8 +12396,8 @@
                   "options": [],
                   "selectedEdgeData": {
                     "0": [
-                      12,
-                      13
+                      11,
+                      12
                     ]
                   }
                 },
@@ -26289,7 +26299,7 @@
     {
       "atomType": "Difference",
       "x": 0.6,
-      "y": 0.4,
+      "y": 0.2,
       "uniqueID": "id-238615",
       "ioValues": [
         {
