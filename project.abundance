@@ -79,7 +79,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-126036",
           "name": "Shape",
           "type": "geometry",
@@ -164,7 +164,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-128091",
           "type": "number",
           "options": []
@@ -253,7 +253,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-128097",
               "name": "shape",
               "type": "geometry",
@@ -385,7 +385,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-128125",
               "name": "Assembly",
               "type": "faceselect",
@@ -482,7 +482,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-128137",
               "name": "selection",
               "type": "geometry",
@@ -1004,7 +1004,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-133380",
                   "name": "assembly",
                   "type": "geometry",
@@ -1205,7 +1205,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-133444",
           "name": "bulkheads",
           "type": "geometry",
@@ -1295,7 +1295,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-135274",
               "name": "A",
               "type": "geometry",
@@ -1409,7 +1409,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-135343",
               "name": "Shape",
               "type": "geometry",
@@ -1625,7 +1625,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-135365",
               "name": "Shape",
               "type": "geometry",
@@ -1802,7 +1802,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-135663",
                   "name": "Shape",
                   "type": "geometry",
@@ -1971,7 +1971,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-135669",
                   "name": "shape",
                   "type": "geometry",
@@ -2103,7 +2103,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-135676",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -2207,7 +2207,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-135753",
               "name": "boat_interior",
               "type": "geometry",
@@ -2265,7 +2265,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-135759",
                   "name": "Shape",
                   "type": "geometry",
@@ -2447,7 +2447,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-135880",
                   "name": "Geometry",
                   "type": "geometry",
@@ -2707,7 +2707,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-135922",
                   "name": "A",
                   "type": "geometry",
@@ -3143,7 +3143,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-135959",
                       "name": "Width",
                       "type": "number",
@@ -3733,7 +3733,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-135984",
                       "name": "assembly",
                       "options": []
@@ -3867,7 +3867,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-135990",
                       "name": "assembly",
                       "options": []
@@ -4104,7 +4104,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-136002",
                       "name": "assembly",
                       "type": "geometry",
@@ -4505,7 +4505,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-136493",
                       "name": "assembly",
                       "type": "geometry",
@@ -4727,7 +4727,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-136505",
                       "name": "assembly",
                       "options": []
@@ -5247,7 +5247,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-136795",
                   "name": "BulkheadThickness",
                   "options": []
@@ -5538,7 +5538,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-136811",
                       "name": "subparts",
                       "type": "partselect",
@@ -5742,7 +5742,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-136823",
                       "name": "faces",
                       "type": "faceselect",
@@ -5924,7 +5924,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-136833",
                       "name": "shape",
                       "type": "edgeselect",
@@ -6231,7 +6231,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-171639",
                       "name": "Geometry",
                       "type": "geometry",
@@ -6757,7 +6757,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-238626",
                       "name": "B",
                       "type": "geometry",
@@ -7298,7 +7298,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-238716",
                       "name": "B",
                       "type": "geometry",
@@ -7842,7 +7842,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-137054",
                   "name": "assembly",
                   "options": []
@@ -7990,7 +7990,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-137060",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -8118,7 +8118,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-137066",
                   "name": "X",
                   "options": []
@@ -8252,7 +8252,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-137072",
                   "name": "X",
                   "options": []
@@ -8352,7 +8352,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-137136",
               "name": "onhatch",
               "type": "geometry",
@@ -8444,7 +8444,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-137155",
                   "name": "Shape",
                   "type": "geometry",
@@ -8712,7 +8712,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-137190",
               "name": "boat_interior",
               "type": "geometry",
@@ -8794,7 +8794,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-137203",
                   "name": "A",
                   "type": "geometry",
@@ -8884,7 +8884,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-137220",
                   "name": "Shape",
                   "type": "geometry",
@@ -9194,7 +9194,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-139942",
               "name": "geometry",
               "type": "geometry",
@@ -9308,7 +9308,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-139959",
               "name": "geometry",
               "type": "geometry",
@@ -9448,7 +9448,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-139992",
               "name": "aft_bulkhead",
               "type": "geometry",
@@ -9520,7 +9520,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-139999",
                   "name": "BulkheadThickness",
                   "options": []
@@ -9894,7 +9894,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-140061",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -10022,7 +10022,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-140085",
                   "name": "X",
                   "options": []
@@ -10180,7 +10180,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-140112",
                   "name": "X",
                   "options": []
@@ -10306,7 +10306,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-140132",
                   "name": "assembly",
                   "options": []
@@ -10848,7 +10848,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-140178",
           "name": "behind_bulkhead",
           "type": "geometry",
@@ -10892,7 +10892,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-143466",
               "type": "geometry",
               "options": []
@@ -10981,7 +10981,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143472",
                   "name": "shape",
                   "type": "geometry",
@@ -11113,7 +11113,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143500",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -11255,7 +11255,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-143539",
               "name": "faces",
               "type": "geometry",
@@ -11355,7 +11355,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-143555",
               "name": "X",
               "options": []
@@ -11604,7 +11604,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143726",
                   "name": "shape",
                   "type": "geometry",
@@ -11791,7 +11791,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143734",
                   "name": "shape",
                   "type": "geometry",
@@ -11897,7 +11897,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-143779",
               "name": "reference_bulkhead",
               "type": "geometry",
@@ -11955,7 +11955,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143785",
                   "name": "selectionOne",
                   "type": "geometry",
@@ -12062,7 +12062,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143802",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -12155,7 +12155,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143815",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -12272,7 +12272,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143827",
                   "type": "geometry",
                   "options": []
@@ -12390,14 +12390,14 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143851",
                   "type": "edgeselect",
                   "options": [],
                   "selectedEdgeData": {
                     "0": [
-                      11,
-                      12
+                      12,
+                      13
                     ]
                   }
                 },
@@ -12510,7 +12510,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143865",
                   "name": "geometry",
                   "type": "geometry",
@@ -12611,7 +12611,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-143882",
                   "name": "assembly",
                   "options": []
@@ -12924,7 +12924,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147108",
                       "name": "assembly",
                       "type": "geometry",
@@ -13200,7 +13200,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147122",
                       "name": "faceSelection",
                       "type": "geometry",
@@ -13333,7 +13333,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147126",
                       "name": "shape",
                       "type": "geometry",
@@ -13520,7 +13520,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147134",
                       "name": "shape",
                       "type": "geometry",
@@ -13675,7 +13675,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147142",
                       "name": "selectionOne",
                       "type": "geometry",
@@ -13789,7 +13789,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147147",
                       "name": "shape",
                       "type": "edgeselect",
@@ -13937,7 +13937,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147153",
                       "name": "Shape",
                       "type": "geometry",
@@ -14459,7 +14459,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-147418",
                   "name": "B",
                   "type": "geometry",
@@ -14864,7 +14864,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147576",
                       "name": "shape",
                       "type": "edgeselect",
@@ -15157,7 +15157,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-171732",
                       "name": "Shape",
                       "type": "geometry",
@@ -15419,7 +15419,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-147706",
                       "name": "X_Length",
                       "options": []
@@ -15966,7 +15966,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-193313",
                   "name": "BulkheadThickness",
                   "options": []
@@ -16432,7 +16432,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-147628",
               "name": "shapeToMove",
               "type": "geometry",
@@ -16723,7 +16723,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-157756",
               "name": "kayakbody",
               "type": "geometry",
@@ -16746,11 +16746,11 @@
               "ioValues": [
                 {
                   "name": "x length",
-                  "ioValue": 10.914537131440824
+                  "ioValue": 10.914537131440813
                 },
                 {
                   "name": "y length",
-                  "ioValue": 25.527857655647573
+                  "ioValue": 25.52785765566965
                 }
               ]
             },
@@ -16863,7 +16863,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-157765",
                   "name": "Shape",
                   "type": "geometry",
@@ -16977,7 +16977,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-157770",
                   "name": "Shape",
                   "type": "geometry",
@@ -17094,7 +17094,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-157776",
                   "name": "B",
                   "type": "geometry",
@@ -17261,7 +17261,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-157784",
                   "name": "A",
                   "type": "geometry",
@@ -17401,7 +17401,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-157790",
                   "name": "toMove",
                   "type": "geometry",
@@ -17620,7 +17620,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-157794",
           "name": "profileShape",
           "type": "geometry",
@@ -17740,7 +17740,7 @@
     {
       "atomType": "ExtractTag",
       "x": 0.4,
-      "y": 0.2,
+      "y": 0.3,
       "uniqueID": "id-175515",
       "name": "Extract hatch panel",
       "ioValues": [
@@ -17840,7 +17840,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-175533",
           "name": "interior",
           "type": "geometry",
@@ -17907,7 +17907,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-175546",
               "name": "Width",
               "type": "number",
@@ -18764,7 +18764,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-175903",
               "name": "shape",
               "type": "geometry",
@@ -18898,7 +18898,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-175932",
               "name": "Assembly",
               "type": "faceselect",
@@ -19083,7 +19083,7 @@
           "atomType": "GitHubMolecule",
           "x": 0.2,
           "y": 0.8,
-          "uniqueID": "id-243332",
+          "uniqueID": "id-247935",
           "name": "Round_End_Arc",
           "ioValues": [
             {
@@ -19111,7 +19111,7 @@
               "atomType": "Output",
               "x": 1,
               "y": 0.5,
-              "uniqueID": "id-243292",
+              "uniqueID": "id-247895",
               "ioValues": [
                 {
                   "name": "number or geometry",
@@ -19122,8 +19122,8 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
-              "uniqueID": "id-243293",
+              "y": 0.2,
+              "uniqueID": "id-247896",
               "name": "Angle",
               "options": []
             },
@@ -19131,7 +19131,7 @@
               "atomType": "Input",
               "x": 0,
               "y": 0.2,
-              "uniqueID": "id-243294",
+              "uniqueID": "id-247897",
               "name": "ID",
               "options": []
             },
@@ -19139,7 +19139,7 @@
               "atomType": "Input",
               "x": 0,
               "y": 0.3,
-              "uniqueID": "id-243295",
+              "uniqueID": "id-247898",
               "name": "OD",
               "options": []
             },
@@ -19147,7 +19147,7 @@
               "atomType": "Equation",
               "x": 0.2,
               "y": 0.3,
-              "uniqueID": "id-243296",
+              "uniqueID": "id-247899",
               "name": "(O-I)/2",
               "ioValues": [
                 {
@@ -19165,7 +19165,7 @@
               "atomType": "Circle",
               "x": 0.3,
               "y": 0.4,
-              "uniqueID": "id-243297",
+              "uniqueID": "id-247900",
               "ioValues": [
                 {
                   "name": "diameter",
@@ -19177,7 +19177,7 @@
               "atomType": "Move",
               "x": 0.4,
               "y": 0.5,
-              "uniqueID": "id-243298",
+              "uniqueID": "id-247901",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -19201,7 +19201,7 @@
               "atomType": "Equation",
               "x": 0.2,
               "y": 0.6,
-              "uniqueID": "id-243299",
+              "uniqueID": "id-247902",
               "name": "I/2+D/2",
               "ioValues": [
                 {
@@ -19219,7 +19219,7 @@
               "atomType": "Rotate",
               "x": 0.6,
               "y": 0.3,
-              "uniqueID": "id-243300",
+              "uniqueID": "id-247903",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -19243,7 +19243,7 @@
               "atomType": "Equation",
               "x": 0.4,
               "y": 0.1,
-              "uniqueID": "id-243301",
+              "uniqueID": "id-247904",
               "name": "A/2",
               "ioValues": [
                 {
@@ -19257,7 +19257,7 @@
               "atomType": "Rotate",
               "x": 0.7,
               "y": 0.5,
-              "uniqueID": "id-243302",
+              "uniqueID": "id-247905",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -19281,7 +19281,7 @@
               "atomType": "Equation",
               "x": 0.5,
               "y": 0.4,
-              "uniqueID": "id-243303",
+              "uniqueID": "id-247906",
               "name": "-1*X",
               "ioValues": [
                 {
@@ -19295,7 +19295,7 @@
               "atomType": "Rotate",
               "x": 0.4,
               "y": 0.9,
-              "uniqueID": "id-243304",
+              "uniqueID": "id-247907",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -19319,7 +19319,7 @@
               "atomType": "Equation",
               "x": 0.1,
               "y": 0.9,
-              "uniqueID": "id-243305",
+              "uniqueID": "id-247908",
               "name": "A/-2-90",
               "ioValues": [
                 {
@@ -19333,7 +19333,7 @@
               "atomType": "Intersection",
               "x": 0.5,
               "y": 0.8,
-              "uniqueID": "id-243306",
+              "uniqueID": "id-247909",
               "ioValues": [
                 {
                   "name": "geometry1",
@@ -19349,7 +19349,7 @@
               "atomType": "Extrude",
               "x": 0.6,
               "y": 0.9,
-              "uniqueID": "id-243307",
+              "uniqueID": "id-247910",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -19365,7 +19365,7 @@
               "atomType": "Extrude",
               "x": 0.8,
               "y": 0.5,
-              "uniqueID": "id-243308",
+              "uniqueID": "id-247911",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -19381,7 +19381,7 @@
               "atomType": "Extrude",
               "x": 0.7,
               "y": 0.3,
-              "uniqueID": "id-243309",
+              "uniqueID": "id-247912",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -19397,7 +19397,7 @@
               "atomType": "Fusion",
               "x": 0.8,
               "y": 0.7,
-              "uniqueID": "id-243310",
+              "uniqueID": "id-247913",
               "ioValues": [
                 {
                   "name": "Shape 1",
@@ -19418,7 +19418,7 @@
               "atomType": "Input",
               "x": 0,
               "y": 0.4,
-              "uniqueID": "id-243311",
+              "uniqueID": "id-247914",
               "name": "Thickness",
               "options": []
             },
@@ -19426,7 +19426,7 @@
               "atomType": "GitHubMolecule",
               "x": 0.2,
               "y": 0.7,
-              "uniqueID": "id-243312",
+              "uniqueID": "id-247915",
               "name": "Concentric_Circles",
               "ioValues": [
                 {
@@ -19444,7 +19444,7 @@
                   "atomType": "Output",
                   "x": 1,
                   "y": 0.5,
-                  "uniqueID": "id-243313",
+                  "uniqueID": "id-247916",
                   "ioValues": [
                     {
                       "name": "number or geometry",
@@ -19455,8 +19455,8 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
-                  "uniqueID": "id-243314",
+                  "y": 0.2,
+                  "uniqueID": "id-247917",
                   "name": "OD",
                   "type": "number",
                   "options": []
@@ -19465,7 +19465,7 @@
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-243315",
+                  "uniqueID": "id-247918",
                   "name": "ID",
                   "type": "number",
                   "options": []
@@ -19474,7 +19474,7 @@
                   "atomType": "Circle",
                   "x": 0.5,
                   "y": 0.4,
-                  "uniqueID": "id-243316",
+                  "uniqueID": "id-247919",
                   "ioValues": [
                     {
                       "name": "diameter",
@@ -19486,7 +19486,7 @@
                   "atomType": "Circle",
                   "x": 0.4,
                   "y": 0.7,
-                  "uniqueID": "id-243317",
+                  "uniqueID": "id-247920",
                   "ioValues": [
                     {
                       "name": "diameter",
@@ -19498,7 +19498,7 @@
                   "atomType": "Difference",
                   "x": 0.7,
                   "y": 0.6,
-                  "uniqueID": "id-243318",
+                  "uniqueID": "id-247921",
                   "ioValues": [
                     {
                       "name": "retain",
@@ -19514,28 +19514,28 @@
               "allConnectors": [
                 {
                   "ap2Name": "diameter",
-                  "ap1ID": "id-243314",
-                  "ap2ID": "id-243316"
+                  "ap1ID": "id-247917",
+                  "ap2ID": "id-247919"
                 },
                 {
                   "ap2Name": "diameter",
-                  "ap1ID": "id-243315",
-                  "ap2ID": "id-243317"
+                  "ap1ID": "id-247918",
+                  "ap2ID": "id-247920"
                 },
                 {
                   "ap2Name": "retain",
-                  "ap1ID": "id-243316",
-                  "ap2ID": "id-243318"
+                  "ap1ID": "id-247919",
+                  "ap2ID": "id-247921"
                 },
                 {
                   "ap2Name": "remove",
-                  "ap1ID": "id-243317",
-                  "ap2ID": "id-243318"
+                  "ap1ID": "id-247920",
+                  "ap2ID": "id-247921"
                 },
                 {
                   "ap2Name": "number or geometry",
-                  "ap1ID": "id-243318",
-                  "ap2ID": "id-243313"
+                  "ap1ID": "id-247921",
+                  "ap2ID": "id-247916"
                 }
               ],
               "parentRepo": {
@@ -19568,7 +19568,7 @@
               "atomType": "GitHubMolecule",
               "x": 0.2,
               "y": 0.9,
-              "uniqueID": "id-243319",
+              "uniqueID": "id-247922",
               "name": "SimpleArc",
               "ioValues": [
                 {
@@ -19586,7 +19586,7 @@
                   "atomType": "Output",
                   "x": 1,
                   "y": 0.5,
-                  "uniqueID": "id-243320",
+                  "uniqueID": "id-247923",
                   "ioValues": [
                     {
                       "name": "number or geometry",
@@ -19597,8 +19597,8 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
-                  "uniqueID": "id-243321",
+                  "y": 0.2,
+                  "uniqueID": "id-247924",
                   "name": "diameter",
                   "type": "number",
                   "options": []
@@ -19607,7 +19607,7 @@
                   "atomType": "Input",
                   "x": 0,
                   "y": 0.2,
-                  "uniqueID": "id-243322",
+                  "uniqueID": "id-247925",
                   "name": "degrees",
                   "type": "number",
                   "options": []
@@ -19616,7 +19616,7 @@
                   "atomType": "Circle",
                   "x": 0.2,
                   "y": 0.2,
-                  "uniqueID": "id-243323",
+                  "uniqueID": "id-247926",
                   "ioValues": [
                     {
                       "name": "diameter",
@@ -19628,7 +19628,7 @@
                   "atomType": "Rectangle",
                   "x": 0.3,
                   "y": 0.5,
-                  "uniqueID": "id-243324",
+                  "uniqueID": "id-247927",
                   "ioValues": [
                     {
                       "name": "x length",
@@ -19644,7 +19644,7 @@
                   "atomType": "Equation",
                   "x": 0.3,
                   "y": 0.6,
-                  "uniqueID": "id-243325",
+                  "uniqueID": "id-247928",
                   "name": "x / 2",
                   "ioValues": [
                     {
@@ -19658,7 +19658,7 @@
                   "atomType": "Move",
                   "x": 0.4,
                   "y": 0.5,
-                  "uniqueID": "id-243326",
+                  "uniqueID": "id-247929",
                   "ioValues": [
                     {
                       "name": "geometry",
@@ -19682,7 +19682,7 @@
                   "atomType": "Move",
                   "x": 0.5,
                   "y": 0.7,
-                  "uniqueID": "id-243327",
+                  "uniqueID": "id-247930",
                   "ioValues": [
                     {
                       "name": "geometry",
@@ -19706,7 +19706,7 @@
                   "atomType": "Equation",
                   "x": 0.4,
                   "y": 0.7,
-                  "uniqueID": "id-243328",
+                  "uniqueID": "id-247931",
                   "name": "-1 * x",
                   "ioValues": [
                     {
@@ -19720,7 +19720,7 @@
                   "atomType": "Rotate",
                   "x": 0.6,
                   "y": 0.5,
-                  "uniqueID": "id-243329",
+                  "uniqueID": "id-247932",
                   "ioValues": [
                     {
                       "name": "geometry",
@@ -19744,7 +19744,7 @@
                   "atomType": "Difference",
                   "x": 0.7,
                   "y": 0.3,
-                  "uniqueID": "id-243330",
+                  "uniqueID": "id-247933",
                   "ioValues": [
                     {
                       "name": "retain",
@@ -19760,7 +19760,7 @@
                   "atomType": "Difference",
                   "x": 0.8,
                   "y": 0.6,
-                  "uniqueID": "id-243331",
+                  "uniqueID": "id-247934",
                   "ioValues": [
                     {
                       "name": "retain",
@@ -19776,83 +19776,83 @@
               "allConnectors": [
                 {
                   "ap2Name": "diameter",
-                  "ap1ID": "id-243321",
-                  "ap2ID": "id-243323"
+                  "ap1ID": "id-247924",
+                  "ap2ID": "id-247926"
                 },
                 {
                   "ap2Name": "x length",
-                  "ap1ID": "id-243321",
-                  "ap2ID": "id-243324"
+                  "ap1ID": "id-247924",
+                  "ap2ID": "id-247927"
                 },
                 {
                   "ap2Name": "y length",
-                  "ap1ID": "id-243321",
-                  "ap2ID": "id-243324"
+                  "ap1ID": "id-247924",
+                  "ap2ID": "id-247927"
                 },
                 {
                   "ap2Name": "x",
-                  "ap1ID": "id-243321",
-                  "ap2ID": "id-243325"
+                  "ap1ID": "id-247924",
+                  "ap2ID": "id-247928"
                 },
                 {
                   "ap2Name": "z-axis degrees",
-                  "ap1ID": "id-243322",
-                  "ap2ID": "id-243329"
+                  "ap1ID": "id-247925",
+                  "ap2ID": "id-247932"
                 },
                 {
                   "ap2Name": "retain",
-                  "ap1ID": "id-243323",
-                  "ap2ID": "id-243330"
+                  "ap1ID": "id-247926",
+                  "ap2ID": "id-247933"
                 },
                 {
                   "ap2Name": "geometry",
-                  "ap1ID": "id-243324",
-                  "ap2ID": "id-243326"
+                  "ap1ID": "id-247927",
+                  "ap2ID": "id-247929"
                 },
                 {
                   "ap2Name": "geometry",
-                  "ap1ID": "id-243324",
-                  "ap2ID": "id-243327"
+                  "ap1ID": "id-247927",
+                  "ap2ID": "id-247930"
                 },
                 {
                   "ap2Name": "xDist",
-                  "ap1ID": "id-243325",
-                  "ap2ID": "id-243326"
+                  "ap1ID": "id-247928",
+                  "ap2ID": "id-247929"
                 },
                 {
                   "ap2Name": "x",
-                  "ap1ID": "id-243325",
-                  "ap2ID": "id-243328"
+                  "ap1ID": "id-247928",
+                  "ap2ID": "id-247931"
                 },
                 {
                   "ap2Name": "remove",
-                  "ap1ID": "id-243326",
-                  "ap2ID": "id-243330"
+                  "ap1ID": "id-247929",
+                  "ap2ID": "id-247933"
                 },
                 {
                   "ap2Name": "geometry",
-                  "ap1ID": "id-243327",
-                  "ap2ID": "id-243329"
+                  "ap1ID": "id-247930",
+                  "ap2ID": "id-247932"
                 },
                 {
                   "ap2Name": "xDist",
-                  "ap1ID": "id-243328",
-                  "ap2ID": "id-243327"
+                  "ap1ID": "id-247931",
+                  "ap2ID": "id-247930"
                 },
                 {
                   "ap2Name": "remove",
-                  "ap1ID": "id-243329",
-                  "ap2ID": "id-243331"
+                  "ap1ID": "id-247932",
+                  "ap2ID": "id-247934"
                 },
                 {
                   "ap2Name": "retain",
-                  "ap1ID": "id-243330",
-                  "ap2ID": "id-243331"
+                  "ap1ID": "id-247933",
+                  "ap2ID": "id-247934"
                 },
                 {
                   "ap2Name": "number or geometry",
-                  "ap1ID": "id-243331",
-                  "ap2ID": "id-243320"
+                  "ap1ID": "id-247934",
+                  "ap2ID": "id-247923"
                 }
               ],
               "parentRepo": {
@@ -19887,163 +19887,163 @@
           "allConnectors": [
             {
               "ap2Name": "A",
-              "ap1ID": "id-243293",
-              "ap2ID": "id-243301"
+              "ap1ID": "id-247896",
+              "ap2ID": "id-247904"
             },
             {
               "ap2Name": "A",
-              "ap1ID": "id-243293",
-              "ap2ID": "id-243305"
+              "ap1ID": "id-247896",
+              "ap2ID": "id-247908"
             },
             {
               "ap2Name": "degrees",
-              "ap1ID": "id-243293",
-              "ap2ID": "id-243319"
+              "ap1ID": "id-247896",
+              "ap2ID": "id-247922"
             },
             {
               "ap2Name": "I",
-              "ap1ID": "id-243294",
-              "ap2ID": "id-243296"
+              "ap1ID": "id-247897",
+              "ap2ID": "id-247899"
             },
             {
               "ap2Name": "I",
-              "ap1ID": "id-243294",
-              "ap2ID": "id-243299"
+              "ap1ID": "id-247897",
+              "ap2ID": "id-247902"
             },
             {
               "ap2Name": "ID",
-              "ap1ID": "id-243294",
-              "ap2ID": "id-243312"
+              "ap1ID": "id-247897",
+              "ap2ID": "id-247915"
             },
             {
               "ap2Name": "O",
-              "ap1ID": "id-243295",
-              "ap2ID": "id-243296"
+              "ap1ID": "id-247898",
+              "ap2ID": "id-247899"
             },
             {
               "ap2Name": "OD",
-              "ap1ID": "id-243295",
-              "ap2ID": "id-243312"
+              "ap1ID": "id-247898",
+              "ap2ID": "id-247915"
             },
             {
               "ap2Name": "diameter",
-              "ap1ID": "id-243295",
-              "ap2ID": "id-243319"
+              "ap1ID": "id-247898",
+              "ap2ID": "id-247922"
             },
             {
               "ap2Name": "diameter",
-              "ap1ID": "id-243296",
-              "ap2ID": "id-243297"
+              "ap1ID": "id-247899",
+              "ap2ID": "id-247900"
             },
             {
               "ap2Name": "D",
-              "ap1ID": "id-243296",
-              "ap2ID": "id-243299"
+              "ap1ID": "id-247899",
+              "ap2ID": "id-247902"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-243297",
-              "ap2ID": "id-243298"
+              "ap1ID": "id-247900",
+              "ap2ID": "id-247901"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-243298",
-              "ap2ID": "id-243300"
+              "ap1ID": "id-247901",
+              "ap2ID": "id-247903"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-243298",
-              "ap2ID": "id-243302"
+              "ap1ID": "id-247901",
+              "ap2ID": "id-247905"
             },
             {
               "ap2Name": "xDist",
-              "ap1ID": "id-243299",
-              "ap2ID": "id-243298"
+              "ap1ID": "id-247902",
+              "ap2ID": "id-247901"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-243300",
-              "ap2ID": "id-243309"
+              "ap1ID": "id-247903",
+              "ap2ID": "id-247912"
             },
             {
               "ap2Name": "z-axis degrees",
-              "ap1ID": "id-243301",
-              "ap2ID": "id-243300"
+              "ap1ID": "id-247904",
+              "ap2ID": "id-247903"
             },
             {
               "ap2Name": "X",
-              "ap1ID": "id-243301",
-              "ap2ID": "id-243303"
+              "ap1ID": "id-247904",
+              "ap2ID": "id-247906"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-243302",
-              "ap2ID": "id-243308"
+              "ap1ID": "id-247905",
+              "ap2ID": "id-247911"
             },
             {
               "ap2Name": "z-axis degrees",
-              "ap1ID": "id-243303",
-              "ap2ID": "id-243302"
+              "ap1ID": "id-247906",
+              "ap2ID": "id-247905"
             },
             {
               "ap2Name": "geometry2",
-              "ap1ID": "id-243304",
-              "ap2ID": "id-243306"
+              "ap1ID": "id-247907",
+              "ap2ID": "id-247909"
             },
             {
               "ap2Name": "z-axis degrees",
-              "ap1ID": "id-243305",
-              "ap2ID": "id-243304"
+              "ap1ID": "id-247908",
+              "ap2ID": "id-247907"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-243306",
-              "ap2ID": "id-243307"
+              "ap1ID": "id-247909",
+              "ap2ID": "id-247910"
             },
             {
               "ap2Name": "Shape 1",
-              "ap1ID": "id-243307",
-              "ap2ID": "id-243310"
+              "ap1ID": "id-247910",
+              "ap2ID": "id-247913"
             },
             {
               "ap2Name": "Shape 2",
-              "ap1ID": "id-243308",
-              "ap2ID": "id-243310"
+              "ap1ID": "id-247911",
+              "ap2ID": "id-247913"
             },
             {
               "ap2Name": "Shape 3",
-              "ap1ID": "id-243309",
-              "ap2ID": "id-243310"
+              "ap1ID": "id-247912",
+              "ap2ID": "id-247913"
             },
             {
               "ap2Name": "number or geometry",
-              "ap1ID": "id-243310",
-              "ap2ID": "id-243292"
+              "ap1ID": "id-247913",
+              "ap2ID": "id-247895"
             },
             {
               "ap2Name": "height",
-              "ap1ID": "id-243311",
-              "ap2ID": "id-243307"
+              "ap1ID": "id-247914",
+              "ap2ID": "id-247910"
             },
             {
               "ap2Name": "height",
-              "ap1ID": "id-243311",
-              "ap2ID": "id-243308"
+              "ap1ID": "id-247914",
+              "ap2ID": "id-247911"
             },
             {
               "ap2Name": "height",
-              "ap1ID": "id-243311",
-              "ap2ID": "id-243309"
+              "ap1ID": "id-247914",
+              "ap2ID": "id-247912"
             },
             {
               "ap2Name": "geometry1",
-              "ap1ID": "id-243312",
-              "ap2ID": "id-243306"
+              "ap1ID": "id-247915",
+              "ap2ID": "id-247909"
             },
             {
               "ap2Name": "geometry",
-              "ap1ID": "id-243319",
-              "ap2ID": "id-243304"
+              "ap1ID": "id-247922",
+              "ap2ID": "id-247907"
             }
           ],
           "parentRepo": {
@@ -20074,7 +20074,7 @@
           },
           "unitsKey": "MM",
           "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1791228147879
+          "lastReloadedFromGithubAt": 1791484088816
         }
       ],
       "allConnectors": [
@@ -20220,7 +20220,7 @@
         },
         {
           "ap2Name": "geometry",
-          "ap1ID": "id-243332",
+          "ap1ID": "id-247935",
           "ap2ID": "id-175795"
         }
       ],
@@ -20259,7 +20259,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-180199",
           "name": "kayak",
           "type": "geometry",
@@ -20276,8 +20276,8 @@
         },
         {
           "atomType": "ExtractTag",
-          "x": 0.2,
-          "y": 0.2,
+          "x": 0.1,
+          "y": 0.3,
           "uniqueID": "id-180211",
           "name": "Extract thinply",
           "ioValues": [
@@ -20296,7 +20296,7 @@
         {
           "atomType": "GitHubMolecule",
           "x": 0.3,
-          "y": 0.2,
+          "y": 0.5,
           "uniqueID": "id-184493",
           "name": "select.Clear",
           "ioValues": [
@@ -20361,7 +20361,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-184489",
               "name": "selection",
               "type": "geometry",
@@ -20530,7 +20530,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-184514",
               "name": "toUnroll",
               "type": "faceselect",
@@ -20694,7 +20694,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-184603",
               "type": "faceselect",
               "options": [],
@@ -20752,7 +20752,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-188899",
               "name": "Assembly",
               "type": "faceselect",
@@ -20945,7 +20945,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-205958",
               "name": "Assembly",
               "type": "faceselect",
@@ -21222,7 +21222,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-214461",
               "name": "toUnroll",
               "type": "faceselect",
@@ -21456,8 +21456,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.4,
-          "y": 0.1,
+          "x": 0.3,
+          "y": 0.2,
           "uniqueID": "id-218645",
           "name": "Molecule",
           "ioValues": [
@@ -21483,7 +21483,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-218649",
               "name": "thinply_components",
               "type": "geometry",
@@ -21573,7 +21573,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-218655",
                   "name": "shape",
                   "type": "geometry",
@@ -21707,7 +21707,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-218683",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -21825,7 +21825,7 @@
             {
               "atomType": "GitHubMolecule",
               "x": 0.4,
-              "y": 0.1,
+              "y": 0.3,
               "uniqueID": "id-218707",
               "name": "crv.MeshUnroll",
               "ioValues": [
@@ -21898,7 +21898,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-218701",
                   "name": "toUnroll",
                   "type": "faceselect",
@@ -22053,7 +22053,7 @@
               "x": 0.1,
               "y": 0.5,
               "uniqueID": "id-218729",
-              "name": "Extract access_hatch, cockpit",
+              "name": "Extract cockpit",
               "ioValues": [
                 {
                   "name": "geometry",
@@ -22062,7 +22062,6 @@
               ],
               "tagIndex": 0,
               "selectedTags": [
-                "access_hatch",
                 "cockpit"
               ],
               "includeUntagged": false,
@@ -22070,8 +22069,8 @@
             },
             {
               "atomType": "CutOrient",
-              "x": 0.2,
-              "y": 0.4,
+              "x": 0.3,
+              "y": 0.3,
               "uniqueID": "id-218732",
               "name": "Cut Orient",
               "ioValues": [
@@ -22081,15 +22080,6 @@
                 }
               ],
               "orientations": [
-                {
-                  "downwardFaceIndex": 13,
-                  "faceCount": 18,
-                  "faceNormal": [
-                    -1,
-                    0,
-                    -1.1102230246251565e-16
-                  ]
-                },
                 {
                   "downwardFaceIndex": 4,
                   "faceCount": 18
@@ -22103,7 +22093,7 @@
                   "faceCount": 18
                 }
               ],
-              "orientationsForHashed": 4
+              "orientationsForHashed": 3
             },
             {
               "atomType": "ExtractTag",
@@ -22200,7 +22190,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-218761",
                   "name": "toUnroll",
                   "type": "faceselect",
@@ -22411,7 +22401,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-218792",
                   "name": "toUnroll",
                   "type": "faceselect",
@@ -22622,7 +22612,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-218822",
                   "name": "toUnroll",
                   "type": "faceselect",
@@ -22784,7 +22774,7 @@
             {
               "atomType": "Move",
               "x": 0.4,
-              "y": 0.6,
+              "y": 0.5,
               "uniqueID": "id-218885",
               "ioValues": [
                 {
@@ -22870,6 +22860,14 @@
                 {
                   "name": "Shape4",
                   "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape5",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "Shape6",
+                  "ioValue": "__GEOMETRY_INPUT__"
                 }
               ]
             },
@@ -22914,7 +22912,11 @@
                 },
                 {
                   "name": "Orientations",
-                  "ioValue": 12
+                  "ioValue": 4
+                },
+                {
+                  "name": "Search Time (minutes)",
+                  "ioValue": 8
                 }
               ],
               "placements": [
@@ -22923,122 +22925,137 @@
                     "id": 0,
                     "rotate": 180,
                     "translate": {
-                      "x": 81.87000274658203,
-                      "y": 104.7300033569336
+                      "x": 41.279998779296875,
+                      "y": 14.649999618530273
                     }
                   },
                   {
-                    "id": 9,
+                    "id": 14,
                     "rotate": 180,
                     "translate": {
-                      "x": 91.98999786376953,
-                      "y": 47.57999801635742
+                      "x": 46.310001373291016,
+                      "y": 35.33000183105469
                     }
                   },
                   {
-                    "id": 2,
+                    "id": 10,
                     "rotate": 180,
                     "translate": {
-                      "x": 81.45999908447266,
-                      "y": 32.790000915527344
+                      "x": 73.40999603271484,
+                      "y": 27.229999542236328
                     }
                   },
                   {
                     "id": 3,
-                    "rotate": 0,
+                    "rotate": 270,
                     "translate": {
-                      "x": 72.09000396728516,
-                      "y": -13.529999732971191
+                      "x": 3.5399999618530273,
+                      "y": 15.40000057220459
                     }
                   },
                   {
-                    "id": 4,
-                    "rotate": 240,
+                    "id": 2,
+                    "rotate": 270,
                     "translate": {
-                      "x": -19.92275619506836,
-                      "y": 36.257080078125
+                      "x": 85.22000122070312,
+                      "y": 23.21000099182129
+                    }
+                  },
+                  {
+                    "id": 7,
+                    "rotate": 0,
+                    "translate": {
+                      "x": 8.84999942779541,
+                      "y": 17.610000610351562
+                    }
+                  },
+                  {
+                    "id": 6,
+                    "rotate": 0,
+                    "translate": {
+                      "x": 59.290000915527344,
+                      "y": 3.5799999237060547
                     }
                   },
                   {
                     "id": 5,
-                    "rotate": 150,
+                    "rotate": 0,
                     "translate": {
-                      "x": 119.30210876464844,
-                      "y": 71.62040710449219
+                      "x": 73.72000122070312,
+                      "y": 6.860000133514404
+                    }
+                  },
+                  {
+                    "id": 8,
+                    "rotate": 180,
+                    "translate": {
+                      "x": 77.58999633789062,
+                      "y": 8.90999984741211
+                    }
+                  },
+                  {
+                    "id": 9,
+                    "rotate": 270,
+                    "translate": {
+                      "x": 87.35000610351562,
+                      "y": 8.6899995803833
+                    }
+                  },
+                  {
+                    "id": 15,
+                    "rotate": 0,
+                    "translate": {
+                      "x": 0.7299999594688416,
+                      "y": 7.199999809265137
                     }
                   }
                 ],
                 [
                   {
                     "id": 1,
-                    "rotate": 0,
+                    "rotate": 180,
                     "translate": {
-                      "x": 0.4499998092651367,
-                      "y": -49.59000015258789
+                      "x": 31.110000610351562,
+                      "y": 14.439998626708984
                     }
                   },
                   {
                     "id": 12,
                     "rotate": 180,
                     "translate": {
-                      "x": 133.58999633789062,
-                      "y": 65.85000610351562
-                    }
-                  },
-                  {
-                    "id": 10,
-                    "rotate": 0,
-                    "translate": {
-                      "x": -51.880001068115234,
-                      "y": 19.520000457763672
+                      "x": 46.28999710083008,
+                      "y": 31.690000534057617
                     }
                   },
                   {
                     "id": 11,
                     "rotate": 0,
                     "translate": {
-                      "x": 34.470001220703125,
-                      "y": -20.65999984741211
+                      "x": 61.040000915527344,
+                      "y": 37.58000183105469
+                    }
+                  },
+                  {
+                    "id": 4,
+                    "rotate": 0,
+                    "translate": {
+                      "x": 8.270000457763672,
+                      "y": 25.6200008392334
                     }
                   }
                 ],
                 [
                   {
                     "id": 13,
-                    "rotate": 0,
+                    "rotate": 270,
                     "translate": {
-                      "x": 0.4500007629394531,
-                      "y": -26.049999237060547
-                    }
-                  },
-                  {
-                    "id": 7,
-                    "rotate": 180,
-                    "translate": {
-                      "x": 91.9800033569336,
-                      "y": 18.579999923706055
-                    }
-                  },
-                  {
-                    "id": 6,
-                    "rotate": 180,
-                    "translate": {
-                      "x": 144.33999633789062,
-                      "y": 24.790000915527344
-                    }
-                  }
-                ],
-                [
-                  {
-                    "id": 8,
-                    "rotate": 90,
-                    "translate": {
-                      "x": 17.40999984741211,
-                      "y": -88.05000305175781
+                      "x": 5.460000038146973,
+                      "y": 22.919998168945312
                     }
                   }
                 ]
-              ]
+              ],
+              "placementsVersion": 2
             },
             {
               "atomType": "Molecule",
@@ -23069,7 +23086,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-218924",
                   "name": "long_parts",
                   "type": "geometry",
@@ -23180,7 +23197,7 @@
                             {
                               "atomType": "Input",
                               "x": 0,
-                              "y": 0.1,
+                              "y": 0.2,
                               "uniqueID": "id-219348",
                               "name": "Shape",
                               "type": "geometry",
@@ -23300,7 +23317,7 @@
                             {
                               "atomType": "Input",
                               "x": 0,
-                              "y": 0.1,
+                              "y": 0.2,
                               "uniqueID": "id-219354",
                               "name": "Shape",
                               "type": "geometry",
@@ -23368,7 +23385,7 @@
                         {
                           "atomType": "Input",
                           "x": 0,
-                          "y": 0.1,
+                          "y": 0.2,
                           "uniqueID": "id-219356",
                           "name": "rectangle",
                           "type": "geometry",
@@ -23515,7 +23532,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-219364",
                       "name": "width",
                       "options": []
@@ -23751,7 +23768,7 @@
                         {
                           "atomType": "Input",
                           "x": 0,
-                          "y": 0.1,
+                          "y": 0.2,
                           "uniqueID": "id-219380",
                           "name": "assembly",
                           "options": []
@@ -23885,7 +23902,7 @@
                         {
                           "atomType": "Input",
                           "x": 0,
-                          "y": 0.1,
+                          "y": 0.2,
                           "uniqueID": "id-219385",
                           "name": "Number",
                           "type": "number",
@@ -24428,7 +24445,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-219563",
                       "name": "Shape",
                       "type": "geometry",
@@ -24596,7 +24613,7 @@
                             {
                               "atomType": "Input",
                               "x": 0,
-                              "y": 0.1,
+                              "y": 0.2,
                               "uniqueID": "id-219580",
                               "name": "Shape",
                               "type": "geometry",
@@ -24716,7 +24733,7 @@
                             {
                               "atomType": "Input",
                               "x": 0,
-                              "y": 0.1,
+                              "y": 0.2,
                               "uniqueID": "id-219586",
                               "name": "Shape",
                               "type": "geometry",
@@ -24784,7 +24801,7 @@
                         {
                           "atomType": "Input",
                           "x": 0,
-                          "y": 0.1,
+                          "y": 0.2,
                           "uniqueID": "id-219588",
                           "name": "rectangle",
                           "type": "geometry",
@@ -24931,7 +24948,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-219596",
                       "name": "width",
                       "options": []
@@ -25167,7 +25184,7 @@
                         {
                           "atomType": "Input",
                           "x": 0,
-                          "y": 0.1,
+                          "y": 0.2,
                           "uniqueID": "id-219612",
                           "name": "assembly",
                           "options": []
@@ -25301,7 +25318,7 @@
                         {
                           "atomType": "Input",
                           "x": 0,
-                          "y": 0.1,
+                          "y": 0.2,
                           "uniqueID": "id-219617",
                           "name": "Number",
                           "type": "number",
@@ -25803,7 +25820,7 @@
                     },
                     {
                       "name": "xDist",
-                      "ioValue": 53.87239871273056
+                      "ioValue": 53.872398702909095
                     },
                     {
                       "name": "yDist",
@@ -25824,7 +25841,7 @@
                   "ioValues": [
                     {
                       "name": "x",
-                      "ioValue": 143.87239871273056
+                      "ioValue": 143.8723987029091
                     }
                   ],
                   "currentEquation": "x - 90"
@@ -26026,7 +26043,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-224528",
                   "type": "geometry",
                   "options": []
@@ -26161,6 +26178,745 @@
                 }
               ],
               "fileTypeVersion": 1
+            },
+            {
+              "atomType": "Move",
+              "x": 0.6,
+              "y": 0.9,
+              "uniqueID": "id-248052",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "xDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "yDist",
+                  "ioValue": 0
+                },
+                {
+                  "name": "zDist",
+                  "ioValue": 0
+                }
+              ]
+            },
+            {
+              "atomType": "Molecule",
+              "x": 0.2,
+              "y": 0.4,
+              "uniqueID": "id-248059",
+              "name": "Molecule",
+              "ioValues": [
+                {
+                  "name": "cockpit",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "topLevel": false,
+              "allAtoms": [
+                {
+                  "atomType": "Output",
+                  "x": 1,
+                  "y": 0.5,
+                  "uniqueID": "id-248061",
+                  "ioValues": [
+                    {
+                      "name": "number or geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Input",
+                  "x": 0,
+                  "y": 0.3,
+                  "uniqueID": "id-248063",
+                  "name": "cockpit",
+                  "type": "geometry",
+                  "options": []
+                },
+                {
+                  "atomType": "Rectangle",
+                  "x": 0.2,
+                  "y": 0.6,
+                  "uniqueID": "id-248066",
+                  "ioValues": [
+                    {
+                      "name": "x length",
+                      "ioValue": 0.01
+                    },
+                    {
+                      "name": "y length",
+                      "ioValue": 40,
+                      "currentEquation": "40"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Extrude",
+                  "x": 0.3,
+                  "y": 0.7,
+                  "uniqueID": "id-248070",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "height",
+                      "ioValue": 10
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Move",
+                  "x": 0.4,
+                  "y": 0.7,
+                  "uniqueID": "id-248074",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "xDist",
+                      "ioValue": 77,
+                      "currentEquation": "77"
+                    },
+                    {
+                      "name": "yDist",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "zDist",
+                      "ioValue": -10
+                    }
+                  ]
+                },
+                {
+                  "atomType": "Rotate",
+                  "x": 0.3,
+                  "y": 0.8,
+                  "uniqueID": "id-248080",
+                  "ioValues": [
+                    {
+                      "name": "geometry",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "x-axis degrees",
+                      "ioValue": 0,
+                      "currentEquation": "0"
+                    },
+                    {
+                      "name": "y-axis degrees",
+                      "ioValue": 0
+                    },
+                    {
+                      "name": "z-axis degrees",
+                      "ioValue": 30,
+                      "currentEquation": "30"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "GitHubMolecule",
+                  "x": 0.6,
+                  "y": 0.7,
+                  "uniqueID": "id-248094",
+                  "name": "select.FacesByNormal",
+                  "ioValues": [
+                    {
+                      "name": "shape",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "normal",
+                      "ioValue": [
+                        0,
+                        0,
+                        1
+                      ]
+                    },
+                    {
+                      "name": "toleranceDeg",
+                      "ioValue": 30
+                    },
+                    {
+                      "name": "u",
+                      "ioValue": 0.5
+                    },
+                    {
+                      "name": "v",
+                      "ioValue": 0.5
+                    }
+                  ],
+                  "topLevel": false,
+                  "allAtoms": [
+                    {
+                      "atomType": "Output",
+                      "x": 1,
+                      "y": 0.5,
+                      "uniqueID": "id-248087",
+                      "ioValues": [
+                        {
+                          "name": "number or geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Code",
+                      "x": 0.5,
+                      "y": 0.3,
+                      "uniqueID": "id-248088",
+                      "ioValues": [
+                        {
+                          "name": "facesOf",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        },
+                        {
+                          "name": "normal",
+                          "ioValue": [
+                            0,
+                            0,
+                            1
+                          ]
+                        },
+                        {
+                          "name": "toleranceDeg",
+                          "ioValue": 30
+                        },
+                        {
+                          "name": "u",
+                          "ioValue": 0.5
+                        },
+                        {
+                          "name": "v",
+                          "ioValue": 0.5
+                        }
+                      ],
+                      "interpreterVersion": 1,
+                      "code": "\nfunction run(facesOf: Assembly, normal: number[], toleranceDeg: number = 0, u: number = 0.5, v: number = 0.5) {\n  if (normal.length != 3) {\n    throw new Error(\"normal must be a vector of three numbers\")\n  }\n  const normVec = new replicad.Vector(normal as [number, number, number]).normalized()\n  const tol = toleranceDeg * replicad.DEG2RAD\n  return facesOf.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    const finder = new replicad.FaceFinder().when((arg) => {\n      const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u,v])\n      const degBetween = Math.acos(faceNorm.normalized().dot(normVec))\n      console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`)\n      return degBetween <= tol;\n    })\n    const foundFaces = finder.find(leaf.geometry)\n    const allFaces = leaf.geometry.faces;\n    const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n    selectedIndexes.push(...indexes)\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { faces: [] }\n    }\n    const before = leaf.selection.faces as number[];\n    leaf.selection.faces = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.faces}`)\n    return leaf;\n  })?.skipDisjointPostprocess()\n}",
+                      "compiledCode": "\"use strict\";\nfunction run(facesOf, normal, toleranceDeg = 0, u = 0.5, v = 0.5) {\n    if (normal.length != 3) {\n        throw new Error(\"normal must be a vector of three numbers\");\n    }\n    const normVec = new replicad.Vector(normal).normalized();\n    const tol = toleranceDeg * replicad.DEG2RAD;\n    return facesOf.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        const finder = new replicad.FaceFinder().when((arg) => {\n            const faceNorm = arg.normal ? arg.normal : arg.element.normalAt([u, v]);\n            const degBetween = Math.acos(faceNorm.normalized().dot(normVec));\n            console.log(`face normal: ${faceNorm}, degBetween: ${degBetween}`);\n            return degBetween <= tol;\n        });\n        const foundFaces = finder.find(leaf.geometry);\n        const allFaces = leaf.geometry.faces;\n        const indexes = foundFaces.map((f) => allFaces.findIndex((face) => face.isSame(f)));\n        selectedIndexes.push(...indexes);\n        if (leaf.selection == undefined) {\n            leaf.selection = { faces: [] };\n        }\n        const before = leaf.selection.faces;\n        leaf.selection.faces = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.faces}`);\n        return leaf;\n    })?.skipDisjointPostprocess();\n}\n"
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-248089",
+                      "name": "shape",
+                      "type": "geometry",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-248090",
+                      "name": "normal",
+                      "type": "point3d",
+                      "options": [],
+                      "pointValue": null
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.3,
+                      "uniqueID": "id-248091",
+                      "name": "toleranceDeg",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.4,
+                      "uniqueID": "id-248092",
+                      "name": "u",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.5,
+                      "uniqueID": "id-248093",
+                      "name": "v",
+                      "options": []
+                    }
+                  ],
+                  "allConnectors": [
+                    {
+                      "ap2Name": "number or geometry",
+                      "ap1ID": "id-248088",
+                      "ap2ID": "id-248087"
+                    },
+                    {
+                      "ap2Name": "facesOf",
+                      "ap1ID": "id-248089",
+                      "ap2ID": "id-248088"
+                    },
+                    {
+                      "ap2Name": "normal",
+                      "ap1ID": "id-248090",
+                      "ap2ID": "id-248088"
+                    },
+                    {
+                      "ap2Name": "toleranceDeg",
+                      "ap1ID": "id-248091",
+                      "ap2ID": "id-248088"
+                    },
+                    {
+                      "ap2Name": "u",
+                      "ap1ID": "id-248092",
+                      "ap2ID": "id-248088"
+                    },
+                    {
+                      "ap2Name": "v",
+                      "ap1ID": "id-248093",
+                      "ap2ID": "id-248088"
+                    }
+                  ],
+                  "parentRepo": {
+                    "lastFoundGit": "2026-10-08T18:23:39.127Z",
+                    "privateRepo": false,
+                    "repoName": "select.FacesByNormal",
+                    "dateCreated": "2026-08-19T19:30:15Z",
+                    "likes": 0,
+                    "pngURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.png?sanitize=true",
+                    "readme": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/README.md?sanitize=true",
+                    "yyyy": 2026,
+                    "topMoleculeID": "",
+                    "userRanking": 0,
+                    "userSetAsThumbnail": false,
+                    "githubMoleculesUsed": [],
+                    "html_url": "https://github.com/tristan-huber/select.FacesByNormal",
+                    "topics": [
+                      "abundance-tool"
+                    ],
+                    "pullRequests": [],
+                    "forks": 0,
+                    "dateModified": "2026-09-03T20:47:11Z",
+                    "ranking": 3,
+                    "searchField": "select.facesbynormal tristan-huber select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5) abundance-tool",
+                    "owner": "tristan-huber",
+                    "description": "Select faces from an assembly whose normal vector is in the given direction plus or minus some tolerance. Note the u,v location where the normal is taken can be set but defaults to center (0.5,0.5)",
+                    "contentURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.abundance?sanitize=true",
+                    "svgURL": "https://raw.githubusercontent.com/tristan-huber/select.FacesByNormal/master/project.svg?sanitize=true",
+                    "isLocal": false
+                  },
+                  "unitsKey": "Unitless",
+                  "fileTypeVersion": 1,
+                  "lastReloadedFromGithubAt": 1791484678613
+                },
+                {
+                  "atomType": "Difference",
+                  "x": 0.5,
+                  "y": 0.6,
+                  "uniqueID": "id-248115",
+                  "ioValues": [
+                    {
+                      "name": "retain",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "remove",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ]
+                },
+                {
+                  "atomType": "GitHubMolecule",
+                  "x": 0.7,
+                  "y": 0.9,
+                  "uniqueID": "id-248123",
+                  "name": "ExtractFaces",
+                  "ioValues": [
+                    {
+                      "name": "Assembly",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    }
+                  ],
+                  "topLevel": false,
+                  "allAtoms": [
+                    {
+                      "atomType": "Output",
+                      "x": 1,
+                      "y": 0.5,
+                      "uniqueID": "id-248120",
+                      "ioValues": [
+                        {
+                          "name": "number or geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-248121",
+                      "name": "Assembly",
+                      "type": "faceselect",
+                      "options": [],
+                      "selectedFaceData": {
+                        "0": [
+                          4,
+                          27
+                        ],
+                        "1": [
+                          4,
+                          27
+                        ],
+                        "2": [
+                          4,
+                          27
+                        ]
+                      }
+                    },
+                    {
+                      "atomType": "Code",
+                      "x": 0.3,
+                      "y": 0.8,
+                      "uniqueID": "id-248122",
+                      "ioValues": [
+                        {
+                          "name": "input",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ],
+                      "interpreterVersion": 1,
+                      "code": "function run(input: Assembly) {\n  const res =  input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Faces. Input must be 3d\")\n    }\n    if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n      const faces = leaf.geometry.faces;\n      const faceIndexes = leaf.selection.faces\n      if (faceIndexes.length == 1) {\n        leaf.geometry = faces[faceIndexes[0]]\n        return leaf;\n      } else {\n        const res = faceIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: faces[index] })\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  console.log(res)\n  return res;\n}",
+                      "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Faces. Input must be 3d\");\n        }\n        if (leaf.selection?.faces && leaf.selection.faces.length > 0) {\n            const faces = leaf.geometry.faces;\n            const faceIndexes = leaf.selection.faces;\n            if (faceIndexes.length == 1) {\n                leaf.geometry = faces[faceIndexes[0]];\n                return leaf;\n            }\n            else {\n                const res = faceIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: faces[index] });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    console.log(res);\n    return res;\n}\n"
+                    }
+                  ],
+                  "allConnectors": [
+                    {
+                      "ap2Name": "input",
+                      "ap1ID": "id-248121",
+                      "ap2ID": "id-248122"
+                    },
+                    {
+                      "ap2Name": "number or geometry",
+                      "ap1ID": "id-248122",
+                      "ap2ID": "id-248120"
+                    }
+                  ],
+                  "parentRepo": {
+                    "lastFoundGit": "2026-10-08T18:23:39.127Z",
+                    "privateRepo": false,
+                    "repoName": "ExtractFaces",
+                    "dateCreated": "2026-07-24T19:57:30Z",
+                    "likes": 0,
+                    "pngURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.png?sanitize=true",
+                    "readme": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/README.md?sanitize=true",
+                    "yyyy": 2026,
+                    "topMoleculeID": "",
+                    "userRanking": 0,
+                    "userSetAsThumbnail": false,
+                    "githubMoleculesUsed": [],
+                    "html_url": "https://github.com/tristan-huber/ExtractFaces",
+                    "topics": [
+                      "abundance-tool"
+                    ],
+                    "pullRequests": [],
+                    "forks": 0,
+                    "dateModified": "2026-07-24T20:38:04Z",
+                    "ranking": 3,
+                    "searchField": "extractfaces tristan-huber extract faces from an assembly by click selection. faces are identified by index within their leaf of the assembly. returns a new assembly with just faces abundance-tool",
+                    "owner": "tristan-huber",
+                    "description": "Extract faces from an assembly by click selection. Faces are identified by index within their leaf of the assembly. Returns a new assembly with just faces",
+                    "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.abundance?sanitize=true",
+                    "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractFaces/master/project.svg?sanitize=true",
+                    "isLocal": false
+                  },
+                  "unitsKey": "Unitless",
+                  "fileTypeVersion": 1,
+                  "lastReloadedFromGithubAt": 1791484722659
+                },
+                {
+                  "atomType": "GitHubMolecule",
+                  "x": 0.8,
+                  "y": 0.7,
+                  "uniqueID": "id-248141",
+                  "name": "crv.MeshUnroll",
+                  "ioValues": [
+                    {
+                      "name": "toUnroll",
+                      "ioValue": "__GEOMETRY_INPUT__"
+                    },
+                    {
+                      "name": "unrollTogether",
+                      "ioValue": false
+                    },
+                    {
+                      "name": "meshTolerance",
+                      "ioValue": 0.05
+                    },
+                    {
+                      "name": "compressiveFraction",
+                      "ioValue": 0.02
+                    },
+                    {
+                      "name": "tensileFraction",
+                      "ioValue": 0.05
+                    }
+                  ],
+                  "topLevel": false,
+                  "allAtoms": [
+                    {
+                      "atomType": "Output",
+                      "x": 1,
+                      "y": 0.5,
+                      "uniqueID": "id-248133",
+                      "ioValues": [
+                        {
+                          "name": "number or geometry",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ]
+                    },
+                    {
+                      "atomType": "Code",
+                      "x": 0.5,
+                      "y": 0.5,
+                      "uniqueID": "id-248134",
+                      "ioValues": [
+                        {
+                          "name": "surface",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        },
+                        {
+                          "name": "tolerance",
+                          "ioValue": 0.05
+                        },
+                        {
+                          "name": "asSingular",
+                          "ioValue": false
+                        },
+                        {
+                          "name": "maxTensileStrain",
+                          "ioValue": 0.05
+                        },
+                        {
+                          "name": "maxCompressiveStrain",
+                          "ioValue": 0.02
+                        }
+                      ],
+                      "interpreterVersion": 1,
+                      "code": "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nfunction run(\n  surface: Assembly,\n  tolerance: number = 0.01,\n  asSingular: boolean = false,\n  maxTensileStrain: number = 0.05,\n  maxCompressiveStrain: number = 0.05,\n): Assembly {\n  const toUnroll: { srcLeaf: Assembly; mesh: Mesh }[] = [];\n  surface.onLeafs((leaf) => {\n    const sface = leaf.getSelectedFaces().filter((f) => f != undefined);\n    if (sface.length > 0) {\n      toUnroll.push(\n        ...sface.map((f) => {\n          return { srcLeaf: leaf, mesh: faceToMesh(f, tolerance) };\n        }),\n      );\n    } else if (leaf.geometry instanceof replicad.Face) {\n      toUnroll.push({\n        srcLeaf: leaf,\n        mesh: faceToMesh(leaf.geometry, tolerance),\n      });\n    }\n    return leaf;\n  });\n  if (toUnroll.length == 0) {\n    throw new Error(\"No selected faces, and not an assembly of face geoms\");\n  }\n\n  if (asSingular) {\n    // Group selected faces that share an edge into one mesh so they unroll\n    // as a single continuous surface; faces with no shared edge stay separate.\n    const islands = combineMeshes(toUnroll.map((t) => t.mesh));\n    let ybuffer = 0;\n    const result = islands.map((foo) => {\n      const unrolled = unrollArap(foo);\n      const distortion = measureDistortion(foo, unrolled);\n      console.log(distortion.triStrains.length);\n      console.log(foo.tris.length);\n      console.log(\n        `pointref range. input mesh: ${foo.positions.length} result mesh: ${unrolled.positions.length}`,\n      );\n      const drawing = unrolledWithHoles(unrolled).translate(0, ybuffer);\n      const meshOverride = buildHeatmapMeshOverride(\n        foo,\n        unrolled,\n        distortion.triStrains,\n        maxTensileStrain,\n        maxCompressiveStrain,\n        ybuffer,\n      );\n      ybuffer += drawing.boundingBox.height * 1.1;\n      return new Assembly({\n        geometry: drawing,\n        metadata: {\n          meshOverride,\n        },\n      });\n    });\n    return new Assembly({ geometry: result.flat() }).skipDisjointPostprocess();\n  } else {\n    let ybuffer = 0;\n    const result = toUnroll.map((leaf) => {\n      const unrollResult = unrollArap(leaf.mesh);\n      const distortion = measureDistortion(leaf.mesh, unrollResult);\n      const drawing = unrolledWithHoles(unrollResult).translate(0, ybuffer);\n      const meshOverride = buildHeatmapMeshOverride(\n        leaf.mesh,\n        unrollResult,\n        distortion.triStrains,\n        maxTensileStrain,\n        maxCompressiveStrain,\n        ybuffer,\n      );\n      ybuffer += drawing.boundingBox.height * 1.1;\n      return new Assembly({\n        ...leaf.srcLeaf,\n        geometry: drawing,\n        metadata: {\n          ...leaf.srcLeaf.metadata,\n          meshOverride,\n        },\n      });\n    });\n    return new Assembly({ geometry: result.flat() }).skipDisjointPostprocess();\n  }\n}\n\nfunction unrolledWithHoles(unrolResult: FlatMesh): replicad.Drawing {\n  let res = xysToClosedDrawing(unrolResult.outline);\n  unrolResult.innerWires.forEach((inner: Point2D[]) => {\n    res = res.cut(xysToClosedDrawing(inner));\n  });\n  return res;\n}\n\nfunction buildHeatmapMeshOverride(\n  mesh: Mesh,\n  flat: FlatMesh,\n  triStrains: { e1: number; e2: number }[],\n  maxTensileStrain: number,\n  maxCompressiveStrain: number,\n  yOffset: number = 0,\n) {\n  const vertices: number[] = [];\n  const triangles: number[] = [];\n  const vertexColors: number[] = [];\n\n  mesh.tris.forEach((tri, triIndex) => {\n    const { e1, e2 } = triStrains[triIndex] ?? { e1: 0, e2: 0 };\n    const tensionRisk = e1 > 0 ? e1 / maxTensileStrain : 0;\n    const compressionRisk = e2 < 0 ? -e2 / maxCompressiveStrain : 0;\n    const [r, g, b] = riskToRgb(tensionRisk, compressionRisk);\n    const baseIndex = vertices.length / 3;\n\n    tri.forEach((vertexIndex) => {\n      const point = flat.positions[vertexIndex];\n      vertices.push(point.x, point.y + yOffset, 0);\n      vertexColors.push(r, g, b);\n    });\n\n    triangles.push(baseIndex, baseIndex + 1, baseIndex + 2);\n  });\n\n  return {\n    faces: {\n      vertices,\n      triangles,\n    },\n    vertexColors,\n  };\n}\n\n// 0 = no distortion (white), 1 = exactly at the material's strain limit\n// (solid color); clamped for anything past the limit since it's already\n// unsafe. Tension (stretch) ramps toward red, compression (shrink) toward\n// blue; whichever risk is larger for a triangle determines its hue.\nfunction riskToRgb(\n  tensionRisk: number,\n  compressionRisk: number,\n): [number, number, number] {\n  if (tensionRisk >= compressionRisk) {\n    const t = Math.max(0, Math.min(1, tensionRisk));\n    return [1, 1 - t, 1 - t];\n  }\n  const t = Math.max(0, Math.min(1, compressionRisk));\n  return [1 - t, 1 - t, 1];\n}\n\n// Groups meshes that share a boundary edge into a single combined mesh (so\n// they flatten together as one continuous surface); meshes with no shared\n// edge are left as separate entries. Vertex dedup uses a hashed key (not\n// pairwise comparison) and connectivity is derived from edges that are\n// naked in more than one input mesh, so this runs in roughly\n// O(points + triangles) total rather than the prior O(tris^2 * meshCount).\nfunction combineMeshes(meshes: Mesh[]): Mesh[] {\n  if (meshes.length <= 1) return meshes;\n\n  // Dedup points across all meshes into one global vertex list.\n  const globalPositions: Point3D[] = [];\n  const globalIndexByKey = new Map<string, number>();\n  const keyOf = (p: Point3D) =>\n    `${p.x.toFixed(6)}_${p.y.toFixed(6)}_${p.z.toFixed(6)}`;\n  const remappedTris: Tri3[][] = meshes.map((mesh) => {\n    const localToGlobal = mesh.positions.map((p) => {\n      const key = keyOf(p);\n      let idx = globalIndexByKey.get(key);\n      if (idx === undefined) {\n        idx = globalPositions.length;\n        globalPositions.push(p);\n        globalIndexByKey.set(key, idx);\n      }\n      return idx;\n    });\n    return mesh.tris.map((tri) => tri.map((i) => localToGlobal[i]) as Tri3);\n  });\n\n  // Union meshes that share a boundary edge: an edge naked in two different\n  // input meshes becomes internal once those meshes are combined.\n  const parent = meshes.map((_, i) => i);\n  const find = (i: number): number => {\n    if (parent[i] !== i) parent[i] = find(parent[i]);\n    return parent[i];\n  };\n  const union = (a: number, b: number) => {\n    const ra = find(a);\n    const rb = find(b);\n    if (ra !== rb) parent[ra] = rb;\n  };\n\n  const edgeKey = (a: number, b: number) => (a < b ? `${a}_${b}` : `${b}_${a}`);\n  const edgeOwner = new Map<string, number>();\n  remappedTris.forEach((tris, meshIndex) => {\n    const boundary = boundaryEdges({ positions: globalPositions, tris });\n    for (const [a, b] of boundary) {\n      const key = edgeKey(a, b);\n      const owner = edgeOwner.get(key);\n      if (owner === undefined) {\n        edgeOwner.set(key, meshIndex);\n      } else if (owner !== meshIndex) {\n        union(owner, meshIndex);\n      }\n    }\n  });\n\n  // Group mesh indices by connected component, then rebuild a compact mesh\n  // (deduped positions, remapped triangle indices) per component.\n  const groups = new Map<number, number[]>();\n  meshes.forEach((_, i) => {\n    const root = find(i);\n    const group = groups.get(root);\n    if (group) group.push(i);\n    else groups.set(root, [i]);\n  });\n\n  return Array.from(groups.values()).map((meshIndices) => {\n    const compactIndex = new Map<number, number>();\n    const positions: Point3D[] = [];\n    const tris: Tri3[] = [];\n    meshIndices.forEach((meshIndex) => {\n      remappedTris[meshIndex].forEach((tri) => {\n        tris.push(\n          tri.map((globalIdx) => {\n            let local = compactIndex.get(globalIdx);\n            if (local === undefined) {\n              local = positions.length;\n              positions.push(globalPositions[globalIdx]);\n              compactIndex.set(globalIdx, local);\n            }\n            return local;\n          }) as Tri3,\n        );\n      });\n    });\n    return { positions, tris };\n  });\n}\n\nfunction faceToMesh(face: replicad.Face, tolerance: number): Mesh {\n  const replMesh = face.mesh({ tolerance: tolerance, angularTolerance: 0.1 });\n  // translate\n  const points: Point3D[] = [];\n  const v = replMesh.vertices;\n  for (let i = 0; i < v.length; i += 3) {\n    points.push({ x: v[i], y: v[i + 1], z: v[i + 2] });\n  }\n  const tris: Tri3[] = [];\n  const t = replMesh.triangles;\n  for (let i = 0; i < t.length; i += 3) {\n    tris.push([t[i], t[i + 1], t[i + 2]]);\n  }\n  return { positions: points, tris: tris };\n}\n\nfunction xysToClosedDrawing(points: Point2D[]) {\n  const pen = replicad.draw([points[0].x, points[0].y]);\n  for (let i = 1; i < points.length; i++) {\n    pen.lineTo([points[i].x, points[i].y]);\n  }\n  return pen.close();\n}\n\nexport type Point2D = { x: number; y: number };\nexport type Point3D = { x: number; y: number; z: number };\n\nexport type Tri3 = [number, number, number];\n\nexport type Mesh = {\n  positions: Point3D[];\n  tris: Tri3[];\n};\n\nexport type FlatMesh = {\n  positions: Point2D[];\n  outline: Point2D[];\n  innerWires: Point2D[][];\n};\n\nexport type Unroller = (mesh: Mesh) => FlatMesh;\n\nconst COT_MIN = 0.05;\nconst COT_MAX = 20;\n\nconst ITERATIONS = 4000;\n\nconst SETTLED = 1e-6;\n\ntype Adj = { j: number; w: number; t: number; dx: number; dy: number };\n\nexport function unrollArap(mesh: Mesh): FlatMesh {\n  const tris = buildTris(mesh);\n  const nv = mesh.positions.length;\n  const flat = placeByUnfolding(mesh, tris);\n\n  if (tris.length > 0 && nv > 1) {\n    const { adj, triW } = buildAdjacency(tris, nv);\n    solve(flat, tris, adj, triW);\n  }\n\n  const positions = canonicalise(flat);\n  const loops = boundaryLoop(mesh).map((wire) => wire.map((i) => positions[i]));\n  // The outer perimeter always encloses every hole, so it always has the\n  // largest enclosed area; boundary loop order otherwise has no geometric\n  // meaning (it's just tessellation edge-iteration order).\n  let outlineIndex = 0;\n  let maxArea = -Infinity;\n  loops.forEach((loop, i) => {\n    const area = Math.abs(polygonArea(loop));\n    if (area > maxArea) {\n      maxArea = area;\n      outlineIndex = i;\n    }\n  });\n  const outline = loops[outlineIndex];\n  const innerWires = loops.filter((_, i) => i !== outlineIndex);\n  return { positions, outline, innerWires };\n}\n\nfunction polygonArea(points: Point2D[]): number {\n  let area = 0;\n  for (let i = 0; i < points.length; i++) {\n    const p = points[i];\n    const q = points[(i + 1) % points.length];\n    area += p.x * q.y - q.x * p.y;\n  }\n  return area / 2;\n}\n\nfunction buildAdjacency(\n  tris: Tri[],\n  nv: number,\n): { adj: Adj[][]; triW: Float64Array } {\n  const adj: Adj[][] = [];\n  const triW = new Float64Array(tris.length * 3);\n  for (let i = 0; i < nv; i++) adj.push([]);\n\n  tris.forEach((tri, t) => {\n    const { ids, xs } = tri;\n    const twoArea = 2 * tri.area;\n    for (let e = 0; e < 3; e++) {\n      const p = e;\n      const q = (e + 1) % 3;\n      const o = (e + 2) % 3;\n      const ax = xs[p].x - xs[o].x,\n        ay = xs[p].y - xs[o].y;\n      const bx = xs[q].x - xs[o].x,\n        by = xs[q].y - xs[o].y;\n\n      const cot = twoArea > 0 ? (ax * bx + ay * by) / twoArea : COT_MIN;\n      const w = Math.min(COT_MAX, Math.max(COT_MIN, cot));\n      triW[t * 3 + e] = w;\n      const dx = xs[p].x - xs[q].x;\n      const dy = xs[p].y - xs[q].y;\n      adj[ids[p]].push({ j: ids[q], w, t, dx, dy });\n      adj[ids[q]].push({ j: ids[p], w, t, dx: -dx, dy: -dy });\n    }\n  });\n  return { adj, triW };\n}\n\nfunction solve(flat: Point2D[], tris: Tri[], adj: Adj[][], triW: Float64Array) {\n  const nv = flat.length;\n  const cos = new Float64Array(tris.length);\n  const sin = new Float64Array(tris.length);\n  const tol = SETTLED * intrinsicScale(tris);\n  const system = factorSystem(adj, nv);\n\n  const bestX = new Float64Array(nv);\n  const bestY = new Float64Array(nv);\n  let bestE = energyOf(flat, tris);\n  snapshot(flat, bestX, bestY);\n\n  const rx = new Float64Array(Math.max(nv - 1, 0));\n  const ry = new Float64Array(Math.max(nv - 1, 0));\n\n  for (let it = 0; it < ITERATIONS; it++) {\n    localStep(flat, tris, triW, cos, sin);\n\n    let maxDelta = 0;\n    if (system) {\n      rx.fill(0);\n      ry.fill(0);\n      for (let i = 1; i < nv; i++) {\n        let bx = 0;\n        let by = 0;\n        for (const e of adj[i]) {\n          bx += e.w * (cos[e.t] * e.dx - sin[e.t] * e.dy);\n          by += e.w * (sin[e.t] * e.dx + cos[e.t] * e.dy);\n          if (e.j === 0) {\n            bx += e.w * flat[0].x;\n            by += e.w * flat[0].y;\n          }\n        }\n        rx[i - 1] = bx;\n        ry[i - 1] = by;\n      }\n      solveBanded(system, rx, ry);\n      for (let i = 1; i < nv; i++) {\n        const d = Math.hypot(rx[i - 1] - flat[i].x, ry[i - 1] - flat[i].y);\n        if (d > maxDelta) maxDelta = d;\n        flat[i].x = rx[i - 1];\n        flat[i].y = ry[i - 1];\n      }\n    } else {\n      maxDelta = gaussSeidel(flat, adj, cos, sin, nv);\n    }\n\n    const e = energyOf(flat, tris);\n    if (e < bestE) {\n      bestE = e;\n      snapshot(flat, bestX, bestY);\n    }\n    if (maxDelta < tol) break;\n  }\n\n  restore(flat, bestX, bestY);\n}\n\nfunction snapshot(flat: Point2D[], x: Float64Array, y: Float64Array) {\n  for (let i = 0; i < flat.length; i++) {\n    if (flat[i] == undefined) {\n      continue;\n    }\n    x[i] = flat[i].x;\n    y[i] = flat[i].y;\n  }\n}\n\nfunction restore(flat: Point2D[], x: Float64Array, y: Float64Array) {\n  for (let i = 0; i < flat.length; i++) {\n    flat[i] = { x: x[i], y: y[i] };\n  }\n}\n\nfunction localStep(\n  flat: Point2D[],\n  tris: Tri[],\n  triW: Float64Array,\n  cos: Float64Array,\n  sin: Float64Array,\n) {\n  tris.forEach((tri, t) => {\n    const { ids, xs } = tri;\n    let num = 0;\n    let den = 0;\n    for (let e = 0; e < 3; e++) {\n      const p = e;\n      const q = (e + 1) % 3;\n      const w = triW[t * 3 + e];\n      const dxc = xs[q].x - xs[p].x;\n      const dyc = xs[q].y - xs[p].y;\n      const dqx = flat[ids[q]].x - flat[ids[p]].x;\n      const dqy = flat[ids[q]].y - flat[ids[p]].y;\n      num += w * (dqy * dxc - dqx * dyc);\n      den += w * (dqx * dxc + dqy * dyc);\n    }\n    const th = Math.atan2(num, den);\n    cos[t] = Math.cos(th);\n    sin[t] = Math.sin(th);\n  });\n}\n\nfunction gaussSeidel(\n  flat: Point2D[],\n  adj: Adj[][],\n  cos: Float64Array,\n  sin: Float64Array,\n  nv: number,\n): number {\n  let maxDelta = 0;\n  for (let sweep = 0; sweep < 3; sweep++) {\n    for (let i = 1; i < nv; i++) {\n      let diag = 0;\n      let sx = 0;\n      let sy = 0;\n      for (const e of adj[i]) {\n        diag += e.w;\n        sx += e.w * (flat[e.j].x + cos[e.t] * e.dx - sin[e.t] * e.dy);\n        sy += e.w * (flat[e.j].y + sin[e.t] * e.dx + cos[e.t] * e.dy);\n      }\n      if (diag <= 0) continue;\n      const nx = sx / diag;\n      const ny = sy / diag;\n      const d = Math.hypot(nx - flat[i].x, ny - flat[i].y);\n      if (d > maxDelta) maxDelta = d;\n      flat[i] = { x: nx, y: ny };\n    }\n  }\n  return maxDelta;\n}\n\ntype Banded = { n: number; b: number; a: Float64Array; envelope: Int32Array };\n\nfunction factorSystem(adj: Adj[][], nv: number): Banded | null {\n  const n = nv - 1;\n  if (n <= 0) return null;\n\n  let b = 0;\n  for (let i = 1; i < nv; i++) {\n    for (const e of adj[i]) {\n      if (e.j === 0) continue;\n      const d = Math.abs(i - e.j);\n      if (d > b) b = d;\n    }\n  }\n  if (b >= n) return null;\n\n  const a = new Float64Array(n * (b + 1));\n  for (let i = 1; i < nv; i++) {\n    const r = i - 1;\n    for (const e of adj[i]) {\n      a[r * (b + 1)] += e.w;\n      if (e.j === 0) continue;\n      const c = e.j - 1;\n      if (c < r) a[r * (b + 1) + (r - c)] -= e.w;\n    }\n  }\n\n  const envelope = new Int32Array(n);\n  for (let r = 0; r < n; r++) {\n    const top = Math.min(b, r);\n    for (let k = top; k >= 1; k--) {\n      if (a[r * (b + 1) + k] !== 0) {\n        envelope[r] = k;\n        break;\n      }\n    }\n  }\n\n  for (let i = 0; i < n; i++) {\n    const wi = envelope[i];\n    for (let k = wi; k >= 1; k--) {\n      const j = i - k;\n      if (j < 0) continue;\n      let s = a[i * (b + 1) + k];\n      const top = Math.min(wi - k, envelope[j]);\n      for (let m = 1; m <= top; m++) {\n        s -= a[i * (b + 1) + (k + m)] * a[j * (b + 1) + m];\n      }\n      a[i * (b + 1) + k] = s / a[j * (b + 1)];\n    }\n    let d = a[i * (b + 1)];\n    for (let k = 1; k <= wi; k++) {\n      d -= a[i * (b + 1) + k] * a[i * (b + 1) + k];\n    }\n    if (!(d > 0)) return null;\n    a[i * (b + 1)] = Math.sqrt(d);\n  }\n  return { n, b, a, envelope };\n}\n\nfunction solveBanded(m: Banded, rx: Float64Array, ry: Float64Array) {\n  const { n, b, a, envelope } = m;\n  const w = b + 1;\n  for (let i = 0; i < n; i++) {\n    let sx = rx[i];\n    let sy = ry[i];\n    const wi = envelope[i];\n    for (let k = 1; k <= wi; k++) {\n      const v = a[i * w + k];\n      sx -= v * rx[i - k];\n      sy -= v * ry[i - k];\n    }\n    const d = a[i * w];\n    rx[i] = sx / d;\n    ry[i] = sy / d;\n  }\n  for (let i = n - 1; i >= 0; i--) {\n    const d = a[i * w];\n    const vx = rx[i] / d;\n    const vy = ry[i] / d;\n    rx[i] = vx;\n    ry[i] = vy;\n    const wi = envelope[i];\n    for (let k = 1; k <= wi; k++) {\n      const v = a[i * w + k];\n      rx[i - k] -= v * vx;\n      ry[i - k] -= v * vy;\n    }\n  }\n}\n\nfunction intrinsicScale(tris: Tri[]): number {\n  let area = 0;\n  for (const tri of tris) area += tri.area;\n  return area > 0 ? Math.sqrt(area) : 1;\n}\n\nexport type Tri = {\n  ids: Tri3;\n  xs: [Point2D, Point2D, Point2D];\n  area: number;\n};\n\nexport function buildTris(mesh: Mesh): Tri[] {\n  const out: Tri[] = [];\n  for (const [a, b, c] of mesh.tris) {\n    const A = mesh.positions[a];\n    const B = mesh.positions[b];\n    const C = mesh.positions[c];\n    const ux = B.x - A.x,\n      uy = B.y - A.y,\n      uz = B.z - A.z;\n    const vx = C.x - A.x,\n      vy = C.y - A.y,\n      vz = C.z - A.z;\n    const cx = uy * vz - uz * vy;\n    const cy = uz * vx - ux * vz;\n    const cz = ux * vy - uy * vx;\n    const cross = Math.hypot(cx, cy, cz);\n    const la = Math.hypot(ux, uy, uz);\n    const lb = Math.hypot(vx, vy, vz);\n    if (la === 0 || lb === 0) continue;\n    const cos = Math.max(\n      -1,\n      Math.min(1, (ux * vx + uy * vy + uz * vz) / (la * lb)),\n    );\n    out.push({\n      ids: [a, b, c],\n      xs: [\n        { x: 0, y: 0 },\n        { x: la, y: 0 },\n        { x: lb * cos, y: lb * Math.sqrt(Math.max(0, 1 - cos * cos)) },\n      ],\n      area: cross / 2,\n    });\n  }\n  return out;\n}\n\nexport function energyOf(flat: Point2D[], tris: Tri[]): number {\n  let e = 0;\n  let area = 0;\n  for (const tri of tris) {\n    const { ids, xs } = tri;\n    for (let k = 0; k < 3; k++) {\n      const p = k;\n      const q = (k + 1) % 3;\n      const lc = Math.hypot(xs[q].x - xs[p].x, xs[q].y - xs[p].y);\n      const lq = Math.hypot(\n        flat[ids[q]].x - flat[ids[p]].x,\n        flat[ids[q]].y - flat[ids[p]].y,\n      );\n      e += (lq - lc) * (lq - lc);\n    }\n    area += tri.area;\n  }\n  return area > 0 ? e / area : 0;\n}\n\nexport function placeByUnfolding(mesh: Mesh, tris: Tri[]): Point2D[] {\n  const nv = mesh.positions.length;\n  const flat: Point2D[] = new Array(nv);\n  const placed: boolean[] = new Array(nv).fill(false);\n\n  const incident: number[][] = [];\n  for (let i = 0; i < nv; i++) incident.push([]);\n  tris.forEach((tri, t) => {\n    for (const id of tri.ids) incident[id].push(t);\n  });\n\n  const seed = tris[0];\n  seed.ids.forEach((id, k) => {\n    flat[id] = { x: seed.xs[k].x, y: seed.xs[k].y };\n    placed[id] = true;\n  });\n\n  const queue: number[] = seed.ids.flatMap((id) => incident[id]);\n  for (let head = 0; head < queue.length; head++) {\n    const tri = tris[queue[head]];\n    const open = tri.ids.filter((i) => !placed[i]);\n    if (open.length !== 1) continue;\n    const v = open[0];\n    const p = placeFrom(\n      bestHinge(v, incident[v], tris, placed, tri),\n      v,\n      flat,\n      placed,\n    );\n    if (!p) continue;\n    flat[v] = p;\n    placed[v] = true;\n    for (const t of incident[v]) queue.push(t);\n  }\n\n  for (let i = 0; i < nv; i++) {\n    if (!placed[i])\n      console.warn(`unroll: vertex ${i} of ${nv} is not connected to the mesh`);\n  }\n  return flat;\n}\n\nfunction bestHinge(\n  v: number,\n  candidates: number[],\n  tris: Tri[],\n  placed: boolean[],\n  fallback: Tri,\n): Tri {\n  let best = fallback;\n  let bestScore = -Infinity;\n  for (const t of candidates) {\n    const tri = tris[t];\n    const k = tri.ids.indexOf(v);\n    if (k < 0) continue;\n    const i = (k + 1) % 3;\n    const j = (k + 2) % 3;\n    if (!placed[tri.ids[i]] || !placed[tri.ids[j]]) continue;\n    const edge = sq(tri.xs[j].x - tri.xs[i].x, tri.xs[j].y - tri.xs[i].y);\n    const reach = sq(tri.xs[k].x - tri.xs[i].x, tri.xs[k].y - tri.xs[i].y);\n    const score = reach > 0 ? edge / reach : Infinity;\n    if (score > bestScore) {\n      bestScore = score;\n      best = tri;\n    }\n  }\n  return best;\n}\n\nfunction sq(dx: number, dy: number): number {\n  return dx * dx + dy * dy;\n}\n\nfunction placeFrom(\n  tri: Tri,\n  v: number,\n  flat: Point2D[],\n  placed: boolean[],\n): Point2D | null {\n  const { ids, xs } = tri;\n  const k = ids.indexOf(v);\n  const i = (k + 1) % 3;\n  const j = (k + 2) % 3;\n  if (!placed[ids[i]] || !placed[ids[j]]) return null;\n\n  const dx = xs[j].x - xs[i].x;\n  const dy = xs[j].y - xs[i].y;\n  const den = dx * dx + dy * dy;\n  if (den < 1e-12) return null;\n  const ex = flat[ids[j]].x - flat[ids[i]].x;\n  const ey = flat[ids[j]].y - flat[ids[i]].y;\n  const sr = (ex * dx + ey * dy) / den;\n  const si = (ey * dx - ex * dy) / den;\n  const norm = Math.hypot(sr, si);\n  if (norm < 1e-12) return null;\n  const cr = sr / norm;\n  const ci = si / norm;\n  const vx = xs[k].x - xs[i].x;\n  const vy = xs[k].y - xs[i].y;\n  return {\n    x: flat[ids[i]].x + cr * vx - ci * vy,\n    y: flat[ids[i]].y + ci * vx + cr * vy,\n  };\n}\n\nexport function canonicalise(flat: Point2D[]): Point2D[] {\n  if (flat.length === 0) return flat;\n  let cx = 0;\n  let cy = 0;\n  for (const p of flat) {\n    cx += p.x;\n    cy += p.y;\n  }\n  cx /= flat.length;\n  cy /= flat.length;\n\n  let sxx = 0;\n  let sxy = 0;\n  let syy = 0;\n  for (const p of flat) {\n    const dx = p.x - cx;\n    const dy = p.y - cy;\n    sxx += dx * dx;\n    sxy += dx * dy;\n    syy += dy * dy;\n  }\n  const ang = 0.5 * Math.atan2(2 * sxy, sxx - syy);\n  const co = Math.cos(-ang);\n  const si = Math.sin(-ang);\n\n  let minX = Infinity;\n  let minY = Infinity;\n  const out = flat.map((p) => {\n    const dx = p.x - cx;\n    const dy = p.y - cy;\n    const q = { x: co * dx - si * dy, y: si * dx + co * dy };\n    if (q.x < minX) minX = q.x;\n    if (q.y < minY) minY = q.y;\n    return q;\n  });\n  for (const q of out) {\n    q.x -= minX;\n    q.y -= minY;\n  }\n  return out;\n}\n\nexport function boundaryEdges(mesh: Mesh): [number, number][] {\n  const used = new Map<string, number>();\n  const key = (a: number, b: number) => (a < b ? `${a}-${b}` : `${b}-${a}`);\n\n  for (const [a, b, c] of mesh.tris) {\n    for (const [u, v] of [\n      [a, b],\n      [b, c],\n      [c, a],\n    ]) {\n      used.set(key(u, v), (used.get(key(u, v)) ?? 0) + 1);\n    }\n  }\n\n  const out: [number, number][] = [];\n  for (const [a, b, c] of mesh.tris) {\n    for (const [u, v] of [\n      [a, b],\n      [b, c],\n      [c, a],\n    ] as [number, number][]) {\n      if (used.get(key(u, v)) === 1) out.push([u, v]);\n    }\n  }\n  return out;\n}\n\nexport function chainEdges(edges: [number, number][]): number[][] {\n  const next = new Map<number, number>();\n  const hasPredecessor = new Set<number>();\n  for (const [u, v] of edges) {\n    next.set(u, v);\n    hasPredecessor.add(v);\n  }\n\n  const chains: number[][] = [];\n  const visited = new Set<number>();\n\n  const walk = (seed: number) => {\n    const chain = [seed];\n    visited.add(seed);\n    let cur = seed;\n    while (true) {\n      const to = next.get(cur);\n      if (to === undefined || to === seed) break;\n      if (visited.has(to)) break;\n      chain.push(to);\n      visited.add(to);\n      cur = to;\n    }\n\n    if (next.get(cur) === seed && chain.length > 2) chain.push(seed);\n    if (chain.length > 1) chains.push(chain);\n  };\n\n  for (const [u] of next) if (!hasPredecessor.has(u)) walk(u);\n  for (const [u] of next) if (!visited.has(u)) walk(u);\n  return chains;\n}\n\nexport function boundaryLoop(mesh: Mesh): number[][] {\n  const chains = chainEdges(boundaryEdges(mesh));\n  if (chains.length === 0) return [];\n  return chains.map((loop) => {\n    return loop[0] === loop[loop.length - 1] ? loop.slice(0, -1) : loop;\n  });\n}\n\n// Distortion measurements\nexport type Distortion = {\n  edgeRms: number;\n  edgeMax: number;\n  areaRatio: number;\n  triStrains: { e1: number; e2: number }[];\n};\n\nexport function measureDistortion(mesh: Mesh, flat: FlatMesh): Distortion {\n  let squared = 0;\n  let count = 0;\n  let edgeMax = 0;\n  let area3d = 0;\n  let area2d = 0;\n  const triStrains: { e1: number; e2: number }[] = [];\n\n  for (const [a, b, c] of mesh.tris) {\n    const local = flattenTriangle(mesh, a, b, c);\n    for (const [u, v] of [\n      [a, b],\n      [b, c],\n      [c, a],\n    ]) {\n      const length3d = distance3d(mesh, u, v);\n      if (length3d === 0) continue;\n      const p = flat.positions[u];\n      const q = flat.positions[v];\n      const ratio = Math.hypot(q.x - p.x, q.y - p.y) / length3d - 1;\n      squared += ratio * ratio;\n      count += 1;\n      edgeMax = Math.max(edgeMax, Math.abs(ratio));\n    }\n\n    area3d += local.area;\n    area2d += Math.abs(\n      signedArea(flat.positions[a], flat.positions[b], flat.positions[c]),\n    );\n    triStrains.push(principalStrains(local, flat, a, b, c));\n  }\n\n  return {\n    edgeRms: count > 0 ? Math.sqrt(squared / count) : 0,\n    edgeMax,\n    areaRatio: area3d > 0 ? area2d / area3d : 1,\n    triStrains,\n  };\n}\n\ntype LocalTriangle = { ux: number; vx: number; vy: number; area: number };\n\nfunction flattenTriangle(\n  mesh: Mesh,\n  a: number,\n  b: number,\n  c: number,\n): LocalTriangle {\n  const A = mesh.positions[a];\n  const B = mesh.positions[b];\n  const C = mesh.positions[c];\n  const ex = B.x - A.x,\n    ey = B.y - A.y,\n    ez = B.z - A.z;\n  const fx = C.x - A.x,\n    fy = C.y - A.y,\n    fz = C.z - A.z;\n  const ux = Math.hypot(ex, ey, ez);\n  const dot = ux > 0 ? (ex * fx + ey * fy + ez * fz) / ux : 0;\n  const nx = ey * fz - ez * fy;\n  const ny = ez * fx - ex * fz;\n  const nz = ex * fy - ey * fx;\n  const cross = Math.hypot(nx, ny, nz);\n  return { ux, vx: dot, vy: ux > 0 ? cross / ux : 0, area: cross / 2 };\n}\n\nfunction principalStrains(\n  local: LocalTriangle,\n  flat: FlatMesh,\n  a: number,\n  b: number,\n  c: number,\n): { e1: number; e2: number } {\n  const det = local.ux * local.vy;\n  if (det === 0) return { e1: 0, e2: 0 };\n\n  const A = flat.positions[a];\n  const B = flat.positions[b];\n  const C = flat.positions[c];\n  const qx1 = B.x - A.x,\n    qy1 = B.y - A.y;\n  const qx2 = C.x - A.x,\n    qy2 = C.y - A.y;\n\n  const i00 = local.vy / det;\n  const i01 = -local.vx / det;\n  const i11 = local.ux / det;\n\n  const j00 = qx1 * i00;\n  const j01 = qx1 * i01 + qx2 * i11;\n  const j10 = qy1 * i00;\n  const j11 = qy1 * i01 + qy2 * i11;\n\n  const e = (j00 + j11) / 2;\n  const f = (j00 - j11) / 2;\n  const g = (j10 + j01) / 2;\n  const h = (j10 - j01) / 2;\n  const q = Math.hypot(e, h);\n  const r = Math.hypot(f, g);\n  const sigma1 = q + r;\n  const sigma2 = Math.abs(q - r);\n  // sigma1 >= sigma2, so e1 (tension) is always >= e2 (compression)\n  return { e1: sigma1 - 1, e2: sigma2 - 1 };\n}\n\nfunction signedArea(\n  a: { x: number; y: number },\n  b: { x: number; y: number },\n  c: { x: number; y: number },\n): number {\n  return ((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)) / 2;\n}\n\nfunction distance3d(mesh: Mesh, u: number, v: number): number {\n  const p = mesh.positions[u];\n  const q = mesh.positions[v];\n  return Math.hypot(q.x - p.x, q.y - p.y, q.z - p.z);\n}\n",
+                      "compiledCode": "// eslint-disable-next-line @typescript-eslint/no-unused-vars\nfunction run(surface, tolerance = 0.01, asSingular = false, maxTensileStrain = 0.05, maxCompressiveStrain = 0.05) {\n    const toUnroll = [];\n    surface.onLeafs((leaf) => {\n        const sface = leaf.getSelectedFaces().filter((f) => f != undefined);\n        if (sface.length > 0) {\n            toUnroll.push(...sface.map((f) => {\n                return { srcLeaf: leaf, mesh: faceToMesh(f, tolerance) };\n            }));\n        }\n        else if (leaf.geometry instanceof replicad.Face) {\n            toUnroll.push({\n                srcLeaf: leaf,\n                mesh: faceToMesh(leaf.geometry, tolerance),\n            });\n        }\n        return leaf;\n    });\n    if (toUnroll.length == 0) {\n        throw new Error(\"No selected faces, and not an assembly of face geoms\");\n    }\n    if (asSingular) {\n        // Group selected faces that share an edge into one mesh so they unroll\n        // as a single continuous surface; faces with no shared edge stay separate.\n        const islands = combineMeshes(toUnroll.map((t) => t.mesh));\n        let ybuffer = 0;\n        const result = islands.map((foo) => {\n            const unrolled = unrollArap(foo);\n            const distortion = measureDistortion(foo, unrolled);\n            console.log(distortion.triStrains.length);\n            console.log(foo.tris.length);\n            console.log(`pointref range. input mesh: ${foo.positions.length} result mesh: ${unrolled.positions.length}`);\n            const drawing = unrolledWithHoles(unrolled).translate(0, ybuffer);\n            const meshOverride = buildHeatmapMeshOverride(foo, unrolled, distortion.triStrains, maxTensileStrain, maxCompressiveStrain, ybuffer);\n            ybuffer += drawing.boundingBox.height * 1.1;\n            return new Assembly({\n                geometry: drawing,\n                metadata: {\n                    meshOverride,\n                },\n            });\n        });\n        return new Assembly({ geometry: result.flat() }).skipDisjointPostprocess();\n    }\n    else {\n        let ybuffer = 0;\n        const result = toUnroll.map((leaf) => {\n            const unrollResult = unrollArap(leaf.mesh);\n            const distortion = measureDistortion(leaf.mesh, unrollResult);\n            const drawing = unrolledWithHoles(unrollResult).translate(0, ybuffer);\n            const meshOverride = buildHeatmapMeshOverride(leaf.mesh, unrollResult, distortion.triStrains, maxTensileStrain, maxCompressiveStrain, ybuffer);\n            ybuffer += drawing.boundingBox.height * 1.1;\n            return new Assembly({\n                ...leaf.srcLeaf,\n                geometry: drawing,\n                metadata: {\n                    ...leaf.srcLeaf.metadata,\n                    meshOverride,\n                },\n            });\n        });\n        return new Assembly({ geometry: result.flat() }).skipDisjointPostprocess();\n    }\n}\nfunction unrolledWithHoles(unrolResult) {\n    let res = xysToClosedDrawing(unrolResult.outline);\n    unrolResult.innerWires.forEach((inner) => {\n        res = res.cut(xysToClosedDrawing(inner));\n    });\n    return res;\n}\nfunction buildHeatmapMeshOverride(mesh, flat, triStrains, maxTensileStrain, maxCompressiveStrain, yOffset = 0) {\n    const vertices = [];\n    const triangles = [];\n    const vertexColors = [];\n    mesh.tris.forEach((tri, triIndex) => {\n        const { e1, e2 } = triStrains[triIndex] ?? { e1: 0, e2: 0 };\n        const tensionRisk = e1 > 0 ? e1 / maxTensileStrain : 0;\n        const compressionRisk = e2 < 0 ? -e2 / maxCompressiveStrain : 0;\n        const [r, g, b] = riskToRgb(tensionRisk, compressionRisk);\n        const baseIndex = vertices.length / 3;\n        tri.forEach((vertexIndex) => {\n            const point = flat.positions[vertexIndex];\n            vertices.push(point.x, point.y + yOffset, 0);\n            vertexColors.push(r, g, b);\n        });\n        triangles.push(baseIndex, baseIndex + 1, baseIndex + 2);\n    });\n    return {\n        faces: {\n            vertices,\n            triangles,\n        },\n        vertexColors,\n    };\n}\n// 0 = no distortion (white), 1 = exactly at the material's strain limit\n// (solid color); clamped for anything past the limit since it's already\n// unsafe. Tension (stretch) ramps toward red, compression (shrink) toward\n// blue; whichever risk is larger for a triangle determines its hue.\nfunction riskToRgb(tensionRisk, compressionRisk) {\n    if (tensionRisk >= compressionRisk) {\n        const t = Math.max(0, Math.min(1, tensionRisk));\n        return [1, 1 - t, 1 - t];\n    }\n    const t = Math.max(0, Math.min(1, compressionRisk));\n    return [1 - t, 1 - t, 1];\n}\n// Groups meshes that share a boundary edge into a single combined mesh (so\n// they flatten together as one continuous surface); meshes with no shared\n// edge are left as separate entries. Vertex dedup uses a hashed key (not\n// pairwise comparison) and connectivity is derived from edges that are\n// naked in more than one input mesh, so this runs in roughly\n// O(points + triangles) total rather than the prior O(tris^2 * meshCount).\nfunction combineMeshes(meshes) {\n    if (meshes.length <= 1)\n        return meshes;\n    // Dedup points across all meshes into one global vertex list.\n    const globalPositions = [];\n    const globalIndexByKey = new Map();\n    const keyOf = (p) => `${p.x.toFixed(6)}_${p.y.toFixed(6)}_${p.z.toFixed(6)}`;\n    const remappedTris = meshes.map((mesh) => {\n        const localToGlobal = mesh.positions.map((p) => {\n            const key = keyOf(p);\n            let idx = globalIndexByKey.get(key);\n            if (idx === undefined) {\n                idx = globalPositions.length;\n                globalPositions.push(p);\n                globalIndexByKey.set(key, idx);\n            }\n            return idx;\n        });\n        return mesh.tris.map((tri) => tri.map((i) => localToGlobal[i]));\n    });\n    // Union meshes that share a boundary edge: an edge naked in two different\n    // input meshes becomes internal once those meshes are combined.\n    const parent = meshes.map((_, i) => i);\n    const find = (i) => {\n        if (parent[i] !== i)\n            parent[i] = find(parent[i]);\n        return parent[i];\n    };\n    const union = (a, b) => {\n        const ra = find(a);\n        const rb = find(b);\n        if (ra !== rb)\n            parent[ra] = rb;\n    };\n    const edgeKey = (a, b) => (a < b ? `${a}_${b}` : `${b}_${a}`);\n    const edgeOwner = new Map();\n    remappedTris.forEach((tris, meshIndex) => {\n        const boundary = boundaryEdges({ positions: globalPositions, tris });\n        for (const [a, b] of boundary) {\n            const key = edgeKey(a, b);\n            const owner = edgeOwner.get(key);\n            if (owner === undefined) {\n                edgeOwner.set(key, meshIndex);\n            }\n            else if (owner !== meshIndex) {\n                union(owner, meshIndex);\n            }\n        }\n    });\n    // Group mesh indices by connected component, then rebuild a compact mesh\n    // (deduped positions, remapped triangle indices) per component.\n    const groups = new Map();\n    meshes.forEach((_, i) => {\n        const root = find(i);\n        const group = groups.get(root);\n        if (group)\n            group.push(i);\n        else\n            groups.set(root, [i]);\n    });\n    return Array.from(groups.values()).map((meshIndices) => {\n        const compactIndex = new Map();\n        const positions = [];\n        const tris = [];\n        meshIndices.forEach((meshIndex) => {\n            remappedTris[meshIndex].forEach((tri) => {\n                tris.push(tri.map((globalIdx) => {\n                    let local = compactIndex.get(globalIdx);\n                    if (local === undefined) {\n                        local = positions.length;\n                        positions.push(globalPositions[globalIdx]);\n                        compactIndex.set(globalIdx, local);\n                    }\n                    return local;\n                }));\n            });\n        });\n        return { positions, tris };\n    });\n}\nfunction faceToMesh(face, tolerance) {\n    const replMesh = face.mesh({ tolerance: tolerance, angularTolerance: 0.1 });\n    // translate\n    const points = [];\n    const v = replMesh.vertices;\n    for (let i = 0; i < v.length; i += 3) {\n        points.push({ x: v[i], y: v[i + 1], z: v[i + 2] });\n    }\n    const tris = [];\n    const t = replMesh.triangles;\n    for (let i = 0; i < t.length; i += 3) {\n        tris.push([t[i], t[i + 1], t[i + 2]]);\n    }\n    return { positions: points, tris: tris };\n}\nfunction xysToClosedDrawing(points) {\n    const pen = replicad.draw([points[0].x, points[0].y]);\n    for (let i = 1; i < points.length; i++) {\n        pen.lineTo([points[i].x, points[i].y]);\n    }\n    return pen.close();\n}\nconst COT_MIN = 0.05;\nconst COT_MAX = 20;\nconst ITERATIONS = 4000;\nconst SETTLED = 1e-6;\nexport function unrollArap(mesh) {\n    const tris = buildTris(mesh);\n    const nv = mesh.positions.length;\n    const flat = placeByUnfolding(mesh, tris);\n    if (tris.length > 0 && nv > 1) {\n        const { adj, triW } = buildAdjacency(tris, nv);\n        solve(flat, tris, adj, triW);\n    }\n    const positions = canonicalise(flat);\n    const loops = boundaryLoop(mesh).map((wire) => wire.map((i) => positions[i]));\n    // The outer perimeter always encloses every hole, so it always has the\n    // largest enclosed area; boundary loop order otherwise has no geometric\n    // meaning (it's just tessellation edge-iteration order).\n    let outlineIndex = 0;\n    let maxArea = -Infinity;\n    loops.forEach((loop, i) => {\n        const area = Math.abs(polygonArea(loop));\n        if (area > maxArea) {\n            maxArea = area;\n            outlineIndex = i;\n        }\n    });\n    const outline = loops[outlineIndex];\n    const innerWires = loops.filter((_, i) => i !== outlineIndex);\n    return { positions, outline, innerWires };\n}\nfunction polygonArea(points) {\n    let area = 0;\n    for (let i = 0; i < points.length; i++) {\n        const p = points[i];\n        const q = points[(i + 1) % points.length];\n        area += p.x * q.y - q.x * p.y;\n    }\n    return area / 2;\n}\nfunction buildAdjacency(tris, nv) {\n    const adj = [];\n    const triW = new Float64Array(tris.length * 3);\n    for (let i = 0; i < nv; i++)\n        adj.push([]);\n    tris.forEach((tri, t) => {\n        const { ids, xs } = tri;\n        const twoArea = 2 * tri.area;\n        for (let e = 0; e < 3; e++) {\n            const p = e;\n            const q = (e + 1) % 3;\n            const o = (e + 2) % 3;\n            const ax = xs[p].x - xs[o].x, ay = xs[p].y - xs[o].y;\n            const bx = xs[q].x - xs[o].x, by = xs[q].y - xs[o].y;\n            const cot = twoArea > 0 ? (ax * bx + ay * by) / twoArea : COT_MIN;\n            const w = Math.min(COT_MAX, Math.max(COT_MIN, cot));\n            triW[t * 3 + e] = w;\n            const dx = xs[p].x - xs[q].x;\n            const dy = xs[p].y - xs[q].y;\n            adj[ids[p]].push({ j: ids[q], w, t, dx, dy });\n            adj[ids[q]].push({ j: ids[p], w, t, dx: -dx, dy: -dy });\n        }\n    });\n    return { adj, triW };\n}\nfunction solve(flat, tris, adj, triW) {\n    const nv = flat.length;\n    const cos = new Float64Array(tris.length);\n    const sin = new Float64Array(tris.length);\n    const tol = SETTLED * intrinsicScale(tris);\n    const system = factorSystem(adj, nv);\n    const bestX = new Float64Array(nv);\n    const bestY = new Float64Array(nv);\n    let bestE = energyOf(flat, tris);\n    snapshot(flat, bestX, bestY);\n    const rx = new Float64Array(Math.max(nv - 1, 0));\n    const ry = new Float64Array(Math.max(nv - 1, 0));\n    for (let it = 0; it < ITERATIONS; it++) {\n        localStep(flat, tris, triW, cos, sin);\n        let maxDelta = 0;\n        if (system) {\n            rx.fill(0);\n            ry.fill(0);\n            for (let i = 1; i < nv; i++) {\n                let bx = 0;\n                let by = 0;\n                for (const e of adj[i]) {\n                    bx += e.w * (cos[e.t] * e.dx - sin[e.t] * e.dy);\n                    by += e.w * (sin[e.t] * e.dx + cos[e.t] * e.dy);\n                    if (e.j === 0) {\n                        bx += e.w * flat[0].x;\n                        by += e.w * flat[0].y;\n                    }\n                }\n                rx[i - 1] = bx;\n                ry[i - 1] = by;\n            }\n            solveBanded(system, rx, ry);\n            for (let i = 1; i < nv; i++) {\n                const d = Math.hypot(rx[i - 1] - flat[i].x, ry[i - 1] - flat[i].y);\n                if (d > maxDelta)\n                    maxDelta = d;\n                flat[i].x = rx[i - 1];\n                flat[i].y = ry[i - 1];\n            }\n        }\n        else {\n            maxDelta = gaussSeidel(flat, adj, cos, sin, nv);\n        }\n        const e = energyOf(flat, tris);\n        if (e < bestE) {\n            bestE = e;\n            snapshot(flat, bestX, bestY);\n        }\n        if (maxDelta < tol)\n            break;\n    }\n    restore(flat, bestX, bestY);\n}\nfunction snapshot(flat, x, y) {\n    for (let i = 0; i < flat.length; i++) {\n        if (flat[i] == undefined) {\n            continue;\n        }\n        x[i] = flat[i].x;\n        y[i] = flat[i].y;\n    }\n}\nfunction restore(flat, x, y) {\n    for (let i = 0; i < flat.length; i++) {\n        flat[i] = { x: x[i], y: y[i] };\n    }\n}\nfunction localStep(flat, tris, triW, cos, sin) {\n    tris.forEach((tri, t) => {\n        const { ids, xs } = tri;\n        let num = 0;\n        let den = 0;\n        for (let e = 0; e < 3; e++) {\n            const p = e;\n            const q = (e + 1) % 3;\n            const w = triW[t * 3 + e];\n            const dxc = xs[q].x - xs[p].x;\n            const dyc = xs[q].y - xs[p].y;\n            const dqx = flat[ids[q]].x - flat[ids[p]].x;\n            const dqy = flat[ids[q]].y - flat[ids[p]].y;\n            num += w * (dqy * dxc - dqx * dyc);\n            den += w * (dqx * dxc + dqy * dyc);\n        }\n        const th = Math.atan2(num, den);\n        cos[t] = Math.cos(th);\n        sin[t] = Math.sin(th);\n    });\n}\nfunction gaussSeidel(flat, adj, cos, sin, nv) {\n    let maxDelta = 0;\n    for (let sweep = 0; sweep < 3; sweep++) {\n        for (let i = 1; i < nv; i++) {\n            let diag = 0;\n            let sx = 0;\n            let sy = 0;\n            for (const e of adj[i]) {\n                diag += e.w;\n                sx += e.w * (flat[e.j].x + cos[e.t] * e.dx - sin[e.t] * e.dy);\n                sy += e.w * (flat[e.j].y + sin[e.t] * e.dx + cos[e.t] * e.dy);\n            }\n            if (diag <= 0)\n                continue;\n            const nx = sx / diag;\n            const ny = sy / diag;\n            const d = Math.hypot(nx - flat[i].x, ny - flat[i].y);\n            if (d > maxDelta)\n                maxDelta = d;\n            flat[i] = { x: nx, y: ny };\n        }\n    }\n    return maxDelta;\n}\nfunction factorSystem(adj, nv) {\n    const n = nv - 1;\n    if (n <= 0)\n        return null;\n    let b = 0;\n    for (let i = 1; i < nv; i++) {\n        for (const e of adj[i]) {\n            if (e.j === 0)\n                continue;\n            const d = Math.abs(i - e.j);\n            if (d > b)\n                b = d;\n        }\n    }\n    if (b >= n)\n        return null;\n    const a = new Float64Array(n * (b + 1));\n    for (let i = 1; i < nv; i++) {\n        const r = i - 1;\n        for (const e of adj[i]) {\n            a[r * (b + 1)] += e.w;\n            if (e.j === 0)\n                continue;\n            const c = e.j - 1;\n            if (c < r)\n                a[r * (b + 1) + (r - c)] -= e.w;\n        }\n    }\n    const envelope = new Int32Array(n);\n    for (let r = 0; r < n; r++) {\n        const top = Math.min(b, r);\n        for (let k = top; k >= 1; k--) {\n            if (a[r * (b + 1) + k] !== 0) {\n                envelope[r] = k;\n                break;\n            }\n        }\n    }\n    for (let i = 0; i < n; i++) {\n        const wi = envelope[i];\n        for (let k = wi; k >= 1; k--) {\n            const j = i - k;\n            if (j < 0)\n                continue;\n            let s = a[i * (b + 1) + k];\n            const top = Math.min(wi - k, envelope[j]);\n            for (let m = 1; m <= top; m++) {\n                s -= a[i * (b + 1) + (k + m)] * a[j * (b + 1) + m];\n            }\n            a[i * (b + 1) + k] = s / a[j * (b + 1)];\n        }\n        let d = a[i * (b + 1)];\n        for (let k = 1; k <= wi; k++) {\n            d -= a[i * (b + 1) + k] * a[i * (b + 1) + k];\n        }\n        if (!(d > 0))\n            return null;\n        a[i * (b + 1)] = Math.sqrt(d);\n    }\n    return { n, b, a, envelope };\n}\nfunction solveBanded(m, rx, ry) {\n    const { n, b, a, envelope } = m;\n    const w = b + 1;\n    for (let i = 0; i < n; i++) {\n        let sx = rx[i];\n        let sy = ry[i];\n        const wi = envelope[i];\n        for (let k = 1; k <= wi; k++) {\n            const v = a[i * w + k];\n            sx -= v * rx[i - k];\n            sy -= v * ry[i - k];\n        }\n        const d = a[i * w];\n        rx[i] = sx / d;\n        ry[i] = sy / d;\n    }\n    for (let i = n - 1; i >= 0; i--) {\n        const d = a[i * w];\n        const vx = rx[i] / d;\n        const vy = ry[i] / d;\n        rx[i] = vx;\n        ry[i] = vy;\n        const wi = envelope[i];\n        for (let k = 1; k <= wi; k++) {\n            const v = a[i * w + k];\n            rx[i - k] -= v * vx;\n            ry[i - k] -= v * vy;\n        }\n    }\n}\nfunction intrinsicScale(tris) {\n    let area = 0;\n    for (const tri of tris)\n        area += tri.area;\n    return area > 0 ? Math.sqrt(area) : 1;\n}\nexport function buildTris(mesh) {\n    const out = [];\n    for (const [a, b, c] of mesh.tris) {\n        const A = mesh.positions[a];\n        const B = mesh.positions[b];\n        const C = mesh.positions[c];\n        const ux = B.x - A.x, uy = B.y - A.y, uz = B.z - A.z;\n        const vx = C.x - A.x, vy = C.y - A.y, vz = C.z - A.z;\n        const cx = uy * vz - uz * vy;\n        const cy = uz * vx - ux * vz;\n        const cz = ux * vy - uy * vx;\n        const cross = Math.hypot(cx, cy, cz);\n        const la = Math.hypot(ux, uy, uz);\n        const lb = Math.hypot(vx, vy, vz);\n        if (la === 0 || lb === 0)\n            continue;\n        const cos = Math.max(-1, Math.min(1, (ux * vx + uy * vy + uz * vz) / (la * lb)));\n        out.push({\n            ids: [a, b, c],\n            xs: [\n                { x: 0, y: 0 },\n                { x: la, y: 0 },\n                { x: lb * cos, y: lb * Math.sqrt(Math.max(0, 1 - cos * cos)) },\n            ],\n            area: cross / 2,\n        });\n    }\n    return out;\n}\nexport function energyOf(flat, tris) {\n    let e = 0;\n    let area = 0;\n    for (const tri of tris) {\n        const { ids, xs } = tri;\n        for (let k = 0; k < 3; k++) {\n            const p = k;\n            const q = (k + 1) % 3;\n            const lc = Math.hypot(xs[q].x - xs[p].x, xs[q].y - xs[p].y);\n            const lq = Math.hypot(flat[ids[q]].x - flat[ids[p]].x, flat[ids[q]].y - flat[ids[p]].y);\n            e += (lq - lc) * (lq - lc);\n        }\n        area += tri.area;\n    }\n    return area > 0 ? e / area : 0;\n}\nexport function placeByUnfolding(mesh, tris) {\n    const nv = mesh.positions.length;\n    const flat = new Array(nv);\n    const placed = new Array(nv).fill(false);\n    const incident = [];\n    for (let i = 0; i < nv; i++)\n        incident.push([]);\n    tris.forEach((tri, t) => {\n        for (const id of tri.ids)\n            incident[id].push(t);\n    });\n    const seed = tris[0];\n    seed.ids.forEach((id, k) => {\n        flat[id] = { x: seed.xs[k].x, y: seed.xs[k].y };\n        placed[id] = true;\n    });\n    const queue = seed.ids.flatMap((id) => incident[id]);\n    for (let head = 0; head < queue.length; head++) {\n        const tri = tris[queue[head]];\n        const open = tri.ids.filter((i) => !placed[i]);\n        if (open.length !== 1)\n            continue;\n        const v = open[0];\n        const p = placeFrom(bestHinge(v, incident[v], tris, placed, tri), v, flat, placed);\n        if (!p)\n            continue;\n        flat[v] = p;\n        placed[v] = true;\n        for (const t of incident[v])\n            queue.push(t);\n    }\n    for (let i = 0; i < nv; i++) {\n        if (!placed[i])\n            console.warn(`unroll: vertex ${i} of ${nv} is not connected to the mesh`);\n    }\n    return flat;\n}\nfunction bestHinge(v, candidates, tris, placed, fallback) {\n    let best = fallback;\n    let bestScore = -Infinity;\n    for (const t of candidates) {\n        const tri = tris[t];\n        const k = tri.ids.indexOf(v);\n        if (k < 0)\n            continue;\n        const i = (k + 1) % 3;\n        const j = (k + 2) % 3;\n        if (!placed[tri.ids[i]] || !placed[tri.ids[j]])\n            continue;\n        const edge = sq(tri.xs[j].x - tri.xs[i].x, tri.xs[j].y - tri.xs[i].y);\n        const reach = sq(tri.xs[k].x - tri.xs[i].x, tri.xs[k].y - tri.xs[i].y);\n        const score = reach > 0 ? edge / reach : Infinity;\n        if (score > bestScore) {\n            bestScore = score;\n            best = tri;\n        }\n    }\n    return best;\n}\nfunction sq(dx, dy) {\n    return dx * dx + dy * dy;\n}\nfunction placeFrom(tri, v, flat, placed) {\n    const { ids, xs } = tri;\n    const k = ids.indexOf(v);\n    const i = (k + 1) % 3;\n    const j = (k + 2) % 3;\n    if (!placed[ids[i]] || !placed[ids[j]])\n        return null;\n    const dx = xs[j].x - xs[i].x;\n    const dy = xs[j].y - xs[i].y;\n    const den = dx * dx + dy * dy;\n    if (den < 1e-12)\n        return null;\n    const ex = flat[ids[j]].x - flat[ids[i]].x;\n    const ey = flat[ids[j]].y - flat[ids[i]].y;\n    const sr = (ex * dx + ey * dy) / den;\n    const si = (ey * dx - ex * dy) / den;\n    const norm = Math.hypot(sr, si);\n    if (norm < 1e-12)\n        return null;\n    const cr = sr / norm;\n    const ci = si / norm;\n    const vx = xs[k].x - xs[i].x;\n    const vy = xs[k].y - xs[i].y;\n    return {\n        x: flat[ids[i]].x + cr * vx - ci * vy,\n        y: flat[ids[i]].y + ci * vx + cr * vy,\n    };\n}\nexport function canonicalise(flat) {\n    if (flat.length === 0)\n        return flat;\n    let cx = 0;\n    let cy = 0;\n    for (const p of flat) {\n        cx += p.x;\n        cy += p.y;\n    }\n    cx /= flat.length;\n    cy /= flat.length;\n    let sxx = 0;\n    let sxy = 0;\n    let syy = 0;\n    for (const p of flat) {\n        const dx = p.x - cx;\n        const dy = p.y - cy;\n        sxx += dx * dx;\n        sxy += dx * dy;\n        syy += dy * dy;\n    }\n    const ang = 0.5 * Math.atan2(2 * sxy, sxx - syy);\n    const co = Math.cos(-ang);\n    const si = Math.sin(-ang);\n    let minX = Infinity;\n    let minY = Infinity;\n    const out = flat.map((p) => {\n        const dx = p.x - cx;\n        const dy = p.y - cy;\n        const q = { x: co * dx - si * dy, y: si * dx + co * dy };\n        if (q.x < minX)\n            minX = q.x;\n        if (q.y < minY)\n            minY = q.y;\n        return q;\n    });\n    for (const q of out) {\n        q.x -= minX;\n        q.y -= minY;\n    }\n    return out;\n}\nexport function boundaryEdges(mesh) {\n    const used = new Map();\n    const key = (a, b) => (a < b ? `${a}-${b}` : `${b}-${a}`);\n    for (const [a, b, c] of mesh.tris) {\n        for (const [u, v] of [\n            [a, b],\n            [b, c],\n            [c, a],\n        ]) {\n            used.set(key(u, v), (used.get(key(u, v)) ?? 0) + 1);\n        }\n    }\n    const out = [];\n    for (const [a, b, c] of mesh.tris) {\n        for (const [u, v] of [\n            [a, b],\n            [b, c],\n            [c, a],\n        ]) {\n            if (used.get(key(u, v)) === 1)\n                out.push([u, v]);\n        }\n    }\n    return out;\n}\nexport function chainEdges(edges) {\n    const next = new Map();\n    const hasPredecessor = new Set();\n    for (const [u, v] of edges) {\n        next.set(u, v);\n        hasPredecessor.add(v);\n    }\n    const chains = [];\n    const visited = new Set();\n    const walk = (seed) => {\n        const chain = [seed];\n        visited.add(seed);\n        let cur = seed;\n        while (true) {\n            const to = next.get(cur);\n            if (to === undefined || to === seed)\n                break;\n            if (visited.has(to))\n                break;\n            chain.push(to);\n            visited.add(to);\n            cur = to;\n        }\n        if (next.get(cur) === seed && chain.length > 2)\n            chain.push(seed);\n        if (chain.length > 1)\n            chains.push(chain);\n    };\n    for (const [u] of next)\n        if (!hasPredecessor.has(u))\n            walk(u);\n    for (const [u] of next)\n        if (!visited.has(u))\n            walk(u);\n    return chains;\n}\nexport function boundaryLoop(mesh) {\n    const chains = chainEdges(boundaryEdges(mesh));\n    if (chains.length === 0)\n        return [];\n    return chains.map((loop) => {\n        return loop[0] === loop[loop.length - 1] ? loop.slice(0, -1) : loop;\n    });\n}\nexport function measureDistortion(mesh, flat) {\n    let squared = 0;\n    let count = 0;\n    let edgeMax = 0;\n    let area3d = 0;\n    let area2d = 0;\n    const triStrains = [];\n    for (const [a, b, c] of mesh.tris) {\n        const local = flattenTriangle(mesh, a, b, c);\n        for (const [u, v] of [\n            [a, b],\n            [b, c],\n            [c, a],\n        ]) {\n            const length3d = distance3d(mesh, u, v);\n            if (length3d === 0)\n                continue;\n            const p = flat.positions[u];\n            const q = flat.positions[v];\n            const ratio = Math.hypot(q.x - p.x, q.y - p.y) / length3d - 1;\n            squared += ratio * ratio;\n            count += 1;\n            edgeMax = Math.max(edgeMax, Math.abs(ratio));\n        }\n        area3d += local.area;\n        area2d += Math.abs(signedArea(flat.positions[a], flat.positions[b], flat.positions[c]));\n        triStrains.push(principalStrains(local, flat, a, b, c));\n    }\n    return {\n        edgeRms: count > 0 ? Math.sqrt(squared / count) : 0,\n        edgeMax,\n        areaRatio: area3d > 0 ? area2d / area3d : 1,\n        triStrains,\n    };\n}\nfunction flattenTriangle(mesh, a, b, c) {\n    const A = mesh.positions[a];\n    const B = mesh.positions[b];\n    const C = mesh.positions[c];\n    const ex = B.x - A.x, ey = B.y - A.y, ez = B.z - A.z;\n    const fx = C.x - A.x, fy = C.y - A.y, fz = C.z - A.z;\n    const ux = Math.hypot(ex, ey, ez);\n    const dot = ux > 0 ? (ex * fx + ey * fy + ez * fz) / ux : 0;\n    const nx = ey * fz - ez * fy;\n    const ny = ez * fx - ex * fz;\n    const nz = ex * fy - ey * fx;\n    const cross = Math.hypot(nx, ny, nz);\n    return { ux, vx: dot, vy: ux > 0 ? cross / ux : 0, area: cross / 2 };\n}\nfunction principalStrains(local, flat, a, b, c) {\n    const det = local.ux * local.vy;\n    if (det === 0)\n        return { e1: 0, e2: 0 };\n    const A = flat.positions[a];\n    const B = flat.positions[b];\n    const C = flat.positions[c];\n    const qx1 = B.x - A.x, qy1 = B.y - A.y;\n    const qx2 = C.x - A.x, qy2 = C.y - A.y;\n    const i00 = local.vy / det;\n    const i01 = -local.vx / det;\n    const i11 = local.ux / det;\n    const j00 = qx1 * i00;\n    const j01 = qx1 * i01 + qx2 * i11;\n    const j10 = qy1 * i00;\n    const j11 = qy1 * i01 + qy2 * i11;\n    const e = (j00 + j11) / 2;\n    const f = (j00 - j11) / 2;\n    const g = (j10 + j01) / 2;\n    const h = (j10 - j01) / 2;\n    const q = Math.hypot(e, h);\n    const r = Math.hypot(f, g);\n    const sigma1 = q + r;\n    const sigma2 = Math.abs(q - r);\n    // sigma1 >= sigma2, so e1 (tension) is always >= e2 (compression)\n    return { e1: sigma1 - 1, e2: sigma2 - 1 };\n}\nfunction signedArea(a, b, c) {\n    return ((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)) / 2;\n}\nfunction distance3d(mesh, u, v) {\n    const p = mesh.positions[u];\n    const q = mesh.positions[v];\n    return Math.hypot(q.x - p.x, q.y - p.y, q.z - p.z);\n}\n"
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-248135",
+                      "name": "toUnroll",
+                      "type": "faceselect",
+                      "options": [],
+                      "selectedFaceData": {}
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.2,
+                      "uniqueID": "id-248136",
+                      "name": "unrollTogether",
+                      "type": "boolean",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.3,
+                      "uniqueID": "id-248137",
+                      "name": "meshTolerance",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Readme",
+                      "x": 0.6,
+                      "y": 0.7,
+                      "uniqueID": "id-248138",
+                      "name": "README",
+                      "ioValues": [
+                        {
+                          "name": "value",
+                          "ioValue": "__GEOMETRY_INPUT__"
+                        }
+                      ],
+                      "readMeText": "Select faces are unrolled into a flat shape, minimizing stretch/compression.\n\nUnrollTogether - if true,  faces with shared edges produce a continuous laid out form\n\nmeshTolerance - lower values will be slower but marginally more precise.\n\ncompressive/tensileFractions - the amount of stretch or compression which can be tolerated. Red for areas that exceed tensile fraction, blue for areas that exceed the compressive tolerance",
+                      "global": true
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.4,
+                      "uniqueID": "id-248139",
+                      "name": "compressiveFraction",
+                      "options": []
+                    },
+                    {
+                      "atomType": "Input",
+                      "x": 0,
+                      "y": 0.5,
+                      "uniqueID": "id-248140",
+                      "name": "tensileFraction",
+                      "options": []
+                    }
+                  ],
+                  "allConnectors": [
+                    {
+                      "ap2Name": "number or geometry",
+                      "ap1ID": "id-248134",
+                      "ap2ID": "id-248133"
+                    },
+                    {
+                      "ap2Name": "value",
+                      "ap1ID": "id-248134",
+                      "ap2ID": "id-248138"
+                    },
+                    {
+                      "ap2Name": "surface",
+                      "ap1ID": "id-248135",
+                      "ap2ID": "id-248134"
+                    },
+                    {
+                      "ap2Name": "asSingular",
+                      "ap1ID": "id-248136",
+                      "ap2ID": "id-248134"
+                    },
+                    {
+                      "ap2Name": "tolerance",
+                      "ap1ID": "id-248137",
+                      "ap2ID": "id-248134"
+                    },
+                    {
+                      "ap2Name": "maxCompressiveStrain",
+                      "ap1ID": "id-248139",
+                      "ap2ID": "id-248134"
+                    },
+                    {
+                      "ap2Name": "maxTensileStrain",
+                      "ap1ID": "id-248140",
+                      "ap2ID": "id-248134"
+                    }
+                  ],
+                  "parentRepo": {
+                    "lastFoundGit": "2026-10-08T18:23:39.127Z",
+                    "privateRepo": false,
+                    "repoName": "crv.MeshUnroll",
+                    "dateCreated": "2026-09-24T21:58:55Z",
+                    "likes": 0,
+                    "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.MeshUnroll/master/README.md?sanitize=true",
+                    "yyyy": 2026,
+                    "topMoleculeID": "id-76481",
+                    "userRanking": 0,
+                    "githubMoleculesUsed": [],
+                    "html_url": "https://github.com/tristan-huber/crv.MeshUnroll",
+                    "topics": [
+                      "abundance-tool"
+                    ],
+                    "pullRequests": [],
+                    "parentRepo": null,
+                    "forks": 0,
+                    "dateModified": "739890",
+                    "ranking": 2,
+                    "searchField": "crv.meshunroll tristan-huber unroll a face or group of faces onto the xy plane. selected faces can be unrolled together or individually. related terms: develop, developable, face abundance-tool",
+                    "owner": "tristan-huber",
+                    "description": "Unroll a face or group of faces onto the xy plane. Selected faces can be unrolled together or individually. Related terms: develop, developable, face",
+                    "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.MeshUnroll/master/project.abundance?sanitize=true",
+                    "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.MeshUnroll/master/project.svg?sanitize=true",
+                    "isLocal": false
+                  },
+                  "unitsKey": "Unitless",
+                  "fileTypeVersion": 1,
+                  "lastReloadedFromGithubAt": 1791484746461
+                }
+              ],
+              "allConnectors": [
+                {
+                  "ap2Name": "retain",
+                  "ap1ID": "id-248063",
+                  "ap2ID": "id-248115"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-248066",
+                  "ap2ID": "id-248070"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-248070",
+                  "ap2ID": "id-248080"
+                },
+                {
+                  "ap2Name": "remove",
+                  "ap1ID": "id-248074",
+                  "ap2ID": "id-248115"
+                },
+                {
+                  "ap2Name": "geometry",
+                  "ap1ID": "id-248080",
+                  "ap2ID": "id-248074"
+                },
+                {
+                  "ap2Name": "Assembly",
+                  "ap1ID": "id-248094",
+                  "ap2ID": "id-248123"
+                },
+                {
+                  "ap2Name": "shape",
+                  "ap1ID": "id-248115",
+                  "ap2ID": "id-248094"
+                },
+                {
+                  "ap2Name": "toUnroll",
+                  "ap1ID": "id-248123",
+                  "ap2ID": "id-248141"
+                },
+                {
+                  "ap2Name": "number or geometry",
+                  "ap1ID": "id-248141",
+                  "ap2ID": "id-248061"
+                }
+              ],
+              "fileTypeVersion": 1
+            },
+            {
+              "atomType": "Extrude",
+              "x": 0.4,
+              "y": 0.4,
+              "uniqueID": "id-248163",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "height",
+                  "ioValue": 0.25,
+                  "currentEquation": "0.25"
+                }
+              ]
+            },
+            {
+              "atomType": "CutOrient",
+              "x": 0.8,
+              "y": 0.3,
+              "uniqueID": "id-248168",
+              "name": "Cut Orient",
+              "ioValues": [
+                {
+                  "name": "geometry",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ],
+              "orientations": [],
+              "orientationsForHashed": null
             }
           ],
           "allConnectors": [
@@ -26203,6 +26959,11 @@
               "ap2Name": "geometry",
               "ap1ID": "id-218729",
               "ap2ID": "id-218732"
+            },
+            {
+              "ap2Name": "cockpit",
+              "ap1ID": "id-218729",
+              "ap2ID": "id-248059"
             },
             {
               "ap2Name": "toUnroll",
@@ -26275,6 +27036,11 @@
               "ap2ID": "id-218902"
             },
             {
+              "ap2Name": "geometry",
+              "ap1ID": "id-218920",
+              "ap2ID": "id-248052"
+            },
+            {
               "ap2Name": "long_parts",
               "ap1ID": "id-219819",
               "ap2ID": "id-218920"
@@ -26283,6 +27049,21 @@
               "ap2Name": "shape",
               "ap1ID": "id-224524",
               "ap2ID": "id-218660"
+            },
+            {
+              "ap2Name": "Shape3",
+              "ap1ID": "id-248052",
+              "ap2ID": "id-218902"
+            },
+            {
+              "ap2Name": "geometry",
+              "ap1ID": "id-248059",
+              "ap2ID": "id-248163"
+            },
+            {
+              "ap2Name": "Shape5",
+              "ap1ID": "id-248163",
+              "ap2ID": "id-218902"
             }
           ],
           "fileTypeVersion": 1
@@ -26385,7 +27166,7 @@
     {
       "atomType": "Difference",
       "x": 0.5,
-      "y": 0.2,
+      "y": 0.3,
       "uniqueID": "id-188892",
       "ioValues": [
         {
@@ -26516,7 +27297,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-43731",
               "name": "primaryEdge",
               "type": "edgeselect",
@@ -26621,7 +27402,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-43739",
                   "name": "wires",
                   "type": "geometry",
@@ -26714,7 +27495,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-43743",
                   "name": "wires",
                   "type": "geometry",
@@ -26847,7 +27628,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-43798",
           "name": "kayak",
           "type": "geometry",
@@ -26955,7 +27736,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-69954",
               "name": "Face",
               "type": "faceselect",
@@ -27060,7 +27841,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-69975",
               "name": "Assembly",
               "type": "faceselect",
@@ -27154,7 +27935,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-69988",
               "name": "Assembly",
               "type": "faceselect",
@@ -27315,7 +28096,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-71985",
               "name": "primaryEdge",
               "type": "edgeselect",
@@ -27420,7 +28201,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-71993",
                   "name": "wires",
                   "type": "geometry",
@@ -27513,7 +28294,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-71997",
                   "name": "wires",
                   "type": "geometry",
@@ -27637,7 +28418,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-72117",
                   "name": "wires",
                   "type": "geometry",
@@ -27775,7 +28556,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-72046",
               "type": "edgeselect",
               "options": [],
@@ -27944,7 +28725,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-74023",
               "type": "partselect",
               "options": [],
@@ -28061,7 +28842,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-74042",
               "type": "partselect",
               "options": [],
@@ -28360,7 +29141,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-74121",
               "type": "partselect",
               "options": [],
@@ -28706,7 +29487,7 @@
     {
       "atomType": "Input",
       "x": 0,
-      "y": 0.1,
+      "y": 0.2,
       "uniqueID": "id-76297",
       "name": "hullThickness",
       "options": []
@@ -28826,7 +29607,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-120067",
               "name": "shape",
               "type": "geometry",
@@ -28958,7 +29739,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-120109",
               "name": "Assembly",
               "type": "faceselect",
@@ -29119,7 +29900,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-120114",
               "name": "shape",
               "type": "geometry",
@@ -29296,7 +30077,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-167981",
                   "name": "Shape",
                   "type": "geometry",
@@ -29449,7 +30230,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-167987",
                   "name": "width",
                   "type": "number",
@@ -29593,7 +30374,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-167994",
                   "name": "Shape",
                   "type": "geometry",
@@ -29686,7 +30467,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-167998",
               "name": "inFace",
               "options": []
@@ -29969,7 +30750,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-168014",
                   "name": "width",
                   "type": "number",
@@ -30362,7 +31143,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-76334",
               "name": "cockpitShape",
               "type": "geometry",
@@ -30582,7 +31363,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-76352",
                   "name": "Shape",
                   "type": "geometry",
@@ -30703,7 +31484,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-76375",
                   "name": "face",
                   "type": "geometry",
@@ -30824,7 +31605,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-76380",
                   "name": "face",
                   "type": "geometry",
@@ -30945,7 +31726,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-76405",
                   "name": "face",
                   "type": "geometry",
@@ -31066,7 +31847,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-76878",
                   "name": "shape",
                   "type": "geometry",
@@ -31200,7 +31981,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-76899",
                   "name": "shape",
                   "type": "geometry",
@@ -31312,7 +32093,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-95373",
                   "name": "vector",
                   "type": "point3d",
@@ -31632,7 +32413,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-76425",
               "name": "Assembly",
               "type": "faceselect",
@@ -31704,7 +32485,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-76671",
           "name": "hullForm",
           "type": "geometry",
@@ -31784,7 +32565,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-120167",
                   "name": "Shape",
                   "type": "geometry",
@@ -31937,7 +32718,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-167768",
                   "name": "width",
                   "type": "number",
@@ -32081,7 +32862,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-167792",
                   "name": "Shape",
                   "type": "geometry",
@@ -32174,7 +32955,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-76677",
               "name": "inFace",
               "options": []
@@ -32457,7 +33238,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-76702",
                   "name": "width",
                   "type": "number",
@@ -32960,7 +33741,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105499",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -33152,7 +33933,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105508",
                   "name": "shape",
                   "type": "geometry",
@@ -33283,39 +34064,39 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105528",
                   "type": "edgeselect",
                   "options": [],
                   "selectedEdgeData": {
                     "0": [
-                      7,
-                      14,
-                      16,
-                      17
+                      8,
+                      10,
+                      11,
+                      14
                     ],
                     "1": [
-                      7,
-                      14,
-                      16,
-                      17
+                      8,
+                      10,
+                      11,
+                      14
                     ],
                     "2": [
-                      9,
-                      20,
-                      22,
-                      23
+                      16,
+                      18,
+                      19,
+                      22
                     ],
                     "3": [
-                      7,
+                      12,
                       14,
-                      16,
+                      15,
                       17
                     ],
                     "4": [
-                      7,
+                      12,
                       14,
-                      16,
+                      15,
                       17
                     ]
                   }
@@ -33446,7 +34227,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105533",
                   "type": "geometry",
                   "options": []
@@ -33571,7 +34352,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105551",
                   "name": "X",
                   "options": []
@@ -33701,7 +34482,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105557",
                   "name": "selection",
                   "type": "geometry",
@@ -33760,7 +34541,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-105562",
                       "name": "selection",
                       "type": "geometry",
@@ -33858,7 +34639,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-105566",
                       "name": "selectionOne",
                       "type": "geometry",
@@ -33982,7 +34763,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-105767",
               "name": "bulkheads",
               "options": []
@@ -34047,7 +34828,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117293",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -34139,7 +34920,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117307",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -34204,7 +34985,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117318",
                   "name": "assembly",
                   "type": "geometry",
@@ -34363,7 +35144,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117333",
                   "name": "shape",
                   "type": "geometry",
@@ -34517,7 +35298,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117362",
                   "name": "selectionOne",
                   "type": "geometry",
@@ -34647,7 +35428,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-126120",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -34766,7 +35547,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-131611",
                   "type": "edgeselect",
                   "options": [],
@@ -34859,7 +35640,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-131623",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -34867,30 +35648,30 @@
                   "selectedFaceData": {
                     "0": [
                       1,
-                      4,
-                      5,
-                      6
+                      2,
+                      3,
+                      4
                     ],
                     "1": [
                       1,
-                      4,
-                      5,
-                      6
+                      2,
+                      3,
+                      4
                     ],
                     "2": [
-                      1,
+                      4,
+                      5,
                       6,
-                      7,
-                      8
+                      7
                     ],
                     "3": [
-                      1,
+                      3,
                       4,
                       5,
                       6
                     ],
                     "4": [
-                      1,
+                      3,
                       4,
                       5,
                       6
@@ -35007,7 +35788,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-193388",
                   "name": "faces",
                   "type": "geometry",
@@ -35285,7 +36066,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105791",
                   "name": "Assembly",
                   "type": "faceselect",
@@ -35293,30 +36074,30 @@
                   "selectedFaceData": {
                     "0": [
                       1,
-                      4,
-                      5,
-                      6
+                      2,
+                      3,
+                      4
                     ],
                     "1": [
                       1,
-                      4,
-                      5,
-                      6
+                      2,
+                      3,
+                      4
                     ],
                     "2": [
-                      1,
+                      4,
+                      5,
                       6,
-                      7,
-                      8
+                      7
                     ],
                     "3": [
-                      1,
+                      3,
                       4,
                       5,
                       6
                     ],
                     "4": [
-                      1,
+                      3,
                       4,
                       5,
                       6
@@ -35449,7 +36230,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105825",
                   "type": "geometry",
                   "options": []
@@ -35589,7 +36370,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105832",
                   "name": "faces",
                   "type": "geometry",
@@ -35719,7 +36500,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105837",
                   "name": "shapeToMove",
                   "type": "geometry",
@@ -35846,7 +36627,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-105843",
                   "name": "X",
                   "options": []
@@ -35946,7 +36727,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-105860",
               "name": "bulkheads",
               "options": []
@@ -35996,32 +36777,32 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-106059",
                   "type": "edgeselect",
                   "options": [],
                   "selectedEdgeData": {
                     "0": [
-                      9,
-                      12
-                    ],
-                    "1": [
-                      9,
-                      12
-                    ],
-                    "2": [
-                      11,
-                      13,
-                      16,
+                      15,
                       17
                     ],
+                    "1": [
+                      15,
+                      17
+                    ],
+                    "2": [
+                      8,
+                      12,
+                      13,
+                      23
+                    ],
                     "3": [
-                      9,
-                      11
+                      7,
+                      9
                     ],
                     "4": [
-                      9,
-                      11
+                      7,
+                      9
                     ]
                   }
                 },
@@ -36112,32 +36893,32 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-106071",
                   "type": "edgeselect",
                   "options": [],
                   "selectedEdgeData": {
                     "0": [
-                      9,
-                      12
-                    ],
-                    "1": [
-                      9,
-                      12
-                    ],
-                    "2": [
-                      11,
-                      13,
-                      16,
+                      15,
                       17
                     ],
+                    "1": [
+                      15,
+                      17
+                    ],
+                    "2": [
+                      8,
+                      12,
+                      13,
+                      23
+                    ],
                     "3": [
-                      9,
-                      11
+                      7,
+                      9
                     ],
                     "4": [
-                      9,
-                      11
+                      7,
+                      9
                     ]
                   }
                 },
@@ -36240,7 +37021,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-106084",
                   "name": "Geometry",
                   "type": "number",
@@ -36497,7 +37278,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-106131",
                   "name": "assembly",
                   "options": []
@@ -36621,7 +37402,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117409",
                   "name": "selectionOne",
                   "type": "geometry",
@@ -36716,7 +37497,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117425",
                   "name": "selection",
                   "type": "geometry",
@@ -36775,7 +37556,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-117430",
                       "name": "selection",
                       "type": "geometry",
@@ -36873,7 +37654,7 @@
                     {
                       "atomType": "Input",
                       "x": 0,
-                      "y": 0.1,
+                      "y": 0.2,
                       "uniqueID": "id-117434",
                       "name": "selectionOne",
                       "type": "geometry",
@@ -37038,7 +37819,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117467",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -37103,7 +37884,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117478",
                   "name": "assembly",
                   "type": "geometry",
@@ -37222,7 +38003,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117493",
                   "name": "faceSelection",
                   "type": "geometry",
@@ -37354,7 +38135,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117508",
                   "name": "shape",
                   "type": "geometry",
@@ -37540,7 +38321,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.1,
+                  "y": 0.2,
                   "uniqueID": "id-117537",
                   "name": "shape",
                   "type": "geometry",
@@ -37966,7 +38747,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-89803",
           "name": "bulkheads",
           "type": "geometry",
@@ -38175,7 +38956,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-90174",
               "name": "Length",
               "options": []
@@ -38297,7 +39078,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-90275",
               "name": "X",
               "options": []
@@ -38811,7 +39592,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-175975",
               "name": "Shape",
               "type": "geometry",
@@ -38927,7 +39708,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-93012",
           "name": "bulkheads",
           "type": "geometry",
@@ -39131,7 +39912,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-93185",
               "name": "height",
               "options": []
@@ -39224,7 +40005,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-93193",
               "name": "height",
               "options": []
@@ -39856,44 +40637,14 @@
             {
               "name": "Orientations",
               "ioValue": 1
+            },
+            {
+              "name": "Search Time (minutes)",
+              "ioValue": 2
             }
           ],
-          "placements": [
-            [
-              {
-                "id": 1,
-                "rotate": 0,
-                "translate": {
-                  "x": 67.33000183105469,
-                  "y": 22.690000534057617
-                }
-              },
-              {
-                "id": 3,
-                "rotate": 0,
-                "translate": {
-                  "x": 67.33000183105469,
-                  "y": -5.890000343322754
-                }
-              },
-              {
-                "id": 2,
-                "rotate": 0,
-                "translate": {
-                  "x": 70.38999938964844,
-                  "y": 15.859999656677246
-                }
-              },
-              {
-                "id": 0,
-                "rotate": 0,
-                "translate": {
-                  "x": 70.38999938964844,
-                  "y": 25.600000381469727
-                }
-              }
-            ]
-          ]
+          "placements": [],
+          "placementsVersion": 2
         },
         {
           "atomType": "Export",
@@ -40129,7 +40880,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-109285",
               "name": "Shape",
               "type": "geometry",
@@ -40220,7 +40971,7 @@
         {
           "atomType": "Input",
           "x": 0,
-          "y": 0.1,
+          "y": 0.2,
           "uniqueID": "id-109319",
           "type": "geometry",
           "options": []
@@ -40289,7 +41040,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-131586",
               "name": "Face",
               "type": "faceselect",
@@ -40578,7 +41329,7 @@
             {
               "atomType": "Input",
               "x": 0,
-              "y": 0.1,
+              "y": 0.2,
               "uniqueID": "id-98401",
               "name": "Shape",
               "type": "geometry",
