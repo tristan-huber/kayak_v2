@@ -1402,7 +1402,7 @@
               "ioValues": [
                 {
                   "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
+                  "ioValue": 10.3
                 }
               ]
             },
@@ -1795,7 +1795,7 @@
                   "ioValues": [
                     {
                       "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
+                      "ioValue": 11.300000000000002
                     }
                   ]
                 },
@@ -2110,7 +2110,7 @@
                   "options": [],
                   "selectedFaceData": {
                     "2": [
-                      3
+                      2
                     ]
                   }
                 },
@@ -2474,7 +2474,7 @@
                     },
                     {
                       "name": "scaleFactor",
-                      "ioValue": "__GEOMETRY_INPUT__"
+                      "ioValue": 1.0884955752212389
                     }
                   ],
                   "interpreterVersion": 0,
@@ -6258,7 +6258,7 @@
                         },
                         {
                           "name": "scaleFactor",
-                          "ioValue": "__GEOMETRY_INPUT__"
+                          "ioValue": 0.03937007874015748
                         }
                       ],
                       "interpreterVersion": 0,
@@ -8411,7 +8411,7 @@
                 },
                 {
                   "name": "zDist",
-                  "ioValue": 0.12624849938676164
+                  "ioValue": 0.12624850125131815
                 }
               ]
             },
@@ -8437,7 +8437,7 @@
                   "ioValues": [
                     {
                       "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
+                      "ioValue": 0.2524970025026363
                     }
                   ]
                 },
@@ -8514,7 +8514,7 @@
               "ioValues": [
                 {
                   "name": "x",
-                  "ioValue": 0.2524969987735233
+                  "ioValue": 0.2524970025026363
                 }
               ],
               "currentEquation": "x / 2"
@@ -8877,7 +8877,7 @@
                   "ioValues": [
                     {
                       "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
+                      "ioValue": 9.400000000000006
                     }
                   ]
                 },
@@ -16746,11 +16746,11 @@
               "ioValues": [
                 {
                   "name": "x length",
-                  "ioValue": 10.914537131440813
+                  "ioValue": 10.914537171680646
                 },
                 {
                   "name": "y length",
-                  "ioValue": 25.52785765566965
+                  "ioValue": 25.52785765566443
                 }
               ]
             },
@@ -16856,7 +16856,7 @@
                   "ioValues": [
                     {
                       "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
+                      "ioValue": 25.52785765566443
                     }
                   ]
                 },
@@ -16970,7 +16970,7 @@
                   "ioValues": [
                     {
                       "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
+                      "ioValue": 10.914537171680646
                     }
                   ]
                 },
@@ -19149,29 +19149,13 @@
               "y": 0.3,
               "uniqueID": "id-247899",
               "name": "(O-I)/2",
-              "ioValues": [
-                {
-                  "name": "O",
-                  "ioValue": 100
-                },
-                {
-                  "name": "I",
-                  "ioValue": 99.5
-                }
-              ],
               "currentEquation": "(O-I)/2"
             },
             {
               "atomType": "Circle",
               "x": 0.3,
               "y": 0.4,
-              "uniqueID": "id-247900",
-              "ioValues": [
-                {
-                  "name": "diameter",
-                  "ioValue": 0.25
-                }
-              ]
+              "uniqueID": "id-247900"
             },
             {
               "atomType": "Move",
@@ -19182,10 +19166,6 @@
                 {
                   "name": "geometry",
                   "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "xDist",
-                  "ioValue": 49.875
                 },
                 {
                   "name": "yDist",
@@ -19203,16 +19183,6 @@
               "y": 0.6,
               "uniqueID": "id-247902",
               "name": "I/2+D/2",
-              "ioValues": [
-                {
-                  "name": "I",
-                  "ioValue": 99.5
-                },
-                {
-                  "name": "D",
-                  "ioValue": 0.25
-                }
-              ],
               "currentEquation": "I/2+D/2"
             },
             {
@@ -19428,16 +19398,6 @@
               "y": 0.7,
               "uniqueID": "id-247915",
               "name": "Concentric_Circles",
-              "ioValues": [
-                {
-                  "name": "OD",
-                  "ioValue": 100
-                },
-                {
-                  "name": "ID",
-                  "ioValue": 99.5
-                }
-              ],
               "topLevel": false,
               "allAtoms": [
                 {
@@ -19474,25 +19434,13 @@
                   "atomType": "Circle",
                   "x": 0.5,
                   "y": 0.4,
-                  "uniqueID": "id-247919",
-                  "ioValues": [
-                    {
-                      "name": "diameter",
-                      "ioValue": 100
-                    }
-                  ]
+                  "uniqueID": "id-247919"
                 },
                 {
                   "atomType": "Circle",
                   "x": 0.4,
                   "y": 0.7,
-                  "uniqueID": "id-247920",
-                  "ioValues": [
-                    {
-                      "name": "diameter",
-                      "ioValue": 99.5
-                    }
-                  ]
+                  "uniqueID": "id-247920"
                 },
                 {
                   "atomType": "Difference",
@@ -19572,10 +19520,6 @@
               "name": "SimpleArc",
               "ioValues": [
                 {
-                  "name": "diameter",
-                  "ioValue": 100
-                },
-                {
                   "name": "degrees",
                   "ioValue": 30
                 }
@@ -19616,29 +19560,13 @@
                   "atomType": "Circle",
                   "x": 0.2,
                   "y": 0.2,
-                  "uniqueID": "id-247926",
-                  "ioValues": [
-                    {
-                      "name": "diameter",
-                      "ioValue": 100
-                    }
-                  ]
+                  "uniqueID": "id-247926"
                 },
                 {
                   "atomType": "Rectangle",
                   "x": 0.3,
                   "y": 0.5,
-                  "uniqueID": "id-247927",
-                  "ioValues": [
-                    {
-                      "name": "x length",
-                      "ioValue": 100
-                    },
-                    {
-                      "name": "y length",
-                      "ioValue": 100
-                    }
-                  ]
+                  "uniqueID": "id-247927"
                 },
                 {
                   "atomType": "Equation",
@@ -19646,12 +19574,6 @@
                   "y": 0.6,
                   "uniqueID": "id-247928",
                   "name": "x / 2",
-                  "ioValues": [
-                    {
-                      "name": "x",
-                      "ioValue": 100
-                    }
-                  ],
                   "currentEquation": "x / 2"
                 },
                 {
@@ -19663,10 +19585,6 @@
                     {
                       "name": "geometry",
                       "ioValue": "__GEOMETRY_INPUT__"
-                    },
-                    {
-                      "name": "xDist",
-                      "ioValue": 50
                     },
                     {
                       "name": "yDist",
@@ -19689,10 +19607,6 @@
                       "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
-                      "name": "xDist",
-                      "ioValue": -50
-                    },
-                    {
                       "name": "yDist",
                       "ioValue": 0
                     },
@@ -19708,12 +19622,6 @@
                   "y": 0.7,
                   "uniqueID": "id-247931",
                   "name": "-1 * x",
-                  "ioValues": [
-                    {
-                      "name": "x",
-                      "ioValue": 50
-                    }
-                  ],
                   "currentEquation": "-1 * x"
                 },
                 {
@@ -22913,10 +22821,6 @@
                 {
                   "name": "Orientations",
                   "ioValue": 4
-                },
-                {
-                  "name": "Search Time (minutes)",
-                  "ioValue": 8
                 }
               ],
               "placements": [
@@ -23054,8 +22958,7 @@
                     }
                   }
                 ]
-              ],
-              "placementsVersion": 2
+              ]
             },
             {
               "atomType": "Molecule",
@@ -23148,7 +23051,7 @@
                           "ioValues": [
                             {
                               "name": "number or geometry",
-                              "ioValue": "__GEOMETRY_INPUT__"
+                              "ioValue": 1.6746711792787627
                             }
                           ]
                         },
@@ -23190,7 +23093,7 @@
                               "ioValues": [
                                 {
                                   "name": "number or geometry",
-                                  "ioValue": "__GEOMETRY_INPUT__"
+                                  "ioValue": 1.711036570577256
                                 }
                               ]
                             },
@@ -23310,7 +23213,7 @@
                               "ioValues": [
                                 {
                                   "name": "number or geometry",
-                                  "ioValue": "__GEOMETRY_INPUT__"
+                                  "ioValue": 1.6383057879802694
                                 }
                               ]
                             },
@@ -23373,11 +23276,11 @@
                           "ioValues": [
                             {
                               "name": "x",
-                              "ioValue": 1.7110365708365074
+                              "ioValue": 1.711036570577256
                             },
                             {
                               "name": "y",
-                              "ioValue": 1.638305788251029
+                              "ioValue": 1.6383057879802694
                             }
                           ],
                           "currentEquation": "(x + y) / 2"
@@ -23468,7 +23371,7 @@
                       "ioValues": [
                         {
                           "name": "x",
-                          "ioValue": 1.6746711795437683
+                          "ioValue": 1.6746711792787627
                         }
                       ],
                       "currentEquation": "x * 2"
@@ -23486,7 +23389,7 @@
                         },
                         {
                           "name": "offset",
-                          "ioValue": 3.3493423590875366
+                          "ioValue": 3.3493423585575255
                         }
                       ],
                       "currentEquation": "ceil(width / offset)"
@@ -23828,7 +23731,7 @@
                         },
                         {
                           "name": "xDist",
-                          "ioValue": 1.6746711795437683
+                          "ioValue": 1.6746711792787627
                         },
                         {
                           "name": "yDist",
@@ -23858,7 +23761,7 @@
                         },
                         {
                           "name": "distX",
-                          "ioValue": 3.3493423590875366
+                          "ioValue": 3.3493423585575255
                         },
                         {
                           "name": "distY",
@@ -24022,7 +23925,7 @@
                             },
                             {
                               "name": "distX",
-                              "ioValue": 3.3493423590875366
+                              "ioValue": 3.3493423585575255
                             },
                             {
                               "name": "distY",
@@ -24090,7 +23993,29 @@
                           "x": 0.7,
                           "y": 0.2,
                           "uniqueID": "id-219396",
-                          "interpreterVersion": 1,
+                          "ioValues": [
+                            {
+                              "name": "Shape",
+                              "ioValue": "__GEOMETRY_INPUT__"
+                            },
+                            {
+                              "name": "Number",
+                              "ioValue": 5
+                            },
+                            {
+                              "name": "distX",
+                              "ioValue": 10
+                            },
+                            {
+                              "name": "distY",
+                              "ioValue": 0
+                            },
+                            {
+                              "name": "distZ",
+                              "ioValue": 0
+                            }
+                          ],
+                          "interpreterVersion": 0,
                           "code": "// Example Code\nconst Inputs = [\n  { inputName: \"Shape\", type: \"geometry\", defaultValue: null },\n  { inputName: \"Number\", type: \"number\", defaultValue: 5 },\n  { inputName: \"distX\", type: \"number\", defaultValue: 10 },\n    { inputName: \"distY\", type: \"number\", defaultValue: 0 },\n    { inputName: \"distZ\", type: \"number\", defaultValue: 0 }\n];\n\nlet shapesArray = [];\nfor (let i = 0; i < Number; i++) {\n    let rotatedShape = await Move(Shape, distX * i, distY * i,distZ * i);\n    shapesArray.push(rotatedShape);\n}\n\nlet assembledShape = await Assembly(shapesArray)\n\nreturn assembledShape;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /**\n    To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n    If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n    Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n    https://replicad.xyz/docs/introapp/UserGuide.html \n    Return a replicad object that includes geometry, color, tags and plane. \n\n\n    Example Code Atom:\n\n      Inputs:[shape, x];\n\n      let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n\n      return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n\n      - See more examples at _______ \n\n\n    */\n"
                         }
                       ],
@@ -24564,7 +24489,7 @@
                           "ioValues": [
                             {
                               "name": "number or geometry",
-                              "ioValue": "__GEOMETRY_INPUT__"
+                              "ioValue": 1.6746711792787627
                             }
                           ]
                         },
@@ -24606,7 +24531,7 @@
                               "ioValues": [
                                 {
                                   "name": "number or geometry",
-                                  "ioValue": "__GEOMETRY_INPUT__"
+                                  "ioValue": 1.711036570577256
                                 }
                               ]
                             },
@@ -24726,7 +24651,7 @@
                               "ioValues": [
                                 {
                                   "name": "number or geometry",
-                                  "ioValue": "__GEOMETRY_INPUT__"
+                                  "ioValue": 1.6383057879802694
                                 }
                               ]
                             },
@@ -24789,11 +24714,11 @@
                           "ioValues": [
                             {
                               "name": "x",
-                              "ioValue": 1.7110365708365074
+                              "ioValue": 1.711036570577256
                             },
                             {
                               "name": "y",
-                              "ioValue": 1.638305788251029
+                              "ioValue": 1.6383057879802694
                             }
                           ],
                           "currentEquation": "(x + y) / 2"
@@ -24884,7 +24809,7 @@
                       "ioValues": [
                         {
                           "name": "x",
-                          "ioValue": 1.6746711795437683
+                          "ioValue": 1.6746711792787627
                         }
                       ],
                       "currentEquation": "x * 2"
@@ -24902,7 +24827,7 @@
                         },
                         {
                           "name": "offset",
-                          "ioValue": 3.3493423590875366
+                          "ioValue": 3.3493423585575255
                         }
                       ],
                       "currentEquation": "ceil(width / offset)"
@@ -25244,7 +25169,7 @@
                         },
                         {
                           "name": "xDist",
-                          "ioValue": 1.6746711795437683
+                          "ioValue": 1.6746711792787627
                         },
                         {
                           "name": "yDist",
@@ -25274,7 +25199,7 @@
                         },
                         {
                           "name": "distX",
-                          "ioValue": 3.3493423590875366
+                          "ioValue": 3.3493423585575255
                         },
                         {
                           "name": "distY",
@@ -25438,7 +25363,7 @@
                             },
                             {
                               "name": "distX",
-                              "ioValue": 3.3493423590875366
+                              "ioValue": 3.3493423585575255
                             },
                             {
                               "name": "distY",
@@ -25506,7 +25431,29 @@
                           "x": 0.7,
                           "y": 0.2,
                           "uniqueID": "id-219628",
-                          "interpreterVersion": 1,
+                          "ioValues": [
+                            {
+                              "name": "Shape",
+                              "ioValue": "__GEOMETRY_INPUT__"
+                            },
+                            {
+                              "name": "Number",
+                              "ioValue": 5
+                            },
+                            {
+                              "name": "distX",
+                              "ioValue": 10
+                            },
+                            {
+                              "name": "distY",
+                              "ioValue": 0
+                            },
+                            {
+                              "name": "distZ",
+                              "ioValue": 0
+                            }
+                          ],
+                          "interpreterVersion": 0,
                           "code": "// Example Code\nconst Inputs = [\n  { inputName: \"Shape\", type: \"geometry\", defaultValue: null },\n  { inputName: \"Number\", type: \"number\", defaultValue: 5 },\n  { inputName: \"distX\", type: \"number\", defaultValue: 10 },\n    { inputName: \"distY\", type: \"number\", defaultValue: 0 },\n    { inputName: \"distZ\", type: \"number\", defaultValue: 0 }\n];\n\nlet shapesArray = [];\nfor (let i = 0; i < Number; i++) {\n    let rotatedShape = await Move(Shape, distX * i, distY * i,distZ * i);\n    shapesArray.push(rotatedShape);\n}\n\nlet assembledShape = await Assembly(shapesArray)\n\nreturn assembledShape;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /**\n    To Use the Code Atom, enter your inputs to the input list a.e Inputs:[shape, height]\n    If your input is connected to another atom with a replicad geometry you can access its geometry by looking up its ID in your library. a.e library[Input1].geometry[0] \n    Use any replicad available methods to modify your geometry. Learn more about all of the available methods at \n    https://replicad.xyz/docs/introapp/UserGuide.html \n    Return a replicad object that includes geometry, color, tags and plane. \n\n\n    Example Code Atom:\n\n      Inputs:[shape, x];\n\n      let finalShape = library[shape].geometry[0].clone.translate[x,0,0]\n\n      return {geometry: finalShape, color: library[shape].color, plane: library[shape].plane, tags: library[shape].tags }\n\n      - See more examples at _______ \n\n\n    */\n"
                         }
                       ],
@@ -25819,10 +25766,6 @@
                       "ioValue": "__GEOMETRY_INPUT__"
                     },
                     {
-                      "name": "xDist",
-                      "ioValue": 53.872398702909095
-                    },
-                    {
                       "name": "yDist",
                       "ioValue": 20.2
                     },
@@ -25838,12 +25781,6 @@
                   "y": 0.3,
                   "uniqueID": "id-219792",
                   "name": "x - 90",
-                  "ioValues": [
-                    {
-                      "name": "x",
-                      "ioValue": 143.8723987029091
-                    }
-                  ],
                   "currentEquation": "x - 90"
                 },
                 {
@@ -26232,7 +26169,7 @@
                 {
                   "atomType": "Input",
                   "x": 0,
-                  "y": 0.3,
+                  "y": 0.2,
                   "uniqueID": "id-248063",
                   "name": "cockpit",
                   "type": "geometry",
@@ -26250,8 +26187,7 @@
                     },
                     {
                       "name": "y length",
-                      "ioValue": 40,
-                      "currentEquation": "40"
+                      "ioValue": 40
                     }
                   ]
                 },
@@ -26283,8 +26219,7 @@
                     },
                     {
                       "name": "xDist",
-                      "ioValue": 77,
-                      "currentEquation": "77"
+                      "ioValue": 77
                     },
                     {
                       "name": "yDist",
@@ -26308,8 +26243,7 @@
                     },
                     {
                       "name": "x-axis degrees",
-                      "ioValue": 0,
-                      "currentEquation": "0"
+                      "ioValue": 0
                     },
                     {
                       "name": "y-axis degrees",
@@ -26317,8 +26251,7 @@
                     },
                     {
                       "name": "z-axis degrees",
-                      "ioValue": 30,
-                      "currentEquation": "30"
+                      "ioValue": 30
                     }
                   ]
                 },
@@ -26898,8 +26831,7 @@
                 },
                 {
                   "name": "height",
-                  "ioValue": 0.25,
-                  "currentEquation": "0.25"
+                  "ioValue": 0.25
                 }
               ]
             },
@@ -28987,7 +28919,7 @@
           "ioValues": [
             {
               "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
+              "ioValue": 10
             }
           ],
           "tagIndex": 0,
@@ -29102,7 +29034,7 @@
           "ioValues": [
             {
               "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
+              "ioValue": 10
             }
           ],
           "tagIndex": 0,
@@ -31356,7 +31288,7 @@
                   "ioValues": [
                     {
                       "name": "number or geometry",
-                      "ioValue": "__GEOMETRY_INPUT__"
+                      "ioValue": 27.55163241085512
                     }
                   ]
                 },
@@ -34071,31 +34003,31 @@
                   "selectedEdgeData": {
                     "0": [
                       8,
-                      10,
+                      9,
                       11,
                       14
                     ],
                     "1": [
                       8,
-                      10,
+                      9,
                       11,
                       14
                     ],
                     "2": [
-                      16,
                       18,
                       19,
-                      22
+                      21,
+                      23
                     ],
                     "3": [
                       12,
-                      14,
+                      13,
                       15,
                       17
                     ],
                     "4": [
                       12,
-                      14,
+                      13,
                       15,
                       17
                     ]
@@ -35659,10 +35591,10 @@
                       4
                     ],
                     "2": [
-                      4,
                       5,
                       6,
-                      7
+                      7,
+                      8
                     ],
                     "3": [
                       3,
@@ -36085,10 +36017,10 @@
                       4
                     ],
                     "2": [
-                      4,
                       5,
                       6,
-                      7
+                      7,
+                      8
                     ],
                     "3": [
                       3,
@@ -36791,10 +36723,10 @@
                       17
                     ],
                     "2": [
-                      8,
-                      12,
+                      9,
+                      11,
                       13,
-                      23
+                      15
                     ],
                     "3": [
                       7,
@@ -36907,10 +36839,10 @@
                       17
                     ],
                     "2": [
-                      8,
-                      12,
+                      9,
+                      11,
                       13,
-                      23
+                      15
                     ],
                     "3": [
                       7,
@@ -40285,10 +40217,6 @@
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
-              "name": "xDist",
-              "ioValue": 7.749999899999963
-            },
-            {
               "name": "yDist",
               "ioValue": 0
             },
@@ -40308,10 +40236,6 @@
             {
               "name": "y",
               "ioValue": 130
-            },
-            {
-              "name": "x",
-              "ioValue": 114.50000020000007
             }
           ],
           "currentEquation": "(y - x) / 2"
@@ -40637,14 +40561,9 @@
             {
               "name": "Orientations",
               "ioValue": 1
-            },
-            {
-              "name": "Search Time (minutes)",
-              "ioValue": 2
             }
           ],
-          "placements": [],
-          "placementsVersion": 2
+          "placements": []
         },
         {
           "atomType": "Export",
